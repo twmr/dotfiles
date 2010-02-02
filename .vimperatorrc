@@ -1,5 +1,6 @@
 set titlestring=Vimperator
-set defsearch=google
+"#:toolbarhide Delicious Toolbar
+set defsearch=b
 
 map <C-r> :restart<CR>
 

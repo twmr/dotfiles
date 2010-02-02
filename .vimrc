@@ -18,10 +18,10 @@ if has('gui_running')
     if has ('win32')
         set columns=120
         set lines=60
-        set guifont=DejaVu_Sans_Mono:h8:cANSI
+        set guifont=Profont:h11:cANSI
     else
-        set guifont=Monaco\ 7.5
-        "set guifont=Monaco\ 8
+"      set guifont=Monaco\ 7.5
+        set guifont=Profont\ 8
         "set guifont=DejaVu\ Sans\ Mono\ 9
     endif
 "elseif (&term =~ 'screen' || &term =~ 'linux')
