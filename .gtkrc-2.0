@@ -1,3 +1,2 @@
-include "/home/gig/.themes/Crazy Mothafucka(GTK)/gtk-2.0/gtkrc"
-
-include "/home/gig/.gtkrc.mine"
+include "/home/thomas/.themes/leop/gtk-2.0/gtkrc"
+include "/home/thomas/.gtkrc.mine"
