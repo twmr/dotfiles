@@ -1,0 +1,10 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=GNOME
+Comment=Gnome session with traditional Compiz window manager
+#Exec=gnome-session
+Exec=/usr/share/xsessions/gnome-gnome
+# no icon yet, only the top three are currently used
+Icon=
+Type=Application
+X-Ubuntu-Gettext-Domain=gnome-session-2.0

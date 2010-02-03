@@ -1,0 +1,6 @@
+[Desktop Entry] 
+Encoding=UTF-8
+Name=GNOME/Awesome
+Comment=Gnome session with tiling Awesome window manager
+Exec=/usr/share/xsessions/gnome-awesome
+#Exec=awesome
