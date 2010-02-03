@@ -1,0 +1,12 @@
+[alias]
+	show-graph = log --graph --abbrev-commit --pretty=oneline
+	st = status
+[user]
+	name = Thomas Hisch
+	email = thomas@opentech.at
+[core]
+	editor = vim
+[color]
+	ui = auto
+[pack]
+	threads = 0
