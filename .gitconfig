@@ -10,3 +10,6 @@
 	ui = auto
 [pack]
 	threads = 0
+[apply]
+	whitespace = strip
+
