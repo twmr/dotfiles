@@ -17,6 +17,9 @@ function src() {
 
 # git functions
 function ga() { git add $* }
+function gd() { git diff $* }
+function gg() { git grep $* }
+
 function gl() { git log $* }
 function gs() { git status $* }
 function gp() { git push $* }
@@ -136,7 +139,7 @@ function git_info {
           fi
         fi
       fi
-     
+
       if [ -n "$1" ]; then
         printf "$1" "${b##refs/heads/}$r"
       else
