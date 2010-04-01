@@ -10,7 +10,7 @@ if tty -s ; then
 fi
 
 # Exports
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/opt/mozilla/bin:/opt/java/jre/bin
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/opt/mozilla/bin:/opt/java/jre/bin:/home/gig/bin:/opt/OneSwarm:/opt/google/chrome
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LOCALE=en_US.UTF-8
@@ -21,14 +21,10 @@ export EDITOR=vim
 export VISUAL=vim
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
-#export WMII_ADDRESS=/tmp/ns.gig.:0/wmii
-#export JAVA_HOME=/opt/java
-#export J2SDKDIR=/opt/java
-#export RACK_ENV='development'
-
-. /opt/intel/Compiler/11.1/069/bin/ia32/iccvars_ia32.sh
-. /opt/intel/Compiler/11.1/069/bin/ia32/ifortvars_ia32.sh
-
+export WMII_ADDRESS=/tmp/ns.gig.:0/wmii
+export JAVA_HOME=/opt/java
+export J2SDKDIR=/opt/java
+export RACK_ENV='development'
 
 # watch for people
 watch=(notme)                   # watch for everybody but me
@@ -84,8 +80,8 @@ bindkey "\e[8~" end-of-line
 bindkey "\e[4~" end-of-line
 bindkey "\e[3~" delete-char
 
-bindkey "\e[6~" history-search-forward
-bindkey "\e[5~" history-search-backward
+bindkey "\e[5~" beginning-of-history
+bindkey "\e[6~" end-of-history
 
 # Automatically start X and log out after when logging into vc/1
 if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/vc/1 ]]; then

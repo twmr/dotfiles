@@ -7,34 +7,45 @@ if v:version >= 700
 endif
 if has('gui_running')
     let &guicursor = &guicursor . ",a:blinkon0" " disable cursor blinking
-    set guioptions-=m                           " remove the menu bar
-    set guioptions-=T                           " remove the tool bar
-    set guioptions-=L                           " never show scrollbars
-    set guioptions-=R                           " set guioptions-=e
+    set guioptions=tmaegr
+    "set guioptions-=m                           " remove the menu bar
+    "set guioptions-=T                           " remove the tool bar
+    "set guioptions-=L                           " never show scrollbars
+    "set guioptions-=R                           " set guioptions-=e
     "set guioptions-=m
     "set guioptions-=r
     "set guioptions+=a
     "set guioptions+=c
+    set columns=100
+    set lines=50
     if has ('win32')
-        set columns=120
-        set lines=60
-        set guifont=Profont:h11:cANSI
+        set guifont=DejaVu_Sans_Mono:h8:cANSI
     else
-"      set guifont=Monaco\ 7.5
-        set guifont=Profont\ 8
-        "set guifont=DejaVu\ Sans\ Mono\ 9
+        ""set guifont=Monaco\ 7.5
+        "set guifont=Profont\ 8
+        "set guifont=Liberation\ Mono\ 9
+        ""set guifont=Monaco\ 8.6
+        set guifont=DejaVu\ Sans\ Mono\ 8.6
+        "set guifont=Fixed\ 9
+        "set guifont=Terminus\ 10
+        """set guifont=Envy\ Code\ R\ 10
+        "set guifont=Monaco\ 9
+        "set guifont=LucidaTypeWriter\ 9
+        "set guifont=Pragmata\ 10
+        "set guifont=Inconsolata\ 12
     endif
 "elseif (&term =~ 'screen' || &term =~ 'linux')
 elseif (&term =~ 'linux')
     set t_Co=16
     set termencoding=utf-8
     set nocursorline
-    colorscheme desert
+    colo desert
 else
     set t_Co=256
-    "colo wombat256
-    colo vividchalk
-    "set mouse=a
+    colo wombat256
+    "colo zenburn
+    "colo molokai
+    set mouse=a
     "set ttymouse=xterm
     set termencoding=utf-8
 endif
@@ -60,8 +71,10 @@ set report=0            " always report when lines are changed
 set shell=/bin/zsh      " set default shell
 set vb                  " don't beep
 set t_vb=               " ^
-set foldenable          " allow folding code
-set foldmethod=marker   " marks foldstarts/ends with {{{ }}}
+set nofoldenable        " dont autofold
+set foldmethod=indent   " marks foldstarts/ends with {{{ }}}
+set foldlevel=1
+set foldnestmax=10
 set tabstop=4           " a n-space tab width
 set shiftwidth=2        " allows the use of < and > for VISUAL indenting
 set softtabstop=2       " counts n spaces when DELETE or BCKSPCE is used
@@ -69,7 +82,7 @@ set textwidth=76        " in new gvim windows
 set autoindent          " auto indents next new line
 set smartindent         " intelligent indenting -- DEPRECATED by cindent
 filetype plugin indent on      " fix the f*cking indenting
-set hlsearch            " highlight all search results
+set nohlsearch          " highlight no search results
 set incsearch           " increment search
 set smartcase           " upper-case sensitive search
 set backspace=indent,eol,start
@@ -138,6 +151,16 @@ let NERDTreeHijackNetrw=1
 let NERDTreeMouseMode=1
 map <F12> :NERDTreeToggle<CR>
 
+" Fuzzy
+map <C-t> :FuzzyFinderTextMate<CR>
+
+" TVO
+let otl_install_menu=1
+let no_otl_maps=0
+let no_otl_insert_maps=0
+let otl_bold_headers=0
+let otl_use_thlnk=0
+
 " Fix filetype detection
 au BufNewFile,BufRead *.inc set filetype=php
 au BufNewFile,BufRead *.sys set filetype=php
@@ -159,11 +182,14 @@ au BufRead,BufNewFile *.sql set ft=pgsql
 au BufRead,BufNewFile *.rl set ft=ragel
 au BufRead,BufNewFile *.svg set ft=svg
 au BufRead,BufNewFile *.haml set ft=haml
+au BufRead,BufNewFile *.mustache set ft=mustache
 
 au BufRead,BufNewFile *.md set ft=mkd tw=72 ts=2 sw=2 expandtab
 au BufRead,BufNewFile *.markdown set ft=mkd tw=72 ts=2 sw=2 expandtab
 au BufRead,BufNewFile *.ron set ft=mkd tw=65 ts=2 sw=2 expandtab
- 
+
+au BufRead,BufNewFile *.coffee set ft=coffee
+
 au Filetype ruby set textwidth=80 ts=2
 au Filetype haml set ts=2 sw=2 sts=0 expandtab tw=120
 

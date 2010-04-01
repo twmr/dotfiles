@@ -7,3 +7,8 @@ style "user-font"
     font_name = "Sans 8"
 }
 widget_class "*" style "user-font"
+
+gtk-xft-antialias = 1
+gtk-xft-hinting = 1
+gtk-xft-hinstyle = hintslight
+gtk-xft-rgba = rgb
