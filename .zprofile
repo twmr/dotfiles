@@ -21,10 +21,12 @@ export EDITOR=vim
 export VISUAL=vim
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
-export WMII_ADDRESS=/tmp/ns.gig.:0/wmii
-export JAVA_HOME=/opt/java
-export J2SDKDIR=/opt/java
-export RACK_ENV='development'
+
+if [ "$HOSTNAME" = "firebird" ]; then
+    . /opt/intel/Compiler/11.1/069/bin/ia32/iccvars_ia32.sh
+    . /opt/intel/Compiler/11.1/069/bin/ia32/ifortvars_ia32.sh
+fi
+
 
 # watch for people
 watch=(notme)                   # watch for everybody but me
