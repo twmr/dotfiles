@@ -22,11 +22,20 @@ export VISUAL=vim
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
 
+
 if [ "$HOSTNAME" = "firebird" ]; then
-    . /opt/intel/Compiler/11.1/069/bin/ia32/iccvars_ia32.sh
-    . /opt/intel/Compiler/11.1/069/bin/ia32/ifortvars_ia32.sh
+    arch="ia32"
+elif [ "$HOSTNAME" = "mustang" ]; then
+    arch="intel64"
+else
+    arch=""
 fi
 
+#if [[ "$arch" = "ia32" ]] || [[ "$arch" = "intel64" ]]; then
+if [ "$arch" != "" ]; then
+    . /opt/intel/Compiler/11.1/069/bin/$arch/iccvars_$arch.sh
+    . /opt/intel/Compiler/11.1/069/bin/$arch/ifortvars_$arch.sh
+fi
 
 # watch for people
 watch=(notme)                   # watch for everybody but me
