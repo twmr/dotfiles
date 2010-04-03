@@ -25,16 +25,18 @@ export IGNOREEOF=3
 
 if [ "$HOSTNAME" = "firebird" ]; then
     arch="ia32"
+    intel_version="11.1/069"
 elif [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
+    intel_version="11.1/046"
 else
     arch=""
 fi
 
 #if [[ "$arch" = "ia32" ]] || [[ "$arch" = "intel64" ]]; then
 if [ "$arch" != "" ]; then
-    . /opt/intel/Compiler/11.1/069/bin/$arch/iccvars_$arch.sh
-    . /opt/intel/Compiler/11.1/069/bin/$arch/ifortvars_$arch.sh
+    . /opt/intel/Compiler/$intel_version/bin/$arch/iccvars_$arch.sh
+    . /opt/intel/Compiler/$intel_version/bin/$arch/ifortvars_$arch.sh
 fi
 
 # watch for people
