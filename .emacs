@@ -10,6 +10,8 @@
 
 (set-default-font "Inconsolata Bold 10")
 
+
+(setq compilation-scroll-output t)
 (setq auto-mode-alist (cons '("\\.F90" . f90-mode) auto-mode-alist))
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)

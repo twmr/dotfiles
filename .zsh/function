@@ -40,6 +40,8 @@ function gco() {
     fi
 }
 
+function laserscp() { scp $* thomas@opentech.meinserver.at:/home/thomas/public_html/laser }
+
 function pastie {
   url=$(curl http://pastie.caboo.se/pastes/create \
     -H "Expect:" \
