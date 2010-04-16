@@ -8,8 +8,14 @@ var loaduserstyles = function()
     /// Userstyles
     var userstyles = [
         [
-            "wikipedia:minimal",
+            "wikipediaen:minimal",
             "en.wikipedia.org",
+            "wikipedia.css",
+        ],
+
+	[
+            "wikipediade:minimal",
+            "de.wikipedia.org",
             "wikipedia.css",
         ],
 
@@ -35,7 +41,7 @@ var loaduserstyles = function()
       styles.removeSheet(false, name)
 
       // Add the sheet
-      styles.addSheet(false, name, filter, 
+      styles.addSheet(false, name, filter,
       File(styledir+"/"+file).read())
     }
 }
