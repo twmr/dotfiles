@@ -1,7 +1,7 @@
 :set titlestring=Vimperator
 "#:toolbarhide Delicious Toolbar
 
-:set defsearch=yahoo
+:set defsearch=g
 :set wildoptions=auto
 :set complete=sfl 
 
