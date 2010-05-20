@@ -1,5 +1,8 @@
 #!/bin/zsh
 #
+#uncomment for emacs binding
+#bindkey -e
+#
 # :completion:<func>:<completer>:<command>:<argument>:<tag>
 # Expansion options
 zstyle ':completion:*' completer _complete _prefix
