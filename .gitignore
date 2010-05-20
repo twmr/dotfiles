@@ -2,3 +2,5 @@
 !.*
 .vim/.netrwhist
 .zsh/history
+.vimperator/info
+.emacs.d/auto-save-list
