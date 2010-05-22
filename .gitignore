@@ -4,3 +4,4 @@
 .zsh/history
 .vimperator/info
 .emacs.d/auto-save-list
+.emacs.d/session\.*
