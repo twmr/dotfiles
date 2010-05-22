@@ -3,15 +3,15 @@
 # zsh specifics
 
 # autoload
-autoload -U compinit
+autoload -U compinit # for completion system
 compinit
 
-autoload zmv				#	for renaming better than your mother named you
+autoload zmv # for renaming better than your mother named you
 
-autoload -U zfinit			#	For initializing zftp
+autoload -U zfinit # For initializing zftp
 zfinit
 
-autoload -U zcalc			#	for mathhhh
+autoload -U zcalc # for mathhhh
 
 
 # history
@@ -31,6 +31,7 @@ setopt ignoreeof
 setopt interactivecomments
 setopt banghist
 setopt noclobber
+setopt hist_allow_clobber      # use key-up (one up in history) to overwrite files (noclobber files)
 setopt hist_reduce_blanks
 setopt hist_ignore_space
 setopt SH_WORD_SPLIT
