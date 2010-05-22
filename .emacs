@@ -15,7 +15,8 @@
 (setq c-default-style (quote ((c-mode . "stroustrup") (c++-mode . "stroustrup") (java-mode . "java") (awk-mode . "awk") (other . "gnu"))))
 (setq safe-local-variable-values (quote ((TeX-master . t))))
  
-(setq tool-bar-mode nil)
+(tool-bar-mode -1)
+(set-scroll-bar-mode 'right)   ; replace 'right with 'left to place it to the left
 (set-default-font "Inconsolata Bold 10")
 
 (setq compilation-scroll-output t)
