@@ -2,17 +2,17 @@
 #
 # reload zshrc
 function src() {
-        autoload -U zrecompile
-                [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
-				for i in "$(find ~/.zsh/ -type f)"; do
-					[[ -f $i ]] && zrecompile -p $i
-					[[ -f $i.zwc.old ]] && rm -f $i.zwc.old
-				done
-                [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
-                [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
-                [[ -f ~/.zshrc.zwc.old ]] && rm -f ~/.zshrc.zwc.old
-                [[ -f ~/.zcompdump.zwc.old ]] && rm -f ~/.zcompdump.zwc.old
-                source ~/.zshrc
+    autoload -U zrecompile
+    [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
+    for i in "$(find ~/.zsh/ -type f)"; do
+	[[ -f $i ]] && zrecompile -p $i
+	[[ -f $i.zwc.old ]] && rm -f $i.zwc.old
+    done
+    [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
+    [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
+    [[ -f ~/.zshrc.zwc.old ]] && rm -f ~/.zshrc.zwc.old
+    [[ -f ~/.zcompdump.zwc.old ]] && rm -f ~/.zcompdump.zwc.old
+    source ~/.zshrc
 }
 
 function add-alias() {
@@ -43,14 +43,14 @@ function gco() {
 function laserscp() { scp $* thomas@opentech.meinserver.at:/home/thomas/public_html/laser }
 
 function pastie {
-  url=$(curl http://pastie.caboo.se/pastes/create \
-    -H "Expect:" \
-    -F "paste[parser]=plain_text" \
-    -F "paste[body]=<-" \
-    -F "paste[authorization]=burger" \
-    -s -L -o /dev/null -w "%{url_effective}")
-  echo -n "$url" | xclip
-  echo "$url"
+    url=$(curl http://pastie.caboo.se/pastes/create \
+	-H "Expect:" \
+	-F "paste[parser]=plain_text" \
+	-F "paste[body]=<-" \
+	-F "paste[authorization]=burger" \
+	-s -L -o /dev/null -w "%{url_effective}")
+    echo -n "$url" | xclip
+    echo "$url"
 }
 
 extract_archive () {
@@ -116,51 +116,51 @@ function calculeer() { echo "$@" | bc }
 function git_info {
     local g="$(git rev-parse --git-dir 2>/dev/null)"
     if [ -n "$g" ]; then
-      local r
-      local b
-      if [ -d "$g/../.dotest" ]
-      then
-        if test -f "$g/../.dotest/rebasing"
-        then
-          r="|REBASE"
-        elif test -f "$g/../.dotest/applying"
-        then
-          r="|AM"
-        else
-          r="|AM/REBASE"
-        fi
-        b="$(git symbolic-ref HEAD 2>/dev/null)"
-      elif [ -f "$g/.dotest-merge/interactive" ]
-      then
-        r="|REBASE-i"
-        b="$(cat "$g/.dotest-merge/head-name")"
-      elif [ -d "$g/.dotest-merge" ]
-      then
-        r="|REBASE-m"
-        b="$(cat "$g/.dotest-merge/head-name")"
-      elif [ -f "$g/MERGE_HEAD" ]
-      then
-        r="|MERGING"
-        b="$(git symbolic-ref HEAD 2>/dev/null)"
-      else
-        if [ -f "$g/BISECT_LOG" ]
-        then
-          r="|BISECTING"
-        fi
-        if ! b="$(git symbolic-ref HEAD 2>/dev/null)"
-        then
-          if ! b="tag: $(git describe --exact-match HEAD 2>/dev/null)"
-          then
-            b="$(cut -c1-7 "$g/HEAD")..."
-          fi
-        fi
-      fi
+	local r
+	local b
+	if [ -d "$g/../.dotest" ]
+	then
+            if test -f "$g/../.dotest/rebasing"
+            then
+		r="|REBASE"
+            elif test -f "$g/../.dotest/applying"
+            then
+		r="|AM"
+            else
+		r="|AM/REBASE"
+            fi
+            b="$(git symbolic-ref HEAD 2>/dev/null)"
+	elif [ -f "$g/.dotest-merge/interactive" ]
+	then
+            r="|REBASE-i"
+            b="$(cat "$g/.dotest-merge/head-name")"
+	elif [ -d "$g/.dotest-merge" ]
+	then
+            r="|REBASE-m"
+            b="$(cat "$g/.dotest-merge/head-name")"
+	elif [ -f "$g/MERGE_HEAD" ]
+	then
+            r="|MERGING"
+            b="$(git symbolic-ref HEAD 2>/dev/null)"
+	else
+            if [ -f "$g/BISECT_LOG" ]
+            then
+		r="|BISECTING"
+            fi
+            if ! b="$(git symbolic-ref HEAD 2>/dev/null)"
+            then
+		if ! b="tag: $(git describe --exact-match HEAD 2>/dev/null)"
+		then
+		    b="$(cut -c1-7 "$g/HEAD")..."
+		fi
+            fi
+	fi
 
-      if [ -n "$1" ]; then
-        printf "$1" "${b##refs/heads/}$r"
-      else
-        printf "[%s]" "${b##refs/heads/}$r"
-      fi
+	if [ -n "$1" ]; then
+            printf "$1" "${b##refs/heads/}$r"
+	else
+            printf "[%s]" "${b##refs/heads/}$r"
+	fi
     fi
 }
 #compdef '_files -g "*.gz *.tgz *.bz2 *.tbz *.zip *.rar *.tar *.lha"' extract_archive
