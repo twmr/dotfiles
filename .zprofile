@@ -93,8 +93,8 @@ bindkey "\e[8~" end-of-line
 bindkey "\e[4~" end-of-line
 bindkey "\e[3~" delete-char
 
-bindkey "\e[5~" history-search-backward
-bindkey "\e[6~" history-search-forward
+bindkey "\e[5~" history-beginning-search-backward
+bindkey "\e[6~" history-beginning-search-forward
 
 # Automatically start X and log out after when logging into vc/1
 if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/vc/1 ]]; then
