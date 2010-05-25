@@ -15,7 +15,6 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LOCALE=en_US.UTF-8
 export BROWSER=firefox
-export PACKAGER='Gigamo <gigamo@gmail.com>'
 export OOO_FORCE_DESKTOP='gnome'
 export EDITOR=vim
 export VISUAL=vim
@@ -87,6 +86,7 @@ fi
 #    clear #for background artifacting
 #fi
 
+bindkey -e #emacs mode
 bindkey "\e[1~" beginning-of-line
 bindkey "\e[7~" beginning-of-line
 bindkey "\e[8~" end-of-line
@@ -96,8 +96,3 @@ bindkey "\e[3~" delete-char
 bindkey "\e[5~" history-beginning-search-backward
 bindkey "\e[6~" history-beginning-search-forward
 
-# Automatically start X and log out after when logging into vc/1
-if [[ -z "$DISPLAY" ]] && [[ $(tty) = /dev/vc/1 ]]; then
-    dbus-launch startx >& .myXLog
-    logout
-fi
