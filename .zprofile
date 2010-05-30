@@ -25,6 +25,7 @@ export IGNOREEOF=3
 if [ "$HOSTNAME" = "firebird" ]; then
     arch="ia32"
     intel_version="11.1/069"
+    export PATH=$PATH:/opt/maple10/bin
 elif [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
     intel_version="11.1/046"
