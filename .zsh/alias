@@ -62,4 +62,9 @@ alias gk='gitk --all &'
 
 #named directories
 hash -d d=/usr/share/doc
-hash -d dotf=${HOME}/gitrepos/dotfiles
+
+if [ "$HOSTNAME" = "firebird" ]; then
+    hash -d dotf=${HOME}/gitrepos/dotfiles
+elif [ "$HOSTNAME" = "mustang" ]; then
+    hash -d dotf=${HOME}/dotfiles
+fi
