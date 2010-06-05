@@ -1,6 +1,7 @@
 [alias]
-	show-graph = log --graph --abbrev-commit --pretty=oneline
 	st = status
+	lol = log --graph --decorate --pretty=oneline --abbrev-commit
+	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 [user]
 	name = Thomas Hisch
 	email = thomas@opentech.at
