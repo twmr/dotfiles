@@ -7,6 +7,9 @@
 (require 'color-theme-tango-2)
 (color-theme-tango-2)
 
+(require 'linum)
+(global-linum-mode 1)
+
 ;;(require 'color-theme-tango)
 ;;(color-theme-tango)
 ;;(require 'color-theme-subdued)
@@ -17,7 +20,7 @@
  
 (tool-bar-mode -1)
 (set-scroll-bar-mode 'right)   ; replace 'right with 'left to place it to the left
-(set-default-font "Inconsolata Bold 10")
+(set-default-font "DejaVu Sans Mono 8")
 
 (setq compilation-scroll-output t)
 (setq auto-mode-alist (cons '("\\.F90" . f90-mode) auto-mode-alist))
