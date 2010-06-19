@@ -1,7 +1,9 @@
-/*
 !.*
+*.swp
+*~
 .vim/.netrwhist
 .zsh/history
+.zsh/cache
 .vimperator/info
 .emacs.d/auto-save-list
 .emacs.d/session\.*
