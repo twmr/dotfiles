@@ -2,6 +2,8 @@
 	st = status
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+	apple-pick = !sh -c 'git rev-list --reverse "$@" | xargs -n1 git cherry-pick' -
+	pd = pull --dry-run
 [user]
 	name = Thomas Hisch
 	email = thomas@opentech.at
@@ -13,7 +15,6 @@
 	threads = 0
 [apply]
 	whitespace = strip
-
 [github]
 	user = thisch
 	token = d5b6175d01b404a6f21a0f815fd6e3af
