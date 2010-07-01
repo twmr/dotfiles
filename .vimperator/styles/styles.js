@@ -7,7 +7,7 @@ var loaduserstyles = function()
 {
     /// Userstyles
     var userstyles = [
-        [
+/*        [
             "wikipediaen:minimal",
             "en.wikipedia.org",
             "wikipedia.css",
@@ -18,7 +18,7 @@ var loaduserstyles = function()
             "de.wikipedia.org",
             "wikipedia.css",
         ],
-
+*/
         [
             "reddit:minimal",
             "reddit.com",
