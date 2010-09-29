@@ -15,10 +15,12 @@ emacs --daemon
 /usr/bin/gconftool-2 -t string  -s /desktop/gnome/session/required_components/windowmanager ${MYWM}
 /usr/bin/gconftool-2 -t boolean -s /apps/nautilus/preferences/show_desktop  ${SHOW_DESKTOP}
 
-if [ "$1" = "awesome" ]; then
+if [ "$MYWM" = "awesome" ]; then
 	/usr/bin/gconftool-2 -t string  -s /desktop/gnome/session/required_components/panel ""
+	/usr/bin/gconftool-2 -s -t list --list-type string /desktop/gnome/session/required_components_list "[filemanager,windowmanager]"
 else
 	/usr/bin/gconftool-2 -t string  -s /desktop/gnome/session/required_components/panel "gnome-panel"
+	/usr/bin/gconftool-2 -s -t list --list-type string /desktop/gnome/session/required_components_list "[filemanager,panel,windowmanager]"
 fi
 
 
