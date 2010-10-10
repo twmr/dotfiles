@@ -63,6 +63,7 @@ alias gk='gitk --all &'
 #named directories
 hash -d d=/usr/share/doc
 hash -d conf=${HOME}/.config
+hash -d era=${HOME}/Dropbox/erasmus
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
 
