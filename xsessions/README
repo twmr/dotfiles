@@ -1,0 +1,5 @@
+change paths in *.desktop files to current directory
+cp the desktop files to /usr/share/xessions (gdm or any other
+standards-compliant DM will look in this dir for xession files)
+
+look into .xsession-errors in case of errors

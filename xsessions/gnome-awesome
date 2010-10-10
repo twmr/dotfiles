@@ -1,3 +1,0 @@
-#!/bin/dash
-exec /usr/share/xsessions/start-gnome-session awesome false
-#exec dbus-launch awesome

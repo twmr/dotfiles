@@ -1,4 +1,8 @@
 #!/bin/dash
+# personal gnome-session script (for gnome-session version 2.32)
+# by thomas hisch <thomas@opentech.at>
+
+# if something with the gnome-session does go wrong look at .xsession-errors in your homedir
 
 MYWM=$1
 SHOW_DESKTOP=$2
@@ -9,23 +13,21 @@ SHOW_DESKTOP=$2
 # Set the background color
 /usr/bin/xsetroot -solid black
 urxvtd -o -q -f &
-emacs --daemon
+pgrep -u `whoami` emacs > /dev/null || emacs --daemon &
 
 # Update the Gnome configuration to reflect WM and desktop appearance
+# IMPORTANT: $MYWM should have a valid .desktop file in
+# /usr/share/applications otherwise gsm will not find it
 /usr/bin/gconftool-2 -t string  -s /desktop/gnome/session/required_components/windowmanager ${MYWM}
 /usr/bin/gconftool-2 -t boolean -s /apps/nautilus/preferences/show_desktop  ${SHOW_DESKTOP}
 
 if [ "$MYWM" = "awesome" ]; then
-	/usr/bin/gconftool-2 -t string  -s /desktop/gnome/session/required_components/panel ""
 	/usr/bin/gconftool-2 -s -t list --list-type string /desktop/gnome/session/required_components_list "[filemanager,windowmanager]"
 else
-	/usr/bin/gconftool-2 -t string  -s /desktop/gnome/session/required_components/panel "gnome-panel"
 	/usr/bin/gconftool-2 -s -t list --list-type string /desktop/gnome/session/required_components_list "[filemanager,panel,windowmanager]"
 fi
 
-
-#sleep 2
-
 export WINDOW_MANAGER=/usr/bin/$1
 
-exec /usr/bin/gnome-session
+#-a starts  only the *.desktop files in the specified dir instead of the WM
+exec /usr/bin/gnome-session #-a /home/thomas/autostartdir

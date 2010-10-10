@@ -1,2 +1,0 @@
-#!/bin/dash
-exec /usr/share/xsessions/start-gnome-session metacity true

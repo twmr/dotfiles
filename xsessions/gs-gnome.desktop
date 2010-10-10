@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Encoding=UTF-8
+Name=GNOME
+Comment=Gnome session with traditional metacity window manager
+Exec=/home/thomas/gitrepos/dotfiles/xsessions/gnome.sh

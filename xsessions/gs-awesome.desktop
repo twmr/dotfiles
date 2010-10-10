@@ -1,0 +1,6 @@
+[Desktop Entry] 
+Type=Application
+Encoding=UTF-8
+Name=Awesome (using gnome-session)
+Comment=Gnome session with tiling Awesome window manager
+Exec=/home/thomas/gitrepos/dotfiles/xsessions/awesome.sh
