@@ -7,27 +7,36 @@
 MYWM=$1
 SHOW_DESKTOP=$2
 
+SESSKEY="/desktop/gnome/session"
+GSETTOOL="/usr/bin/gconftool-2"
+
+
 # Load resources
 /usr/bin/xrdb -merge .Xresources
 
 # Set the background color
-/usr/bin/xsetroot -solid black
+#/usr/bin/xsetroot -solid black
 urxvtd -o -q -f &
 pgrep -u `whoami` emacs > /dev/null || emacs --daemon &
 
 # Update the Gnome configuration to reflect WM and desktop appearance
 # IMPORTANT: $MYWM should have a valid .desktop file in
 # /usr/share/applications otherwise gsm will not find it
-/usr/bin/gconftool-2 -t string  -s /desktop/gnome/session/required_components/windowmanager ${MYWM}
-/usr/bin/gconftool-2 -t boolean -s /apps/nautilus/preferences/show_desktop  ${SHOW_DESKTOP}
 
-if [ "$MYWM" = "awesome" ]; then
-	/usr/bin/gconftool-2 -s -t list --list-type string /desktop/gnome/session/required_components_list "[filemanager,windowmanager]"
+$GSETTOOL -t string  -s $SESSKEY/required_components/windowmanager ${MYWM}
+$GSETTOOL -t boolean -s /apps/nautilus/preferences/show_desktop  ${SHOW_DESKTOP}
+
+if [ "$MYWM" = "awesome" ]
+then
+    $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[windowmanager]"
+    $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[]"
 else
-	/usr/bin/gconftool-2 -s -t list --list-type string /desktop/gnome/session/required_components_list "[filemanager,panel,windowmanager]"
+    $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[filemanager,panel,windowmanager]"
+    $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[gnome-settings-daemon]"
 fi
 
 export WINDOW_MANAGER=/usr/bin/$1
 
 #-a starts  only the *.desktop files in the specified dir instead of the WM
-exec /usr/bin/gnome-session #-a /home/thomas/autostartdir
+exec /usr/bin/gnome-session #-a /home/thomas/dumm
+#exec strace -fF -o /tmp/gnome-session-trace /usr/bin/gnome-session
