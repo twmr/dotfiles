@@ -9,15 +9,27 @@
 
 (require 'linum)
 (global-linum-mode 1)
-
+(setq column-number-mode t)
 ;;(require 'color-theme-tango)
 ;;(color-theme-tango)
 ;;(require 'color-theme-subdued)
 ;;(color-theme-subdued)
 
-(setq c-default-style (quote ((c-mode . "stroustrup") (c++-mode . "stroustrup") (java-mode . "java") (awk-mode . "awk") (other . "gnu"))))
+;; whitespace fixes
+;;  -- ws-trim.el --
+;;(show-ws-toggle-show-trailing-whitespace)
+;;(show-ws-toggle-show-tabs)
+;;  -- ethan-wspace --
+(require 'ethan-wspace)
+(global-ethan-wspace-mode 1)
+
+(setq c-default-style (quote ( (c-mode . "stroustrup")
+                               (c++-mode . "stroustrup")
+                               (java-mode . "java")
+                               (awk-mode . "awk")
+                               (other . "gnu") )))
 (setq safe-local-variable-values (quote ((TeX-master . t))))
- 
+
 (tool-bar-mode -1)
 (set-scroll-bar-mode 'right)   ; replace 'right with 'left to place it to the left
 (set-default-font "DejaVu Sans Mono 8")
@@ -26,9 +38,7 @@
 (setq auto-mode-alist (cons '("\\.F90" . f90-mode) auto-mode-alist))
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
-;; (add-hook 'before-save-hook 'delete-trailing-whitespace)
 
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
-
 (setq-default TeX-master nil) ;; make auctex aware of the multi-file document structure
