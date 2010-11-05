@@ -3,6 +3,10 @@
 ;;; My location for external packages.
 (add-to-list 'load-path "~/.emacs.d/site-lisp")
 
+;:::::::::::::::::::::::::::::::::::::::::::::::
+;: Appearance
+;:::::::::::::::::::::::::::::::::::::::::::::::
+
 (require 'color-theme)
 (require 'color-theme-tango-2)
 (color-theme-tango-2)
@@ -14,6 +18,15 @@
 ;;(color-theme-tango)
 ;;(require 'color-theme-subdued)
 ;;(color-theme-subdued)
+
+(tool-bar-mode -1)
+
+(set-scroll-bar-mode nil) ; replace 'right with 'left to place it to the left
+(set-default-font "ProFont 10")
+
+;:::::::::::::::::::::::::::::::::::::::::::::::
+;: Logical Behavour
+;:::::::::::::::::::::::::::::::::::::::::::::::
 
 ;; whitespace fixes
 ;;  -- ws-trim.el --
@@ -28,17 +41,46 @@
                                (java-mode . "java")
                                (awk-mode . "awk")
                                (other . "gnu") )))
+
+(add-to-list 'load-path
+             "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
+(require 'yasnippet) ;; not yasnippet-bundle
+(yas/initialize)
+(yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
+
+
+;; set linux c-style if filename or directory contains the string linux
+(defun maybe-linux-style ()
+  (when (and buffer-file-name
+             (string-match "linux" buffer-file-name))
+    (c-set-style "Linux")))
+(add-hook 'c-mode-hook 'maybe-linux-style)
+
 (setq safe-local-variable-values (quote ((TeX-master . t))))
 
-(tool-bar-mode -1)
-(set-scroll-bar-mode 'right)   ; replace 'right with 'left to place it to the left
-(set-default-font "DejaVu Sans Mono 8")
+;; follow sylinks to source files in version controlled systems
+(setq vc-follow-symlinks t)
 
+;; the compilation buffer will scroll automatically to follow the
+;; output as it comes in.
 (setq compilation-scroll-output t)
+;; empowers the Del key to delete all whitespace to the left of the
+;; point.
+(setq c-toggle-hungry-state t)
+
+;; automatic identation
+(add-hook 'c-mode-common-hook '(lambda () (c-toggle-auto-state 1)))
+
 (setq auto-mode-alist (cons '("\\.F90" . f90-mode) auto-mode-alist))
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+
+;:::::::::::::::::::::::::::::::::::::::::::::::
+;: LaTeX Stuff
+;:::::::::::::::::::::::::::::::::::::::::::::::
+
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
-(setq-default TeX-master nil) ;; make auctex aware of the multi-file document structure
+;; make auctex aware of the multi-file document structure
+(setq-default TeX-master nil)
