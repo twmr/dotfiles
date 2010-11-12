@@ -1,0 +1,6 @@
+[submodule ".emacs.d/ethan-wspace"]
+	path = .emacs.d/ethan-wspace
+	url = git://github.com/glasserc/ethan-wspace.git
+[submodule ".emacs.d/vimpulse"]
+	path = .emacs.d/vimpulse
+	url = git://gitorious.org/vimpulse/vimpulse.git
