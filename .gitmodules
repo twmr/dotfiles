@@ -4,3 +4,6 @@
 [submodule ".emacs.d/vimpulse"]
 	path = .emacs.d/vimpulse
 	url = git://gitorious.org/vimpulse/vimpulse.git
+[submodule ".emacs.d/yasnippet-licenses"]
+	path = .emacs.d/yasnippet-licenses
+	url = git://github.com/jonatkinson/yasnippet-licenses.git
