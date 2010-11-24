@@ -22,7 +22,8 @@
 (tool-bar-mode -1)
 
 (set-scroll-bar-mode nil) ; replace 'right with 'left to place it to the left
-(set-default-font "ProFont 10")
+;;default font is now set in .Xdefaults
+;;(set-default-font "ProFont-9")
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Logical Behavour
@@ -33,7 +34,7 @@
 ;;(show-ws-toggle-show-trailing-whitespace)
 ;;(show-ws-toggle-show-tabs)
 ;;  -- ethan-wspace --
-(add-to-list 'load-path "~/.emacs.d/ethan-wspace")
+(add-to-list 'load-path "~/.emacs.d/ethan-wspace/lisp")
 (require 'ethan-wspace)
 (global-ethan-wspace-mode 1)
 
