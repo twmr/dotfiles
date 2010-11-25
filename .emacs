@@ -29,6 +29,10 @@
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
+
+(add-to-list 'load-path "~/.emacs.d/vimpulse")
+(require 'vimpulse)
+
 ;; whitespace fixes
 (add-to-list 'load-path "~/.emacs.d/ethan-wspace/lisp")
 (require 'ethan-wspace)
