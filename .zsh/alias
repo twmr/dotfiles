@@ -46,7 +46,7 @@ alias zetaf='sudo shutdown -h now'
 alias reboot='sudo reboot'
 alias svim='sudo vim'
 alias v='gvim'
-alias e='emacs'
+alias e='emacsclient -c -a /usr/bin/emacs -n'
 
 alias pgnup='gnuplot -persist'
 #alias netcfg='netcfg2'

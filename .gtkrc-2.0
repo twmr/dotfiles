@@ -1,2 +1,2 @@
-include "/home/thomas/.themes/leop/gtk-2.0/gtkrc"
+#include "/home/thomas/.themes/leop/gtk-2.0/gtkrc"
 include "/home/thomas/.gtkrc.mine"

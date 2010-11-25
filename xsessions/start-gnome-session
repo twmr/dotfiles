@@ -29,7 +29,7 @@ $GSETTOOL -t boolean -s /apps/nautilus/preferences/show_desktop  ${SHOW_DESKTOP}
 if [ "$MYWM" = "awesome" ]
 then
     $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[windowmanager]"
-    $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[]"
+    $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[gnome-settings-daemon]"
 else
     $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[filemanager,panel,windowmanager]"
     $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[gnome-settings-daemon]"
