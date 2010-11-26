@@ -22,6 +22,7 @@ Emacs.font:		ProFont-9
 
 !URxvt*font:             -*-terminus-medium-r-*-*-14-140-*-*-*-*-*-*
 
+URxvt*geometry:		100x70
 URxvt*font:             -*-terminus-medium-r-*-*-12-120-*-*-*-*-*-*
 URxvt*boldFont:         -*-terminus-medium-r-*-*-12-120-*-*-*-*-*-*
 URxvt*italicFont:       -*-terminus-medium-r-*-*-12-120-*-*-*-*-*-*

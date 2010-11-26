@@ -12,7 +12,13 @@ GSETTOOL="/usr/bin/gconftool-2"
 
 
 # Load resources
-/usr/bin/xrdb -merge .Xresources
+if [ -f $HOME/.Xresourses ]; then
+  xrdb -merge $HOME/.Xresources
+fi
+if [ -f $HOME/.Xdefaults ]; then
+  xrdb -merge $HOME/.Xdefaults
+fi
+
 
 # Set the background color
 #/usr/bin/xsetroot -solid black
