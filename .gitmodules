@@ -7,3 +7,6 @@
 [submodule ".emacs.d/yasnippet-licenses"]
 	path = .emacs.d/yasnippet-licenses
 	url = git://github.com/jonatkinson/yasnippet-licenses.git
+[submodule ".emacs.d/undo-tree"]
+	path = .emacs.d/undo-tree
+	url = http://www.dr-qubit.org/git/undo-tree.git
