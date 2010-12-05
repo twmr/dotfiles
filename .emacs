@@ -14,35 +14,135 @@
 (require 'linum)
 (global-linum-mode 1)
 (setq column-number-mode t)
-;;(require 'color-theme-tango)
-;;(color-theme-tango)
-;;(require 'color-theme-subdued)
-;;(color-theme-subdued)
 
 (tool-bar-mode -1)
 
 (set-scroll-bar-mode nil) ; replace 'right with 'left to place it to the left
+
 ;;default font is now set in .Xdefaults
 ;;(set-default-font "ProFont-9")
+
+;:::::::::::::::::::::::::::::::::::::::::::::::
+;: Keymappings
+;:::::::::::::::::::::::::::::::::::::::::::::::
+
+(global-set-key [f3] 'dabbrev-expand)
+(global-set-key [f4] 'query-replace)
+(global-set-key "\M-#" 'compile)
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
+;:::::::::::::::::::::::::::::::::::::::::::::::
+;; CC-MODE
+(require 'cc-mode)
+(setq c-default-style (quote ( (c-mode . "stroustrup")
+                               (c++-mode . "stroustrup")
+                               (java-mode . "java")
+                               (awk-mode . "awk")
+                               (other . "gnu") )))
 
+;; set linux c-style if filename or directory contains the string
+;; linux
+(defun maybe-linux-style ()
+  (when (and buffer-file-name
+             (string-match "linux" buffer-file-name))
+    (c-set-style "Linux")))
+(add-hook 'c-mode-hook 'maybe-linux-style)
+
+;; do not create newlines for electric keys if the following line is
+;; nonblank
+(defun c-semi&comma-no-newlines-before-nonblanks ()
+  (save-excursion
+    (if (and (eq last-command-char ?\;)
+           (zerop (forward-line 1))
+           (not (looking-at "^[ \t]*$")))
+        'stop
+      nil)))
+(setq c-hanging-semi&comma-criteria
+  (cons 'c-semi&comma-no-newlines-before-nonblanks
+        c-hanging-semi&comma-criteria))
+
+;; due to no-newlines-before-nonblanks I need this from the
+;; google-styleguide
+(defun google-make-newline-indent ()
+  (define-key c-mode-base-map "\C-m" 'newline-and-indent)
+  (define-key c-mode-base-map [ret] 'newline-and-indent))
+(add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+
+;; automatic identation (auto mode -> /a in modeline) and empowers the
+;; Del key to delete all whitespace to the left of the point (hungry
+;; mode -> h in modeline) for C-based languages (including java) for
+;; current keybindings see - cc-mode manual
+(add-hook 'c-mode-common-hook
+          '(lambda () (c-toggle-auto-hungry-state 1)))
+
+
+;; makes delete map to hungry mode
+(defun thi-map-delete-hungry ()
+  (define-key c-mode-base-map [delete] 'c-hungry-backspace))
+(add-hook 'c-mode-common-hook 'thi-map-delete-hungry)
+
+
+;:::::::::::::::::::::::::::::::::::::::::::::::
+;; Vi Mode : Viper and Vimpulse
+
+(setq vimpulse-want-vi-keys-in-apropos nil)
+(setq vimpulse-want-vi-keys-in-buffmenu nil)
+(setq vimpulse-want-vi-keys-in-dired nil)
+(setq vimpulse-want-vi-keys-in-help nil)
+(setq vimpulse-want-vi-keys-in-Info nil)
+(setq vimpulse-want-change-undo nil)
+
+(add-to-list 'load-path "~/.emacs.d/undo-tree") ;; required by vimpulse
 (add-to-list 'load-path "~/.emacs.d/vimpulse")
 (require 'vimpulse)
+
+;; redefine (equiv. of the famous `map Y y$')
+(defun viper-yank-line (arg)
+  "Delete to the end of line."
+  (interactive "P")
+  (viper-goto-eol (cons arg ?y)))
+
+
+;; ugly ugly ugly fix
+(add-hook 'viper-vi-state-hook
+          '(lambda () (set-face-background 'mode-line "red")))
+(add-hook 'viper-emacs-state-hook
+          '(lambda ()
+             (set-face-background 'mode-line "#2e3436")
+             (set-face-foreground 'mode-line "#eeeeec")))
+
+
+(setq-default viper-auto-indent t)
+
+(setq viper-change-notification-threshold 0
+      viper-expert-level 5
+      viper-inhibit-startup-message t
+      viper-vi-style-in-minibuffer nil
+      viper-want-ctl-h-help t)
+
+(setq-default viper-ex-style-editing nil)
+(setq-default viper-ex-style-motion nil)
+(setq-default viper-delete-backwards-in-replace t)
+
+
+;;(setq viper-emacs-state-id
+;;      (concat (propertize "<EMACS>" 'face 'isearch) " "))
+
+;; Show when minibuffer is in Emacs mode.
+;;(when (facep 'viper-minibuffer-emacs)
+;;  (set-face-foreground 'viper-minibuffer-emacs "red")
+;;  (set-face-background 'viper-minibuffer-emacs "black"))
+
 
 ;; whitespace fixes
 (add-to-list 'load-path "~/.emacs.d/ethan-wspace/lisp")
 (require 'ethan-wspace)
 (global-ethan-wspace-mode 1)
 
-(setq c-default-style (quote ( (c-mode . "stroustrup")
-                               (c++-mode . "stroustrup")
-                               (java-mode . "java")
-                               (awk-mode . "awk")
-                               (other . "gnu") )))
 
 (add-to-list 'load-path
              "~/.emacs.d/site-lisp/yasnippet-0.6.1c")
@@ -50,13 +150,6 @@
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
 
-
-;; set linux c-style if filename or directory contains the string linux
-(defun maybe-linux-style ()
-  (when (and buffer-file-name
-             (string-match "linux" buffer-file-name))
-    (c-set-style "Linux")))
-(add-hook 'c-mode-hook 'maybe-linux-style)
 
 (setq safe-local-variable-values (quote ((TeX-master . t))))
 
@@ -66,12 +159,6 @@
 ;; the compilation buffer will scroll automatically to follow the
 ;; output as it comes in.
 (setq compilation-scroll-output t)
-;; empowers the Del key to delete all whitespace to the left of the
-;; point.
-(setq c-toggle-hungry-state t)
-
-;; automatic identation
-(add-hook 'c-mode-common-hook '(lambda () (c-toggle-auto-state 1)))
 
 ;; Go into proper mode according to file extension
 (setq auto-mode-alist
@@ -121,6 +208,17 @@
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+
+;:::::::::::::::::::::::::::::::::::::::::::::::
+;: Git Stuff
+;:::::::::::::::::::::::::::::::::::::::::::::::
+
+(add-to-list 'load-path ".../git/contrib/emacs")
+(require 'git)
+(require 'git-blame)
+
+(add-to-list 'load-path "/home/thomas/icicles/")
+(require 'icicles)
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: LaTeX Stuff
