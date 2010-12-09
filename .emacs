@@ -22,6 +22,15 @@
 ;;default font is now set in .Xdefaults
 ;;(set-default-font "ProFont-9")
 
+;; highlight the current line
+;; (faces are set in color-theme)
+;;optional: set a custom face, so we can
+;; recognize from the normal marking (selection)
+;;(defface hl-line '((t (:background "Gray")))
+;;  "Face to use for `hl-line-face'." :group 'hl-line)
+;;(setq hl-line-face 'hl-line)
+(global-hl-line-mode t) ; turn it on for all modes by default
+
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Keymappings
 ;:::::::::::::::::::::::::::::::::::::::::::::::
@@ -150,15 +159,23 @@
 (yas/initialize)
 (yas/load-directory "~/.emacs.d/site-lisp/yasnippet-0.6.1c/snippets")
 
-
-(setq safe-local-variable-values (quote ((TeX-master . t))))
+;; keyboard scroll one line at a time
+;; http://www.emacswiki.org/emacs/SmoothScrolling
+;; -------------------------------------
+;; following commands do not work - still no smooth scrolling
+;; -- (setq scroll-step 1)
+;; -- (setq scroll-conservatively 10000)
+;; however this works: (still not as smooth as in vim :( )
+(require 'smooth-scrolling)
 
 ;; follow sylinks to source files in version controlled systems
 (setq vc-follow-symlinks t)
 
 ;; the compilation buffer will scroll automatically to follow the
 ;; output as it comes in.
-(setq compilation-scroll-output t)
+;; - is not a good idea if you want to see and jump to the firs error
+;;   so comment this out
+;;(setq compilation-scroll-output t)
 
 ;; Go into proper mode according to file extension
 (setq auto-mode-alist
@@ -216,14 +233,17 @@
 ;: Git Stuff
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
-(add-to-list 'load-path ".../git/contrib/emacs")
-(require 'git)
-(require 'git-blame)
+;; FIXME study emacs Git packages
+;;(add-to-list 'load-path ".../git/contrib/emacs")
+;;(require 'git)
+;;(require 'git-blame)
 
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: LaTeX Stuff
 ;:::::::::::::::::::::::::::::::::::::::::::::::
+
+(setq safe-local-variable-values (quote ((TeX-master . t))))
 
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
