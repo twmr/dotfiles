@@ -105,7 +105,9 @@
 (setq vimpulse-want-vi-keys-in-Info nil)
 (setq vimpulse-want-change-undo nil)
 
-;;(add-to-list 'load-path "~/.emacs.d/undo-tree")
+(add-to-list 'load-path "~/.emacs.d/undo-tree")
+;;(setq undo-tree-visualizer-mode t)
+
 (add-to-list 'load-path "~/.emacs.d/vimpulse")
 (require 'vimpulse)
 
@@ -226,8 +228,8 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; Icicles - completion
-(add-to-list 'load-path "~/.emacs.d/icicles/")
-(require 'icicles)
+;;(add-to-list 'load-path "~/.emacs.d/icicles/")
+;;(require 'icicles)
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Git Stuff
