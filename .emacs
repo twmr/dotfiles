@@ -95,6 +95,9 @@
 (add-hook 'c-mode-common-hook 'thi-map-delete-hungry)
 
 
+;; replace buffermenu with ibuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;; Vi Mode : Viper and Vimpulse
 
