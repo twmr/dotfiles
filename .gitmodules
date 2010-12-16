@@ -10,6 +10,3 @@
 [submodule ".emacs.d/undo-tree"]
 	path = .emacs.d/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
-[submodule ".emacs.d/icicles"]
-	path = .emacs.d/icicles
-	url = git://github.com/emacsmirror/icicles.git
