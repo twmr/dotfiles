@@ -149,8 +149,8 @@
 ;;;; Change the background color of the mode-line, according to the
 ;;;; current viper input state.
 ;;;; from http://retroj.net/git/dot-emacs/viper.el
-(defvar jj-viper-normal-mode-line-background (face-background 'mode-line))
-(defvar jj-viper-normal-mode-line-foreground (face-foreground 'mode-line))
+(defvar jjf-viper-normal-mode-line-background (face-background 'mode-line))
+(defvar jjf-viper-normal-mode-line-foreground (face-foreground 'mode-line))
 (defun jjf-viper-set-mode-line-color (&rest after-which-mode)
   (set-face-background
    'mode-line
