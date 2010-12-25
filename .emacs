@@ -8,8 +8,11 @@
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
 (require 'color-theme)
+(setq color-theme-load-all-themes nil)
 ;;(require 'color-theme-tango-2)
 ;;(color-theme-tango-2)
+;;(require 'color-theme-tangotango)
+;;(color-theme-tangotango)
 (require 'color-theme-wombat)
 (color-theme-wombat)
 
@@ -22,8 +25,7 @@
 (setq column-number-mode t)
 
 (tool-bar-mode -1)
-
-(set-scroll-bar-mode nil) ; replace 'right with 'left to place it to the left
+(set-scroll-bar-mode nil)
 
 ;;default font is now set in .Xdefaults
 ;;(set-default-font "ProFont-9")
@@ -276,13 +278,15 @@
 ;: Git Stuff
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
-;; FIXME study emacs Git packages
-;;(add-to-list 'load-path ".../git/contrib/emacs")
-;;(require 'git)
+(add-to-list 'load-path ".../git/contrib/emacs")
+(require 'git)
 ;;(require 'git-blame)
+
 (require 'diff-mode)
-(set-face-foreground 'diff-added "green1")
-(set-face-background 'diff-removed "red3")
+;; Diffing (see diff-mode !!)
+;; FIXME use color theme colors!!
+;;(set-face-foreground 'diff-added "green1")
+;;(set-face-foreground 'diff-removed "red3")
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: LaTeX Stuff

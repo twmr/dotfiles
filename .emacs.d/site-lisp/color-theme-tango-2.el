@@ -51,9 +51,12 @@
      (border ((t (:background "#888a85"))))
      (fringe ((t (:background "#111111"))))
      (highlight ((t (:background "#444444"))))
-     (mode-line ((t (:foreground "#eeeeec" :background "#2e3436"))))
+     (mode-line ((t (:foreground "#eeeeec" :background "#2e3436"
+                                 :box (:line-width 1 :color nil :style released-button)))))
      (mode-line-inactive ((t (:foreground "#cccddd" :background "#111111"))))
      (region ((t (:background "#555753"))))
+
+     (linum ((t (:foreground "#eeeeec" :background "#2e3436"))))
 
      (flyspell-duplicate ((t (:foreground "#fcaf3e"))))
      (flyspell-incorrect ((t (:foreground "#cc0000"))))
