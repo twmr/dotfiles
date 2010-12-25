@@ -8,11 +8,17 @@
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
 (require 'color-theme)
-(require 'color-theme-tango-2)
-(color-theme-tango-2)
+;;(require 'color-theme-tango-2)
+;;(color-theme-tango-2)
+(require 'color-theme-wombat)
+(color-theme-wombat)
 
 (require 'linum)
 (global-linum-mode 1)
+;;FIXME maybe move this into color-theme ??
+(set-face-foreground 'linum "white")
+(set-face-background 'linum "black")
+
 (setq column-number-mode t)
 
 (tool-bar-mode -1)
@@ -274,7 +280,9 @@
 ;;(add-to-list 'load-path ".../git/contrib/emacs")
 ;;(require 'git)
 ;;(require 'git-blame)
-
+(require 'diff-mode)
+(set-face-foreground 'diff-added "green1")
+(set-face-background 'diff-removed "red3")
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: LaTeX Stuff
