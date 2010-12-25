@@ -9,18 +9,18 @@
 
 (require 'color-theme)
 (setq color-theme-load-all-themes nil)
+(add-to-list 'load-path "~/.emacs.d/colors")
 ;;(require 'color-theme-tango-2)
 ;;(color-theme-tango-2)
 ;;(require 'color-theme-tangotango)
 ;;(color-theme-tangotango)
-(require 'color-theme-wombat)
+(load-file "~/.emacs.d/colors/color-theme-wombat/color-theme-wombat.el")
 (color-theme-wombat)
 
 (require 'linum)
 (global-linum-mode 1)
-;;FIXME maybe move this into color-theme ??
-(set-face-foreground 'linum "white")
-(set-face-background 'linum "black")
+;;(set-face-foreground 'linum "white")
+;;(set-face-background 'linum "black")
 
 (setq column-number-mode t)
 

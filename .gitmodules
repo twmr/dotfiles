@@ -10,3 +10,6 @@
 [submodule ".emacs.d/undo-tree"]
 	path = .emacs.d/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
+[submodule ".emacs.d/colors/color-theme-wombat"]
+	path = .emacs.d/colors/color-theme-wombat
+	url = git://github.com/demizer/color-theme-wombat.git
