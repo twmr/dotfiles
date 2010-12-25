@@ -285,8 +285,8 @@
 (require 'diff-mode)
 ;; Diffing (see diff-mode !!)
 ;; FIXME use color theme colors!!
-;;(set-face-foreground 'diff-added "green1")
-;;(set-face-foreground 'diff-removed "red3")
+(set-face-foreground 'diff-added "green1")
+(set-face-foreground 'diff-removed "red3")
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: LaTeX Stuff
