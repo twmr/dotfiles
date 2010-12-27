@@ -1,10 +1,15 @@
 ;; -*- coding: utf-8 -*-
 
-(setq inhibit-startup-screen t)
-
-;;; My location for external packages.
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/site-lisp"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
+;;----------------------------------------------------------------------------
+;; Set load path
+;;----------------------------------------------------------------------------
+(if (fboundp 'normal-top-level-add-subdirs-to-load-path)
+    (let* ((my-lisp-dir "~/.emacs.d/site-lisp/")
+           (default-directory my-lisp-dir))
+      (progn
+        (setq load-path (cons my-lisp-dir load-path))
+        (normal-top-level-add-subdirs-to-load-path))))
+(setq load-path (cons (expand-file-name "~/.emacs.d") load-path))
 
 
 (require 'init-theme)
@@ -12,10 +17,13 @@
 (require 'init-git-vc)
 (require 'init-viper)
 (require 'init-latex)
+(require 'init-gnuplot)
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Appearance
 ;:::::::::::::::::::::::::::::::::::::::::::::::
+
+(setq inhibit-startup-screen t)
 
 (require 'linum)
 (global-linum-mode 1)
@@ -53,6 +61,7 @@
 ;; replace buffermenu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+(add-hook 'ada-mode-hook 'viper-mode)
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;; whitespace fixes
