@@ -1,5 +1,9 @@
 ;; -*- coding: utf-8 -*-
 
+(require 'cl)
+(defvar *emacs-load-start* (current-time))
+
+
 ;;----------------------------------------------------------------------------
 ;; Set load path
 ;;----------------------------------------------------------------------------
@@ -60,8 +64,6 @@
 
 ;; replace buffermenu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
-
-(add-hook 'ada-mode-hook 'viper-mode)
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;; whitespace fixes
@@ -139,3 +141,10 @@
               auto-mode-alist))
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+(setq custom-file "~/.emacs.d/custom.el")
+(load custom-file 'noerror)
+
+(message "My emacs config loaded in %ds"
+         (destructuring-bind (hi lo ms) (current-time)
+           (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
