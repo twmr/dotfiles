@@ -22,10 +22,10 @@ fi
 
 # Set the background color
 #/usr/bin/xsetroot -solid black
-pgrep -u `whoami` urxvtd > /dev/null || urxvtd -o -f &
+pgrep -u $USER urxvtd > /dev/null || urxvtd -o -f &
 
 #The following line is now in gnome-session
-#pgrep -u `whoami` emacs > /dev/null || emacs --daemon &
+#pgrep -u $USER emacs > /dev/null || emacs --daemon &
 
 # Update the Gnome configuration to reflect WM and desktop appearance
 # IMPORTANT: $MYWM should have a valid .desktop file in
