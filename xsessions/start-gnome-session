@@ -10,7 +10,6 @@ SHOW_DESKTOP=$2
 SESSKEY="/desktop/gnome/session"
 GSETTOOL="/usr/bin/gconftool-2"
 
-
 # Load resources
 if [ -f $HOME/.Xresourses ]; then
   xrdb -merge $HOME/.Xresources
@@ -19,6 +18,9 @@ if [ -f $HOME/.Xdefaults ]; then
   xrdb -merge $HOME/.Xdefaults
 fi
 
+# TODO: when is it better to start apps here and when is it better to
+# put the apps in .config/autostart and start it using a session
+# manager (gnome-session)
 
 # Set the background color
 #/usr/bin/xsetroot -solid black
@@ -29,7 +31,9 @@ pgrep -u $USER urxvtd > /dev/null || urxvtd -o -f &
 
 # Update the Gnome configuration to reflect WM and desktop appearance
 # IMPORTANT: $MYWM should have a valid .desktop file in
-# /usr/share/applications otherwise gsm will not find it
+# /usr/share/applications or in .local/share/applications (for other
+# dirs see log of `gnome-session --debug`) otherwise gsm will complain
+# about it
 
 $GSETTOOL -t string  -s $SESSKEY/required_components/windowmanager ${MYWM}
 $GSETTOOL -t boolean -s /apps/nautilus/preferences/show_desktop  ${SHOW_DESKTOP}
@@ -45,6 +49,7 @@ fi
 
 export WINDOW_MANAGER=/usr/bin/$1
 
-#-a starts  only the *.desktop files in the specified dir instead of the WM
-exec /usr/bin/gnome-session #-a /home/thomas/dumm
+#if something does not work as expected start gnome-session with --debug and look into .xsession-errors
+#-a starts only the *.desktop files in the specified dir instead of the WM  (ex: -a /home/thomas/dumm)
 #exec strace -fF -o /tmp/gnome-session-trace /usr/bin/gnome-session
+exec /usr/bin/gnome-session
