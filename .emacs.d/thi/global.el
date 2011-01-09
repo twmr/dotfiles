@@ -1,3 +1,7 @@
+;; don't clutter dirs with backup files - use this dir instead
+;; maybe not useful for files inside dropbox (add exception ?)
+(setq backup-dir-alist '(("." . "~/.emacs.d/backup/")))
+
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Appearance
 ;:::::::::::::::::::::::::::::::::::::::::::::::
