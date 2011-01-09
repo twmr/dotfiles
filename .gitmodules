@@ -1,18 +1,15 @@
-[submodule ".emacs.d/ethan-wspace"]
-	path = .emacs.d/ethan-wspace
-	url = git://github.com/glasserc/ethan-wspace.git
-[submodule ".emacs.d/vimpulse"]
-	path = .emacs.d/vimpulse
-	url = git://gitorious.org/vimpulse/vimpulse.git
-[submodule ".emacs.d/yasnippet-licenses"]
-	path = .emacs.d/yasnippet-licenses
-	url = git://github.com/jonatkinson/yasnippet-licenses.git
-[submodule ".emacs.d/undo-tree"]
-	path = .emacs.d/undo-tree
-	url = http://www.dr-qubit.org/git/undo-tree.git
 [submodule ".emacs.d/colors/color-theme-wombat"]
 	path = .emacs.d/colors/color-theme-wombat
 	url = git://github.com/demizer/color-theme-wombat.git
 [submodule ".emacs.d/colors/twilight-emacs"]
 	path = .emacs.d/colors/twilight-emacs
 	url = git://github.com/crafterm/twilight-emacs.git
+[submodule ".emacs.d/vendor/ethan-wspace"]
+	path = .emacs.d/vendor/ethan-wspace
+	url = git://github.com/glasserc/ethan-wspace.git
+[submodule ".emacs.d/vendor/vimpulse"]
+	path = .emacs.d/vendor/vimpulse
+	url = git://gitorious.org/vimpulse/vimpulse.git
+[submodule ".emacs.d/vendor/undo-tree"]
+	path = .emacs.d/vendor/undo-tree
+	url = http://www.dr-qubit.org/git/undo-tree.git
