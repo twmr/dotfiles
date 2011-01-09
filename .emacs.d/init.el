@@ -8,6 +8,7 @@
 (load "thi/defuns")
 (load "thi/global")
 (load "thi/ido")
+(load "thi/magit")
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling
 ;; -------------------------------------
@@ -21,8 +22,6 @@
 (require 'init-ccmode)
 (require 'init-latex)
 (require 'init-gnuplot)
-;;(require 'init-git-vc)
-(require 'magit)
 
 (vendor 'vimpulse)
 (vendor 'ethan-wspace)
