@@ -1,5 +1,8 @@
 ;;; It's Magit! An Emacs mode for Git.
 
+;; follow sylinks to source files in version controlled systems
+(setq vc-follow-symlinks t)
+
 (add-hook
  'magit-mode-hook
  (lambda ()

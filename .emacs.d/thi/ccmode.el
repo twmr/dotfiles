@@ -1,5 +1,3 @@
-;:::::::::::::::::::::::::::::::::::::::::::::::
-;; CC-MODE
 (require 'cc-mode)
 (setq c-default-style (quote ( (c-mode . "stroustrup")
                                (c++-mode . "stroustrup")
@@ -48,5 +46,3 @@
 (defun thi-map-delete-hungry ()
   (define-key c-mode-base-map [delete] 'c-hungry-backspace))
 (add-hook 'c-mode-common-hook 'thi-map-delete-hungry)
-
-(provide 'init-ccmode)

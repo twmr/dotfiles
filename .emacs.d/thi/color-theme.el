@@ -16,11 +16,3 @@
 (autoload 'color-theme-twilight "color-theme-twilight" nil t)
 
 (color-theme-wombat)
-
-(require 'diff-mode)
-;; Diffing (see diff-mode !!)
-;; FIXME use color theme colors!!
-(set-face-foreground 'diff-added "green1")
-(set-face-foreground 'diff-removed "red3")
-
-(provide 'init-theme)
