@@ -23,6 +23,7 @@
 (require 'init-latex)
 (require 'init-gnuplot)
 
+(vendor 'undo-tree)
 (vendor 'vimpulse)
 (vendor 'ethan-wspace)
 (vendor 'yasnippet)

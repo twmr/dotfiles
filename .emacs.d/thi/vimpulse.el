@@ -8,12 +8,6 @@
 (setq vimpulse-want-vi-keys-in-Info nil)
 (setq vimpulse-want-change-undo nil)
 
-;;(add-to-list 'load-path "~/.emacs.d/undo-tree")
-;;(setq undo-tree-visualizer-mode t)
-
-(add-to-list 'load-path "~/.emacs.d/vimpulse")
-(require 'vimpulse)
-
 (setq-default viper-auto-indent t)
 
 (setq viper-change-notification-threshold 0
@@ -82,5 +76,3 @@
      (add-hook 'viper-replace-state-hook 'jjf-viper-set-mode-line-color)
      (add-hook 'viper-emacs-state-hook 'jjf-viper-set-mode-line-color)
      (add-hook 'window-configuration-change-hook 'jjf-viper-set-mode-line-color)))
-
-(provide 'init-viper)
