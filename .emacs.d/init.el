@@ -3,7 +3,7 @@
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor"))
 
-(setq custom-file "~/.emacs.d/custom.el")
+(setq custom-file "~/.emacs.d/thi/custom.el")
 (load custom-file 'noerror)
 
 (load "thi/defuns")
