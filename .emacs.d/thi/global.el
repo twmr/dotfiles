@@ -56,6 +56,12 @@
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
+;; Spaces instead of tabs
+(setq-default indent-tabs-mode nil)
+
+;; If there is a tab, make it the size of 2 spaces
+(setq-default tab-width 2)
+
 ;; the compilation buffer will scroll automatically to follow the
 ;; output as it comes in.
 ;; - is not a good idea if you want to see and jump to the firs error
