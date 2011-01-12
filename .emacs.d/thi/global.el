@@ -41,18 +41,6 @@
 (global-hl-line-mode t) ; turn it on for all modes by default
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
-;: Keymappings
-;:::::::::::::::::::::::::::::::::::::::::::::::
-
-(global-set-key [f3] 'dabbrev-expand)
-(global-set-key [f4] 'query-replace)
-(global-set-key "\M-#" 'compile)
-(global-set-key (kbd "C-x g") 'magit-status)
-
-;; replace buffermenu with ibuffer
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
-;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 

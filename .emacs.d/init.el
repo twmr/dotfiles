@@ -8,12 +8,14 @@
 
 (load "thi/defuns")
 (load "thi/global")
+(load "thi/bindings")
 (load "thi/ido")
 (load "thi/magit")
 (load "thi/color-theme")
 (load "thi/ccmode")
 (load "thi/latex")
 (load "thi/gnuplot")
+(load "thi/recentf")
 
 (vendor 'undo-tree)
 (vendor 'vimpulse)
