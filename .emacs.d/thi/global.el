@@ -56,6 +56,9 @@
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
+;; "y or n" instead of "yes or no"
+(fset 'yes-or-no-p 'y-or-n-p)
+
 ;; Spaces instead of tabs
 (setq-default indent-tabs-mode nil)
 
