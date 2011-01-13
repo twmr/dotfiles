@@ -16,6 +16,7 @@
 (load "thi/latex")
 (load "thi/gnuplot")
 (load "thi/recentf")
+(load "thi/compilation")
 
 (vendor 'undo-tree)
 (vendor 'vimpulse)
