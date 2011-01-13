@@ -19,8 +19,16 @@
 
 (setq inhibit-startup-screen t)
 
-(require 'linum)
 (global-linum-mode 1)
+;; linum should be disabled for certain modes where linenumbers do not
+;; make sense
+;; http://www.emacswiki.org/emacs/LineNumbers
+(setq linum-disabled-modes-list '(eshell-mode wl-summary-mode compilation-mode))
+(defun linum-on ()
+    (unless (or (minibufferp) (member major-mode linum-disabled-modes-list)
+              (string-match "*" (buffer-name))
+              )
+    (linum-mode 1)))
 ;;(set-face-foreground 'linum "white")
 ;;(set-face-background 'linum "black")
 
@@ -58,6 +66,54 @@
 ;; - is not a good idea if you want to see and jump to the firs error
 ;;   so comment this out
 ;;(setq compilation-scroll-output t)
+
+(defun my-compile ()
+  "Run compile and resize the compile window"
+  (interactive)
+  (progn
+    (call-interactively 'compile)
+    (setq cur (selected-window))
+    (setq w (get-buffer-window "*compilation*"))
+    (select-window w)
+    (setq h (window-height w))
+    (shrink-window (- h 10))
+    (select-window cur)
+    )
+  )
+(defun my-compilation-hook ()
+  "Make sure that the compile window is splitting vertically"
+  (progn
+    (if (not (get-buffer-window "*compilation*"))
+        (progn
+          (split-window-vertically)
+          )
+      )
+    ;;(tabbar-mode 0)
+    )
+  )
+(add-hook 'compilation-mode-hook 'my-compilation-hook)
+(global-set-key [f9] 'my-compile)
+
+;; automatically indent yanked code
+;; http://www.emacswiki.org/emacs/AutoIndentation
+(dolist (command '(yank yank-pop))
+  (eval `(defadvice ,command (after indent-region activate)
+           (and (not current-prefix-arg)
+                (member major-mode '(emacs-lisp-mode
+                                     lisp-mode
+            http://www.emacswiki.org/emacs/AutoIndentation                         clojure-mode
+                                     scheme-mode
+                                     haskell-mode
+                                     ruby-mode
+                                     rspec-mode
+                                     python-mode
+                                     c-mode
+                                     c++-mode
+                                     objc-mode
+                                     latex-mode
+                                     plain-tex-mode))
+                (let ((mark-even-if-inactive transient-mark-mode))
+                  (indent-region (region-beginning) (region-end) nil))))))
 
 ;; Go into proper mode according to file extension
 (setq auto-mode-alist
