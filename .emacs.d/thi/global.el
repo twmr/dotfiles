@@ -61,39 +61,6 @@
 ;; If there is a tab, make it the size of 2 spaces
 (setq-default tab-width 2)
 
-;; the compilation buffer will scroll automatically to follow the
-;; output as it comes in.
-;; - is not a good idea if you want to see and jump to the firs error
-;;   so comment this out
-;;(setq compilation-scroll-output t)
-
-(defun my-compile ()
-  "Run compile and resize the compile window"
-  (interactive)
-  (progn
-    (call-interactively 'compile)
-    (setq cur (selected-window))
-    (setq w (get-buffer-window "*compilation*"))
-    (select-window w)
-    (setq h (window-height w))
-    (shrink-window (- h 10))
-    (select-window cur)
-    )
-  )
-(defun my-compilation-hook ()
-  "Make sure that the compile window is splitting vertically"
-  (progn
-    (if (not (get-buffer-window "*compilation*"))
-        (progn
-          (split-window-vertically)
-          )
-      )
-    ;;(tabbar-mode 0)
-    )
-  )
-(add-hook 'compilation-mode-hook 'my-compilation-hook)
-(global-set-key [f9] 'my-compile)
-
 ;; automatically indent yanked code
 ;; http://www.emacswiki.org/emacs/AutoIndentation
 (dolist (command '(yank yank-pop))
