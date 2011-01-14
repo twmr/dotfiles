@@ -72,7 +72,7 @@
            (and (not current-prefix-arg)
                 (member major-mode '(emacs-lisp-mode
                                      lisp-mode
-            http://www.emacswiki.org/emacs/AutoIndentation                         clojure-mode
+                                     clojure-mode
                                      scheme-mode
                                      haskell-mode
                                      ruby-mode
