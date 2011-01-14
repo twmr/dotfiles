@@ -3,9 +3,14 @@
 ;; How to Define Keyboard Shortcuts in Emacs
 ;; http://xahlee.org/emacs/keyboard_shortcuts.html
 
-;; (global-set-key [f3] 'dabbrev-expand)
+;; FIXME, this is used for testing purposes only
+(global-set-key [f1] 'yas/expand)
+(global-set-key [f2] 'hippie-expand)
+(global-set-key [f3] 'dabbrev-expand)
+
+
 (global-set-key [f4] 'query-replace)
-(global-set-key "\M-#" 'compile)
+
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; replace buffermenu with ibuffer
