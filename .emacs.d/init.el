@@ -22,6 +22,7 @@
 (vendor 'vimpulse)
 (vendor 'ethan-wspace)
 (vendor 'yasnippet)
+(vendor 'auto-mark)
 
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling

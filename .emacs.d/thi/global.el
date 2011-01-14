@@ -52,6 +52,10 @@
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
+;; automatically adds marks
+(eval-after-load 'auto-mark
+  '(global-auto-mark-mode 1))
+
 ;; "y or n" instead of "yes or no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
