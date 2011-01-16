@@ -29,6 +29,13 @@ pgrep -u $USER urxvtd > /dev/null || urxvtd -o -f &
 #The following line is now in gnome-session
 #pgrep -u $USER emacs > /dev/null || emacs --daemon &
 
+# The following is a simple hack to avoid starting
+# gnome-panel/metacity when awesome was supposed to be started. this
+# should be fixed in gnome-session (bug already filed under
+# https://bugzilla.gnome.org/show_bug.cgi?id=638677 )
+desktopfiles=`grep -Eil '(metacity|gnome-panel)' ~/.config/gnome-session/saved-session/*.desktop`
+rm -f $desktopfiles
+
 # Update the Gnome configuration to reflect WM and desktop appearance
 # IMPORTANT: $MYWM should have a valid .desktop file in
 # /usr/share/applications or in .local/share/applications (for other
