@@ -33,8 +33,13 @@ pgrep -u $USER urxvtd > /dev/null || urxvtd -o -f &
 # gnome-panel/metacity when awesome was supposed to be started. this
 # should be fixed in gnome-session (bug already filed under
 # https://bugzilla.gnome.org/show_bug.cgi?id=638677 )
-desktopfiles=`grep -Eil '(metacity|gnome-panel)' ~/.config/gnome-session/saved-session/*.desktop`
-rm -f $desktopfiles
+if [ "$MYWM" = "awesome" ]
+then
+    desktopfilesregex="~/.config/gnome-session/saved-session/*.desktop"
+    desktopfiles=`grep -Eil '(metacity|gnome-panel)'
+                  $desktopfilesregex`
+    rm -f $desktopfiles
+fi
 
 # Update the Gnome configuration to reflect WM and desktop appearance
 # IMPORTANT: $MYWM should have a valid .desktop file in
