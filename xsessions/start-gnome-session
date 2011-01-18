@@ -35,10 +35,11 @@ pgrep -u $USER urxvtd > /dev/null || urxvtd -o -f &
 # https://bugzilla.gnome.org/show_bug.cgi?id=638677 )
 if [ "$MYWM" = "awesome" ]
 then
-    desktopfilesregex="~/.config/gnome-session/saved-session/*.desktop"
-    desktopfiles=`grep -Eil '(metacity|gnome-panel)'
-                  $desktopfilesregex`
-    rm -f $desktopfiles
+    desktopfiles=`find ~/.config/gnome-session/saved-session -name "*.desktop"`
+    if [ "x$desktopfiles" != "x" ]; then
+        matchedfiles=`grep -Eil '(metacity|gnome-panel)' $desktopfiles`
+        rm -f $matchedfiles
+    fi
 fi
 
 # Update the Gnome configuration to reflect WM and desktop appearance
