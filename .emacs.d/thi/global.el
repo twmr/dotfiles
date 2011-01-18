@@ -65,27 +65,6 @@
 ;; If there is a tab, make it the size of 2 spaces
 (setq-default tab-width 2)
 
-;; automatically indent yanked code
-;; http://www.emacswiki.org/emacs/AutoIndentation
-(dolist (command '(yank yank-pop))
-  (eval `(defadvice ,command (after indent-region activate)
-           (and (not current-prefix-arg)
-                (member major-mode '(emacs-lisp-mode
-                                     lisp-mode
-                                     clojure-mode
-                                     scheme-mode
-                                     haskell-mode
-                                     ruby-mode
-                                     rspec-mode
-                                     python-mode
-                                     c-mode
-                                     c++-mode
-                                     objc-mode
-                                     latex-mode
-                                     plain-tex-mode))
-                (let ((mark-even-if-inactive transient-mark-mode))
-                  (indent-region (region-beginning) (region-end) nil))))))
-
 ;; Go into proper mode according to file extension
 (setq auto-mode-alist
       (append '(("\\.C$"    . c++-mode)
@@ -133,3 +112,39 @@
               auto-mode-alist))
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+
+;:::::::::::::::::::::::::::::::::::::::::::::::
+;: Yank and Paste
+;:::::::::::::::::::::::::::::::::::::::::::::::
+
+; http://www.emacswiki.org/emacs/CopyAndPaste
+; You need an emacs with bug #902 fixed for this to work properly. It
+; has now been fixed in CVS HEAD it makes "highlight/middlebutton"
+; style (X11 primary selection based) copy-paste work as expected if
+; you're used to other modern apps (that is to say, the mere act of
+; highlighting doesn't overwrite the clipboard or alter the kill ring,
+; but you can paste in merely highlighted text with the mouse if you
+; want to)
+(global-set-key [mouse-2] 'mouse-yank-primary)  ; make mouse middle-click only paste from primary X11 selection, not clipboard and kill ring.
+
+;; automatically indent yanked code
+;; http://www.emacswiki.org/emacs/AutoIndentation
+(dolist (command '(yank yank-pop mouse-yank-primary))
+  (eval `(defadvice ,command (after indent-region activate)
+           (and (not current-prefix-arg)
+                (member major-mode '(emacs-lisp-mode
+                                     lisp-mode
+                                     clojure-mode
+                                     scheme-mode
+                                     haskell-mode
+                                     ruby-mode
+                                     rspec-mode
+                                     python-mode
+                                     c-mode
+                                     c++-mode
+                                     objc-mode
+                                     latex-mode
+                                     plain-tex-mode))
+                (let ((mark-even-if-inactive transient-mark-mode))
+                  (indent-region (region-beginning) (region-end) nil))))))
