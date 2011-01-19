@@ -1,4 +1,4 @@
-#!/bin/dash # -*- mode: shell-script -*-
+#!/bin/dash
 # personal gnome-session script (for gnome-session version 2.32)
 # by thomas hisch <thomas@opentech.at>
 
