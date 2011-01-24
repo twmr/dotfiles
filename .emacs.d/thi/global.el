@@ -142,6 +142,7 @@
                                      ruby-mode
                                      rspec-mode
                                      python-mode
+                                     ada-mode
                                      c-mode
                                      c++-mode
                                      java-mode
