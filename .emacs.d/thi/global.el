@@ -143,6 +143,7 @@
                                      python-mode
                                      c-mode
                                      c++-mode
+                                     java-mode
                                      objc-mode
                                      latex-mode
                                      plain-tex-mode))
