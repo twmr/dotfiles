@@ -8,3 +8,4 @@
 .emacs.d/auto-save-list
 .emacs.d/session\.*
 .emacs.d/emacs-server.log
+.themes/
