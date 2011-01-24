@@ -10,8 +10,9 @@
 (setq auto-save-file-name-transforms
       `((".*" ,user-cache-file-dir t)))
 
-;;TODO move into auto-complete local file
+;;maybe move into auto-complete local file ?
 (setq ac-comphist-file (concat user-cache-file-dir "ac-comphist.dat"))
+(setq abbrev-file-name (concat user-cache-file-dir "abbrev_defs"))
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Appearance
