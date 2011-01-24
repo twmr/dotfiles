@@ -76,3 +76,7 @@
      (add-hook 'viper-replace-state-hook 'jjf-viper-set-mode-line-color)
      (add-hook 'viper-emacs-state-hook 'jjf-viper-set-mode-line-color)
      (add-hook 'window-configuration-change-hook 'jjf-viper-set-mode-line-color)))
+
+;; Vimpulse/Viper bindings
+
+(define-key viper-vi-basic-map "gs" 'magit-status)
