@@ -87,3 +87,13 @@
 ;; Vimpulse/Viper bindings
 
 (define-key viper-vi-basic-map "gs" 'magit-status)
+
+;; Don't mess with my Esc key in Vi state, bad, bad Viper!
+;; (for example Esc-w doesnt copy lines correctly)
+(define-key viper-vi-intercept-map viper-ESC-key nil) ; viper-intercept-ESC-key
+;;
+;; ;; Don't mess with my input methods, bad, bad Viper!
+(defalias 'viper-set-input-method 'ignore)
+(ad-deactivate 'activate-input-method)
+(ad-deactivate 'inactivate-input-method)
+(ad-deactivate 'toggle-input-method)
