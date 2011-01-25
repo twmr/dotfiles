@@ -77,6 +77,13 @@
      (add-hook 'viper-emacs-state-hook 'jjf-viper-set-mode-line-color)
      (add-hook 'window-configuration-change-hook 'jjf-viper-set-mode-line-color)))
 
+(remove-hook 'minibuffer-setup-hook 'viper-minibuffer-setup-sentinel)
+;; post-ddfcd16209c575 Vimpulse makes also these two necessary:
+(defadvice viper-set-minibuffer-overlay (around fuck-viper activate)
+ nil)
+(defadvice viper-has-face-support-p (around fuck-viper activate)
+ nil)
+
 ;; Vimpulse/Viper bindings
 
 (define-key viper-vi-basic-map "gs" 'magit-status)
