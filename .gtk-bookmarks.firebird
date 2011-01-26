@@ -1,5 +1,4 @@
 file:///home/thomas/Dropbox Dropbox
-file:///home/thomas/Dropbox/erasmus Erasmus
 file:///home/thomas/Documents
 file:///home/thomas/Music
 file:///home/thomas/Pictures
@@ -7,15 +6,5 @@ file:///home/thomas/Videos
 file:///home/thomas/Downloads
 sftp://thinkthi@mustang/home/thomas mustang
 sftp://thi@ram/home/thi ram
-sftp://thohis@linuxserver.dsic.upv.es/labos/alumnos/thohis dsic
 sftp://e0625874@home.student.tuwien.ac.at/ tuwien-home
 sftp://thomas@opentech.meinserver.at/home/thomas meinserver
-davs://P4618869@poliformat.upv.es/dav/ALU_6070_2010 dist_sys
-davs://P4618869@poliformat.upv.es/dav/ALU_5903_2010 artif_intel
-davs://P4618869@poliformat.upv.es/dav/ALU_3166_2010 conmut
-davs://P4618869@poliformat.upv.es/dav/ALU_6049_2010 par_comp
-davs://P4618869@poliformat.upv.es/dav/ALU_3144_2010 sig_aleat
-davs://P4618869@poliformat.upv.es/dav/ALU_3157_2010 arch_os
-davs://P4618869@poliformat.upv.es/dav/ALU_6045_2010 rt_sys
-davs://P4618869@poliformat.upv.es/dav/ALU_3156_2010 txdata
-davs://P4618869@poliformat.upv.es/dav/ALU_3159_2010 op_comm
