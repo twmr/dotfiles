@@ -1,7 +1,12 @@
 ;;; It's Magit! An Emacs mode for Git.
 
+;; disable vc atm as I don't think that I need it
+;; TODO VC vs. magit
+(setq vc-handled-backends nil)
+
 ;; follow sylinks to source files in version controlled systems
-(setq vc-follow-symlinks t)
+;;(setq vc-follow-symlinks t)
+
 
 (add-hook
  'magit-mode-hook
