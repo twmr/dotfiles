@@ -24,7 +24,10 @@
 ;; linum should be disabled for certain modes where linenumbers do not
 ;; make sense
 ;; http://www.emacswiki.org/emacs/LineNumbers
-(setq linum-disabled-modes-list '(eshell-mode wl-summary-mode compilation-mode))
+(setq linum-disabled-modes-list '(eshell-mode
+                                  org-mode
+                                  wl-summary-mode
+                                  compilation-mode))
 (defun linum-on ()
     (unless (or (minibufferp) (member major-mode linum-disabled-modes-list)
               (string-match "*" (buffer-name))
