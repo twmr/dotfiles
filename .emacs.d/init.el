@@ -17,12 +17,21 @@
 (load "thi/gnuplot")
 (load "thi/recentf")
 (load "thi/compilation")
+(load "thi/org-mode")
 
 (vendor 'undo-tree)
+
+;; avoid that :qw quits the whole window
+;; FIXME move this to somewhere else
+(setq vimpulse-want-quit-like-Vim nil) ;; needs to be before vimpulse
+
 (vendor 'vimpulse)
 (vendor 'ethan-wspace)
 (vendor 'yasnippet)
 (vendor 'auto-mark)
+
+;;FIXME vendor function can't load org-mode atm
+;;(vendor 'org-mode)
 
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling

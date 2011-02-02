@@ -69,6 +69,13 @@
 ;; If there is a tab, make it the size of 2 spaces
 (setq-default tab-width 2)
 
+(dolist (hook '(erc-mode-hook
+        LaTeX-mode-hook
+        org-mode-hook
+        edit-server-start-hook
+        markdown-mode-hook))
+  (add-hook hook (lambda () (variable-pitch-mode t))))
+
 ;; Go into proper mode according to file extension
 (setq auto-mode-alist
       (append '(("\\.C$"    . c++-mode)
