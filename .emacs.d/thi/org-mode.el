@@ -1,6 +1,9 @@
 (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
 
+;; fontify src blocks, doesn't work with fixed-pitch blocks :(
+;;(setq org-src-fontify-natively t)
+
 (setq org-use-speed-commands t)
 (setq org-speed-commands-user (quote (("0" . delete-window)
                                       ("1" . delete-other-windows)
