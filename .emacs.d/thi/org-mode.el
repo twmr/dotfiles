@@ -2,6 +2,7 @@
 (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
 
 (setq org-agenda-files (quote ("~/Dropbox/notes-org/studium.org"
+                               "~/Dropbox/notes-org/laserPA.org"
                                "~/Dropbox/notes-org/emacs.org")))
 
 ;; fontify src blocks, doesn't work with fixed-pitch blocks :(
