@@ -22,3 +22,6 @@
 [submodule ".emacs.d/vendor/org-mode"]
 	path = .emacs.d/vendor/org-mode
 	url = git://orgmode.org/org-mode.git
+[submodule ".emacs.d/colors/color-theme-tangotango"]
+	path = .emacs.d/colors/color-theme-tangotango
+	url = git://github.com/juba/color-theme-tangotango.git
