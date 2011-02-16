@@ -6,12 +6,12 @@
 (setq custom-file "~/.emacs.d/thi/custom.el")
 (load custom-file 'noerror)
 
+(load "thi/color-theme")
 (load "thi/defuns")
 (load "thi/global")
 (load "thi/bindings")
 (load "thi/ido")
 (load "thi/magit")
-(load "thi/color-theme")
 (load "thi/ccmode")
 (load "thi/latex")
 (load "thi/gnuplot")
