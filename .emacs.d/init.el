@@ -29,6 +29,7 @@
 (vendor 'ethan-wspace)
 (vendor 'yasnippet)
 (vendor 'auto-mark)
+(vendor 'smart-tab)
 
 ;;FIXME vendor function can't load org-mode atm
 ;;(vendor 'org-mode)
