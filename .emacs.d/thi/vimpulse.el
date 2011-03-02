@@ -8,13 +8,15 @@
 (setq vimpulse-want-vi-keys-in-Info nil)
 (setq vimpulse-want-change-undo nil)
 
+
 (setq-default viper-auto-indent t)
 
 (setq viper-change-notification-threshold 0
       viper-expert-level 5
       viper-inhibit-startup-message t
       viper-vi-style-in-minibuffer nil
-      viper-want-ctl-h-help t)
+      viper-want-ctl-h-help t
+      viper-want-emacs-keys-in-insert t)
 
 (setq-default viper-ex-style-editing nil)
 (setq-default viper-ex-style-motion nil)
