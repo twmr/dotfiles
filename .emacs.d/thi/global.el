@@ -136,6 +136,25 @@
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+;; add warning face for certain keywords
+(defvar warning-words-regexp
+  (regexp-opt '("FIXME" "TODO" "BUG" "XXX" "DEBUG") 'words)
+  "Regexp matching words that commonly denote something that
+ warrants attention in programs.")
+
+(setq warning-words-font-lock-spec
+      (cons warning-words-regexp
+            (list
+             0 ;; use whole match
+             'font-lock-warning-face
+             t ;; OVERRIDE
+             )))
+
+(font-lock-add-keywords
+ 'c-mode ;; or nil for current buffer
+ (list
+  warning-words-font-lock-spec))
+
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Yank and Paste
