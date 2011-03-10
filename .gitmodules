@@ -25,3 +25,6 @@
 [submodule ".emacs.d/colors/color-theme-tangotango"]
 	path = .emacs.d/colors/color-theme-tangotango
 	url = git://github.com/juba/color-theme-tangotango.git
+[submodule ".emacs.d/vendor/evil"]
+	path = .emacs.d/vendor/evil
+	url = git://gitorious.org/evil/evil.git
