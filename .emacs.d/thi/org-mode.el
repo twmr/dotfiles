@@ -3,6 +3,7 @@
 
 (setq org-agenda-files (quote ("~/Dropbox/notes-org/studium.org"
                                "~/Dropbox/notes-org/laserPA.org"
+                               "~/Dropbox/notes-org/diplomarbeit.org"
                                "~/Dropbox/notes-org/physik.org"
                                "~/Dropbox/notes-org/emacs.org")))
 
