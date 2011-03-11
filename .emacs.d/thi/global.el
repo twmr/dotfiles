@@ -27,6 +27,7 @@
 ;; http://www.emacswiki.org/emacs/LineNumbers
 (setq linum-disabled-modes-list '(eshell-mode
                                   org-mode
+                                  latex-mode
                                   wl-summary-mode
                                   compilation-mode))
 (defun linum-on ()

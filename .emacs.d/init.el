@@ -30,6 +30,9 @@
 (vendor 'yasnippet)
 (vendor 'auto-mark)
 
+;;FIXME smart-tab vs yasnippet bug
+;;(vendor 'smart-tab)
+
 ;;FIXME vendor function can't load org-mode atm
 ;;(vendor 'org-mode)
 
