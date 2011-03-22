@@ -1,8 +1,3 @@
-;;FIXME use vendor function for this
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/org-mode/lisp"))
-(require 'org-install)
-(require 'org-habit)
-
 (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
 

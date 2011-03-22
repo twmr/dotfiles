@@ -13,7 +13,6 @@
 (load "thi/ido")
 (load "thi/magit")
 (load "thi/ccmode")
-(load "thi/org-mode")
 (load "thi/latex")
 (load "thi/gnuplot")
 (load "thi/recentf")
@@ -29,6 +28,7 @@
 (vendor 'ethan-wspace)
 (vendor 'yasnippet)
 (vendor 'auto-mark)
+(vendor 'orgmode)
 
 ;;FIXME smart-tab vs yasnippet bug
 ;;(vendor 'smart-tab)
