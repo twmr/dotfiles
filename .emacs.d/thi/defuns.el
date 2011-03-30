@@ -2,6 +2,14 @@
 ;; Modified from defunkt's original version to support autoloading.
 ;; http://github.com/defunkt/emacs/blob/master/defunkt/defuns.el
 (defun vendor (library &rest autoload-functions)
+  (if (eq library 'orgmode)
+      (progn
+        (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor/org-mode/lisp"))
+        (require 'org-install)
+        (require 'org-habit)
+        (load "~/.emacs.d/thi/org-mode")
+        )
+    )
   (let* ((file (symbol-name library))
          (normal (concat "~/.emacs.d/vendor/" file))
          (lnormal (concat normal "/lisp"))
