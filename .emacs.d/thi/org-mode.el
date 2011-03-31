@@ -30,10 +30,42 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-cb" 'org-iswitchb)
 
+;; taken from http://tincman.wordpress.com/2011/01/04/research-paper-management-with-emacs-org-mode-and-reftex/
+;;
+
+;; needed because every time when i load a org file a get asked for a master file name ?!?!!
+(setq reftex-default-bibliography
+      (quote
+       ("~/Dropbox/research/refs.bib")))
+
+(setq org-link-abbrev-alist
+      '(("bib" . "~/Dropbox/research/refs.bib::%s")
+        ("diplomarbeit" . "~/notes-org/diplomarbeit.org::#%s")
+        ("papers" . "~/research/papers/%s.pdf")))
+
+(defun org-mode-reftex-search ()
+  ;;jump to the notes for the paper pointed to at from reftex search
+  (interactive)
+  (org-open-link-from-string (format "[[diplomarbeit:%s]]" (reftex-citation t))))
+
 (defun org-mode-reftex-setup ()
   (load-library "reftex")
-  (and (buffer-file-name)
-       (file-exists-p (buffer-file-name))
-       (reftex-parse-all))
-  (define-key org-mode-map (kbd "C-c )") 'reftex-citation))
+  (and (buffer-file-name) (file-exists-p (buffer-file-name))
+       (progn
+         ;enable auto-revert-mode to update reftex when bibtex file changes on disk
+         (global-auto-revert-mode t)
+
+         (reftex-parse-all)
+
+         ;add a custom reftex cite format to insert links
+         (reftex-set-cite-format
+          '((?b . "[[bib:%l][%l-bib]]")
+            (?n . "[[diplomarbeit:%l][%l-diplomarbeit]]")
+            (?p . "[[papers:%l][%l-paper]]")
+            (?c . "\\cite{%l}")
+            (?t . "%t")
+            (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]")))))
+  (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
+  (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search))
+
 (add-hook 'org-mode-hook 'org-mode-reftex-setup)
