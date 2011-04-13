@@ -31,3 +31,6 @@
 [submodule ".emacs.d/vendor/python"]
 	path = .emacs.d/vendor/python
 	url = git://github.com/fgallina/python.el.git
+[submodule ".emacs.d/vendor/pymacs"]
+	path = .emacs.d/vendor/pymacs
+	url = git://github.com/pinard/Pymacs.git
