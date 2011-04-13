@@ -10,6 +10,7 @@
 (load "thi/defuns")
 (load "thi/global")
 (load "thi/bindings")
+(load "thi/folding")
 (load "thi/ido")
 (load "thi/magit")
 (load "thi/ccmode")
@@ -29,12 +30,10 @@
 (vendor 'yasnippet)
 (vendor 'auto-mark)
 (vendor 'orgmode)
+(vendor 'python)
 
 ;;FIXME smart-tab vs yasnippet bug
 ;;(vendor 'smart-tab)
-
-;;FIXME vendor function can't load org-mode atm
-;;(vendor 'org-mode)
 
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling
@@ -43,4 +42,4 @@
 ;; -- (setq scroll-step 1)
 ;; -- (setq scroll-conservatively 10000)
 ;; however this works: (still not as smooth as in vim :( )
-(vendor 'smooth-scrolling)
+;;(vendor 'smooth-scrolling)
