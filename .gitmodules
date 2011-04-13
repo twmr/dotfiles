@@ -28,3 +28,6 @@
 [submodule ".emacs.d/vendor/evil"]
 	path = .emacs.d/vendor/evil
 	url = git://gitorious.org/evil/evil.git
+[submodule ".emacs.d/vendor/python"]
+	path = .emacs.d/vendor/python
+	url = git://github.com/fgallina/python.el.git

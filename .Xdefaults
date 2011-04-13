@@ -52,7 +52,7 @@ URxvt*saveLines:        32767
 URxvt*scrollBar:        false
 URxvt*scrollBar_right:  true
 URxvt*loginShell:       true
-URxvt*shading:          60
+URxvt*shading:          85
 URxvt*transparent:      true
 URxvt*termName:         rxvt-unicode
 URxvt*secondaryScroll:  true

@@ -35,8 +35,7 @@
 
 ;; needed because every time when i load a org file a get asked for a master file name ?!?!!
 (setq reftex-default-bibliography
-      (quote
-       ("~/Dropbox/research/refs.bib")))
+      '("~/Dropbox/research/refs.bib"))
 
 (setq org-link-abbrev-alist
       '(("bib" . "~/Dropbox/research/refs.bib::%s")

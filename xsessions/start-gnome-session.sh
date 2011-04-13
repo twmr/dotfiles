@@ -24,10 +24,11 @@ fi
 
 # Set the background color
 #/usr/bin/xsetroot -solid black
-pgrep -u $USER urxvtd > /dev/null || urxvtd -o -f &
+pgrep -x -u $USER urxvtd > /dev/null || urxvtd -o -f &
+echo "pgrep test"
 
 #The following line is now in gnome-session
-#pgrep -u $USER emacs > /dev/null || emacs --daemon &
+pgrep -u $USER emacs > /dev/null || emacs --daemon &
 
 # The following is a simple hack to avoid starting
 # gnome-panel/metacity when awesome was supposed to be started. this
@@ -65,4 +66,5 @@ export WINDOW_MANAGER=/usr/bin/$1
 #if something does not work as expected start gnome-session with --debug and look into .xsession-errors
 #-a starts only the *.desktop files in the specified dir instead of the WM  (ex: -a /home/thomas/dumm)
 #exec strace -fF -o /tmp/gnome-session-trace /usr/bin/gnome-session
+#exec /usr/bin/awesome
 exec /usr/bin/gnome-session
