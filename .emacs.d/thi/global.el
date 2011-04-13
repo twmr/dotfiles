@@ -61,6 +61,7 @@
 (tool-bar-mode -1)
 (set-scroll-bar-mode nil)
 
+(size-indication-mode)
 ;;default font is now set in .Xdefaults
 ;;(set-default-font "ProFont-9")
 
