@@ -32,3 +32,9 @@
 ;; (global-unset-key (kbd "C-x 1")) ; was delete-other-windows
 ;; (global-unset-key (kbd "C-x 0")) ; was delete-window
 ;; (global-unset-key (kbd "C-x o")) ; was other-window
+
+
+;;(define-key minibuffer-local-map (kbd "M-p") 'previous-complete-history-element)
+;;(define-key minibuffer-local-map (kbd "M-n") 'next-complete-history-element)
+(define-key minibuffer-local-map (kbd "<up>") 'previous-complete-history-element)
+(define-key minibuffer-local-map (kbd "<down>") 'next-complete-history-element)
