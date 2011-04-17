@@ -26,7 +26,7 @@ export EDITOR=vim
 export VISUAL=vim
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
-
+export AWT_TOOLKIT=MToolkit # for matlab
 
 if [ "$HOSTNAME" = "firebird" ]; then
     arch="ia32"
@@ -102,4 +102,3 @@ bindkey "\e[3~" delete-char
 
 bindkey "\e[5~" history-beginning-search-backward
 bindkey "\e[6~" history-beginning-search-forward
-
