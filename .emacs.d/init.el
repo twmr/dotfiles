@@ -12,7 +12,6 @@
 (load "thi/bindings")
 (load "thi/folding")
 (load "thi/ido")
-(load "thi/magit")
 (load "thi/ccmode")
 (load "thi/latex")
 (load "thi/gnuplot")
@@ -30,6 +29,7 @@
 (vendor 'yasnippet)
 (vendor 'auto-mark)
 (vendor 'orgmode)
+(vendor 'magit)
 (vendor 'python)
 
 ;;FIXME smart-tab vs yasnippet bug

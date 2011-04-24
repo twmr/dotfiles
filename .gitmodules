@@ -34,3 +34,6 @@
 [submodule ".emacs.d/vendor/pymacs"]
 	path = .emacs.d/vendor/pymacs
 	url = git://github.com/pinard/Pymacs.git
+[submodule ".emacs.d/vendor/magit"]
+	path = .emacs.d/vendor/magit
+	url = git://github.com/philjackson/magit.git
