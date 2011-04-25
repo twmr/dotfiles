@@ -15,4 +15,5 @@
 (autoload 'color-theme-wombat "color-theme-wombat" nil t)
 (autoload 'color-theme-twilight "color-theme-twilight" nil t)
 
-(color-theme-tangotango)
+;;(color-theme-tangotango)
+(color-theme-wombat)
