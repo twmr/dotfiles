@@ -39,8 +39,8 @@
 
 (setq org-link-abbrev-alist
       '(("bib" . "~/Dropbox/research/refs.bib::%s")
-        ("diplomarbeit" . "~/notes-org/diplomarbeit.org::#%s")
-        ("papers" . "~/research/papers/%s.pdf")))
+        ("diplomarbeit" . "~/Dropbox/notes-org/diplomarbeit.org::#%s")
+        ("papers" . "~/Dropbox/research/%s.pdf")))
 
 (defun org-mode-reftex-search ()
   ;;jump to the notes for the paper pointed to at from reftex search
@@ -63,7 +63,7 @@
             (?p . "[[papers:%l][%l-paper]]")
             (?c . "\\cite{%l}")
             (?t . "%t")
-            (?h . "** %t\n:PROPERTIES:\n:Custom_ID: %l\n:END:\n[[papers:%l][%l-paper]]")))))
+            (?h . "\n** %t\n   :PROPERTIES:   \n:Custom_ID: %l\n   :END:\n   [[papers:%l][%l-paper]]")))))
   (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
   (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search))
 
