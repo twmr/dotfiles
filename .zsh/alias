@@ -56,8 +56,6 @@ alias nautilus='nautilus --no-desktop'
 #alias cmake='cmake -DCMAKE_INSTALL_PREFIX=/usr -DSYSCONFDIR=/etc'
 #alias slurm='slurm -i wlan0'
 #alias dmenu='dmenu_run -fn "-adobe-helvetica-medium-r-normal-*-10-*-*-*-*-*-*-*" -nb "#1E1E1E" -nf "#C4C4C4" -sb "#333333" -sf "#3579A8"'
-alias gpo='gp origin'
-alias gpg='gp gitorious'
 alias gk='gitk --all &'
 
 #named directories

@@ -32,6 +32,7 @@ function gs() { git status $* }
 function gp() { git push $* }
 function gc() { git commit -m "$*" }
 function gpl() { git pull $* }
+function gps() { git push $* }
 function gco() {
     if [ -z "$1" ]; then
         git checkout master
