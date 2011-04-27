@@ -41,6 +41,11 @@ function gco() {
     fi
 }
 
+function makecf {
+    cd ~/cf-fem-lib/build_release/
+    make
+}
+
 function laserscp() { scp $* thomas@opentech.meinserver.at:/home/thomas/public_html/laser }
 
 function pastie {
