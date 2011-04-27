@@ -18,7 +18,7 @@
 (load "thi/recentf")
 (load "thi/compilation")
 
-(vendor 'undo-tree)
+;;(vendor 'undo-tree)
 
 ;; avoid that :qw quits the whole window
 ;; FIXME move this to somewhere else
