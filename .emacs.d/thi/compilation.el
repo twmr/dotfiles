@@ -22,7 +22,7 @@
   (progn
     (if (not (get-buffer-window "*compilation*"))
         (progn
-          (split-window-vertically)
+          (split-window-horizontally)
           )
       )
     (tabbar-mode 0)
