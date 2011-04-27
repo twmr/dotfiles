@@ -9,3 +9,4 @@
 .emacs.d/session\.*
 .emacs.d/emacs-server.log
 .themes/
+/.emacs.d/ac-comphist.dat
