@@ -21,7 +21,8 @@
 (setq inhibit-startup-screen t)
 
 ;: LINUM
-(global-linum-mode 1)
+;; disable linum atm - because it causes spped problems with navigation
+;;(global-linum-mode 1)
 ;; linum should be disabled for certain modes where linenumbers do not
 ;; make sense
 ;; http://www.emacswiki.org/emacs/LineNumbers
