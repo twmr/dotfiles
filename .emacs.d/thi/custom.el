@@ -6,6 +6,7 @@
  '(fringe-mode (quote (5 . 5)) nil (fringe))
  '(ido-enable-tramp-completion nil)
  '(ido-use-faces t)
+ '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . default) ("pdf" . "evince %s"))))
  '(tabbar-background-color "black")
  '(tabbar-mode t nil (tabbar))
