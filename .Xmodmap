@@ -1,0 +1,6 @@
+!keycode 151 = Super_L
+!clear mod4
+!add mod4 = Super_L
+!keycode 151 = Caps_Lock
+clear lock
+add mod4 = Caps_Lock
