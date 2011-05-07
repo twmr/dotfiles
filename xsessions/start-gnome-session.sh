@@ -30,6 +30,11 @@ echo "pgrep test"
 #The following line is now in gnome-session
 pgrep -u $USER emacs > /dev/null || emacs --daemon &
 
+#international keyboard layout
+setxkbmap us altgr-intl
+xmodmap ~/.Xmodmap
+
+
 # The following is a simple hack to avoid starting
 # gnome-panel/metacity when awesome was supposed to be started. this
 # should be fixed in gnome-session (bug already filed under

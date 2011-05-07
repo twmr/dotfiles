@@ -58,6 +58,8 @@ alias nautilus='nautilus --no-desktop'
 #alias dmenu='dmenu_run -fn "-adobe-helvetica-medium-r-normal-*-10-*-*-*-*-*-*-*" -nb "#1E1E1E" -nf "#C4C4C4" -sb "#333333" -sf "#3579A8"'
 alias gk='gitk --all &'
 
+alias yu='sudo yum update'
+
 #named directories
 hash -d d=/usr/share/doc
 hash -d conf=${HOME}/.config
