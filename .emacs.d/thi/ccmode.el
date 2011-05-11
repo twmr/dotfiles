@@ -1,9 +1,9 @@
 (require 'cc-mode)
-(setq c-default-style (quote ( (c-mode . "stroustrup")
-                               (c++-mode . "stroustrup")
-                               (java-mode . "java")
-                               (awk-mode . "awk")
-                               (other . "gnu") )))
+(setq c-default-style '((c-mode . "stroustrup")
+                        (c++-mode . "stroustrup")
+                        (java-mode . "java")
+                        (awk-mode . "awk")
+                        (other . "gnu") ))
 
 ;; set linux c-style if filename or directory contains the string
 ;; linux
@@ -12,6 +12,18 @@
              (string-match "linux" buffer-file-name))
     (c-set-style "Linux")))
 (add-hook 'c-mode-hook 'maybe-linux-style)
+
+(defun cf-fem-lib-style ()
+  (interactive)
+  (message (buffer-file-name))
+  (when (and buffer-file-name
+             (string-match "cf-fem-lib" buffer-file-name))
+     (setq c-basic-offset 2)
+    ;; (setq-default c-basic-offset 2
+    ;;               tab-width 2
+    ;;               indent-tabs-mode nil)
+    ))
+(add-hook 'c++-mode-hook 'cf-fem-lib-style)
 
 ;; do not create newlines for electric keys if the following line is
 ;; nonblank
