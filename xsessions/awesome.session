@@ -1,0 +1,6 @@
+[GNOME Session]
+Name=Awesome Gnome3 session
+RequiredComponents=gnome-settings-daemon;
+RequiredProviders=windowmanager;notifications;
+DefaultProvider-windowmanager=awesome
+DefaultProvider-notifications=notification-daemon
