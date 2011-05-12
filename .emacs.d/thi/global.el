@@ -159,6 +159,20 @@
  (list
   warning-words-font-lock-spec))
 
+;; from emacs-wiki
+(defun unfill-paragraph ()
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+
+(defun unfill-region ()
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-region (region-beginning) (region-end) nil)))
+
+(define-key global-map "\M-Q" 'unfill-paragraph)
+(define-key global-map "\C-\M-q" 'unfill-region)
+
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Yank and Paste
