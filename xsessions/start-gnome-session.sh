@@ -6,6 +6,7 @@
 
 MYWM=$1
 SHOW_DESKTOP=$2
+GNOME3=false
 
 SESSKEY="/desktop/gnome/session"
 GSETTOOL="/usr/bin/gconftool-2"
@@ -39,7 +40,7 @@ xmodmap ~/.Xmodmap
 # gnome-panel/metacity when awesome was supposed to be started. this
 # should be fixed in gnome-session (bug already filed under
 # https://bugzilla.gnome.org/show_bug.cgi?id=638677 )
-if [ "$MYWM" = "awesome" ]
+if [ "$MYWM" = "awesome" && "$GNOME3" -ne "true"]
 then
     desktopfiles=`find ~/.config/gnome-session/saved-session -name "*.desktop"`
     if [ "x$desktopfiles" != "x" ]; then
@@ -48,22 +49,29 @@ then
     fi
 fi
 
+
 # Update the Gnome configuration to reflect WM and desktop appearance
 # IMPORTANT: $MYWM should have a valid .desktop file in
 # /usr/share/applications or in .local/share/applications (for other
 # dirs see log of `gnome-session --debug`) otherwise gsm will complain
 # about it
 
-$GSETTOOL -t string  -s $SESSKEY/required_components/windowmanager ${MYWM}
 $GSETTOOL -t boolean -s /apps/nautilus/preferences/show_desktop  ${SHOW_DESKTOP}
 
-if [ "$MYWM" = "awesome" ]
+if [ "$GNOME3" = "true" ]
 then
-    $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[windowmanager]"
-    $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[gnome-settings-daemon]"
+    $GSETTOOL -u $SESSKEY/required_components/windowmanager
 else
-    $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[filemanager,panel,windowmanager]"
-    $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[gnome-settings-daemon]"
+    $GSETTOOL -s $SESSKEY/required_components/windowmanager ${MYWM} -t string
+
+    if [ "$MYWM" = "awesome" ]
+    then
+        $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[windowmanager]"
+        $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[gnome-settings-daemon]"
+    else
+        $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[filemanager,panel,windowmanager]"
+        $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[gnome-settings-daemon]"
+    fi
 fi
 
 export WINDOW_MANAGER=/usr/bin/$1
@@ -72,4 +80,10 @@ export WINDOW_MANAGER=/usr/bin/$1
 #-a starts only the *.desktop files in the specified dir instead of the WM  (ex: -a /home/thomas/dumm)
 #exec strace -fF -o /tmp/gnome-session-trace /usr/bin/gnome-session
 #exec /usr/bin/awesome
-exec /usr/bin/gnome-session
+
+if [ "$GNOME3" = "true" && "$MYWM" = "awesome" ]
+then
+    exec gnome-session --session=awesome
+else
+    exec gnome-session
+fi

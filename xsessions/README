@@ -2,4 +2,8 @@ change paths in *.desktop files to current directory
 cp the desktop files to /usr/share/xessions (gdm or any other
 standards-compliant DM will look in this dir for xession files)
 
+if you are using some distribution that comes with gnome3 instead of
+gnome 2 then copy the awesome.session file to
+/usr/share/gnome-sessions/sessions
+
 look into .xsession-errors in case of errors
