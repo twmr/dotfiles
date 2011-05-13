@@ -1,9 +1,12 @@
 change paths in *.desktop files to current directory
 cp the desktop files to /usr/share/xessions (gdm or any other
-standards-compliant DM will look in this dir for xession files)
+standards-compliant login manager will look in this dir for xsession files)
 
-if you are using some distribution that comes with gnome3 instead of
-gnome 2 then copy the awesome.session file to
-/usr/share/gnome-sessions/sessions
+sudo cp gs-awesome.desktop /usr/share/xsessions
+sudo cp gs-gnome.desktop /usr/share/xsessions
 
 look into .xsession-errors in case of errors
+
+for Ubuntu 11.4 (with gnome 2.32) do the following:
+
+sudo cp ubuntu/awesome.session /usr/share/gnome-session/sessions/awesome.session

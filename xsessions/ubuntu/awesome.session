@@ -1,0 +1,9 @@
+[GNOME Session]
+Name=Classic GNOME
+Required=windowmanager;filemanager;
+Required-windowmanager=awesome
+Required-filemanager=nautilus
+DefaultApps=gnome-settings-daemon;
+IsRunnableHelper=/usr/lib/nux/unity_support_test --compiz
+FallbackSessionsID=GNOME2d
+GNOME2d=2d-gnome
