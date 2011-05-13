@@ -1,5 +1,5 @@
 [GNOME Session]
-Name=Classic GNOME
+Name=Awesome-Gnome
 Required=windowmanager;filemanager;
 Required-windowmanager=awesome
 Required-filemanager=nautilus

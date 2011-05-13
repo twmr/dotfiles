@@ -8,6 +8,11 @@ MYWM=$1
 SHOW_DESKTOP=$2
 GNOME3=false
 
+HOSTNAME=`hostname`
+if [ "$HOSTNAME" = "thisch" ]; then
+    GNOME3=true
+fi
+
 SESSKEY="/desktop/gnome/session"
 GSETTOOL="/usr/bin/gconftool-2"
 
@@ -26,7 +31,6 @@ fi
 # Set the background color
 #/usr/bin/xsetroot -solid black
 pgrep -x -u $USER urxvtd > /dev/null || urxvtd -o -f &
-echo "pgrep test"
 
 #The following line is now in gnome-session
 pgrep -u $USER emacs > /dev/null || emacs --daemon &
@@ -40,10 +44,11 @@ xmodmap ~/.Xmodmap
 # gnome-panel/metacity when awesome was supposed to be started. this
 # should be fixed in gnome-session (bug already filed under
 # https://bugzilla.gnome.org/show_bug.cgi?id=638677 )
-if [ "$MYWM" = "awesome" && "$GNOME3" -ne "true"]
+if [ "$MYWM" = "awesome" -a "$GNOME3" != "true" ]
 then
     desktopfiles=`find ~/.config/gnome-session/saved-session -name "*.desktop"`
-    if [ "x$desktopfiles" != "x" ]; then
+    if [ "x$desktopfiles" != "x" ] 
+    then
         matchedfiles=`grep -Eil '(metacity|gnome-panel)' $desktopfiles`
         rm -f $matchedfiles
     fi
@@ -74,16 +79,20 @@ else
     fi
 fi
 
-export WINDOW_MANAGER=/usr/bin/$1
 
 #if something does not work as expected start gnome-session with --debug and look into .xsession-errors
 #-a starts only the *.desktop files in the specified dir instead of the WM  (ex: -a /home/thomas/dumm)
 #exec strace -fF -o /tmp/gnome-session-trace /usr/bin/gnome-session
 #exec /usr/bin/awesome
 
-if [ "$GNOME3" = "true" && "$MYWM" = "awesome" ]
+#echo TESTVARS
+#echo $GNOME3
+#echo $MYWM
+if [ "$GNOME3" = "true" -a "$MYWM" = "awesome" ]
 then
     exec gnome-session --session=awesome
 else
+    export WINDOW_MANAGER=/usr/bin/$1
     exec gnome-session
 fi
+
