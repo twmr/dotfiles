@@ -10,8 +10,11 @@ if tty -s ; then
 fi
 
 # Exports
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/opt/mozilla/bin:/opt/java/jre/bin:/home/gig/bin:/opt/OneSwarm:/opt/google/chrome:/usr/local/bin:/home/thomas/cf-fem-lib/build_release/green:/home/thomas/cf-fem-lib/build_release/src
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/bin
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+#for DA
+export PATH=$PATH:$HOME/cf-fem-lib/build_release/green:$HOME/cf-fem-lib/build_release/src
 
 #for netgen
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/packages/Togl-1.7
