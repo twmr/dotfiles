@@ -24,6 +24,7 @@
 ;; FIXME move this to somewhere else
 (setq vimpulse-want-quit-like-Vim nil) ;; needs to be before vimpulse
 
+(vendor 'smex)
 (vendor 'vimpulse)
 (vendor 'ethan-wspace)
 (vendor 'yasnippet)
