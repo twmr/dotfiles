@@ -1,11 +1,11 @@
 (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
 
-(setq org-agenda-files (quote ("~/Dropbox/notes-org/studium.org"
-                               "~/Dropbox/notes-org/laserPA.org"
-                               "~/Dropbox/notes-org/diplomarbeit.org"
-                               "~/Dropbox/notes-org/physik.org"
-                               "~/Dropbox/notes-org/emacs.org")))
+(setq org-agenda-files (quote ("~/gitrepos/orgnotes/studium.org"
+                               "~/gitrepos/orgnotes/laserPA.org"
+                               "~/gitrepos/orgnotes/diplomarbeit.org"
+                               "~/gitrepos/orgnotes/physik.org"
+                               "~/gitrepos/orgnotes/emacs.org")))
 
 ;; fontify src blocks, doesn't work with fixed-pitch blocks :(
 ;;(setq org-src-fontify-natively t)
@@ -35,11 +35,11 @@
 
 ;; needed because every time when i load a org file a get asked for a master file name ?!?!!
 (setq reftex-default-bibliography
-      '("~/Dropbox/research/refs.bib"))
+      '("~/gitrepos/orgnotes/refs.bib"))
 
 (setq org-link-abbrev-alist
-      '(("bib" . "~/Dropbox/research/refs.bib::%s")
-        ("diplomarbeit" . "~/Dropbox/notes-org/diplomarbeit.org::#%s")
+      '(("bib" . "~/gitrepos/orgnotes/refs.bib::%s")
+        ("diplomarbeit" . "~/gitrepos/orgnotes/diplomarbeit.org::#%s")
         ("papers" . "~/Dropbox/research/%s.pdf")))
 
 (defun org-mode-reftex-search ()
@@ -63,7 +63,8 @@
             (?p . "[[papers:%l][%l-paper]]")
             (?c . "\\cite{%l}")
             (?t . "%t")
-            (?h . "\n** %t\n   :PROPERTIES:\n   :Custom_ID: %l\n   :END:\n   [[papers:%l][%l-paper]]")))))
+            (?h . "\n** [[papers:%l][%t]]\n   :PROPERTIES:\n   :Custom_ID: %l\n   :END:\n")))))
+
   (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
   (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search))
 
