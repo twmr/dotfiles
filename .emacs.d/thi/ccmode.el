@@ -18,7 +18,12 @@
   (message (buffer-file-name))
   (when (and buffer-file-name
              (string-match "cf-fem-lib" buffer-file-name))
-     (setq c-basic-offset 2)
+    (progn
+      (c-set-style "stroustrup")
+      (setq c-basic-offset 2)
+      (c-set-offset 'access-label 0)
+      (c-set-offset 'topmost-intro 2)
+      )
     ;; (setq-default c-basic-offset 2
     ;;               tab-width 2
     ;;               indent-tabs-mode nil)
