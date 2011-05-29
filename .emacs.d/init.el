@@ -28,7 +28,7 @@
 (vendor 'smex)
 (vendor 'vimpulse)
 (vendor 'ethan-wspace)
-(vendor 'yasnippet)
+;;(vendor 'yasnippet)
 (vendor 'auto-mark)
 (vendor 'orgmode)
 (vendor 'magit)
