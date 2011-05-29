@@ -1,10 +1,13 @@
 ;;; Recent Files
 
+;; recentf-save-file has to be before (require ..) otherwise you have
+;; to load the new file manually with recentf-load-list
+(setq recentf-save-file (concat user-cache-file-dir "recentf"))
+
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 60)
 (setq recentf-max-saved-items 500)
-;;(setq recentf-save-file (concat user-cache-file-dir ".recentf"))
 
 (defun xsteve-ido-choose-from-recentf ()
   "Use ido to select a recently opened file from the `recentf-list'"
