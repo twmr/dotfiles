@@ -63,7 +63,7 @@
             (?p . "[[papers:%l][%l-paper]]")
             (?c . "\\cite{%l}")
             (?t . "%t")
-            (?h . "\n** [[papers:%l][%t]]\n   :PROPERTIES:\n   :Custom_ID: %l\n   :END:\n")))))
+            (?h . "\n** [[papers:%l][%t]]\n  :PROPERTIES:\n  :Custom_ID: %l\n  :END:\n")))))
 
   (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
   (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search))
