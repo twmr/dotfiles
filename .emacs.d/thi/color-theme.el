@@ -10,10 +10,10 @@
   (nconc load-path orig-load-path))
 
 (autoload 'color-theme-tango-2 "color-theme-tango-2" nil t)
-(autoload 'color-theme-tangotango "color-theme-tangotango" nil t)
+(autoload 'color-theme-thi-tangotango "color-theme-thi-tangotango" nil t)
 (autoload 'color-theme-zenburn "zenburn" nil t)
 (autoload 'color-theme-wombat "color-theme-wombat" nil t)
 (autoload 'color-theme-twilight "color-theme-twilight" nil t)
 
-(color-theme-tangotango) ;; needed before wombat to enable better looking magit faces
+(color-theme-thi-tangotango) ;; needed before wombat to enable better looking magit faces
 (color-theme-wombat)
