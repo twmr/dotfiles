@@ -54,6 +54,10 @@
          ;enable auto-revert-mode to update reftex when bibtex file changes on disk
          (global-auto-revert-mode t)
 
+         ;; this prevent reftex asking for the master file
+         (make-local-variable 'TeX-master)
+         (setq TeX-master t)
+
          (reftex-parse-all)
 
          ;add a custom reftex cite format to insert links
