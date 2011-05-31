@@ -35,9 +35,12 @@ if [ "$HOSTNAME" = "firebird" ]; then
     arch="ia32"
     intel_version="11.1/069"
     export PATH=$PATH:/opt/maple10/bin
+    export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
 elif [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
     intel_version="11.1/046"
+elif [ "$HOSTNAME" = "thisch" ]; then
+    export MATLAB_JAVA=/usr/lib/jvm/java-6-openjdk/jre
 else
     arch=""
 fi
