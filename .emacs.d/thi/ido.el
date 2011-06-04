@@ -36,9 +36,19 @@
   (set (make-local-variable 'truncate-lines) nil))
 (add-hook 'ido-minibuffer-setup-hook 'ido-disable-line-trucation)
 
+(defun ido-my-edit-input () "bla" (interactive)
+  (setq ido-current-directory
+        (concat (abbreviate-file-name ido-current-directory) ido-text ))
+  (setq ido-text "")
+  (ido-edit-input))
+
 (defun ido-my-keys ()
- "Add my keybindings for ido."
- (define-key ido-completion-map "\t" 'ido-next-match)
- (define-key ido-completion-map (kbd "<backtab>") 'ido-complete) ;; use \C-g to exit minibuffer
- )
+  "Add my keybindings for ido."
+  (when (eq ido-cur-item 'file)
+    (define-key ido-completion-map (kbd "C-e") 'ido-my-edit-input)
+    ;;(define-key ido-completion-map (kbd "<backspace>") 'ido-my-edit-input)
+    )
+  (define-key ido-completion-map "\t" 'ido-next-match)
+  (define-key ido-completion-map (kbd "<backtab>") 'ido-complete) ;; use \C-g to exit minibuffer
+  )
 (add-hook 'ido-setup-hook 'ido-my-keys)
