@@ -173,6 +173,22 @@
 (define-key global-map "\M-Q" 'unfill-paragraph)
 (define-key global-map "\C-\M-q" 'unfill-region)
 
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+(defun unfill-paragraph ()
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+
+(defun unfill-region ()
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-region (region-beginning) (region-end) nil)))
+;; Handy key definitions
+(define-key global-map "\M-Q" 'unfill-paragraph)
+(define-key global-map "\M-\C-q" 'unfill-region)
+
+
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Yank and Paste
