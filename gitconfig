@@ -7,8 +7,6 @@
 [user]
 	name = Thomas Hisch
 	email = thomas@opentech.at
-[core]
-	editor = vim
 [color]
 	ui = auto
 [pack]

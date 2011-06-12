@@ -1,0 +1,31 @@
+#!/bin/zsh
+
+#bindkey -e #emacs mode
+
+case $TERM in
+    xterm*)
+        # Pos1 && End
+        bindkey '^[OH'  beginning-of-line                  ## Pos1
+        bindkey '^[OF'  end-of-line                        ## End
+        bindkey '^[[3~' delete-char                        ## Entf
+        bindkey '^[[5~' history-beginning-search-backward  ## Page Up
+        bindkey '^[[6~' history-beginning-search-forward   ## Page Down
+        ;;
+    rxvt-unicode*)
+        bindkey "^[[1~" beginning-of-line
+        bindkey "^[[7~" beginning-of-line
+        bindkey "^[[8~" end-of-line
+        bindkey "^[[4~" end-of-line
+        bindkey "^[[3~" delete-char
+        bindkey "^[[5~" history-beginning-search-backward
+        bindkey "^[[6~" history-beginning-search-forward
+        ;;
+    screen*)
+        # Pos1 && End
+        bindkey '^[[1~' beginning-of-line                  ## Pos1
+        bindkey '^[[4~' end-of-line                        ## End
+        bindkey '^[[3~' delete-char                        ## Entf
+        bindkey '^[[5~' history-beginning-search-backward  ## Page Up
+        bindkey '^[[6~' history-beginning-search-forward   ## Page Down
+        ;;
+esac

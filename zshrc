@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+. ~/.zsh/keybindings
 . ~/.zsh/function
 . ~/.zsh/style
 . ~/.zsh/opts
