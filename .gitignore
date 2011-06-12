@@ -4,7 +4,7 @@
 vim/.netrwhist
 zsh/history*
 zsh/cache
-.emacs.d/auto-save-list
-.emacs.d/session\.*
-.emacs.d/emacs-server.log
-/.emacs.d/ac-comphist.dat
+emacs.d/auto-save-list
+emacs.d/session\.*
+emacs.d/emacs-server.log
+emacs.d/ac-comphist.dat
