@@ -7,6 +7,18 @@
                                "~/gitrepos/orgnotes/physik.org"
                                "~/gitrepos/orgnotes/emacs.org")))
 
+
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . nil)
+   (python . t)))
+
+
+(add-hook 'org-babel-after-execute-hook 'org-display-inline-images)
+
+;; this will turn off asking for a confirmation
+(setq org-confirm-babel-evaluate nil)
+
 ;; fontify src blocks, doesn't work with fixed-pitch blocks :(
 ;;(setq org-src-fontify-natively t)
 
