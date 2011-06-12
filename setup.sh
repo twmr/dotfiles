@@ -3,7 +3,7 @@
 
 pwd=$PWD
 filename=`basename $0`
-excludes=".emacs.d/ .gitignore .gitmodules laptop-settings.sh $filename xsessions/ make.conf"
+excludes=".gitignore .gitmodules laptop-settings.sh $filename xsessions/ make.conf"
 
 for file in `git ls-files | sed 's/\/.*/\//' | uniq`; do
     skip=0
