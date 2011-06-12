@@ -23,6 +23,7 @@ for file in `git ls-files | sed 's/\/.*/\//' | uniq`; do
         if test $(echo $file | cut -d. -f2) != $HOSTNAME; then
             continue
         fi
+        file="gtk-bookmarks" #strip the hostname
     fi
 
     #strip last slash (directories) from filename
