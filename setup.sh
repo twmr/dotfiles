@@ -30,8 +30,13 @@ for file in `git ls-files | sed 's/\/.*/\//' | uniq`; do
     file=${file%/}
 
     if ! test -e "$HOME/.$file"; then
-        echo ln -s "$pwd/$file" "$HOME/.$file"
-        ln -s "$pwd/$file" "$HOME/.$file"
+        if test $file = "gtk-bookmarks"; then
+            echo ln -s "$pwd/$file.$HOSTNAME" "$HOME/.$file"
+            ln -s "$pwd/$file.$HOSTNAME" "$HOME/.$file"
+        else
+            echo ln -s "$pwd/$file" "$HOME/.$file"
+            ln -s "$pwd/$file" "$HOME/.$file"
+        fi
         #todo test if it points to correct directory/file
     elif ! test -L "$HOME/.$file"; then
         echo "$HOME/.$file already exists but is not a symbolic link - don't know what to do"
