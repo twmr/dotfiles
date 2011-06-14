@@ -66,9 +66,4 @@ hash -d conf=${HOME}/.config
 hash -d era=${HOME}/Dropbox/erasmus
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
-
-if [ "$HOSTNAME" = "firebird" ]; then
-    hash -d dotf=${HOME}/gitrepos/dotfiles
-elif [ "$HOSTNAME" = "mustang" ]; then
-    hash -d dotf=${HOME}/dotfiles
-fi
+hash -d dotf=${HOME}/gitrepos/dotfiles
