@@ -4,6 +4,9 @@
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	apple-pick = !sh -c 'git rev-list --reverse "$@" | xargs -n1 git cherry-pick' -
 	pd = pull --dry-run
+	sua = submodule foreach git pull origin master
+	scomp = submodule foreach 'make||:'
+	sc = !git sua && git scomp
 [user]
 	name = Thomas Hisch
 	email = thomas@opentech.at
