@@ -7,6 +7,8 @@
 	sua = submodule foreach git pull origin master
 	scomp = submodule foreach 'make||:'
 	sc = !git sua && git scomp
+	aliases = config --get-regexp ^alias\\.
+	al = !git aliases
 [user]
 	name = Thomas Hisch
 	email = thomas@opentech.at
