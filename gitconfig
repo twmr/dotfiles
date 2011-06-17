@@ -4,8 +4,8 @@
 	lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	apple-pick = !sh -c 'git rev-list --reverse "$@" | xargs -n1 git cherry-pick' -
 	pd = pull --dry-run
-	sua = submodule foreach git pull origin master
-	scomp = submodule foreach 'make||:'
+	sua = submodule foreach 'git fetch origin && git checkout -f master && git pull'
+	scomp = submodule foreach '[[ -e Makefile ]] && make||:'
 	sc = !git sua && git scomp
 	aliases = config --get-regexp ^alias\\.
 	al = !git aliases
