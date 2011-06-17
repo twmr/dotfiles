@@ -102,3 +102,16 @@
 (ad-deactivate 'activate-input-method)
 (ad-deactivate 'inactivate-input-method)
 (ad-deactivate 'toggle-input-method)
+
+(defun thi-turn-hl-line-mode-on ()
+  (interactive)
+  (if (not (member major-mode hl-line-disabled-modes-list))
+      (hl-line-mode 1)))
+
+(defun thi-turn-hl-line-mode-off ()
+  (interactive)
+  (if (not (member major-mode hl-line-disabled-modes-list))
+      (hl-line-mode -1)))
+
+(add-hook 'vimpulse-visual-state-hook 'thi-turn-hl-line-mode-off)
+(add-hook 'viper-vi-state-hook 'thi-turn-hl-line-mode-on)

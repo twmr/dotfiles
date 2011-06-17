@@ -41,22 +41,9 @@
 
 
 ;: LINE Highlighting (highlight the current line)
-;; (faces are set in color-theme)
-;;optional: set a custom face, so we can
-;; recognize from the normal marking (selection)
-;;(defface hl-line '((t (:background "Gray")))
-;;  "Face to use for `hl-line-face'." :group 'hl-line)
-;;(setq hl-line-face 'hl-line)
-(global-hl-line-mode t) ; turn it on for all modes by default
 ;; exceptions where hl-line is not desired:
-(defun local-hl-line-mode-off ()
-  (interactive)
-  (make-local-variable 'global-hl-line-mode)
-  (setq global-hl-line-mode nil))
-
-(dolist (hook '(org-mode-hook))
-  (add-hook hook 'local-hl-line-mode-off))
-
+(setq hl-line-disabled-modes-list '(org-mode))
+(set-face-attribute 'highlight nil :underline nil)
 
 (setq column-number-mode t)
 (tool-bar-mode -1)
