@@ -10,6 +10,7 @@
 
 
 (global-set-key [f4] 'query-replace)
+(global-set-key [f5] 'git-grep)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
