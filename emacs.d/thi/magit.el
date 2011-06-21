@@ -47,4 +47,5 @@
                                      git-grep-switches)
                              'git-grep-history)))
   (let ((grep-use-null-device nil))
-    (grep concat ("PAGER=cat " command-args))))
+    ;; (grep (concat "PAGER=cat " command-args))))
+    (grep command-args)))
