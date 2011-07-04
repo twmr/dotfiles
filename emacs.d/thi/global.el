@@ -133,18 +133,14 @@
   "Regexp matching words that commonly denote something that
  warrants attention in programs.")
 
-(setq warning-words-font-lock-spec
-      (cons warning-words-regexp
-            (list
-             0 ;; use whole match
-             'font-lock-warning-face
-             t ;; OVERRIDE
-             )))
 
-(font-lock-add-keywords
- 'c-mode ;; or nil for current buffer
- (list
-  warning-words-font-lock-spec))
+;; fontify watch keywords(TODO,FIXME) in prog-modes (taken from emacs-starter-kit)
+(defun esk-add-watchwords ()
+  (font-lock-add-keywords
+   nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
+          1 font-lock-warning-face t))))
+
+(add-hook 'prog-mode-hook 'esk-add-watchwords)
 
 ;; from emacs-wiki
 (defun unfill-paragraph ()
