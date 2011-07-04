@@ -9,7 +9,7 @@ SHOW_DESKTOP=$2
 GNOME3=false
 
 HOSTNAME=`hostname`
-if [ "$HOSTNAME" = "thisch" ]; then
+if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" ]; then
     GNOME3=true
 fi
 
@@ -90,6 +90,8 @@ fi
 #echo $MYWM
 if [ "$GNOME3" = "true" -a "$MYWM" = "awesome" ]
 then
+    rm -f ~/.config/gnome-session/saved-session/gnome-shell.desktop
+    #exec gnome-session --debug --session=awesome
     exec gnome-session --session=awesome
 else
     export WINDOW_MANAGER=/usr/bin/$1
