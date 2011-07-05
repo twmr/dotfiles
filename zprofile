@@ -26,10 +26,11 @@ export NETGENDIR=/usr/local/bin
 export BROWSER=chromium-browser
 export OOO_FORCE_DESKTOP='gnome'
 export EDITOR="emacsclient -c -a /usr/bin/emacs -nw"
-export VISUAL=$EDITOR
+export VISUAL="$EDITOR"
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
 export AWT_TOOLKIT=MToolkit # for matlab
+HOSTNAME=`hostname`
 
 if [ "$HOSTNAME" = "firebird" ]; then
     arch="ia32"
@@ -40,7 +41,8 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
     intel_version="11.1/046"
 elif [ "$HOSTNAME" = "thisch" ]; then
-    export MATLAB_JAVA=/usr/lib/jvm/java-6-openjdk/jre
+    export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
+    export PATH=$PATH:$HOME/MATLAB/R2010b/bin
 else
     arch=""
 fi
