@@ -17,7 +17,8 @@
   (interactive)
   (message (buffer-file-name))
   (when (and buffer-file-name
-             (string-match "cf-fem-lib" buffer-file-name))
+             (or (string-match "cf-fem-lib" buffer-file-name)
+                 (string-match "Sessa" buffer-file-name)))
     (progn
       (c-set-style "stroustrup")
       (setq c-basic-offset 2)
