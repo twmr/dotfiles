@@ -60,6 +60,12 @@ alias gk='gitk --all &'
 
 alias yu='sudo yum update'
 
+
+if [ "$HOSTNAME" = "firebird" ]; then
+    alias femtotunnel='ssh -L 2401:localhost:2401 moves@femto.iap.tuwien.ac.at'
+fi
+
+
 #named directories
 hash -d d=/usr/share/doc
 hash -d conf=${HOME}/.config
