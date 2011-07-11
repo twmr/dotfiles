@@ -9,4 +9,7 @@ look into .xsession-errors in case of errors
 
 for Ubuntu 11.4 (with gnome 2.32) do the following:
 
-sudo cp ubuntu/awesome.session /usr/share/gnome-session/sessions/awesome.session
+ln -s ubuntu/awesome.session .config/gnome-session/sessions/awesome.session
+
+on fedora: create a link from .config/autostart/awesome.desktop to fedora/awesome.desktop
+and one from .config/gnome-session/sessions/awesome.session to fedora/awesome.session
