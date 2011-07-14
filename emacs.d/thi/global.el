@@ -14,6 +14,9 @@
 (setq ac-comphist-file (concat user-cache-file-dir "ac-comphist.dat"))
 (setq abbrev-file-name (concat user-cache-file-dir "abbrev_defs"))
 
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Appearance
 ;:::::::::::::::::::::::::::::::::::::::::::::::
