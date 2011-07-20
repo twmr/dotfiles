@@ -47,6 +47,8 @@
 ;; exceptions where hl-line is not desired:
 (setq hl-line-disabled-modes-list '(org-mode))
 (set-face-attribute 'highlight nil :underline nil)
+(add-hook 'find-file-hook 'thi-turn-hl-line-mode-on)
+
 
 (setq column-number-mode t)
 (tool-bar-mode -1)
