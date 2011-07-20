@@ -21,6 +21,8 @@
      ((file-directory-p normal) (add-to-list 'load-path normal) (set 'found t))
      ((file-directory-p suffix) (add-to-list 'load-path suffix) (set 'found t))
      ((file-exists-p suffix)  (set 'found t)))
+    (when (file-exists-p (concat personal "-pre.el"))
+      (load (concat personal "-pre")))
     (when found
       (if autoload-functions
           (dolist (autoload-function autoload-functions)

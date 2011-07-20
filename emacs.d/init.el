@@ -23,14 +23,14 @@
 (load "thi/compilation")
 
 ;;(vendor 'undo-tree)
-
-;; avoid that :qw quits the whole window
-;; FIXME move this to somewhere else
-(setq vimpulse-want-quit-like-Vim nil) ;; needs to be before vimpulse
-
 (vendor 'auto-complete)
 (vendor 'smex)
-(vendor 'vimpulse)
+
+ (if (y-or-n-p-with-timeout "Start evil? " 2 nil)
+     (vendor 'evil)
+     (vendor 'vimpulse)
+ )
+
 (vendor 'ethan-wspace)
 ;;(vendor 'yasnippet)
 (vendor 'auto-mark)
