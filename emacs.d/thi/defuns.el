@@ -21,6 +21,8 @@
      ((file-directory-p normal) (add-to-list 'load-path normal) (set 'found t))
      ((file-directory-p suffix) (add-to-list 'load-path suffix) (set 'found t))
      ((file-exists-p suffix)  (set 'found t)))
+    (when (file-exists-p (concat personal "-pre.el"))
+      (load (concat personal "-pre")))
     (when found
       (if autoload-functions
           (dolist (autoload-function autoload-functions)
@@ -28,3 +30,14 @@
         (require library)))
     (when (file-exists-p (concat personal ".el"))
       (load personal))))
+
+;; start hl-line in each buffer where the major modes are note in hl-line-disabled-modes-list
+(defun thi-turn-hl-line-mode-on ()
+  (interactive)
+  (if (not (member major-mode hl-line-disabled-modes-list))
+      (hl-line-mode 1)))
+
+(defun thi-turn-hl-line-mode-off ()
+  (interactive)
+  (if (not (member major-mode hl-line-disabled-modes-list))
+      (hl-line-mode -1)))

@@ -14,6 +14,9 @@
 (setq ac-comphist-file (concat user-cache-file-dir "ac-comphist.dat"))
 (setq abbrev-file-name (concat user-cache-file-dir "abbrev_defs"))
 
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Appearance
 ;:::::::::::::::::::::::::::::::::::::::::::::::
@@ -44,6 +47,8 @@
 ;; exceptions where hl-line is not desired:
 (setq hl-line-disabled-modes-list '(org-mode))
 (set-face-attribute 'highlight nil :underline nil)
+(add-hook 'find-file-hook 'thi-turn-hl-line-mode-on)
+
 
 (setq column-number-mode t)
 (tool-bar-mode -1)
