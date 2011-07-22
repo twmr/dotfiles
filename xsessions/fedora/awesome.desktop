@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=awesome
+NoDisplay=true
+Comment=Awesome window manager
+Exec=/usr/bin/awesome
+X-GNOME-WMName=Awesome
+X-GNOME-Provides=windowmanager
