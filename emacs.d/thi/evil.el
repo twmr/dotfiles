@@ -8,6 +8,7 @@
 
 ;; associate certain modes with default evil states
 (add-to-list 'evil-emacs-state-modes 'magit-mode)
+(add-to-list 'evil-emacs-state-modes 'magit-key-mode)
 
 ;; extra keybindings
 
