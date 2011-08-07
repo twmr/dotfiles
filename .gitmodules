@@ -16,9 +16,6 @@
 [submodule "emacs.d/vendor/yasnippet"]
 	path = emacs.d/vendor/yasnippet
 	url = git://github.com/emacsmirror/yasnippet.git
-[submodule "emacs.d/vendor/smart-tab"]
-	path = emacs.d/vendor/smart-tab
-	url = git://github.com/genehack/smart-tab.git
 [submodule "emacs.d/vendor/org-mode"]
 	path = emacs.d/vendor/org-mode
 	url = git://orgmode.org/org-mode.git
