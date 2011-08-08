@@ -37,7 +37,7 @@ if [ "$HOSTNAME" = "firebird" ]; then
     intel_version="11.1/069"
     export PATH=$PATH:/opt/maple10/bin:$HOME/local/Moves2/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
-    export CVSROOT=:pserver:hisch@localhost:/usr/local/cvsroot/quest.root 
+    export CVSROOT=:pserver:hisch@localhost:/usr/local/cvsroot/quest.root
     export SESSA_DATABASE_PATH=$HOME/CVSrepos/Development/databases
 elif [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
@@ -45,6 +45,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 elif [ "$HOSTNAME" = "thisch" ]; then
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
     export PATH=$PATH:$HOME/MATLAB/R2010b/bin
+    export CFFEM_MLCODE=/home/thomas/cf-fem-lib/matlab
 else
     arch=""
 fi
