@@ -26,10 +26,10 @@
 (vendor 'auto-complete)
 (vendor 'smex)
 
- (if (y-or-n-p-with-timeout "Start evil? " 2 nil)
-     (vendor 'evil)
-     (vendor 'vimpulse)
- )
+(if (y-or-n-p-with-timeout "Start evil? " 2 nil)
+    (vendor 'evil)
+  (vendor 'vimpulse)
+  )
 
 (vendor 'ethan-wspace)
 ;;(vendor 'yasnippet)
@@ -37,9 +37,6 @@
 (vendor 'orgmode)
 (vendor 'magit)
 (vendor 'python)
-
-;;FIXME smart-tab vs yasnippet bug
-;;(vendor 'smart-tab)
 
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling

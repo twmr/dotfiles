@@ -1,0 +1,5 @@
+[GNOME Session]
+Name=Awesome session
+RequiredComponents=
+RequiredProviders=windowmanager;
+DefaultProvider-windowmanager=awesome
