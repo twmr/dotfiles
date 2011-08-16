@@ -44,6 +44,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     intel_version="11.1/046"
     export PATH=~/gitrepos/emacs/src:/usr/local/MATLAB/R2010b/bin:$PATH
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
+    export CFFEM_MLCODE=/home/thomas/cf-fem-lib/matlab
 elif [ "$HOSTNAME" = "thisch" ]; then
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
     export PATH=$PATH:$HOME/MATLAB/R2010b/bin
