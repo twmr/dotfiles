@@ -26,10 +26,8 @@
 (vendor 'auto-complete)
 (vendor 'smex)
 
-(if (y-or-n-p-with-timeout "Start evil? " 2 nil)
-    (vendor 'evil)
-  (vendor 'vimpulse)
-  )
+(vendor 'evil)
+;; (vendor 'vimpulse)
 
 (vendor 'ethan-wspace)
 ;;(vendor 'yasnippet)
