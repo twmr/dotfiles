@@ -59,7 +59,8 @@ alias nautilus='nautilus --no-desktop'
 alias gk='gitk --all &'
 
 alias yu='sudo yum update'
-
+alias yr='sudo yum remove'
+alias ys='yum search'
 
 if [ "$HOSTNAME" = "firebird" ]; then
     alias femtotunnel='ssh -L 2401:localhost:2401 moves@femto.iap.tuwien.ac.at'
