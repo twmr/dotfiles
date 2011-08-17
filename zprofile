@@ -39,6 +39,7 @@ if [ "$HOSTNAME" = "firebird" ]; then
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
     export CVSROOT=:pserver:hisch@localhost:/usr/local/cvsroot/quest.root
     export SESSA_DATABASE_PATH=$HOME/CVSrepos/Development/databases
+    export CFFEM_MLCODE=/home/thomas/cf-fem-lib/matlab
 elif [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
     intel_version="11.1/046"
