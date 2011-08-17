@@ -28,7 +28,7 @@ function gd() { git diff $* }
 function gg() { git grep $* }
 
 function gl() { git log $* }
-function gs() { git status $* }
+function gs() { git status --ignore-submodules $* }
 function gp() { git push $* }
 function gc() { git commit -m "$*" }
 function gpl() { git pull $* }
