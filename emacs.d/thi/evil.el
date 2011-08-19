@@ -11,3 +11,4 @@
 ;; extra keybindings
 
 (define-key evil-normal-state-map "gs" 'magit-status)
+(define-key evil-insert-state-map "\C-k" 'kill-line)
