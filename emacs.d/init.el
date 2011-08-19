@@ -21,6 +21,7 @@
 (load "thi/recentf")
 (load "thi/nxml")
 (load "thi/compilation")
+(load "thi/matlab")
 
 ;;(vendor 'undo-tree)
 (vendor 'auto-complete)
