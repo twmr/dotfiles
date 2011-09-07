@@ -74,3 +74,5 @@ hash -d era=${HOME}/Dropbox/erasmus
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
 hash -d dotf=${HOME}/gitrepos/dotfiles
+hash -d emd=${HOME}/gitrepos/dotfiles/emacs.d
+hash -d emv=${HOME}/gitrepos/dotfiles/emacs.d/vendor

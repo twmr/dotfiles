@@ -61,6 +61,6 @@
 
 
 ;; makes delete map to hungry mode
-(defun thi-map-delete-hungry ()
-  (define-key c-mode-base-map [delete] 'c-hungry-backspace))
-(add-hook 'c-mode-common-hook 'thi-map-delete-hungry)
+;;(defun thi-map-delete-hungry ()
+;;  (define-key c-mode-base-map [backspace] 'c-hungry-backspace))
+;;(add-hook 'c-mode-common-hook 'thi-map-delete-hungry)
