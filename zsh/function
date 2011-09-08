@@ -25,7 +25,7 @@ function add-alias() {
 function GG() { grep -RiI --exclude-dir=.svn  --exclude-dir=.git $* * }
 # git functions
 function ga() { git add $* }
-function gd() { git diff $* }
+function gd() { git diff --ignore-submodules $* }
 function gg() { git grep $* }
 
 function gl() { git log $* }
