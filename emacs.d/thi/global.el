@@ -113,7 +113,7 @@
         ("\\.asm\\'" . asm-mode)
         ("\\.F90\\'" . f90-mode)
         ("\\.m\\'" . matlab-mode)
-        ("\\.md\\'" . markdown-mode)
+        ("\\.\\(md\\|markdown\\)\\'" . markdown-mode)
         ("ChangeLog\\'" . change-log-mode)
         ("change\\.log\\'" . change-log-mode)
         ("changelo\\'" . change-log-mode)
