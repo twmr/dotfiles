@@ -43,3 +43,6 @@
 [submodule "emacs.d/vendor/flymake-cursor"]
 	path = emacs.d/vendor/flymake-cursor
 	url = git://github.com/illusori/emacs-flymake-cursor.git
+[submodule "emacs.d/vendor/textlint"]
+	path = emacs.d/vendor/textlint
+	url = git://github.com/DamienCassou/textlint.git
