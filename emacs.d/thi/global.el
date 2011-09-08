@@ -225,6 +225,7 @@
                                      c-mode
                                      c++-mode
                                      java-mode
+                                     matlab-mode
                                      objc-mode
                                      latex-mode
                                      plain-tex-mode))
