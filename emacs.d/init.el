@@ -36,6 +36,7 @@
 (vendor 'orgmode)
 (vendor 'magit)
 (vendor 'python)
+(vendor 'flymake-cursor)
 
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling
