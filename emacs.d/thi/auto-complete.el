@@ -27,7 +27,7 @@
                 text-mode haml-mode sass-mode yaml-mode csv-mode
                 espresso-mode haskell-mode html-mode matlab-mode
                 nxml-mode sh-mode smarty-mode Cojure-mode
-                lisp-mode textile-mode markdown-mode
+                lisp-mode latex-mode textile-mode markdown-mode
                 tuareg-mode))
   (add-to-list 'ac-modes mode))
 
