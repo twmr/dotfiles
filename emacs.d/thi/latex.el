@@ -12,10 +12,15 @@
 (defun turn-on-visual-line-mode ()
   (visual-line-mode 1))
 
+(defun turn-on-longlines-mode ()
+  (longlines-mode 1))
+
 (add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
 (add-hook 'latex-mode-hook 'turn-on-outline-minor-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-visual-line-mode)
 (add-hook 'latex-mode-hook 'turn-on-visual-line-mode)
+;; (add-hook 'LaTeX-mode-hook 'turn-on-longlines-mode)
+;; (add-hook 'latex-mode-hook 'turn-on-longlines-mode)
 ;;(setq outline-minor-mode-prefix "\C-c\C-o") ; Or something else
 
 (add-hook 'outline-minor-mode-hook
