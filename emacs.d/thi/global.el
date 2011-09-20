@@ -134,19 +134,20 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; add warning face for certain keywords
-(defvar warning-words-regexp
-  (regexp-opt '("FIXME" "TODO" "BUG" "XXX" "DEBUG") 'words)
-  "Regexp matching words that commonly denote something that
- warrants attention in programs.")
+;; (defvar warning-words-regexpVV
+;;   (regexp-opt '("FIXME" "TODO" "BUG" "XXX" "DEBUG") 'words)
+;;   "Regexp matching words that commonly denote something that
+;;  warrants attention in programs.")
 
 
 ;; fontify watch keywords(TODO,FIXME) in prog-modes (taken from emacs-starter-kit)
 (defun esk-add-watchwords ()
   (font-lock-add-keywords
-   nil '(("\\<\\(FIX\\|TODO\\|FIXME\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
+   nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
           1 font-lock-warning-face t))))
 
 (add-hook 'prog-mode-hook 'esk-add-watchwords)
+(add-hook 'LaTeX-mode-hook 'esk-add-watchwords)
 
 ;; from emacs-wiki
 (defun unfill-paragraph ()
