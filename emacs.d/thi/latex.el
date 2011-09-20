@@ -15,15 +15,34 @@
 (defun turn-on-longlines-mode ()
   (longlines-mode 1))
 
+(defun compilation-latex-stuff ()
+  (interactive)
+  (when (string-match "tudadoc" buffer-file-name)
+    ;; (make-local-variable 'compile-command)
+    ;; (setq 'compile-commnad "cd /home/thomas/gitrepos/tudadoc && make")
+    (set (make-local-variable 'compilation-read-command) nil)
+    (set (make-local-variable 'compile-command)
+         "cd /home/thomas/gitrepos/tudadoc && make")))
+
 (add-hook 'LaTeX-mode-hook 'turn-on-outline-minor-mode)
 (add-hook 'latex-mode-hook 'turn-on-outline-minor-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-visual-line-mode)
 (add-hook 'latex-mode-hook 'turn-on-visual-line-mode)
 (add-hook 'LaTeX-mode-hook 'turn-off-auto-fill)
 (add-hook 'latex-mode-hook 'turn-off-auto-fill)
+(add-hook 'LaTeX-mode-hook 'compilation-latex-stuff)
+(add-hook 'latex-mode-hook 'compilation-latex-stuff)
 ;; (add-hook 'LaTeX-mode-hook 'turn-on-longlines-mode)
 ;; (add-hook 'latex-mode-hook 'turn-on-longlines-mode)
 ;;(setq outline-minor-mode-prefix "\C-c\C-o") ; Or something else
+
+
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+(setq reftex-use-external-file-finders t)
+(setq reftex-external-file-finders
+      '(("tex" . "kpsewhich -format=.tex %f")
+        ("bib" . "kpsewhich -format=.bib %f")))
 
 (add-hook 'outline-minor-mode-hook
           (lambda ()
