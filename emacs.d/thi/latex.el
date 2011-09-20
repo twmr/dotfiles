@@ -19,6 +19,8 @@
 (add-hook 'latex-mode-hook 'turn-on-outline-minor-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-visual-line-mode)
 (add-hook 'latex-mode-hook 'turn-on-visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'turn-off-auto-fill)
+(add-hook 'latex-mode-hook 'turn-off-auto-fill)
 ;; (add-hook 'LaTeX-mode-hook 'turn-on-longlines-mode)
 ;; (add-hook 'latex-mode-hook 'turn-on-longlines-mode)
 ;;(setq outline-minor-mode-prefix "\C-c\C-o") ; Or something else
