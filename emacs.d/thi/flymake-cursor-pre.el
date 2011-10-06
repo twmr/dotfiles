@@ -16,3 +16,7 @@
                '("\\.py\\'" flymake-pyflakes-init)))
 
 (add-hook 'find-file-hook 'flymake-find-file-hook)
+
+(defun flymake-display-warning (warning)
+  "Display a warning to the user, using message"
+  (message warning))
