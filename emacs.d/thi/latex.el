@@ -5,6 +5,18 @@
 ;; make auctex aware of the multi-file document structure
 (setq-default TeX-master nil)
 
+;;The following makes C-c-c not ask, just do the default action. Adds C-c-a for asking
+(setq TeX-command-force "")
+(add-hook 'LaTeX-mode-hook
+'(lambda()
+(define-key LaTeX-mode-map "\C-c\C-a" ; 'a' for ask, change to anything you want
+(lambda (arg) (interactive "P")
+(let ((TeX-command-force nil))
+(TeX-command-master arg))))))
+
+;;Inserts {} automaticly on _ and ^
+(setq TeX-electric-sub-and-superscript t)
+
 
 (defun turn-on-outline-minor-mode ()
   (outline-minor-mode 1))
