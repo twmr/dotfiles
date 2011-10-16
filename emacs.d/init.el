@@ -23,7 +23,8 @@
 (load "thi/compilation")
 (load "thi/matlab")
 
-;;(vendor 'undo-tree)
+(vendor 'undo-tree) ;; test undo tree once again and see if there are
+                    ;; any conflicts with evil
 (vendor 'auto-complete)
 (vendor 'smex)
 
