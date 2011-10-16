@@ -5,6 +5,8 @@
                         (awk-mode . "awk")
                         (other . "gnu") ))
 
+(setq c-toggle-auto-newline nil)
+
 ;; set linux c-style if filename or directory contains the string
 ;; linux
 (defun maybe-linux-style ()
