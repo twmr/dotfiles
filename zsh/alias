@@ -62,9 +62,7 @@ alias yu='sudo yum update'
 alias yr='sudo yum remove'
 alias ys='yum search'
 
-if [ "$HOSTNAME" = "firebird" ]; then
-    alias femtotunnel='ssh -L 2401:localhost:2401 moves@femto.iap.tuwien.ac.at'
-fi
+alias femtotunnel='ssh -L 2401:localhost:2401 moves@femto.iap.tuwien.ac.at'
 
 
 #named directories
