@@ -37,6 +37,7 @@
 (vendor 'orgmode)
 (vendor 'magit)
 (vendor 'python)
+(vendor 'flymake)
 (vendor 'flymake-cursor)
 
 ;; keyboard scroll one line at a time

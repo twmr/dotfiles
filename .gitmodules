@@ -46,3 +46,6 @@
 [submodule "emacs.d/vendor/textlint"]
 	path = emacs.d/vendor/textlint
 	url = git://github.com/DamienCassou/textlint.git
+[submodule "emacs.d/vendor/flymake"]
+	path = emacs.d/vendor/flymake
+	url = git://github.com/illusori/emacs-flymake.git

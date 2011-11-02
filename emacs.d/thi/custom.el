@@ -5,6 +5,7 @@
   ;; If there is more than one, they won't work right.
  '(evil-mode-line-format (quote before))
  '(flymake-cursor-error-display-delay 0.4)
+ '(flymake-gui-warnings-enabled nil)
  '(fringe-mode (quote (5 . 5)) nil (fringe))
  '(ido-enable-tramp-completion nil)
  '(ido-use-faces t)
