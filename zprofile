@@ -43,11 +43,14 @@ if [ "$HOSTNAME" = "firebird" ]; then
 elif [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
     intel_version="11.1/046"
-    export PATH=/usr/local/MATLAB/R2010b/bin:$PATH
+    export PATH=/usr/lib64/openmpi/bin:/usr/local/MATLAB/R2010b/bin:$PATH
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
     export CFFEM_MLCODE=/home/thomas/cf-fem-lib/matlab
     export CVSROOT=:pserver:hisch@localhost:/usr/local/cvsroot/quest.root
     export SESSA_DATABASE_PATH=/home/thomas/gitrepos/sessa-git/databases
+
+    #parallel stuff
+    export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
 elif [ "$HOSTNAME" = "thisch" ]; then
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
     export PATH=$PATH:$HOME/MATLAB/R2010b/bin
