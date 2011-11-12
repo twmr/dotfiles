@@ -13,6 +13,8 @@
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(matlab-indent-level 2)
  '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . default) ("pdf" . "evince %s"))))
+ '(org-log-done (quote note))
+ '(preview-default-option-list (quote ("displaymath" "floats" "graphics" "textmath" "showlabels")))
  '(preview-scale-function 1.5)
  '(preview-transparent-color (quote (highlight :background)))
  '(viper-emacs-state-mode-list (quote (Custom-mode dired-mode efs-mode tar-mode browse-kill-ring-mode recentf-mode recentf-dialog-mode occur-mode mh-folder-mode gnus-group-mode gnus-summary-mode completion-list-mode help-mode Info-mode Buffer-menu-mode compilation-mode rcirc-mode jde-javadoc-checker-report-mode view-mode vm-mode vm-summary-mode magit-key-mode)))
