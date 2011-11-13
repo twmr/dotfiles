@@ -5,6 +5,8 @@
                         (awk-mode . "awk")
                         (other . "gnu") ))
 
+(setq c-toggle-auto-newline nil)
+
 ;; set linux c-style if filename or directory contains the string
 ;; linux
 (defun maybe-linux-style ()
@@ -30,6 +32,15 @@
     ;;               indent-tabs-mode nil)
     ))
 (add-hook 'c++-mode-hook 'cf-fem-lib-style)
+
+(defun compilation-cffemlib-stuff ()
+  (when (string-match "cf-fem-lib" buffer-file-name)
+    ;; (make-local-variable 'compile-command)
+    ;; (setq 'compile-commnad "cd /home/thomas/gitrepos/tudadoc && make")
+    (set (make-local-variable 'compilation-read-command) nil)
+    (set (make-local-variable 'compile-command)
+         "cd ~/cf-fem-lib/build && make")))
+(add-hook 'c++-mode-hook 'compilation-cffemlib-stuff)
 
 ;; do not create newlines for electric keys if the following line is
 ;; nonblank

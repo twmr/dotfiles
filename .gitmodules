@@ -13,9 +13,6 @@
 [submodule "emacs.d/vendor/undo-tree"]
 	path = emacs.d/vendor/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
-[submodule "emacs.d/vendor/yasnippet"]
-	path = emacs.d/vendor/yasnippet
-	url = git://github.com/emacsmirror/yasnippet.git
 [submodule "emacs.d/vendor/org-mode"]
 	path = emacs.d/vendor/org-mode
 	url = git://orgmode.org/org-mode.git
@@ -46,3 +43,6 @@
 [submodule "emacs.d/vendor/textlint"]
 	path = emacs.d/vendor/textlint
 	url = git://github.com/DamienCassou/textlint.git
+[submodule "emacs.d/vendor/flymake"]
+	path = emacs.d/vendor/flymake
+	url = git://github.com/illusori/emacs-flymake.git

@@ -13,9 +13,9 @@ term screen-256color
 termcapinfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 termcapinfo rxvt-256color 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm' 
 
-screen -t irc irssi
+#screen -t irc irssi
 #screen -t mail sup
-screen -t torrent rtorrent
+#screen -t torrent rtorrent
 screen -t zsh
 
 bindkey -k k1 select 0

@@ -1,21 +1,21 @@
 #!/bin/zsh
 
-case $TERM in
-    *xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
-        precmd () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" } 
-        preexec () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" }
-    ;;
-    screen)
-        precmd () { 
-            print -Pn "\e]83;title \"$1\"\a" 
-            print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" 
-        }
-        preexec () { 
-            print -Pn "\e]83;title \"$1\"\a" 
-            print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" 
-        }
-    ;; 
-esac
+#case $TERM in
+#    *xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
+#        precmd () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" } 
+#        preexec () { print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" }
+#    ;;
+#    screen)
+#        precmd () { 
+#            print -Pn "\e]83;title \"$1\"\a" 
+#            print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~]\a" 
+#        }
+#        preexec () { 
+#            print -Pn "\e]83;title \"$1\"\a" 
+#            print -Pn "\e]0;$TERM - (%L) [%n@%M]%# [%~] ($1)\a" 
+#        }
+#    ;; 
+#esac
 
 setprompt () {
     autoload -U colors zsh/terminfo
@@ -33,4 +33,6 @@ ${PR_RED}»${PR_NO_COLOR} '
     #export PS1="$(print '%{\e[0;33m%}[%~]%{\e[0;31m%}%#%{\e[0m%} ')"
 }
 
-setprompt
+if [ -n "$TERM" ]; then
+  setprompt
+fi

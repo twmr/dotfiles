@@ -47,6 +47,7 @@ function makecf {
 }
 
 function laserscp() { scp $* thomas@opentech.meinserver.at:/home/thomas/public_html/laser }
+function diplomscp() { scp $* thomas@opentech.meinserver.at:/home/thomas/public_html/diplom }
 
 function pastie {
     url=$(curl http://pastie.caboo.se/pastes/create \
