@@ -23,6 +23,10 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+;;key-chords
+(key-chord-define-global "fg" 'iy-go-to-char)
+(key-chord-define-global "df" 'iy-go-to-char-backward)
+
 
 ;; Map the window manipulation keys to meta 0, 1, 2, o
 ;; (global-set-key (kbd "M-3") 'split-window-horizontally) ; was digit-argument

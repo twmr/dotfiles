@@ -11,6 +11,9 @@
   (load-theme 'wombat))
 (load "thi/defuns")
 (load "thi/global")
+(load "vendor/key-chord")
+(load "vendor/iy-go-to-char")
+
 (load "thi/bindings")
 (if (< emacs-major-version 24)
     (load "thi/folding"))
