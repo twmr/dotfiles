@@ -22,7 +22,8 @@
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
 (setq inhibit-startup-screen t)
-(blink-cursor-mode -1)
+(setq show-paren-mode t)
+(setq blink-cursor-mode nil)
 
 ;: LINUM
 ;; disable linum atm - because it causes spped problems with navigation
