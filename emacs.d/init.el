@@ -8,11 +8,15 @@
 
 (if (< emacs-major-version 24)
     (load "thi/color-theme")
-  (load-theme 'wombat))
+  (progn ;; else part (for emacs-24)
+    (setq custom-theme-directory "~/.emacs.d/themes")
+    (load-theme 'wombat)))
+
 (load "thi/defuns")
 (load "thi/global")
 (load "vendor/key-chord")
 (load "vendor/iy-go-to-char")
+(key-chord-mode 1)
 
 (load "thi/bindings")
 (if (< emacs-major-version 24)

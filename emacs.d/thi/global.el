@@ -22,10 +22,12 @@
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
 (setq inhibit-startup-screen t)
+(setq show-paren-mode t)
+(setq blink-cursor-mode nil)
 
 ;: LINUM
 ;; disable linum atm - because it causes spped problems with navigation
-;;(global-linum-mode 1)
+(global-linum-mode 1)
 ;; linum should be disabled for certain modes where linenumbers do not
 ;; make sense
 ;; http://www.emacswiki.org/emacs/LineNumbers
