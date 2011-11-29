@@ -119,6 +119,8 @@ Unless quit using C-g or the region is activated before searching, the start
  point is set as mark.
 "
   (interactive "p\ncGo to char: ")
+  (when (evil-normal-state-p)
+    (evil-insert-state))
   (let ((count (if (zerop n) 1 n))
         (cont t)
         (orig (if (region-active-p) (mark) (point)))
