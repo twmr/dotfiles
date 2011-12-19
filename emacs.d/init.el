@@ -17,6 +17,7 @@
 (load "vendor/key-chord")
 (load "vendor/iy-go-to-char")
 (key-chord-mode 1)
+(load "vendor/eassist")
 
 (load "thi/bindings")
 (if (< emacs-major-version 24)

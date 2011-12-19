@@ -27,6 +27,31 @@
 (key-chord-define-global "fg" 'iy-go-to-char)
 (key-chord-define-global "df" 'iy-go-to-char-backward)
 
+(defun my-c-mode-common-hook ()
+  (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
+  (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+(defun my-python-mode-hook ()
+  (define-key python-mode-map (kbd "M-m") 'eassist-list-methods))
+(add-hook 'python-mode-hook 'my-python-mode-hook)
+
+(define-key lisp-mode-shared-map (kbd "M-m") 'eassist-list-methods)
+
+;; real Emacs hackers don't use the arrow keys
+;; (global-set-key (kbd "<up>") (lambda ()
+;;                                (interactive)
+;;                                (message "Arrow key navigation is disabled. Use k instead.")))
+;; (global-set-key (kbd "<down>") (lambda ()
+;;                                  (interactive)
+;;                                  (message "Arrow key navigation is disabled. Use j instead.")))
+;; (global-set-key (kbd "<left>") (lambda ()
+;;                                  (interactive)
+;;                                  (message "Arrow key navigation is disabled. Use h instead.")))
+;; (global-set-key (kbd "<right>") (lambda ()
+;;                                   (interactive)
+;;                                   (message "Arrow key navigation is disabled. Use l instead.")))
+
 
 ;; Map the window manipulation keys to meta 0, 1, 2, o
 ;; (global-set-key (kbd "M-3") 'split-window-horizontally) ; was digit-argument
