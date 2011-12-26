@@ -46,8 +46,63 @@ function makecf {
     (cd ~/cf-fem-lib/build_release/ && make)
 }
 
-function laserscp() { scp $* thomas@opentech.meinserver.at:/home/thomas/public_html/laser }
-function diplomscp() { scp $* thomas@opentech.meinserver.at:/home/thomas/public_html/diplom }
+function laserscp() {
+    remotedir="/home/thomas/public_html/laser"
+    remotehost="thomas@opentech.meinserver.at"
+    flist=$@
+    if [[ $# -gt 1 ]]; then
+        # echo more than one arg:  $#
+        if [[ ! -e $@[$#] ]]; then
+            # echo last arg $@[$#] does not exist
+            # echo strip it from arglist
+            strippedlen=$((${#@}-1))
+            # echo $strippedlen
+            # echo ${@:1:${strippedlen}}
+            flist=${@:1:${strippedlen}}
+            remotedir=$remotedir/$@[${#@}]
+            echo $remotehost "mkdir -p $remotedir"
+            ssh $remotehost "mkdir -p $remotedir"
+        else
+            # echo $@[$#] exists
+        fi
+    fi
+
+    # for i in {1..${#@}}; do
+    #     echo $i, $@[$i]
+    # done
+    echo secure copy : $flist
+    echo to: $remotehost:$remotedir
+    scp $flist $remotehost:$remotedir/
+}
+
+function diplomscp() {
+    remotedir="/home/thomas/public_html/diplom"
+    remotehost="thomas@opentech.meinserver.at"
+    flist=$@
+    if [[ $# -gt 1 ]]; then
+        # echo more than one arg:  $#
+        if [[ ! -e $@[$#] ]]; then
+            # echo last arg $@[$#] does not exist
+            # echo strip it from arglist
+            strippedlen=$((${#@}-1))
+            # echo $strippedlen
+            # echo ${@:1:${strippedlen}}
+            flist=${@:1:${strippedlen}}
+            remotedir=$remotedir/$@[${#@}]
+            echo $remotehost "mkdir -p $remotedir"
+            ssh $remotehost "mkdir -p $remotedir"
+        else
+            # echo $@[$#] exists
+        fi
+    fi
+
+    # for i in {1..${#@}}; do
+    #     echo $i, $@[$i]
+    # done
+    echo secure copy : $flist
+    echo to: $remotehost:$remotedir
+    scp $flist $remotehost:$remotedir/
+}
 
 function pastie {
     url=$(curl http://pastie.caboo.se/pastes/create \
