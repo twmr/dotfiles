@@ -15,10 +15,10 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/bin
 if [ "$HOSTNAME" = "thisch" ]; then
     #for DA
     CFBUILD_DIRNAME='build_release'
-    NGSOLVE_PATH="${HOME}/packages/ngsolve_with_mkl/installed"
+    NGSOLVE_PATH=${HOME}/packages/ngsolve_with_mkl/installed
     export LD_LIBRARY_PATH=${NGSOLVE_PATH}/lib:/usr/local/lib
     export LD_LIBRARY_PATH=$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/lib:$LD_LIBRARY_PATH
-    export PATH=$PATH:$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/green:$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/src
+    export PATH=$HOME/cf-fem-lib/examples/2DFEM/randomlas:$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/green:$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/src:$PATH
 
     #for netgen
     export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/packages/Togl-1.7

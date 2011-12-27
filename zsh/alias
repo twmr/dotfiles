@@ -23,6 +23,9 @@ alias ll='ls -ahl --color | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -
 alias cdc='cd; clear'
 alias ls='ls -hF -a --color=auto'
 
+alias ipycomp='(cd ~/gitrepos/ipython && git pull && ./setup.py build && sudo ./setup.py install)'
+alias ipnb='ipython notebook --pylab=inline --notebook-dir ~/gitrepos/ipython_workspace'
+
 #alias tuint='sudo iwconfig eth1 essid tunet && dhclient eth1'
 #alias connmarina='sudo iwlist wlan0 scan && sudo netcfg wireless-marina'
 
