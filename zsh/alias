@@ -66,7 +66,7 @@ alias yr='sudo yum remove'
 alias ys='yum search'
 
 alias femtotunnel='ssh -L 2401:localhost:2401 moves@femto.iap.tuwien.ac.at'
-
+alias vsc='ssh thisch@vsc.tuwien.ac.at'
 
 #named directories
 hash -d d=/usr/share/doc
