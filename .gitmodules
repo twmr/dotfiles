@@ -7,9 +7,6 @@
 [submodule "emacs.d/vendor/ethan-wspace"]
 	path = emacs.d/vendor/ethan-wspace
 	url = git://github.com/glasserc/ethan-wspace.git
-[submodule "emacs.d/vendor/vimpulse"]
-	path = emacs.d/vendor/vimpulse
-	url = git://gitorious.org/vimpulse/vimpulse.git
 [submodule "emacs.d/vendor/undo-tree"]
 	path = emacs.d/vendor/undo-tree
 	url = http://www.dr-qubit.org/git/undo-tree.git
