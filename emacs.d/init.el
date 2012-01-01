@@ -37,7 +37,6 @@
 (vendor 'smex)
 
 (vendor 'evil)
-;; (vendor 'vimpulse)
 
 (vendor 'rainbow-delimiters)
 (vendor 'ethan-wspace)
