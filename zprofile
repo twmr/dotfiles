@@ -65,6 +65,11 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 
     #parallel stuff
     export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
+
+    export LD_LIBRARY_PATH=$HOME/local/software/lib:$HOME/local/software/lib/Togl1.7/:$LD_LIBRARY_PATH
+    export NETGENDIR=$HOME/local/software/bin
+    export NETGENSRC=$HOME/local/src/netgen-4.9.13 #for cffemlib compilation
+    export PATH=$HOME/local/software/bin:$PATH
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"
     intel_arch="intel64"
