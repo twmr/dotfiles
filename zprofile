@@ -9,29 +9,6 @@ if tty -s ; then
     stty -ixoff
 fi
 
-# Exports
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/bin
-
-if [ "$HOSTNAME" = "thisch" ]; then
-    #for DA
-    CFBUILD_DIRNAME='build_release'
-    NGSOLVE_PATH=${HOME}/packages/ngsolve_with_mkl/installed
-    export LD_LIBRARY_PATH=${NGSOLVE_PATH}/lib:/usr/local/lib
-    export LD_LIBRARY_PATH=$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/lib:$LD_LIBRARY_PATH
-    export PATH=$HOME/cf-fem-lib/examples/2DFEM/randomlas:$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/green:$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/src:$PATH
-
-    #for netgen
-    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/packages/Togl-1.7
-    export NETGENDIR=/usr/local/bin
-fi
-
-# if [ -z $LD_LIBRARY_PATH ]; then
-#     export LD_LIBRARY_PATH=/home/thomas/packages/ngsolve_with_mkl/installed/lib:/usr/local/lib
-# else
-#     export LD_LIBRARY_PATH=/home/thomas/packages/ngsolve_with_mkl/installed/lib:/usr/local/lib:$LD_LIBRARY_PATH
-# fi
-
-
 #export LC_ALL=en_US.UTF-8
 #export LANG=en_US.UTF-8
 #export LOCALE=en_US.UTF-8
@@ -43,6 +20,9 @@ export HISTCONTROL=ignoredups
 export IGNOREEOF=3
 export AWT_TOOLKIT=MToolkit # for matlab
 HOSTNAME=`hostname`
+
+# Exports
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/bin
 
 if [ "$HOSTNAME" = "firebird" ]; then
     arch="ia32"
@@ -66,6 +46,19 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     #parallel stuff
     export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
 elif [ "$HOSTNAME" = "thisch" ]; then
+    #for DA
+    CFBUILD_DIRNAME='build_release'
+    PACK_PATH=${HOME}/packages
+    NGSOLVE_PATH=${PACK_PATH}/ngsolve_with_mkl/installed
+
+    export LD_LIBRARY_PATH=${NGSOLVE_PATH}/lib:/usr/local/lib
+    export LD_LIBRARY_PATH=$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/lib:$LD_LIBRARY_PATH
+    export PATH=$HOME/cf-fem-lib/examples/2DFEM/randomlas:$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/green:$HOME/cf-fem-lib/${CFBUILD_DIRNAME}/src:$PATH
+
+    #for netgen
+    export LD_LIBRARY_PATH=${PACK_PATH}/Togl-1.7:$LD_LIBRARY_PATH
+    export NETGENDIR=/usr/local/bin
+
     #arch="intel64"
     intel_arch="intel64"
     intel_version=""
@@ -73,8 +66,14 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     . ${intel_prefix}${intel_version}/bin/compilervars.sh ${intel_arch}
 
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
-    export PATH=$PATH:$HOME/MATLAB/R2010b/bin
+    export PATH=$PATH:$HOME/qtcreator-2.4.0/bin/:$HOME/MATLAB/R2010b/bin
     export CFFEM_MLCODE=/home/thomas/cf-fem-lib/matlab
+
+    export PETSC_DIR=${PACK_PATH}/petsc-3.2-p6
+    export SLEPC_DIR=${PACK_PATH}/slepc-3.2-p3
+
+    export BOOST_PATH=${PACK_PATH}/boost_1_46_1
+
 else
     arch=""
 fi
