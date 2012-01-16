@@ -37,19 +37,49 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
     intel_version="11.1/046"
     intel_prefix="/opt/intel/Compiler/"
-    export PATH=~/gitrepos/emacs/src:/usr/lib64/openmpi/bin:/usr/local/MATLAB/R2010b/bin:$PATH
+
+    export MYSRCDIR=$HOME/local/src
+    export LOCSOFT=$HOME/local/software
+
+    export MATLAB_BIN=/usr/local/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
-    export CFFEM_MLCODE=/home/thomas/cf-fem-lib/matlab
+    export CFFEM_REPO=/home/thomas/cf-fem-lib
+    export CFFEM_MLCODE=${CFFEM_REPO}/matlab
+    export CFBD=${CFFEM_REPO}/build
+    #cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DNETGEN_SOURCE_DIR=${NETGENSRC}
+    #-DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DENABLE_MPI=ON ..
+
+    export NETGENDIR=$LOCSOFT/bin
+    export NETGENSRC=$MYSRCDIR/netgen-4.9.13 #for cffemlib compilation
+
+    #sessa
     export CVSROOT=:pserver:hisch@localhost:/usr/local/cvsroot/quest.root
     export SESSA_DATABASE_PATH=/home/thomas/gitrepos/sessa-git/databases
 
-    #parallel stuff
-    export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
+    #parallel stuff (mpi + petsc + slepc)
 
-    export LD_LIBRARY_PATH=$HOME/local/software/lib:$HOME/local/software/lib/Togl1.7/:$LD_LIBRARY_PATH
-    export NETGENDIR=$HOME/local/software/bin
-    export NETGENSRC=$HOME/local/src/netgen-4.9.13 #for cffemlib compilation
-    export PATH=$HOME/local/software/bin:$PATH
+    export MYMPI_INC_PATH=/usr/include/openmpi-x86_64
+    export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
+    export MYMPI_BIN_PATH=/usr/lib64/openmpi/bin
+
+
+    export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
+    export PETSC_ARCH="arch-linux2-cxx-debug"
+    #./configure --with-c++-support=1 --with-scalar-type=complex
+    #--with-x11=0 --with-clanguage=cxx
+    #--with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib
+    #CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03"
+
+    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03"  --with-shared-libraries=1
+
+
+
+    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
+    #./configure  #suffices
+
+    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:$LOCSOFT/lib:$LOBSOFT/lib/Togl1.7/:$LD_LIBRARY_PATH
+    export PATH=$LOCSOFT/bin:$HOME/gitrepos/emacs/src:${MYMPI_BIN_PATH}:${MATLAB_BIN}:$PATH
+
 elif [ "$HOSTNAME" = "thisch" ]; then
     #for DA
     CFBUILD_DIRNAME='build_release'
