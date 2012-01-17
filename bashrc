@@ -34,7 +34,7 @@ export MYMPI_LIB_PATH=/usr/mpi/qlogic/lib64
 export BOOST_SRC_PATH=$MYSRCDIR/boost_1_47_0
 
 export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
-export PETSC_ARCH="arch-linux2-c-debug"
+export PETSC_ARCH="arch-linux2-cxx-debug"
 export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
 
@@ -60,9 +60,34 @@ function initnonmpicfbuild {
 
 function buildpetsc {
    # ./configure --with-scalar-type=complex --with-boost-dir=$BOOST_SRC_PATH --with-X11=0
-    ./configure --with-c++-support=1   --with-scalar-type=complex  --with-x11=0 \
-        --with-c-support=1 --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib \
-        CXXOPTFLAGS="-O3 -xHOST" COPTFLAGS="-O3 -xHOST" FOPTFLAGS="-03 -xHOST"
+   # ./configure --with-c++-support=1   --with-scalar-type=complex  --with-x11=0 \
+   #     --with-c-support=1 --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib \
+   #     CXXOPTFLAGS="-O3 -xHOST" COPTFLAGS="-O3 -xHOST" FOPTFLAGS="-03 -xHOST"
+
+   #new shared library stuff
+    cd $PETSC_DIR
+    ./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 \
+        --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib \
+        CXXOPTFLAGS="-O3 -xHost" COPTFLAGS="-O3 -xHost" FOPTFLAGS="-03 -xHost" \
+        --with-shared-libraries=1
+
+    #todo 'PETSC_ARCH=intel-cxx-complex_debug' --with-debugging=1
+    #todo 'PETSC_ARCH=intel-cxx-complex' --with-debugging=0
+
+    #todo play with:
+    #'--download-parmetis=yes',
+    #'--download-plapack=yes',
+    #'--download-superlu_dist=yes',
+    #'--download-mumps=yes',
+    #'--download-spooles=yes',
+    #'--with-fortran-kernels=1',
+    #'--download-blacs=ifneeded',
+    #'--download-scalapack=ifneeded',
+}
+
+function buildslepc {
+    cd $SLEPC_DIR
+    ./configure
 }
 
 function  makecfmpi {
