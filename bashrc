@@ -16,30 +16,33 @@ export LOCSOFT=$HOME/local/software
 
 export NETGENDIR=$LOCSOFT/bin
 export NETGENSRCDIR=$MYSRCDIR/netgen-4.9.13
-export CFFEMBUILDDIR=$HOME/gitrepos/cf-fem-lib/build
+export CFFEMREPO=$HOME/gitrepos/cf-fem-lib
+export CFFEMBUILDDIR=$CFFEMREPO/build
 export CFBD=$CFFEMBUILDDIR
 
-export LD_LIBRARY_PATH=$LOCSOFT/lib/:$LOCSOFT/lib/Togl1.7:$LD_LIBRARY_PATH
-
-export EPDPATH=$LOCSOFT/epd-7.2-1-rh5-x86_64/bin
 export RANDPATH=$HOME/gitrepos/randomlas
 
-export PATH=$RANDPATH:$CFFEMBUILDDIR/src:$EPDPATH:$NETGENDIR:$PATH
-
+#python distribution
+export EPDPATH=$LOCSOFT/epd-7.2-1-rh5-x86_64/bin
 
 #MPI stuff
+#TODO use appropriate includes set by mpi-selector
 export MYMPI_INC_PATH=/usr/mpi/qlogic/include
 export MYMPI_LIB_PATH=/usr/mpi/qlogic/lib64
 
 export BOOST_SRC_PATH=$MYSRCDIR/boost_1_47_0
 
 export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
-export PETSC_ARCH="arch-linux2-cxx-debug"
+#export PETSC_ARCH="arch-linux2-cxx-debug"
+export PETSC_ARCH=intel-cxx-complex_debug
 export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
+export PATH=$RANDPATH:$CFFEMBUILDDIR/src:$EPDPATH:$NETGENDIR:$PATH
+export PYTHONPATH=${CFFEMREPO}/tools/in2d_creator_scripts:${PYTHONPATH}
+export LD_LIBRARY_PATH=$LOCSOFT/lib/:$LOCSOFT/lib/Togl1.7:$LD_LIBRARY_PATH
 
 #for the xml_pp program
-export PERLLIB=/home/lv70072/thisch/bin/
+#export PERLLIB=/home/lv70072/thisch/bin/
 
 function initcfbuild {
     LANG=C CC=mpicc CXX=mpicxx  cmake -DBOOST_ROOT=$BOOST_SRC_PATH \
@@ -65,11 +68,23 @@ function buildpetsc {
    #     CXXOPTFLAGS="-O3 -xHOST" COPTFLAGS="-O3 -xHOST" FOPTFLAGS="-03 -xHOST"
 
    #new shared library stuff
+
+    echo number of args $#
+
+    if [ "$1" == "DEBUG" ]; then
+        extraflags="PETSC_ARCH=intel-cxx-complex_debug --with-debugging=1";
+    else
+        extraflags="PETSC_ARCH=intel-cxx-complex --with-debugging=0";
+    fi
+    echo $extraflags
+    # return -1
+
     cd $PETSC_DIR
     ./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 \
         --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib \
-        CXXOPTFLAGS="-O3 -xHost" COPTFLAGS="-O3 -xHost" FOPTFLAGS="-03 -xHost" \
-        --with-shared-libraries=1
+        CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" \
+        --with-shared-libraries=1 ${extraflags}
+        # CXXOPTFLAGS="-O3 -xHost" COPTFLAGS="-O3 -xHost" FOPTFLAGS="-03 -xHost" \
 
     #todo 'PETSC_ARCH=intel-cxx-complex_debug' --with-debugging=1
     #todo 'PETSC_ARCH=intel-cxx-complex' --with-debugging=0
