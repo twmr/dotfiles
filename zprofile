@@ -87,7 +87,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
     export CFBD=${CFFEM_REPO}/build
     export RANDOMLAS=${CFFEM_REPO}/examples/2DFEM/randomlas
-    export PYTHONPATH=$CFFEM_REPO/tools/in2d_creator_scripts:${PYTHONPATH}
+    export PYTHONPATH=$CFFEM_REPO/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}
 
     PACK_PATH=${HOME}/packages
     export NETGENDIR=/usr/local/bin
