@@ -99,6 +99,7 @@
         ("\\.idl$"  . c++-mode)
         ("\\.ipp$"  . c++-mode)
         ("\\.c$"    . c-mode)
+        ("CMakeLists.txt$"    . cmake-mode)
         ("\\.ma?k\\'" . makefile-mode)
         ("\\(M\\|m\\|GNUm\\)akefile\\(\\.in\\)?" . makefile-mode)
         ("\\.pl$"   . perl-mode)
