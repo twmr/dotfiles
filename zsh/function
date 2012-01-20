@@ -43,7 +43,7 @@ function gco() {
 }
 
 function makecf {
-    (cd ~/cf-fem-lib/build_release/ && make)
+    (cd ${CFBD} && make)
 }
 
 function laserscp() {

@@ -5,6 +5,7 @@
 
 (setq custom-file "~/.emacs.d/thi/custom.el")
 (load custom-file 'noerror)
+(setq debug-on-error t)
 
 (if (< emacs-major-version 24)
     (load "thi/color-theme")
@@ -18,6 +19,7 @@
 (load "vendor/iy-go-to-char")
 (key-chord-mode 1)
 ;; (load "vendor/eassist")
+(load "vendor/cmake-mode")
 
 (load "thi/bindings")
 (if (< emacs-major-version 24)
@@ -44,6 +46,7 @@
 (vendor 'auto-mark)
 (vendor 'orgmode)
 (vendor 'magit)
+(load "vendor/magit/git-commit-mode/git-commit")
 (vendor 'python)
 (vendor 'flymake)
 (vendor 'flymake-cursor)
