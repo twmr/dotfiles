@@ -47,6 +47,8 @@
 (vendor 'python)
 (vendor 'flymake)
 (vendor 'flymake-cursor)
+(setq gnuplot-program-version "4.4")
+(vendor 'gnuplot)
 
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling

@@ -118,6 +118,7 @@
         ("\\.F90\\'" . f90-mode)
         ("\\.m\\'" . matlab-mode)
         ("\\.\\(md\\|markdown\\)\\'" . markdown-mode)
+        ("bash\\(rc\\|_profile\\)$" . shell-script-mode)
         ("ChangeLog\\'" . change-log-mode)
         ("change\\.log\\'" . change-log-mode)
         ("changelo\\'" . change-log-mode)
