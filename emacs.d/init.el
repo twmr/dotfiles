@@ -46,7 +46,6 @@
 (vendor 'auto-mark)
 (vendor 'orgmode)
 (vendor 'magit)
-(load "vendor/magit/git-commit-mode/git-commit")
 (vendor 'python)
 (vendor 'flymake)
 (vendor 'flymake-cursor)
