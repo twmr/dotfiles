@@ -43,11 +43,12 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 
     export MATLAB_BIN=/usr/local/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
-    export CFFEM_REPO=/home/thomas/cf-fem-lib
+    export CFFEM_REPO=${HOME}/cf-fem-lib
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
     export CFBD=${CFFEM_REPO}/build
+    export RANDOMLAS=${HOME}/gitrepos/randomlas
 
-    export PYTHONPATH=$CFFEM_REPO/tools/in2d_creator_scripts:${PYTHONPATH}
+    export PYTHONPATH=$CFFEM_REPO/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}
     #cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DNETGEN_SOURCE_DIR=${NETGENSRC}
     #-DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DENABLE_MPI=ON ..
 
