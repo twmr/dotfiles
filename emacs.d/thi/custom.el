@@ -3,7 +3,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("e28aa80863908e5d4f155546cda4dfe7bcf91e1c" "47205295626f777c037e6bbbbe0ce28cb941762e" default)))
+ '(comint-input-ignoredups t)
+ '(comint-prompt-read-only t)
+ '(custom-safe-themes (quote ("a16379c0d5f9144e4e734a50d851b2347e762fe2a9ecd518377a497c853fb66f" "e28aa80863908e5d4f155546cda4dfe7bcf91e1c" "47205295626f777c037e6bbbbe0ce28cb941762e" default)))
  '(evil-mode-line-format (quote before))
  '(flymake-cursor-error-display-delay 0.4)
  '(flymake-gui-warnings-enabled nil)
