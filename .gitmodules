@@ -49,3 +49,6 @@
 [submodule "emacs.d/vendor/rainbow-delimiters"]
 	path = emacs.d/vendor/rainbow-delimiters
 	url = http://github.com/jlr/rainbow-delimiters
+[submodule "emacs.d/vendor/gnuplot"]
+	path = emacs.d/vendor/gnuplot
+	url = git://github.com/bruceravel/gnuplot-mode.git

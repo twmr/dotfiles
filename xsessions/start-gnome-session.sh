@@ -9,7 +9,7 @@ SHOW_DESKTOP=$2
 GNOME3=false
 
 HOSTNAME=`hostname`
-if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" ]; then
+if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" -o "$HOSTNAME" = "cobra" ]; then
     GNOME3=true
 fi
 
@@ -97,4 +97,3 @@ else
     export WINDOW_MANAGER=/usr/bin/$1
     exec gnome-session
 fi
-

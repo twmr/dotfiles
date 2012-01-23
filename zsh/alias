@@ -72,7 +72,6 @@ alias vsc='ssh -X thisch@vsc.tuwien.ac.at'
 #named directories
 hash -d d=/usr/share/doc
 hash -d conf=${HOME}/.config
-hash -d rand=${HOME}/cf-fem-lib/examples/2DFEM/randomlas
 hash -d era=${HOME}/Dropbox/erasmus
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
