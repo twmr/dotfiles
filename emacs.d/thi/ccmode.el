@@ -24,8 +24,9 @@
     (progn
       (c-set-style "stroustrup")
       (setq c-basic-offset 2)
-      (c-set-offset 'access-label 0)
-      (c-set-offset 'topmost-intro 2)
+      (c-set-offset 'inclass 2)
+      ;; (c-set-offset 'access-label 0)
+      ;; (c-set-offset 'topmost-intro 0)
       )
     ;; (setq-default c-basic-offset 2
     ;;               tab-width 2
