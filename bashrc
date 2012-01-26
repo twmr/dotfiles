@@ -1,5 +1,10 @@
 # .bashrc
 
+export LANG="C"
+export LC_ALL="C"
+
+# exec zsh
+
 # Source global definitions
 if [ -f /etc/bashrc ]; then
   . /etc/bashrc
@@ -8,16 +13,13 @@ fi
 # User specific aliases and functions
 source ~/.zsh/alias
 
-export LANG="C"
-export LC_ALL="C"
-
 export MYSRCDIR=$HOME/local/src
 export LOCSOFT=$HOME/local/software
 
 export NETGENDIR=$LOCSOFT/bin
 export NETGENSRCDIR=$MYSRCDIR/netgen-4.9.13
 export CFFEMREPO=$HOME/gitrepos/cf-fem-lib
-export CFFEMBUILDDIR=$CFFEMREPO/build
+export CFFEMBUILDDIR=$CFFEMREPO/build_release
 export CFBD=$CFFEMBUILDDIR
 
 export RANDPATH=$HOME/gitrepos/randomlas
@@ -37,12 +39,12 @@ export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
 export PETSC_ARCH=intel-cxx-complex_debug
 export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
-export PATH=$RANDPATH:$CFFEMBUILDDIR/src:$EPDPATH:$NETGENDIR:$PATH
-export PYTHONPATH=${CFFEMREPO}/tools/in2d_creator_scripts:${PYTHONPATH}
+export PATH=$RANDPATH:$RANOMDPATH/scripts:${CFBD}/src:${CFBD}/green:$EPDPATH:$NETGENDIR:$PATH
+export PYTHONPATH=${CFFEMREPO}/tools/in2d_creator_scripts:${RANDPATH}/scripts:${RANDPATH}:${LOCSOFT}/nlopt/lib/python2.7/site-packages
 export LD_LIBRARY_PATH=$LOCSOFT/lib/:$LOCSOFT/lib/Togl1.7:$LD_LIBRARY_PATH
 
 #for the xml_pp program
-#export PERLLIB=/home/lv70072/thisch/bin/
+export PERLLIB=/home/lv70072/thisch/bin/
 
 function initcfbuild {
     LANG=C CC=mpicc CXX=mpicxx  cmake -DBOOST_ROOT=$BOOST_SRC_PATH \
@@ -74,7 +76,7 @@ function buildpetsc {
     if [ "$1" == "DEBUG" ]; then
         extraflags="PETSC_ARCH=intel-cxx-complex_debug --with-debugging=1";
     else
-        extraflags="PETSC_ARCH=intel-cxx-complex --with-debugging=0";
+        extraflags="PETSC_ARCH=intel-cxx-complex --with-debugging=0 CXXOPTFLAGS='-O3 -xHost' COPTFLAGS='-O3 -xHost' FOPTFLAGS='-03 -xHost'"
     fi
     echo $extraflags
     # return -1
@@ -84,10 +86,6 @@ function buildpetsc {
         --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib \
         CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" \
         --with-shared-libraries=1 ${extraflags}
-        # CXXOPTFLAGS="-O3 -xHost" COPTFLAGS="-O3 -xHost" FOPTFLAGS="-03 -xHost" \
-
-    #todo 'PETSC_ARCH=intel-cxx-complex_debug' --with-debugging=1
-    #todo 'PETSC_ARCH=intel-cxx-complex' --with-debugging=0
 
     #todo play with:
     #'--download-parmetis=yes',
@@ -125,3 +123,5 @@ alias e='emacsclient -nw -a /usr/bin/emacs'
 alias vim='emacsclient -nw -a /usr/bin/emacs'
 alias started=${HOME}/gitrepos/dotfiles/emacs.d/start-emacs-server.sh
 alias ked="e -e '(kill-emacs)'"
+
+#exec zsh
