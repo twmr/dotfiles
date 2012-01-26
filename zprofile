@@ -151,7 +151,7 @@ if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "l01" -o "$HOSTNAME" = mustang ]; t
 
     #cffemlib + simulation stuff
     export PYTHONPATH=${CFFEM_REPO}/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}
-    export PATH=$RANDOMLAS:$CFBD/green:$CFBD/src:${PATH}
+    export PATH=${RANDOMLAS}:${RANDOMLAS}/scripts:${CFBD}/green:${CFBD}/src:${PATH}
 
     #todo test togl variable stuff
     if [ -z "${NGSOLVE_PATH}" ]; then
