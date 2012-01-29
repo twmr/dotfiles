@@ -23,6 +23,9 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+;; expand-region
+(global-set-key (kbd "C-q") 'er/expand-region)
+
 ;;key-chords
 (key-chord-define-global "fg" 'iy-go-to-char)
 (key-chord-define-global "df" 'iy-go-to-char-backward)

@@ -52,3 +52,6 @@
 [submodule "emacs.d/vendor/gnuplot"]
 	path = emacs.d/vendor/gnuplot
 	url = git://github.com/bruceravel/gnuplot-mode.git
+[submodule "emacs.d/vendor/expand-region"]
+	path = emacs.d/vendor/expand-region
+	url = git://github.com/magnars/expand-region.el.git
