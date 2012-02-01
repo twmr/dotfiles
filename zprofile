@@ -91,21 +91,23 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     intel_version=""
     intel_prefix="/home/thomas/intel"
 
-    export MYSRCDIR=${HOME}/packages
-    #LOCSOT not defined
+    export MYSRCDIR=${HOME}/local/src
+    export LOCSOFT=$HOME/local/software
 
     export MATLAB_BIN=${HOME}/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
 
-    export CFFEM_REPO=/home/thomas/cf-fem-lib
+    export CFFEM_REPO=${MYSRCDIR}/cf-fem-lib
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
     export CFBD=${CFFEM_REPO}/build
     export RANDOMLAS=${CFFEM_REPO}/examples/2DFEM/randomlas
 
     #TODO compile instructions cf-fem-lib
 
-    export NETGENDIR=/usr/local/bin
-    NGSOLVE_PATH=${MYSRCDIR}/ngsolve_with_mkl/installed
+    export NETGENDIR=/usr/local/bin #netgen needs this envvar
+    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen-4.9.13
+    export NGSOLVE_PATH=${MYSRCDIR}/ngsolve_with_mkl/installed
+    export NGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve_with_mkl
     TOGL_PATH=${MYSRCDIR}/Togl-1.7
 
     #TODO upgrade boost
@@ -121,8 +123,8 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
 
     export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
-    export PETSC_ARCH=arch-linux2-cxx-debug
-    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1
+    export PETSC_ARCH=arch-linux2-cxx-release
+    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=~/intel/mkl/lib/intel64 CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1 --with-debugging=0
 
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
@@ -148,9 +150,16 @@ if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "l01" -o "$HOSTNAME" = mustang ]; t
     else
         hash -d rand=${RANDOMLAS}
     fi
+    if [ -z "${CFFEM_REPO}" ]; then
+        echo Warning CFFEM_REPO not defined
+    else
+        hash -d cfrepo=${CFFEM_REPO}
+    fi
+
 
     #cffemlib + simulation stuff
-    export PYTHONPATH=${CFFEM_REPO}/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}
+    export PYTHONPATH=${CFFEM_REPO}/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}:${LOCSOFT}/nlopt/lib/python2.7/site-packages
+
     export PATH=${RANDOMLAS}:${RANDOMLAS}/scripts:${CFBD}/green:${CFBD}/src:${PATH}
 
     #todo test togl variable stuff
