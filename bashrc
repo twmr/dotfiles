@@ -1,50 +1,9 @@
 # .bashrc
 
-export LANG="C"
-export LC_ALL="C"
-
-# exec zsh
-
 # Source global definitions
 if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
-
-# User specific aliases and functions
-source ~/.zsh/alias
-
-export MYSRCDIR=$HOME/local/src
-export LOCSOFT=$HOME/local/software
-
-export NETGENDIR=$LOCSOFT/bin
-export NETGENSRCDIR=$MYSRCDIR/netgen-4.9.13
-export CFFEMREPO=$HOME/gitrepos/cf-fem-lib
-export CFFEMBUILDDIR=$CFFEMREPO/build_release
-export CFBD=$CFFEMBUILDDIR
-
-export RANDPATH=$HOME/gitrepos/randomlas
-
-#python distribution
-export EPDPATH=$LOCSOFT/epd-7.2-1-rh5-x86_64/bin
-
-#MPI stuff
-#TODO use appropriate includes set by mpi-selector
-export MYMPI_INC_PATH=/usr/mpi/qlogic/include
-export MYMPI_LIB_PATH=/usr/mpi/qlogic/lib64
-
-export BOOST_SRC_PATH=$MYSRCDIR/boost_1_47_0
-
-export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
-#export PETSC_ARCH="arch-linux2-cxx-debug"
-export PETSC_ARCH=intel-cxx-complex_debug
-export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
-
-export PATH=$RANDPATH:$RANOMDPATH/scripts:${CFBD}/src:${CFBD}/green:$EPDPATH:$NETGENDIR:$PATH
-export PYTHONPATH=${CFFEMREPO}/tools/in2d_creator_scripts:${RANDPATH}/scripts:${RANDPATH}:${LOCSOFT}/nlopt/lib/python2.7/site-packages
-export LD_LIBRARY_PATH=$LOCSOFT/lib/:$LOCSOFT/lib/Togl1.7:$LD_LIBRARY_PATH
-
-#for the xml_pp program
-export PERLLIB=/home/lv70072/thisch/bin/
 
 function initcfbuild {
     LANG=C CC=mpicc CXX=mpicxx  cmake -DBOOST_ROOT=$BOOST_SRC_PATH \
@@ -115,13 +74,5 @@ function makecfmpiall {
 #     cd $CFBD; make -j8 pertubation; cd -
 # }
 
-alias gs='git status'
-alias gd='git diff'
-#alias python='python2.6'
-#alias e='emacs -nw'
-alias e='emacsclient -nw -a /usr/bin/emacs'
-alias vim='emacsclient -nw -a /usr/bin/emacs'
-alias started=${HOME}/gitrepos/dotfiles/emacs.d/start-emacs-server.sh
-alias ked="e -e '(kill-emacs)'"
 
-#exec zsh
+exec zsh

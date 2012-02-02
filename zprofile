@@ -22,7 +22,9 @@ export AWT_TOOLKIT=MToolkit # for matlab
 HOSTNAME=`hostname`
 
 # Exports
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
+if [ ! "$HOSTNAME" = "l01" ]; then
+    export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
+fi
 
 if [ "$HOSTNAME" = "firebird" ]; then
     arch="ia32"
@@ -132,8 +134,52 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 elif [ "$HOSTNAME" = "l01" ]; then
     arch=""
 
-    echo TODO
+    export LANG="C"
+    export LC_ALL="C"
 
+    export MYSRCDIR=$HOME/local/src
+    export LOCSOFT=$HOME/local/software
+
+    #for zsh
+    fpath=${LOCSOFT}/share/zsh/4.3.15/functions
+
+    export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
+    export CFBD=${CFFEM_REPO}/build_release
+
+    export NETGENDIR=${LOCSOFT}/bin
+    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen-4.9.13
+    #NGSOLVE_PATH=${MYSRCDIR}/ngsolve-4.9.13
+    TOGL_PATH=${LOCSOFT}/lib/Togl1.7
+
+    export RANDOMLAS=$HOME/gitrepos/randomlas
+
+    #python distribution
+    export EPDPATH=$LOCSOFT/epd-7.2-1-rh5-x86_64/bin
+
+    #MPI stuff
+    #TODO use appropriate includes set by mpi-selector
+    export MYMPI_INC_PATH=/usr/mpi/qlogic/include
+    export MYMPI_LIB_PATH=/usr/mpi/qlogic/lib64
+
+    export BOOST_SRC_PATH=$MYSRCDIR/boost_1_47_0
+
+    export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
+    #export PETSC_ARCH="arch-linux2-cxx-debug"
+    export PETSC_ARCH=intel-cxx-complex_debug
+    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
+
+    export PATH=$LOCSOFT/bin:$EPDPATH:$PATH
+    export LD_LIBRARY_PATH=$LOCSOFT/lib/:${TOGL_PATH}:${LD_LIBRARY_PATH}
+
+    #for the xml_pp program
+    export PERLLIB=/home/lv70072/thisch/bin/
+
+    #alias python='python2.6'
+    #alias e='emacs -nw'
+    alias e='emacsclient -nw -a /usr/bin/emacs'
+    alias vim='emacsclient -nw -a /usr/bin/emacs'
+    alias started=${HOME}/gitrepos/dotfiles/emacs.d/start-emacs-server.sh
+    alias ked="e -e '(kill-emacs)'"
 else
     arch=""
 fi
@@ -156,7 +202,6 @@ if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "l01" -o "$HOSTNAME" = mustang ]; t
         hash -d cfrepo=${CFFEM_REPO}
     fi
 
-
     #cffemlib + simulation stuff
     export PYTHONPATH=${CFFEM_REPO}/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}:${LOCSOFT}/nlopt/lib/python2.7/site-packages
 
@@ -165,8 +210,10 @@ if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "l01" -o "$HOSTNAME" = mustang ]; t
     #todo test togl variable stuff
     if [ -z "${NGSOLVE_PATH}" ]; then
         echo Warning NGSOLVE_PATH not defined
+    else
+        export LD_LIBRARY_PATH=${NGSOLVE_PATH}/lib:${LD_LIBRARY_PATH}
     fi
-    export LD_LIBRARY_PATH=${CFBD}/lib:${NGSOLVE_PATH}/lib:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH=${CFBD}/lib:${LD_LIBRARY_PATH}
 
 fi
 # watch for people
