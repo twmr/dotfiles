@@ -168,7 +168,7 @@ elif [ "$HOSTNAME" = "l01" ]; then
     export PETSC_ARCH=intel-cxx-complex_debug
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
-    export PATH=$LOCSOFT/bin:$EPDPATH:$PATH
+    export PATH=$HOME/bin:${LOCSOFT}/bin:$EPDPATH:$PATH
     export LD_LIBRARY_PATH=$LOCSOFT/lib/:${TOGL_PATH}:${LD_LIBRARY_PATH}
 
     #for the xml_pp program

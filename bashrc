@@ -73,6 +73,3 @@ function makecfmpiall {
 # function makecfmpi {
 #     cd $CFBD; make -j8 pertubation; cd -
 # }
-
-
-exec zsh
