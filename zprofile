@@ -84,7 +84,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
-    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib:${TOGL_PATH} #:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib #:${LD_LIBRARY_PATH}
     export PATH=${LOCSOFT}/bin:${HOME}/gitrepos/emacs/src:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${PATH}
 
 elif [ "$HOSTNAME" = "thisch" ]; then
@@ -117,7 +117,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     . ${intel_prefix}${intel_version}/bin/compilervars.sh ${intel_arch}
 
-    export LD_LIBRARY_PATH=${TOGL_PATH}:/usr/local/lib:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
     export PATH=$HOME/qtcreator-2.4.0/bin/:${MATLAB_BIN}:$PATH
 
     #parallel stuff (mpi + petsc + slepc )
@@ -169,7 +169,7 @@ elif [ "$HOSTNAME" = "l01" ]; then
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
     export PATH=$HOME/bin:${LOCSOFT}/bin:$EPDPATH:$PATH
-    export LD_LIBRARY_PATH=$LOCSOFT/lib/:${TOGL_PATH}:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH=${LOCSOFT}/lib/:${LD_LIBRARY_PATH}
 
     #for the xml_pp program
     export PERLLIB=/home/lv70072/thisch/bin/
@@ -207,12 +207,13 @@ if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "l01" -o "$HOSTNAME" = mustang ]; t
 
     export PATH=${RANDOMLAS}:${RANDOMLAS}/scripts:${CFBD}/green:${CFBD}/src:${PATH}
 
-    #todo test togl variable stuff
-    if [ -z "${NGSOLVE_PATH}" ]; then
-        echo Warning NGSOLVE_PATH not defined
-    else
+    if [ "${NGSOLVE_PATH}" ]; then
         export LD_LIBRARY_PATH=${NGSOLVE_PATH}/lib:${LD_LIBRARY_PATH}
     fi
+    if [ "${TOGL_PATH}" ]; then
+        export LD_LIBRARY_PATH=${TOGL_PATH}:${LD_LIBRARY_PATH}
+    fi
+
     export LD_LIBRARY_PATH=${CFBD}/lib:${LD_LIBRARY_PATH}
 
 fi
