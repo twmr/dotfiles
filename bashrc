@@ -5,6 +5,11 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
+if [ -f ~/.zprofile ]; then
+  . ~/.zprofile
+fi
+
+
 function initcfbuild {
     LANG=C CC=mpicc CXX=mpicxx  cmake -DBOOST_ROOT=$BOOST_SRC_PATH \
         -DCMAKE_CXX_FLAGS="-I$MYSRCDIR" -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" \
