@@ -22,11 +22,12 @@ export AWT_TOOLKIT=MToolkit # for matlab
 HOSTNAME=`hostname`
 
 ONVSC=`hostname | egrep '(l01|r[0-9]+{2}n[0-9]+{2})' `
-echo onvsc: $ONVSC
 
 # Exports
-if [ -z $ONVSC ]; then
+if [ -z "$ONVSC" ]; then
     export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
+else
+    echo onvsc: $ONVSC
 fi
 
 if [ "$HOSTNAME" = "firebird" ]; then
@@ -134,7 +135,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
 
-elif [ $ONVSC ]; then
+elif [ "$ONVSC" ]; then
     arch=""
 
     export LANG="C"
@@ -193,7 +194,7 @@ if [ "$arch" ]; then
     . ${intel_prefix}${intel_version}/bin/$arch/ifortvars_$arch.sh
 fi
 
-if [ "$HOSTNAME" = "thisch" -o $ONVSC -o "$HOSTNAME" = mustang ]; then
+if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     if [ -z "${RANDOMLAS}" ]; then
         echo Warning RANDOMLAS not defined
     else
