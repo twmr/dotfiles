@@ -27,6 +27,7 @@ ONVSC=`hostname | egrep '(l01|r[0-9]+{2}n[0-9]+{2})' `
 if [ -z "$ONVSC" ]; then
     export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
 else
+    echo "loading zprofile"
     echo onvsc: $ONVSC
 fi
 
@@ -144,9 +145,6 @@ elif [ "$ONVSC" ]; then
     export MYSRCDIR=$HOME/local/src
     export LOCSOFT=$HOME/local/software
 
-    #for zsh
-    fpath=${LOCSOFT}/share/zsh/4.3.15/functions
-
     export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
     export CFBD=${CFFEM_REPO}/build_release
 
@@ -178,12 +176,6 @@ elif [ "$ONVSC" ]; then
     #for the xml_pp program
     export PERLLIB=/home/lv70072/thisch/bin/
 
-    #alias python='python2.6'
-    #alias e='emacs -nw'
-    alias e='emacsclient -nw -a /usr/bin/emacs'
-    alias vim='emacsclient -nw -a /usr/bin/emacs'
-    alias started=${HOME}/gitrepos/dotfiles/emacs.d/start-emacs-server.sh
-    alias ked="e -e '(kill-emacs)'"
 else
     arch=""
 fi
