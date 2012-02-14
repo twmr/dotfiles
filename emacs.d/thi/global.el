@@ -29,7 +29,7 @@
 
 ;: LINUM
 ;; disable linum atm - because it causes spped problems with navigation
-(global-linum-mode 1)
+;; (global-linum-mode 1)
 ;; linum should be disabled for certain modes where linenumbers do not
 ;; make sense
 ;; http://www.emacswiki.org/emacs/LineNumbers
@@ -49,9 +49,9 @@
 
 ;: LINE Highlighting (highlight the current line)
 ;; exceptions where hl-line is not desired:
-(setq hl-line-disabled-modes-list '(org-mode))
-(set-face-attribute 'highlight nil :underline nil)
-(add-hook 'find-file-hook 'thi-turn-hl-line-mode-on)
+;; (setq hl-line-disabled-modes-list '(org-mode))
+;; (set-face-attribute 'highlight nil :underline nil)
+;; (add-hook 'find-file-hook 'thi-turn-hl-line-mode-on)
 
 
 (setq column-number-mode t)
