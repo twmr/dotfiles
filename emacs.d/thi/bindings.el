@@ -25,6 +25,7 @@
 
 ;; expand-region
 (global-set-key (kbd "C-q") 'er/expand-region)
+(global-set-key (kbd "C-S-q") 'er/contract-region)
 
 ;;key-chords
 (key-chord-define-global "fg" 'iy-go-to-char)

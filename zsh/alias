@@ -49,8 +49,16 @@ alias zetaf='sudo shutdown -h now'
 alias reboot='sudo reboot'
 alias svim='sudo vim'
 alias v='gvim'
-alias e='emacsclient -c -a /usr/bin/emacs -n'
+#alias e='emacsclient -c -a /usr/bin/emacs -n'
 alias qtc='qtcreator'
+
+#from vsc bashrc
+#alias python='python2.6'
+#alias e='emacs -nw'
+alias e='emacsclient -nw -a /usr/bin/emacs'
+alias vim='emacsclient -nw -a /usr/bin/emacs'
+alias started=${HOME}/gitrepos/dotfiles/emacs.d/start-emacs-server.sh
+alias ked="e -e '(kill-emacs)'"
 
 alias pgnup='gnuplot -persist'
 #alias netcfg='netcfg2'
