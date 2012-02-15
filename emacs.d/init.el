@@ -5,7 +5,7 @@
 
 (setq custom-file "~/.emacs.d/thi/custom.el")
 (load custom-file 'noerror)
-(setq debug-on-error t)
+;;(setq debug-on-error t)
 
 (if (< emacs-major-version 24)
     (load "thi/color-theme")

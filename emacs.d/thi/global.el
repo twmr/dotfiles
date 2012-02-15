@@ -67,6 +67,12 @@
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
+
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode -1))))
+
 ;; automatically adds marks
 (eval-after-load 'auto-mark
   '(global-auto-mark-mode 1))
