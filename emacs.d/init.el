@@ -41,7 +41,6 @@
 (vendor 'evil)
 (vendor 'markdown-mode)
 
-(vendor 'rainbow-delimiters)
 (vendor 'ethan-wspace)
 ;; (vendor 'yasnippet)
 (vendor 'auto-mark)
