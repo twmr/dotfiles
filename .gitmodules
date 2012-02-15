@@ -46,12 +46,12 @@
 [submodule "emacs.d/vendor/yasnippet"]
 	path = emacs.d/vendor/yasnippet
 	url = git://github.com/capitaomorte/yasnippet.git
-[submodule "emacs.d/vendor/rainbow-delimiters"]
-	path = emacs.d/vendor/rainbow-delimiters
-	url = http://github.com/jlr/rainbow-delimiters
 [submodule "emacs.d/vendor/gnuplot"]
 	path = emacs.d/vendor/gnuplot
 	url = git://github.com/bruceravel/gnuplot-mode.git
 [submodule "emacs.d/vendor/expand-region"]
 	path = emacs.d/vendor/expand-region
 	url = git://github.com/magnars/expand-region.el.git
+[submodule "emacs.d/vendor/markdown-mode"]
+	path = emacs.d/vendor/markdown-mode
+	url = git://jblevins.org/git/markdown-mode.git

@@ -39,6 +39,7 @@
 (vendor 'smex)
 
 (vendor 'evil)
+(vendor 'markdown-mode)
 
 (vendor 'rainbow-delimiters)
 (vendor 'ethan-wspace)
