@@ -12,7 +12,6 @@ fi
 #export LC_ALL=en_US.UTF-8
 #export LANG=en_US.UTF-8
 #export LOCALE=en_US.UTF-8
-export BROWSER=chromium-browser
 export OOO_FORCE_DESKTOP='gnome'
 export EDITOR="emacsclient -c -a /usr/bin/emacs -nw"
 export VISUAL="$EDITOR"
@@ -46,6 +45,8 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
     intel_version="11.1/046"
     intel_prefix="/opt/intel/Compiler/"
+
+    export BROWSER=google-chrome
 
     export MYSRCDIR=$HOME/local/src
     export LOCSOFT=$HOME/local/software
@@ -90,7 +91,8 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib #:${LD_LIBRARY_PATH}
-    export PATH=${LOCSOFT}/bin:${HOME}/gitrepos/emacs/src:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${PATH}
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${PATH}
+    #${HOME}/gitrepos/emacs/src
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"

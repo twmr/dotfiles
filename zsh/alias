@@ -36,7 +36,9 @@ alias -s {mpg,mpeg,avi,ogm,wmv,m4v,mp4,mov}='mplayer -idx'
 # auto open audio
 alias -s {mp3,ogg,wav,flac}='cmus'
 # auto open web addresses
-alias -s {html,php,com,net,org,gov}='firefox'
+if [ "$BROWSER" ]; then
+    alias -s {html,php,com,net,org,gov}="$BROWSER"
+fi
 # auto open regular files
 alias -s txt='vim'
 alias -s pdf='xpdf'
