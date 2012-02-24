@@ -22,6 +22,12 @@ function add-alias() {
     alias $name
 }
 
+#running process search
+function psea() {
+    local pregex=$1
+    ps ax | grep -i $pregex
+}
+
 function GG() { grep -RiI --exclude-dir=.svn  --exclude-dir=.git $* * }
 # git functions
 function ga() { git add $* }
