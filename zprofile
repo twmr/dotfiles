@@ -28,6 +28,7 @@ if [ -z "$ONVSC" ]; then
 else
     echo "loading zprofile"
     echo onvsc: $ONVSC
+    echo "please type zsh"
 fi
 
 if [ "$HOSTNAME" = "firebird" ]; then
@@ -91,8 +92,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib #:${LD_LIBRARY_PATH}
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${PATH}
-    #${HOME}/gitrepos/emacs/src
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${HOME}/gitrepos/emacs/src:$HOME/qtcreator-2.4.0/bin/:$PATH
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"
