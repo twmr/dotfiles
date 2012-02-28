@@ -126,6 +126,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     . ${intel_prefix}${intel_version}/bin/compilervars.sh ${intel_arch}
 
     export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
+
     export EMBINPATH=${HOME}/gitrepos/emacs/src
     export PATH=$HOME/qtcreator-2.4.0/bin/:${MATLAB_BIN}:${EMBINPATH}:$PATH
 
