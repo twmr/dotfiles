@@ -93,6 +93,9 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib #:${LD_LIBRARY_PATH}
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${PATH}
     #${HOME}/gitrepos/emacs/src
+elif [ "$HOSTNAME" = "cobra" ]; then
+    DOTFPATH=$HOME/gitrepos/dotfiles
+    export PATH=$DOTFPATH/bin:$PATH
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"
