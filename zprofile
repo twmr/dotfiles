@@ -96,12 +96,15 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 elif [ "$HOSTNAME" = "cobra" ]; then
     DOTFPATH=$HOME/gitrepos/dotfiles
     export PATH=$DOTFPATH/bin:$PATH
+    export BROWSER=google-chrome
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"
     intel_arch="intel64"
     intel_version=""
     intel_prefix="/home/thomas/intel"
+
+    export BROWSER=chromium-browser
 
     export MYSRCDIR=${HOME}/local/src
     export LOCSOFT=$HOME/local/software
