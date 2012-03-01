@@ -13,7 +13,7 @@ fi
 #export LANG=en_US.UTF-8
 #export LOCALE=en_US.UTF-8
 export OOO_FORCE_DESKTOP='gnome'
-export EDITOR="emacsclient -c -a /usr/bin/emacs -nw"
+export EDITOR="vim" #is an alias to emacsclient
 export VISUAL="$EDITOR"
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
@@ -28,6 +28,7 @@ if [ -z "$ONVSC" ]; then
 else
     echo "loading zprofile"
     echo onvsc: $ONVSC
+    echo "please type zsh"
 fi
 
 if [ "$HOSTNAME" = "firebird" ]; then
@@ -91,8 +92,9 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib #:${LD_LIBRARY_PATH}
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${PATH}
-    #${HOME}/gitrepos/emacs/src
+
+    export EMBINPATH=${HOME}/gitrepos/emacs/src
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.4.0/bin/:$PATH
 elif [ "$HOSTNAME" = "cobra" ]; then
     DOTFPATH=$HOME/gitrepos/dotfiles
     export PATH=$DOTFPATH/bin:$PATH
@@ -131,7 +133,9 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     . ${intel_prefix}${intel_version}/bin/compilervars.sh ${intel_arch}
 
     export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
-    export PATH=$HOME/qtcreator-2.4.0/bin/:${MATLAB_BIN}:$PATH
+
+    export EMBINPATH=${HOME}/gitrepos/emacs/src
+    export PATH=$HOME/qtcreator-2.4.0/bin/:${MATLAB_BIN}:${EMBINPATH}:$PATH
 
     #parallel stuff (mpi + petsc + slepc )
 
