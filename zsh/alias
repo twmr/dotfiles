@@ -52,11 +52,11 @@ alias reboot='sudo reboot'
 #alias e='emacsclient -c -a /usr/bin/emacs -n'
 alias qtc='qtcreator'
 
-# if [ "$EMBINPATH" ]; then
-    # embin="$EMBINPATH/emacs"
-# else
+if [ "$EMBINPATH" ]; then
+    embin="$EMBINPATH/emacs"
+else
     embin="/usr/bin/emacs"
-# fi
+fi
 consoleemacs="emacsclient -nw -a $embin"
 guiemacs="emacsclient -c -a $embin"
 alias e="$guiemacs"
