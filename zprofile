@@ -13,7 +13,7 @@ fi
 #export LANG=en_US.UTF-8
 #export LOCALE=en_US.UTF-8
 export OOO_FORCE_DESKTOP='gnome'
-export EDITOR="vim" #is an alias to emacsclient
+export EDITOR="emacs" #is an alias to emacsclient
 export VISUAL="$EDITOR"
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
@@ -28,7 +28,6 @@ if [ -z "$ONVSC" ]; then
 else
     echo "loading zprofile"
     echo onvsc: $ONVSC
-    echo "please type zsh"
 fi
 
 if [ "$HOSTNAME" = "firebird" ]; then
@@ -182,6 +181,7 @@ elif [ "$ONVSC" ]; then
     export PETSC_ARCH=intel-cxx-complex_debug
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
+    export EMBINPATH=/usr/local/bin
     export PATH=$HOME/bin:${LOCSOFT}/bin:$EPDPATH:$PATH
     export LD_LIBRARY_PATH=${LOCSOFT}/lib/:${LD_LIBRARY_PATH}
 

@@ -5,10 +5,13 @@ if [ -f /etc/bashrc ]; then
   . /etc/bashrc
 fi
 
-if [ -f ~/.zprofile ]; then
-  . ~/.zprofile
-fi
-
+function initzsh {
+	echo "loading zsh"
+	if [ -f ~/.zprofile ]; then
+	  . ~/.zprofile
+	fi
+	exec zsh
+}
 
 function initcfbuild {
     LANG=C CC=mpicc CXX=mpicxx  cmake -DBOOST_ROOT=$BOOST_SRC_PATH \
