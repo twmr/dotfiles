@@ -57,12 +57,33 @@ if [ "$EMBINPATH" ]; then
 else
     embin="/usr/bin/emacs"
 fi
+
 consoleemacs="emacsclient -nw -a $embin"
 guiemacs="emacsclient -c -a $embin"
 alias e="$guiemacs"
 alias emacs="$guiemacs"
 alias vim="$consoleemacs"
-alias ked="emacsclient -nw -e '(kill-emacs)'"
+
+ONVSC=`hostname | egrep '(l01|r[0-9]+{2}n[0-9]+{2})' `
+if [ "$ONVSC" ]; then
+    alias e="$consoleemacs"
+    alias emacs="$consoleemacs"
+fi
+
+#kill emacs daemon
+function ked()
+{
+    echo "trying to kill emacs"
+    pgrep -u $USER "emacs" > /dev/null
+    RETVAL=$?
+    if [ $RETVAL -eq 0 ]; then
+        echo "killing emacs on " `date` >> ~/.emacs.d/emacs-server.log
+        emacsclient -nw -e '(kill-emacs)'
+    else
+        echo "no emacs-daemon is running"
+    fi
+}
+
 
 function started() {
     pgrep -u $USER "emacs" > /dev/null
