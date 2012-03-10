@@ -40,6 +40,7 @@
 
 (vendor 'evil)
 (vendor 'markdown-mode)
+(vendor 'textlint)
 
 (vendor 'ethan-wspace)
 ;; (vendor 'yasnippet)
