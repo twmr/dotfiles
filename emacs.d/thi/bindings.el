@@ -29,7 +29,7 @@
 
 ;;key-chords
 (key-chord-define-global "fg" 'iy-go-to-char)
-(key-chord-define-global "df" 'iy-go-to-char-backward)
+;; (key-chord-define-global "df" 'iy-go-to-char-backward)
 
 (defun my-c-mode-common-hook ()
   (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
