@@ -110,6 +110,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
     export CFBD=${CFFEM_REPO}/build
     export RANDOMLAS=${CFFEM_REPO}/examples/2DFEM/randomlas
+    export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
 
     #TODO compile instructions cf-fem-lib
 
@@ -196,6 +197,11 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
         echo Warning RANDOMLAS not defined
     else
         hash -d rand=${RANDOMLAS}
+    fi
+    if [ -z "${LAMBDAFOUR}" ]; then
+        echo Warning RANDOMLAS not defined
+    else
+        hash -d lamd=${LAMBDAFOUR}
     fi
     if [ -z "${CFFEM_REPO}" ]; then
         echo Warning CFFEM_REPO not defined
