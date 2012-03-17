@@ -91,8 +91,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib #:${LD_LIBRARY_PATH}
-
-    export EMBINPATH=${HOME}/gitrepos/emacs/src
+    # export EMBINPATH=${HOME}/gitrepos/emacs/src
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.4.0/bin/:$PATH
 elif [ "$HOSTNAME" = "cobra" ]; then
     DOTFPATH=$HOME/gitrepos/dotfiles
@@ -118,6 +117,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
     export CFBD=${CFFEM_REPO}/build
     export RANDOMLAS=${CFFEM_REPO}/examples/2DFEM/randomlas
+    export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
 
     #TODO compile instructions cf-fem-lib
 
@@ -204,6 +204,11 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
         echo Warning RANDOMLAS not defined
     else
         hash -d rand=${RANDOMLAS}
+    fi
+    if [ -z "${LAMBDAFOUR}" ]; then
+        echo Warning RANDOMLAS not defined
+    else
+        hash -d lamd=${LAMBDAFOUR}
     fi
     if [ -z "${CFFEM_REPO}" ]; then
         echo Warning CFFEM_REPO not defined
