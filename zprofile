@@ -96,7 +96,8 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.4.0/bin/:$PATH
 elif [ "$HOSTNAME" = "cobra" ]; then
     DOTFPATH=$HOME/gitrepos/dotfiles
-    export PATH=$DOTFPATH/bin:$PATH
+    export LOCSOFT=$HOME/local/software
+    export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
     export BROWSER=google-chrome
 
 elif [ "$HOSTNAME" = "thisch" ]; then
