@@ -58,6 +58,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
     export CFBD=${CFFEM_REPO}/build
     export RANDOMLAS=${HOME}/gitrepos/randomlas
+    export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
 
     #cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DNETGEN_SOURCE_DIR=${NETGENSRC}
     #-DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DENABLE_MPI=ON ..
@@ -92,7 +93,8 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     #./configure  #suffices
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib #:${LD_LIBRARY_PATH}
     # export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.4.0/bin/:$PATH
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.4.82/bin/:$PATH
+
 elif [ "$HOSTNAME" = "cobra" ]; then
     DOTFPATH=$HOME/gitrepos/dotfiles
     export LOCSOFT=$HOME/local/software
@@ -208,7 +210,7 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     if [ -z "${LAMBDAFOUR}" ]; then
         echo Warning RANDOMLAS not defined
     else
-        hash -d lamd=${LAMBDAFOUR}
+        hash -d lamb=${LAMBDAFOUR}
     fi
     if [ -z "${CFFEM_REPO}" ]; then
         echo Warning CFFEM_REPO not defined
