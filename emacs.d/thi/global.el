@@ -3,12 +3,12 @@
 
 ;; don't clutter dirs with backup files - use this dir instead
 ;; maybe not useful for files inside dropbox (add exception ?)
-(setq backup-by-copying t)
-(setq backup-dir-alist '(("." . ,user-cache-file-dir)))
-(setq auto-save-list-file-prefix
-      (concat user-cache-file-dir ".auto-saves-"))
-(setq auto-save-file-name-transforms
-      `((".*" ,user-cache-file-dir t)))
+;; (setq backup-by-copying t)
+;; (setq backup-dir-alist '(("." . ,user-cache-file-dir)))
+;; (setq auto-save-list-file-prefix
+      ;; (concat user-cache-file-dir ".auto-saves-"))
+;; (setq auto-save-file-name-transforms
+      ;; `((".*" ,user-cache-file-dir t)))
 
 ;;maybe move into auto-complete local file ?
 (setq ac-comphist-file (concat user-cache-file-dir "ac-comphist.dat"))
