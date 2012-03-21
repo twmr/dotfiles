@@ -216,6 +216,7 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
         echo Warning CFFEM_REPO not defined
     else
         hash -d cfrepo=${CFFEM_REPO}
+        hash -d cfr=${CFFEM_REPO}
     fi
 
     #cffemlib + simulation stuff
