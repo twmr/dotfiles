@@ -52,6 +52,9 @@ alias reboot='sudo reboot'
 #alias e='emacsclient -c -a /usr/bin/emacs -n'
 alias qtc='qtcreator'
 
+alias mat='matlab -nosplash'
+alias cmat='matlab -nodesktop -nosplash -nojvm'
+
 if [ "$EMBINPATH" ]; then
     embin="$EMBINPATH/emacs"
 else
