@@ -21,3 +21,5 @@
 [github]
 	user = thisch
 	token = d5b6175d01b404a6f21a0f815fd6e3af
+[core]
+	editor = vim
