@@ -93,12 +93,19 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib #:${LD_LIBRARY_PATH}
     # export EMBINPATH=${HOME}/gitrepos/emacs/src
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.4.0/bin/:$PATH
+elif [ "$HOSTNAME" = "cobra" ]; then
+    DOTFPATH=$HOME/gitrepos/dotfiles
+    export LOCSOFT=$HOME/local/software
+    export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
+    export BROWSER=google-chrome
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"
     intel_arch="intel64"
     intel_version=""
     intel_prefix="/home/thomas/intel"
+
+    export BROWSER=chromium-browser
 
     export MYSRCDIR=${HOME}/local/src
     export LOCSOFT=$HOME/local/software
