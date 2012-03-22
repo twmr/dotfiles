@@ -1,4 +1,7 @@
 #!/bin/sh
-xrandr --output HDMI1 --auto
-xrandr --output VGA1 --auto
-xrandr --output VGA1 --right-of HDMI1
+
+outleft=HDMI-0
+outright=DVI-0
+xrandr --output ${outleft} --auto
+xrandr --output ${outright} --auto
+xrandr --output ${outright} --right-of ${outleft}
