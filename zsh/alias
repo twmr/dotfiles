@@ -62,7 +62,7 @@ else
 fi
 
 consoleemacs="emacsclient -nw -a $embin"
-guiemacs="emacsclient -c -a $embin"
+guiemacs="emacsclient -nc -a $embin"
 alias e="$guiemacs"
 alias emacs="$guiemacs"
 alias vim="$consoleemacs"
