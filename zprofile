@@ -51,6 +51,8 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export MYSRCDIR=$HOME/local/src
     export LOCSOFT=$HOME/local/software
 
+    export TUDADOC=$HOME/gitrepos/tudadoc
+
     export MATLAB_BIN=/usr/local/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
 
@@ -98,6 +100,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 elif [ "$HOSTNAME" = "cobra" ]; then
     DOTFPATH=$HOME/gitrepos/dotfiles
     export LOCSOFT=$HOME/local/software
+    export TUDADOC=$HOME/gitrepos/tudadoc
     export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
     export BROWSER=google-chrome
 
@@ -111,6 +114,8 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export MYSRCDIR=${HOME}/local/src
     export LOCSOFT=$HOME/local/software
+
+    export TUDADOC=$HOME/gitrepos/tudadoc
 
     export MATLAB_BIN=${HOME}/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
@@ -199,6 +204,10 @@ fi
 if [ "$arch" ]; then
     . ${intel_prefix}${intel_version}/bin/$arch/iccvars_$arch.sh
     . ${intel_prefix}${intel_version}/bin/$arch/ifortvars_$arch.sh
+fi
+
+if [ "${TUDADOC}" ]; then
+        hash -d doc=${TUDADOC}
 fi
 
 if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
