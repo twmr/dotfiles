@@ -1,0 +1,47 @@
+#!/usr/bin/env perl
+# Use 'ssc' (this script) instead of 'ssh' to log into a remote machine.
+# Without an argument after the hostname it will list available screens.
+# Add an argument after the hostname to attach to an existing screen, or
+#   specify a new screen.  Eg, ssc remote.com foo
+# The numbers in front of the screen tag can usually be ignored.
+
+# ssh option parsing by @klochner
+my $optstring = ""; 
+while ($val = shift) {
+  if    ($val =~ /^-\w$/)  { $optstring .= " ".$val.(shift); }
+  elsif ($val =~ /^-\w+$/) { $optstring .= " ".$val;         }
+  elsif ($machine)         { $tag        =     $val;         }
+  else                     { $machine    =     $val;         }
+}
+
+if (!$machine) {
+  print "USAGE: ssc [ssh options] remote.com [screen name]\n";
+} elsif (!$tag) {
+  @screens = split("\n", `ssh $optstring $machine screen -ls`);
+  for(@screens) {
+    if(/^\s*(\d+)\.(\S+)\s+\(([^\)]*)\)/) {
+      ($num, $tag, $status) = ($1, $2, $3);
+      if($status =~ /attached/i) { $att{"$num.$tag"} = 1; }
+      elsif($status =~ /detached/i) { $att{"$num.$tag"} = 0; }
+      else { print "Couldn't parse this: $_\n"; }
+      # remember anything weird about the screen, like shared screens
+      if($status =~ /^(attached|detached)$/i) { 
+        $special{"$num.$tag"} = "";
+      } else {
+        $special{"$num.$tag"} = "[$status]";
+      }
+    }
+  }
+  print "ATTACHED:\n";
+  for(sort { ($a=~/\.(\w+)/)[0] cmp ($b=~/\.(\w+)/)[0] } keys(%att)) {
+    ($tag) = /\.(\w+)/;
+    print "  $tag\t($_)\t$special{$_}\n" if $att{$_};
+  }
+  print "DETACHED:\n";
+  for(sort { ($a=~/\.(\w+)/)[0] cmp ($b=~/\.(\w+)/)[0] } keys(%att)) {
+    ($tag) = /\.(\w+)/;
+    print "  $tag\t($_)\t$special{$_}\n" unless $att{$_};
+  }
+} else {
+ system("ssh $optstring -t $machine \"screen -S $tag -dr || screen -S $tag\"");
+}
