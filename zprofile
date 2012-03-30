@@ -54,6 +54,8 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export MATLAB_BIN=/usr/local/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
 
+    export PYCHARM_JDK=$MATLAB_JAVA
+
     export CFFEM_REPO=${HOME}/cf-fem-lib
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
     export CFBD=${CFFEM_REPO}/build
