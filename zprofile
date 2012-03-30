@@ -51,6 +51,9 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export MYSRCDIR=$HOME/local/src
     export LOCSOFT=$HOME/local/software
 
+    export GITR=$HOME/gitrepos
+    export TUDADOC=$GITR/tudadoc
+
     export MATLAB_BIN=/usr/local/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
 
@@ -100,6 +103,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 elif [ "$HOSTNAME" = "cobra" ]; then
     DOTFPATH=$HOME/gitrepos/dotfiles
     export LOCSOFT=$HOME/local/software
+    export TUDADOC=$HOME/gitrepos/tudadoc
     export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
     export BROWSER=google-chrome
 
@@ -113,6 +117,9 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export MYSRCDIR=${HOME}/local/src
     export LOCSOFT=$HOME/local/software
+
+    export GITR=$HOME/gitrepos
+    export TUDADOC=$GITR/tudadoc
 
     export MATLAB_BIN=${HOME}/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
@@ -138,8 +145,8 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 
-    export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=$HOME/qtcreator-2.4.0/bin/:${MATLAB_BIN}:${EMBINPATH}:$PATH
+    #export EMBINPATH=${HOME}/gitrepos/emacs/src
+    export PATH=$HOME/qtcreator-2.4.0/bin/:${MATLAB_BIN}:$PATH #${EMBINPATH}:$PATH
 
     #parallel stuff (mpi + petsc + slepc )
 
@@ -203,6 +210,10 @@ if [ "$arch" ]; then
     . ${intel_prefix}${intel_version}/bin/$arch/ifortvars_$arch.sh
 fi
 
+if [ "${TUDADOC}" ]; then
+        hash -d doc=${TUDADOC}
+fi
+
 if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     if [ -z "${RANDOMLAS}" ]; then
         echo Warning RANDOMLAS not defined
@@ -223,6 +234,11 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
 
     #cffemlib + simulation stuff
     export PYTHONPATH=${CFFEM_REPO}/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}:${LOCSOFT}/nlopt/lib/python2.7/site-packages
+    if [ "${GITR}" ]; then
+        if [ -d "${GITR}/matplotlib2tikz" ]; then
+            export PYTHONPATH=${GITR}/matplotlib2tikz:${PYTHONPATH}
+        fi
+    fi
 
     export PATH=${RANDOMLAS}:${RANDOMLAS}/scripts:${CFBD}/green:${CFBD}/src:${PATH}
 

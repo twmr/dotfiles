@@ -62,7 +62,7 @@ else
 fi
 
 consoleemacs="emacsclient -nw -a $embin"
-guiemacs="emacsclient -c -a $embin"
+guiemacs="emacsclient -nc -a $embin"
 alias e="$guiemacs"
 alias emacs="$guiemacs"
 alias vim="$consoleemacs"
@@ -89,6 +89,15 @@ function ked()
 
 
 function started() {
+    if [ $# -gt 0 ]; then
+        if [ "$1" = "-f" ]; then
+            date >> ~/.emacs.d/emacs-server.log
+            echo "$embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1"
+            $embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1
+            return;
+        fi
+    fi
+
     pgrep -u $USER "emacs" > /dev/null
     RETVAL=$?
     if [ $RETVAL -eq 0 ]; then
