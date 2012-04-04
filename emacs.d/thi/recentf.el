@@ -22,3 +22,4 @@
 
 ;; todo integrate it into ido better and bind it to some Vimpulse/Viper keys
 (global-set-key [f11] 'xsteve-ido-choose-from-recentf)
+(define-key recentf-mode-map (kbd "C-e") 'ido-my-edit-input)

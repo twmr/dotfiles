@@ -1,5 +1,9 @@
 (evil-mode 1)
 
+;;curser color fix (emacs 24)
+;;http://stackoverflow.com/questions/9900232/changing-color-themes-emacs-24-order-matters
+(setq evil-default-cursor t)
+
 ;;TODO modeline color changes
 
 ;; (defvar evil-normal-mode-line-background (face-background 'mode-line))
