@@ -66,6 +66,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     #cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DNETGEN_SOURCE_DIR=${NETGENSRC}
     #-DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DENABLE_MPI=ON ..
 
+
     export NETGENDIR=$LOCSOFT/bin
     export NETGENSRC=$MYSRCDIR/netgen-4.9.13 #for cffemlib compilation
     NGSOLVE_PATH=${MYSRCDIR}/ngsolve-4.9.13
@@ -129,6 +130,9 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
 
     #TODO compile instructions cf-fem-lib
+
+    #single core version:
+    # cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DNETGEN_SOURCE_DIR=${NETGEN_SRC_PATH} -DCMAKE_INSTALL_PREFIX=${NGSOLVE_PATH} ..
 
     export NETGENDIR=/usr/local/bin #netgen needs this envvar
     export NETGEN_SRC_PATH=${MYSRCDIR}/netgen-4.9.13
@@ -235,6 +239,9 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     if [ "${GITR}" ]; then
         if [ -d "${GITR}/matplotlib2tikz" ]; then
             export PYTHONPATH=${GITR}/matplotlib2tikz:${PYTHONPATH}
+        fi
+        if [ -d "${GITR}/matlab2tikz" ]; then
+            export MATLAB2TIKZ=${GITR}/matlab2tikz
         fi
     fi
 
