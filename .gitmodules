@@ -55,3 +55,9 @@
 [submodule "emacs.d/vendor/markdown-mode"]
 	path = emacs.d/vendor/markdown-mode
 	url = git://jblevins.org/git/markdown-mode.git
+[submodule "emacs.d/vendor/popup"]
+	path = emacs.d/vendor/popup
+	url = https://github.com/m2ym/popup-el
+[submodule "emacs.d/vendor/fuzzy"]
+	path = emacs.d/vendor/fuzzy
+	url = https://github.com/m2ym/fuzzy-el

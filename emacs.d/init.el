@@ -35,7 +35,13 @@
 
 (vendor 'undo-tree) ;; test undo tree once again and see if there are
                     ;; any conflicts with evil
+
+;;auto-complete
+(vendor 'popup)
+(vendor 'fuzzy)
 (vendor 'auto-complete)
+
+
 (vendor 'smex)
 
 (vendor 'evil)
