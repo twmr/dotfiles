@@ -93,10 +93,16 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 
     #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1
 
+    #petsc4py:
+    #src in ~/local/src/petsc4py ...
+
+    export P4PYLIB=${MYSRCDIR}/petsc4py-1.2/build/temp.linux-x86_64-2.7/arch-linux2-cxx-debug/src
+    export P4PYPATH=${MYSRCDIR}/petsc4py-1.2/build/lib.linux-x86_64-2.7 #/petsc4py
+    export PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
 
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
-    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib #:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib:${P4PYLIB} #:${LD_LIBRARY_PATH}
     # export EMBINPATH=${HOME}/gitrepos/emacs/src
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.4.82/bin/:$PATH
 
@@ -238,6 +244,13 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
         if [ -d "${GITR}/matplotlib2tikz" ]; then
             export PYTHONPATH=${GITR}/matplotlib2tikz:${PYTHONPATH}
         fi
+    fi
+
+    if [ "${P4PYPATH}" ]; then
+            export PYTHONPATH=${P4PYPATH}:${PYTHONPATH}
+    fi
+    if [ "${PYMPIPATH}" ]; then
+            export PYTHONPATH=${PYMPIPATH}:${PYTHONPATH}
     fi
 
     export PATH=${RANDOMLAS}:${RANDOMLAS}/scripts:${CFBD}/green:${CFBD}/src:${PATH}
