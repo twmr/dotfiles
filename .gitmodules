@@ -61,3 +61,6 @@
 [submodule "emacs.d/vendor/fuzzy"]
 	path = emacs.d/vendor/fuzzy
 	url = https://github.com/m2ym/fuzzy-el
+[submodule "emacs.d/vendor/ace-jump-mode"]
+	path = emacs.d/vendor/ace-jump-mode
+	url = git://github.com/winterTTr/ace-jump-mode.git
