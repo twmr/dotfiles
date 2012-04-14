@@ -47,6 +47,7 @@
 (vendor 'evil)
 (vendor 'markdown-mode)
 (vendor 'textlint)
+(vendor 'ace-jump-mode)
 
 (vendor 'ethan-wspace)
 ;; (vendor 'yasnippet)

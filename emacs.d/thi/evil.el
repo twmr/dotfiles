@@ -47,3 +47,6 @@
 
 (define-key evil-normal-state-map "gs" 'magit-status)
 (define-key evil-insert-state-map "\C-k" 'kill-line)
+
+;;thank you @magnars
+(define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)

@@ -1,6 +1,3 @@
-[submodule "emacs.d/colors/color-theme-wombat"]
-	path = emacs.d/colors/color-theme-wombat
-	url = git://github.com/demizer/color-theme-wombat.git
 [submodule "emacs.d/colors/twilight-emacs"]
 	path = emacs.d/colors/twilight-emacs
 	url = git://github.com/crafterm/twilight-emacs.git
@@ -61,3 +58,6 @@
 [submodule "emacs.d/vendor/fuzzy"]
 	path = emacs.d/vendor/fuzzy
 	url = https://github.com/m2ym/fuzzy-el
+[submodule "emacs.d/vendor/ace-jump-mode"]
+	path = emacs.d/vendor/ace-jump-mode
+	url = git://github.com/winterTTr/ace-jump-mode.git
