@@ -1,6 +1,3 @@
-[submodule "emacs.d/colors/color-theme-wombat"]
-	path = emacs.d/colors/color-theme-wombat
-	url = git://github.com/demizer/color-theme-wombat.git
 [submodule "emacs.d/colors/twilight-emacs"]
 	path = emacs.d/colors/twilight-emacs
 	url = git://github.com/crafterm/twilight-emacs.git
