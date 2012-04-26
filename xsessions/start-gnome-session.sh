@@ -39,6 +39,13 @@ pgrep -u $USER emacs > /dev/null || emacs --daemon &
 setxkbmap us altgr-intl
 xmodmap ~/.Xmodmap
 
+if [ "$HOSTNAME" = "cobra" ]; then
+    # make the mouse work right on my thinkpad in fedora
+    xinput set-prop 'TPPS/2 IBM TrackPoint' "Evdev Wheel Emulation" 1
+    xinput set-prop 'TPPS/2 IBM TrackPoint' "Evdev Wheel Emulation Button" 2
+    xinput set-prop 'TPPS/2 IBM TrackPoint' "Evdev Wheel Emulation Timeout" 200
+fi
+
 
 # The following is a simple hack to avoid starting
 # gnome-panel/metacity when awesome was supposed to be started. this
