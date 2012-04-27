@@ -9,6 +9,8 @@
 	sc = !git sua && git scomp
 	aliases = config --get-regexp ^alias\\.
 	al = !git aliases
+  co = commit
+  dc = diff --color-words
 [user]
 	name = Thomas Hisch
 	email = thomas@opentech.at
