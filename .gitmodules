@@ -61,3 +61,6 @@
 [submodule "emacs.d/vendor/ace-jump-mode"]
 	path = emacs.d/vendor/ace-jump-mode
 	url = git://github.com/winterTTr/ace-jump-mode.git
+[submodule "emacs.d/vendor/git-commit"]
+	path = emacs.d/vendor/git-commit
+	url = git://github.com/rafl/git-commit-mode.git

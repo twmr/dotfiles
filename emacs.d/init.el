@@ -54,6 +54,7 @@
 (vendor 'auto-mark)
 (vendor 'orgmode)
 (vendor 'magit)
+(vendor 'git-commit)
 (vendor 'python)
 (vendor 'flymake)
 (vendor 'flymake-cursor)
