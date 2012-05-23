@@ -223,24 +223,24 @@
 
 ;; automatically indent yanked code
 ;; http://www.emacswiki.org/emacs/AutoIndentation
-(dolist (command '(yank yank-pop mouse-yank-primary))
-  (eval `(defadvice ,command (after indent-region activate)
-           (and (not current-prefix-arg)
-                (member major-mode '(emacs-lisp-mode
-                                     lisp-mode
-                                     clojure-mode
-                                     scheme-mode
-                                     haskell-mode
-                                     ruby-mode
-                                     rspec-mode
-                                     python-mode
-                                     ada-mode
-                                     c-mode
-                                     c++-mode
-                                     java-mode
-                                     matlab-mode
-                                     objc-mode
-                                     latex-mode
-                                     plain-tex-mode))
-                (let ((mark-even-if-inactive transient-mark-mode))
-                  (indent-region (region-beginning) (region-end) nil))))))
+;; (dolist (command '(yank yank-pop mouse-yank-primary))
+;;   (eval `(defadvice ,command (after indent-region activate)
+;;            (and (not current-prefix-arg)
+;;                 (member major-mode '(emacs-lisp-mode
+;;                                      lisp-mode
+;;                                      clojure-mode
+;;                                      scheme-mode
+;;                                      haskell-mode
+;;                                      ruby-mode
+;;                                      rspec-mode
+;;                                      python-mode
+;;                                      ada-mode
+;;                                      c-mode
+;;                                      c++-mode
+;;                                      java-mode
+;;                                      matlab-mode
+;;                                      objc-mode
+;;                                      latex-mode
+;;                                      plain-tex-mode))
+;;                 (let ((mark-even-if-inactive transient-mark-mode))
+;;                   (indent-region (region-beginning) (region-end) nil))))))

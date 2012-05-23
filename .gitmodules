@@ -64,3 +64,6 @@
 [submodule "emacs.d/vendor/git-commit"]
 	path = emacs.d/vendor/git-commit
 	url = git://github.com/rafl/git-commit-mode.git
+[submodule "emacs.d/vendor/cedet"]
+	path = emacs.d/vendor/cedet
+	url = git://git.randomsample.de/cedet.git
