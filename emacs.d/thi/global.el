@@ -113,6 +113,8 @@
         ("\\.java$" . java-mode)
         ("\\.txt$"  . text-mode)
         ("\\.tex$" . latex-mode)
+        ("\\.gtikz$" . latex-mode)
+        ("\\.tikz$" . latex-mode)
         ("\\.sty$" . latex-mode)
         ("\\.bbl$" . latex-mode)
         ("\\.html$" . html-helper-mode)
