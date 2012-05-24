@@ -50,8 +50,11 @@
 ;: LINE Highlighting (highlight the current line)
 ;; exceptions where hl-line is not desired:
 ;; (setq hl-line-disabled-modes-list '(org-mode))
-;; (set-face-attribute 'highlight nil :underline nil)
-;; (add-hook 'find-file-hook 'thi-turn-hl-line-mode-on)
+(setq hl-line-enabled-modes-list '(magit-status-mode
+                                   magit-log-mode))
+(set-face-attribute 'highlight nil :underline nil)
+(add-hook 'find-file-hook 'thi-turn-hl-line-mode-on2)
+(add-hook 'magit-mode-hook 'thi-turn-hl-line-mode-on2)
 
 
 (setq column-number-mode t)
@@ -84,6 +87,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; If there is a tab, make it the size of 2 spaces
+;; TODO Check if this causes problems with fgallina/python.el
 (setq-default tab-width 2)
 
 (dolist (hook '(erc-mode-hook

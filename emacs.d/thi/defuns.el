@@ -41,3 +41,13 @@
   (interactive)
   (if (not (member major-mode hl-line-disabled-modes-list))
       (hl-line-mode -1)))
+
+(defun thi-turn-hl-line-mode-on2 ()
+  (interactive)
+  (if (member major-mode hl-line-enabled-modes-list)
+      (hl-line-mode 1)))
+
+(defun thi-turn-hl-line-mode-off2 ()
+  (interactive)
+  (if (member major-mode hl-line-enabled-modes-list)
+      (hl-line-mode -1)))
