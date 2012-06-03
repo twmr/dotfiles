@@ -114,6 +114,21 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
     export BROWSER=google-chrome
 
+    #parallel stuff (mpi + petsc + slepc)
+
+    export MYMPI_INC_PATH=/usr/include/openmpi-x86_64
+    export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
+    export MYMPI_BIN_PATH=/usr/lib64/openmpi/bin
+
+    export MYSRCDIR=$HOME/local/src
+    export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p7
+    export PETSC_ARCH="arch-linux2-c"
+    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
+
+    export PYTHONPATH="/usr/lib64/python2.7/site-packages/openmpi/"
+    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$PATH
+
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"
     intel_arch="intel64"
