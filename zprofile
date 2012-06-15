@@ -93,18 +93,25 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 
     #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1
 
-    #petsc4py:
-    #src in ~/local/src/petsc4py ...
-
-    export P4PYLIB=${MYSRCDIR}/petsc4py-1.2/build/temp.linux-x86_64-2.7/arch-linux2-cxx-debug/src
-    export P4PYPATH=${MYSRCDIR}/petsc4py-1.2/build/lib.linux-x86_64-2.7 #/petsc4py
-    export PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
-
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
-    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib:${P4PYLIB} #:${LD_LIBRARY_PATH}
+
+    #PETSC4PY
+    PETSCPY_DIR=${MYSRCDIR}/petsc4py-1.2
+    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-debug/src
+    P4PYPATH=${PETSCPY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
+
+    #SLEPC4PY
+    SLEPCPY_DIR=${MYSRCDIR}/slepc4py-1.2
+    S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-debug/src
+    S4PYPATH=${SLEPCPY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
+
+    #MPI4PY
+    PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
+
+    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib:${P4PYLIB}:${S4PYLIB} #:${LD_LIBRARY_PATH}
     # export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.4.82/bin/:$PATH
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.5.0/bin/:$PATH
 
 elif [ "$HOSTNAME" = "cobra" ]; then
     DOTFPATH=$HOME/gitrepos/dotfiles
@@ -248,6 +255,9 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
 
     if [ "${P4PYPATH}" ]; then
             export PYTHONPATH=${P4PYPATH}:${PYTHONPATH}
+    fi
+    if [ "${S4PYPATH}" ]; then
+            export PYTHONPATH=${S4PYPATH}:${PYTHONPATH}
     fi
     if [ "${PYMPIPATH}" ]; then
             export PYTHONPATH=${PYMPIPATH}:${PYTHONPATH}
