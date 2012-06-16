@@ -50,8 +50,11 @@
 ;: LINE Highlighting (highlight the current line)
 ;; exceptions where hl-line is not desired:
 ;; (setq hl-line-disabled-modes-list '(org-mode))
-;; (set-face-attribute 'highlight nil :underline nil)
-;; (add-hook 'find-file-hook 'thi-turn-hl-line-mode-on)
+(setq hl-line-enabled-modes-list '(magit-status-mode
+                                   magit-log-mode))
+(set-face-attribute 'highlight nil :underline nil)
+(add-hook 'find-file-hook 'thi-turn-hl-line-mode-on2)
+(add-hook 'magit-mode-hook 'thi-turn-hl-line-mode-on2)
 
 
 (setq column-number-mode t)
@@ -84,6 +87,7 @@
 (setq-default indent-tabs-mode nil)
 
 ;; If there is a tab, make it the size of 2 spaces
+;; TODO Check if this causes problems with fgallina/python.el
 (setq-default tab-width 2)
 
 (dolist (hook '(erc-mode-hook
@@ -113,6 +117,8 @@
         ("\\.java$" . java-mode)
         ("\\.txt$"  . text-mode)
         ("\\.tex$" . latex-mode)
+        ("\\.gtikz$" . latex-mode)
+        ("\\.tikz$" . latex-mode)
         ("\\.sty$" . latex-mode)
         ("\\.bbl$" . latex-mode)
         ("\\.html$" . html-helper-mode)
@@ -223,24 +229,24 @@
 
 ;; automatically indent yanked code
 ;; http://www.emacswiki.org/emacs/AutoIndentation
-(dolist (command '(yank yank-pop mouse-yank-primary))
-  (eval `(defadvice ,command (after indent-region activate)
-           (and (not current-prefix-arg)
-                (member major-mode '(emacs-lisp-mode
-                                     lisp-mode
-                                     clojure-mode
-                                     scheme-mode
-                                     haskell-mode
-                                     ruby-mode
-                                     rspec-mode
-                                     python-mode
-                                     ada-mode
-                                     c-mode
-                                     c++-mode
-                                     java-mode
-                                     matlab-mode
-                                     objc-mode
-                                     latex-mode
-                                     plain-tex-mode))
-                (let ((mark-even-if-inactive transient-mark-mode))
-                  (indent-region (region-beginning) (region-end) nil))))))
+;; (dolist (command '(yank yank-pop mouse-yank-primary))
+;;   (eval `(defadvice ,command (after indent-region activate)
+;;            (and (not current-prefix-arg)
+;;                 (member major-mode '(emacs-lisp-mode
+;;                                      lisp-mode
+;;                                      clojure-mode
+;;                                      scheme-mode
+;;                                      haskell-mode
+;;                                      ruby-mode
+;;                                      rspec-mode
+;;                                      python-mode
+;;                                      ada-mode
+;;                                      c-mode
+;;                                      c++-mode
+;;                                      java-mode
+;;                                      matlab-mode
+;;                                      objc-mode
+;;                                      latex-mode
+;;                                      plain-tex-mode))
+;;                 (let ((mark-even-if-inactive transient-mark-mode))
+;;                   (indent-region (region-beginning) (region-end) nil))))))

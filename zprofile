@@ -68,6 +68,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     #cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DNETGEN_SOURCE_DIR=${NETGENSRC}
     #-DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DENABLE_MPI=ON ..
 
+
     export NETGENDIR=$LOCSOFT/bin
     export NETGENSRC=$MYSRCDIR/netgen-4.9.13 #for cffemlib compilation
     NGSOLVE_PATH=${MYSRCDIR}/ngsolve-4.9.13
@@ -120,6 +121,21 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
     export BROWSER=google-chrome
 
+    #parallel stuff (mpi + petsc + slepc)
+
+    export MYMPI_INC_PATH=/usr/include/openmpi-x86_64
+    export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
+    export MYMPI_BIN_PATH=/usr/lib64/openmpi/bin
+
+    export MYSRCDIR=$HOME/local/src
+    export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p7
+    export PETSC_ARCH="arch-linux2-c"
+    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
+
+    export PYTHONPATH="/usr/lib64/python2.7/site-packages/openmpi/"
+    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$PATH
+
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"
     intel_arch="intel64"
@@ -144,6 +160,9 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
 
     #TODO compile instructions cf-fem-lib
+
+    #single core version:
+    # cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DNETGEN_SOURCE_DIR=${NETGEN_SRC_PATH} -DCMAKE_INSTALL_PREFIX=${NGSOLVE_PATH} ..
 
     export NETGENDIR=/usr/local/bin #netgen needs this envvar
     export NETGEN_SRC_PATH=${MYSRCDIR}/netgen-4.9.13
@@ -250,6 +269,9 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     if [ "${GITR}" ]; then
         if [ -d "${GITR}/matplotlib2tikz" ]; then
             export PYTHONPATH=${GITR}/matplotlib2tikz:${PYTHONPATH}
+        fi
+        if [ -d "${GITR}/matlab2tikz" ]; then
+            export MATLAB2TIKZ=${GITR}/matlab2tikz
         fi
     fi
 
