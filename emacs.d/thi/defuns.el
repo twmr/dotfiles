@@ -51,3 +51,21 @@
   (interactive)
   (if (member major-mode hl-line-enabled-modes-list)
       (hl-line-mode -1)))
+
+
+
+(defun my-count-words-region (posBegin posEnd)
+  "Print number of words and chars in region."
+  (interactive "r")
+  (message "Counting \u2026")
+  (save-excursion
+    (let (wordCount charCount)
+      (setq wordCount 0)
+      (setq charCount (- posEnd posBegin))
+      (goto-char posBegin)
+      (while (and (< (point) posEnd)
+                  (re-search-forward "\\w+\\W*" posEnd t))
+        (setq wordCount (1+ wordCount)))
+
+      (message "Words: %d. Chars: %d." wordCount charCount)
+      )))
