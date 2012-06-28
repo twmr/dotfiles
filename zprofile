@@ -178,7 +178,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 
     #export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=$HOME/qtcreator-2.4.0/bin/:${MATLAB_BIN}:$PATH #${EMBINPATH}:$PATH
+    export PATH=${MATLAB_BIN}:$PATH #${EMBINPATH}:$PATH
 
     #parallel stuff (mpi + petsc + slepc )
 
@@ -190,6 +190,10 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
+
+    #EMACS:
+    # ./configure --with-gif=no --with-tiff=no --with-x-toolkit=gtk3
+
 
 elif [ "$ONVSC" ]; then
     arch=""
