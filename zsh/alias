@@ -41,7 +41,9 @@ if [ "$BROWSER" ]; then
 fi
 # auto open regular files
 alias -s txt='vim'
-alias -s pdf='xpdf'
+alias -s pdf='evince'
+
+alias ev='evince'
 
 #alias mountnet='sudo mount -t cifs //192.168.1.5/E-Disk /home/gig/tmp/shares -o iocharset=utf8,file_mode=0777,dir_mode=0777'
 alias wcat='wget -q -O -'

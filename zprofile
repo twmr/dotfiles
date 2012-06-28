@@ -127,7 +127,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export PYTHONPATH="/usr/lib64/python2.7/site-packages/openmpi/"
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$PATH
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${HOME}/qtcreator-2.5.0/bin:$PATH
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"
