@@ -4,6 +4,16 @@
 pwd=$PWD
 filename=`basename $0`
 excludes=".gitignore .gitmodules laptop-settings.sh $filename xsessions/ make.conf"
+hostname=`hostname`
+ONVSC=`hostname | egrep '(l01|r[0-9]+{2}n[0-9]+{2})' `
+
+if test ${hostname} == "thisch"; then
+    excludes = "${exlcudes} vpnc/"
+fi
+
+if [ -z "$ONVSC" ]; then
+    excludes = "${exlcudes} bash_profile bash_rc"
+fi
 
 for file in `git ls-files | sed 's/\/.*/\//' | uniq`; do
     skip=0
