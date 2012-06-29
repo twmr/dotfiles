@@ -170,8 +170,8 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 
-    #export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=${MATLAB_BIN}:$PATH #${EMBINPATH}:$PATH
+    export EMBINPATH=${HOME}/gitrepos/emacs/src
+    export PATH=${MATLAB_BIN}:${EMBINPATH}:$PATH
 
     #parallel stuff (mpi + petsc + slepc )
 
