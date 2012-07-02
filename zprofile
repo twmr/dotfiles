@@ -150,8 +150,8 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export GITR=$HOME/gitrepos
     export TUDADOC=$GITR/tudadoc
 
-    export MATLAB_BIN=${HOME}/MATLAB/R2010b/bin
-    export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
+    export MATLAB_BIN=/usr/local/MATLAB/R2012a/bin
+    #export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
 
     export CFFEM_REPO=${MYSRCDIR}/cf-fem-lib
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
@@ -162,34 +162,53 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     #TODO compile instructions cf-fem-lib
 
     #single core version:
-    # cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DNETGEN_SOURCE_DIR=${NETGEN_SRC_PATH} -DCMAKE_INSTALL_PREFIX=${NGSOLVE_PATH} ..
+    # cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DBOOST_ROOT=${BOOST_PATH} ..
 
-    export NETGENDIR=/usr/local/bin #netgen needs this envvar
-    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen-4.9.13
-    export NGSOLVE_PATH=${MYSRCDIR}/ngsolve_with_mkl/installed
-    export NGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve_with_mkl
+    #multi core version:
+    # cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DBOOST_ROOT=${BOOST_PATH} -DENABLE_MPI=1 ..
+
+    export NETGENDIR=${LOCSOFT}/bin #netgen needs this envvar
+    export NETGEN_SRC_PATH=${GITR}/netgen
+    #export NGSOLVE_PATH=${MYSRCDIR}/ngsolve_with_mkl/installed
+    #export NGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve_with_mkl
+    export NGSOLVE_PATH=${LOCSOFT}
+    export NGSOLVE_SRC_PATH=${GITR}/ngsolve
     TOGL_PATH=${MYSRCDIR}/Togl-1.7
 
-    #TODO upgrade boost
-    export BOOST_PATH=${MYSRCDIR}/boost_1_46_1
+    export BOOST_PATH=${MYSRCDIR}/boost_1_50_0
 
     . ${intel_prefix}${intel_version}/bin/compilervars.sh ${intel_arch}
 
-    export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH=${LOCSOFT}/lib:/usr/local/lib:${LD_LIBRARY_PATH}
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=${MATLAB_BIN}:${EMBINPATH}:$PATH
+    export PATH=${MATLAB_BIN}:${LOCSOFT}/bin:${EMBINPATH}:$PATH
 
     #parallel stuff (mpi + petsc + slepc )
 
-    export LD_LIBRARY_PATH=/usr/lib64/openmpi/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=/usr/lib/openmpi/lib:$LD_LIBRARY_PATH
 
     export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
     export PETSC_ARCH=arch-linux2-cxx-release
-    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=~/intel/mkl/lib/intel64 CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1 --with-debugging=0
+    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=~/intel/mkl/lib/intel64 CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1 --with-debugging=0 --download-fftw=yes
 
-    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
+    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p5
     #./configure  #suffices
+
+    #PETSC4PY
+    PETSCPY_DIR=${MYSRCDIR}/petsc4py-1.2
+    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
+    P4PYPATH=${PETSCPY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
+
+    #SLEPC4PY
+    SLEPCPY_DIR=${MYSRCDIR}/slepc4py-1.2
+    S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
+    S4PYPATH=${SLEPCPY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
+
+    #MPI4PY (do I need this ??)
+    PYMPIPATH=/usr/lib/python2.7/dist-packages/mpi4py
+
+    export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${LD_LIBRARY_PATH}
 
     #EMACS:
     # ./configure --with-gif=no --with-tiff=no --with-x-toolkit=gtk3
