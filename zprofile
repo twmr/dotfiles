@@ -138,9 +138,9 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     #arch="intel64"
-    intel_arch="intel64"
-    intel_version=""
-    intel_prefix="/home/thomas/intel"
+    intel_arch="" #"intel64"
+    #intel_version=""
+    #intel_prefix="/home/thomas/intel"
 
     export BROWSER=chromium-browser
 
@@ -167,17 +167,26 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     #multi core version:
     # cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DBOOST_ROOT=${BOOST_PATH} -DENABLE_MPI=1 ..
 
+    #intel single core version:
+    #LANG=C CC=icc CXX=icpc cmake -DCMAKE_CXX_FLAGS=-I${MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DBOOST_ROOT=${BOOST_PATH} ..
+
+
     export NETGENDIR=${LOCSOFT}/bin #netgen needs this envvar
     export NETGEN_SRC_PATH=${GITR}/netgen
     #export NGSOLVE_PATH=${MYSRCDIR}/ngsolve_with_mkl/installed
     #export NGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve_with_mkl
+
     export NGSOLVE_PATH=${LOCSOFT}
     export NGSOLVE_SRC_PATH=${GITR}/ngsolve
+    #compile ngsolve with (assuming that you have the config.site file in the prefix)
+    #./configure --prefix=${LOCSOFT} --with-netgen=${LOCSOFT}
+
     TOGL_PATH=${MYSRCDIR}/Togl-1.7
 
     export BOOST_PATH=${MYSRCDIR}/boost_1_50_0
 
-    . ${intel_prefix}${intel_version}/bin/compilervars.sh ${intel_arch}
+    source /opt/intel/composer_xe_2011_sp1.10.319/bin/compilervars.sh intel64
+    source /opt/intel/composer_xe_2011_sp1.11.339/bin/compilervars.sh intel64
 
     export LD_LIBRARY_PATH=${LOCSOFT}/lib:/usr/local/lib:${LD_LIBRARY_PATH}
 
@@ -190,23 +199,34 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
     export PETSC_ARCH=arch-linux2-cxx-release
-    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=~/intel/mkl/lib/intel64 CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1 --with-debugging=0 --download-fftw=yes
+    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/composer_xe_2011_sp1.11.339/mkl/lib/intel64 CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1 --with-debugging=0 --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz
+
+    # export PETSC_ARCH=arch-linux2-intel-cxx-debug -> fehlermeldung cffemlib compile
+    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-c-support=1 CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz --with-blas-lapack-dir=/opt/intel/composerxe/mkl/lib/intel64 --with-shared-libraries=1
+    #HIER NOCH MIT INTEL COMPILERN (geht im moment nicht)
+    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-c-support=1 --with-cc=icpc -with-g++=icc CXXOPTFLAGS="-O3 -xHOST" COPTFLAGS="-O3 -xHOST" FOPTFLAGS="-03 -xHOST" --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz --with-blas-lapack-dir=/opt/intel/composerxe/mkl/lib/intel64 --with-shared-libraries=1
+
 
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p5
     #./configure  #suffices
 
     #PETSC4PY
     PETSCPY_DIR=${MYSRCDIR}/petsc4py-1.2
-    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
+    # P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
+    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-intel-cxx-debug/src
     P4PYPATH=${PETSCPY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
 
     #SLEPC4PY
     SLEPCPY_DIR=${MYSRCDIR}/slepc4py-1.2
-    S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
+    # S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
+    S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-intel-cxx-debug/src
     S4PYPATH=${SLEPCPY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
 
     #MPI4PY (do I need this ??)
     PYMPIPATH=/usr/lib/python2.7/dist-packages/mpi4py
+
+
+    LMPRO=${GITR}/light-matter/src
 
     export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${LD_LIBRARY_PATH}
 
@@ -295,6 +315,11 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
         fi
         if [ -d "${GITR}/matlab2tikz" ]; then
             export MATLAB2TIKZ=${GITR}/matlab2tikz
+        fi
+        if [ "${LMPRO}" ]; then
+            if [ -d "${LMPRO}" ]; then
+                export PYTHONPATH=${LMPRO}:${PYTHONPATH}
+            fi
         fi
     fi
 
