@@ -232,3 +232,9 @@ function git_info {
     fi
 }
 #compdef '_files -g "*.gz *.tgz *.bz2 *.tbz *.zip *.rar *.tar *.lha"' extract_archive
+
+
+function cfbench() {
+    echo time mpirun -np 4 calc_cfbasis -f parameters_iterationsschritt_001_out.xml -k 30.0 -o oidatest
+    time mpirun -np 4 calc_cfbasis -f parameters_iterationsschritt_001_out.xml -k 30.0 -o oidatest
+}

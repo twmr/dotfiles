@@ -173,13 +173,12 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export NETGENDIR=${LOCSOFT}/bin #netgen needs this envvar
     export NETGEN_SRC_PATH=${GITR}/netgen
-    #export NGSOLVE_PATH=${MYSRCDIR}/ngsolve_with_mkl/installed
-    #export NGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve_with_mkl
 
     export NGSOLVE_PATH=${LOCSOFT}
     export NGSOLVE_SRC_PATH=${GITR}/ngsolve
     #compile ngsolve with (assuming that you have the config.site file in the prefix)
     #./configure --prefix=${LOCSOFT} --with-netgen=${LOCSOFT}
+    #TODO compile NGSOLVE with MKL
 
     TOGL_PATH=${MYSRCDIR}/Togl-1.7
 
@@ -191,33 +190,54 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LD_LIBRARY_PATH=${LOCSOFT}/lib:/usr/local/lib:${LD_LIBRARY_PATH}
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=${MATLAB_BIN}:${LOCSOFT}/bin:${EMBINPATH}:$PATH
+    # export PATH=${MATLAB_BIN}:${HOME}/bin:${LOCSOFT}/bin:${EMBINPATH}:$PATH #EMACS-GIT
+    export PATH=${MATLAB_BIN}:${HOME}/bin:${LOCSOFT}/bin:$PATH
 
     #parallel stuff (mpi + petsc + slepc )
 
     export LD_LIBRARY_PATH=/usr/lib/openmpi/lib:$LD_LIBRARY_PATH
 
-    export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
-    export PETSC_ARCH=arch-linux2-cxx-release
-    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/composer_xe_2011_sp1.11.339/mkl/lib/intel64 CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1 --with-debugging=0 --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz
 
-    # export PETSC_ARCH=arch-linux2-intel-cxx-debug -> fehlermeldung cffemlib compile
+    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --download-fftw=1 --with-fortran-kernels=1"
+
+    export PETSC_DEBUGGING="--with-debuggging=0" #RELEASE BUILD
+    export PETSC_OPT_FLAGS="CXXOPTFLAGS='-O3' COPTFLAGS='-O3' FOPTFLAGS='-03'"
+
+    export PETSC_BLAS_DIR="/opt/intel/composer_xe_2011_sp1.11.339/mkl/lib/intel64"
+
+    # export PETSC_DIR=${MYSRCDIR}/petsc-dev
+    # export PETSC_ARCH=arch-linux2-cxx-debug
+
+    #for light-matter
+    export PETSC_DIR=${MYSRCDIR}/petsc-3.3-p2
+    export PETSC_ARCH=arch-linux2-cxx-release
+    #wenn man slepc-dev vewendet muss man noch --download-sowing setzen
+    #ERROR: cannot generate Fortran stubs; try configuring PETSc with --download-sowing or use a mercurial version of PETSc
+    export PETSC_MAIN_FLAGS="${PETSC_MAIN_FLAGS} --download-sowing"
+
+
+    # ./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
+
+
+    #./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-debugging=0 --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz
+
+    # export PETSC_ARCH=arch-linux2-intel-cxx-debug #-> fehlermeldung cffemlib compile
     #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-c-support=1 CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz --with-blas-lapack-dir=/opt/intel/composerxe/mkl/lib/intel64 --with-shared-libraries=1
     #HIER NOCH MIT INTEL COMPILERN (geht im moment nicht)
     #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-c-support=1 --with-cc=icpc -with-g++=icc CXXOPTFLAGS="-O3 -xHOST" COPTFLAGS="-O3 -xHOST" FOPTFLAGS="-03 -xHOST" --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz --with-blas-lapack-dir=/opt/intel/composerxe/mkl/lib/intel64 --with-shared-libraries=1
 
 
-    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p5
+    export SLEPC_DIR=${MYSRCDIR}/slepc-dev
     #./configure  #suffices
 
     #PETSC4PY
-    PETSCPY_DIR=${MYSRCDIR}/petsc4py-1.2
+    PETSCPY_DIR=${MYSRCDIR}/petsc4py-dev
     # P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
-    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-intel-cxx-debug/src
+    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/$PETSC_ARCH/src
     P4PYPATH=${PETSCPY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
 
     #SLEPC4PY
-    SLEPCPY_DIR=${MYSRCDIR}/slepc4py-1.2
+    SLEPCPY_DIR=${MYSRCDIR}/slepc4py-dev
     # S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
     S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-intel-cxx-debug/src
     S4PYPATH=${SLEPCPY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
