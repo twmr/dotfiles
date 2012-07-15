@@ -177,8 +177,9 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export NGSOLVE_PATH=${LOCSOFT}
     export NGSOLVE_SRC_PATH=${GITR}/ngsolve
     #compile ngsolve with (assuming that you have the config.site file in the prefix)
-    #./configure --prefix=${LOCSOFT} --with-netgen=${LOCSOFT}
-    #TODO compile NGSOLVE with MKL
+
+    #I don't know if the MKL stuff works in this case
+    #./configure --prefix=${LOCSOFT} --with-netgen=${LOCSOFT} --with-lapack='-lsvml -lmkl_intel_lp64 -lmkl_sequential -lmkl_core'
 
     TOGL_PATH=${MYSRCDIR}/Togl-1.7
 
@@ -189,7 +190,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export LD_LIBRARY_PATH=${LOCSOFT}/lib:/usr/local/lib:${LD_LIBRARY_PATH}
 
-    export EMBINPATH=${HOME}/gitrepos/emacs/src
+    # export EMBINPATH=${HOME}/gitrepos/emacs/src
     # export PATH=${MATLAB_BIN}:${HOME}/bin:${LOCSOFT}/bin:${EMBINPATH}:$PATH #EMACS-GIT
     export PATH=${MATLAB_BIN}:${HOME}/bin:${LOCSOFT}/bin:$PATH
 
