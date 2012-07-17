@@ -154,6 +154,11 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     #export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
 
     export CFFEM_REPO=${MYSRCDIR}/cf-fem-lib
+
+    #required by the main.m file
+    export CFFEM_PREFIX=${CFFEM_REPO}
+    export SALT_PATH=${CFFEM_REPO}
+
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
     export CFBD=${CFFEM_REPO}/build
     export RANDOMLAS=${CFFEM_REPO}/examples/2DFEM/randomlas
