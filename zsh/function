@@ -232,3 +232,13 @@ function git_info {
     fi
 }
 #compdef '_files -g "*.gz *.tgz *.bz2 *.tbz *.zip *.rar *.tar *.lha"' extract_archive
+
+
+function cfbench() {
+    echo time mpirun -np 4 calc_cfbasis -f cfbench.xml -k 30.0 -o oidatest
+    time mpirun -np 4 calc_cfbasis -f cfbench.xml -k 30.0 -o oidatest -log_summary | tee logsumm.log
+}
+function cfmatlab() {
+    #TODO aendere den path s.d. matlab die single core version von der cffemlib verwendet
+    env LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libgfortran.so.3 matlab -desktop matlab -desktop
+}
