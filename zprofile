@@ -132,8 +132,12 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PETSC_ARCH="arch-linux2-c"
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
-    export PYTHONPATH="/usr/lib64/python2.7/site-packages/openmpi/"
-    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib
+    SCIPY_DIR=$HOME/gitrepos/scipy
+    SCIPYLIB=${SCIPY_DIR}/build/temp.linux-x86_64-2.7
+    SCIPYPATH=${SCIPY_DIR}/build/lib.linux-x86_64-2.7
+
+    export PYTHONPATH=${SCIPYPATH}:"/usr/lib64/python2.7/site-packages/openmpi"
+    export LD_LIBRARY_PATH=${SCIPYLIB}:${MYMPI_LIB_PATH}:${LOCSOFT}/lib
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${HOME}/qtcreator-2.5.0/bin:$PATH
 
 elif [ "$HOSTNAME" = "thisch" ]; then
@@ -154,8 +158,14 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     #export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
 
     export CFFEM_REPO=${MYSRCDIR}/cf-fem-lib
+
+    #required by the main.m file
+    export CFFEM_PREFIX=${CFFEM_REPO}
+    export SALT_PATH=${CFFEM_REPO}
+
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
-    export CFBD=${CFFEM_REPO}/build
+    export CFBD=${CFFEM_REPO}/build-release
+    export CFBDMPI=${CFFEM_REPO}/build-mpi-release
     export RANDOMLAS=${CFFEM_REPO}/examples/2DFEM/randomlas
     export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
 
@@ -177,7 +187,9 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export NGSOLVE_PATH=${LOCSOFT}
     export NGSOLVE_SRC_PATH=${GITR}/ngsolve
     #compile ngsolve with (assuming that you have the config.site file in the prefix)
+    #Does it make a difference if -O3 is in the CXXFLAGS in config.site or not ?!?!
 
+    #BRAUCHEN WIR ÜBERHAUPT DIE MKL ??
     #I don't know if the MKL stuff works in this case
     #./configure --prefix=${LOCSOFT} --with-netgen=${LOCSOFT} --with-lapack='-lsvml -lmkl_intel_lp64 -lmkl_sequential -lmkl_core'
 
@@ -251,6 +263,11 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${LD_LIBRARY_PATH}
 
+    #NLOPT: in order to create python modules you need to pass the
+    #--enable-shared option to the configure script
+    #CXXFLAGS='-fPIC' CFLAGS='-fPIC' ./configure --prefix=${LOCSOFT} --enable-shared --without-matlab
+    #make && make install
+
     #EMACS:
     # ./configure --with-gif=no --with-tiff=no --with-x-toolkit=gtk3
 
@@ -266,6 +283,7 @@ elif [ "$ONVSC" ]; then
 
     export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
     export CFBD=${CFFEM_REPO}/build_release
+    export CFBDMPI=${CFFEM_REPO}/build_release
 
     export NETGENDIR=${LOCSOFT}/bin
     export NETGEN_SRC_PATH=${MYSRCDIR}/netgen/netgen #git version
@@ -340,7 +358,7 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     fi
 
     #cffemlib + simulation stuff
-    export PYTHONPATH=${CFFEM_REPO}/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}:${LOCSOFT}/nlopt/lib/python2.7/site-packages
+    export PYTHONPATH=${CFFEM_REPO}/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}:${LOCSOFT}/lib/python2.7/site-packages
     if [ "${GITR}" ]; then
         if [ -d "${GITR}/matplotlib2tikz" ]; then
             export PYTHONPATH=${GITR}/matplotlib2tikz:${PYTHONPATH}
@@ -365,7 +383,7 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
             export PYTHONPATH=${PYMPIPATH}:${PYTHONPATH}
     fi
 
-    export PATH=${RANDOMLAS}:${RANDOMLAS}/scripts:${CFBD}/green:${CFBD}/src:${PATH}
+    export PATH=${RANDOMLAS}:${RANDOMLAS}/scripts:${CFBDMPI}/green:${CFBDMPI}/src:${PATH}
 
     if [ "${NGSOLVE_PATH}" ]; then
         export LD_LIBRARY_PATH=${NGSOLVE_PATH}/lib:${LD_LIBRARY_PATH}
@@ -374,7 +392,7 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
         export LD_LIBRARY_PATH=${TOGL_PATH}:${LD_LIBRARY_PATH}
     fi
 
-    export LD_LIBRARY_PATH=${CFBD}/lib:${LD_LIBRARY_PATH}
+    export LD_LIBRARY_PATH=${CFBDMPI}/lib:${LD_LIBRARY_PATH}
 
 fi
 # watch for people
