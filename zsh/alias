@@ -126,7 +126,7 @@ alias yr='sudo yum remove'
 alias ys='yum search'
 
 alias femtotunnel='ssh -L 2401:localhost:2401 moves@femto.iap.tuwien.ac.at'
-alias vsc='ssh -X thisch@vsc.tuwien.ac.at'
+alias vsc='ssh -AX thisch@vsc.tuwien.ac.at'
 alias qshtest='qsh -N dummy -V -cwd -l h_rt=00:10:00 -pe mpich 8'
 
 #named directories
