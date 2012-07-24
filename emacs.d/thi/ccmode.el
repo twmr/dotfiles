@@ -5,7 +5,8 @@
                         (awk-mode . "awk")
                         (other . "gnu") ))
 
-(setq c-toggle-auto-newline nil)
+;; turn auto newlines off
+;; (setq c-toggle-auto-newline -1)
 
 ;; set linux c-style if filename or directory contains the string
 ;; linux
@@ -45,16 +46,16 @@
 
 ;; do not create newlines for electric keys if the following line is
 ;; nonblank
-(defun c-semi&comma-no-newlines-before-nonblanks ()
-  (save-excursion
-    (if (and (eq last-command-char ?\;)
-           (zerop (forward-line 1))
-           (not (looking-at "^[ \t]*$")))
-        'stop
-      nil)))
-(setq c-hanging-semi&comma-criteria
-  (cons 'c-semi&comma-no-newlines-before-nonblanks
-        c-hanging-semi&comma-criteria))
+;; (defun c-semi&comma-no-newlines-before-nonblanks ()
+;;   (save-excursion
+;;     (if (and (eq last-command-char ?\;)
+;;            (zerop (forward-line 1))
+;;            (not (looking-at "^[ \t]*$")))
+;;         'stop
+;;       nil)))
+;; (setq c-hanging-semi&comma-criteria
+;;  (cons 'c-semi&comma-no-newlines-before-nonblanks
+;;         c-hanging-semi&comma-criteria))
 
 ;; due to no-newlines-before-nonblanks I need this from the
 ;; google-styleguide
@@ -68,9 +69,11 @@
 ;; Del key to delete all whitespace to the left of the point (hungry
 ;; mode -> h in modeline) for C-based languages (including java) for
 ;; current keybindings see - cc-mode manual
-(add-hook 'c-mode-common-hook
-          '(lambda () (c-toggle-auto-hungry-state 1)))
+;; (add-hook 'c-mode-common-hook
+;;           '(lambda () (c-toggle-auto-hungry-state 1)))
 
+(add-hook 'c-mode-common-hook
+          '(lambda () (c-toggle-hungry-state 1)))
 
 ;; makes delete map to hungry mode
 ;;(defun thi-map-delete-hungry ()

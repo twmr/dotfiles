@@ -132,8 +132,12 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PETSC_ARCH="arch-linux2-c"
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
-    export PYTHONPATH="/usr/lib64/python2.7/site-packages/openmpi/"
-    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib
+    SCIPY_DIR=$HOME/gitrepos/scipy
+    SCIPYLIB=${SCIPY_DIR}/build/temp.linux-x86_64-2.7
+    SCIPYPATH=${SCIPY_DIR}/build/lib.linux-x86_64-2.7
+
+    export PYTHONPATH=${SCIPYPATH}:"/usr/lib64/python2.7/site-packages/openmpi"
+    export LD_LIBRARY_PATH=${SCIPYLIB}:${MYMPI_LIB_PATH}:${LOCSOFT}/lib
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${HOME}/qtcreator-2.5.0/bin:$PATH
 
 elif [ "$HOSTNAME" = "thisch" ]; then
