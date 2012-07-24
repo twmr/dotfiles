@@ -268,7 +268,7 @@ elif [ "$ONVSC" ]; then
     export CFBD=${CFFEM_REPO}/build_release
 
     export NETGENDIR=${LOCSOFT}/bin
-    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen-4.9.13
+    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen/netgen #git version
     #NGSOLVE_PATH=${MYSRCDIR}/ngsolve-4.9.13
     TOGL_PATH=${LOCSOFT}/lib/Togl1.7
 
@@ -282,12 +282,23 @@ elif [ "$ONVSC" ]; then
     export MYMPI_INC_PATH=/usr/mpi/qlogic/include
     export MYMPI_LIB_PATH=/usr/mpi/qlogic/lib64
 
-    export BOOST_SRC_PATH=$MYSRCDIR/boost_1_47_0
+    export BOOST_SRC_PATH=$MYSRCDIR/boost_1_50_0
 
-    export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
+    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1"
+    export PETSC_DEBUGGING="--with-debuggging=0" #RELEASE BUILD
+    export PETSC_OPT_FLAGS="CXXOPTFLAGS='-O3 -xHOST' COPTFLAGS='-O3 -xHOST' FOPTFLAGS='-O3-xHOST'"
+    export PETSC_BLAS_DIR="/opt/intel/Compiler/11.1/046/mkl/lib"
+
+    #wenn man slepc-dev vewendet muss man noch --download-sowing setzen
+    #ERROR: cannot generate Fortran stubs; try configuring PETSc with --download-sowing or use a mercurial version of PETSc
+    export PETSC_MAIN_FLAGS="${PETSC_MAIN_FLAGS} --download-sowing"
+
+    # ./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
+
+    export PETSC_DIR=${MYSRCDIR}/petsc-3.3-p2
     #export PETSC_ARCH="arch-linux2-cxx-debug"
-    export PETSC_ARCH=intel-cxx-complex_debug
-    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
+    export PETSC_ARCH=intel-cxx-complex_release
+    export SLEPC_DIR=${MYSRCDIR}/slepc-dev
 
     export EMBINPATH=/usr/local/bin
     export PATH=$HOME/bin:${LOCSOFT}/bin:$EPDPATH:$PATH
