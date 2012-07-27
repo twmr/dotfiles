@@ -281,16 +281,13 @@ elif [ "$ONVSC" ]; then
     export MYSRCDIR=$HOME/local/src
     export LOCSOFT=$HOME/local/software
 
-    export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
-    export CFBD=${CFFEM_REPO}/build_release
-    export CFBDMPI=${CFFEM_REPO}/build_release
 
     export TOGL_PATH=${LOCSOFT}/lib/Togl1.7
     export NETGENDIR=${LOCSOFT}/bin
     export NETGEN_SRC_PATH=${MYSRCDIR}/netgen_with_icc/netgen #version from ml
     #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -I$LOCSOFT/include" ./configure --prefix=$LOCSOFT --with-togl=$TOGL_PATH
 
-    export aNGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve-dev/ngsolve
+    export NGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve-dev/ngsolve
     #libtoolize && autoreconf && automake --add-missing && autoreconf
     #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -I$LOCSOFT/include" ./configure --prefix=$LOCSOFT
 
@@ -305,6 +302,16 @@ elif [ "$ONVSC" ]; then
     export MYMPI_LIB_PATH=/usr/mpi/qlogic/lib64
 
     export BOOST_SRC_PATH=$MYSRCDIR/boost_1_50_0
+
+    export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
+    export CFBD=${CFFEM_REPO}/build_release
+    export CFBDMPI=${CFFEM_REPO}/build_release
+    #NONMPI BUILD
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -openmp" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_CXX_FLAGS="-I$HOME/local/src" -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
+
+    #MPI BUILD
+    #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHOST -openmp" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_CXX_FLAGS="-I$HOME/local/src" -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
+
 
     export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1"
     export PETSC_DEBUGGING="--with-debuggging=0" #RELEASE BUILD
