@@ -304,8 +304,8 @@ elif [ "$ONVSC" ]; then
     export BOOST_SRC_PATH=$MYSRCDIR/boost_1_50_0
 
     export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
-    export CFBD=${CFFEM_REPO}/build_release
-    export CFBDMPI=${CFFEM_REPO}/build_release
+    export CFBD=${CFFEM_REPO}/build_release_single
+    export CFBDMPI=${CFFEM_REPO}/build
     #NONMPI BUILD
     #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -openmp" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_CXX_FLAGS="-I$HOME/local/src" -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
 
