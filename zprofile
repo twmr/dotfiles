@@ -265,7 +265,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     #NLOPT: in order to create python modules you need to pass the
     #--enable-shared option to the configure script
-    #CXXFLAGS='-fPIC' CFLAGS='-fPIC' ./configure --prefix=${LOCSOFT} --enable-shared --without-matlab
+    #CXXFLAGS='-fPIC' CFLAGS='-fPIC' ./configure --prefix=${LOCSOFT} --enable-shared --without-matlab --with-cxx
     #make && make install
 
     #EMACS:
