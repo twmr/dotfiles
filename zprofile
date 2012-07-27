@@ -285,10 +285,14 @@ elif [ "$ONVSC" ]; then
     export CFBD=${CFFEM_REPO}/build_release
     export CFBDMPI=${CFFEM_REPO}/build_release
 
+    export TOGL_PATH=${LOCSOFT}/lib/Togl1.7
     export NETGENDIR=${LOCSOFT}/bin
-    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen/netgen #git version
-    #NGSOLVE_PATH=${MYSRCDIR}/ngsolve-4.9.13
-    TOGL_PATH=${LOCSOFT}/lib/Togl1.7
+    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen_with_icc/netgen #version from ml
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -I$LOCSOFT/include" ./configure --prefix=$LOCSOFT --with-togl=$TOGL_PATH
+
+    export aNGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve-dev/ngsolve
+    #libtoolize && autoreconf && automake --add-missing && autoreconf
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -I$LOCSOFT/include" ./configure --prefix=$LOCSOFT
 
     export RANDOMLAS=$HOME/gitrepos/randomlas
 

@@ -17,7 +17,8 @@ function initcfbuild {
     LANG=C CC=mpicc CXX=mpicxx  cmake -DBOOST_ROOT=$BOOST_SRC_PATH \
         -DCMAKE_CXX_FLAGS="-I$MYSRCDIR" -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" \
         -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGENSRCDIR \
-        -DENABLE_MPI=ON \
+        -DENABLE_MPI=1 \
+        -DENABLE_NLOPT=1 \
         -DMPI_INCLUDE_PATH=$MYMPI_INC_PATH -DMPI_LIBRARY=$MYMPI_LIB_PATH \
         -DCMAKE_INSTALL_PREFIX=$LOCSOFT ..
     make -j8
