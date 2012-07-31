@@ -152,7 +152,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LOCSOFT=$HOME/local/software
 
     export GITR=$HOME/gitrepos
-    export TUDADOC=$GITR/tudadoc
+    export PUBADOC=$GITR/publication
 
     export MATLAB_BIN=/usr/local/MATLAB/R2012a/bin
     #export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
@@ -341,8 +341,9 @@ if [ "$arch" ]; then
     . ${intel_prefix}${intel_version}/bin/$arch/ifortvars_$arch.sh
 fi
 
-if [ "${TUDADOC}" ]; then
-        hash -d doc=${TUDADOC}
+if [ "${PUBDADOC}" ]; then
+        hash -d doc=${PUBADOC}
+        hash -d pub=${PUBADOC}
 fi
 
 if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
