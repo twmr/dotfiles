@@ -152,7 +152,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LOCSOFT=$HOME/local/software
 
     export GITR=$HOME/gitrepos
-    export TUDADOC=$GITR/tudadoc
+    export PUBDADOC=$GITR/publication
 
     export MATLAB_BIN=/usr/local/MATLAB/R2012a/bin
     #export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
@@ -169,31 +169,26 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export RANDOMLAS=${CFFEM_REPO}/examples/2DFEM/randomlas
     export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
 
-    #TODO compile instructions cf-fem-lib
+    #NONMPI BUILD
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -openmp" cmake -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
 
-    #single core version:
-    # cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DBOOST_ROOT=${BOOST_PATH} ..
-
-    #multi core version:
-    # cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DBOOST_ROOT=${BOOST_PATH} -DENABLE_MPI=1 ..
-
-    #intel single core version:
-    #LANG=C CC=icc CXX=icpc cmake -DCMAKE_CXX_FLAGS=-I${MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DBOOST_ROOT=${BOOST_PATH} ..
+    #MPI BUILD (verwendet noch den gcc)
+    #TODO use intel compiler in mpicxx/mpicc !!
+    #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -march=native -fopenmp" cmake -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 ..
 
 
     export NETGENDIR=${LOCSOFT}/bin #netgen needs this envvar
-    export NETGEN_SRC_PATH=${GITR}/netgen
+    export NETGEN_SRC_PATH=${GITR}/netgen/netgen
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -I$LOCSOFT/include -gcc-name=gcc-4.5" ./configure --prefix=$LOCSOFT --with-togl=$TOGL_PATH
 
     export NGSOLVE_PATH=${LOCSOFT}
     export NGSOLVE_SRC_PATH=${GITR}/ngsolve
-    #compile ngsolve with (assuming that you have the config.site file in the prefix)
-    #Does it make a difference if -O3 is in the CXXFLAGS in config.site or not ?!?!
+    #OLD: compile ngsolve with (assuming that you have the config.site file in the prefix)
+    #OLD: Does it make a difference if -O3 is in the CXXFLAGS in config.site or not ?!?!
+    #autoreconf -i
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -I$LOCSOFT/include -gcc-name=gcc-4.5" ./configure --prefix=$LOCSOFT
 
-    #BRAUCHEN WIR ÜBERHAUPT DIE MKL ??
-    #I don't know if the MKL stuff works in this case
-    #./configure --prefix=${LOCSOFT} --with-netgen=${LOCSOFT} --with-lapack='-lsvml -lmkl_intel_lp64 -lmkl_sequential -lmkl_core'
-
-    TOGL_PATH=${MYSRCDIR}/Togl-1.7
+    export TOGL_PATH=${MYSRCDIR}/Togl-1.7
 
     export BOOST_PATH=${MYSRCDIR}/boost_1_50_0
 
@@ -281,14 +276,15 @@ elif [ "$ONVSC" ]; then
     export MYSRCDIR=$HOME/local/src
     export LOCSOFT=$HOME/local/software
 
-    export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
-    export CFBD=${CFFEM_REPO}/build_release
-    export CFBDMPI=${CFFEM_REPO}/build_release
 
+    export TOGL_PATH=${LOCSOFT}/lib/Togl1.7
     export NETGENDIR=${LOCSOFT}/bin
-    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen/netgen #git version
-    #NGSOLVE_PATH=${MYSRCDIR}/ngsolve-4.9.13
-    TOGL_PATH=${LOCSOFT}/lib/Togl1.7
+    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen_with_icc/netgen #version from ml
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -I$LOCSOFT/include" ./configure --prefix=$LOCSOFT --with-togl=$TOGL_PATH
+
+    export NGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve-dev/ngsolve
+    #libtoolize && autoreconf && automake --add-missing && autoreconf
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -I$LOCSOFT/include" ./configure --prefix=$LOCSOFT
 
     export RANDOMLAS=$HOME/gitrepos/randomlas
 
@@ -301,6 +297,16 @@ elif [ "$ONVSC" ]; then
     export MYMPI_LIB_PATH=/usr/mpi/qlogic/lib64
 
     export BOOST_SRC_PATH=$MYSRCDIR/boost_1_50_0
+
+    export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
+    export CFBD=${CFFEM_REPO}/build_release
+    export CFBDMPI=${CFFEM_REPO}/build_release
+    #NONMPI BUILD
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -openmp -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
+
+    #MPI BUILD
+    #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHOST -openmp -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
+
 
     export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1"
     export PETSC_DEBUGGING="--with-debuggging=0" #RELEASE BUILD
@@ -335,8 +341,9 @@ if [ "$arch" ]; then
     . ${intel_prefix}${intel_version}/bin/$arch/ifortvars_$arch.sh
 fi
 
-if [ "${TUDADOC}" ]; then
-        hash -d doc=${TUDADOC}
+if [ "${PUBDADOC}" ]; then
+        hash -d doc=${PUBADOC}
+        hash -d pub=${PUBADOC}
 fi
 
 if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
