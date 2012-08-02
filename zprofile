@@ -152,7 +152,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LOCSOFT=$HOME/local/software
 
     export GITR=$HOME/gitrepos
-    export PUBADOC=$GITR/publication
+    export PUBDADOC=$GITR/publication
 
     export MATLAB_BIN=/usr/local/MATLAB/R2012a/bin
     #export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
