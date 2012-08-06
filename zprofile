@@ -152,7 +152,6 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LOCSOFT=$HOME/local/software
 
     export GITR=$HOME/gitrepos
-    export PUBDADOC=$GITR/publication
 
     export MATLAB_BIN=/usr/local/MATLAB/R2012a/bin
     #export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
@@ -168,6 +167,10 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export CFBDMPI=${CFFEM_REPO}/build-mpi-release
     export RANDOMLAS=${CFFEM_REPO}/examples/2DFEM/randomlas
     export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
+
+    export PUBDOC=$GITR/publication
+    export PUBSRC=$RANDOMLAS/
+    export PUBEVAL=$RANDOMLAS/Publication
 
     #NONMPI BUILD
     #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -openmp" cmake -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
@@ -341,9 +344,9 @@ if [ "$arch" ]; then
     . ${intel_prefix}${intel_version}/bin/$arch/ifortvars_$arch.sh
 fi
 
-if [ "${PUBDADOC}" ]; then
-        hash -d doc=${PUBADOC}
-        hash -d pub=${PUBADOC}
+if [ "${PUBDOC}" ]; then
+    hash -d doc=${PUBDOC}
+    hash -d pubdoc=${PUBDOC}
 fi
 
 if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
