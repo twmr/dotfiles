@@ -128,13 +128,9 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export MYMPI_BIN_PATH=/usr/lib64/openmpi/bin
 
     export MYSRCDIR=$HOME/local/src
-    export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p7
+    export PETSC_DIR=${HOME}/gitrepos/petsc-dev
     export PETSC_ARCH="arch-linux2-c"
-    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
-    SCIPY_DIR=$HOME/gitrepos/scipy
-    SCIPYLIB=${SCIPY_DIR}/build/temp.linux-x86_64-2.7
-    SCIPYPATH=${SCIPY_DIR}/build/lib.linux-x86_64-2.7
 
     export PYTHONPATH=${SCIPYPATH}:"/usr/lib64/python2.7/site-packages/openmpi"
     export LD_LIBRARY_PATH=${SCIPYLIB}:${MYMPI_LIB_PATH}:${LOCSOFT}/lib
