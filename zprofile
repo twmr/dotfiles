@@ -152,7 +152,6 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LOCSOFT=$HOME/local/software
 
     export GITR=$HOME/gitrepos
-    export PUBDADOC=$GITR/publication
 
     export MATLAB_BIN=/usr/local/MATLAB/R2012a/bin
     #export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
@@ -169,8 +168,12 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export RANDOMLAS=${CFFEM_REPO}/examples/2DFEM/randomlas
     export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
 
+    export PUBDOC=$GITR/publication
+    export PUBSRC=$RANDOMLAS/
+    export PUBEVAL=$RANDOMLAS/Publication
+
     #NONMPI BUILD
-    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -openmp" cmake -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -openmp -ipo -gcc-name=gcc-4.5" cmake -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
 
     #MPI BUILD (verwendet noch den gcc)
     #TODO use intel compiler in mpicxx/mpicc !!
@@ -312,7 +315,7 @@ elif [ "$ONVSC" ]; then
 
     export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1"
     export PETSC_DEBUGGING="--with-debuggging=0" #RELEASE BUILD
-    export PETSC_OPT_FLAGS="CXXOPTFLAGS='-O3 -xHOST' COPTFLAGS='-O3 -xHOST' FOPTFLAGS='-O3-xHOST'"
+    export PETSC_OPT_FLAGS="CXXOPTFLAGS='-O3 -xHOST -ipo' COPTFLAGS='-O3 -xHOST -ipo' FOPTFLAGS='-O3-xHOST -ipo'"
     export PETSC_BLAS_DIR="/opt/intel/Compiler/11.1/046/mkl/lib"
 
     #wenn man slepc-dev vewendet muss man noch --download-sowing setzen
@@ -343,9 +346,9 @@ if [ "$arch" ]; then
     . ${intel_prefix}${intel_version}/bin/$arch/ifortvars_$arch.sh
 fi
 
-if [ "${PUBDADOC}" ]; then
-        hash -d doc=${PUBADOC}
-        hash -d pub=${PUBADOC}
+if [ "${PUBDOC}" ]; then
+    hash -d doc=${PUBDOC}
+    hash -d pubdoc=${PUBDOC}
 fi
 
 if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
