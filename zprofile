@@ -289,7 +289,7 @@ elif [ "$ONVSC" ]; then
     export RANDOMLAS=$HOME/gitrepos/randomlas
 
     #python distribution
-    export EPDPATH=$LOCSOFT/epd-7.2-1-rh5-x86_64/bin
+    export EPDPATH=$LOCSOFT/epd-7.3-2-rh5-x86_64
 
     #MPI stuff
     #TODO use appropriate includes set by mpi-selector
@@ -307,6 +307,8 @@ elif [ "$ONVSC" ]; then
     #MPI BUILD
     #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHOST -openmp -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
 
+    #MPI BUILD (without openmp)
+    #CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHost -ipo -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
 
     export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1"
     export PETSC_DEBUGGING="--with-debuggging=0" #RELEASE BUILD
@@ -325,8 +327,8 @@ elif [ "$ONVSC" ]; then
     export SLEPC_DIR=${MYSRCDIR}/slepc-dev
 
     export EMBINPATH=/usr/local/bin
-    export PATH=$HOME/bin:${LOCSOFT}/bin:$EPDPATH:$PATH
-    export LD_LIBRARY_PATH=${LOCSOFT}/lib/:${LD_LIBRARY_PATH}
+    export PATH=$EPDPATH/bin:$HOME/bin:${LOCSOFT}/bin:$PATH
+    export LD_LIBRARY_PATH=${LOCSOFT}/lib:${LD_LIBRARY_PATH}
 
     #for the xml_pp program
     export PERLLIB=/home/lv70072/thisch/bin/
