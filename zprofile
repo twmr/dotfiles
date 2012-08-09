@@ -292,6 +292,7 @@ elif [ "$ONVSC" ]; then
 
     export NGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve-dev/ngsolve
     #libtoolize && autoreconf && automake --add-missing && autoreconf
+    #ich glaube mit -xHost gehts nicht
     #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -I$LOCSOFT/include" ./configure --prefix=$LOCSOFT
 
     export RANDOMLAS=$HOME/gitrepos/randomlas
@@ -310,17 +311,17 @@ elif [ "$ONVSC" ]; then
     export CFBD=${CFFEM_REPO}/build_release_single
     export CFBDMPI=${CFFEM_REPO}/build
     #NONMPI BUILD
-    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -openmp -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
+    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHost -ipo -openmp -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
 
     #MPI BUILD
-    #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHOST -openmp -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
+    #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHost -ipo -openmp -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
 
     #MPI BUILD (without openmp)
-    #CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHost -ipo -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
+    #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHost -ipo -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
 
     export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1"
-    export PETSC_DEBUGGING="--with-debuggging=0" #RELEASE BUILD
-    export PETSC_OPT_FLAGS="CXXOPTFLAGS='-O3 -xHOST -ipo' COPTFLAGS='-O3 -xHOST -ipo' FOPTFLAGS='-O3-xHOST -ipo'"
+    export PETSC_DEBUGGING="--with-debugging=no" #RELEASE BUILD
+    export PETSC_OPT_FLAGS="CXXOPTFLAGS='-O3 -xHost -ipo' COPTFLAGS='-O3 -xHost -ipo' FOPTFLAGS='-O3 -xHost -ipo'"
     export PETSC_BLAS_DIR="/opt/intel/Compiler/11.1/046/mkl/lib"
 
     #wenn man slepc-dev vewendet muss man noch --download-sowing setzen
@@ -331,7 +332,7 @@ elif [ "$ONVSC" ]; then
 
     export PETSC_DIR=${MYSRCDIR}/petsc-3.3-p2
     #export PETSC_ARCH="arch-linux2-cxx-debug"
-    export PETSC_ARCH=intel-cxx-complex_release
+    export PETSC_ARCH=intel-cxx-complex_release-mumps
     export SLEPC_DIR=${MYSRCDIR}/slepc-dev
 
     export EMBINPATH=/usr/local/bin
