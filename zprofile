@@ -128,13 +128,9 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export MYMPI_BIN_PATH=/usr/lib64/openmpi/bin
 
     export MYSRCDIR=$HOME/local/src
-    export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p7
+    export PETSC_DIR=${HOME}/gitrepos/petsc-dev
     export PETSC_ARCH="arch-linux2-c"
-    export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
 
-    SCIPY_DIR=$HOME/gitrepos/scipy
-    SCIPYLIB=${SCIPY_DIR}/build/temp.linux-x86_64-2.7
-    SCIPYPATH=${SCIPY_DIR}/build/lib.linux-x86_64-2.7
 
     export PYTHONPATH=${SCIPYPATH}:"/usr/lib64/python2.7/site-packages/openmpi"
     export LD_LIBRARY_PATH=${SCIPYLIB}:${MYMPI_LIB_PATH}:${LOCSOFT}/lib
@@ -197,6 +193,7 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     source /opt/intel/composer_xe_2011_sp1.10.319/bin/compilervars.sh intel64
     source /opt/intel/composer_xe_2011_sp1.11.339/bin/compilervars.sh intel64
+    export INTEL_MKL_PREFIX=/opt/intel/composer_xe_2011_sp1.11.339/mkl
 
     export LD_LIBRARY_PATH=${LOCSOFT}/lib:/usr/local/lib:${LD_LIBRARY_PATH}
 
@@ -209,9 +206,16 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export LD_LIBRARY_PATH=/usr/lib/openmpi/lib:$LD_LIBRARY_PATH
 
 
-    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --download-fftw=1 --with-fortran-kernels=1"
+    # export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --download-fftw=1 --with-fortran-kernels=1"
+    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1"
 
-    export PETSC_DEBUGGING="--with-debuggging=0" #RELEASE BUILD
+    # export PETSC_MUMPS_FLAGS="--download-mumps=1 --with-scalapack-lib=$INTEL_MKL_PREFIX/lib/intel64/libmkl_scalapack_lp64.a --with-scalapack-include=$INTEL_MKL_PREFIX/include --with-blacs-lib=[$INTEL_MKL_PREFIX/lib/intel64/libmkl_blacs_openmpi_lp64.a,$INTEL_MKL_PREFIX/lib/intel64/libmkl_core.a,$INTEL_MKL_PREFIX/lib/intel64/libmkl_blas95_lp64.a,$INTEL_MKL_PREFIX/lib/intel64/libmkl_gnu_thread.a,-lpthread] --with-blacs-include=$INTEL_MKL_PREFIX/include"
+    # export PETSC_MUMPS_FLAGS="--with-blacs-lib=[$INTEL_MKL_PREFIX/lib/intel64/libmkl_blacs_openmpi_lp64.a,$INTEL_MKL_PREFIX/lib/intel64/libmkl_core.a,$INTEL_MKL_PREFIX/lib/intel64/libmkl_intel_thread.a,$INTEL_MKL_PREFIX/lib/intel64/libmkl_sequential.a,-lpthread] --with-blacs-include=$INTEL_MKL_PREFIX/include"
+
+    export PETSC_MUMPS_FLAGS="--download-blacs=1 --download-mumps=1 --download-scalapack=1 --download-parmetis=1 --download-metis=1"
+
+
+    export PETSC_DEBUGGING="--with-debugging=0" #RELEASE BUILD
     export PETSC_OPT_FLAGS="CXXOPTFLAGS='-O3' COPTFLAGS='-O3' FOPTFLAGS='-03'"
 
     export PETSC_BLAS_DIR="/opt/intel/composer_xe_2011_sp1.11.339/mkl/lib/intel64"
@@ -221,13 +225,14 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     #for light-matter
     export PETSC_DIR=${MYSRCDIR}/petsc-3.3-p2
+    # export PETSC_ARCH=arch-linux2-cxx-mumps-release
     export PETSC_ARCH=arch-linux2-cxx-release
     #wenn man slepc-dev vewendet muss man noch --download-sowing setzen
     #ERROR: cannot generate Fortran stubs; try configuring PETSc with --download-sowing or use a mercurial version of PETSc
     export PETSC_MAIN_FLAGS="${PETSC_MAIN_FLAGS} --download-sowing"
 
 
-    # ./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
+    # ./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} ${PETSC_OPT_FLAGS} ${PETSC_MUMPS_FLAGS} ${PETSC_DEBUGGING}
 
 
     #./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-debugging=0 --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz
