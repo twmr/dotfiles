@@ -54,10 +54,10 @@
 	url = git://jblevins.org/git/markdown-mode.git
 [submodule "emacs.d/vendor/popup"]
 	path = emacs.d/vendor/popup
-	url = https://github.com/m2ym/popup-el
+	url = git://github.com/m2ym/popup-el
 [submodule "emacs.d/vendor/fuzzy"]
 	path = emacs.d/vendor/fuzzy
-	url = https://github.com/m2ym/fuzzy-el
+	url = git://github.com/m2ym/fuzzy-el
 [submodule "emacs.d/vendor/ace-jump-mode"]
 	path = emacs.d/vendor/ace-jump-mode
 	url = git://github.com/winterTTr/ace-jump-mode.git
