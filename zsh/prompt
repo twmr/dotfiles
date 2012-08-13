@@ -28,8 +28,7 @@ setprompt () {
     done
 
     if [ "$HOSTNAME" = "l01" ]; then
-        PROMPT=$'${PR_CYAN}%n@%m${PR_NO_COLOR} | ${PR_RED}%~${PR_NO_COLOR}
-${PR_LIGHT_BLUE}»${PR_NO_COLOR} '
+        PROMPT=$'${PR_CYAN}%n@%m${PR_NO_COLOR} | ${PR_RED}%~${PR_NO_COLOR} '
     else
         PROMPT=$'[%y] %n${PR_RED}@${PR_NO_COLOR}%m | ${PR_BLUE}%~${PR_NO_COLOR}
 ${PR_RED}»${PR_NO_COLOR} '
