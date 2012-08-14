@@ -363,11 +363,11 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     else
         hash -d rand=${RANDOMLAS}
     fi
-    if [ -z "${LAMBDAFOUR}" ]; then
-        echo Warning RANDOMLAS not defined
-    else
-        hash -d lamb=${LAMBDAFOUR}
-    fi
+    # if [ -z "${LAMBDAFOUR}" ]; then
+    #     echo Warning LAMDDAFOUR not defined
+    # else
+    #     hash -d lamb=${LAMBDAFOUR}
+    # fi
     if [ -z "${CFFEM_REPO}" ]; then
         echo Warning CFFEM_REPO not defined
     else
