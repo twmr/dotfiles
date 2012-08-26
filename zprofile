@@ -117,9 +117,12 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 elif [ "$HOSTNAME" = "cobra" ]; then
     DOTFPATH=$HOME/gitrepos/dotfiles
     export LOCSOFT=$HOME/local/software
-    export TUDADOC=$HOME/gitrepos/tudadoc
+    export PUBDOC=$HOME/gitrepos/publication
     export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
     export BROWSER=google-chrome
+
+    export RANDOMLAS=${HOME}/gitrepos/randomlas
+    export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
 
     #parallel stuff (mpi + petsc + slepc)
 
@@ -357,7 +360,7 @@ if [ "${PUBDOC}" ]; then
     hash -d pubdoc=${PUBDOC}
 fi
 
-if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
+if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" -o "$HOSTNAME" = "cobra" ]; then
     if [ -z "${RANDOMLAS}" ]; then
         echo Warning RANDOMLAS not defined
     else
