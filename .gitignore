@@ -10,3 +10,6 @@ emacs.d/emacs-server.log
 emacs.d/ac-comphist.dat
 emacs.d/tmp
 emacs.d/abbrev_defs
+matplotlib/test_cache/
+matplotlib/tex.cache/
+
