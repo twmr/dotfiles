@@ -30,7 +30,7 @@
 	url = git://github.com/nonsequitur/smex.git
 [submodule "emacs.d/vendor/auto-complete"]
 	path = emacs.d/vendor/auto-complete
-	url = git://github.com/m2ym/auto-complete.git
+	url = git://github.com/auto-complete/auto-complete.git
 [submodule "emacs.d/vendor/flymake-cursor"]
 	path = emacs.d/vendor/flymake-cursor
 	url = git://github.com/illusori/emacs-flymake-cursor.git
@@ -54,10 +54,10 @@
 	url = git://jblevins.org/git/markdown-mode.git
 [submodule "emacs.d/vendor/popup"]
 	path = emacs.d/vendor/popup
-	url = git://github.com/m2ym/popup-el
+	url = git://github.com/auto-complete/popup-el
 [submodule "emacs.d/vendor/fuzzy"]
 	path = emacs.d/vendor/fuzzy
-	url = git://github.com/m2ym/fuzzy-el
+	url = git://github.com/auto-complete/fuzzy-el
 [submodule "emacs.d/vendor/ace-jump-mode"]
 	path = emacs.d/vendor/ace-jump-mode
 	url = git://github.com/winterTTr/ace-jump-mode.git
