@@ -17,7 +17,7 @@ export EDITOR="emacs" #is an alias to emacsclient
 export VISUAL="$EDITOR"
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
-export AWT_TOOLKIT=MToolkit # for matlab
+# export AWT_TOOLKIT=MToolkit # for matlab
 HOSTNAME=`hostname`
 
 ONVSC=`hostname | egrep '(l01|r[0-9]+{2}n[0-9]+{2})' `
@@ -120,6 +120,8 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PUBDOC=$HOME/gitrepos/publication
     export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
     export BROWSER=google-chrome
+
+    export MATLAB_BIN=/opt/MATLAB/R2012a/bin
 
     export RANDOMLAS=${HOME}/gitrepos/randomlas
     export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib

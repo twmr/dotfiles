@@ -241,7 +241,12 @@ function cfbench() {
 function cfmatlab() {
     #TODO aendere den path s.d. matlab die single core version von der cffemlib verwendet
     (
+    if [ `hostname` = "thisch" ]; then
+        PRELOADSTRING="/usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libgfortran.so.3"
+    else
+        PRELOADSTRING=""
+    fi
     export PATH=$CFBD:$PATH
-    env LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libgfortran.so.3 matlab -desktop matlab -desktop
+    env LD_PRELOAD=$PRELOADSTRING $MATLAB_BIN/matlab -desktop
     )
 }

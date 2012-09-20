@@ -46,6 +46,7 @@ if [ "$HOSTNAME" = "cobra" ]; then
     xinput set-prop 'TPPS/2 IBM TrackPoint' "Evdev Wheel Emulation Timeout" 200
 fi
 
+wmname LG3D
 
 # The following is a simple hack to avoid starting
 # gnome-panel/metacity when awesome was supposed to be started. this
