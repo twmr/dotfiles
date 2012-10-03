@@ -32,6 +32,8 @@
 (load "thi/nxml")
 (load "thi/compilation")
 (load "thi/matlab")
+(load "vendor/iedit")
+(load "thi/iedit")
 
 (vendor 'undo-tree) ;; test undo tree once again and see if there are
                     ;; any conflicts with evil
