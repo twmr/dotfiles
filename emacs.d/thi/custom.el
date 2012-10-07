@@ -17,7 +17,7 @@
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(matlab-indent-level 2)
  '(org-file-apps (quote ((auto-mode . emacs) ("\\.mm\\'" . default) ("\\.x?html?\\'" . default) ("pdf" . "evince %s"))))
- '(org-log-done (quote note))
+ '(org-log-done nil)
  '(preview-default-option-list (quote ("displaymath" "floats" "graphics" "textmath" "showlabels")))
  '(preview-scale-function 1.5)
  '(preview-transparent-color (quote (highlight :background)))

@@ -150,6 +150,9 @@
         )
               auto-mode-alist))
 
+(autoload 'gitconfig-mode "gitconfig-mode"
+  "Mode for editing gitconfig files" t)
+
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; add warning face for certain keywords
