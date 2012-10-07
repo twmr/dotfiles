@@ -2,28 +2,43 @@
 
 (add-to-list 'load-path (expand-file-name "~/.emacs.d"))
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor"))
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get"))
 
 (setq custom-file "~/.emacs.d/thi/custom.el")
 (load custom-file 'noerror)
 ;;(setq debug-on-error t)
 
-(if (< emacs-major-version 24)
-    (load "thi/color-theme")
-  (progn ;; else part (for emacs-24)
-    (setq custom-theme-directory "~/.emacs.d/themes")
-    (load-theme 'wombat)))
+;; Require el-get to install packages
+(unless (require 'el-get nil t)
+  (url-retrieve
+   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
+   (lambda (s)
+     (let (el-get-master-branch)
+       (goto-char (point-max))
+       (eval-print-last-sexp)))))
+(el-get 'sync)
+
+(load "thi/el-get")
+
+;; (load-theme 'wombat)
+(load-theme 'naquadah)
+(rainbow-delimiters-mode 1)
 
 (load "thi/defuns")
 (load "thi/global")
+(load "thi/iedit")
+(load "thi/auto-complete")
+(load "thi/org-mode")
+
+(elpa-vendor 'evil "0.0.0")
+
+
 (load "vendor/key-chord")
 (load "vendor/iy-go-to-char")
 (key-chord-mode 1)
 ;; (load "vendor/eassist")
-(load "vendor/cmake-mode")
 
 (load "thi/bindings")
-(if (< emacs-major-version 24)
-    (load "thi/folding"))
 (load "thi/ido")
 (load "thi/ccmode")
 (load "thi/latex")
@@ -32,37 +47,23 @@
 (load "thi/nxml")
 (load "thi/compilation")
 (load "thi/matlab")
-(load "vendor/iedit")
-(load "thi/iedit")
 
-(vendor 'undo-tree) ;; test undo tree once again and see if there are
-                    ;; any conflicts with evil
-
-;;auto-complete
-(vendor 'popup)
-(vendor 'fuzzy)
-(vendor 'auto-complete)
-
-
-(vendor 'smex)
-
-(vendor 'evil)
-(vendor 'markdown-mode)
-(vendor 'textlint)
-(vendor 'ace-jump-mode)
-
-(vendor 'ethan-wspace)
-;; (vendor 'yasnippet)
 (vendor 'auto-mark)
-(vendor 'orgmode)
-(vendor 'magit)
-(vendor 'git-commit)
-(vendor 'python)
 (vendor 'flymake)
 (vendor 'flymake-cursor)
-(setq gnuplot-program-version "4.4")
-(vendor 'gnuplot)
-(vendor 'expand-region)
+
+;; (vendor 'smex)
+;; (vendor 'markdown-mode)
+;; (vendor 'textlint)
+;; (vendor 'ace-jump-mode)
+;; (vendor 'ethan-wspace)
+;; (vendor 'yasnippet)
+;; (vendor 'orgmode)
+;; (vendor 'magit)
+;; (vendor 'git-commit)
+;; (vendor 'python)
+;; (vendor 'gnuplot)
+;; (vendor 'expand-region)
 
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling
