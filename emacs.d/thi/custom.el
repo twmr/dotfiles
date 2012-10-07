@@ -31,7 +31,7 @@
  ;; If there is more than one, they won't work right.
  '(ido-first-match ((t (:foreground "#ad7f8a" :weight bold))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "DarkGoldenrod1"))))
- '(magit-item-highlight ((t (:inverse-video nil)))))
+ '(magit-item-highlight ((t (:inverse-video nil))) t))
  ;; '(tabbar-button ((t (:foreground "#ad7f8a"))))
  ;;'(tabbar-selected ((t (:background "DarkGoldenrod1" :foreground "Black"))))
  ;;'(tabbar-separator ((t (:height 0.5))))

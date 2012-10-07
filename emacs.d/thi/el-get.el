@@ -4,6 +4,8 @@
 (el-get nil
         '(auto-complete
           magit
+          magithub
+          gitconfig-mode
           org-mode
           cmake-mode
           markdown-mode
@@ -15,14 +17,14 @@
           ethan-wspace
           gnuplot-mode
           iedit
+          rainbow-delimiters
           naquadah-theme
           highlight-indentation
           browse-kill-ring
           nognus
           go-mode
-          el-get
           rainbow-mode
-          rainbow-delimiters
+          el-get
           multi-term
           erc-track-score
           browse-kill-ring
