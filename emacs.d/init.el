@@ -29,6 +29,7 @@
 (load "thi/iedit")
 (load "thi/auto-complete")
 (load "thi/org-mode")
+(load "thi/yasnippet")
 
 (elpa-vendor 'evil "0.0.0")
 

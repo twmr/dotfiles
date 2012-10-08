@@ -4,7 +4,7 @@
 
 (yas/global-mode 1)
 
-(yas/load-directory "~/.emacs.d/vendor/yasnippet/snippets")
+(yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
 
 (setq yas/prompt-functions '(yas/ido-prompt
                              yas/dropdown-prompt

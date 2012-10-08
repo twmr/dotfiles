@@ -6,32 +6,30 @@
           magit
           magithub
           gitconfig-mode
+          git-commit-mode
           org-mode
           cmake-mode
           markdown-mode
+          yaml-mode
           expand-region
           ace-jump-mode
           textlint
           yasnippet
+          naquadah-theme
           smex
           ethan-wspace
           gnuplot-mode
           iedit
+          protobuf-mode
+          rainbow-mode
           rainbow-delimiters
-          naquadah-theme
           highlight-indentation
           browse-kill-ring
           nognus
           go-mode
-          rainbow-mode
           el-get
           multi-term
-          erc-track-score
           browse-kill-ring
-          emacs-jabber
-          htmlize
-          yaml-mode
           goto-last-change
           idle-highlight-mode
-          mmm-mode
-          git-commit-mode))
+          mmm-mode))
