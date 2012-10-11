@@ -27,18 +27,10 @@
 (dolist (mode '(awk-mode magit-log-edit-mode log-edit-mode org-mode
                 text-mode haml-mode sass-mode yaml-mode csv-mode
                 espresso-mode haskell-mode html-mode matlab-mode
-                nxml-mode sh-mode smarty-mode Cojure-mode
+                nxml-mode sh-mode Cojure-mode
                 lisp-mode latex-mode textile-mode markdown-mode
                 tuareg-mode))
   (add-to-list 'ac-modes mode))
-
-
-;; not needed any longer
-;; (eval-after-load "viper"
-;;   '(progn
-;;      (define-key ac-completing-map (kbd "C-n") 'dabbrev-expand)
-;;      (define-key ac-completing-map (kbd "C-p") 'dabbrev-expand)
-;;      (define-key ac-completing-map viper-ESC-key 'viper-intercept-ESC-key)))
 
 ;; Exclude very large buffers from dabbrev
 (defun smp-dabbrev-friend-buffer (other-buffer)

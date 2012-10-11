@@ -25,8 +25,8 @@
           rainbow-delimiters
           highlight-indentation
           browse-kill-ring
-          nognus
-          go-mode
+          ;; nognus
+          ;; go-mode
           el-get
           multi-term
           browse-kill-ring

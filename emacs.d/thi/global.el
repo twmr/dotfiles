@@ -24,7 +24,7 @@
 (setq inhibit-startup-screen t)
 (setq show-paren-mode t)
 (setq blink-cursor-mode nil)
-(setq default-indicate-empty-lines t)
+(setq default-indicate-empty-lines nil)
 
 
 ;: LINUM

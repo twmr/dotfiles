@@ -38,6 +38,7 @@
 (load "vendor/iy-go-to-char")
 (key-chord-mode 1)
 ;; (load "vendor/eassist")
+(load "vendor/lambda-mode")
 
 (load "thi/bindings")
 (load "thi/ido")
