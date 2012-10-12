@@ -30,8 +30,7 @@
 (load "thi/auto-complete")
 (load "thi/org-mode")
 (load "thi/yasnippet")
-
-(elpa-vendor 'evil "0.0.0")
+(load "thi/git-commit-mode")
 
 
 (load "vendor/key-chord")
@@ -50,6 +49,7 @@
 (load "thi/compilation")
 (load "thi/matlab")
 
+(elpa-vendor 'evil "0.0.0")
 (vendor 'auto-mark)
 (vendor 'flymake)
 (vendor 'flymake-cursor)
