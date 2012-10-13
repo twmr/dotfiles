@@ -30,29 +30,15 @@ else
     echo onvsc: $ONVSC
 fi
 
-if [ "$HOSTNAME" = "firebird" ]; then
-    arch="ia32"
-    intel_version="11.1/069"
-    intel_prefix="/opt/intel/Compiler/"
+export MYSRCDIR=$HOME/local/src
+export LOCSOFT=$HOME/local/software
+export GITR=$HOME/gitrepos
+export BROWSER=google-chrome
 
-    export PATH=$PATH:/opt/maple10/bin:$HOME/local/Moves2/bin
-    export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
-    export CVSROOT=:pserver:hisch@localhost:/usr/local/cvsroot/quest.root
-    export SESSA_DATABASE_PATH=$HOME/CVSrepos/Development/databases
-    export CFFEM_MLCODE=/home/thomas/cf-fem-lib/matlab
-
-elif [ "$HOSTNAME" = "mustang" ]; then
+if [ "$HOSTNAME" = "mustang" ]; then
     arch="intel64"
     intel_version="11.1/046"
     intel_prefix="/opt/intel/Compiler/"
-
-    export BROWSER=google-chrome
-
-    export MYSRCDIR=$HOME/local/src
-    export LOCSOFT=$HOME/local/software
-
-    export GITR=$HOME/gitrepos
-    export TUDADOC=$GITR/tudadoc
 
     export MATLAB_BIN=/usr/local/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
@@ -65,9 +51,9 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export RANDOMLAS=${HOME}/gitrepos/randomlas
     export LAMBDAFOUR=${CFFEM_REPO}/examples/1DFDM/lambda4tests
 
+    #CFFEM COMPILE
     #cmake -DCMAKE_CXX_FLAGS=-I{$MYSRCDIR} -DCMAKE_BUILD_TYPE=Debug -DNETGEN_SOURCE_DIR=${NETGENSRC}
     #-DCMAKE_INSTALL_PREFIX=${LOCSOFT} -DENABLE_MPI=ON ..
-
 
     export NETGENDIR=$LOCSOFT/bin
     export NETGENSRC=$MYSRCDIR/netgen-4.9.13 #for cffemlib compilation
@@ -75,8 +61,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     TOGL_PATH=${LOCSOFT}/lib/Togl1.7
 
     #sessa
-    export CVSROOT=:pserver:hisch@localhost:/usr/local/cvsroot/quest.root
-    export SESSA_DATABASE_PATH=/home/thomas/gitrepos/sessa-git/databases
+    export SESSA_DATABASE_PATH=${GITR}/sessa-git/databases
 
     #parallel stuff (mpi + petsc + slepc)
 
@@ -115,16 +100,14 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.5.0/bin/:$PATH
 
 elif [ "$HOSTNAME" = "cobra" ]; then
-    DOTFPATH=$HOME/gitrepos/dotfiles
-    export LOCSOFT=$HOME/local/software
     export PUBDOC=$HOME/gitrepos/publication
+    DOTFPATH=$HOME/gitrepos/dotfiles
     export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
-    export BROWSER=google-chrome
 
     export MATLAB_BIN=/opt/MATLAB/R2012a/bin
 
-    export RANDOMLAS=${HOME}/gitrepos/randomlas
-    export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
+    export RANDOMLAS=${GITR}/randomlas
+    export CFFEM_REPO=${GITR}/cf-fem-lib
 
     #parallel stuff (mpi + petsc + slepc)
 
@@ -132,9 +115,14 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
     export MYMPI_BIN_PATH=/usr/lib64/openmpi/bin
 
-    export MYSRCDIR=$HOME/local/src
-    export PETSC_DIR=${HOME}/gitrepos/petsc-dev
-    export PETSC_ARCH="arch-linux2-c"
+    # for light-matter project
+    export PETSC_DIR=${GITR}/petsc-3.3-p3
+    export PETSC_ARCH="arch-linux64-complex-fft-debug"
+
+    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1 --with-c2html=0"
+    export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
+    export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
+    # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
 
 
     export PYTHONPATH=${SCIPYPATH}:"/usr/lib64/python2.7/site-packages/openmpi"
@@ -142,27 +130,15 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${HOME}/qtcreator-2.5.0/bin:$PATH
 
 elif [ "$HOSTNAME" = "thisch" ]; then
-    #arch="intel64"
-    intel_arch="" #"intel64"
-    #intel_version=""
-    #intel_prefix="/home/thomas/intel"
-
-    export BROWSER=chromium-browser
-
-    export MYSRCDIR=${HOME}/local/src
-    export LOCSOFT=$HOME/local/software
-
-    export GITR=$HOME/gitrepos
+    intel_arch=""
 
     export MATLAB_BIN=/usr/local/MATLAB/R2012a/bin
     #export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk/jre
 
     export CFFEM_REPO=${MYSRCDIR}/cf-fem-lib
-
     #required by the main.m file
     export CFFEM_PREFIX=${CFFEM_REPO}
     export SALT_PATH=${CFFEM_REPO}
-
     export CFFEM_MLCODE=${CFFEM_REPO}/matlab
     export CFBD=${CFFEM_REPO}/build-release
     export CFBDMPI=${CFFEM_REPO}/build-mpi-release
@@ -173,10 +149,10 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     export PUBSRC=$RANDOMLAS/
     export PUBEVAL=$RANDOMLAS/Publication
 
-    #NONMPI BUILD
+    #CFFEMLIB: NONMPI BUILD
     #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -openmp -ipo -gcc-name=gcc-4.5" cmake -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
 
-    #MPI BUILD (verwendet noch den gcc)
+    #CFFEMLIB: MPI BUILD (verwendet noch den gcc)
     #TODO use intel compiler in mpicxx/mpicc !!
     #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -march=native -fopenmp" cmake -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 ..
 
@@ -193,7 +169,6 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -I$LOCSOFT/include -gcc-name=gcc-4.5" ./configure --prefix=$LOCSOFT
 
     export TOGL_PATH=${MYSRCDIR}/Togl-1.7
-
     export BOOST_PATH=${MYSRCDIR}/boost_1_50_0
 
     source /opt/intel/composer_xe_2011_sp1.10.319/bin/compilervars.sh intel64
@@ -218,15 +193,9 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     # export PETSC_MUMPS_FLAGS="--with-blacs-lib=[$INTEL_MKL_PREFIX/lib/intel64/libmkl_blacs_openmpi_lp64.a,$INTEL_MKL_PREFIX/lib/intel64/libmkl_core.a,$INTEL_MKL_PREFIX/lib/intel64/libmkl_intel_thread.a,$INTEL_MKL_PREFIX/lib/intel64/libmkl_sequential.a,-lpthread] --with-blacs-include=$INTEL_MKL_PREFIX/include"
 
     export PETSC_MUMPS_FLAGS="--download-blacs=1 --download-mumps=1 --download-scalapack=1 --download-parmetis=1 --download-metis=1"
-
-
     export PETSC_DEBUGGING="--with-debugging=0" #RELEASE BUILD
     export PETSC_OPT_FLAGS="CXXOPTFLAGS='-O3' COPTFLAGS='-O3' FOPTFLAGS='-03'"
-
     export PETSC_BLAS_DIR="/opt/intel/composer_xe_2011_sp1.11.339/mkl/lib/intel64"
-
-    # export PETSC_DIR=${MYSRCDIR}/petsc-dev
-    # export PETSC_ARCH=arch-linux2-cxx-debug
 
     #for light-matter
     export PETSC_DIR=${MYSRCDIR}/petsc-3.3-p2
@@ -239,8 +208,8 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     # ./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} ${PETSC_OPT_FLAGS} ${PETSC_MUMPS_FLAGS} ${PETSC_DEBUGGING}
 
-
-    #./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-debugging=0 --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz
+    #FOR LIGHT-MATTER PROJECT
+    #./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} ${PETSC_OPT_FLAGS} ${PETSC_MUMPS_FLAGS} ${PETSC_DEBUGGING} --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz
 
     # export PETSC_ARCH=arch-linux2-intel-cxx-debug #-> fehlermeldung cffemlib compile
     #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-c-support=1 CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --download-fftw=$PETSC_DIR/fftw-3.3.2.tar.gz --with-blas-lapack-dir=/opt/intel/composerxe/mkl/lib/intel64 --with-shared-libraries=1
@@ -276,19 +245,10 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     #CXXFLAGS='-fPIC' CFLAGS='-fPIC' ./configure --prefix=${LOCSOFT} --enable-shared --without-matlab --with-cxx
     #make && make install
 
-    #EMACS:
-    # ./configure --with-gif=no --with-tiff=no --with-x-toolkit=gtk3
-
-
 elif [ "$ONVSC" ]; then
     arch=""
-
     export LANG="C"
     export LC_ALL="C"
-
-    export MYSRCDIR=$HOME/local/src
-    export LOCSOFT=$HOME/local/software
-
 
     export TOGL_PATH=${LOCSOFT}/lib/Togl1.7
     export NETGENDIR=${LOCSOFT}/bin
@@ -351,7 +311,6 @@ else
     arch=""
 fi
 
-#if [[ "$arch" = "ia32" ]] || [[ "$arch" = "intel64" ]]; then
 if [ "$arch" ]; then
     . ${intel_prefix}${intel_version}/bin/$arch/iccvars_$arch.sh
     . ${intel_prefix}${intel_version}/bin/$arch/ifortvars_$arch.sh
@@ -418,6 +377,7 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" -o "$HOSTN
     export LD_LIBRARY_PATH=${CFBDMPI}/lib:${LD_LIBRARY_PATH}
 
 fi
+
 # watch for people
 #watch=(notme)                   # watch for everybody but me
 #LOGCHECK=300                    # check every 5 min for login/logout activity
