@@ -31,6 +31,10 @@
 (key-chord-define-global "fg" 'iy-go-to-char)
 ;; (key-chord-define-global "df" 'iy-go-to-char-backward)
 
+;;Fr Oct 12 2012: I don't know why  ido-find-file worked without this line before 
+(global-set-key (kbd "C-x C-f") 'ido-find-file)
+
+
 (defun my-c-mode-common-hook ()
   (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
   (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
