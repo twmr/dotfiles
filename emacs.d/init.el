@@ -20,52 +20,50 @@
 
 (load "thi/el-get")
 
-;; (load-theme 'wombat)
 (load-theme 'naquadah)
-(rainbow-delimiters-mode 1)
 
 (load "thi/defuns")
 (load "thi/global")
-(load "thi/iedit")
-(load "thi/auto-complete")
-(load "thi/org-mode")
-(load "thi/yasnippet")
-(load "thi/git-commit-mode")
-
-
-(load "vendor/key-chord")
-(load "vendor/iy-go-to-char")
-(key-chord-mode 1)
-;; (load "vendor/eassist")
-(load "vendor/lambda-mode")
-
 (load "thi/bindings")
 (load "thi/ido")
 (load "thi/ccmode")
 (load "thi/latex")
-(load "thi/gnuplot")
 (load "thi/recentf")
 (load "thi/nxml")
 (load "thi/compilation")
 (load "thi/matlab")
-
-(elpa-vendor 'evil "0.0.0")
-(vendor 'auto-mark)
-(vendor 'flymake)
+(load "thi/flymake-pre")
 (vendor 'flymake-cursor)
+(vendor 'ace-jump-mode)
 
-;; (vendor 'smex)
+
+;;customizations for el-get packages
+;;TODO automatically load these files when the el-get packs are loaded
+(load "thi/smex")
+(load "thi/ethan-wspace")
+(load "thi/org-mode")
+(load "thi/auto-complete")
+(load "thi/yasnippet")
+(load "thi/git-commit-mode")
+(load "thi/gnuplot")
+(load "thi/iedit")
+(load "thi/rainbow-delimiters-mode")
+(load "thi/magit")
+
+
+;;elpa packages
+(elpa-vendor 'evil "0.0.0")
+;; (load "thi/undo-tree") ;; FIXME why does this not work ?
+
+(load "vendor/eassist") ;; (for C/C++ development - see bindings.el)
+(load "vendor/key-chord") ;; from emacs-rocks
+(load "vendor/iy-go-to-char")
+(key-chord-mode 1)
+(load "vendor/lambda-mode") ;; useful for python development
+
+;; (vendor 'auto-mark)
 ;; (vendor 'markdown-mode)
-;; (vendor 'textlint)
-;; (vendor 'ace-jump-mode)
-;; (vendor 'ethan-wspace)
-;; (vendor 'yasnippet)
-;; (vendor 'orgmode)
-;; (vendor 'magit)
-;; (vendor 'git-commit)
 ;; (vendor 'python)
-;; (vendor 'gnuplot)
-;; (vendor 'expand-region)
 
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling

@@ -16,3 +16,4 @@ matplotlib/test_cache/
 matplotlib/tex.cache/
 
 /matplotlib/fontList.cache
+/emacs.d/history

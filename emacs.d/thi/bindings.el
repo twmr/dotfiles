@@ -28,7 +28,8 @@
 (global-set-key (kbd "C-S-q") 'er/contract-region)
 
 ;;key-chords
-(key-chord-define-global "fg" 'iy-go-to-char)
+(eval-after-load 'key-chord
+  '(key-chord-define-global "fg" 'iy-go-to-char))
 ;; (key-chord-define-global "df" 'iy-go-to-char-backward)
 
 ;;Fr Oct 12 2012: I don't know why  ido-find-file worked without this line before 
