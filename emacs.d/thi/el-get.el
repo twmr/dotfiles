@@ -13,7 +13,7 @@
           yaml-mode
           expand-region
           ace-jump-mode
-          textlint
+          ;; textlint ;; not needed atm
           yasnippet
           naquadah-theme
           smex
