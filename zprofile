@@ -124,10 +124,25 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
     # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
 
+    export SLEPC_DIR=${GITR}/slepc-3.3-p3
+    # ./confgigure
 
-    export PYTHONPATH=${SCIPYPATH}:"/usr/lib64/python2.7/site-packages/openmpi"
-    export LD_LIBRARY_PATH=${SCIPYLIB}:${MYMPI_LIB_PATH}:${LOCSOFT}/lib
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${HOME}/qtcreator-2.5.0/bin:$PATH
+    #PETSC4PY
+    PETSCPY_DIR=${GITR}/petsc4py
+    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/$PETSC_ARCH/src
+    P4PYPATH=${PETSCPY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
+
+    #SLEPC4PY
+    SLEPCPY_DIR=${GITR}/slepc4py
+    S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/$PETSC_ARCH/src
+    S4PYPATH=${SLEPCPY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
+
+    #MPI4PY
+    PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
+    export PYTHONPATH=$PYMPIPATH
+
+    export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${PATH}
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     intel_arch=""
