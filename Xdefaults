@@ -52,7 +52,7 @@ URxvt*saveLines:        32767
 URxvt*scrollBar:        false
 URxvt*scrollBar_right:  true
 URxvt*loginShell:       true
-URxvt*shading:          25
+URxvt*shading:          10
 URxvt*transparent:      true
 URxvt*termName:         rxvt-unicode
 URxvt*secondaryScroll:  true
@@ -71,6 +71,7 @@ urxvt*cursorColor: #b092a4
 URxvt*tintColor:        #EEEEEE
 URxvt*background:       #000000
 URxvt*foreground:       #e1e2db
+URxvt.iconFile:    /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg
 
 !!! shiva
 *color0:              rgb:00/00/00
