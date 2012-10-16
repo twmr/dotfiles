@@ -136,7 +136,6 @@ hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
 HOSTNAME=`hostname`
 if [ "$HOSTNAME" = "pc-52-rh" ]; then
-    echo $SBDEV
     DOTFDIR=${HDEPS}/dotfiles
     hash -d sand=${SBDIR}
     hash -d sanddev=${SBDEV}
