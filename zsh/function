@@ -36,6 +36,7 @@ function gg() { git grep $* }
 
 function gl() { git log $* }
 function gs() { git status --ignore-submodules $* }
+function gsvr() { git svn rebase $* }
 function gp() { git push $* }
 function gc() { git commit -m "$*" }
 function gpl() { git pull $* }

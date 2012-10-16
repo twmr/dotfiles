@@ -23,8 +23,8 @@ alias ll='ls -ahl --color | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -
 alias cdc='cd; clear'
 alias ls='ls -hF -a --color=auto'
 
-alias ipycomp='(cd ~/gitrepos/ipython && git pull && ./setup.py build && sudo ./setup.py install)'
-alias ipnb='ipython notebook --pylab=inline --notebook-dir ~/gitrepos/ipython_workspace'
+alias ipycomp='(cd ${GITR}/ipython && git pull && ./setup.py build && sudo ./setup.py install)'
+alias ipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace'
 
 #alias tuint='sudo iwconfig eth1 essid tunet && dhclient eth1'
 #alias connmarina='sudo iwlist wlan0 scan && sudo netcfg wireless-marina'
@@ -132,9 +132,18 @@ alias qshtest='qsh -N dummy -V -cwd -l h_rt=00:10:00 -pe mpich 8'
 #named directories
 hash -d d=/usr/share/doc
 hash -d conf=${HOME}/.config
-hash -d era=${HOME}/Dropbox/erasmus
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
-hash -d dotf=${HOME}/gitrepos/dotfiles
-hash -d emd=${HOME}/gitrepos/dotfiles/emacs.d
-hash -d emv=${HOME}/gitrepos/dotfiles/emacs.d/vendor
+HOSTNAME=`hostname`
+if [ "$HOSTNAME" = "pc-52-rh" ]; then
+    echo $SBDEV
+    DOTFDIR=${HDEPS}/dotfiles
+    hash -d sand=${SBDIR}
+    hash -d sanddev=${SBDEV}
+    alias svnextlist="svn propget svn:externals -R"
+else
+    DOTFDIR=${GITR}/dotfiles
+fi
+hash -d dotf=${DOTFDIR}
+hash -d emd=${DOTFDIR}/emacs.d
+hash -d emv=${DOTFDIR}/vendor

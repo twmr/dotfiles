@@ -143,6 +143,18 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${PATH}
+elif [ "$HOSTNAME" = "pc-52-rh" ]; then
+    export HDEPS=/opt/hisch_deps
+
+    export GITR=$HDPES/gitrepos
+    DOTFPATH=$HDEPS/dotfiles
+    export EMBINPATH=$HDEPS/emacs-24.2/src
+    export PATH=${DOTFPATH}:${EMBINPATH}:$HDEPS/git-svn-clone-externals:$PATH
+
+    export SBDIR=${HOME}/sandbox # links to the current sandbox
+    export SBREL=/opt/sandbox_hisch
+    export SBDEV=/opt/sandbox_hisch_temp
+    export PYTHONPATH=${SBDIR}/gui/branches/POC4IMO/src/hvgui/pylib:${SBDIR}/ipycore/trunk/src
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     intel_arch=""
