@@ -69,28 +69,30 @@ if [ "$HOSTNAME" = "mustang" ]; then
     export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
     export MYMPI_BIN_PATH=/usr/lib64/openmpi/bin
 
-
     export PETSC_DIR=${MYSRCDIR}/petsc-3.2-p6
-    export PETSC_ARCH="arch-linux2-cxx-debug"
-    #./configure --with-c++-support=1 --with-scalar-type=complex
-    #--with-x11=0 --with-clanguage=cxx
-    #--with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib
-    #CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03"
+    export PETSC_ARCH="arch-linux2-fft-complex-cxx-debug"
 
-    #./configure --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib CXXOPTFLAGS="-O3" COPTFLAGS="-O3" FOPTFLAGS="-03" --with-shared-libraries=1
+    #COMPILE PETSC
+    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1"
+    export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
+    # --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib
+    export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
+    # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
+
 
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
 
     #PETSC4PY
+    PSUFF="linux-x86_64-2.7" #Python suffix
     PETSCPY_DIR=${MYSRCDIR}/petsc4py-1.2
-    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-debug/src
-    P4PYPATH=${PETSCPY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
+    P4PYLIB=${PETSCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
+    P4PYPATH=${PETSCPY_DIR}/build/lib.${PYSUFF} #/petsc4py
 
     #SLEPC4PY
     SLEPCPY_DIR=${MYSRCDIR}/slepc4py-1.2
-    S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-debug/src
-    S4PYPATH=${SLEPCPY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
+    S4PYLIB=${SLEPCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
+    S4PYPATH=${SLEPCPY_DIR}/build/lib.${PYSUFF} #/slepc4py
 
     #MPI4PY
     PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
@@ -100,9 +102,9 @@ if [ "$HOSTNAME" = "mustang" ]; then
     export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.5.0/bin/:$PATH
 
 elif [ "$HOSTNAME" = "cobra" ]; then
+
     export PUBDOC=$HOME/gitrepos/publication
     DOTFPATH=$HOME/gitrepos/dotfiles
-    export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:$PATH
 
     export MATLAB_BIN=/opt/MATLAB/R2012a/bin
 
@@ -128,21 +130,23 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     # ./confgigure
 
     #PETSC4PY
+    PSUFF="linux-x86_64-2.7" #Python suffix
     PETSCPY_DIR=${GITR}/petsc4py
-    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/$PETSC_ARCH/src
-    P4PYPATH=${PETSCPY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
+    P4PYLIB=${PETSCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
+    P4PYPATH=${PETSCPY_DIR}/build/lib.${PYSUFF} #/petsc4py
 
     #SLEPC4PY
     SLEPCPY_DIR=${GITR}/slepc4py
-    S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/$PETSC_ARCH/src
-    S4PYPATH=${SLEPCPY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
+    S4PYLIB=${SLEPCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
+    S4PYPATH=${SLEPCPY_DIR}/build/lib.${PYSUFF} #/slepc4py
 
     #MPI4PY
     PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
     export PYTHONPATH=$PYMPIPATH
 
     export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${PATH}
+    export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$HOME/qtcreator-2.5.84/bin:${PATH}
+
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps
 
