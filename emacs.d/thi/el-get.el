@@ -5,8 +5,7 @@
         '(auto-complete
           magit
           magithub
-          gitconfig-mode
-          git-commit-mode
+          git-modes
           org-mode
           cmake-mode
           markdown-mode

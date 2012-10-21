@@ -16,10 +16,10 @@
      (let (el-get-master-branch)
        (goto-char (point-max))
        (eval-print-last-sexp)))))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/thi/recipes")
 (el-get 'sync)
-
 (load "thi/el-get")
-
 (load-theme 'naquadah)
 
 (load "thi/defuns")
@@ -49,7 +49,6 @@
 (load "thi/iedit")
 (load "thi/rainbow-delimiters-mode")
 (load "thi/magit")
-
 
 ;;elpa packages
 (elpa-vendor 'evil "0.0.0")
