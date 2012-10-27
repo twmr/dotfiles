@@ -1,0 +1,16 @@
+#!/bin/bash
+
+GDIR=$HOME/gitrepos
+
+for x in `ls $GDIR`; do
+    # echo "$GDIR/$x/.git"
+    if [ ! -e "$GDIR/$x/.git" ]; then
+        # echo $x is not a git repo
+        continue
+    fi
+    echo
+    echo
+    echo -e '\E[37;44m'"\033[1mGIT REPOSITORY $x\033[0m"
+    echo
+    (cd $GDIR/$x && git status)
+done
