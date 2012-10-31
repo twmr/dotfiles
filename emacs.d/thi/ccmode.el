@@ -21,6 +21,7 @@
   (message (buffer-file-name))
   (when (and buffer-file-name
              (or (string-match "cf-fem-lib" buffer-file-name)
+                 (string-match "pyspu" buffer-file-name)
                  (string-match "Sessa" buffer-file-name)))
     (progn
       (c-set-style "stroustrup")
