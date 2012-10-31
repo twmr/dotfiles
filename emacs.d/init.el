@@ -8,6 +8,38 @@
 (load custom-file 'noerror)
 ;;(setq debug-on-error t)
 
+(setq thi::packages
+        '(auto-complete
+          magit
+          magithub
+          ;; git-modes
+          org-mode
+          cmake-mode
+          markdown-mode
+          yaml-mode
+          expand-region
+          ace-jump-mode
+          ;; textlint ;; not needed atm
+          yasnippet
+          naquadah-theme
+          smex
+          ethan-wspace
+          gnuplot-mode
+          iedit
+          protobuf-mode
+          rainbow-mode
+          rainbow-delimiters
+          highlight-indentation
+          browse-kill-ring
+          ;; nognus
+          ;; go-mode
+          el-get
+          multi-term
+          browse-kill-ring
+          goto-last-change
+          idle-highlight-mode
+          mmm-mode))
+
 ;; Require el-get to install packages
 (unless (require 'el-get nil t)
   (url-retrieve
@@ -18,8 +50,14 @@
        (eval-print-last-sexp)))))
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/thi/recipes")
-(el-get 'sync)
-(load "thi/el-get")
+
+;; (el-get 'sync)
+;; (setq el-get-is-lazy t)
+;; (setq el-get-byte-compile nil)
+(el-get 'sync thi::packages)
+
+
+
 (load-theme 'naquadah)
 
 (load "thi/defuns")
