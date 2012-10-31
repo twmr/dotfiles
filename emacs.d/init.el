@@ -79,28 +79,32 @@
 ;;TODO automatically load these files when the el-get packs are loaded
 (load "thi/smex")
 (load "thi/ethan-wspace")
-(load "thi/org-mode")
+;; (load "thi/org-mode")
 (load "thi/auto-complete")
 (load "thi/yasnippet")
-(load "thi/git-commit-mode")
+
+;; TODO fix conflict with magit
+;; (load "thi/git-commit-mode")
 (load "thi/gnuplot")
 (load "thi/iedit")
 (load "thi/rainbow-delimiters-mode")
 (load "thi/magit")
+
+(vendor 'python)
+(load "vendor/lambda-mode") ;; useful for python development
+
 
 ;;elpa packages
 (elpa-vendor 'evil "0.0.0")
 ;; (load "thi/undo-tree") ;; FIXME why does this not work ?
 
 (load "vendor/eassist") ;; (for C/C++ development - see bindings.el)
-(load "vendor/key-chord") ;; from emacs-rocks
-(load "vendor/iy-go-to-char")
-(key-chord-mode 1)
-(load "vendor/lambda-mode") ;; useful for python development
+;; (load "vendor/key-chord") ;; from emacs-rocks
+;; (load "vendor/iy-go-to-char")
+;; (key-chord-mode 1)
 
+;; TODO activate this when you think you need it
 ;; (vendor 'auto-mark)
-;; (vendor 'markdown-mode)
-;; (vendor 'python)
 
 ;; keyboard scroll one line at a time
 ;; http://www.emacswiki.org/emacs/SmoothScrolling
