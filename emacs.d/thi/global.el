@@ -1,18 +1,15 @@
-
-(defvar user-cache-file-dir (expand-file-name (concat (or (getenv "XDG_CACHE_HOME") "~/.cache") "/emacs/")))
-
 ;; don't clutter dirs with backup files - use this dir instead
 ;; maybe not useful for files inside dropbox (add exception ?)
 ;; (setq backup-by-copying t)
-;; (setq backup-dir-alist '(("." . ,user-cache-file-dir)))
+;; (setq backup-dir-alist '(("." . ,thi::cache-file-dir)))
 ;; (setq auto-save-list-file-prefix
-      ;; (concat user-cache-file-dir ".auto-saves-"))
+      ;; (concat thi::cache-file-dir ".auto-saves-"))
 ;; (setq auto-save-file-name-transforms
-      ;; `((".*" ,user-cache-file-dir t)))
+      ;; `((".*" ,thi::cache-file-dir t)))
 
 ;;maybe move into auto-complete local file ?
-(setq ac-comphist-file (concat user-cache-file-dir "ac-comphist.dat"))
-(setq abbrev-file-name (concat user-cache-file-dir "abbrev_defs"))
+(setq ac-comphist-file (concat thi::cache-file-dir "ac-comphist.dat"))
+(setq abbrev-file-name (concat thi::cache-file-dir "abbrev_defs"))
 
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -254,3 +251,40 @@
 ;;                                      plain-tex-mode))
 ;;                 (let ((mark-even-if-inactive transient-mark-mode))
 ;;                   (indent-region (region-beginning) (region-end) nil))))))
+
+
+;; taken from Julien Danjou
+(setq frame-title-format '("" invocation-name ": %b"))
+(tool-bar-mode -1)                      ; Kill the toolbar
+(menu-bar-mode -1)                      ; Kill the menu bar
+(setq scroll-step 1)
+(setq visible-bell t)
+(setq-default fill-column 76)
+(setq user-full-name "Thomas Hisch")
+(defalias 'yes-or-no-p 'y-or-n-p)
+(set-default 'indicate-buffer-boundaries '((up . nil) (down . nil) (t . left)))
+(setq next-screen-context-lines 5)      ; I want to keep more lines when
+                                        ; switching pages
+(setq use-dialog-box nil)               ; Seriously…
+(setq source-directory "~/Work/src/emacs/src")
+(put 'narrow-to-region 'disabled nil)
+(set-default 'indent-tabs-mode nil)    ; always use spaces to indent, no tab
+
+(display-time-mode 1)
+(global-hi-lock-mode 1)                 ; highlight stuff
+(savehist-mode 1)
+(blink-cursor-mode 1)                   ; blink!
+(delete-selection-mode 1)               ; Transient mark can delete/replace
+(set-scroll-bar-mode 'right)            ; Scrollbar on the right
+(scroll-bar-mode -1)                    ; But no scrollbar
+(line-number-mode 1)                    ; Show line number
+(column-number-mode 1)                  ; Show colum number
+(global-hl-line-mode 1)                 ; Highlight the current line
+;; (windmove-default-keybindings)        ; Move between frames with Shift+arrow
+(show-paren-mode t)
+(url-handler-mode 1)                    ; Allow to open URL
+(mouse-avoidance-mode 'animate)         ; Move the mouse away
+(ffap-bindings)                         ; Use ffap
+;; (iswitchb-mode 1)
+;; (browse-kill-ring-default-keybindings)
+(which-func-mode 1)

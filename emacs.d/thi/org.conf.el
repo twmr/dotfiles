@@ -5,6 +5,7 @@
                                "~/gitrepos/orgnotes/laserPA.org"
                                "~/gitrepos/orgnotes/diplomarbeit.org"
                                "~/gitrepos/orgnotes/physik.org"
+                               "~/gitrepos/orgnotes/ims.org"
                                "~/gitrepos/orgnotes/emacs.org")))
 
 

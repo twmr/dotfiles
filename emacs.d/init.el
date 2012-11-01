@@ -1,25 +1,36 @@
 ;; -*- coding: utf-8 -*-
+;; (setq debug-on-error t)
 
-(add-to-list 'load-path (expand-file-name "~/.emacs.d"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/vendor"))
-(add-to-list 'load-path (expand-file-name "~/.emacs.d/el-get/el-get"))
+(dolist (p '("" "/vendor" "/el-get/el-get"))
+  (add-to-list 'load-path (expand-file-name
+                           (concat user-emacs-directory p))))
 
-(setq custom-file "~/.emacs.d/thi/custom.el")
+(defvar thi::cache-file-dir (expand-file-name
+                             (concat (or (getenv "XDG_CACHE_HOME") "~/.cache") "/emacs/")))
+(defvar thi::config-dir (expand-file-name
+                         (concat user-emacs-directory "/thi")))
+(setq custom-file (concat thi::config-dir "/custom.el"))
 (load custom-file 'noerror)
-;;(setq debug-on-error t)
+
+;; Each file named <somelibrary>.conf.el is loaded just after the library is
+;; loaded.
+(dolist (file (directory-files thi::config-dir))
+  (when (string-match (format "^\\(.+\\)\\.conf\\.el$") file)
+    (eval-after-load (match-string-no-properties 1 file)
+      `(load ,(concat thi::config-dir "/" file)))))
+
 
 (setq thi::packages
         '(auto-complete
           magit
           magithub
-          ;; git-modes
+          git-modes
           org-mode
           cmake-mode
           markdown-mode
           yaml-mode
           expand-region
           ace-jump-mode
-          ;; textlint ;; not needed atm
           yasnippet
           naquadah-theme
           smex
@@ -31,6 +42,7 @@
           rainbow-delimiters
           highlight-indentation
           browse-kill-ring
+          ;; textlint ;; not needed atm
           ;; nognus
           ;; go-mode
           el-get
@@ -49,14 +61,12 @@
        (goto-char (point-max))
        (eval-print-last-sexp)))))
 
-(add-to-list 'el-get-recipe-path "~/.emacs.d/thi/recipes")
+(add-to-list 'el-get-recipe-path (concat thi::config-dir "/recipes"))
 
 ;; (el-get 'sync)
 ;; (setq el-get-is-lazy t)
 ;; (setq el-get-byte-compile nil)
 (el-get 'sync thi::packages)
-
-
 
 (load-theme 'naquadah)
 
@@ -74,20 +84,10 @@
 (vendor 'flymake-cursor)
 (vendor 'ace-jump-mode)
 
-
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
-(load "thi/smex")
-(load "thi/ethan-wspace")
-;; (load "thi/org-mode")
 (load "thi/auto-complete")
 (load "thi/yasnippet")
-
-;; TODO fix conflict with magit
-;; (load "thi/git-commit-mode")
-(load "thi/gnuplot")
-(load "thi/iedit")
-(load "thi/rainbow-delimiters-mode")
 (load "thi/magit")
 
 (vendor 'python)
