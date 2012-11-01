@@ -145,4 +145,5 @@ else
 fi
 hash -d dotf=${DOTFDIR}
 hash -d emd=${DOTFDIR}/emacs.d
-hash -d emv=${DOTFDIR}/vendor
+hash -d emv=${DOTFDIR}/emacs.d/vendor
+hash -d egd=${DOTFDIR}/emacs.d/el-get
