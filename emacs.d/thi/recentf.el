@@ -2,7 +2,7 @@
 
 ;; recentf-save-file has to be before (require ..) otherwise you have
 ;; to load the new file manually with recentf-load-list
-(setq recentf-save-file (concat thi::cache-file-dir "recentf"))
+(setq recentf-save-file (concat thi::cache-file-dir "/recentf"))
 
 (require 'recentf)
 (recentf-mode 1)

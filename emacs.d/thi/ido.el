@@ -1,7 +1,7 @@
 ;;(require 'ido)
 (ido-mode 'both) ;; for buffers and files
 (setq
-  ido-save-directory-list-file (concat thi::cache-file-dir "ido.last")
+  ido-save-directory-list-file (concat thi::cache-file-dir "/ido.last")
 
   ido-ignore-buffers ;; ignore these guys
   '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"

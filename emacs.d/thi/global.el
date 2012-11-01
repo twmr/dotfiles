@@ -1,17 +1,3 @@
-;; don't clutter dirs with backup files - use this dir instead
-;; maybe not useful for files inside dropbox (add exception ?)
-;; (setq backup-by-copying t)
-;; (setq backup-dir-alist '(("." . ,thi::cache-file-dir)))
-;; (setq auto-save-list-file-prefix
-      ;; (concat thi::cache-file-dir ".auto-saves-"))
-;; (setq auto-save-file-name-transforms
-      ;; `((".*" ,thi::cache-file-dir t)))
-
-;;maybe move into auto-complete local file ?
-(setq ac-comphist-file (concat thi::cache-file-dir "ac-comphist.dat"))
-(setq abbrev-file-name (concat thi::cache-file-dir "abbrev_defs"))
-
-
 ;; "y or n" instead of "yes or no"
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -20,8 +6,6 @@
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
 (setq inhibit-startup-screen t)
-(setq show-paren-mode t)
-(setq blink-cursor-mode nil)
 (setq default-indicate-empty-lines nil)
 
 
@@ -80,10 +64,6 @@
 ;; automatically adds marks
 (eval-after-load 'auto-mark
   '(global-auto-mark-mode 1))
-
-
-;; Spaces instead of tabs
-(setq-default indent-tabs-mode nil)
 
 ;; If there is a tab, make it the size of 2 spaces
 ;; TODO Check if this causes problems with fgallina/python.el

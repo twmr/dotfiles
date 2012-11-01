@@ -6,11 +6,12 @@
                            (concat user-emacs-directory p))))
 
 (defvar thi::cache-file-dir (expand-file-name
-                             (concat (or (getenv "XDG_CACHE_HOME") "~/.cache") "/emacs/")))
+                             (concat (or (getenv "XDG_CACHE_HOME") "~/.cache") "/emacs")))
 (defvar thi::config-dir (expand-file-name
                          (concat user-emacs-directory "/thi")))
 (setq custom-file (concat thi::config-dir "/custom.el"))
 (load custom-file 'noerror)
+(mkdir thi::cache-file-dir t)
 
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
@@ -27,6 +28,7 @@
           git-modes
           org-mode
           cmake-mode
+          eassist
           markdown-mode
           yaml-mode
           expand-region
@@ -92,12 +94,10 @@
 (vendor 'python)
 (load "vendor/lambda-mode") ;; useful for python development
 
-
 ;;elpa packages
 (elpa-vendor 'evil "0.0.0")
 ;; (load "thi/undo-tree") ;; FIXME why does this not work ?
 
-(load "vendor/eassist") ;; (for C/C++ development - see bindings.el)
 ;; (load "vendor/key-chord") ;; from emacs-rocks
 ;; (load "vendor/iy-go-to-char")
 ;; (key-chord-mode 1)
