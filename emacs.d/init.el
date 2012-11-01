@@ -85,6 +85,9 @@
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
 
+(tabbar-mode) ;; try this for a while
+
+
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
 (load "thi/auto-complete")
