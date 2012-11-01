@@ -13,7 +13,7 @@
   dc = diff --color-words
 [user]
 	name = Thomas Hisch
-	email = thomas@opentech.at
+	email = t.hisch@gmail.com
 [color]
 	ui = auto
 [pack]
