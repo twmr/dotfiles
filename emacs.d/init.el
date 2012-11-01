@@ -79,10 +79,9 @@
 (load "thi/recentf")
 (load "thi/nxml")
 (load "thi/compilation")
-(load "thi/matlab")
+;; (load "thi/matlab") ;; not needed ATM
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
-(vendor 'ace-jump-mode)
 
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded

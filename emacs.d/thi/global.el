@@ -12,6 +12,7 @@
 (setq abbrev-file-name (concat thi::cache-file-dir "abbrev_defs"))
 
 
+;; "y or n" instead of "yes or no"
 (defalias 'yes-or-no-p 'y-or-n-p)
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
@@ -54,9 +55,12 @@
 (add-hook 'magit-mode-hook 'thi-turn-hl-line-mode-on2)
 
 
-(setq column-number-mode t)
-(tool-bar-mode -1)
-(set-scroll-bar-mode nil)
+(line-number-mode 1)                    ; Show line number
+(column-number-mode 1)                  ; Show colum number
+(tool-bar-mode -1)                      ; Kill the toolbar
+(menu-bar-mode -1)                      ; Kill the menu bar
+(set-scroll-bar-mode 'right)            ; Scrollbar on the right
+(scroll-bar-mode -1)                    ; But no scrollbar
 
 (size-indication-mode)
 ;;default font is now set in .Xdefaults
@@ -77,8 +81,6 @@
 (eval-after-load 'auto-mark
   '(global-auto-mark-mode 1))
 
-;; "y or n" instead of "yes or no"
-(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Spaces instead of tabs
 (setq-default indent-tabs-mode nil)
@@ -226,6 +228,8 @@
 ; highlighting doesn't overwrite the clipboard or alter the kill ring,
 ; but you can paste in merely highlighted text with the mouse if you
 ; want to)
+;;FIXME this does not work if evil command mode is active
+;;TODO use a lambda which checks if command mode is active (if yes signals a visible-bell) if not calls mouse-yank-primary)
 (global-set-key [mouse-2] 'mouse-yank-primary)  ; make mouse middle-click only paste from primary X11 selection, not clipboard and kill ring.
 
 ;; automatically indent yanked code
@@ -255,30 +259,23 @@
 
 ;; taken from Julien Danjou
 (setq frame-title-format '("" invocation-name ": %b"))
-(tool-bar-mode -1)                      ; Kill the toolbar
-(menu-bar-mode -1)                      ; Kill the menu bar
 (setq scroll-step 1)
 (setq visible-bell t)
 (setq-default fill-column 76)
 (setq user-full-name "Thomas Hisch")
-(defalias 'yes-or-no-p 'y-or-n-p)
+
 (set-default 'indicate-buffer-boundaries '((up . nil) (down . nil) (t . left)))
 (setq next-screen-context-lines 5)      ; I want to keep more lines when
                                         ; switching pages
 (setq use-dialog-box nil)               ; Seriously…
-(setq source-directory "~/Work/src/emacs/src")
 (put 'narrow-to-region 'disabled nil)
 (set-default 'indent-tabs-mode nil)    ; always use spaces to indent, no tab
 
 (display-time-mode 1)
 (global-hi-lock-mode 1)                 ; highlight stuff
 (savehist-mode 1)
-(blink-cursor-mode 1)                   ; blink!
+
 (delete-selection-mode 1)               ; Transient mark can delete/replace
-(set-scroll-bar-mode 'right)            ; Scrollbar on the right
-(scroll-bar-mode -1)                    ; But no scrollbar
-(line-number-mode 1)                    ; Show line number
-(column-number-mode 1)                  ; Show colum number
 (global-hl-line-mode 1)                 ; Highlight the current line
 ;; (windmove-default-keybindings)        ; Move between frames with Shift+arrow
 (show-paren-mode t)
