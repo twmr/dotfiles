@@ -17,6 +17,11 @@
 ;; replace buffermenu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+
+;; TOGGLE MENU BAR 
+(global-set-key (kbd "C-%") 'menu-bar-mode)
+
+
 ;; smex stuff
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
