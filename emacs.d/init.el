@@ -92,7 +92,6 @@
 ;;TODO automatically load these files when the el-get packs are loaded
 (load "thi/auto-complete")
 (load "thi/yasnippet")
-(load "thi/magit")
 
 (vendor 'python)
 (load "vendor/lambda-mode") ;; useful for python development
