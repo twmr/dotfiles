@@ -5,7 +5,13 @@
 (setq vc-handled-backends nil)
 
 ;; follow sylinks to source files in version controlled systems
-;;(setq vc-follow-symlinks t)
+;; (setq vc-follow-symlinks t)
+
+(setq magit-repo-dirs `(,"~/gitrepos" "~/.emacs.d" "~/.emacs.d/el-get/el-get"))
+(setq magit-commit-signoff nil) ;; TODO set this to nil only for IMS repos
+(setq magit-remote-ref-format 'remote-slash-branch)
+(setq magit-completing-read-function 'magit-ido-completing-read)
+(setq magit-save-some-buffers nil)
 
 
 (add-hook
