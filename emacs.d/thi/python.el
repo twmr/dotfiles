@@ -8,14 +8,14 @@
  "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"
  python-skeleton-autoinsert t )
 
-(defvar ac-source-python
-  '((candidates .
-                (lambda ()
-                  (mapcar '(lambda (completion)
-                             (first (last (split-string completion "\\." t))))
-                          (python-symbol-completions (python-partial-symbol)))))))
+;; (defvar ac-source-python
+;;   '((candidates .
+;;                 (lambda ()
+;;                   (mapcar '(lambda (completion)
+;;                              (first (last (split-string completion "\\." t))))
+;;                           (python-symbol-completions (python-partial-symbol)))))))
 
 
-(add-hook 'python-mode-hook
-             (lambda() (setq ac-sources '(ac-source-python))))
+;; (add-hook 'python-mode-hook
+;;              (lambda() (setq ac-sources '(ac-source-python))))
 (add-hook 'python-mode-hook #'lambda-mode 1)

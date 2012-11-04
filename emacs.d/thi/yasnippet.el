@@ -1,14 +1,16 @@
-;;; Snippets make typing fun
+(setq yas-snippet-dirs '("~/.emacs.d/el-get/yasnippet/snippets" "~/.emacs.d/snippets"))
+(yas-global-mode 1)
 
-(require 'dropdown-list)
+(defun yas-not-activate ()
+  (memq major-mode '(term-mode)))
 
-(yas/global-mode 1)
+(set-default 'yas--dont-activate (cons #'yas-not-activate yas--dont-activate))
 
-(yas/load-directory "~/.emacs.d/el-get/yasnippet/snippets")
+;; (require 'dropdown-list)
 
-(setq yas/prompt-functions '(yas/ido-prompt
-                             yas/dropdown-prompt
-                             yas/completing-prompt))
+;; (setq yas/prompt-functions '(yas/ido-prompt
+;;                              yas/dropdown-prompt
+;;                              yas/completing-prompt))
 
 ;; Replace yasnippets's TAB
 ;; TODO study this
