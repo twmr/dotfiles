@@ -134,21 +134,60 @@
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+
+(defcustom thi::programming-language-major-modes
+  '(prog-mode     ; This is the mode perl, makefile, lisp-mode, scheme-mode,
+                  ; emacs-lisp-mode, sh-mode, java-mode, c-mode, c++-mode,
+                  ; python-mode inherits from.
+    lua-mode
+    cmake-mode
+    tex-mode                            ; LaTeX inherits
+    sgml-mode                           ; HTML inherits
+    css-mode
+    nxml-mode
+    diff-mode
+    haskell-mode
+    rst-mode)
+  "What considering as programming languages.")
+
+(defun thi::customize-programming-language-mode ()
+  (font-lock-add-keywords
+   nil
+   '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\|NOTE\\|REFACTOR\\|FIX\\)"
+      1
+      '(:box (:color "grey10" :line-width 2) :background "red" :bold t :foreground "yellow")
+      prepend)))
+  ;; (idle-highlight-mode 1)
+  (rainbow-mode 1)
+  (rainbow-delimiters-mode 1)
+  (setq show-trailing-whitespace t)
+  (flyspell-prog-mode))
+
+(dolist (mode thi::programming-language-major-modes)
+  (add-hook
+   (intern (concat (symbol-name mode) "-hook"))
+   'thi::customize-programming-language-mode))
+
+(semantic-mode 1)
+;; see http://www.gnu.org/software/emacs/manual/html_node/semantic/Sticky-Func-Mode.html#Sticky-Func-Mode
+(global-semantic-stickyfunc-mode 1)
+(global-semantic-idle-summary-mode 1)
+
+
 ;; add warning face for certain keywords
 ;; (defvar warning-words-regexpVV
 ;;   (regexp-opt '("FIXME" "TODO" "BUG" "XXX" "DEBUG") 'words)
 ;;   "Regexp matching words that commonly denote something that
 ;;  warrants attention in programs.")
 
-
 ;; fontify watch keywords(TODO,FIXME) in prog-modes (taken from emacs-starter-kit)
-(defun esk-add-watchwords ()
-  (font-lock-add-keywords
-   nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
-          1 font-lock-warning-face t))))
+;; (defun esk-add-watchwords ()
+;;   (font-lock-add-keywords
+;;    nil '(("\\<\\(FIXME\\|TODO\\|FIX\\|HACK\\|REFACTOR\\|NOCOMMIT\\)"
+;;           1 font-lock-warning-face t))))
 
-(add-hook 'prog-mode-hook 'esk-add-watchwords)
-(add-hook 'LaTeX-mode-hook 'esk-add-watchwords)
+;; (add-hook 'prog-mode-hook 'esk-add-watchwords)
+;; (add-hook 'LaTeX-mode-hook 'esk-add-watchwords)
 
 ;; from emacs-wiki
 (defun unfill-paragraph ()
