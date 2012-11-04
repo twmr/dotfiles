@@ -18,3 +18,4 @@
 
 (add-hook 'python-mode-hook
              (lambda() (setq ac-sources '(ac-source-python))))
+(add-hook 'python-mode-hook #'lambda-mode 1)

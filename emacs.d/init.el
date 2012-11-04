@@ -93,8 +93,10 @@
 (load "thi/auto-complete")
 (load "thi/yasnippet")
 
-(vendor 'python)
 (load "vendor/lambda-mode") ;; useful for python development
+(vendor 'python)
+
+
 
 ;;elpa packages
 (elpa-vendor 'evil "0.0.0")
