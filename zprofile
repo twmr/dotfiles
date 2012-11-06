@@ -150,15 +150,20 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps
 
-    export GITR=$HDPES/gitrepos
-    DOTFPATH=$HDEPS/dotfiles
+    export GITR=${HOME}/gitrepos
+    DOTFPATH=${GITR}/dotfiles
     export EMBINPATH=$HDEPS/emacs-24.2/src
-    export PATH=${DOTFPATH}:${EMBINPATH}:$HDEPS/git-svn-clone-externals:$PATH
+    export PATH=${DOTFPATH}/bin:${EMBINPATH}:$HDEPS/git-svn-clone-externals:$PATH
 
     export SBDIR=${HOME}/sandbox # links to the current sandbox
     export SBREL=/opt/sandbox_hisch
     export SBDEV=/opt/sandbox_hisch_temp
-    export PYTHONPATH=${SBDIR}/gui/branches/POC4IMO/src/hvgui/pylib:${SBDIR}/ipycore/trunk/src
+
+
+    #RELEASE STUFF
+    # export PYTHONPATH=${SBDIR}/gui/branches/POC4IMO/src/hvgui/pylib:${SBDIR}/ipycore/trunk/src
+    #TRUNK
+    export PYTHONPATH=${SBDIR}/IDIPYT/trunk/src/py:${SBDIR}/ipycore/trunk/src
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     intel_arch=""

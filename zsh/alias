@@ -139,7 +139,9 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     DOTFDIR=${HDEPS}/dotfiles
     hash -d sand=${SBDIR}
     hash -d sanddev=${SBDEV}
+    hash -d sd=${SBDEV}
     alias svnextlist="svn propget svn:externals -R"
+    alias sco="scons Arch=arch-pc Patch=0 NetLib=$SBDIR/NetLib/trunk"
 else
     DOTFDIR=${GITR}/dotfiles
 fi
