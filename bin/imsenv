@@ -1,0 +1,114 @@
+#!/usr/bin/env python
+
+import os
+from os.path import join, exists
+import logging
+
+# SBDIR=os.getenv("SBDIR")
+SBDIR = '/tmp/testcheckout2'
+NLPATH = join(SBDIR, 'NetLib')
+
+compilecommand = 'scons Arch=arch-pc Patch=0 NetLib=%s' % NLPATH
+checkoutcommand = 'git svn clone -r HEAD'
+
+repos = ['site-scons', 'IDIPYT', 'ipycore', 'NetLib', 'HWCtrl', 'wcu_manager_p0', 'rsdef', 'eds']
+
+compilerepos = ['NetLib', 'eds', 'wcu_manager_p0', 'HWCtrl', 'IDIPYT' ]
+
+svnurls=dict()
+svnurls['wcu_manager_p0'] = 'PatternGeneration/wcu_manager_p0/trunk'
+svnurls['HWSimuEnv'] = 'CtrlSys/HWSimuEnv/trunk'
+svnurls['NetLib'] = 'CtrlSys/NetLib/trunk'
+svnurls['HWCtrl'] = 'CtrlSys/HWCtrl/trunk'
+svnurls['IDIPYT'] = 'CtrlSys/IDIPYT/trunk'
+svnurls['ipycore'] = 'CtrlSys/ipycore/trunk'
+svnurls['site-scons'] = 'CtrlSys/site-scons'
+svnurls['eds'] = 'CtrlSys/eds/trunk'
+svnurls['rsdef'] = 'PatternGeneration/specifications/Rastered_Structure_Data_Exchange_Format/trunk'
+
+externals=dict()
+externals['IDIPYT'] = {'ext/netlib_pb2': '../../NetLib/src/pb2'}
+externals['NetLib'] = {'site_scons': '../site-scons'}
+externals['wcu_manager_p0'] = {'site_scons': '../site-scons',
+                               'ext/eds': '../../eds/pb2',
+                               'ext/hwctrl': '../../HWCtrl/pb2' }
+externals['HWCtrl'] = {'site_scons': '../site-scons',
+                       'ext/tmwc': '../../wcu_manager_p0/pb2'} #,
+#'ext/driver': '../../MSPI_Driver' }
+
+externals['eds'] = {'site_scons': '../site-scons',
+                    'ext/rsdef': '../../rsdef' }
+
+
+def genCheckoutCommand(pro):
+    return checkoutcommand + ' svn://svn/%s %s' % (svnurls[pro], pro)
+
+def createEnvrionmentFile(dir):
+    raise NotImplementedError
+
+def createExternals(dir):
+    os.chdir(dir)
+    for repo in repos:
+        if not repo in externals:
+            print "repo", repo, "does not have externals"
+            continue
+
+        logging.info("Repo " + repo + " has the following externals " + str(externals[repo]))
+        for key,val in externals[repo].iteritems():
+            linkcmd = "ln -sf %s %s" % (val, key)
+            fullcmd = "cd %s && %s" %(repo,linkcmd)
+            print fullcmd
+            logging.debug("  " + fullcmd)
+            os.system(fullcmd)
+
+def compileRepos(dir, extraFlags=""):
+    os.chdir(dir)
+    for repo in compilerepos:
+        if repo == 'IDIPYT':
+            cmd = "cd " + repo + " && make protobufs"
+        else:
+            cmd = "cd " + repo + " && " + compilecommand + " " + extraFlags
+        print cmd
+        logging.info("Compiling Repo " + repo + " with \'" + cmd + "\'")
+        os.system(cmd)
+
+def initialCheckout(dir):
+    """
+    checkout all repos in a new directory
+    """
+
+    #first create the sandboxdir
+    if not os.path.exists(dir):
+        os.mkdir(dir)
+    os.chdir(dir)
+
+    for repo in repos:
+        print repo
+        if not exists(repo):
+            cmd = genCheckoutCommand(repo)
+            logging.info("Checkout of Repo " + repo + " with " + cmd)
+
+            os.system(cmd)
+        else:
+            logging.info("Repo " + repo + " is already checked out")
+
+if __name__ == '__main__':
+    print "sandbox:", SBDIR
+
+    #TODO are you sure message (readline ?)
+
+    logging.basicConfig(filename=SBDIR+'/imsenv.log',
+                        level=logging.DEBUG)
+    logging.info("Checking out all repos")
+    initialCheckout(SBDIR)
+    logging.info("Creating svn:externals links")
+    createExternals(SBDIR)
+    logging.info("Compiling all repos")
+    compileRepos(SBDIR, '-j4')
+
+    pypaths = ['IDIPYT/src/py', 'ipycore/src']
+    pypaths = [join(SBDIR, x) for x in pypaths]
+
+    print "Please execute:"
+    print "export PYTHONPATH=\"" + ":".join(pypaths) + "\""
+    print "export SANDBOXDIR=" + SBDIR
