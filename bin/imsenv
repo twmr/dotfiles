@@ -23,6 +23,7 @@ svnurls['site-scons'] = 'CtrlSys/site-scons'
 svnurls['eds'] = 'CtrlSys/eds/trunk'
 svnurls['rsdef'] = 'PatternGeneration/specifications/Rastered_Structure_Data_Exchange_Format/trunk'
 
+#TODO the tromsim stuff is required to start the the wcu server
 #TODO call the make_libblnkf script to generate the blnkf
 svnurls['tromsim'] = 'PatternGeneration/TROM/trunk/sim.abuerli/simvectors/_gen'
 
@@ -87,7 +88,8 @@ def initialCheckout(sbdir):
 
             os.system(cmd)
         else:
-            logging.info("Repo " + repo + " is already checked out")
+            logging.info("Repo " + repo + " is already checked out: do svn rebase")
+            os.system("cd " + repo + " && git svn rebase")
 
 if __name__ == '__main__':
 
