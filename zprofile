@@ -145,7 +145,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PYTHONPATH=$PYMPIPATH
 
     export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
-    export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$HOME/qtcreator-2.5.84/bin:${PATH}
+    export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$HOME/qtcreator-2.6.0/bin:${PATH}
 
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps
