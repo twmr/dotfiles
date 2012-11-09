@@ -2,6 +2,7 @@
 
 import os
 from os.path import join
+import re
 
 SBDIR=os.getenv("SANDBOXDIR")
 
@@ -9,18 +10,26 @@ NLDIR = join(SBDIR, "NetLib")
 WCUDIR = join(SBDIR, "wcu_manager_p0")
 
 print "using sandbox: ", SBDIR
-from _NETLIB import NETLIB
-import _NETLIB.ProtoImporter
+# from ipynetlib._NETLIB import NETLIB
 
-
-for p in [ '/usr/local/include', join(NLDIR, "src/api"), join(WCUDIR, "pb2") ]:
-    print "REGISTERING PROTO PATH:", p
-    NETLIB.ProtoImporter.registerProtoPath(p)
+# for p in [ '/usr/local/include', join(NLDIR, "build/arch-pc/src/api"),
+#            join(WCUDIR, "build/arch-pc/pb2") ]:
+#     print "REGISTERING PROTO PATH:", p
+#     NETLIB.ProtoImporter.registerProtoPath(p)
 # or set PROTOPATH in env
 
-import _NETLIB.ClientConnector
-import _NETLIB.InterfaceManager
-import _NETLIB.ClientConnectorPool as ccp
+import ipynetlib._NETLIB.ClientConnector
+# import ipynetlib._NETLIB.InterfaceManager
+import ipynetlib._NETLIB.ClientConnectorPool as ccp
+# import eds.IEds
+
+#if we want to talk with the psu we need to import the psu interface stuff
+import hwctrl.IPsu
+
+
+# clc = NETLIB.ClientConnector("tmwc", "tcp://127.0.0.1:27999", 100)
+# eds = clc.POC_ExposureDataStreamer
+# print eds.getState()
 
 # import wcu_manager_p0.IStage
 
@@ -35,16 +44,26 @@ class Mydict(dict):
         return c[0]
 
 
+LOGDIR=join(SBDIR,'hws-log')
+ports=list()
 
-# ports = [28008, 28006, 28011, 28001, 28000]
-# ports.sort()
-ports = [26999, 27999, 28000, 28001, 28002, 28003, 28004, 28005, 28006, 28007, 28008, 28009, 28010, 28011, 28012, 28013, 28014, 28015, 30400, 49152]
+#TODO use glob module
+for r,d,f in os.walk(LOGDIR):
+    for file in f:
+        if "stderr" in file:
+            continue
+        # print "FILE", file
+        for line in open(join(LOGDIR, file), 'r').readlines():
+            if re.match(".*tcp://", line):
+                uri = line[line.find('tcp'):].strip()
+                port = int(uri[-5:])
+                ports.append(port)
+                print "uri", uri, "port", port
+
+ports.sort()
 
 names = list()
-
-
 pool = ccp.ClientConnectorPool(100)
-
 mymap = Mydict()
 for port in ports:
     clc = pool.getClc("localhost", port)
@@ -66,3 +85,11 @@ for key, val in mymap.iteritems():
 names.sort()
 print names
 #print mymap
+
+psuclc = mymap['PSU_HVREF']
+psu = psuclc.PSU_HVREF # or psuclc['PSU_HVREF']
+print psu
+
+print dir(psu)
+
+# import ipdb; ipdb.set_trace()
