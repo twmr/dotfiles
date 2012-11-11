@@ -1,6 +1,7 @@
 !.*
 *.swp
 *~
+\#*\#
 vim/.netrwhist
 zsh/history*
 zsh/cache
@@ -18,3 +19,4 @@ matplotlib/tex.cache/
 /matplotlib/fontList.cache
 /emacs.d/history
 /emacs.d/url/cookies
+/emacs.d/semanticdb

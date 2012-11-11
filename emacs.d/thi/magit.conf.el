@@ -1,12 +1,5 @@
 ;;; It's Magit! An Emacs mode for Git.
 
-;; disable vc atm as I don't think that I need it
-;; TODO VC vs. magit
-(setq vc-handled-backends nil)
-
-;; follow sylinks to source files in version controlled systems
-;; (setq vc-follow-symlinks t)
-
 (setq magit-repo-dirs `(,"~/gitrepos" "~/.emacs.d" "~/.emacs.d/el-get/el-get"))
 (setq magit-commit-signoff nil) ;; TODO set this to nil only for IMS repos
 (setq magit-remote-ref-format 'remote-slash-branch)
@@ -24,6 +17,7 @@
 (defun magit-pull ()
   (interactive)
   (magit-run-git-async "pull" "--rebase" "-v"))
+
 (defun magit-toggle-section () ;; overwrite magit-toggle-section function
   "Toggle hidden status of current section."
   (interactive)

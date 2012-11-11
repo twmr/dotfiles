@@ -74,6 +74,7 @@
 
 (load "thi/defuns")
 (load "thi/global")
+(load "thi/vc")
 (load "thi/bindings")
 (load "thi/ido")
 (load "thi/ccmode")
