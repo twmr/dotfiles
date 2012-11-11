@@ -144,6 +144,11 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
     export PYTHONPATH=$PYMPIPATH
 
+    #IMS STUFF
+    export HWSIMUENV=${GITR}/hwsimuenv
+    export TOOLSREPO=${GITR}/tools
+
+
     export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
     export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$HOME/qtcreator-2.6.0/bin:${PATH}
 
