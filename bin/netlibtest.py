@@ -24,8 +24,7 @@ import ipynetlib._NETLIB.ClientConnectorPool as ccp
 # import eds.IEds
 
 #if we want to talk with the psu we need to import the psu interface stuff
-import hwctrl.IPsu
-
+# import hwctrl.IPsu
 
 # clc = NETLIB.ClientConnector("tmwc", "tcp://127.0.0.1:27999", 100)
 # eds = clc.POC_ExposureDataStreamer
@@ -43,22 +42,20 @@ class Mydict(dict):
             raise RuntimeError('more than one clc for the same object name')
         return c[0]
 
-
-LOGDIR=join(SBDIR,'hws-log')
+#TODO obtain LOGDIR from somewhere
+LOGDIR=join(SBDIR,'hws-log', 'poc')
 ports=list()
 
 #TODO use glob module
-for r,d,f in os.walk(LOGDIR):
-    for file in f:
-        if "stderr" in file:
-            continue
-        # print "FILE", file
-        for line in open(join(LOGDIR, file), 'r').readlines():
-            if re.match(".*tcp://", line):
-                uri = line[line.find('tcp'):].strip()
-                port = int(uri[-5:])
-                ports.append(port)
-                print "uri", uri, "port", port
+import glob
+for file in glob.glob(join(LOGDIR, '*stdout.log')):
+    print "logf name", file
+    for line in open(file, 'r').readlines():
+        if re.match(".*tcp://", line):
+            uri = line[line.find('tcp'):].strip()
+            port = int(uri[-5:])
+            ports.append(port)
+            print "uri", uri, "port", port
 
 ports.sort()
 
@@ -85,6 +82,9 @@ for key, val in mymap.iteritems():
 names.sort()
 print names
 #print mymap
+
+if 'PSU_HVREF' not in mymap:
+    raise RuntimeError('PSU_HVREF is not available - did you start all NetLib Servers?')
 
 psuclc = mymap['PSU_HVREF']
 psu = psuclc.PSU_HVREF # or psuclc['PSU_HVREF']

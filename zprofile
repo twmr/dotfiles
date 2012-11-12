@@ -163,6 +163,9 @@ elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export SBREL=/opt/sandbox_hisch
     export SBDEV=/opt/sandbox_hisch_temp
 
+    export HWSIMUENV=${GITR}/HWSimuEnv
+    export TOOLSREPO=${GITR}/tools
+
     #RELEASE STUFF
     # export PYTHONPATH=${SBDIR}/gui/branches/POC4IMO/src/hvgui/pylib:${SBDIR}/ipycore/trunk/src
     #TRUNK
