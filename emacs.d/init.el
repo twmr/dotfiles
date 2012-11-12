@@ -36,6 +36,7 @@
           yasnippet
           naquadah-theme
           smex
+          dired+
           ethan-wspace
           gnuplot-mode
           iedit
