@@ -171,10 +171,10 @@
    (intern (concat (symbol-name mode) "-hook"))
    'thi::customize-programming-language-mode))
 
-(semantic-mode 1)
+;; (semantic-mode 1)
 ;; see http://www.gnu.org/software/emacs/manual/html_node/semantic/Sticky-Func-Mode.html#Sticky-Func-Mode
-(global-semantic-stickyfunc-mode 1)
-(global-semantic-idle-summary-mode 1)
+;; (global-semantic-stickyfunc-mode 1)
+;; (global-semantic-idle-summary-mode 1)
 
 
 ;; add warning face for certain keywords
