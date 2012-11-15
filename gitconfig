@@ -9,6 +9,7 @@
 	sc = !git sua && git scomp
 	aliases = config --get-regexp ^alias\\.
 	al = !git aliases
+	cp = cherry-pick
   co = commit
   dc = diff --color-words
 [user]
