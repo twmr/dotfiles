@@ -74,6 +74,32 @@ function sco() {
     scons Arch=arch-pc Patch=0 NetLib=$NLDIR $args
 }
 
+function scocf() {
+    args=""
+    if [[ $# -ge 1 ]]; then
+        if [[ $1 == 'trunk' ]]; then
+            NLDIR=`pwd`/../NetLib
+        else
+            print "unknown type", $1
+            return 1
+        fi
+        if [[ $# -ge 2 ]]; then
+           args=$2
+        fi
+    else
+        NLDIR=`pwd`/../NetLib
+    fi
+
+    echo NLDIR is $NLDIR
+    if [ ! -e $NLDIR ]; then
+        echo "$NLDIR does not exist (wrong directory ??)"
+    fi
+    echo executing
+    echo scons Arch=arch-cf Patch=0 NetLib=$NLDIR $args
+    scons Arch=arch-cf Patch=0 NetLib=$NLDIR $args
+}
+
+
 function makecf {
     (cd ${CFBD} && make)
 }
