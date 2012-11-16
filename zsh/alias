@@ -141,6 +141,8 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     hash -d sanddev=${SBDEV}
     hash -d sd=${SBDEV}
     alias svnextlist="svn propget svn:externals -R"
+    hash -d strunk=/opt/sandboxes/trunk
+    hash -d spoc=/opt/sandboxes/poc4imo
 else
     DOTFDIR=${GITR}/dotfiles
 fi
