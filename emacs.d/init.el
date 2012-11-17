@@ -37,6 +37,7 @@
           naquadah-theme
           smex
           dired+
+          dired-details
           ethan-wspace
           gnuplot-mode
           iedit
