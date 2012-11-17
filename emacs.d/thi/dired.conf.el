@@ -1,6 +1,11 @@
 (eval-after-load 'evil
-  `(evil-define-key 'normal dired-mode-map "`" 'dired-up-directory))
-
+  (progn
+  `(evil-define-key 'normal dired-mode-map (kbd "<return>")
+     'dired-find-alternate-file) ; was dired-advertised-find-file
+  `(evil-define-key 'normal dired-mode-map (kbd "`")
+     '(lambda () (interactive) (find-alternate-file ".."))))
+)
+;;http://www.ergoemacs.org/emacs/emacs_dired_tips.html
 
 (defun thi::directorychooser ()
   "Use ido to select a recently used directory from the `thi::directory-list'"
