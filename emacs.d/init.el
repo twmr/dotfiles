@@ -77,6 +77,7 @@
 (load "thi/global")
 (load "thi/vc")
 (load "thi/bindings")
+(load "thi/projects")
 (load "thi/ido")
 (load "thi/ccmode")
 (load "thi/latex")
