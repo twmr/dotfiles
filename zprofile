@@ -157,19 +157,11 @@ elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export GITR=${HOME}/gitrepos
     DOTFPATH=${GITR}/dotfiles
     export EMBINPATH=$HDEPS/emacs-24.2/src
-    export PATH=${DOTFPATH}/bin:${EMBINPATH}:$HDEPS/git-svn-clone-externals:$PATH
+    export PATH=${DOTFPATH}/bin:${EMBINPATH}:$PATH
 
-    export SBDIR=${HOME}/sandbox # links to the current sandbox
-    export SBREL=/opt/sandbox_hisch
-    export SBDEV=/opt/sandbox_hisch_temp
-
+    #TODO rename HWSimuEnv to hwsimuenv
     export HWSIMUENV=${GITR}/HWSimuEnv
     export TOOLSREPO=${GITR}/tools
-
-    #RELEASE STUFF
-    # export PYTHONPATH=${SBDIR}/gui/branches/POC4IMO/src/hvgui/pylib:${SBDIR}/ipycore/trunk/src
-    #TRUNK
-    # export PYTHONPATH=${SBDIR}/IDIPYT/trunk/src/py:${SBDIR}/ipycore/trunk/src
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     intel_arch=""
