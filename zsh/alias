@@ -4,7 +4,6 @@
 
 . ~/.zsh/vars
 
-#alias outside='weatherget -s BEXX0008 -m'
 alias mv='mv -v --backup=existing'
 alias mmv='noglob zmv -W'
 alias rm='rm -v'
@@ -23,12 +22,6 @@ alias ll='ls -ahl --color | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -
 alias cdc='cd; clear'
 alias ls='ls -hF -a --color=auto'
 
-alias ipycomp='(cd ${GITR}/ipython && git pull && ./setup.py build && sudo ./setup.py install)'
-alias ipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace'
-
-#alias tuint='sudo iwconfig eth1 essid tunet && dhclient eth1'
-#alias connmarina='sudo iwlist wlan0 scan && sudo netcfg wireless-marina'
-
 # auto open images
 alias -s {jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}='mirage'
 # auto open movies
@@ -44,96 +37,39 @@ alias -s txt='vim'
 alias -s pdf='evince'
 
 alias ev='evince'
-
-#alias mountnet='sudo mount -t cifs //192.168.1.5/E-Disk /home/gig/tmp/shares -o iocharset=utf8,file_mode=0777,dir_mode=0777'
 alias wcat='wget -q -O -'
-alias sysup='sudo abs && yaourt -Syu --aur --devel'
-alias startx='dbus-launch --exit-with-session ck-launch-session startx'
-alias zetaf='sudo shutdown -h now'
 alias reboot='sudo reboot'
-#alias e='emacsclient -c -a /usr/bin/emacs -n'
 alias qtc='qtcreator'
 
 alias mat='matlab -nosplash'
 alias cmat='matlab -nodesktop -nosplash -nojvm'
 
+embin="/usr/bin/emacs"
 if [ "$EMBINPATH" ]; then
     embin="$EMBINPATH/emacs"
-else
-    embin="/usr/bin/emacs"
 fi
 
 consoleemacs="emacsclient -nw -a $embin"
 guiemacs="emacsclient -nc -a $embin"
 alias e="$guiemacs"
-alias emacs="$guiemacs"
+alias emacs="$embin"
 alias vim="$consoleemacs"
 alias uvim="/usr/bin/vim"
 
-ONVSC=`hostname | egrep '(l01|r[0-9]+{2}n[0-9]+{2})' `
-if [ "$ONVSC" ]; then
-    alias e="$consoleemacs"
-    alias emacs="$consoleemacs"
-fi
-
-#kill emacs daemon
-function ked()
-{
-    echo "trying to kill emacs"
-    pgrep -u $USER "emacs" > /dev/null
-    RETVAL=$?
-    if [ $RETVAL -eq 0 ]; then
-        echo "killing emacs on " `date` >> ~/.emacs.d/emacs-server.log
-        emacsclient -nw -e '(kill-emacs)'
-    else
-        echo "no emacs-daemon is running"
-    fi
-}
-
-
-function started() {
-    if [ $# -gt 0 ]; then
-        if [ "$1" = "-f" ]; then
-            date >> ~/.emacs.d/emacs-server.log
-            echo "$embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1"
-            $embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1
-            return;
-        fi
-    fi
-
-    pgrep -u $USER "emacs" > /dev/null
-    RETVAL=$?
-    if [ $RETVAL -eq 0 ]; then
-        echo "emacs-daemon already running"
-    else
-        date >> ~/.emacs.d/emacs-server.log
-        echo "$embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1"
-        $embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1
-    fi
-}
+alias ipycomp='(cd ${GITR}/ipython && git pull && ./setup.py build && sudo ./setup.py install)'
+alias ipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace'
 
 alias svim='sudo /usr/bin/vim'
 alias v='vim'
 
 alias pgnup='gnuplot -persist'
-#alias netcfg='netcfg2'
 alias nautilus='nautilus --no-desktop'
-#alias spotify='wine ~/.wine/drive_c/Program\ Files/Spotify/spotify.exe'
-alias gk='gitk --all &'
 
 alias yu='sudo yum update'
 alias yr='sudo yum remove'
 alias ys='yum search'
 
-alias femtotunnel='ssh -L 2401:localhost:2401 moves@femto.iap.tuwien.ac.at'
-alias vsc='ssh -AX thisch@vsc.tuwien.ac.at'
-alias qshtest='qsh -N dummy -V -cwd -l h_rt=00:10:00 -pe mpich 8'
-
 #named directories
-hash -d d=/usr/share/doc
-hash -d conf=${HOME}/.config
-hash -d loc=${HOME}/.local
-hash -d awe=${HOME}/.config/awesome
 HOSTNAME=`hostname`
 if [ "$HOSTNAME" = "pc-52-rh" ]; then
     DOTFDIR=${HDEPS}/dotfiles
@@ -146,8 +82,12 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
 else
     DOTFDIR=${GITR}/dotfiles
 fi
+
+hash -d d=/usr/share/doc
+hash -d conf=${HOME}/.config
+hash -d loc=${HOME}/.local
+hash -d awe=${HOME}/.config/awesome
 hash -d dotf=${DOTFDIR}
 hash -d emd=${DOTFDIR}/emacs.d
-hash -d emv=${DOTFDIR}/emacs.d/vendor
 hash -d egd=${DOTFDIR}/emacs.d/el-get
 hash -d gr=${GITR}

@@ -15,6 +15,42 @@ function src() {
     source ~/.zshrc
 }
 
+#kill emacs daemon
+function ked() {
+    echo "trying to kill emacs"
+    pgrep -u $USER "emacs" > /dev/null
+    RETVAL=$?
+    if [ $RETVAL -eq 0 ]; then
+        echo "killing emacs on " `date` >> ~/.emacs.d/emacs-server.log
+        emacsclient -nw -e '(kill-emacs)'
+    else
+        echo "no emacs-daemon is running"
+    fi
+}
+
+
+function started() {
+    if [ $# -gt 0 ]; then
+        if [ "$1" = "-f" ]; then
+            date >> ~/.emacs.d/emacs-server.log
+            echo "$embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1"
+            $embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1
+            return;
+        fi
+    fi
+
+    pgrep -u $USER "emacs" > /dev/null
+    RETVAL=$?
+    if [ $RETVAL -eq 0 ]; then
+        echo "emacs-daemon already running"
+    else
+        date >> ~/.emacs.d/emacs-server.log
+        echo "$embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1"
+        $embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1
+    fi
+}
+
+
 function add-alias() {
     local name=$1 value="$2"
     echo "alias $name='$value'" >> ~/.zsh/alias
@@ -29,11 +65,12 @@ function psea() {
 }
 
 function GG() { grep -RiI --exclude-dir=.svn  --exclude-dir=.git $* * }
+
 # git functions
 function ga() { git add $* }
 function gd() { git diff --ignore-submodules $* }
-function gg() { git grep $* }
-
+function gg() { git grep "$*" }
+function gk() { gitk --all $* & }
 function gl() { git log $* }
 function gs() { git status --ignore-submodules $* }
 function gsvr() { git svn rebase $* }
