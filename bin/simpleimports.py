@@ -12,7 +12,7 @@ ramper = hwlib.Ramper('RAMPER_PSYS_C', verbose=True)
 
 mp2 = hwlib.Multipole('MP2', verbose=True)
 
-scanner = hwlib.TestScanner('SCANNER1', verbose=True)
+scanner = hwlib.Scanner('SCANNER1', verbose=True)
 
 cup  = hwlib.Cup('PAM_FC1',verbose=True)
 
