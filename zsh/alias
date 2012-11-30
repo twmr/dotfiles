@@ -76,6 +76,8 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     alias svnextlist="svn propget svn:externals -R"
     hash -d strunk=/opt/sandboxes/trunk
     hash -d spoc=/opt/sandboxes/poc4imo
+    hash -d pst=${HOME}/gitrepos/POC-scripts/trunk
+
 else
     DOTFDIR=${GITR}/dotfiles
 fi
