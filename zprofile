@@ -111,6 +111,8 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export RANDOMLAS=${GITR}/randomlas
     export CFFEM_REPO=${GITR}/cf-fem-lib
 
+    export BOOST_SRC_PATH=$MYSRCDIR/boost_1_52_0
+
     #parallel stuff (mpi + petsc + slepc)
 
     export MYMPI_INC_PATH=/usr/include/openmpi-x86_64
