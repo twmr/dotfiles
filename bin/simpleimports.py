@@ -5,6 +5,7 @@ import _hwlib.ramper
 import _hwlib.scanner
 import _hwlib.cup
 import _hwlib.ramper
+import _hwlib.sessionmanager
 
 psu = hwlib.PowerSupply('PSU_HVREF', verbose=True)
 
@@ -16,4 +17,7 @@ scanner = hwlib.Scanner('SCANNER1', verbose=True)
 
 cup  = hwlib.Cup('PAM_FC1',verbose=True)
 
-print "ramper, cup, psu, scanner and mp2 objects initialized"
+session = hwlib.SessionManager('SessionManager', verbose=True)
+# session = hwlib.SessionManager(verbose=True)
+
+print "ramper, cup, psu, scanner, session and mp2 objects initialized"
