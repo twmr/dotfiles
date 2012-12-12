@@ -72,19 +72,16 @@ alias ys='yum search'
 #named directories
 HOSTNAME=`hostname`
 if [ "$HOSTNAME" = "pc-52-rh" ]; then
-    DOTFDIR=${HDEPS}/dotfiles
     alias svnextlist="svn propget svn:externals -R"
     hash -d strunk=/opt/sandboxes/trunk
     hash -d spoc=/opt/sandboxes/poc4imo
     hash -d pst=${HOME}/gitrepos/POC-scripts/trunk
-    hash -d psb=${HOME}/gitrepos/POC-scripts/branches/POC4IMO
+    hash -d psb=${HOME}/gitrepos/POC-scripts-POC4IMO
     hash -d hwt=/opt/sandboxes/trunk/HWCtrl
     hash -d hwb=/opt/sandboxes/poc4imo/HWCtrl
-
-else
-    DOTFDIR=${GITR}/dotfiles
 fi
 
+DOTFDIR=${GITR}/dotfiles
 hash -d d=/usr/share/doc
 hash -d conf=${HOME}/.config
 hash -d loc=${HOME}/.local
