@@ -159,7 +159,7 @@ elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export GITR=${HOME}/gitrepos
     DOTFPATH=${GITR}/dotfiles
     export EMBINPATH=$HDEPS/emacs-24.2/src
-    export PATH=${DOTFPATH}/bin:${EMBINPATH}:$PATH
+    export PATH=/opt/hisch_deps/qtcreator-2.6.0/bin:${DOTFPATH}/bin:${EMBINPATH}:$PATH
 
     #TODO rename HWSimuEnv to hwsimuenv
     export HWSIMUENV=${GITR}/HWSimuEnv
