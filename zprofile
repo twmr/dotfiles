@@ -111,6 +111,8 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export RANDOMLAS=${GITR}/randomlas
     export CFFEM_REPO=${GITR}/cf-fem-lib
 
+    export BOOST_SRC_PATH=$MYSRCDIR/boost_1_52_0
+
     #parallel stuff (mpi + petsc + slepc)
 
     export MYMPI_INC_PATH=/usr/include/openmpi-x86_64
@@ -149,8 +151,8 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export TOOLSREPO=${GITR}/tools
 
 
-    export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
-    export PATH=$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$HOME/qtcreator-2.6.0/bin:${PATH}
+    export LD_LIBRARY_PATH=/opt/protobuf/lib:${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
+    export PATH=/opt/protobuf/bin:$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$HOME/qtcreator-2.6.0/bin:${PATH}
 
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps
@@ -355,7 +357,7 @@ if [ "${PUBDOC}" ]; then
     hash -d pubdoc=${PUBDOC}
 fi
 
-if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" -o "$HOSTNAME" = "cobra" ]; then
+if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     if [ -z "${RANDOMLAS}" ]; then
         echo Warning RANDOMLAS not defined
     else
