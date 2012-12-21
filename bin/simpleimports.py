@@ -5,7 +5,11 @@ import _hwlib.ramper
 import _hwlib.scanner
 import _hwlib.cup
 import _hwlib.ramper
-import _hwlib.sessionmanager
+
+from core import SessionManager
+from core import ClientConnectorBase as Base
+
+from mathpack.misc import polar
 
 psu = hwlib.PowerSupply('PSU_HVREF', verbose=True)
 
@@ -15,9 +19,10 @@ mp2 = hwlib.Multipole('MP2', verbose=True)
 
 scanner = hwlib.Scanner('SCANNER1', verbose=True)
 
-cup  = hwlib.Cup('PAM_FC1',verbose=True)
+cup = hwlib.Cup('PAM_FC1',verbose=True)
 
-session = hwlib.SessionManager('SessionManager', verbose=True)
-# session = hwlib.SessionManager(verbose=True)
+session = SessionManager('SessionManager', verbose=True)
 
-print "ramper, cup, psu, scanner, session and mp2 objects initialized"
+mp5 = Base('MP5', verbose=True)
+
+print "ramper, cup, psu, scanner, session, mp2 and mp5 objects initialized"
