@@ -99,7 +99,7 @@ if [ "$HOSTNAME" = "mustang" ]; then
 
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib:${P4PYLIB}:${S4PYLIB} #:${LD_LIBRARY_PATH}
     # export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.5.0/bin/:$PATH
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.6.1/bin/:$PATH
 
 elif [ "$HOSTNAME" = "cobra" ]; then
 
