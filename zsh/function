@@ -366,6 +366,8 @@ function cfmatlab() {
         PRELOADSTRING=""
     fi
     export PATH=$CFBD:$PATH
-    env LD_PRELOAD=$PRELOADSTRING $MATLAB_BIN/matlab -desktop
+    echo env LD_PRELOAD="$PRELOADSTRING" $MATLAB_BIN/matlab -desktop
+    env LD_PRELOAD="$PRELOADSTRING" $MATLAB_BIN/matlab -desktop
+
     )
 }

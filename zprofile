@@ -213,9 +213,9 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     export LD_LIBRARY_PATH=${LOCSOFT}/lib:/usr/local/lib:${LD_LIBRARY_PATH}
 
-    # export EMBINPATH=${HOME}/gitrepos/emacs/src
-    # export PATH=${MATLAB_BIN}:${HOME}/bin:${LOCSOFT}/bin:${EMBINPATH}:$PATH #EMACS-GIT
-    export PATH=${MATLAB_BIN}:${HOME}/bin:${LOCSOFT}/bin:$PATH
+    export EMBINPATH=${HOME}/gitrepos/emacs/src
+    export PATH=${MATLAB_BIN}:${HOME}/bin:${LOCSOFT}/bin:${EMBINPATH}:$PATH #EMACS-GIT
+    # export PATH=${MATLAB_BIN}:${HOE}/bin:${LOCSOFT}/bin:$PATH
 
     #parallel stuff (mpi + petsc + slepc )
 
@@ -235,8 +235,9 @@ elif [ "$HOSTNAME" = "thisch" ]; then
 
     #for light-matter
     export PETSC_DIR=${MYSRCDIR}/petsc-3.3-p2
-    # export PETSC_ARCH=arch-linux2-cxx-mumps-release
-    export PETSC_ARCH=arch-linux2-cxx-release
+    # export PETSC_DIR=${MYSRCDIR}/petsc-dev DOESNT WORK (checked out on 14.8.2012)
+    export PETSC_ARCH=arch-linux2-cxx-mumps-release
+    # export PETSC_ARCH=arch-linux2-cxx-release
     #wenn man slepc-dev vewendet muss man noch --download-sowing setzen
     #ERROR: cannot generate Fortran stubs; try configuring PETSc with --download-sowing or use a mercurial version of PETSc
     export PETSC_MAIN_FLAGS="${PETSC_MAIN_FLAGS} --download-sowing"
@@ -401,7 +402,7 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
             export PYTHONPATH=${PYMPIPATH}:${PYTHONPATH}
     fi
 
-    export PATH=${RANDOMLAS}:${RANDOMLAS}/scripts:${CFBDMPI}/green:${CFBDMPI}/src:${PATH}
+    export PATH=${RANDOMLAS}:${RANDOMLAS}/scripts:${RANDOMLAS}/testscripts:${CFBDMPI}/green:${CFBDMPI}/src:${PATH}
 
     if [ "${NGSOLVE_PATH}" ]; then
         export LD_LIBRARY_PATH=${NGSOLVE_PATH}/lib:${LD_LIBRARY_PATH}
