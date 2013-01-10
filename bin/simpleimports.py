@@ -10,6 +10,7 @@ from core import SessionManager
 from core import ClientConnectorBase as Base
 
 from mathpack.misc import polar
+import quantities as pq
 
 psu = hwlib.PowerSupply('PSU_HVREF', verbose=True)
 
