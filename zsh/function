@@ -78,6 +78,7 @@ function gp() { git push $* }
 function gc() { git commit -m "$*" }
 function gpl() { git pull $* }
 function gps() { git push $* }
+function gsr() { git svn rebase $* }
 function gco() {
     if [ -z "$1" ]; then
         git checkout master
