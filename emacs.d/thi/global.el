@@ -166,7 +166,8 @@
   (rainbow-mode 1)
   (rainbow-delimiters-mode 1)
   (setq show-trailing-whitespace t)
-  (flyspell-prog-mode))
+  ;; (flyspell-prog-mode)
+  )
 
 (dolist (mode thi::programming-language-major-modes)
   (add-hook
