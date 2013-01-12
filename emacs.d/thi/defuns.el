@@ -25,7 +25,7 @@
 
 (defun elpa-vendor (library vnum &rest autoload-functions)
   (let* ((file (symbol-name library))
-         (normal (concat "~/.emacs.d/elpa/" file "-" vnum))
+         (normal (concat "~/.emacs.d/el-get/package/elpa/" file "-" vnum))
          (lnormal (concat normal "/lisp"))
          (suffix (concat normal ".el"))
          (personal (concat "~/.emacs.d/thi/" file))
