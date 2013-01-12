@@ -87,6 +87,7 @@
   (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search))
 
 (add-hook 'org-mode-hook 'org-mode-reftex-setup)
+(add-hook 'org-mode-hook 'turn-on-visual-line-mode)
 
 
 ;;beamer

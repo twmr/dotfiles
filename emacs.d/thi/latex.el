@@ -18,14 +18,6 @@
 (setq TeX-electric-sub-and-superscript t)
 
 
-(defun turn-on-outline-minor-mode ()
-  (outline-minor-mode 1))
-
-(defun turn-on-visual-line-mode ()
-  (visual-line-mode 1))
-
-(defun turn-on-longlines-mode ()
-  (longlines-mode 1))
 
 (defun compilation-latex-stuff ()
   (interactive)
