@@ -1,10 +1,4 @@
-from _hwlib import hwlib
-import _hwlib.multipole
-import _hwlib.powersupply
-import _hwlib.ramper
-import _hwlib.scanner
-import _hwlib.cup
-import _hwlib.ramper
+import hwlib
 
 from core import SessionManager
 from core import ClientConnectorBase as Base
