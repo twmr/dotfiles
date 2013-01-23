@@ -24,7 +24,7 @@
  '(preview-scale-function 1.5)
  '(preview-transparent-color (quote (highlight :background)))
  '(recentf-exclude (quote ("COMMIT_EDITMSG" "session.*")))
- '(safe-local-variable-values (quote ((eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook" (add-hook (quote write-contents-functions) (lambda nil (delete-trailing-whitespace) nil)) (require (quote whitespace)) "Sometimes the mode needs to be toggled off and on." (whitespace-mode 0) (whitespace-mode 1)) (whitespace-line-column . 80) (whitespace-style face trailing lines-tail) (require-final-newline . t) (TeX-master . t)))))
+ '(safe-local-variable-values (quote ((nxml-child-indent . 4) (TeX-master . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
