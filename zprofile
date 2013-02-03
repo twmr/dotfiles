@@ -36,9 +36,9 @@ export GITR=$HOME/gitrepos
 export BROWSER=google-chrome
 
 if [ "$HOSTNAME" = "mustang" ]; then
-    arch="intel64"
-    intel_version="11.1/046"
-    intel_prefix="/opt/intel/Compiler/"
+    arch="" #intel64"
+    #intel_version="11.1/046"
+    #intel_prefix="/opt/intel/Compiler/"
 
     export MATLAB_BIN=/usr/local/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
