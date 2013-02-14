@@ -329,4 +329,4 @@
 (ffap-bindings)                         ; Use ffap
 ;; (iswitchb-mode 1)
 ;; (browse-kill-ring-default-keybindings)
-(which-func-mode 1)
+;; (which-func-mode 1)
