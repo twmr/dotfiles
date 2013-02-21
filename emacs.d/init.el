@@ -41,6 +41,7 @@
           ethan-wspace
           undo-tree
           evil
+          python
           ;; gnuplot-mode ;; not needed atm
           iedit
           protobuf-mode
@@ -87,20 +88,18 @@
 (load "thi/recentf")
 (load "thi/nxml")
 (load "thi/compilation")
+(load "vendor/lambda-mode") ;; useful for python development
 ;; (load "thi/matlab") ;; not needed ATM
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
 
 ;;(tabbar-mode)
 
-
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
 (load "thi/auto-complete")
 (load "thi/yasnippet")
 
-(load "vendor/lambda-mode") ;; useful for python development
-(vendor 'python)
 
 (global-undo-tree-mode)
 
