@@ -39,6 +39,8 @@
           dired+
           dired-details
           ethan-wspace
+          undo-tree
+          evil
           ;; gnuplot-mode ;; not needed atm
           iedit
           protobuf-mode
@@ -100,11 +102,7 @@
 (load "vendor/lambda-mode") ;; useful for python development
 (vendor 'python)
 
-
-
-;;elpa packages
-(elpa-vendor 'evil "0.0.0")
-;; (load "thi/undo-tree") ;; FIXME why does this not work ?
+(global-undo-tree-mode)
 
 ;; (load "vendor/key-chord") ;; from emacs-rocks
 ;; (load "vendor/iy-go-to-char")
