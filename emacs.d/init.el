@@ -91,7 +91,7 @@
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
 
-(tabbar-mode) ;; try this for a while
+;;(tabbar-mode)
 
 
 ;;customizations for el-get packages
