@@ -39,7 +39,7 @@
           dired+
           dired-details
           ethan-wspace
-          gnuplot-mode
+          ;; gnuplot-mode ;; not needed atm
           iedit
           protobuf-mode
           rainbow-mode
