@@ -44,8 +44,8 @@
           ;; gnuplot-mode ;; not needed atm
           iedit
           protobuf-mode
-          rainbow-mode
-          rainbow-delimiters
+          ;;rainbow-mode
+          ;;rainbow-delimiters
           highlight-indentation
           browse-kill-ring
           ;; textlint ;; not needed atm
