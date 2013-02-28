@@ -98,8 +98,6 @@
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
 (load "thi/auto-complete")
-(load "thi/yasnippet")
-
 
 (global-undo-tree-mode)
 
