@@ -13,6 +13,9 @@
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 
+;; TODO move this to jedi specific config
+(setq jedi:setup-keys t)
+
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
 (dolist (file (directory-files thi::config-dir))
@@ -38,10 +41,13 @@
           smex
           dired+
           dired-details
+          replace+
           ethan-wspace
           undo-tree
           evil
           python
+          epc
+          jedi
           ;; gnuplot-mode ;; not needed atm
           iedit
           protobuf-mode
@@ -116,3 +122,4 @@
 ;; -- (setq scroll-conservatively 10000)
 ;; however this works: (still not as smooth as in vim :( )
 ;;(vendor 'smooth-scrolling)
+(put 'dired-find-alternate-file 'disabled nil)
