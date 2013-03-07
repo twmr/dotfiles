@@ -183,8 +183,9 @@
       '(:box (:color "grey10" :line-width 2) :background "red" :bold t :foreground "yellow")
       prepend)))
   ;; (idle-highlight-mode 1)
-  (rainbow-mode 1)
-  (rainbow-delimiters-mode 1)
+  ;; temporarily disabled the rainbow modes as i think they cause speed problems
+  ;; (rainbow-mode 1)
+  ;; (rainbow-delimiters-mode 1)
   (setq show-trailing-whitespace t)
   ;; (flyspell-prog-mode)
   )
@@ -329,4 +330,4 @@
 (ffap-bindings)                         ; Use ffap
 ;; (iswitchb-mode 1)
 ;; (browse-kill-ring-default-keybindings)
-(which-func-mode 1)
+;; (which-func-mode 1)

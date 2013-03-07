@@ -36,9 +36,9 @@ export GITR=$HOME/gitrepos
 export BROWSER=google-chrome
 
 if [ "$HOSTNAME" = "mustang" ]; then
-    arch="intel64"
-    intel_version="11.1/046"
-    intel_prefix="/opt/intel/Compiler/"
+    arch="" #intel64"
+    #intel_version="11.1/046"
+    #intel_prefix="/opt/intel/Compiler/"
 
     export MATLAB_BIN=/usr/local/MATLAB/R2010b/bin
     export MATLAB_JAVA=/usr/lib/jvm/java-1.6.0-openjdk-1.6.0.0.x86_64/jre
@@ -97,9 +97,13 @@ if [ "$HOSTNAME" = "mustang" ]; then
     #MPI4PY
     PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
 
+
+    #QTcreator version
+    QTCV="2.6.2"
+
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib:${P4PYLIB}:${S4PYLIB} #:${LD_LIBRARY_PATH}
     # export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-2.6.1/bin/:$PATH
+    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-${QTCV}/bin/:$PATH
 
 elif [ "$HOSTNAME" = "cobra" ]; then
 
@@ -152,7 +156,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
 
     export LD_LIBRARY_PATH=/opt/protobuf/lib:${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
-    export PATH=/opt/protobuf/bin:$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$HOME/qtcreator-2.6.0/bin:${PATH}
+    export PATH=${HOME}/bin:/opt/protobuf/bin:$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$HOME/qtcreator-2.6.0/bin:${PATH}
 
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps

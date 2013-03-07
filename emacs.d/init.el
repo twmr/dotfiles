@@ -13,6 +13,9 @@
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 
+;; TODO move this to jedi specific config
+(setq jedi:setup-keys t)
+
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
 (dolist (file (directory-files thi::config-dir))
@@ -38,12 +41,18 @@
           smex
           dired+
           dired-details
+          replace+
           ethan-wspace
-          gnuplot-mode
+          undo-tree
+          evil
+          python
+          epc
+          jedi
+          ;; gnuplot-mode ;; not needed atm
           iedit
           protobuf-mode
-          rainbow-mode
-          rainbow-delimiters
+          ;;rainbow-mode
+          ;;rainbow-delimiters
           highlight-indentation
           browse-kill-ring
           ;; textlint ;; not needed atm
@@ -85,26 +94,18 @@
 (load "thi/recentf")
 (load "thi/nxml")
 (load "thi/compilation")
+(load "vendor/lambda-mode") ;; useful for python development
 ;; (load "thi/matlab") ;; not needed ATM
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
 
-(tabbar-mode) ;; try this for a while
-
+;;(tabbar-mode)
 
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
 (load "thi/auto-complete")
-(load "thi/yasnippet")
 
-(load "vendor/lambda-mode") ;; useful for python development
-(vendor 'python)
-
-
-
-;;elpa packages
-(elpa-vendor 'evil "0.0.0")
-;; (load "thi/undo-tree") ;; FIXME why does this not work ?
+(global-undo-tree-mode)
 
 ;; (load "vendor/key-chord") ;; from emacs-rocks
 ;; (load "vendor/iy-go-to-char")
@@ -121,3 +122,4 @@
 ;; -- (setq scroll-conservatively 10000)
 ;; however this works: (still not as smooth as in vim :( )
 ;;(vendor 'smooth-scrolling)
+(put 'dired-find-alternate-file 'disabled nil)
