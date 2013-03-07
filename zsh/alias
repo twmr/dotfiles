@@ -23,7 +23,7 @@ alias cdc='cd; clear'
 alias ls='ls -hF -a --color=auto'
 
 # auto open images
-alias -s {jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}='mirage'
+alias -s {jpg,JPG,jpeg,JPEG,png,PNG,gif,GIF}='eog'
 # auto open movies
 alias -s {mpg,mpeg,avi,ogm,wmv,m4v,mp4,mov}='mplayer -idx'
 # auto open audio
@@ -68,6 +68,11 @@ alias nautilus='nautilus --no-desktop'
 alias yu='sudo yum update'
 alias yr='sudo yum remove'
 alias ys='yum search'
+
+
+alias removepyc='rm `find . -iname "*.pyc"`'
+alias removelog='rm `find . -iname "*.log"`'
+
 
 #named directories
 HOSTNAME=`hostname`
