@@ -1,7 +1,7 @@
 #!/bin/sh
 
-outleft=HDMI-0
-outright=DVI-0
+outleft=DVI-2
+outright=DVI-3
 xrandr --output ${outleft} --auto
 xrandr --output ${outright} --auto
 xrandr --output ${outright} --right-of ${outleft}
