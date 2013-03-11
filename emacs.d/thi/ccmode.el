@@ -36,6 +36,26 @@
     ))
 (add-hook 'c++-mode-hook 'cf-fem-lib-style)
 
+(defun ims-style ()
+  (interactive)
+  (message (buffer-file-name))
+  (when (and buffer-file-name
+             (or (string-match "sandboxes" buffer-file-name)
+                 (string-match "trunk" buffer-file-name)
+                 (string-match "POC4IMO" buffer-file-name)))
+    (progn
+      (c-set-style "stroustrup")
+      (setq c-basic-offset 2)
+      (c-set-offset 'inclass 2)
+      ;; (c-set-offset 'access-label 0)
+      ;; (c-set-offset 'topmost-intro 0)
+      )
+    ;; (setq-default c-basic-offset 2
+    ;;               tab-width 2
+    ;;               indent-tabs-mode nil)
+    ))
+(add-hook 'c++-mode-hook 'cf-fem-lib-style)
+
 (defun compilation-cffemlib-stuff ()
   (when (string-match "cf-fem-lib" buffer-file-name)
     ;; (make-local-variable 'compile-command)
