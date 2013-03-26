@@ -83,8 +83,9 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     hash -d spoc=/opt/sandboxes/poc4imo
     hash -d pst=${HOME}/gitrepos/POC-scripts/trunk
     hash -d psb=${HOME}/gitrepos/POC-scripts-POC4IMO
-    hash -d hwt=/opt/sandboxes/trunk/HWCtrl
-    hash -d hwb=/opt/sandboxes/poc4imo/HWCtrl
+    hash -d hwt=~strunk/HWCtrl
+    hash -d hwb=~spoc/HWCtrl
+    hash -d hwp=~sbranch/HWCtrl
 fi
 
 DOTFDIR=${GITR}/dotfiles
