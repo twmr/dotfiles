@@ -42,6 +42,7 @@
           dired+
           dired-details
           replace+
+          find-file-in-repository
           ethan-wspace
           undo-tree
           evil
