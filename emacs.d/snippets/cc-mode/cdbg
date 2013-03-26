@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: cdbg
+# key: cdbg
+# --
+std::cout << "DEBUG" << std::endl;
