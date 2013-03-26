@@ -27,7 +27,7 @@
   ido-use-filename-at-point nil    ; don't use filename at point (annoying)
   ido-use-url-at-point nil         ; don't use url at point (annoying)
 
-  ido-enable-flex-matching nil     ; don't try to be too smart
+  ido-enable-flex-matching t     ; don't try to be too smart
   ido-confirm-unique-completion t) ; wait for RET, even with unique completion
 
 ;; when using ido, the confirmation is rather annoying...
