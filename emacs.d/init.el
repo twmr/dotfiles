@@ -46,6 +46,7 @@
           ethan-wspace
           undo-tree
           lua-mode
+          minimap
           evil
           python
           epc
