@@ -45,6 +45,7 @@
           find-file-in-repository
           ethan-wspace
           undo-tree
+          lua-mode
           evil
           python
           epc
