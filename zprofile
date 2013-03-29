@@ -154,9 +154,10 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export HWSIMUENV=${GITR}/hwsimuenv
     export TOOLSREPO=${GITR}/tools
 
+    export EMBINPATH=${HOME}/gitrepos/emacs/src
 
     export LD_LIBRARY_PATH=/opt/protobuf/lib:${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
-    export PATH=${HOME}/bin:/opt/protobuf/bin:$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$HOME/qtcreator-2.6.0/bin:${PATH}
+    export PATH=${HOME}/bin:/opt/protobuf/bin:$DOTFPATH/bin:$LOCSOFT/idlex-0.8/:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$EMBINPATH:$HOME/qtcreator/bin:${PATH}
 
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps
