@@ -1,3 +1,5 @@
+first install 'dash'
+
 change paths in *.desktop files to current directory
 cp the desktop files to /usr/share/xessions (gdm or any other
 standards-compliant login manager will look in this dir for xsession files)

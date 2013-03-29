@@ -9,7 +9,8 @@ SHOW_DESKTOP=$2
 GNOME3=false
 
 HOSTNAME=`hostname`
-if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" -o "$HOSTNAME" = "cobra" ]; then
+if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" -o "$HOSTNAME" = "cobra"
+        -o "$HOSTNAME" = "pc-52-rh"]; then
     GNOME3=true
 fi
 
