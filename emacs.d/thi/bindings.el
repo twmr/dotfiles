@@ -18,6 +18,7 @@
 ;; replace buffermenu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
+(global-set-key (kbd "C-c t") 'visit-term-buffer)
 
 ;; TOGGLE MENU BAR 
 (global-set-key (kbd "C-%") 'menu-bar-mode)
