@@ -2,6 +2,9 @@
 
 #bindkey -e #emacs mode
 
+bindkey '^W' vi-backward-kill-word
+bindkey '^[^?' backward-kill-word
+
 case $TERM in
     xterm*)
         # Pos1 && End
