@@ -68,6 +68,7 @@ alias nautilus='nautilus --no-desktop'
 alias yu='sudo yum update'
 alias yr='sudo yum remove'
 alias ys='yum search'
+alias yi='sudo yum install'
 
 
 alias removepyc='rm `find . -iname "*.pyc"`'
