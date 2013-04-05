@@ -47,6 +47,7 @@ if [ "$HOSTNAME" = "cobra" ]; then
     xinput set-prop 'TPPS/2 IBM TrackPoint' "Evdev Wheel Emulation Timeout" 200
 fi
 
+#required for matlab
 wmname LG3D
 
 # The following is a simple hack to avoid starting
