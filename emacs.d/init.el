@@ -102,13 +102,9 @@
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
 
-;;(tabbar-mode)
-
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
 (load "thi/auto-complete")
-
-(global-undo-tree-mode)
 
 ;; (load "vendor/key-chord") ;; from emacs-rocks
 ;; (load "vendor/iy-go-to-char")
