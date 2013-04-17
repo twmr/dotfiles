@@ -1,0 +1,6 @@
+(:name smart-mode-line
+       :description "BLUB"
+       :type github
+       :pkgname "Bruce-Connor/smart-mode-line"
+       :post-init (add-hook 'after-init-hook 'sml/setup)
+       :features "smart-mode-line")
