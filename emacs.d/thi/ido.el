@@ -17,7 +17,7 @@
                           " [Too big]" " [Confirm]"))
   ;; the following two variables where commented out because
   ;; they are not useful in for diplaying completions vertically
-  ;;ido-max-prospects 8              ; don't spam my minibuffer
+  ido-max-prospects 20              ; don't spam my minibuffer
   ;;ido-max-window-height 2
 
   ido-enable-last-directory-history t ; remember last used dirs
