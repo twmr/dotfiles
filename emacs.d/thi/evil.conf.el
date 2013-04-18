@@ -50,3 +50,6 @@
 
 ;;thank you @magnars
 (define-key evil-normal-state-map (kbd "SPC") 'ace-jump-mode)
+
+
+(define-key evil-normal-state-map "\C-u" 'evil-scroll-up)
