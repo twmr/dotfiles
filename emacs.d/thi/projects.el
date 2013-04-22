@@ -1,11 +1,10 @@
 (defvar thi::directory-list '(
                               "/opt/sandboxes"
-                              "/opt/sandboxes/current-branch"
+                              "/opt/sandboxes/current_branch"
                               "/opt/sandboxes/poc4imo"
+                              "/opt/sandboxes/trunk"
 
-                              "~/gitrepos/POC-scripts/trunk/poclib"
-                              "~/gitrepos/POC-scripts/trunk/tests"
-                              "~/gitrepos/POC-scripts/trunk/integrationtests"
+                              "~/gitrepos/POC-scripts/trunk"
 
                               "~/gitrepos/tools"
                               "~/gitrepos/tools/future-tools"

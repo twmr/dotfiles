@@ -12,6 +12,7 @@ Emacs.font:		ProFont-9
 !Emacs.font:		Sans-10
 !Emacs.menuBar: off
 Emacs.verticalScrollBars: off
+Emacs.geometry:	100x70
 
 !-------------------------------------------------------------------------------
 !
