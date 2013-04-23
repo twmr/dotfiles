@@ -1,5 +1,8 @@
 ;;; Global key bindigns
 
+
+(global-unset-key (kbd "M-l")) ;; downcase-word
+
 ;; How to Define Keyboard Shortcuts in Emacs
 ;; http://xahlee.org/emacs/keyboard_shortcuts.html
 
