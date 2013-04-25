@@ -14,6 +14,7 @@
  '(fringe-mode (quote (5 . 5)) nil (fringe))
  '(ido-auto-merge-delay-time 2.7)
  '(ido-enable-tramp-completion nil)
+ '(ido-max-window-height 30)
  '(ido-use-faces t)
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
