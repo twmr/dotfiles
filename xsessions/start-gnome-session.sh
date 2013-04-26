@@ -43,7 +43,8 @@ if [ "$HOSTNAME" = "cobra" ]; then
 fi
 
 #required for matlab
-wmname LG3D
+#first checks if wmname is installed
+type -P wmanme &>/dev/null && wmname LG3D
 
 # The following is a simple hack to avoid starting
 # gnome-panel/metacity when awesome was supposed to be started. this
