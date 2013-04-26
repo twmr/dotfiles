@@ -6,13 +6,8 @@
 
 MYWM=$1
 SHOW_DESKTOP=$2
-GNOME3=false
-
+GNOME3=true
 HOSTNAME=`hostname`
-if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" -o "$HOSTNAME" = "cobra"
-        -o "$HOSTNAME" = "pc-52-rh"]; then
-    GNOME3=true
-fi
 
 SESSKEY="/desktop/gnome/session"
 GSETTOOL="/usr/bin/gconftool-2"
