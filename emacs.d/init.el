@@ -86,7 +86,8 @@
 ;; (setq el-get-byte-compile nil)
 (el-get 'sync thi::packages)
 
-(load-theme 'naquadah)
+;; safe-theme question fix - see http://stackoverflow.com/questions/8545756/how-to-treat-solarized-as-a-safe-theme
+(load-theme 'naquadah t)
 
 (load "thi/defuns")
 (load "thi/global")
