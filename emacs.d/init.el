@@ -97,7 +97,8 @@
 (load "thi/projects")
 (load "thi/ido")
 (load "thi/ccmode")
-(load "thi/latex")
+;; I don't need a latex setup atm
+;;(load "thi/latex")
 (load "thi/recentf")
 (load "thi/nxml")
 (load "thi/compilation")
