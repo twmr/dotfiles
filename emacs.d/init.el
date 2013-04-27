@@ -23,16 +23,17 @@
     (eval-after-load (match-string-no-properties 1 file)
       `(load ,(concat thi::config-dir "/" file)))))
 
+(setq jedi:setup-keys t)
 
 (setq thi::packages
         '(auto-complete
           magit
           magithub
           git-modes
-          org-mode
+          ;;org-mode
           cmake-mode
           eassist
-          markdown-mode
+          ;;markdown-mode
           yaml-mode
           expand-region
           ace-jump-mode
@@ -45,14 +46,14 @@
           find-file-in-repository
           ethan-wspace
           smart-mode-line
-          undo-tree
+          ;; undo-tree
           lua-mode
-          minimap
+          ;;minimap
           evil
           python
           epc
           jedi
-          ;; gnuplot-mode ;; not needed atm
+          ;; gnuplot-mode
           iedit
           protobuf-mode
           ;;rainbow-mode

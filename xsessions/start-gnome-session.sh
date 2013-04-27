@@ -6,13 +6,8 @@
 
 MYWM=$1
 SHOW_DESKTOP=$2
-GNOME3=false
-
+GNOME3=true
 HOSTNAME=`hostname`
-if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" -o "$HOSTNAME" = "cobra"
-        -o "$HOSTNAME" = "pc-52-rh"]; then
-    GNOME3=true
-fi
 
 SESSKEY="/desktop/gnome/session"
 GSETTOOL="/usr/bin/gconftool-2"
@@ -48,7 +43,8 @@ if [ "$HOSTNAME" = "cobra" ]; then
 fi
 
 #required for matlab
-wmname LG3D
+#first checks if wmname is installed
+type -P wmanme &>/dev/null && wmname LG3D
 
 # The following is a simple hack to avoid starting
 # gnome-panel/metacity when awesome was supposed to be started. this

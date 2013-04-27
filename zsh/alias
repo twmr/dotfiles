@@ -89,6 +89,8 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     hash -d hwt=~strunk/HWCtrl
     hash -d hwb=~spoc/HWCtrl
     hash -d hwp=~sbranch/HWCtrl
+    hash -d tp1=~/gitrepos/tools/poc1
+    hash -d tp2=~/gitrepos/tools/poc2
 fi
 if [ "$HOSTNAME" = "cobra" ]; then
     hash -d pst=${HOME}/gitrepos/POC-scripts/trunk

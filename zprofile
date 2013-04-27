@@ -167,12 +167,12 @@ elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export PATH=/opt/hisch_deps/qtcreator-2.6.1/bin:${DOTFPATH}/bin:${EMBINPATH}:$GITR/nbconvert:$PATH
 
     PYSPU="linux-x86_64-2.7" #Python suffix
-    PYSPUDIR=${GITR}/pyspu/trunk
+    PYSPUDIR=${GITR}/pyspu.git/trunk
     PYSPULIB=${PYSPUDIR}/build/temp.${PYSPU}
     PYSPUPATH=${PYSPUDIR}/build/lib.${PYSPU}
 
-    #export PYTHONPATH=$PYSPUPATH:$PYTHONPATH
-    #export LD_LIBRARY_PATH=$PYSPULIB:$LD_LIBRARY_PATH
+    export PYTHONPATH=$PYSPUPATH #:$PYTHONPATH
+    export LD_LIBRARY_PATH=$PYSPULIB #:$LD_LIBRARY_PATH
 
 
     #TODO rename HWSimuEnv to hwsimuenv
