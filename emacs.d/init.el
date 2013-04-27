@@ -86,7 +86,8 @@
 ;; (setq el-get-byte-compile nil)
 (el-get 'sync thi::packages)
 
-;; safe-theme question fix - see http://stackoverflow.com/questions/8545756/how-to-treat-solarized-as-a-safe-theme
+;; safe-theme question fix
+;; see http://stackoverflow.com/questions/8545756/how-to-treat-solarized-as-a-safe-theme
 (load-theme 'naquadah t)
 
 (load "thi/defuns")
@@ -116,12 +117,4 @@
 ;; TODO activate this when you think you need it
 ;; (vendor 'auto-mark)
 
-;; keyboard scroll one line at a time
-;; http://www.emacswiki.org/emacs/SmoothScrolling
-;; -------------------------------------
-;; following commands do not work - still no smooth scrolling
-;; -- (setq scroll-step 1)
-;; -- (setq scroll-conservatively 10000)
-;; however this works: (still not as smooth as in vim :( )
-;;(vendor 'smooth-scrolling)
 (put 'dired-find-alternate-file 'disabled nil)

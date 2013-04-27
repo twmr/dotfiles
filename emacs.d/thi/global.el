@@ -75,7 +75,6 @@
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
-
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 (dolist (hook '(change-log-mode-hook log-edit-mode-hook))
@@ -305,7 +304,8 @@
 
 ;; taken from Julien Danjou
 (setq frame-title-format '("" invocation-name ": %b"))
-(setq scroll-step 1)
+;; keyboard scroll one line at a time
+(setq scroll-conservatively 10000)
 (setq visible-bell t)
 (setq-default fill-column 76)
 (setq user-full-name "Thomas Hisch")
