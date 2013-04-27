@@ -42,7 +42,7 @@
           smex
           dired+
           dired-details
-          replace+
+          ;;replace+
           find-file-in-repository
           ethan-wspace
           smart-mode-line
@@ -53,8 +53,8 @@
           python
           epc
           jedi
-          ;; gnuplot-mode
-          iedit
+          ;; gnuplot-mode ;; not needed atm
+          ;; iedit
           protobuf-mode
           ;;rainbow-mode
           ;;rainbow-delimiters

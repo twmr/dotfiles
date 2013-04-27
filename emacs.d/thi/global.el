@@ -276,7 +276,7 @@
 ; want to)
 ;;FIXME this does not work if evil command mode is active
 ;;TODO use a lambda which checks if command mode is active (if yes signals a visible-bell) if not calls mouse-yank-primary)
-(global-set-key [mouse-2] 'mouse-yank-primary)  ; make mouse middle-click only paste from primary X11 selection, not clipboard and kill ring.
+;; (global-set-key [mouse-2] 'mouse-yank-primary)  ; make mouse middle-click only paste from primary X11 selection, not clipboard and kill ring.
 
 ;; automatically indent yanked code
 ;; http://www.emacswiki.org/emacs/AutoIndentation
