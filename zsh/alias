@@ -13,6 +13,8 @@ alias mplayer='mplayer -idx'
 alias wget='wget --timeout 10'
 alias grep='grep --color=auto'
 
+alias pip='python-pip'
+
 #function call
 alias ex=extract_archive
 
