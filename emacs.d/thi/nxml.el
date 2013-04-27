@@ -1,4 +1,4 @@
-(load-library "rng-nxml")
+;;(load-library "rng-nxml")
 (add-to-list 'auto-mode-alist
               (cons (concat "\\." (regexp-opt '("xml" "xsd" "sch" "rng" "xslt" "svg" "rss") t) "\\'")
                     'nxml-mode))
