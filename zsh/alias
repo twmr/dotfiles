@@ -36,7 +36,7 @@ if [ "$BROWSER" ]; then
     alias -s {html,php,com,net,org,gov}="$BROWSER"
 fi
 # auto open regular files
-alias -s txt='vim'
+alias -s txt='e'
 alias -s pdf='evince'
 
 alias ev='evince'
@@ -54,10 +54,9 @@ fi
 
 consoleemacs="emacsclient -nw -a $embin"
 guiemacs="emacsclient -nc -a $embin"
-alias e="$guiemacs"
+alias E="$guiemacs"
+alias e="$consoleemacs"
 alias emacs="$embin"
-alias vim="$consoleemacs"
-alias uvim="/usr/bin/vim"
 
 alias ipycomp='(cd ${GITR}/ipython && git pull && ./setup.py build && sudo ./setup.py install)'
 alias ipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace'
@@ -68,15 +67,8 @@ alias v='vim'
 alias pgnup='gnuplot -persist'
 alias nautilus='nautilus --no-desktop'
 
-alias yu='sudo yum update'
-alias yr='sudo yum remove'
-alias ys='yum search'
-alias yi='sudo yum install'
-
-
 alias removepyc='rm `find . -iname "*.pyc"`'
 alias removelog='rm `find . -iname "*.log"`'
-
 
 #named directories
 HOSTNAME=`hostname`
@@ -98,7 +90,6 @@ if [ "$HOSTNAME" = "cobra" ]; then
 fi
 
 DOTFDIR=${GITR}/dotfiles
-hash -d d=/usr/share/doc
 hash -d conf=${HOME}/.config
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
