@@ -30,7 +30,7 @@
           magit
           magithub
           git-modes
-          ;;org-mode
+          org-mode
           cmake-mode
           eassist
           ;;markdown-mode
