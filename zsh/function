@@ -32,10 +32,9 @@ function ked() {
 function started() {
     if [ $# -gt 0 ]; then
         if [ "$1" = "-f" ]; then
-            date >> ~/.emacs.d/emacs-server.log
-            echo "$embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1"
-            $embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1
-            return;
+            echo "$embin --daemon"
+            $embin --daemon
+            return
         fi
     fi
 
@@ -44,9 +43,8 @@ function started() {
     if [ $RETVAL -eq 0 ]; then
         echo "emacs-daemon already running"
     else
-        date >> ~/.emacs.d/emacs-server.log
-        echo "$embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1"
-        $embin --daemon >> ~/.emacs.d/emacs-server.log 2>&1
+        echo "$embin --daemon"
+        $embin --daemon
     fi
 }
 
