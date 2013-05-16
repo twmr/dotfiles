@@ -24,7 +24,7 @@
  '(preview-scale-function 1.5)
  '(preview-transparent-color (quote (highlight :background)))
  '(recentf-exclude (quote ("COMMIT_EDITMSG" "session.*")))
- '(safe-local-variable-values (quote ((nxml-child-indent . 4) (TeX-master . t)))))
+ '(safe-local-variable-values (quote ((TeX-master . "manuscript.tex") (nxml-child-indent . 4) (TeX-master . t)))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
