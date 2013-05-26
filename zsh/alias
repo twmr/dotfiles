@@ -60,6 +60,7 @@ alias emacs="$embin"
 
 alias ipycomp='(cd ${GITR}/ipython && git pull && ./setup.py build && sudo ./setup.py install)'
 alias ipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace'
+alias imsipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace/ims'
 
 alias svim='sudo /usr/bin/vim'
 alias v='vim'
