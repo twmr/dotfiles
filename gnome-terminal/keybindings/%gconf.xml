@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<gconf>
+	<entry name="help" mtime="1369764105" type="string">
+		<stringvalue>disabled</stringvalue>
+	</entry>
+	<entry name="full_screen" mtime="1369764099" type="string">
+		<stringvalue>disabled</stringvalue>
+	</entry>
+</gconf>
