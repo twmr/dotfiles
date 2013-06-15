@@ -124,7 +124,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export MYMPI_BIN_PATH=/usr/lib64/openmpi/bin
 
     # for light-matter project
-    export PETSC_DIR=${GITR}/petsc-3.3-p3
+    export PETSC_DIR=${GITR}/petsc
     export PETSC_ARCH="arch-linux64-complex-fft-debug"
 
     export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1 --with-c2html=0"

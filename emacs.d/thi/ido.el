@@ -17,12 +17,12 @@
                           " [Too big]" " [Confirm]"))
   ;; the following two variables where commented out because
   ;; they are not useful in for diplaying completions vertically
-  ido-max-prospects 20              ; don't spam my minibuffer
+  ido-max-prospects 50              ; don't spam my minibuffer
   ;;ido-max-window-height 2
 
   ido-enable-last-directory-history t ; remember last used dirs
   ido-max-directory-size 100000 ; should be enough
-  ido-max-work-directory-list 30   ; should be enough
+  ido-max-work-directory-list 50   ; should be enough
   ido-max-work-file-list      50   ; remember many
   ido-use-filename-at-point nil    ; don't use filename at point (annoying)
   ido-use-url-at-point nil         ; don't use url at point (annoying)

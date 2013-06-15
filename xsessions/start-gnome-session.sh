@@ -33,7 +33,10 @@ pgrep -u $USER emacs > /dev/null || emacs --daemon &
 
 #international keyboard layout
 setxkbmap us altgr-intl
-xmodmap ~/.Xmodmap
+# xmodmap ~/.Xmodmap
+
+setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
+# setxkbmap -option ctrl:nocaps       # Make Caps Lock a Control key
 
 if [ "$HOSTNAME" = "cobra" ]; then
     # make the mouse work right on my thinkpad in fedora
