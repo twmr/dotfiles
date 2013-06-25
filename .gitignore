@@ -12,11 +12,11 @@ emacs.d/ac-comphist.dat
 emacs.d/tmp
 emacs.d/el-get
 emacs.d/elpa
+emacs.d/url
 emacs.d/abbrev_defs
-matplotlib/test_cache/
-matplotlib/tex.cache/
+matplotlib/test_cache
+matplotlib/tex.cache
 
 /matplotlib/fontList.cache
 /emacs.d/history
-/emacs.d/url/cookies
 /emacs.d/semanticdb
