@@ -324,7 +324,7 @@
 (delete-selection-mode 1)               ; Transient mark can delete/replace
 (global-hl-line-mode 1)                 ; Highlight the current line
 ;; (windmove-default-keybindings)        ; Move between frames with Shift+arrow
-(show-paren-mode t)
+;;(show-paren-mode t) ;; does not work with current emacs git master (Jun 2013)
 (url-handler-mode 1)                    ; Allow to open URL
 (mouse-avoidance-mode 'animate)         ; Move the mouse away
 (ffap-bindings)                         ; Use ffap
