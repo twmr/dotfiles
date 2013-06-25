@@ -132,7 +132,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
     # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
 
-    export SLEPC_DIR=${GITR}/slepc-3.3-p3
+    export SLEPC_DIR=${GITR}/slepc-dev
     # ./confgigure
 
     #PETSC4PY
