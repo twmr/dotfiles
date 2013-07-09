@@ -47,8 +47,8 @@
 (scroll-bar-mode -1)                    ; But no scrollbar
 
 (size-indication-mode)
-;;default font is now set in .Xdefaults
-;;(set-default-font "ProFont-9")
+;;default font is now set in .Xresources
+;; (set-default-font "ProFont-9")
 
 ;; JSON MODE FIX
 
