@@ -1,5 +1,97 @@
-Xft.antialias: true
-Xft.hinting:   true
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcdfilterlegacy
-Xft.rgba:      rgb
+Xft.antialias:          true
+Xft.hinting:            true
+Xft.hintstyle:          hintfull
+Xft.lcdfilter:          lcdfilterlegacy
+Xft.rgba:               rgb
+
+Xcursor.theme:          neutral
+
+Emacs.FontBackend:      xft
+Emacs.font:             ProFont-9
+!Emacs.font:             DejaVu Sans Mono:size=11
+!Emacs.font:             Sans-10
+!Emacs.menuBar:          off
+Emacs.verticalScrollBars: off
+Emacs.geometry:         100x70
+
+URxvt*geometry:         100x70
+URxvt*font:             xft:terminus:size=9
+URxvt*font:             xft:Profont:size=9
+
+URxvt*saveLines:        32767
+URxvt*scrollBar:        false
+URxvt*scrollBar_right:  true
+URxvt*loginShell:       true
+URxvt*shading:          10
+URxvt*transparent:      true
+URxvt*termName:         rxvt-unicode
+URxvt*secondaryScroll:  true
+!URxvt*perl-lib:         /usr/lib/urxvt/perl/
+!URxvt*perl-ext-common:  default,matcher,searchable-scrollback
+!URxvt*urlLauncher:      chromium-browser
+!URxvt*matcher.button:   1
+!URxvt*cutchars:         BACKSLASH '"'&()*,;<=>?@[]{|}
+
+!URxvt*visualBell:       true
+!URxvt*keysym.C-u:       perl:matcher
+!URxvt*urgentOnBell:     true
+!URxvt*inheritPixmap:    true
+urxvt*cursorColor:      #b092a4
+URxvt*tintColor:        #EEEEEE
+URxvt*background:       #000000
+URxvt*foreground:       #e1e2db
+URxvt.iconFile:         /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg
+
+!!! shiva
+*color0:              rgb:00/00/00
+*color1:              rgb:cd/5c/5c
+*color2:              rgb:27/CA/25
+*color3:              rgb:d2/b4/8c
+*color4:              rgb:5f/7b/8a
+*color5:              rgb:cd/cd/b4
+*color6:              rgb:68/68/68
+*color7:              rgb:ff/ff/ff
+*color8:              rgb:3C/3C/3C
+*color9:              rgb:D6/93/00
+*color10:             rgb:95/c7/49
+*color11:             rgb:cd/cd/c1
+*color12:             rgb:36/7F/C5
+*color13:             rgb:cd/cd/b4
+*color14:             rgb:77/87/98
+*color15:             rgb:ff/ff/ff
+
+
+xterm*internalBorder:        0
+xterm*loginShell:         true
+xterm*scrollBar:         false
+xterm*cursorBlink:       false
+!xterm*geometry:         80x26
+xterm*saveLines:         65535
+xterm*dynamicColors:        on
+xterm*highlightSelection: true
+! Catch URLs?
+xterm*charClass:     33:48,35-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,126:48
+! Appearance
+xterm*utf8:          2
+xterm*eightBitInput: true
+xterm*faceName:      terminus:pixelsize=12
+xterm*cursorColor:   #FFFFFF
+! Zenburn
+xterm*background:  #222222
+xterm*foreground:  #dcdccc
+xterm*color0:      #1E2320
+xterm*color1:      #705050
+xterm*color2:      #60b48a
+xterm*color3:      #dfaf8f
+xterm*color4:      #506070
+xterm*color5:      #dc8cc3
+xterm*color6:      #8cd0d3
+xterm*color7:      #dcdccc
+xterm*color8:      #709080
+xterm*color9:      #dca3a3
+xterm*color10:     #c3bf9f
+xterm*color11:     #f0dfaf
+xterm*color12:     #94bff3
+xterm*color13:     #ec93d3
+xterm*color14:     #93e0e3
+xterm*color15:     #ffffff

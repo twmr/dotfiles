@@ -16,9 +16,6 @@ GSETTOOL="/usr/bin/gconftool-2"
 if [ -f $HOME/.Xresourses ]; then
   xrdb -merge $HOME/.Xresources
 fi
-if [ -f $HOME/.Xdefaults ]; then
-  xrdb -merge $HOME/.Xdefaults
-fi
 
 # TODO: when is it better to start apps here and when is it better to
 # put the apps in .config/autostart and start it using a session
