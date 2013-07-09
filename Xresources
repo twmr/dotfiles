@@ -14,10 +14,13 @@ Emacs.font:             ProFont-9
 Emacs.verticalScrollBars: off
 Emacs.geometry:         100x70
 
+!!!!!!!!!!!!
+!!! make sure that you have installed the rxvt-unicode-256-ml package in fedora
+!!! then do 'sudo ln -sf /usr/bin/urxvt256c-ml /usr/bin/urxvt'
+!!!!!!!!!!!!
 URxvt*geometry:         100x70
 URxvt*font:             xft:terminus:size=9
-URxvt*font:             xft:Profont:size=9
-
+! URxvt*font:             xft:Profont:size=9
 URxvt*saveLines:        32767
 URxvt*scrollBar:        false
 URxvt*scrollBar_right:  true
