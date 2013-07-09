@@ -17,6 +17,8 @@ Emacs.geometry:         100x70
 !!!!!!!!!!!!
 !!! make sure that you have installed the rxvt-unicode-256-ml package in fedora
 !!! then do 'sudo ln -sf /usr/bin/urxvt256c-ml /usr/bin/urxvt'
+!!! then check that you see all colors with
+!!! (x=`tput op` y=`printf %76s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done)
 !!!!!!!!!!!!
 URxvt*geometry:         100x70
 URxvt*font:             xft:terminus:size=9
