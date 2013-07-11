@@ -85,12 +85,12 @@ if [ "$HOSTNAME" = "mustang" ]; then
 
     #PETSC4PY
     PSUFF="linux-x86_64-2.7" #Python suffix
-    PETSCPY_DIR=${MYSRCDIR}/petsc4py-1.2
+    export PETSC4PY_DIR=${MYSRCDIR}/petsc4py-1.2
     P4PYLIB=${PETSCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
     P4PYPATH=${PETSCPY_DIR}/build/lib.${PYSUFF} #/petsc4py
 
     #SLEPC4PY
-    SLEPCPY_DIR=${MYSRCDIR}/slepc4py-1.2
+    export SLEPC4PY_DIR=${MYSRCDIR}/slepc4py-1.2
     S4PYLIB=${SLEPCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
     S4PYPATH=${SLEPCPY_DIR}/build/lib.${PYSUFF} #/slepc4py
 
@@ -137,12 +137,12 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     #PETSC4PY
     PSUFF="linux-x86_64-2.7" #Python suffix
-    PETSCPY_DIR=${GITR}/petsc4py
+    export PETSC4PY_DIR=${GITR}/petsc4py
     P4PYLIB=${PETSCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
     P4PYPATH=${PETSCPY_DIR}/build/lib.${PYSUFF} #/petsc4py
 
     #SLEPC4PY
-    SLEPCPY_DIR=${GITR}/slepc4py
+    export SLEPC4PY_DIR=${GITR}/slepc4py
     S4PYLIB=${SLEPCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
     S4PYPATH=${SLEPCPY_DIR}/build/lib.${PYSUFF} #/slepc4py
 
@@ -272,13 +272,13 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     #./configure  #suffices
 
     #PETSC4PY
-    PETSCPY_DIR=${MYSRCDIR}/petsc4py-dev
+    export PETSC4PY_DIR=${MYSRCDIR}/petsc4py-dev
     # P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
     P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/$PETSC_ARCH/src
     P4PYPATH=${PETSCPY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
 
     #SLEPC4PY
-    SLEPCPY_DIR=${MYSRCDIR}/slepc4py-dev
+    export SLEPC4PY_DIR=${MYSRCDIR}/slepc4py-dev
     # S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
     S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-intel-cxx-debug/src
     S4PYPATH=${SLEPCPY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
