@@ -38,7 +38,8 @@
           expand-region
           ace-jump-mode
           yasnippet
-          naquadah-theme
+          ;; naquadah-theme
+          solarized-theme
           smex
           dired+
           dired-details
@@ -88,7 +89,8 @@
 
 ;; safe-theme question fix
 ;; see http://stackoverflow.com/questions/8545756/how-to-treat-solarized-as-a-safe-theme
-(load-theme 'naquadah t)
+;; (load-theme 'naquadah t)
+(load-theme 'solarized-light t)
 
 (load "thi/defuns")
 (load "thi/global")
