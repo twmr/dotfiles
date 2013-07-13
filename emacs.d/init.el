@@ -47,7 +47,7 @@
           find-file-in-repository
           ethan-wspace
           smart-mode-line
-          ;; undo-tree
+          undo-tree
           lua-mode
           ;;minimap
           evil
