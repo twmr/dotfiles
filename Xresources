@@ -20,7 +20,7 @@ Emacs.geometry:         100x70
 !!! then check that you see all colors with
 !!! (x=`tput op` y=`printf %76s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done)
 !!!!!!!!!!!!
-URxvt*geometry:         100x70
+URxvt*geometry:         70x50
 URxvt*font:             xft:terminus:size=9
 ! URxvt*font:             xft:Profont:size=9
 URxvt*saveLines:        32767
