@@ -18,6 +18,9 @@ autoload -U zcalc # for mathhhh
 HISTFILE=~/.zsh/history
 HISTSIZE=5000
 SAVEHIST=5000
+setopt hist_allow_clobber      # use key-up (one up in history) to overwrite files (noclobber files)
+setopt hist_reduce_blanks
+setopt hist_ignore_space
 
 # type a dir's name to cd into it
 compctl -/ cd
@@ -31,9 +34,6 @@ setopt ignoreeof
 setopt interactivecomments
 setopt banghist
 setopt noclobber
-setopt hist_allow_clobber      # use key-up (one up in history) to overwrite files (noclobber files)
-setopt hist_reduce_blanks
-setopt hist_ignore_space
 setopt SH_WORD_SPLIT
 setopt nobeep                  # i hate beeps
 setopt automenu
