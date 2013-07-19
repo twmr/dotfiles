@@ -8,7 +8,6 @@ alias mv='mv -v --backup=existing'
 alias mmv='noglob zmv -W'
 alias rm='rm -v'
 alias cp='cp -v'
-alias firefox='/usr/bin/firefox'
 alias mplayer='mplayer -idx'
 alias wget='wget --timeout 10'
 alias grep='grep --color=auto'
@@ -21,7 +20,7 @@ alias ex=extract_archive
 # basics
 #alias c='clear'
 alias l='ls -la'
-#alias ll='ls -ahl --color | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -al | egrep \"^drw\" | wc -l` \e[1;32m|\e[1;35m Files: \e[1;31m`ls -al | egrep -v \"^drw\" | grep -v total | wc -l` \e[1;32m]--"'
+alias ll='ls -ahl --color | more; echo "\e[1;32m --[\e[1;34m Dirs:\e[1;36m `ls -al | egrep \"^drw\" | wc -l` \e[1;32m|\e[1;35m Files: \e[1;31m`ls -al | egrep -v \"^drw\" | grep -v total | wc -l` \e[1;32m]--"'
 alias cdc='cd; clear'
 #alias ls='ls -hF -a --color=auto'
 
@@ -69,8 +68,8 @@ alias v='vim'
 alias pgnup='gnuplot -persist'
 alias nautilus='nautilus --no-desktop'
 
-alias removepyc='rm `find . -iname "*.pyc"`'
-alias removelog='rm `find . -iname "*.log"`'
+alias removepyc='rm -f `find . -iname "*.pyc"`'
+alias removelog='rm -f`find . -iname "*.log"`'
 
 #named directories
 HOSTNAME=`hostname`
