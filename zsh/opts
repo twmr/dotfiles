@@ -21,6 +21,7 @@ SAVEHIST=5000
 setopt hist_allow_clobber      # use key-up (one up in history) to overwrite files (noclobber files)
 setopt hist_reduce_blanks
 setopt hist_ignore_space
+setopt histverify              # when using ! cmds, confirm first
 
 # type a dir's name to cd into it
 compctl -/ cd
@@ -40,11 +41,14 @@ setopt automenu
 setopt autopushd               # automatically append dirs to the push/pop list
 setopt pushdignoredups         # and don't duplicate them
 setopt cdablevars              # avoid the need for an explicit $
-setopt nohup                   # and don't kill them, either
+
+
+setopt nohup                   # don't kill child processes of the current zsh when the zsh process is killed
+
+
 setopt nolisttypes             # show types in completion
 setopt extendedglob            # weird & wacky pattern matching - yay zsh!
 setopt completeinword          # not just at the end
 setopt alwaystoend             # when complete from middle, move cursor
 setopt nopromptcr              # don't add \n which overwrites cmds with no \n
-setopt histverify              # when using ! cmds, confirm first
 setopt interactivecomments     # escape commands so i can use them later
