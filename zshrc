@@ -51,3 +51,4 @@ source $ZSH/oh-my-zsh.sh
 . ~/.zsh/alias
 . ~/.zsh/keybindings
 . ~/.zsh/prompt
+setopt nohup                   # don't kill child processes of the current zsh when the zsh process is killed
