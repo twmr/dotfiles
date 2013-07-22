@@ -39,7 +39,7 @@
           ace-jump-mode
           yasnippet
           ;; naquadah-theme
-          solarized-theme
+          color-theme-solarized
           smex
           dired+
           dired-details
