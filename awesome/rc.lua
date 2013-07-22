@@ -61,7 +61,7 @@ settings.browser1 = browser
 settings.browser2 = 'chromium-browser'
 settings.editor = 'emacsclient -n -c'
 settings.editor2 = 'gvim'
-settings.filemanager = 'nautilus ' .. home
+settings.filemanager = 'nemo ' .. home
 settings.music = 'rhythmbox'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
@@ -119,7 +119,7 @@ if screen.count() == 1 then
    monitors.prim = 1
    monitors.seond = 1
    tags = {
-      namessecond  = { "doc","vsc","web","qtc", "nonuni",6,7,8,9}
+      namessecond  = { "doc","vsc","web","qtc","nonuni",6,7,8,9}
    }
 end
 
