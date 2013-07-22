@@ -7,10 +7,10 @@ Xft.rgba:               rgb
 Xcursor.theme:          neutral
 
 Emacs.FontBackend:      xft
-Emacs.font:             ProFont-9
-!Emacs.font:             DejaVu Sans Mono:size=11
-!Emacs.font:             Sans-10
-!Emacs.menuBar:          off
+!Emacs.font:             ProFont-9
+Emacs.font:             DejaVu Sans Mono:size=11
+! Emacs.font:             Sans-10
+! Emacs.menuBar:          off
 Emacs.verticalScrollBars: off
 Emacs.geometry:         100x70
 
