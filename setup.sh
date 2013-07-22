@@ -3,16 +3,13 @@
 
 pwd=$PWD
 filename=`basename $0`
-excludes=".gitignore .gitmodules laptop-settings.sh $filename xsessions/ make.conf"
+excludes=".gitignore .gitmodules laptop-settings.sh $filename xsessions/ gentoo xinitrc.opensuse"
+confdirs="awesome gnome-terminal"
+
 hostname=`hostname`
-ONVSC=`hostname | egrep '(l01|r[0-9]+{2}n[0-9]+{2})' `
 
 if test ${hostname} == "thisch"; then
     excludes = "${exlcudes} vpnc/"
-fi
-
-if [ -z "$ONVSC" ]; then
-    excludes = "${exlcudes} bash_profile bash_rc"
 fi
 
 for file in `git ls-files | sed 's/\/.*/\//' | uniq`; do
@@ -24,7 +21,6 @@ for file in `git ls-files | sed 's/\/.*/\//' | uniq`; do
             break
         fi
     done
-
     if test $skip -eq 1; then
         continue
     fi
@@ -38,6 +34,27 @@ for file in `git ls-files | sed 's/\/.*/\//' | uniq`; do
 
     #strip last slash (directories) from filename
     file=${file%/}
+
+    skip=0
+    for cdir in $confdirs; do
+        if test $file = $cdir; then
+            if ! test -e "$HOME/.config/$file"; then
+                echo ln -s "$pwd/$file" "$HOME/.$file"
+                ln -s "$pwd/$file" "$HOME/.$file"
+                #todo test if it points to correct directory/file
+            elif ! test -L "$HOME/.config/$file"; then
+                echo "$HOME/.config/$file already exists but is not a symbolic link - don't know what to do"
+            else
+                echo "$HOME/.config/$file already exists"
+                #todo Overwrite it [y]n ....
+            fi
+            skip=1
+            break
+        fi
+    done
+    if test $skip -eq 1; then
+        continue
+    fi
 
     if ! test -e "$HOME/.$file"; then
         if test $file = "gtk-bookmarks"; then
