@@ -38,14 +38,16 @@ for file in `git ls-files | sed 's/\/.*/\//' | uniq`; do
     skip=0
     for cdir in $confdirs; do
         if test $file = $cdir; then
-            if ! test -e "$HOME/.config/$file"; then
-                echo ln -s "$pwd/$file" "$HOME/.$file"
-                ln -s "$pwd/$file" "$HOME/.$file"
+            src="$pwd/$file"
+            dst="$HOME/.config/$file"
+            if ! test -e $dst; then
+                echo ln -s  $src $dst
+                ln -s $src $dst
                 #todo test if it points to correct directory/file
-            elif ! test -L "$HOME/.config/$file"; then
-                echo "$HOME/.config/$file already exists but is not a symbolic link - don't know what to do"
+            elif ! test -L $dst; then
+                echo "$dst already exists but is not a symbolic link - don't know what to do"
             else
-                echo "$HOME/.config/$file already exists"
+                echo "$dst already exists"
                 #todo Overwrite it [y]n ....
             fi
             skip=1
