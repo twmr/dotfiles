@@ -90,10 +90,8 @@ if beautiful.wallpaper then
 end
 -- }}}
 
-
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-
 
 if hostname == "pc-52-rh" then
    monitors = {
@@ -101,9 +99,12 @@ if hostname == "pc-52-rh" then
       second = 2
    }
    tags = {
-      namessecond  = { "doc","vsc","web","qtc", "nonuni",6,7,8,9 },
-      names  = { "vsc",2,3,4,5,6,7,8,9 }
+      namessecond  = { "main","loader","web","scripts",5,"remote",7,8,9 },
+      names  = { "mail","emacs","hvgui",4,5,6,7,8,9 }
    }
+   lockcmd = "xscreensaver-command -lock"
+   defaultlayoutidmon2 = 3
+   defaultlayoutidmon1 = 1
 else
    monitors = {
       prim = 2,
@@ -113,21 +114,24 @@ else
       names  = { "doc","vsc","web","qtc", "mail", "nonuni",7,8,9 },
       namessecond  = { "vsc",2,3,4,5,6,7,8,9 }
    }
+   lockcmd = "gnome-screensaver-command -l"
+   defaultlayoutidmon2 = 1
+   defaultlayoutidmon1 = 1
 end
 
 if screen.count() == 1 then
    monitors.prim = 1
    monitors.seond = 1
    tags = {
-      namessecond  = { "doc","vsc","web","qtc","nonuni",6,7,8,9}
+      namessecond  = { "doc","vsc","web","qtc", "nonuni",6,7,8,9}
    }
 end
 
 for s = 1, screen.count() do
    if s > 1 then
-     tags[s] = awful.tag(tags.names, s, layouts[1])
+     tags[s] = awful.tag(tags.names, s, layouts[defaultlayoutidmon2])
    else
-     tags[s] = awful.tag(tags.namessecond, s, layouts[1])
+     tags[s] = awful.tag(tags.namessecond, s, layouts[defaultlayoutidmon1])
    end
    awful.tag.setproperty(tags[s][5], "mwfact", 0.13)
 end
@@ -139,7 +143,7 @@ myawesomemenu = {
    { "manual", settings.term .. " -e man awesome" },
    { "edit config", settings.editor .. " " .. awesome.conffile },
    { "restart", awesome.restart },
-   { "lock screen", "gnome-screensaver-command -l" },
+   { "lock screen", lockcmd },
    { "quit",  function ()
       awesome.quit()
       exec("gnome-session-quit --logout")
@@ -313,6 +317,8 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "space", function () awful.layout.inc(layouts, -1) end),
 
     awful.key({ modkey, "Control" }, "n", awful.client.restore),
+
+    awful.key({ "Control", altkey }, "l",     function () exec(lockcmd)                 end),
 
     -- Prompt
     awful.key({ modkey },            "r",     function () exec("gnome-do")           end),
