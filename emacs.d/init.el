@@ -39,8 +39,10 @@
           ace-jump-mode
           yasnippet
           ;; naquadah-theme
-          color-theme-solarized
+          solarized-theme
+          flx
           smex
+          ;; flycheck
           dired+
           dired-details
           ;;replace+
