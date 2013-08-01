@@ -31,6 +31,7 @@
           eassist
           ;;markdown-mode
           yaml-mode
+          js2-mode
           expand-region
           ace-jump-mode
           yasnippet
@@ -56,9 +57,9 @@
           ;; iedit
           protobuf-mode
           ;;rainbow-mode
-          ;;rainbow-delimiters
+          rainbow-delimiters
           highlight-indentation
-          browse-kill-ring
+          ;; browse-kill-ring
           ;; textlint ;; not needed atm
           ;; nognus
           ;; go-mode
