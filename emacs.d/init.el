@@ -14,17 +14,12 @@
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 
-;; TODO move this to jedi specific config
-(setq jedi:setup-keys t)
-
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
 (dolist (file (directory-files thi::config-dir))
   (when (string-match (format "^\\(.+\\)\\.conf\\.el$") file)
     (eval-after-load (match-string-no-properties 1 file)
       `(load ,(concat thi::config-dir "/" file)))))
-
-(setq jedi:setup-keys t)
 
 (setq thi::packages
         '(auto-complete
