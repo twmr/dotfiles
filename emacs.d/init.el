@@ -1,4 +1,5 @@
-;; -*- coding: utf-8 -*-
+;;; personal-emacs-contig --- by thomas hisch
+
 ;; (setq debug-on-error t)
 
 (dolist (p '("" "/vendor" "/el-get/el-get"))
