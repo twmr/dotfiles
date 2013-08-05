@@ -19,6 +19,9 @@
                                   latex-mode
                                   wl-summary-mode
                                   compilation-mode))
+
+;; this function is required otherwise linum-disabled-modes-list is not
+;; taken into account
 (defun linum-on ()
     (unless (or (minibufferp) (member major-mode linum-disabled-modes-list)
               (string-match "*" (buffer-name))
