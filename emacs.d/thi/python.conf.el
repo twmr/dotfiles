@@ -18,5 +18,11 @@
 
 ;; (add-hook 'python-mode-hook
 ;;              (lambda() (setq ac-sources '(ac-source-python))))
+
+
+;;force loading of python-cell-mode
+(require 'python-cell)
+
 (add-hook 'python-mode-hook #'lambda-mode 1)
 (add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'python-mode-hook #'python-cell-mode 1)

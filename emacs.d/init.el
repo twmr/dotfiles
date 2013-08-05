@@ -50,6 +50,7 @@
           lua-mode
           ;;minimap
           evil
+          python-cell
           python
           epc
           jedi
