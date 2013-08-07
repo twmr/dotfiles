@@ -156,6 +156,7 @@
  ;; If there is more than one, they won't work right.
  '(ido-first-match ((t (:foreground "#ad7f8a" :weight bold))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "DarkGoldenrod1"))))
+ '(python-cell ((t (:inherit highlight :background "gray94"))))
  '(tabbar-default ((t (:background "gray17" :foreground "gray" :height 0.9 :family "Mono"))) t)
  '(tabbar-selected ((t (:inherit tabbar-default :foreground "gold" :box (:line-width 1 :color "white" :style pressed-button)))) t))
  ;; '(tabbar-button ((t (:foreground "#ad7f8a"))))
