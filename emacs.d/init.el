@@ -26,6 +26,7 @@
           magit
           magithub
           git-modes
+          calfw
           ;;org-mode
           cmake-mode
           eassist
@@ -108,6 +109,8 @@
 ;; (load "thi/matlab") ;; not needed ATM
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
+
+(load-library 'calfw-cal)
 
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
