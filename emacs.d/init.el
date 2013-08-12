@@ -110,7 +110,7 @@
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
 
-(load-library 'calfw-cal)
+(load-library "calfw-cal")
 
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
