@@ -6,13 +6,13 @@
 ;; How to Define Keyboard Shortcuts in Emacs
 ;; http://xahlee.org/emacs/keyboard_shortcuts.html
 
-;; FIXME, this is used for testing purposes only
-(global-set-key [f1] 'yas/expand)
+(global-set-key [f1] 'query-replace)
+;; (global-set-key [f1] 'yas/expand)
 (global-set-key [f2] 'hippie-expand)
-(global-set-key [f3] 'dabbrev-expand)
+;; (global-set-key [f3] 'dabbrev-expand)
 
 
-(global-set-key [f4] 'query-replace)
+;; (global-set-key [f4] 'query-replace)
 (global-set-key [f5] 'magit-grep)
 (global-set-key [f6] 'magit-status)
 (global-set-key [f7] 'open-file-at-cursor)

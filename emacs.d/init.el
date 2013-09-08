@@ -26,11 +26,11 @@
           magit
           magithub
           git-modes
-          calfw
+          ;; calfw
           ;;org-mode
           cmake-mode
           eassist
-          ;;markdown-mode
+          markdown-mode
           yaml-mode
           js2-mode
           expand-region
@@ -66,7 +66,7 @@
           ;; nognus
           ;; go-mode
           el-get
-          multi-term
+          ;; multi-term
           browse-kill-ring
           goto-last-change
           idle-highlight-mode
@@ -110,7 +110,7 @@
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
 
-(load-library "calfw-cal")
+;; (load-library "calfw-cal")
 
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded

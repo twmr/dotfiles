@@ -30,3 +30,13 @@
 (add-hook 'python-mode-hook #'lambda-mode 1)
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook #'python-cell-mode 1)
+
+;; TESTING CODE
+;; (font-lock-add-keywords 'python-mode `(("\\<\\(TEST\\)"
+;;                                         1 '(:weight bold :overline t) prepend)))
+;; (font-lock-add-keywords 'python-mode `((
+;;                                         ,(rx line-start (* space)
+;;                                              (group (and "#" (or (and "#" (* (not (any "\n"))))
+;;                                                                  (and " <" (or "codecell" "markdowncell") ">"))
+;;                                                          line-end)))
+;;                                         1 '(:weight bold :overline t) prepend)))
