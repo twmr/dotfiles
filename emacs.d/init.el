@@ -78,6 +78,7 @@
           browse-kill-ring
           goto-last-change
           idle-highlight-mode
+          window-numbering
           mmm-mode))
 
 ;; Require el-get to install packages
@@ -117,6 +118,10 @@
 ;; (load "thi/matlab") ;; not needed ATM
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
+
+(custom-set-faces '(window-numbering-face
+                    ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
+(window-numbering-mode 1)
 
 ;; (load-library "calfw-cal")
 
