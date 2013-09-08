@@ -6,6 +6,11 @@
    =F11= open recent files (uses recentf-list)
    =F12= dired directory open  (uses thi::directory-list)
 
+*** ido-find-file (C-x f)
+    =C-f= switches to the default find-file interface
+    (from there =C-m= can be used to open the CWD in dired)
+    =C-d= open the dired-buffer
+
 ** Function Keys
    =F5= magit grep
    =F6= magit status
