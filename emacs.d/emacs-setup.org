@@ -1,0 +1,12 @@
+
+* Key Bindings
+
+** IDO Mode
+   =S-F11= open recent directories (uses recentf-list)
+   =F11= open recent files (uses recentf-list)
+   =F12= dired directory open  (uses thi::directory-list)
+
+** Function Keys
+   =F5= magit grep
+   =F6= magit status
+   =F7= open file at cursor
