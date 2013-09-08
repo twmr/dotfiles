@@ -2,6 +2,12 @@
 
 ;; (setq debug-on-error t)
 
+(package-initialize)
+(require 'keyfreq)
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+;; use keyfreq-show to see how many times you used a command.
+
 (dolist (p '("" "/vendor" "/el-get/el-get"))
   (add-to-list 'load-path (expand-file-name
                            (concat user-emacs-directory p))))
