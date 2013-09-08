@@ -50,7 +50,9 @@
           undo-tree
           lua-mode
           ;;minimap
+          evil-leader
           evil
+          evil-numbers
           python-cell
           python
           epc
