@@ -33,7 +33,7 @@
           magithub
           git-modes
           ;; calfw
-          ;;org-mode
+          org-mode
           cmake-mode
           eassist
           markdown-mode
@@ -80,6 +80,10 @@
           idle-highlight-mode
           window-numbering
           mmm-mode))
+
+(when (string= system-name "pc-52-rh")
+  (delete 'org-mode thi::packages)
+  (delete 'markdown-mode thi::packages))
 
 ;; Require el-get to install packages
 (unless (require 'el-get nil t)
