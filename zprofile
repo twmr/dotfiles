@@ -175,6 +175,7 @@ elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     # export LD_LIBRARY_PATH=$PYSPULIB #:$LD_LIBRARY_PATH
 
 
+    export PYTHONPATH=${GITR}/pyspu.git/trunk
     #TODO rename HWSimuEnv to hwsimuenv
     export HWSIMUENV=${GITR}/HWSimuEnv
     export TOOLSREPO=${GITR}/tools
