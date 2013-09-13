@@ -82,7 +82,7 @@
           window-numbering
           mmm-mode))
 
-(when (string= system-name "pc-52-rh")
+(when (string= system-name "pc-52-rh.ims.co.at")
   (delete 'org-mode thi::packages)
   (delete 'markdown-mode thi::packages))
 
