@@ -2,12 +2,6 @@
 
 ;; (setq debug-on-error t)
 
-(package-initialize)
-(require 'keyfreq)
-(keyfreq-mode 1)
-(keyfreq-autosave-mode 1)
-;; use keyfreq-show to see how many times you used a command.
-
 (dolist (p '("" "/vendor" "/el-get/el-get"))
   (add-to-list 'load-path (expand-file-name
                            (concat user-emacs-directory p))))
@@ -19,6 +13,13 @@
 (setq custom-file (concat thi::config-dir "/custom.el"))
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
+
+(package-initialize)
+(require 'keyfreq)
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+;; use keyfreq-show to see how many times you used a command.
+
 
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
