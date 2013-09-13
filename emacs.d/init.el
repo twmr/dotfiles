@@ -30,8 +30,9 @@
 
 (setq thi::packages
         '(auto-complete
+          git-modes
           magit
-          magithub
+          ;; magithub
           git-modes
           ;; calfw
           org-mode
