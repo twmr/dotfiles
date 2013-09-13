@@ -99,7 +99,7 @@ if hostname == "pc-52-rh" then
       second = 2
    }
    tags = {
-      namessecond  = { "main","loader","web","scripts",5,"remote",7,8,9 },
+      namessecond  = { "main","loader","web","scripts",5,"remote","vm",8,9 },
       names  = { "mail","emacs","hvgui",4,5,6,7,8,9 }
    }
    lockcmd = "xscreensaver-command -lock"
@@ -335,16 +335,27 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "n",
-        function (c)
-            -- the client currently has the input focus, so it cannot be
-            -- minimized, since minimized clients can't have the focus.
-            c.minimized = true
-        end),
+              function (c)
+                 -- the client currently has the input focus, so it cannot be
+                 -- minimized, since minimized clients can't have the focus.
+                 c.minimized = true
+    end),
     awful.key({ modkey,           }, "m",
-        function (c)
-            c.maximized_horizontal = not c.maximized_horizontal
-            c.maximized_vertical   = not c.maximized_vertical
-        end)
+              function (c)
+                 c.maximized_horizontal = not c.maximized_horizontal
+                 c.maximized_vertical   = not c.maximized_vertical
+    end),
+
+    awful.key({ modkey }, "`",
+              function (c)
+                 if awful.client.floating.get(c) then
+                    awful.client.floating.delete(c)
+                    -- awful.titlebar.remove(c)
+                 else
+                    awful.client.floating.set(c, true)
+                    -- awful.titlebar.add(c)
+                 end
+    end)
 )
 
 -- {{{ Key bindings
@@ -630,23 +641,23 @@ awful.rules.rules = {
    --  --   callback = awful.client.setmaster
    --  -- },
 
-   --  -- matlab/matplotlib
-   --  --{ rule = { name = "Figure .*" },
-   --  --  properties = { floating = true, tag = tags[monitors.prim][2] },
-   --  --  callback = awful.titlebar.add
-   --  --},
+    -- matlab/matplotlib
+    { rule = { name = "Figure .*" },
+     properties = { floating = true },
+     callback = awful.titlebar.add
+    },
    --  -- { rule = { class = "Gnome-Control-Center" instance = "gnome-control-center" },
    --  --  properties = { floating = true }, callback = awful.titlebar.add
    --  --},
    --  { rule = { class = "Virt-manager", instance = "virt-manager" },
    --    properties = { floating = true }
    --  },
-   --  { rule = { class = "Thunderbird", instance = "Mail" },
-   --    properties = { tag = tags[monitors.prim][5] }
-   --  },
-   --  -- { rule = { class = "Emacs", instance = "emacs" },
-   --  --   properties = { tag = tags[monitors.prim][2] }
-   --  -- },
+    { rule = { class = "Thunderbird", instance = "Mail" },
+      properties = { tag = tags[monitors.second][1] }
+    },
+    -- { rule = { class = "Emacs", instance = "emacs" },
+    --   properties = { tag = tags[monitors.second][2] }
+    -- },
    --  { rule = { class = "Emacs", instance = "_Remember_" },
    --    properties = { floating = true }, callback = awful.titlebar.add
    --  },
@@ -756,8 +767,17 @@ client.connect_signal("manage", function (c, startup)
     end
 end)
 
-client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
-client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
+client.connect_signal("focus",
+                      function(c)
+                         c.border_color = beautiful.border_focus
+                      end)
+client.connect_signal("unfocus",
+                      function(c)
+                         c.border_color = beautiful.border_normal
+                      end)
+-- }}}
+
+
 -- }}}
 
 
