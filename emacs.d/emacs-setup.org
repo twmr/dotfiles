@@ -1,6 +1,4 @@
-
 * Key Bindings
-
 ** IDO Mode
    =S-F11= open recent directories (uses recentf-list)
    =F11= open recent files (uses recentf-list)
@@ -15,3 +13,14 @@
    =F5= magit grep
    =F6= magit status
    =F7= open file at cursor
+** python development
+*** yasnippet python snippets
++ class *suppa*
++ def
++ ifmain
++ for
++ while
++ defm (was ist der unterschied zu def ??)
++ ipdb
+*** movement commands
++ TODO
