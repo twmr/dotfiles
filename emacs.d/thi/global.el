@@ -74,7 +74,9 @@
         org-mode-hook
         edit-server-start-hook
         markdown-mode-hook))
-  (add-hook hook (lambda () (variable-pitch-mode t))))
+  (add-hook hook (lambda () (progn
+                              (variable-pitch-mode t)
+                              (wrap-column-mode)))))
 
 ;; Go into proper mode according to file extension
 (setq auto-mode-alist

@@ -123,3 +123,28 @@ This command is similar to `find-file-at-point' but without prompting for confir
                 (find-file (concat path ".el"))
               (when (y-or-n-p (format "file doesn't exist: 「%s」. Create?" path) )
                 (find-file path )) ) ) ) ) ))
+
+;; from https://gist.github.com/sabof/5383987
+(defun wc/narrow-window ()
+  (let (( new-right
+          (max 0 (+ (or (cdr (window-margins)) 0)
+                    (- (window-body-width) fill-column)))))
+    (set-window-margins nil (car (window-margins)) new-right)
+    (set-window-fringes nil (car (window-fringes)) 2)))
+
+(define-minor-mode wrap-column-mode
+    "Wrap the text at `fill-column'.
+Works by adjusting the right margin."
+  nil nil nil
+  (if wrap-column-mode
+      (progn
+        (visual-line-mode 1)
+        (add-hook 'window-configuration-change-hook
+                  'wc/narrow-window nil t)
+        (wc/narrow-window))
+      (progn
+        (remove-hook 'window-configuration-change-hook
+                     'wc/narrow-window t)
+        (set-window-margins nil (car (window-margins)) nil)
+        (set-window-fringes nil (car (window-fringes))
+                                (car (window-fringes))))))
