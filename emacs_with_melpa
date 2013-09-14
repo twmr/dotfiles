@@ -1,0 +1,166 @@
+;; -*- mode: lisp -*-
+
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(package-initialize)
+
+;; (helm-mode 1)
+;; (global-set-key (kbd "C-c h") 'helm-mini)
+;; (global-set-key (kbd "C-c g") 'helm-git-grep)
+
+(defvar prelude-packages
+  '(auto-complete
+    solarized-theme
+    eldoc
+    evil
+    magit
+    flx-ido)
+  "A list of packages to ensure are installed at launch.")
+
+;; TODO rewirte prelude-packages-installed-p s.t. it does not required "cl"
+(require 'cl-lib)
+(require 'cl)
+(defun prelude-packages-installed-p ()
+  (loop for p in prelude-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
+
+(unless (prelude-packages-installed-p)
+  ;; check for new packages (package versions)
+  (message "%s" "Emacs Prelude is now refreshing its package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ;; install the missing packages
+  (dolist (p prelude-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+(load-theme 'solarized-light t)
+
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(setq inhibit-startup-screen t)
+(setq default-indicate-empty-lines nil)
+
+(ido-mode 'both) ;; for buffers and files
+(flx-ido-mode)
+(evil-mode 1)
+
+;; Original idea from
+;; http://www.opensubscriber.com/message/emacs-devel@gnu.org/10971693.html
+(defun comment-dwim-line (&optional arg)
+  "Replacement for the comment-dwim command.
+        If no region is selected and current line is not blank and we are not at the end of the line,
+        then comment current line.
+        Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+
+(eval-after-load 'magit
+  '(progn
+     ;; Subtler highlight
+     ;; (set-face-background 'magit-item-highlight "#121212")
+     ;; (set-face-background 'diff-file-header "#121212")
+     ;; (set-face-foreground 'diff-context "#666666")
+     ;; (set-face-foreground 'diff-added "#00cc33")
+     ;; (set-face-foreground 'diff-removed "#ff0000")
+     
+     ;; full screen magit-status
+     (defadvice magit-status (around magit-fullscreen activate)
+       (window-configuration-to-register :magit-fullscreen)
+       ad-do-it
+       (delete-other-windows))
+     
+     (defun magit-quit-session ()
+       "Restores the previous window configuration and kills the magit buffer"
+       (interactive)
+       (kill-buffer)
+       (jump-to-register :magit-fullscreen))
+     (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+     
+     (defadvice git-commit-commit (after delete-window activate)
+       (delete-window))
+     )
+)
+
+(require 'auto-complete-config)
+(global-auto-complete-mode t)
+;;(setq ac-auto-start nil)
+(setq ac-dwim t)
+
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 60)
+(setq recentf-max-saved-items 500)
+
+(defun recentf-ido-find-file ()
+  "Find a recent file using Ido."
+  (interactive)
+  (let* ((home (expand-file-name (getenv "HOME")))
+         (file-assoc-list
+          (mapcar (lambda (x)
+                    (cons (replace-regexp-in-string
+                           home "~" x) x))
+                  recentf-list))
+         (filename-list
+          (remove-duplicates (mapcar #'car file-assoc-list)
+                             :test #'string=))
+         (filename (ido-completing-read "Choose recent file: "
+                                        filename-list nil t)))
+    (when filename
+      (find-file (cdr (assoc filename file-assoc-list))))))
+
+(defun recentf-ido-find-dir ()
+  "Find a recent directory using Ido."
+  ;; TODO temporarily unset the ido-directory face
+  (interactive)
+  (let* ((home (expand-file-name (getenv "HOME")))
+         (dir-assoc-list
+          (mapcar (lambda (x)
+                    (cons (replace-regexp-in-string
+                           home "~" (file-name-directory x)) x))
+                  recentf-list))
+         (dirname-list
+          (remove-duplicates (mapcar #'car dir-assoc-list)
+                             :test #'string=)))
+    (dired (ido-completing-read "Choose recent dir: "
+                                dirname-list
+                                nil
+                                t))))
+
+;; @see http://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
+;; @see http://zuttobenkyou.wordpress.com/2011/02/15/some-thoughts-on-emacs-and-vim/
+(define-key evil-insert-state-map "k" #'cofi/maybe-exit)
+(evil-define-command cofi/maybe-exit ()
+  :repeat change
+  (interactive)
+  (let ((modified (buffer-modified-p)))
+    (insert "k")
+    (let ((evt (read-event (format "Insert %c to exit insert state" ?j)
+               nil 0.5)))
+      (cond
+       ((null evt) (message ""))
+       ((and (integerp evt) (char-equal evt ?j))
+    (delete-char -1)
+    (set-buffer-modified-p modified)
+    (push 'escape unread-command-events))
+       (t (setq unread-command-events (append unread-command-events
+                          (list evt))))))))
+
+;; BINDINGS
+
+(global-set-key "\M-;" 'comment-dwim-line)
+(define-key evil-normal-state-map "gs" 'magit-status)
+(define-key evil-insert-state-map "\C-k" 'kill-line)
+(define-key evil-insert-state-map [remap newline] 'evil-ret-and-indent)
+(define-key ac-completing-map (kbd "C-n") 'ac-next)
+(define-key ac-completing-map (kbd "C-p") 'ac-previous)
+(define-key ac-complete-mode-map [tab] 'ac-expand)
+(global-set-key [f11] 'recentf-ido-find-file)
+(global-set-key [S-f11] 'recentf-ido-find-dir)
+(define-key recentf-mode-map (kbd "C-e") 'ido-my-edit-input)
+
