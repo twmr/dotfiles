@@ -64,6 +64,20 @@ function emacs_melpa_setup() {
     mkdir ~/.emacs.d
 }
 
+function emacs_std_setup() {
+    if [ -h ~/.emacs.d ]; then
+        unlink ~/.emacs.d
+    fi
+    if [ -e ~/.emacs.d ]; then
+        echo "deleting .emacs.d"
+        rm -rf ~/.emacs.d
+    fi
+    if [ -h ~/.emacs ]; then
+        unlink ~/.emacs
+    fi
+
+    ln -s ~dotf/emacs.d ~/.emacs.d
+}
 
 function add-alias() {
     local name=$1 value="$2"
