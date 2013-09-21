@@ -11,8 +11,7 @@ slepcdir = os.getenv('SLEPC_DIR')
 slepc4pydir = os.getenv('SLEPC4PY_DIR')
 
 petscurl = "https://bitbucket.org/petsc/petsc.git"
-slepcurl = "http://www.grycap.upv.es/slepc/svn/trunk"
-# slepcurl = "http://www.grycap.upv.es/slepc/svn/branches/slepc-3_4-branch"
+slepccurl = "https://bitbucket.org/slepc/slepc.git"
 
 petsc4pyurl = "https://bitbucket.org/petsc/petsc4py"
 slepc4pyurl = "https://code.google.com/p/slepc4py/"
@@ -63,14 +62,14 @@ if tool == 'petsc':
 
 if tool == 'slepc':
     if not isdir(slepcdir):
-        cmd = ['svn', 'checkout', slepcurl, slepcdir]
+        cmd = ['git', 'clone', '--depth', '1', '-vvv', slepccurl, slepcdir]
         logger.info("Checkout of Repo slepc with " + " ".join(cmd))
         check_call(cmd, stdout=syscallstdout,
                    stderr=syscallstderr)
 
     logger.info('cd ' + slepcdir)
     os.chdir(slepcdir)
-    check_call(['svn', 'update'], stdout=syscallstdout, stderr=syscallstderr)
+    check_call(['git', 'pull'], stdout=syscallstdout, stderr=syscallstderr)
     check_call(["./configure"], stdout=syscallstdout,
                stderr=syscallstderr)
     logger.info("calling make")
