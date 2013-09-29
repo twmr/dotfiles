@@ -20,6 +20,9 @@
                                   wl-summary-mode
                                   compilation-mode))
 
+;; fill-column-indicator
+(setq-default fci-rule-column 80)
+
 ;; this function is required otherwise linum-disabled-modes-list is not
 ;; taken into account
 (defun linum-on ()

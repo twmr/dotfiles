@@ -53,6 +53,7 @@
           dired-details
           ;;replace+
           find-file-in-repository
+          fill-column-indicator
           ethan-wspace
           smart-mode-line
           undo-tree
