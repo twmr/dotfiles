@@ -55,7 +55,8 @@ consoleemacs="emacsclient -nw -a $embin"
 guiemacs="emacsclient -nc" # -a $embin"
 alias E="$guiemacs"
 alias e="$consoleemacs"
-alias emacs="$embin"
+# alias emacs="$embin"
+alias emacs="$guiemacs"
 
 alias ipycomp='(cd ${GITR}/ipython && git pull && ./setup.py build && sudo ./setup.py install)'
 alias ipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace'
