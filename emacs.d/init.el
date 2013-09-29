@@ -15,9 +15,9 @@
 (mkdir thi::cache-file-dir t)
 
 (package-initialize)
-(require 'keyfreq)
-(keyfreq-mode 1)
-(keyfreq-autosave-mode 1)
+;; (require 'keyfreq)
+;; (keyfreq-mode 1)
+;; (keyfreq-autosave-mode 1)
 ;; use keyfreq-show to see how many times you used a command.
 
 
