@@ -110,6 +110,8 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PUBDOC=$HOME/gitrepos/publication
     DOTFPATH=$HOME/gitrepos/dotfiles
 
+    export JDK_HOME=$HOME/sandbox/jdk1.7.0_40
+
     export MATLAB_BIN=/opt/MATLAB/R2012a/bin
 
     export RANDOMLAS=${GITR}/randomlas
