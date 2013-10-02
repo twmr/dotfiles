@@ -31,6 +31,7 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook #'python-cell-mode 1)
 (add-hook 'python-mode-hook #'fci-mode 1)
+(add-hook 'python-mode-hook #'highlight-indenation-mode 1)
 
 ;; TESTING CODE
 ;; (font-lock-add-keywords 'python-mode `(("\\<\\(TEST\\)"
