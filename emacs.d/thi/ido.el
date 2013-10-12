@@ -49,8 +49,11 @@
     (define-key ido-completion-map (kbd "C-e") 'ido-my-edit-input)
     ;;(define-key ido-completion-map (kbd "<backspace>") 'ido-my-edit-input)
     )
-  (define-key ido-completion-map "\t" 'ido-next-match)
-  (define-key ido-completion-map (kbd "<backtab>") 'ido-complete) ;; use \C-g to exit minibuffer
+  (define-key ido-completion-map [(tab)] 'ido-next-match)
+  (define-key ido-completion-map [(backtab)] 'ido-prev-match)
+  ;; C-n/p is more intuitive in vertical layout
+  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
   )
 (add-hook 'ido-setup-hook 'ido-my-keys)
 
