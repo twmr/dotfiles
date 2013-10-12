@@ -25,7 +25,17 @@
 *** movement commands
 + TODO
 
+** Buffer management
+=C-x left= move to previous buffer (current window)
+=C-x right= move to next buffer (current window)
 * Key Bindings Graphene Setup
 ** sr-speedbar
    =f6= toogle
    =U= 1 dir up
+   =C-c s= switch into speedbar window
+   =C-x o= get out of speedbar window
+   =D= delete file under point
+   =right= show file specific information, e.g., list of classes, functions, ..)
+** Projectile
+   =C-c P n= new project
+   =C-c P f= open existing project
