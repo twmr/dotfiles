@@ -22,4 +22,5 @@ matplotlib/tex.cache
 /emacs.d/semanticdb
 /emacs.d/eshell/history
 /emacs.d/keyfreq.html
-/emacs_with_melpa.d/elpa
+/emacs_with_melpa.d/
+/emacs_with_graphene.d/

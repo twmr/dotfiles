@@ -1,0 +1,20 @@
+;; -*- mode: lisp -*-
+
+(setq prelude-packages
+  '(auto-complete
+    solarized-theme
+    graphene
+    sr-speedbar
+    eldoc
+    evil
+    magit
+    
+    flx-ido))
+
+(load-file "~/gitrepos/dotfiles/emacs_with_melpa")
+
+;; (require 'graphene)
+(global-set-key [f6] 'sr-speedbar-toggle)
+
+;; (ido-vertical-mode)
+

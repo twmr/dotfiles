@@ -64,6 +64,22 @@ function emacs_melpa_setup() {
     ln -s ~dotf/emacs_with_melpa.d ~/.emacs.d
 }
 
+function emacs_graphene_setup() {
+    if [ -L ~/.emacs.d ]; then
+        unlink ~/.emacs.d
+    fi
+    if [ -L ~/.emacs ]; then
+        unlink ~/.emacs
+    fi
+    if [ -e ~/.emacs.d ]; then
+        echo "deleting .emacs.d"
+        rm -rf ~/.emacs.d
+    fi
+
+    ln -s ~dotf/emacs_with_graphene ~/.emacs
+    ln -s ~dotf/emacs_with_graphene.d ~/.emacs.d
+}
+
 function emacs_std_setup() {
     if [ -h ~/.emacs.d ]; then
         unlink ~/.emacs.d

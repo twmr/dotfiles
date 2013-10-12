@@ -44,6 +44,22 @@
 (setq default-indicate-empty-lines nil)
 
 (ido-mode 'both) ;; for buffers and files
+(setq
+  ;; Display ido results vertically, rather than horizontally
+  ;; see http://www.emacswiki.org/emacs/InteractivelyDoThings#toc17
+  ido-decorations (quote ("\n-> " "" "\n   " "\n   ..." "[" "]"
+                          " [No match]" " [Matched]" " [Not readable]"
+                          " [Too big]" " [Confirm]"))
+  ;; the following two variables where commented out because
+  ;; they are not useful in for diplaying completions vertically
+  ido-max-prospects 50              ; don't spam my minibuffer
+ )
+(defun ido-define-keys () ;; C-n/p is more intuitive in vertical layout
+  (define-key ido-completion-map [(tab)] 'ido-next-match)
+  (define-key ido-completion-map [(backtab)] 'ido-prev-match)
+  (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
+  (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
+(add-hook 'ido-setup-hook 'ido-define-keys)
 (flx-ido-mode)
 (evil-mode 1)
 

@@ -24,3 +24,8 @@
 + ipdb
 *** movement commands
 + TODO
+
+* Key Bindings Graphene Setup
+** sr-speedbar
+   =f6= toogle
+   =U= 1 dir up
