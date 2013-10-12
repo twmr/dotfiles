@@ -1,6 +1,6 @@
 ;;; Global key bindigns
 
-(global-set-key "\C-h" 'delete-backward-char)
+;; (global-set-key "\C-h" 'delete-backward-char)
 
 (global-unset-key (kbd "M-l")) ;; downcase-word
 
