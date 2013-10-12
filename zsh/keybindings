@@ -22,6 +22,8 @@ case $TERM in
         bindkey "^[[3~" delete-char
         bindkey "^[[5~" history-beginning-search-backward
         bindkey "^[[6~" history-beginning-search-forward
+	bindkey "^[^[[D" backward-word
+	bindkey "^[^[[C" forward-word
         ;;
     screen*)
         # Pos1 && End
