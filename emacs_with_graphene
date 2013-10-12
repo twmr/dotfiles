@@ -8,13 +8,18 @@
     eldoc
     evil
     magit
-    
     flx-ido))
 
 (load-file "~/gitrepos/dotfiles/emacs_with_melpa")
 
-;; (require 'graphene)
-(global-set-key [f6] 'sr-speedbar-toggle)
+(require 'graphene)
+(setq graphene-default-font nil)
+(setq graphene-variable-pitch-font nil)
+(setq graphene-fixed-pitch-font nil)
+(graphene-set-fonts)
 
-;; (ido-vertical-mode)
+(setq resize-mini-windows t) ;; fixes the ido vertical problem when using graphene
+
+(require 'sr-speedbar)
+(global-set-key [f6] 'sr-speedbar-toggle)
 

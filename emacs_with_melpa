@@ -61,7 +61,9 @@
   (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
 (add-hook 'ido-setup-hook 'ido-define-keys)
 (flx-ido-mode)
-(evil-mode 1)
+
+(when (member 'evil prelude-packages)
+  (evil-mode 1))
 
 ;; Original idea from
 ;; http://www.opensubscriber.com/message/emacs-devel@gnu.org/10971693.html
@@ -150,29 +152,35 @@
 
 ;; @see http://stackoverflow.com/questions/10569165/how-to-map-jj-to-esc-in-emacs-evil-mode
 ;; @see http://zuttobenkyou.wordpress.com/2011/02/15/some-thoughts-on-emacs-and-vim/
-(define-key evil-insert-state-map "k" #'cofi/maybe-exit)
-(evil-define-command cofi/maybe-exit ()
-  :repeat change
-  (interactive)
-  (let ((modified (buffer-modified-p)))
-    (insert "k")
-    (let ((evt (read-event (format "Insert %c to exit insert state" ?j)
-               nil 0.5)))
-      (cond
-       ((null evt) (message ""))
-       ((and (integerp evt) (char-equal evt ?j))
-    (delete-char -1)
-    (set-buffer-modified-p modified)
-    (push 'escape unread-command-events))
-       (t (setq unread-command-events (append unread-command-events
-                          (list evt))))))))
+(eval-after-load 'evil
+  '(progn
+    (define-key evil-insert-state-map "k" #'cofi/maybe-exit)
+    (evil-define-command cofi/maybe-exit ()
+      :repeat change
+      (interactive)
+      (let ((modified (buffer-modified-p)))
+	(insert "k")
+	(let ((evt (read-event (format "Insert %c to exit insert state" ?j)
+		   nil 0.5)))
+	  (cond
+	   ((null evt) (message ""))
+	   ((and (integerp evt) (char-equal evt ?j))
+	(delete-char -1)
+	(set-buffer-modified-p modified)
+	(push 'escape unread-command-events))
+	   (t (setq unread-command-events (append unread-command-events
+			      (list evt))))))))))
+
 
 ;; BINDINGS
 
+(eval-after-load 'evil
+  '(progn
+    (define-key evil-normal-state-map "gs" 'magit-status)
+    (define-key evil-insert-state-map "\C-k" 'kill-line)
+    (define-key evil-insert-state-map [remap newline] 'evil-ret-and-indent)))
+
 (global-set-key "\M-;" 'comment-dwim-line)
-(define-key evil-normal-state-map "gs" 'magit-status)
-(define-key evil-insert-state-map "\C-k" 'kill-line)
-(define-key evil-insert-state-map [remap newline] 'evil-ret-and-indent)
 (define-key ac-completing-map (kbd "C-n") 'ac-next)
 (define-key ac-completing-map (kbd "C-p") 'ac-previous)
 (define-key ac-complete-mode-map [tab] 'ac-expand)
