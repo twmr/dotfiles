@@ -8,6 +8,7 @@
     eldoc
     evil
     magit
+    ethan-wspace
     flx-ido))
 
 (load-file "~/gitrepos/dotfiles/emacs_with_melpa")
@@ -19,6 +20,8 @@
 (graphene-set-fonts)
 
 (setq resize-mini-windows t) ;; fixes the ido vertical problem when using graphene
+
+(global-ethan-wspace-mode)
 
 (require 'sr-speedbar)
 (global-set-key [f6] 'sr-speedbar-toggle)
