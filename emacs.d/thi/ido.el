@@ -54,7 +54,6 @@
   ;; C-n/p is more intuitive in vertical layout
   (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
   (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
-  )
 (add-hook 'ido-setup-hook 'ido-my-keys)
 
 ;; With this code it is not possible anymore to go to the root directory with ido-find-file:  C-x C-f //  leads to a tramp error ?!?!?

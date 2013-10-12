@@ -55,6 +55,7 @@
 
 
 (define-key evil-normal-state-map "\C-u" 'evil-scroll-up)
+(define-key evil-normal-state-map (kbd "C-.") nil)
 
 (define-key evil-normal-state-map "+" 'evil-numbers/inc-at-pt)
 (define-key evil-normal-state-map "-" 'evil-numbers/dec-at-pt)
