@@ -32,6 +32,7 @@
         '(auto-complete
           git-modes
           magit
+          projectile
           ;; magithub
           git-modes
           ;; calfw
