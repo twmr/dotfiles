@@ -258,6 +258,8 @@
 ; want to)
 ;;FIXME this does not work if evil command mode is active
 ;;TODO use a lambda which checks if command mode is active (if yes signals a visible-bell) if not calls mouse-yank-primary)
+
+;; NOTE the following keybinding is already the default in the latest emacs version
 ;; (global-set-key [mouse-2] 'mouse-yank-primary)  ; make mouse middle-click only paste from primary X11 selection, not clipboard and kill ring.
 
 ;; automatically indent yanked code
@@ -314,3 +316,18 @@
 ;; (iswitchb-mode 1)
 ;; (browse-kill-ring-default-keybindings)
 ;; (which-func-mode 1)
+
+
+;; from better-defaults
+;; https://github.com/technomancy/better-defaults/blob/master/better-defaults.el
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
+
+(require 'saveplace)
+(setq-default save-place t)
+
+(setq x-select-enable-clipboard t ;; emacs default values is already t
+      x-select-enable-primary t ;; emacs default is nil
+      save-interprogram-paste-before-kill t
+      apropos-do-all t
+      mouse-yank-at-point t)

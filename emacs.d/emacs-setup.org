@@ -1,14 +1,17 @@
+#+STARTUP: indent
 * Key Bindings
+** TODO Function Keys
 ** IDO Mode
-   =S-F11= open recent directories (uses recentf-list)
-   =F11= open recent files (uses recentf-list)
-   =F12= dired directory open  (uses thi::directory-list)
-
+=S-F11= open recent directories (uses recentf-list)
+=F11= open recent files (uses recentf-list)
+=F12= dired directory open  (uses thi::directory-list)
 *** ido-find-file (C-x f)
-    =C-f= switches to the default find-file interface
-    (from there =C-m= can be used to open the CWD in dired)
-    =C-d= open the dired-buffer
-
+=C-f= switches to the default find-file interface
+(from there =C-m= can be used to open the CWD in dired)
+=C-d= open the dired-buffer
+** Dired
+=C-x C-j= dired jump (jumps to a dired buffer of the directory of the
+current file); equivalent to =C-x d RET=
 ** Function Keys
    =F5= magit grep
    =F6= magit status
@@ -23,27 +26,26 @@
 + defm (was ist der unterschied zu def ??)
 + ipdb
 *** movement commands
-    =C-.= jump to definition
-    =C-,= jump back
-    =C-c d= show doc
+=C-.= jump to definition
+=C-,= jump back
+=C-c d= show doc
 ** Buffer management
 =C-x left= move to previous buffer (current window)
 =C-x right= move to next buffer (current window)
 =C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other windows! does
 the same as C-x 1
 ** evil
-=C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other windows! does
-the same as C-x 1
-
+=C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other
+windows! does the same as =C-x 1=
 
 * Key Bindings Graphene Setup
 ** sr-speedbar
-   =f6= toogle
-   =U= 1 dir up
-   =C-c s= switch into speedbar window
-   =C-x o= get out of speedbar window
-   =D= delete file under point
-   =right= show file specific information, e.g., list of classes, functions, ..)
+=f6= toogle
+=U= 1 dir up
+=C-c s= switch into speedbar window
+=C-x o= get out of speedbar window
+=D= delete file under point
+=right= show file specific information, e.g., list of classes, functions, ..)
 ** Projectile
-   =C-c P n= new project
-   =C-c P f= open existing project
+=C-c P n= new project
+=C-c P f= open existing project
