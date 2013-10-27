@@ -49,7 +49,7 @@
     (define-key ido-completion-map (kbd "C-e") 'ido-my-edit-input)
     ;;(define-key ido-completion-map (kbd "<backspace>") 'ido-my-edit-input)
     )
-  (define-key ido-completion-map [(tab)] 'ido-next-match)
+  (define-key ido-completion-map (kbd "TAB") 'ido-next-match)
   (define-key ido-completion-map [(backtab)] 'ido-prev-match)
   ;; C-n/p is more intuitive in vertical layout
   (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
