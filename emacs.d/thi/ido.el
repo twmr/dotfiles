@@ -78,4 +78,5 @@
 
 (flx-ido-mode)
 ;; disable ido faces to see flx highlights.
-(setq ido-use-faces nil)
+;; (setq ido-use-faces nil)
+;; (setq flx-ido-use-faces nil)
