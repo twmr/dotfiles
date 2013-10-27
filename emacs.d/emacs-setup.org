@@ -37,7 +37,8 @@ the same as C-x 1
 ** evil
 =C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other
 windows! does the same as =C-x 1=
-
+** Editing
+=M-b M-u= upcase backward word
 * Key Bindings Graphene Setup
 ** sr-speedbar
 =f6= toogle
