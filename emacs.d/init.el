@@ -108,7 +108,10 @@
 ;; safe-theme question fix
 ;; see http://stackoverflow.com/questions/8545756/how-to-treat-solarized-as-a-safe-theme
 ;; (load-theme 'naquadah t)
-(load-theme 'solarized-light t)
+(if window-system
+    (load-theme 'solarized-light t)
+  (load-theme 'solarized-dark t))
+
 
 (load "thi/defuns")
 (load "thi/global")
