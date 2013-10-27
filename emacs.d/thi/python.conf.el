@@ -25,13 +25,13 @@
 
 
 ;;force loading of python-cell-mode
-(require 'python-cell)
 
 (add-hook 'python-mode-hook #'lambda-mode 1)
 (add-hook 'python-mode-hook 'jedi:setup)
-(add-hook 'python-mode-hook #'python-cell-mode 1)
 (add-hook 'python-mode-hook #'fci-mode 1)
 (add-hook 'python-mode-hook #'highlight-indentation-mode 1)
+(eval-after-load 'python-cell
+  (add-hook 'python-mode-hook #'python-cell-mode 1))
 
 ;; redefine jedi's C-. (jedi:goto-definition)
 ;; to remember position, and set C-, to jump back
