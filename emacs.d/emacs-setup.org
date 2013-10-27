@@ -1,6 +1,5 @@
 #+STARTUP: indent
 * Key Bindings
-** TODO Function Keys
 ** IDO Mode
 =S-F11= open recent directories (uses recentf-list)
 =F11= open recent files (uses recentf-list)
@@ -33,7 +32,7 @@ current file); equivalent to =C-x d RET=
 =C-x left= move to previous buffer (current window)
 =C-x right= move to next buffer (current window)
 =C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other windows! does
-the same as C-x 1
+the same as C-x 1 (which works in all modes)
 ** evil
 =C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other
 windows! does the same as =C-x 1=

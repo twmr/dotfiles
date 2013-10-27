@@ -5,6 +5,9 @@
   '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
 ;; (helm-mode 1)
 ;; (global-set-key (kbd "C-c h") 'helm-mini)
 ;; (global-set-key (kbd "C-c g") 'helm-git-grep)
@@ -86,20 +89,20 @@
      ;; (set-face-foreground 'diff-context "#666666")
      ;; (set-face-foreground 'diff-added "#00cc33")
      ;; (set-face-foreground 'diff-removed "#ff0000")
-     
+
      ;; full screen magit-status
      (defadvice magit-status (around magit-fullscreen activate)
        (window-configuration-to-register :magit-fullscreen)
        ad-do-it
        (delete-other-windows))
-     
+
      (defun magit-quit-session ()
        "Restores the previous window configuration and kills the magit buffer"
        (interactive)
        (kill-buffer)
        (jump-to-register :magit-fullscreen))
      (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
-     
+
      (defadvice git-commit-commit (after delete-window activate)
        (delete-window))
      )
@@ -159,17 +162,17 @@
       :repeat change
       (interactive)
       (let ((modified (buffer-modified-p)))
-	(insert "k")
-	(let ((evt (read-event (format "Insert %c to exit insert state" ?j)
-		   nil 0.5)))
-	  (cond
-	   ((null evt) (message ""))
-	   ((and (integerp evt) (char-equal evt ?j))
-	(delete-char -1)
-	(set-buffer-modified-p modified)
-	(push 'escape unread-command-events))
-	   (t (setq unread-command-events (append unread-command-events
-			      (list evt))))))))))
+        (insert "k")
+        (let ((evt (read-event (format "Insert %c to exit insert state" ?j)
+                   nil 0.5)))
+          (cond
+           ((null evt) (message ""))
+           ((and (integerp evt) (char-equal evt ?j))
+        (delete-char -1)
+        (set-buffer-modified-p modified)
+        (push 'escape unread-command-events))
+           (t (setq unread-command-events (append unread-command-events
+                              (list evt))))))))))
 
 
 ;; BINDINGS
@@ -188,3 +191,5 @@
 (global-set-key [S-f11] 'recentf-ido-find-dir)
 (define-key recentf-mode-map (kbd "C-e") 'ido-my-edit-input)
 
+;; replace buffermenu with ibuffer
+(global-set-key (kbd "C-x C-b") 'ibuffer)
