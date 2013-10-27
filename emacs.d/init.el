@@ -20,6 +20,8 @@
 ;; (keyfreq-autosave-mode 1)
 ;; use keyfreq-show to see how many times you used a command.
 
+;; http://comments.gmane.org/gmane.emacs.vim-emulation/1700
+(setq evil-want-C-i-jump nil)
 
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
