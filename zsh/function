@@ -5,8 +5,8 @@ function src() {
     autoload -U zrecompile
     [[ -f ~/.zshrc ]] && zrecompile -p ~/.zshrc
     for i in "$(find ~/.zsh/ -type f)"; do
-	[[ -f $i ]] && zrecompile -p $i
-	[[ -f $i.zwc.old ]] && rm -f $i.zwc.old
+        [[ -f $i ]] && zrecompile -p $i
+        [[ -f $i.zwc.old ]] && rm -f $i.zwc.old
     done
     [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
     [[ -f ~/.zcompdump ]] && zrecompile -p ~/.zcompdump
@@ -28,7 +28,6 @@ function ked() {
     fi
 }
 
-
 function started() {
     if [ $# -gt 0 ]; then
         if [ "$1" = "-f" ]; then
@@ -48,7 +47,10 @@ function started() {
     fi
 }
 
-function emacs_melpa_setup() {
+
+_emacs_setup() {
+    local name=$1
+    echo $name
     if [ -L ~/.emacs.d ]; then
         unlink ~/.emacs.d
     fi
@@ -60,39 +62,24 @@ function emacs_melpa_setup() {
         rm -rf ~/.emacs.d
     fi
 
-    ln -s ~dotf/emacs_with_melpa ~/.emacs
-    ln -s ~dotf/emacs_with_melpa.d ~/.emacs.d
+    if [ -e ~dotf/$name ]; then
+        echo ln -s ~dotf/$name ~/.emacs
+        ln -s ~dotf/$name ~/.emacs
+    fi
+    echo ln -s ~dotf/${name}.d ~/.emacs.d
+    ln -s ~dotf/${name}.d ~/.emacs.d
+}
+
+function emacs_melpa_setup() {
+    _emacs_setup "emacs_with_melpa"
 }
 
 function emacs_graphene_setup() {
-    if [ -L ~/.emacs.d ]; then
-        unlink ~/.emacs.d
-    fi
-    if [ -L ~/.emacs ]; then
-        unlink ~/.emacs
-    fi
-    if [ -e ~/.emacs.d ]; then
-        echo "deleting .emacs.d"
-        rm -rf ~/.emacs.d
-    fi
-
-    ln -s ~dotf/emacs_with_graphene ~/.emacs
-    ln -s ~dotf/emacs_with_graphene.d ~/.emacs.d
+    _emacs_setup "emacs_with_graphene"
 }
 
 function emacs_std_setup() {
-    if [ -h ~/.emacs.d ]; then
-        unlink ~/.emacs.d
-    fi
-    if [ -e ~/.emacs.d ]; then
-        echo "deleting .emacs.d"
-        rm -rf ~/.emacs.d
-    fi
-    if [ -h ~/.emacs ]; then
-        unlink ~/.emacs
-    fi
-
-    ln -s ~dotf/emacs.d ~/.emacs.d
+    _emacs_setup "emacs"
 }
 
 function add-alias() {
@@ -275,11 +262,11 @@ function manuscp() {
 
 function pastie {
     url=$(curl http://pastie.caboo.se/pastes/create \
-	-H "Expect:" \
-	-F "paste[parser]=plain_text" \
-	-F "paste[body]=<-" \
-	-F "paste[authorization]=burger" \
-	-s -L -o /dev/null -w "%{url_effective}")
+  -H "Expect:" \
+  -F "paste[parser]=plain_text" \
+  -F "paste[body]=<-" \
+  -F "paste[authorization]=burger" \
+  -s -L -o /dev/null -w "%{url_effective}")
     echo -n "$url" | xclip
     echo "$url"
 }
@@ -347,51 +334,51 @@ function calculeer() { echo "$@" | bc }
 function git_info {
     local g="$(git rev-parse --git-dir 2>/dev/null)"
     if [ -n "$g" ]; then
-	local r
-	local b
-	if [ -d "$g/../.dotest" ]
-	then
+  local r
+  local b
+  if [ -d "$g/../.dotest" ]
+  then
             if test -f "$g/../.dotest/rebasing"
             then
-		r="|REBASE"
+    r="|REBASE"
             elif test -f "$g/../.dotest/applying"
             then
-		r="|AM"
+    r="|AM"
             else
-		r="|AM/REBASE"
+    r="|AM/REBASE"
             fi
             b="$(git symbolic-ref HEAD 2>/dev/null)"
-	elif [ -f "$g/.dotest-merge/interactive" ]
-	then
+  elif [ -f "$g/.dotest-merge/interactive" ]
+  then
             r="|REBASE-i"
             b="$(cat "$g/.dotest-merge/head-name")"
-	elif [ -d "$g/.dotest-merge" ]
-	then
+  elif [ -d "$g/.dotest-merge" ]
+  then
             r="|REBASE-m"
             b="$(cat "$g/.dotest-merge/head-name")"
-	elif [ -f "$g/MERGE_HEAD" ]
-	then
+  elif [ -f "$g/MERGE_HEAD" ]
+  then
             r="|MERGING"
             b="$(git symbolic-ref HEAD 2>/dev/null)"
-	else
+  else
             if [ -f "$g/BISECT_LOG" ]
             then
-		r="|BISECTING"
+    r="|BISECTING"
             fi
             if ! b="$(git symbolic-ref HEAD 2>/dev/null)"
             then
-		if ! b="tag: $(git describe --exact-match HEAD 2>/dev/null)"
-		then
-		    b="$(cut -c1-7 "$g/HEAD")..."
-		fi
+    if ! b="tag: $(git describe --exact-match HEAD 2>/dev/null)"
+    then
+        b="$(cut -c1-7 "$g/HEAD")..."
+    fi
             fi
-	fi
+  fi
 
-	if [ -n "$1" ]; then
+  if [ -n "$1" ]; then
             printf "$1" "${b##refs/heads/}$r"
-	else
+  else
             printf "[%s]" "${b##refs/heads/}$r"
-	fi
+  fi
     fi
 }
 #compdef '_files -g "*.gz *.tgz *.bz2 *.tbz *.zip *.rar *.tar *.lha"' extract_archive
