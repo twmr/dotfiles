@@ -62,9 +62,9 @@
   (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
 (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
-(defun my-python-mode-hook ()
-  (define-key python-mode-map (kbd "M-m") 'eassist-list-methods))
-(add-hook 'python-mode-hook 'my-python-mode-hook)
+;; (defun my-python-mode-hook ()
+;;   (define-key python-mode-map (kbd "M-m") 'eassist-list-methods))
+;; (add-hook 'python-mode-hook 'my-python-mode-hook)
 
 (define-key lisp-mode-shared-map (kbd "M-m") 'eassist-list-methods)
 
@@ -107,3 +107,5 @@
 ;;(define-key minibuffer-local-map (kbd "M-n") 'next-complete-history-element)
 (define-key minibuffer-local-map (kbd "<up>") 'previous-complete-history-element)
 (define-key minibuffer-local-map (kbd "<down>") 'next-complete-history-element)
+
+(global-set-key (kbd "C-c s") 'sr-speedbar-select-window)

@@ -11,6 +11,8 @@
 
 ;: LINUM
 (global-linum-mode 1)
+;; Linum format to avoid graphics glitches in fringe
+(setq linum-format " %4d ")
 ;; linum should be disabled for certain modes where linenumbers do not
 ;; make sense
 ;; http://www.emacswiki.org/emacs/LineNumbers

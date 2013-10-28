@@ -6,6 +6,18 @@
 (define-key ac-completing-map (kbd "C-p") 'ac-previous)
 (define-key ac-complete-mode-map (kbd "TAB") 'ac-expand)
 
+;; Autocomplete defaults
+;; ESC to get out of autocomplete menu
+(ac-config-default)
+(define-key ac-completing-map (kbd "ESC") 'ac-stop)
+(setq ac-auto-show-menu 0.2
+      ac-auto-start 3
+      ac-quick-help-delay 2.0
+      ac-ignore-case nil
+      ac-candidate-menu-min 2
+      ac-use-quick-help nil
+      ac-limit 10)
+
 ;;----------------------------------------------------------------------------
 ;; Use Emacs' built-in TAB completion hooks to trigger AC (Emacs >= 23.2)
 ;;----------------------------------------------------------------------------
