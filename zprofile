@@ -437,3 +437,7 @@ fi
 #LOGCHECK=300                    # check every 5 min for login/logout activity
 
 . ~/.zsh/linuxconsole
+
+[[ $- != *i* ]] && return
+[[ -z "$TMUX" ]] && exec tmux
+
