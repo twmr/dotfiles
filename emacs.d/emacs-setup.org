@@ -4,7 +4,7 @@
 =S-F11= open recent directories (uses recentf-list)
 =F11= open recent files (uses recentf-list)
 =F12= dired directory open  (uses thi::directory-list)
-*** ido-find-file (C-x f)
+*** ido-find-file (C-x C-f)
 =C-f= switches to the default find-file interface
 (from there =C-m= can be used to open the CWD in dired)
 =C-d= open the dired-buffer
@@ -38,6 +38,10 @@ the same as C-x 1 (which works in all modes)
 windows! does the same as =C-x 1=
 ** Editing
 =M-b M-u= upcase backward word
+** Projectile
+=C-x f= open file in repository (using fuzzy matching)
+=C-c P n= new project
+=C-c P f= open existing project
 * Key Bindings Graphene Setup
 ** sr-speedbar
 =f6= toogle

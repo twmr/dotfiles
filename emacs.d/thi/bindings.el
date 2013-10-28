@@ -25,7 +25,7 @@
 
 (global-set-key (kbd "C-c t") 'visit-term-buffer)
 
-;; TOGGLE MENU BAR 
+;; TOGGLE MENU BAR
 (global-set-key (kbd "C-%") 'menu-bar-mode)
 
 
@@ -46,7 +46,7 @@
 
 ;;Fr Oct 12 2012: I don't know why  ido-find-file worked without this line before 
 (global-set-key (kbd "C-x C-f") 'ido-find-file)
-(global-set-key (kbd "C-x f") 'find-file-in-repository)
+(global-set-key (kbd "C-x f") 'projectile-find-file)
 
 
 ;; from better-defaults
