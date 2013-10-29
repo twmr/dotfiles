@@ -16,7 +16,8 @@
 ;; (global-set-key [f4] 'query-replace)
 (global-set-key [f5] 'magit-grep)
 (global-set-key [f6] 'magit-status)
-(global-set-key [f7] 'open-file-at-cursor)
+(global-set-key [f7] 'magit-run-gitk)
+(global-set-key [f8] 'open-file-at-cursor)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
