@@ -12,6 +12,8 @@ alias mplayer='mplayer -idx'
 alias wget='wget --timeout 10'
 alias grep='grep --color=auto'
 
+alias -g G='| egrep'
+
 alias pip='python-pip'
 
 #function call
@@ -74,6 +76,8 @@ alias removelog='rm -f`find . -iname "*.log"`'
 
 alias st='~/Downloads/sublime_text_3/sublime_text'
 
+alias ipy='ipython'
+
 #named directories
 HOSTNAME=`hostname`
 if [ "$HOSTNAME" = "pc-52-rh" ]; then
@@ -90,6 +94,10 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     hash -d tp1=~/gitrepos/tools/poc1
     hash -d tp2=~/gitrepos/tools/poc2
     hash -d pyspu=~/gitrepos/pyspu.git/trunk
+
+    alias simutestrunner='python testrunner.py -c tests/testconfig_simulation.json -s os-vm -p 26999 -u os-vm -l 8000 -t 120 --debug'
+
+    alias tsp='~/gitrepos/pyspu/branches/version0.8/tsplotter/tsplotter'
 fi
 if [ "$HOSTNAME" = "cobra" ]; then
     hash -d pst=${HOME}/gitrepos/POC-scripts/trunk
