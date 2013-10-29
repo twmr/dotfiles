@@ -438,6 +438,6 @@ fi
 
 . ~/.zsh/linuxconsole
 
-[[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
+#[[ $- != *i* ]] && return
+#[[ -z "$TMUX" ]] && exec tmux
 
