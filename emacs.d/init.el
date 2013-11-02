@@ -75,6 +75,7 @@
           ;;rainbow-mode
           rainbow-delimiters
           highlight-indentation
+          sr-speedbar
           ;; browse-kill-ring
           ;; textlint ;; not needed atm
           ;; nognus
@@ -128,9 +129,9 @@
 (load "thi/nxml")
 (load "thi/compilation")
 (load "vendor/lambda-mode") ;; useful for python development
-;; (load "thi/matlab") ;; not needed ATM
 (load "thi/flymake-pre")
 (vendor 'flymake-cursor)
+(load "thi/graphene")
 
 (custom-set-faces '(window-numbering-face
                     ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))

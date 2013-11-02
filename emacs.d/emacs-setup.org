@@ -25,9 +25,9 @@ current file); equivalent to =C-x d RET=
 + defm (was ist der unterschied zu def ??)
 + ipdb
 *** movement commands
-=C-.= jump to definition
-=C-,= jump back
-=C-c d= show doc
+=C-.= jump to definition (jedi)
+=C-,= jump back (jedi)
+=C-c d= show doc (jedi)
 ** Buffer management
 =C-x left= move to previous buffer (current window)
 =C-x right= move to next buffer (current window)
@@ -42,6 +42,8 @@ windows! does the same as =C-x 1=
 =C-x f= open file in repository (using fuzzy matching)
 =C-c P n= new project
 =C-c P f= open existing project
+** elisp
+emacs-lisp-byte-compile
 * Key Bindings Graphene Setup
 ** sr-speedbar
 =f6= toogle

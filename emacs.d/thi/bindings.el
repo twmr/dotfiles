@@ -110,3 +110,4 @@
 (define-key minibuffer-local-map (kbd "<down>") 'next-complete-history-element)
 
 (global-set-key (kbd "C-c s") 'sr-speedbar-select-window)
+(global-set-key [f6] 'sr-speedbar-toggle)
