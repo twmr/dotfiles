@@ -1,17 +1,17 @@
-(setq
- ;; the following code does not work when we run emacs from a remove pc (ssh)
- ;; python-shell-interpreter "ipython"
- ;; python-shell-interpreter-args "--matplotlib"
- ;; python-shell-prompt-regexp "In \\[[0-9]+\\]: "
- ;; python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
- ;; python-shell-completion-setup-code
- ;;   "from IPython.core.completerlib import module_completion"
- ;; python-shell-completion-module-string-code
- ;;   "';'.join(module_completion('''%s'''))\n"
- ;; python-shell-completion-string-code
- ;;   "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"
+;; ;; the following code does not work when we run emacs from a remove pc (ssh)
+;; (setq
+;;  python-shell-interpreter "ipython"
+;;  python-shell-interpreter-args "--matplotlib"
+;;  python-shell-prompt-regexp "In \\[[0-9]+\\]: "
+;;  python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: "
+;;  python-shell-completion-setup-code
+;;    "from IPython.core.completerlib import module_completion"
+;;  python-shell-completion-module-string-code
+;;    "';'.join(module_completion('''%s'''))\n"
+;;  python-shell-completion-string-code
+;;    "';'.join(get_ipython().Completer.all_completions('''%s'''))\n"
 
- python-skeleton-autoinsert t )
+(setq python-skeleton-autoinsert t )
 
 ;; (defvar ac-source-python
 ;;   '((candidates .
@@ -26,13 +26,14 @@
 
 
 ;;force loading of python-cell-mode
+(require 'python-cell)
 
 (add-hook 'python-mode-hook #'lambda-mode 1)
-(add-hook 'python-mode-hook 'jedi:setup)
+(eval-after-load 'jedi
+  (add-hook 'python-mode-hook 'jedi:setup))
 (add-hook 'python-mode-hook #'fci-mode 1)
 (add-hook 'python-mode-hook #'highlight-indentation-mode 1)
-(eval-after-load 'python-cell
-  (add-hook 'python-mode-hook #'python-cell-mode 1))
+(add-hook 'python-mode-hook #'python-cell-mode 1)
 
 ;; redefine jedi's C-. (jedi:goto-definition)
 ;; to remember position, and set C-, to jump back

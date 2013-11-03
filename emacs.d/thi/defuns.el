@@ -45,26 +45,23 @@
     (when (file-exists-p (concat personal ".el"))
       (load personal))))
 
-;; start hl-line in each buffer where the major modes are note in hl-line-disabled-modes-list
+;; start hl-line in each buffer where the major modes are not in
+;; hl-line-disabled-modes-list
 (defun thi-turn-hl-line-mode-on ()
-  (interactive)
-  (if (not (member major-mode hl-line-disabled-modes-list))
+  (when (not (member major-mode hl-line-disabled-modes-list))
       (hl-line-mode 1)))
 
 (defun thi-turn-hl-line-mode-off ()
-  (interactive)
-  (if (not (member major-mode hl-line-disabled-modes-list))
+  (when (not (member major-mode hl-line-disabled-modes-list))
       (hl-line-mode -1)))
 
 (defun thi-turn-hl-line-mode-on2 ()
-  (interactive)
-  (if (member major-mode hl-line-enabled-modes-list)
-      (hl-line-mode 1)))
+  (when (member major-mode hl-line-enabled-modes-list)
+    (hl-line-mode 1)))
 
 (defun thi-turn-hl-line-mode-off2 ()
-  (interactive)
-  (if (member major-mode hl-line-enabled-modes-list)
-      (hl-line-mode -1)))
+  (when (member major-mode hl-line-enabled-modes-list)
+    (hl-line-mode -1)))
 
 (defun turn-on-outline-minor-mode ()
   (outline-minor-mode 1))

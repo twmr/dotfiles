@@ -18,6 +18,8 @@
     eldoc
     evil
     magit
+    ;; powerline
+    smart-mode-line
     flx-ido)
   "A list of packages to ensure are installed at launch.")
 
@@ -39,7 +41,14 @@
     (when (not (package-installed-p p))
       (package-install p))))
 
+
+;; (require 'powerline)
+;; (powerline-default-theme)
+(require 'smart-mode-line)
+(if after-init-time (sml/setup)
+  (add-hook 'after-init-hook 'sml/setup))
 (load-theme 'solarized-light t)
+
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
