@@ -8,7 +8,9 @@ Xcursor.theme:          neutral
 
 Emacs.FontBackend:      xft
 !Emacs.font:             ProFont-9
-Emacs.font:             DejaVu Sans Mono:size=11
+Emacs.font:             Source Code Pro:size=12
+! Emacs.font:             Anonymous Pro:size=12
+! Emacs.font:             DejaVu Sans Mono:size=11
 ! Emacs.font:             Sans-10
 ! Emacs.menuBar:          off
 Emacs.verticalScrollBars: off
