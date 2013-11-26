@@ -18,8 +18,9 @@
     eldoc
     evil
     magit
+    flycheck
     ;; powerline
-    smart-mode-line
+    ;; smart-mode-line
     flx-ido)
   "A list of packages to ensure are installed at launch.")
 
@@ -44,9 +45,9 @@
 
 ;; (require 'powerline)
 ;; (powerline-default-theme)
-(require 'smart-mode-line)
-(if after-init-time (sml/setup)
-  (add-hook 'after-init-hook 'sml/setup))
+;; (require 'smart-mode-line)
+;; (if after-init-time (sml/setup)
+  ;; (add-hook 'after-init-hook 'sml/setup))
 (load-theme 'solarized-light t)
 
 
@@ -183,6 +184,8 @@
            (t (setq unread-command-events (append unread-command-events
                               (list evt))))))))))
 
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; BINDINGS
 
