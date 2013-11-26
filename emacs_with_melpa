@@ -15,10 +15,12 @@
 (defvar prelude-packages
   '(auto-complete
     solarized-theme
+    zenburn-theme
     eldoc
     evil
     magit
     flycheck
+    nlinum
     ;; powerline
     ;; smart-mode-line
     flx-ido)
@@ -48,7 +50,11 @@
 ;; (require 'smart-mode-line)
 ;; (if after-init-time (sml/setup)
   ;; (add-hook 'after-init-hook 'sml/setup))
-(load-theme 'solarized-light t)
+;; (load-theme 'solarized-light t)
+(load-theme 'zenburn t)
+
+(global-linum-mode 1)
+(setq linum-format " %4d ")
 
 
 (defalias 'yes-or-no-p 'y-or-n-p)
