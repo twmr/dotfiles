@@ -7,16 +7,17 @@
 (defvar thi::directory-list '(
                               "/opt/sandboxes"
                               "/opt/sandboxes/current_branch"
-                              "/opt/sandboxes/poc4imo"
                               "/opt/sandboxes/trunk"
 
-                              "~/gitrepos/POC-scripts/trunk"
+                              "~/gitrepos/POC-scripts/branches/version2.0"
+                              "~/gitrepos/pyspu/branches/version0.8"
 
                               "~/gitrepos/tools"
-                              "~/gitrepos/tools/future-tools"
+                              "~/gitrepos/tools/future"
+                              "~/gitrepos/tools/alpha"
 
                               "~/gitrepos/imshelperscripts"
-                              "~/gitrepos/HWSimuEnv"
+                              "~/gitrepos/hwsimuenv"
 
                               "~/gitrepos/dotfiles/emacs.d"
                               "~/gitrepos/dotfiles/emacs.d/thi"
