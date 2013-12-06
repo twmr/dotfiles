@@ -97,7 +97,6 @@ if [ "$HOSTNAME" = "mustang" ]; then
     #MPI4PY
     PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
 
-
     #QTcreator version
     QTCV="2.6.2"
 
