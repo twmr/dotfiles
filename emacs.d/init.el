@@ -2,14 +2,14 @@
 
 ;; (setq debug-on-error t)
 
-(dolist (p '("" "/vendor" "/el-get/el-get"))
+(dolist (p '("/lisp" "/lisp/vendor" "/el-get/el-get"))
   (add-to-list 'load-path (expand-file-name
                            (concat user-emacs-directory p))))
 
 (defvar thi::cache-file-dir (expand-file-name
                              (concat (or (getenv "XDG_CACHE_HOME") "~/.cache") "/emacs")))
 (defvar thi::config-dir (expand-file-name
-                         (concat user-emacs-directory "/thi")))
+                         (concat user-emacs-directory "/lisp/thi")))
 (setq custom-file (concat thi::config-dir "/custom.el"))
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)

@@ -70,7 +70,7 @@
              (define-key speedbar-mode-map [left] 'speedbar-contract-line)))
 
 ;; Highlight the current line
-(add-hook 'speedbar-mode-hook '(lambda () (hl-line-mode 1)))
+(add-hook 'speedbar-mode-hook #'hl-line-mode 1)
 
 ;; Pin and unpin the speedbar
 (defvar graphene-speedbar-pinned-directory)

@@ -1,6 +1,18 @@
+!run the tool xev to see the keycodes 
+!
+! unbind physical left ctrl key (keysym was determined by xev)
+keycode 37 = 
+! a more generic way to achieve the same is
+! keysym Control_L = (does not work)
+
+
 !keycode 151 = Super_L
 !clear mod4
 !add mod4 = Super_L
 !keycode 151 = Caps_Lock
-clear lock
-add mod4 = Caps_Lock
+!clear lock
+!add mod4 = Caps_Lock
+
+!remove Lock = Caps_Lock
+!keycode 37 = Control_L NoSymbol Control_L
+!add Control = Control_L

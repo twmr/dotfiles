@@ -45,6 +45,11 @@ windows! does the same as =C-x 1=
 ** elisp
 emacs-lisp-byte-compile
 * Key Bindings Graphene Setup
+** python flycheck
+=C-c ! c= force check of file
+=C-c ! l= list errors
+=C-c ! p= previous error
+=C-c ! n= next error
 ** sr-speedbar
 =f6= toogle
 =U= 1 dir up

@@ -75,12 +75,14 @@
 (add-hook 'project-persist-after-load-hook
           (lambda ()
             (graphene-load-project-desktop)
-            (graphene-set-project-root project-persist-current-project-root-dir)))
+            (graphene-set-project-root
+             project-persist-current-project-root-dir)))
 
 ;; Save the project desktop.
 (add-hook 'project-persist-after-save-hook
           (lambda ()
-            (message (format "Saving project desktop in %s" project-persist-current-project-settings-dir))
+            (message (format "Saving project desktop in %s"
+                             project-persist-current-project-settings-dir))
             (desktop-save project-persist-current-project-settings-dir)))
 
 ;; http://www.emacswiki.org/DeskTop#toc4: Overriding stale desktop locks

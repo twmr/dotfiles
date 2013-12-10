@@ -14,7 +14,11 @@ alias grep='grep --color=auto'
 
 alias -g G='| egrep'
 
-alias pip='python-pip'
+# alias pip='python-pip'
+
+#python stuff
+alias workon='source activate'
+alias workoff='source deactivate'
 
 #function call
 alias ex=extract_archive

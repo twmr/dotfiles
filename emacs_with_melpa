@@ -15,11 +15,14 @@
 (defvar prelude-packages
   '(auto-complete
     solarized-theme
+    zenburn-theme
     eldoc
     evil
     magit
+    flycheck
+    nlinum
     ;; powerline
-    smart-mode-line
+    ;; smart-mode-line
     flx-ido)
   "A list of packages to ensure are installed at launch.")
 
@@ -44,10 +47,14 @@
 
 ;; (require 'powerline)
 ;; (powerline-default-theme)
-(require 'smart-mode-line)
-(if after-init-time (sml/setup)
-  (add-hook 'after-init-hook 'sml/setup))
-(load-theme 'solarized-light t)
+;; (require 'smart-mode-line)
+;; (if after-init-time (sml/setup)
+  ;; (add-hook 'after-init-hook 'sml/setup))
+;; (load-theme 'solarized-light t)
+(load-theme 'zenburn t)
+
+(global-linum-mode 1)
+(setq linum-format " %4d ")
 
 
 (defalias 'yes-or-no-p 'y-or-n-p)
@@ -183,6 +190,8 @@
            (t (setq unread-command-events (append unread-command-events
                               (list evt))))))))))
 
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; BINDINGS
 
