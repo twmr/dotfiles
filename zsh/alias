@@ -99,7 +99,7 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     hash -d tp2=~/gitrepos/tools/poc2
     hash -d pyspu=~/gitrepos/pyspu.git/trunk
 
-    alias simutestrunner='python testrunner.py -c tests/testconfig_simulation.json -s os-vm -p 26999 -u os-vm -l 8000 -t 120 --debug'
+    alias simutestrunner='python testrunner.py -c tests/testconfig_simulation.json -s localhost -p 26999 -u localhost -l 8000 -t 120 --debug'
 
     alias tsp='~/gitrepos/pyspu/branches/version0.8/tsplotter/tsplotter'
 fi
