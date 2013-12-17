@@ -1,0 +1,18 @@
+#!/usr/bin/env python
+from __future__ import print_function
+
+import sys
+
+if __name__ == "__main__":
+   input = sys.argv[1] # hex number
+   num = int(input, 16)
+   binnum = bin(num)
+
+   print("number: ", binnum)
+   output = []
+   for i, v in enumerate(str(binnum)[::-1]):
+      if v == '1':
+         output.append("Bit %d set" % i)
+
+   for o in output[::-1]:
+      print(o)
