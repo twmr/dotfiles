@@ -14,11 +14,38 @@
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 
+(require 'package)
+(add-to-list 'package-archives
+  '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
-;; (require 'keyfreq)
-;; (keyfreq-mode 1)
-;; (keyfreq-autosave-mode 1)
-;; use keyfreq-show to see how many times you used a command.
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(defvar prelude-packages
+  '(json-mode
+    )
+  "A list of packages to ensure are installed at launch.")
+
+;; TODO rewrite prelude-packages-installed-p s.t. it does not required "cl"
+(require 'cl-lib)
+(require 'cl)
+(defun prelude-packages-installed-p ()
+  (loop for p in prelude-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
+
+(unless (prelude-packages-installed-p)
+  ;; check for new packages (package versions)
+  (message "%s" "Emacs Prelude is now refreshing its package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ;; install the missing packages
+  (dolist (p prelude-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
+
+(package-initialize)
 
 ;; http://comments.gmane.org/gmane.emacs.vim-emulation/1700
 (setq evil-want-C-i-jump nil)
@@ -43,7 +70,6 @@
           eassist
           markdown-mode
           yaml-mode
-          js2-mode
           expand-region
           ace-jump-mode
           yasnippet
@@ -77,7 +103,6 @@
           highlight-indentation
           sr-speedbar
           ;; browse-kill-ring
-          ;; textlint ;; not needed atm
           ;; nognus
           ;; go-mode
           el-get
