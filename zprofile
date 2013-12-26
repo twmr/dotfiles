@@ -158,7 +158,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export EMBINPATH=${HOME}/gitrepos/emacs/src
 
     export LD_LIBRARY_PATH=/opt/protobuf/lib:${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
-    export PATH=${HOME}/bin:$HOME/anaconda/bin:/opt/protobuf/bin:$DOTFPATH/bin:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$EMBINPATH:$HOME/qtcreator/bin:$HOME/sandbox/pycharm-community-3.0/bin:${PATH}
+    export PATH=${HOME}/bin::/opt/protobuf/bin:$DOTFPATH/bin:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$EMBINPATH:$HOME/qtcreator/bin:$HOME/sandbox/pycharm-community-3.0/bin:${PATH}
 
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps
