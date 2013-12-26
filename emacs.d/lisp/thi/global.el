@@ -25,6 +25,7 @@
                                   DocView-mode
                                   latex-mode
                                   wl-summary-mode
+                                  git-commit-mode
                                   compilation-mode))
 
 ;; fill-column-indicator
