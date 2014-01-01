@@ -50,6 +50,35 @@
 ;; http://comments.gmane.org/gmane.emacs.vim-emulation/1700
 (setq evil-want-C-i-jump nil)
 
+;; (defun flymake-display-warning (warning)
+;;   "Display a warning to the user, using message"
+;;   (message warning))
+
+;; Nope, I want my copies in the system temp dir.
+;; (setq flymake-run-in-place nil)
+;; This lets me say where my temp dir is.
+;; (mkdir (concat thi::cache-file-dir "/flymaketmp/") t)
+;; (setq temporary-file-directory (concat thi::cache-file-dir "/flymaketmp/"))
+
+;; I want to see at most the first 4 errors for a line.
+;; (setq flymake-number-of-errors-to-display 4)
+
+(eval-after-load "flymake"
+  '(progn
+    (defun flymake-pyflakes-init ()
+      (let* ((temp-file (flymake-init-create-temp-buffer-copy
+                         'flymake-create-temp-inplace))
+             (local-file (file-relative-name
+                          temp-file
+                          (file-name-directory buffer-file-name))))
+        (list "pyflakes" (list local-file))))
+
+    (add-to-list 'flymake-allowed-file-name-masks
+                 '("\\.py\\'" flymake-pyflakes-init))))
+
+(add-hook 'find-file-hook 'flymake-find-file-hook)
+(eval-after-load 'flymake '(require 'flymake-cursor))
+
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
 (dolist (file (directory-files thi::config-dir))
@@ -84,8 +113,6 @@
           find-file-in-repository
           fill-column-indicator
           ethan-wspace
-          smart-mode-line
-          undo-tree
           lua-mode
           ;;minimap
           evil-leader
@@ -136,10 +163,9 @@
 ;; safe-theme question fix
 ;; see http://stackoverflow.com/questions/8545756/how-to-treat-solarized-as-a-safe-theme
 ;; (load-theme 'naquadah t)
-(if window-system
-    (load-theme 'solarized-light t)
-  (load-theme 'solarized-dark t))
+(load-theme 'solarized-light t)
 
+(global-undo-tree-mode)
 
 (load "thi/defuns")
 (load "thi/global")
@@ -154,8 +180,6 @@
 (load "thi/nxml")
 (load "thi/compilation")
 (load "vendor/lambda-mode") ;; useful for python development
-(load "thi/flymake-pre")
-(vendor 'flymake-cursor)
 (load "thi/graphene")
 
 (custom-set-faces '(window-numbering-face

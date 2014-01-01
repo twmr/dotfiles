@@ -6,7 +6,7 @@
          (normal (concat "~/.emacs.d/vendor/" file))
          (lnormal (concat normal "/lisp"))
          (suffix (concat normal ".el"))
-         (personal (concat "~/.emacs.d/thi/" file))
+         (personal (concat "~/.emacs.d/lisp/thi/" file))
          (found nil))
     (cond
      ((file-directory-p lnormal) (add-to-list 'load-path lnormal) (set 'found t))
@@ -28,7 +28,7 @@
          (normal (concat "~/.emacs.d/el-get/package/elpa/" file "-" vnum))
          (lnormal (concat normal "/lisp"))
          (suffix (concat normal ".el"))
-         (personal (concat "~/.emacs.d/thi/" file))
+         (personal (concat "~/.emacs.d/lisp/thi/" file))
          (found nil))
     (cond
      ((file-directory-p lnormal) (add-to-list 'load-path lnormal) (set 'found t))
