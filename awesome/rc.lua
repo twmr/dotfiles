@@ -99,8 +99,10 @@ if hostname == "pc-52-rh" then
       second = 2
    }
    tags = {
-      namessecond  = { "main","loader","web","scripts",5,"remote","vm",8,9 },
-      names  = { "mail","emacs","hvgui",4,5,6,7,8,9 }
+      namessecond  = { "1main","2emacs","3web","4scripts","5jeol",
+                       "6remote","7vm","8tmp","9tmp", "10brunn",
+                       "11nemo", "12tmp", "13tmp" },
+      names  = { "1mail","2emacs",3,4,5,6,7,8,9,10,11,12,13 }
    }
    lockcmd = "xscreensaver-command -lock"
    defaultlayoutidmon2 = 3
@@ -324,7 +326,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey },            "r",     function () exec("gnome-do")           end),
 
     -- Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end)
+    -- awful.key({ modkey }, "p", function() menubar.show() end)
 )
 
 clientkeys = awful.util.table.join(
