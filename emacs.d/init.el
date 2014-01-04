@@ -24,6 +24,7 @@
 
 (defvar prelude-packages
   '(json-mode
+    moe-theme
     )
   "A list of packages to ensure are installed at launch.")
 
@@ -50,18 +51,18 @@
 ;; http://comments.gmane.org/gmane.emacs.vim-emulation/1700
 (setq evil-want-C-i-jump nil)
 
-;; (defun flymake-display-warning (warning)
-;;   "Display a warning to the user, using message"
-;;   (message warning))
+(defun flymake-display-warning (warning)
+  "Display a warning to the user, using message"
+  (message warning))
 
 ;; Nope, I want my copies in the system temp dir.
-;; (setq flymake-run-in-place nil)
+(setq flymake-run-in-place nil)
 ;; This lets me say where my temp dir is.
-;; (mkdir (concat thi::cache-file-dir "/flymaketmp/") t)
-;; (setq temporary-file-directory (concat thi::cache-file-dir "/flymaketmp/"))
+(mkdir (concat thi::cache-file-dir "/flymaketmp/") t)
+(setq temporary-file-directory (concat thi::cache-file-dir "/flymaketmp/"))
 
 ;; I want to see at most the first 4 errors for a line.
-;; (setq flymake-number-of-errors-to-display 4)
+(setq flymake-number-of-errors-to-display 4)
 
 (eval-after-load "flymake"
   '(progn
@@ -77,7 +78,7 @@
                  '("\\.py\\'" flymake-pyflakes-init))))
 
 (add-hook 'find-file-hook 'flymake-find-file-hook)
-(eval-after-load 'flymake '(require 'flymake-cursor))
+;; (eval-after-load 'flymake '(require 'flymake-cursor))
 
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
@@ -87,7 +88,8 @@
       `(load ,(concat thi::config-dir "/" file)))))
 
 (setq thi::packages
-        '(auto-complete
+        '(solarized-theme
+          auto-complete
           git-modes
           magit
           projectile
@@ -102,8 +104,7 @@
           expand-region
           ace-jump-mode
           yasnippet
-          ;; naquadah-theme
-          solarized-theme
+          smart-mode-line
           flx
           smex
           ;; flycheck
@@ -163,6 +164,7 @@
 ;; safe-theme question fix
 ;; see http://stackoverflow.com/questions/8545756/how-to-treat-solarized-as-a-safe-theme
 ;; (load-theme 'naquadah t)
+;; (load-theme 'moe-light t)
 (load-theme 'solarized-light t)
 
 (global-undo-tree-mode)
