@@ -116,6 +116,7 @@ function gcl() { git clone "$*" }
 function gpl() { git pull $* }
 function gps() { git push $* }
 function gsr() { git svn rebase $* }
+function gri() { git rebase -i $* }
 function gco() {
     if [ -z "$1" ]; then
         git checkout master
