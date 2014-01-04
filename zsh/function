@@ -112,6 +112,7 @@ function gs() { git status --ignore-submodules $* }
 function gsvr() { git svn rebase $* }
 function gp() { git push $* }
 function gc() { git commit -m "$*" }
+function gcl() { git clone "$*" }
 function gpl() { git pull $* }
 function gps() { git push $* }
 function gsr() { git svn rebase $* }
