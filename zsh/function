@@ -74,6 +74,10 @@ function emacs_melpa_setup() {
     _emacs_setup "emacs_with_melpa"
 }
 
+function emacs_elget_setup() {
+    _emacs_setup "emacs_with_elget"
+}
+
 function emacs_graphene_setup() {
     _emacs_setup "emacs_with_graphene"
 }
