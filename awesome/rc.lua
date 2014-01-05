@@ -323,10 +323,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", altkey }, "l",     function () exec(lockcmd)                 end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () exec("gnome-do")           end),
-
-    -- Menubar
-    -- awful.key({ modkey }, "p", function() menubar.show() end)
+    awful.key({ modkey },            "r",     function () exec("gnome-do")           end)
 )
 
 clientkeys = awful.util.table.join(
