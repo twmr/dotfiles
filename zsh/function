@@ -47,6 +47,10 @@ function started() {
     fi
 }
 
+function enconda() {
+    export PATH=$HOME/anaconda/bin:$PATH
+}
+
 
 _emacs_setup() {
     local name=$1
