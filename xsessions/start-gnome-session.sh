@@ -89,7 +89,7 @@ fi
 #if something does not work as expected start gnome-session with --debug and look into .xsession-errors
 #-a starts only the *.desktop files in the specified dir instead of the WM  (ex: -a /home/thomas/dumm)
 #exec strace -fF -o /tmp/gnome-session-trace /usr/bin/gnome-session
-#exec /usr/bin/awesome
+exec ssh-agent /usr/bin/awesome
 
 #echo TESTVARS
 #echo $GNOME3
