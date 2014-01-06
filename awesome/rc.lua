@@ -55,7 +55,7 @@ local modkey = "Mod4"
 beautiful.init(awful.util.getdir("config") .. "/theme.lua")
 
 settings = {}
-settings.term = 'urxvtc'
+settings.term = 'urxvt256c'
 -- settings.term = 'gnome-terminal'
 settings.browser1 = browser
 settings.browser2 = 'chromium-browser'
