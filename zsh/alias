@@ -102,6 +102,10 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     alias simutestrunner='python testrunner.py -c tests/testconfig_simulation.json -s localhost -p 26999 -u localhost -l 8000 -t 120 --debug'
 
     alias tsp='~/gitrepos/pyspu/branches/version0.8/tsplotter/tsplotter'
+
+    alias opbrunn='ssh operator@brunn -X'
+    alias devbrunn='ssh devel@brunn -X'
+
 fi
 if [ "$HOSTNAME" = "cobra" ]; then
     hash -d pst=${HOME}/gitrepos/POC-scripts/trunk
