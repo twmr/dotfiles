@@ -20,6 +20,12 @@ export IGNOREEOF=3
 # export AWT_TOOLKIT=MToolkit # for matlab
 HOSTNAME=`hostname`
 
+# see http://blog.vanutsteen.nl/2013/04/30/using-your-desktop-s-git-author-everywhere-you-ssh/
+export GIT_AUTHOR_NAME="`git config user.name`"
+export GIT_AUTHOR_EMAIL="`git config user.email`"
+export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
+export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
+
 ONVSC=`hostname | egrep '(l01|r[0-9]+{2}n[0-9]+{2})' `
 
 # Exports
