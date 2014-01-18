@@ -173,5 +173,6 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook #'global-undo-tree-mode)
+(add-hook 'after-init-hook #'yas-global-mode)
 
 ;;; init.el ends here
