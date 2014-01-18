@@ -24,7 +24,7 @@
 
 (defvar prelude-packages
   '(json-mode
-    moe-theme
+    ;; moe-theme
     )
   "A list of packages to ensure are installed at launch.")
 
