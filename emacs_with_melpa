@@ -12,6 +12,14 @@
 ;; (global-set-key (kbd "C-c h") 'helm-mini)
 ;; (global-set-key (kbd "C-c g") 'helm-git-grep)
 
+;; Flycheck python dependencies
+;; install the flake8 tool https://pypi.python.org/pypi/flake8 
+;; and pep8-naming https://pypi.python.org/pypi/flake8
+;; and pyflakes https://pypi.python.org/pypi/flake8
+;; verify that all where installed successfully with
+;; $ flake8 --version
+;; 2.0 (pep8: 1.4.3, pyflakes: 0.6.1, naming: 0.2)
+
 (defvar prelude-packages
   '(auto-complete
     solarized-theme
@@ -19,8 +27,10 @@
     eldoc
     evil
     magit
+    yasnippet
     flycheck
     nlinum
+    ethan-wspace
     ;; powerline
     smart-mode-line
     flx-ido)
@@ -52,6 +62,21 @@
 (global-linum-mode 1)
 (setq linum-format " %4d ")
 
+;; linum should be disabled for certain modes where linenumbers do not
+;; make sense
+;; http://www.emacswiki.org/emacs/LineNumbers
+(setq linum-disabled-modes-list '(eshell-mode
+                                  org-mode
+                                  DocView-mode
+                                  latex-mode
+                                  wl-summary-mode
+                                  git-commit-mode
+                                  compilation-mode))
+(defun linum-on ()
+    (unless (or (minibufferp) (member major-mode linum-disabled-modes-list)
+              (string-match "*" (buffer-name))
+              )
+    (linum-mode 1)))
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -79,6 +104,13 @@
 
 (when (member 'evil prelude-packages)
   (evil-mode 1))
+
+(yas-global-mode 1)
+(setq yas/prompt-functions '(yas/ido-prompt
+			     yas/dropdown-prompt
+			     yas/completing-prompt))
+
+(global-ethan-wspace-mode 1)
 
 ;; Original idea from
 ;; http://www.opensubscriber.com/message/emacs-devel@gnu.org/10971693.html
@@ -212,6 +244,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(flycheck-display-errors-delay 0.4)
+ '(flycheck-highlighting-mode (quote lines))
  '(sml/active-background-color "gray25"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
