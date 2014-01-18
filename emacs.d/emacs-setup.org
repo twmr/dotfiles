@@ -38,12 +38,17 @@ the same as C-x 1 (which works in all modes)
 windows! does the same as =C-x 1=
 ** Editing
 =M-b M-u= upcase backward word
+=M-h= mark paragraph
 ** Projectile
 =C-x f= open file in repository (using fuzzy matching)
 =C-c P n= new project
 =C-c P f= open existing project
 ** elisp
 emacs-lisp-byte-compile
+** flycheck
+use customize-group flycheck to customize error display delay
+=C-c ! n= move cursor to next error
+
 * Key Bindings Graphene Setup
 ** python flycheck
 =C-c ! c= force check of file
