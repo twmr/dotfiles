@@ -51,35 +51,6 @@
 ;; http://comments.gmane.org/gmane.emacs.vim-emulation/1700
 (setq evil-want-C-i-jump nil)
 
-(defun flymake-display-warning (warning)
-  "Display a warning to the user, using message"
-  (message warning))
-
-;; Nope, I want my copies in the system temp dir.
-(setq flymake-run-in-place nil)
-;; This lets me say where my temp dir is.
-(mkdir (concat thi::cache-file-dir "/flymaketmp/") t)
-(setq temporary-file-directory (concat thi::cache-file-dir "/flymaketmp/"))
-
-;; I want to see at most the first 4 errors for a line.
-(setq flymake-number-of-errors-to-display 4)
-
-(eval-after-load "flymake"
-  '(progn
-    (defun flymake-pyflakes-init ()
-      (let* ((temp-file (flymake-init-create-temp-buffer-copy
-                         'flymake-create-temp-inplace))
-             (local-file (file-relative-name
-                          temp-file
-                          (file-name-directory buffer-file-name))))
-        (list "pyflakes" (list local-file))))
-
-    (add-to-list 'flymake-allowed-file-name-masks
-                 '("\\.py\\'" flymake-pyflakes-init))))
-
-(add-hook 'find-file-hook 'flymake-find-file-hook)
-;; (eval-after-load 'flymake '(require 'flymake-cursor))
-
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
 (dolist (file (directory-files thi::config-dir))
@@ -107,7 +78,7 @@
           smart-mode-line
           flx
           smex
-          ;; flycheck
+          flycheck
           dired+
           dired-details
           ;;replace+
@@ -167,7 +138,6 @@
 ;; (load-theme 'moe-light t)
 (load-theme 'solarized-light t)
 
-(global-undo-tree-mode)
 
 (load "thi/defuns")
 (load "thi/global")
@@ -188,8 +158,6 @@
                     ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
 (window-numbering-mode 1)
 
-;; (load-library "calfw-cal")
-
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
 (load "thi/auto-complete")
@@ -202,3 +170,8 @@
 ;; (vendor 'auto-mark)
 
 (put 'dired-find-alternate-file 'disabled nil)
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(add-hook 'after-init-hook #'global-undo-tree-mode)
+
+;;; init.el ends here

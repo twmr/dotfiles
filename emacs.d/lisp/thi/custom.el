@@ -7,8 +7,6 @@
  '(comint-prompt-read-only t)
  '(cursor-color nil)
  '(evil-mode-line-format (quote before))
- '(flymake-cursor-error-display-delay 0.4)
- '(flymake-gui-warnings-enabled nil)
  '(foreground-color nil)
  '(fringe-mode (quote (5 . 5)) nil (fringe))
  '(ido-auto-merge-delay-time 2.7)
