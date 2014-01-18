@@ -1,4 +1,15 @@
 #+STARTUP: indent
+
+* Dependencies
+** jedi
+=yi python-virtualenv=
+** Flycheck python dependencies
+ install the flake8 tool https://pypi.python.org/pypi/flake8
+ and pep8-naming https://github.com/flintwork/pep8-naming
+ and pyflakes https://github.com/pyflakes/pyflakes
+ verify that all where installed successfully with
+ $ flake8 --version
+ 2.0 (pep8: 1.4.3, pyflakes: 0.6.1, naming: 0.2)
 * Key Bindings
 ** IDO Mode
 =S-F11= open recent directories (uses recentf-list)
