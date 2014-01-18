@@ -72,7 +72,8 @@
           eassist
           markdown-mode
           yaml-mode
-          expand-region
+          ;; expand-region ;; temp. disabled because atm it triggers the
+          ;; error void var. er/add-pyhon-.. while opening a python file
           ace-jump-mode
           yasnippet
           smart-mode-line
@@ -91,7 +92,6 @@
           evil
           evil-numbers
           python-cell
-          python
           epc
           jedi
           ;; gnuplot-mode ;; not needed atm
@@ -153,6 +153,8 @@
 (load "thi/compilation")
 (load "vendor/lambda-mode") ;; useful for python development
 (load "thi/graphene")
+(load "thi/python") ;; we need to load it manually because python.conf.el
+                    ;; does not get loaded using our el-get specific loader
 
 (custom-set-faces '(window-numbering-face
                     ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
@@ -173,6 +175,6 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook #'global-undo-tree-mode)
-(add-hook 'after-init-hook #'yas-global-mode)
+(add-hook 'after-init-hook #'yas-global-mode 1)
 
 ;;; init.el ends here

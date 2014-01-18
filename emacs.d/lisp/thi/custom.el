@@ -13,6 +13,7 @@
  '(ido-enable-tramp-completion nil)
  '(ido-max-window-height 30)
  '(ido-use-faces t)
+ '(jedi:get-in-function-call-delay 0.4)
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(matlab-indent-level 2)
@@ -148,6 +149,22 @@
      (TeX-master . "manuscript.tex")
      (nxml-child-indent . 4)
      (TeX-master . t))))
+ '(semantic-new-buffer-setup-functions
+   (quote
+    ((c-mode . semantic-default-c-setup)
+     (c++-mode . semantic-default-c-setup)
+     (html-mode . semantic-default-html-setup)
+     (java-mode . wisent-java-default-setup)
+     (js-mode . wisent-javascript-setup-parser)
+     (scheme-mode . semantic-default-scheme-setup)
+     (srecode-template-mode . srecode-template-setup-parser)
+     (texinfo-mode . semantic-default-texi-setup)
+     (makefile-automake-mode . semantic-default-make-setup)
+     (makefile-gmake-mode . semantic-default-make-setup)
+     (makefile-makepp-mode . semantic-default-make-setup)
+     (makefile-bsdmake-mode . semantic-default-make-setup)
+     (makefile-imake-mode . semantic-default-make-setup)
+     (makefile-mode . semantic-default-make-setup))))
  '(sml/active-background-color "gray25"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

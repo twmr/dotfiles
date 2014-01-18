@@ -29,8 +29,7 @@
 (require 'python-cell)
 
 (add-hook 'python-mode-hook #'lambda-mode 1)
-(eval-after-load 'jedi
-  (add-hook 'python-mode-hook 'jedi:setup))
+(add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook #'fci-mode 1)
 (add-hook 'python-mode-hook #'highlight-indentation-mode 1)
 (add-hook 'python-mode-hook #'python-cell-mode 1)
