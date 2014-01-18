@@ -15,6 +15,7 @@ fi
 export OOO_FORCE_DESKTOP='gnome'
 export EDITOR="emacs" #is an alias to emacsclient
 export VISUAL="$EDITOR"
+export PAGER="vless"
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
 # export AWT_TOOLKIT=MToolkit # for matlab
@@ -40,6 +41,11 @@ export MYSRCDIR=$HOME/local/src
 export LOCSOFT=$HOME/local/software
 export GITR=$HOME/gitrepos
 export BROWSER=google-chrome
+
+prepath() {
+    # prepend path to PATH
+    [ -d "${1}" ] && [[ ! "${PATH}" =~ "${1}" ]] && PATH="${1}:${PATH}"
+}
 
 if [ "$HOSTNAME" = "mustang" ]; then
     arch="" #intel64"
@@ -163,8 +169,16 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
 
-    export LD_LIBRARY_PATH=/opt/protobuf/lib:${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
-    export PATH=${HOME}/bin::/opt/protobuf/bin:$DOTFPATH/bin:${LOCSOFT}/bin:${MYMPI_BIN_PATH}:$EMBINPATH:$HOME/qtcreator/bin:$HOME/sandbox/pycharm-community-3.0/bin:${PATH}
+    export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
+
+    prepath $HOME/sandbox/pycharm-community-3.0/bin
+    prepath $HOME/qtcreator/bin
+    prepath $EMBINPATH
+    prepath $MYMPI_BIN_PATH
+    prepath $LOCSOFT/bin
+    prepath $DOTFPATH/bin
+    prepath $HOME/.local/bin
+    prepath $HOME/bin
 
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps
@@ -437,12 +451,7 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
 
 fi
 
-# watch for people
-#watch=(notme)                   # watch for everybody but me
-#LOGCHECK=300                    # check every 5 min for login/logout activity
-
 . ~/.zsh/linuxconsole
 
 #[[ $- != *i* ]] && return
 #[[ -z "$TMUX" ]] && exec tmux
-
