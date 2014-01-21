@@ -83,6 +83,10 @@ alias st='~/Downloads/sublime_text_3/sublime_text'
 alias ipy='ipython'
 alias bp='bpython-curtsies'
 
+
+alias di='sudo dnf install'
+alias dnu='sudo dnf update'
+
 #named directories
 HOSTNAME=`hostname`
 if [ "$HOSTNAME" = "pc-52-rh" ]; then
