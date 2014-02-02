@@ -83,9 +83,9 @@ alias st='~/Downloads/sublime_text_3/sublime_text'
 alias ipy='ipython'
 alias bp='bpython-curtsies'
 
-
 alias di='sudo dnf install'
 alias dnu='sudo dnf update'
+alias ds='sudo dnf search'
 
 #named directories
 HOSTNAME=`hostname`
