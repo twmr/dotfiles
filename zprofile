@@ -185,7 +185,9 @@ elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export GITR=${HOME}/gitrepos
     DOTFPATH=${GITR}/dotfiles
     export EMBINPATH=$GITR/emacs/src
-    export PATH=${HOME}/qtcreator:${HOME}/.local/bin:${DOTFPATH}/bin:${EMBINPATH}:$PATH
+    export PATH=${HOME}/software/pycharm/bin:${HOME}/.local/bin:${DOTFPATH}/bin:${EMBINPATH}:$PATH
+
+    export JDK_HOME=$HOME/software/jdk1.7.0_51
 
     # PYSPU="linux-x86_64-2.7" #Python suffix
     # PYSPUDIR=${GITR}/pyspu.git/trunk
