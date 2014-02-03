@@ -82,6 +82,7 @@ alias st='~/Downloads/sublime_text_3/sublime_text'
 
 alias ipy='ipython'
 alias bp='bpython-curtsies'
+alias pyc='pycharm.sh'
 
 alias di='sudo dnf install'
 alias dnu='sudo dnf update'
