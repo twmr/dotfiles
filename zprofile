@@ -140,7 +140,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PETSC_DIR=${GITR}/petsc
     export PETSC_ARCH="arch-linux64-complex-fft-debug"
 
-    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1 --with-c2html=0"
+    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1 --with-c2html=0 --with-mpi=0"
     export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
     export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
     # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
@@ -172,7 +172,6 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
 
     prepath $HOME/sandbox/pycharm-community-3.1/bin
-    prepath $HOME/qtcreator/bin
     prepath $EMBINPATH
     prepath $MYMPI_BIN_PATH
     prepath $LOCSOFT/bin
@@ -185,20 +184,8 @@ elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export GITR=${HOME}/gitrepos
     DOTFPATH=${GITR}/dotfiles
     export EMBINPATH=$GITR/emacs/src
-    export PATH=${HOME}/qtcreator:${HOME}/.local/bin:${DOTFPATH}/bin:${EMBINPATH}:$PATH
+    export PATH=${HOME}/.local/bin:${DOTFPATH}/bin:${EMBINPATH}:$PATH
 
-    # PYSPU="linux-x86_64-2.7" #Python suffix
-    # PYSPUDIR=${GITR}/pyspu.git/trunk
-    # PYSPULIB=${PYSPUDIR}/build/temp.${PYSPU}
-    # PYSPUPATH=${PYSPUDIR}/build/lib.${PYSPU}
-
-    # export PYTHONPATH=$PYSPUPATH #:$PYTHONPATH
-    # export LD_LIBRARY_PATH=$PYSPULIB #:$LD_LIBRARY_PATH
-
-
-    export PYTHONPATH=${GITR}/pyspu.git/trunk
-    #TODO rename HWSimuEnv to hwsimuenv
-    export HWSIMUENV=${GITR}/HWSimuEnv
     export TOOLSREPO=${GITR}/tools
 
 elif [ "$HOSTNAME" = "thisch" ]; then
