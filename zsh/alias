@@ -65,9 +65,8 @@ alias ec="$consoleemacs"
 #alias emacs="$guiemacs"
 
 alias ipycomp='(cd ${GITR}/ipython && git pull && ./setup.py build && sudo ./setup.py install)'
-alias ipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace'
-alias imsipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace/ims'
-alias psipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/POC-scripts/trunk/doc/examples $*'
+alias in='ipython notebook'
+alias imsipnb='ipython notebook --pylab=inline --notebook-dir ${GITR}/ipython_workspace'
 
 alias svim='sudo /usr/bin/vim'
 alias v='vim'
@@ -101,8 +100,9 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     hash -d hwt=~strunk/HWCtrl
     hash -d hwb=~spoc/HWCtrl
     hash -d hwp=~sbranch/HWCtrl
-    hash -d tp1=~/gitrepos/tools/poc1
-    hash -d tp2=~/gitrepos/tools/poc2
+    hash -d tol=~/gitrepos/tools
+    hash -d tal=~/gitrepos/tools/alpha
+    hash -d tbl=~/gitrepos/tools/beta1
     hash -d pyspu=~/gitrepos/pyspu.git/trunk
 
     alias simutestrunner='python testrunner.py -c tests/testconfig_simulation.json -s localhost -p 26999 -u localhost -l 8000 -t 120 --debug'
