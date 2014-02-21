@@ -55,7 +55,7 @@ local modkey = "Mod4"
 beautiful.init(awful.util.getdir("config") .. "/theme.lua")
 
 settings = {}
-settings.term = 'urxvt256c'
+settings.term = 'urxvt256c-ml'
 -- settings.term = 'gnome-terminal'
 settings.browser1 = browser
 settings.browser2 = 'chromium-browser'
@@ -100,12 +100,12 @@ if hostname == "pc-52-rh" then
    }
    tags = {
       namessecond  = { "1main","2emacs","3web","4scripts","5jeol",
-                       "6remote","7vm","8tmp","9tmp", "10brunn",
+                       "6remote","7vm","8keller","9brunn", "10tmp",
                        "11nemo", "12tmp", "13tmp" },
       names  = { "1mail","2emacs",3,4,5,6,7,8,9,10,11,12,13 }
    }
    lockcmd = "xscreensaver-command -lock"
-   defaultlayoutidmon2 = 3
+   defaultlayoutidmon2 = 1
    defaultlayoutidmon1 = 1
 else
    monitors = {
@@ -651,9 +651,9 @@ awful.rules.rules = {
    --  { rule = { class = "Virt-manager", instance = "virt-manager" },
    --    properties = { floating = true }
    --  },
-    { rule = { class = "Thunderbird", instance = "Mail" },
-      properties = { tag = tags[monitors.second][1] }
-    },
+   -- { rule = { class = "Thunderbird", instance = "Mail" },
+   --   properties = { tag = tags[monitors.second][1] }
+   -- },
     -- { rule = { class = "Emacs", instance = "emacs" },
     --   properties = { tag = tags[monitors.second][2] }
     -- },
