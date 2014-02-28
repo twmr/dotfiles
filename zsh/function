@@ -394,6 +394,10 @@ function git_info {
 }
 #compdef '_files -g "*.gz *.tgz *.bz2 *.tbz *.zip *.rar *.tar *.lha"' extract_archive
 
+function mgg() {
+    (cd ~psc; GIT_PAGER=cat gg $*; cd ~tol; GIT_PAGER=cat gg $*) | less
+}
+
 
 function cfbench() {
     echo time mpirun -np 4 calc_cfbasis -f cfbench.xml -k 30.0 -o oidatest
