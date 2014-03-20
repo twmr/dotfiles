@@ -34,6 +34,7 @@
 (add-hook 'python-mode-hook #'highlight-indentation-mode 1)
 (add-hook 'python-mode-hook #'python-cell-mode 1)
 (add-hook 'python-mode-hook #'yas-minor-mode 1)
+(add-hook 'python-mode-hook #'superword-mode 1)
 
 ;; redefine jedi's C-. (jedi:goto-definition)
 ;; to remember position, and set C-, to jump back
