@@ -10,11 +10,11 @@
 	aliases = config --get-regexp ^alias\\.
 	al = !git aliases
 	cp = cherry-pick
-  co = commit
-  dc = diff --color-words
+	co = commit
+	dc = diff --color-words
 [user]
 	name = Thomas Hisch
-	email = t.hisch@gmail.com
+	email = thomas.hisch@ims.co.at
 [color]
 	ui = auto
 [pack]
