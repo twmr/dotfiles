@@ -45,24 +45,6 @@
     (when (file-exists-p (concat personal ".el"))
       (load personal))))
 
-;; start hl-line in each buffer where the major modes are not in
-;; hl-line-disabled-modes-list
-(defun thi-turn-hl-line-mode-on ()
-  (when (not (member major-mode hl-line-disabled-modes-list))
-      (hl-line-mode 1)))
-
-(defun thi-turn-hl-line-mode-off ()
-  (when (not (member major-mode hl-line-disabled-modes-list))
-      (hl-line-mode -1)))
-
-(defun thi-turn-hl-line-mode-on2 ()
-  (when (member major-mode hl-line-enabled-modes-list)
-    (hl-line-mode 1)))
-
-(defun thi-turn-hl-line-mode-off2 ()
-  (when (member major-mode hl-line-enabled-modes-list)
-    (hl-line-mode -1)))
-
 (defun turn-on-outline-minor-mode ()
   (outline-minor-mode 1))
 
@@ -71,7 +53,6 @@
 
 (defun turn-on-longlines-mode ()
   (longlines-mode 1))
-
 
 (defun my-count-words-region (posBegin posEnd)
   "Print number of words and chars in region."

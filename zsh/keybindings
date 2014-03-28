@@ -14,6 +14,14 @@ case $TERM in
         bindkey '^[[5~' history-beginning-search-backward  ## Page Up
         bindkey '^[[6~' history-beginning-search-forward   ## Page Down
         ;;
+    eterm-color*)
+        # Pos1 && End
+        bindkey '^[OH'  beginning-of-line                  ## Pos1
+        bindkey '^[OF'  end-of-line                        ## End
+        bindkey '^[[3~' delete-char                        ## Entf
+        bindkey '^[[5~' history-beginning-search-backward  ## Page Up
+        bindkey '^[[6~' history-beginning-search-forward   ## Page Down
+        ;;
     rxvt-unicode*)
         bindkey "^[[1~" beginning-of-line
         bindkey "^[[7~" beginning-of-line

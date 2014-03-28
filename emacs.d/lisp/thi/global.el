@@ -41,16 +41,7 @@
 ;;(set-face-foreground 'linum "white")
 ;;(set-face-background 'linum "black")
 
-
-;: LINE Highlighting (highlight the current line)
-;; exceptions where hl-line is not desired:
-;; (setq hl-line-disabled-modes-list '(org-mode))
-(setq hl-line-enabled-modes-list '(magit-status-mode
-                                   magit-log-mode))
 (set-face-attribute 'highlight nil :underline nil)
-(add-hook 'find-file-hook 'thi-turn-hl-line-mode-on2)
-(add-hook 'magit-mode-hook 'thi-turn-hl-line-mode-on2)
-
 
 (line-number-mode 1)                    ; Show line number
 (column-number-mode 1)                  ; Show colum number
@@ -316,6 +307,8 @@
 
 (delete-selection-mode 1)               ; Transient mark can delete/replace
 (global-hl-line-mode 1)                 ; Highlight the current line
+(make-variable-buffer-local 'global-hl-line-mode) ; this makes it possible to disable hl-line mode for certain modes (see http://stackoverflow.com/questions/9990370/how-to-disable-hl-line-feature-in-specified-mode)
+
 ;; (windmove-default-keybindings)        ; Move between frames with Shift+arrow
 (show-paren-mode t)
 (url-handler-mode 1)                    ; Allow to open URL
