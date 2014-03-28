@@ -151,6 +151,7 @@
 (load "thi/recentf")
 (load "thi/nxml")
 (load "thi/compilation")
+(load "thi/term")
 (load "vendor/lambda-mode") ;; useful for python development
 (load "thi/graphene")
 (load "thi/python") ;; we need to load it manually because python.conf.el
