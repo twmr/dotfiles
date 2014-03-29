@@ -23,9 +23,13 @@
 =C-x C-j= dired jump (jumps to a dired buffer of the directory of the
 current file); equivalent to =C-x d RET=
 ** Function Keys
-   =F5= magit grep
-   =F6= magit status
-   =F7= open file at cursor
+=F2=
+If I'm already in an ansi-term, but it's called "*ansi-term*" rename it.
+If I'm already in an ansi-term, but it's called something else, start a new ansi-term called "*ansi-term*"
+If I'm in another non-terminal buffer, switch to a buffer called "*ansi-term*" or create a new one if it doesn't exist
+=F5= magit grep
+=F6= magit status
+=F7= open file at cursor
 ** python development
 *** yasnippet python snippets
 + class *suppa*
@@ -47,6 +51,7 @@ the same as C-x 1 (which works in all modes)
 ** evil
 =C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other
 windows! does the same as =C-x 1=
+=S-*= search symbol under point (also try =M-s .= beginning with emacs 24.4)
 ** Editing
 =M-b M-u= upcase backward word
 =M-h= mark paragraph
@@ -59,7 +64,16 @@ emacs-lisp-byte-compile
 ** flycheck
 use customize-group flycheck to customize error display delay
 =C-c ! n= move cursor to next error
+** gnus
+*** =L= goto summary buffer
+** ansi-term
+try prefixing actions that aren’t recognized by their standard key commands
+with =C-x=. For example, =M-x= becomes =C-x M-x=.
 
+sshing into remote hosts and typing C-c C-f opens the remote CWD using tramp
+if bash_profile is configured correctly (http://www.enigmacurry.com/category/emacs/2/)
+
+see description for F2 keybinding
 * Key Bindings Graphene Setup
 ** python flycheck
 =C-c ! c= force check of file
