@@ -126,3 +126,78 @@ Works by adjusting the right margin."
         (set-window-margins nil (car (window-margins)) nil)
         (set-window-fringes nil (car (window-fringes))
                                 (car (window-fringes))))))
+
+;; see http://www.enigmacurry.com/category/emacs/2/
+(require 'term)
+;; (defun visit-ansi-term ()
+;;   "If the current buffer is:
+;;      1) a running ansi-term named *ansi-term*, rename it.
+;;      2) a stopped ansi-term, kill it and create a new one.
+;;      3) a non ansi-term, go to an already running ansi-term
+;;         or start a new one while killing a defunt one"
+;;   (interactive)
+;;   (let ((is-term (string= "term-mode" major-mode))
+;;         (is-running (term-check-proc (buffer-name)))
+;;         (term-cmd "/bin/zsh")
+;;         (anon-term (get-buffer "*ansi-term*")))
+;;     (if is-term
+;;         (if is-running
+;;             (if (string= "*ansi-term*" (buffer-name))
+;;                 (call-interactively 'rename-buffer)
+;;               (if anon-term
+;;                   (switch-to-buffer "*ansi-term*")
+;;                 (ansi-term term-cmd)))
+;;           (kill-buffer (buffer-name))
+;;           (ansi-term term-cmd))
+;;       (if anon-term
+;;           (if (term-check-proc "*ansi-term*")
+;;               (switch-to-buffer "*ansi-term*")
+;;             (kill-buffer "*ansi-term*")
+;;             (ansi-term term-cmd))
+;;         (ansi-term term-cmd)))))
+
+;; more advanced visit-ansi term from one of the comment of the above blog post
+(defun visit-ansi-term (arg)
+  "If the current buffer is:
+     1) a running ansi-term named *ansi-term*, rename it.
+     2) a stopped ansi-term, kill it and create a new one.
+     3) a non ansi-term, go to an already running ansi-term
+        or start a new one while killing a defunt one
+     4) on a named term (i.e., not *ansi-term*) create a new one
+     4) if called with CTRL-u create a new ansi-term regardless
+     5) C-u C-u create a new ansi-term and prompt for name
+   Within an existing ansi-term one need to use C-x C-u F2 for a new term"
+  (interactive
+   (cond
+    ((equal current-prefix-arg nil)
+     (list nil))
+    ((equal current-prefix-arg '(4))
+     (list "*ansi-term*"))
+    ((equal current-prefix-arg '(16))
+     (list (read-string "Name (*ansi-term*):" nil nil "*ansi-term*")))
+    ))
+  (let ((is-term (string= "term-mode" major-mode))
+        (is-running (term-check-proc (buffer-name)))
+        (term-cmd "/bin/zsh")
+        (anon-term (get-buffer "*ansi-term*")))
+    (cond
+     ((string= arg nil)
+      (if is-term
+          (if is-running
+              (if (string= "*ansi-term*" (buffer-name))
+                  (call-interactively 'rename-buffer)
+                (if anon-term
+                    (switch-to-buffer "*ansi-term*")
+                  (ansi-term term-cmd)))
+            (kill-buffer (buffer-name))
+            (ansi-term term-cmd))
+        (if anon-term
+            (if (term-check-proc "*ansi-term*")
+                (switch-to-buffer "*ansi-term*")
+              (kill-buffer "*ansi-term*")
+              (ansi-term term-cmd))
+          (ansi-term term-cmd))))
+     ((string= arg "*ansi-term*")
+      (ansi-term term-cmd))
+     (t
+      (ansi-term term-cmd arg)))))

@@ -9,7 +9,9 @@
 
 (global-set-key [f1] 'query-replace)
 ;; (global-set-key [f1] 'yas/expand)
-(global-set-key [f2] 'hippie-expand)
+;; (global-set-key [f2] 'hippie-expand)
+(global-set-key (kbd "<f2>") 'visit-ansi-term)
+
 ;; (global-set-key [f3] 'dabbrev-expand)
 
 
