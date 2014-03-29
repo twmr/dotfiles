@@ -6,7 +6,7 @@
   ido-ignore-buffers ;; ignore these guys
   '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
 
-     "^\*compilation" "^\*GTAGS" "^session\.*" "^\*")
+     "^\*compilation" "^\*GTAGS" "^\*")
   ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~src")
   ido-case-fold  t                 ; be case-insensitive
 
