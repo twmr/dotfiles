@@ -100,7 +100,7 @@
           ;;rainbow-mode
           rainbow-delimiters
           highlight-indentation
-          sr-speedbar
+          ;; sr-speedbar (commented out as long as there is no upstream fix for the ad-advised-.. problem)
           ;; browse-kill-ring
           ;; nognus
           ;; go-mode
@@ -153,6 +153,7 @@
 (load "thi/compilation")
 (load "thi/term")
 (load "vendor/lambda-mode") ;; useful for python development
+(load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
 (load "thi/python") ;; we need to load it manually because python.conf.el
                     ;; does not get loaded using our el-get specific loader
