@@ -5,6 +5,7 @@
 
   ido-ignore-buffers ;; ignore these guys
   '("\\` " "^\*Mess" "^\*Back" ".*Completion" "^\*Ido" "^\*trace"
+    ".newsrc-dribble"
 
      "^\*compilation" "^\*GTAGS" "^\*")
   ido-work-directory-list '("~/" "~/Desktop" "~/Documents" "~src")
