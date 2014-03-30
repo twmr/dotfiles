@@ -19,6 +19,11 @@
 =C-f= switches to the default find-file interface
 (from there =C-m= can be used to open the CWD in dired)
 =C-d= open the dired-buffer
+** Buffers
+*** =C-x left/right= switch buffer
+*** =comma [0-9]= comma is evil-leader key
+*** =comma qq= other frame (or use awesome =super []=)
+*** =comma oo= new frame
 ** Dired
 =C-x C-j= dired jump (jumps to a dired buffer of the directory of the
 current file); equivalent to =C-x d RET=
@@ -66,6 +71,16 @@ use customize-group flycheck to customize error display delay
 =C-c ! n= move cursor to next error
 ** gnus
 *** =L= goto summary buffer
+*** in groups buffer
+**** =C-k= remove selected topic -> where does it go???
+*** im summary buffer
+**** =TAB= wechselt in das msg window (funktioniert auch wenn man nicht vorher RET drückt um das msg window zu öffnen
+*** im msg window
+**** =q= delete-window
+*** composing mails
+**** =m= in inbox or group buffers to create a new mail
+**** =r= to reply (selected message) plain mail
+**** =R= reply including message
 ** ansi-term
 try prefixing actions that aren’t recognized by their standard key commands
 with =C-x=. For example, =M-x= becomes =C-x M-x=.
@@ -90,3 +105,6 @@ see description for F2 keybinding
 ** Projectile
 =C-c P n= new project
 =C-c P f= open existing project
+* Integrationtests
+** ido flx
+*** start emacs and type M-x rb after starting gnus and loading an org file -> revert-buffer is expected
