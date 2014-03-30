@@ -7,6 +7,11 @@
                       (goto-address-mode) ;; clickable urls
                       )))
 
+
+(define-key term-mode-map (kbd "M-x") 'smex)
+(define-key term-raw-map (kbd "M-x") 'smex)
+
+
 ;; force ansi-term to be utf-8 after it launches
 (defadvice ansi-term (after advise-ansi-term-coding-system activate)
   (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
