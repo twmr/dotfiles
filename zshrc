@@ -54,4 +54,5 @@ source $ZSH/oh-my-zsh.sh
 . ~/.zsh/emacs
 
 setopt interactivecomments # pound sign in interactive prompt
-setopt nohup                   # don't kill child processes of the current zsh when the zsh process is killed
+setopt nohup  # don't kill child processes of the current zsh when the zsh
+              # process is killed
