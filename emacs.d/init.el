@@ -102,6 +102,7 @@
           highlight-indentation
           ;; sr-speedbar (commented out as long as there is no upstream fix for the ad-advised-.. problem)
           ;; browse-kill-ring
+          bbdb
           ;; nognus
           ;; go-mode
           el-get
