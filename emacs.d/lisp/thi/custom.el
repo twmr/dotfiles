@@ -33,7 +33,7 @@
     ("displaymath" "floats" "graphics" "textmath" "showlabels")))
  '(preview-scale-function 1.5)
  '(preview-transparent-color (quote (highlight :background)))
- '(recentf-exclude (quote ("COMMIT_EDITMSG" "session.*")))
+ '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")))
  '(safe-local-variable-values
    (quote
     ((TeX-master)
