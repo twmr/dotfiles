@@ -7,8 +7,6 @@
  '(comint-prompt-read-only t)
  '(cursor-color nil)
  '(evil-mode-line-format (quote before))
- '(foreground-color nil)
- '(fringe-mode (quote (5 . 5)) nil (fringe))
  '(ido-auto-merge-delay-time 2.7)
  '(ido-enable-tramp-completion nil)
  '(ido-max-window-height 30)
@@ -173,6 +171,7 @@
  ;; If there is more than one, they won't work right.
  '(ido-first-match ((t (:foreground "#ad7f8a" :weight bold))))
  '(ido-subdir ((((min-colors 88) (class color)) (:foreground "DarkGoldenrod1"))))
+ '(linum ((t (:inherit (quote shadow) :background "#d7d7af" :foreground "#87875f" :slant normal :height 66))))
  '(python-cell ((t (:inherit highlight :background "gray94"))) t)
  '(tabbar-default ((t (:background "gray17" :foreground "gray" :height 0.9 :family "Mono"))) t)
  '(tabbar-selected ((t (:inherit tabbar-default :foreground "gold" :box (:line-width 1 :color "white" :style pressed-button)))) t)
