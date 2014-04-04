@@ -14,7 +14,7 @@
 	dc = diff --color-words
 [user]
 	name = Thomas Hisch
-	email = thomas.hisch@ims.co.at
+	email = t.hisch@gmail.com
 [color]
 	ui = auto
 [pack]
@@ -28,3 +28,5 @@
 	editor = vim
 [push]
 	default = simple
+[oh-my-zsh]
+	hide-status = 1
