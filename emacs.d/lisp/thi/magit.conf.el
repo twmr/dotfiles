@@ -14,6 +14,15 @@
 ;; (define-key magit-mode-map (kbd "M-2") 'split-window-vertically)   ; was magit-show-level-2
 ;; (define-key magit-mode-map (kbd "M-1") 'delete-other-windows)      ; was magit-show-level-1
 
+;; TODO reordering (untracked-files) doesn't seem to work!??!
+(remove-hook 'magit-status-sections-hook 'magit-insert-stashes)
+;; (remove-hook 'magit-status-sections-hook 'magit-insert-untracked-files)
+(remove-hook 'magit-status-sections-hook 'magit-insert-status-local-line)
+(remove-hook 'magit-status-sections-hook 'magit-insert-status-remote-line)
+(remove-hook 'magit-status-sections-hook 'magit-insert-status-head-line)
+(remove-hook 'magit-status-sections-hook 'magit-insert-tags-line)
+;; (add-hook 'magit-status-sections-hook 'magit-insert-untracked-files t)
+
 (defun magit-pull ()
   (interactive)
   (magit-run-git-async "pull" "--rebase" "-v"))
