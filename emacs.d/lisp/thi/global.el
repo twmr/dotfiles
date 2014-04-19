@@ -12,10 +12,10 @@
 ;: LINUM
 (global-linum-mode 1)
 
-(when window-system
-  (set-fringe-mode '(8 . 0))
-  ;; Linum format to avoid graphics glitches in fringe
-  (setq linum-format " %4d "))
+;; (when window-system
+;;   (set-fringe-mode '(8 . 0))
+;; Linum format to avoid graphics glitches in fringe
+;; (setq linum-format " %4d "))
 
 ;; linum should be disabled for certain modes where linenumbers do not
 ;; make sense
@@ -26,6 +26,7 @@
                                   latex-mode
                                   wl-summary-mode
                                   git-commit-mode
+                                  direx-mode
                                   compilation-mode))
 
 ;; fill-column-indicator
