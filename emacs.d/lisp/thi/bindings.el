@@ -12,6 +12,11 @@
 ;; (global-set-key [f2] 'hippie-expand)
 (global-set-key (kbd "<f2>") 'visit-ansi-term)
 
+(defun switch-to-previous-buffer ()
+      (interactive)
+      (switch-to-buffer (other-buffer (current-buffer) 1)))
+(global-set-key (kbd "<f3>") 'switch-to-previous-buffer)
+
 ;; (global-set-key [f3] 'dabbrev-expand)
 
 
