@@ -24,6 +24,10 @@
 *** =comma [0-9]= comma is evil-leader key
 *** =comma qq= other frame (or use awesome =super []=)
 *** =comma oo= new frame
+*** perspective mode (multiple workspaces!!!!)
+current workspace name is shown in green in the modeline
+**** =C-x x right= next workspace
+**** =C-x x left= prev workspace
 ** Dired
 =C-x C-j= dired jump (jumps to a dired buffer of the directory of the
 current file); equivalent to =C-x d RET=
