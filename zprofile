@@ -178,6 +178,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $DOTFPATH/bin
     prepath $HOME/.local/bin
     prepath $HOME/bin
+    prepath $HOME/.cabal/bin
 
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps
