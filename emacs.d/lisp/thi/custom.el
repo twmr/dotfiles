@@ -163,7 +163,12 @@
      (makefile-bsdmake-mode . semantic-default-make-setup)
      (makefile-imake-mode . semantic-default-make-setup)
      (makefile-mode . semantic-default-make-setup))))
- '(sml/active-background-color "gray25"))
+ '(sml/active-background-color "gray25")
+ '(sml/hidden-modes
+   (quote
+    (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
+ '(sml/mode-width 10)
+ '(sml/name-width 14))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
