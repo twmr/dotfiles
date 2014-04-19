@@ -63,7 +63,9 @@
           auto-complete
           git-modes
           magit
+          perspective
           projectile
+          direx
           ;; magithub
           git-modes
           ;; calfw
@@ -179,5 +181,6 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook #'global-undo-tree-mode)
 (add-hook 'after-init-hook #'yas-global-mode 1)
+(add-hook 'after-init-hook #'persp-mode 1)
 
 ;;; init.el ends here
