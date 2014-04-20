@@ -135,11 +135,14 @@
 ;; (setq el-get-byte-compile nil)
 (el-get 'sync thi::packages)
 
-;; safe-theme question fix
-;; see http://stackoverflow.com/questions/8545756/how-to-treat-solarized-as-a-safe-theme
-;; (load-theme 'naquadah t)
-;; (load-theme 'moe-light t)
-(load-theme 'solarized-light t)
+;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
+(defvar thi::theme 'solarized-light)
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+              '(lambda (f)
+                 (with-selected-frame f
+                   (when (window-system f) (load-theme thi::theme t)))))
+  (load-theme thi::theme t))
 
 
 (load "thi/defuns")
