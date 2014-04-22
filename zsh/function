@@ -48,7 +48,7 @@ function started() {
 }
 
 function enconda() {
-    export PATH=$HOME/anaconda/bin:$PATH
+    export PATH=$HOME/anaconda/bin:$HOME/miniconda/bin:$PATH
 }
 
 function enpy34() {
