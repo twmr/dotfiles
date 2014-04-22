@@ -11,6 +11,7 @@
 ;; (global-set-key [f1] 'yas/expand)
 ;; (global-set-key [f2] 'hippie-expand)
 (global-set-key (kbd "<f2>") 'visit-ansi-term)
+(global-set-key (kbd "<C-f3>") 'persp-switch)
 
 (defun switch-to-previous-buffer ()
       (interactive)
