@@ -20,7 +20,9 @@
 (remove-hook 'magit-status-sections-hook 'magit-insert-status-local-line)
 (remove-hook 'magit-status-sections-hook 'magit-insert-status-remote-line)
 (remove-hook 'magit-status-sections-hook 'magit-insert-status-head-line)
-(remove-hook 'magit-status-sections-hook 'magit-insert-tags-line)
+(remove-hook 'magit-status-sections-hook 'magit-insert-status-tags-line)
+(remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-commits)
+(remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-commits)
 ;; (add-hook 'magit-status-sections-hook 'magit-insert-untracked-files t)
 
 (defun magit-pull ()
