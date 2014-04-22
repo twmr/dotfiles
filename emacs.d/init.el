@@ -24,6 +24,8 @@
 
 (defvar prelude-packages
   '(json-mode
+    solarized-theme
+    smart-mode-line
     ;; moe-theme
     )
   "A list of packages to ensure are installed at launch.")
@@ -59,8 +61,7 @@
       `(load ,(concat thi::config-dir "/" file)))))
 
 (setq thi::packages
-        '(solarized-theme
-          auto-complete
+        '(auto-complete
           git-modes
           magit
           perspective
@@ -79,7 +80,6 @@
           ;; error void var. er/add-pyhon-.. while opening a python file
           ace-jump-mode
           yasnippet
-          smart-mode-line
           flx
           smex
           flycheck
@@ -137,6 +137,7 @@
 (el-get 'sync thi::packages)
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
+(setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 (defvar thi::theme 'solarized-light)
 (if (daemonp)
     (add-hook 'after-make-frame-functions
@@ -144,7 +145,7 @@
                  (with-selected-frame f
                    (when (window-system f) (load-theme thi::theme t)))))
   (load-theme thi::theme t))
-
+(sml/setup)
 
 (load "thi/defuns")
 (load "thi/global")
