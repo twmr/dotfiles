@@ -1,0 +1,26 @@
+
+if [ $TERM = eterm-color ]; then
+    "\e[1;3C": forward-word   # ctrl + right
+    "\e[1;3D": backward-word  # ctrl + left
+fi
+echo "inputrc"
+if [ $TERM = rxvt-unicode-256color ]; then
+    echo "inputrc2"
+    #"\e0d": forward-word   # ctrl + right
+    #"\e0c": backward-word  # ctrl + left
+    #"^[^[[D": backward-word
+    #"^[^[[C": forward-word
+    "\e[D": backward-word
+    "\e[C": forward-word
+fi
+
+# "^[^[[D": backward-word
+# "^[^[[C": forward-word
+
+#"\eOd": backward-word
+#"\eOc": forward-word
+
+#"\e3c": forward-word
+#"\e3d": backward-word
+
+
