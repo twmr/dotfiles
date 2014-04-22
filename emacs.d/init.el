@@ -72,6 +72,7 @@
           org-mode
           cmake-mode
           eassist
+          haskell-mode
           markdown-mode
           yaml-mode
           ;; expand-region ;; temp. disabled because atm it triggers the
