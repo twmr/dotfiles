@@ -40,9 +40,25 @@
 
 (defun ido-my-edit-input () "bla" (interactive)
   (setq ido-current-directory
-        (concat (abbreviate-file-name ido-current-directory) ido-text ))
-  (setq ido-text "")
+        (concat (abbreviate-file-name ido-current-directory) ido-text)
+        ido-text "")
   (ido-edit-input))
+
+(defun ido-scroll-down ()
+  "scroll down by 20 lines in ido buffers"
+  (interactive)
+  (let ((count 0))
+    (while (< count 20)
+      (setq count (1+ count))
+      (ido-next-match))))
+
+(defun ido-scroll-up ()
+  "scroll up by 20 lines in ido buffers"
+  (interactive)
+  (let ((count 0))
+    (while (< count 20)
+      (setq count (1+ count))
+      (ido-prev-match))))
 
 (defun ido-my-keys ()
   "Add my keybindings for ido."
@@ -53,6 +69,8 @@
   (define-key ido-completion-map (kbd "TAB") 'ido-next-match)
   (define-key ido-completion-map [(backtab)] 'ido-prev-match)
   ;; C-n/p is more intuitive in vertical layout
+  (define-key ido-completion-map (kbd "<next>") 'ido-scroll-down)
+  (define-key ido-completion-map (kbd "<prior>") 'ido-scroll-up)
   (define-key ido-completion-map (kbd "C-n") 'ido-next-match)
   (define-key ido-completion-map (kbd "C-p") 'ido-prev-match))
 (add-hook 'ido-setup-hook 'ido-my-keys)
