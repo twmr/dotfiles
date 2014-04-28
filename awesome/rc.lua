@@ -102,10 +102,10 @@ if hostname == "pc-52-rh" then
       namessecond  = { "1main","2emacs","3web","4scripts","5jeol",
                        "6remote","7vm","8keller","9brunn", "10tmp",
                        "11nemo", "12tmp", "13tmp" },
-      names  = { "1mail","2emacs",3,4,5,6,7,8,9,10,11,12,13 }
+      names  = { 1,2,3,4,5,6,7,8,9 }
    }
    lockcmd = "xscreensaver-command -lock"
-   defaultlayoutidmon2 = 1
+   defaultlayoutidmon2 = 1 --4
    defaultlayoutidmon1 = 1
 else
    monitors = {
@@ -607,19 +607,19 @@ awful.rules.rules = {
                      focus = awful.client.focus.filter,
                      keys = clientkeys,
                      buttons = clientbuttons } },
-    { rule = { class = "mplayer" },
-      properties = { floating = true } },
-    { rule = { class = "pinentry" },
-      properties = { floating = true } },
-    { rule = { class = "gimp" },
-      properties = { floating = true } },
+    -- { rule = { class = "mplayer" },
+    --   properties = { floating = true } },
+    -- { rule = { class = "pinentry" },
+    --   properties = { floating = true } },
+    -- { rule = { class = "gimp" },
+    --   properties = { floating = true } },
    --  { rule = { class = "Firefox", instance = "Navigator" },
    --    properties = { tag = tags[monitors.prim][3] }
    --  },
-    { rule = { instance = "chromium-browser" },
-      properties = { tag = tags[monitors.prim][3] } },
-    { rule = { instance = "google-chrome" },
-      properties = { tag = tags[monitors.prim][3] } },
+    -- { rule = { instance = "chromium-browser" },
+      -- properties = { tag = tags[monitors.prim][3] } },
+    -- { rule = { instance = "google-chrome" },
+      -- properties = { tag = tags[monitors.prim][3] } },
    --  { rule = { class = "Skype", instance = "skype" },
    --    properties = { tag = tags[monitors.prim][5], split = 250, target = "master" }
    --  },
@@ -641,10 +641,10 @@ awful.rules.rules = {
    --  -- },
 
     -- matlab/matplotlib
-    { rule = { name = "Figure .*" },
-     properties = { floating = true },
-     callback = awful.titlebar.add
-    },
+    -- { rule = { name = "Figure .*" },
+    --  properties = { floating = true },
+    --  callback = awful.titlebar.add
+    -- },
    --  -- { rule = { class = "Gnome-Control-Center" instance = "gnome-control-center" },
    --  --  properties = { floating = true }, callback = awful.titlebar.add
    --  --},
