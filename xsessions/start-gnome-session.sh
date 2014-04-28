@@ -35,71 +35,28 @@ setxkbmap us altgr-intl
 setxkbmap -option ctrl:swapcaps     # Swap Left Control and Caps Lock
 # setxkbmap -option ctrl:nocaps       # Make Caps Lock a Control key
 
-if [ "$HOSTNAME" = "cobra" ]; then
-    # make the mouse work right on my thinkpad in fedora
-    xinput set-prop 'TPPS/2 IBM TrackPoint' "Evdev Wheel Emulation" 1
-    xinput set-prop 'TPPS/2 IBM TrackPoint' "Evdev Wheel Emulation Button" 2
-    xinput set-prop 'TPPS/2 IBM TrackPoint' "Evdev Wheel Emulation Timeout" 200
-fi
+~/gitrepos/dotfiles/bin/dualhead-ims.sh
 
-#required for matlab
-#first checks if wmname is installed
-type -P wmanme &>/dev/null && wmname LG3D
+/usr/bin/gnome-keyring-daemon --start --components=pkcs11
+/usr/bin/gnome-keyring-daemon --start --components=ssh
+/usr/bin/gnome-keyring-daemon --start --components=gpg
 
-# The following is a simple hack to avoid starting
-# gnome-panel/metacity when awesome was supposed to be started. this
-# should be fixed in gnome-session (bug already filed under
-# https://bugzilla.gnome.org/show_bug.cgi?id=638677 )
-if [ "$MYWM" = "awesome" -a "$GNOME3" != "true" ]
-then
-    desktopfiles=`find ~/.config/gnome-session/saved-session -name "*.desktop"`
-    if [ "x$desktopfiles" != "x" ] 
-    then
-        matchedfiles=`grep -Eil '(metacity|gnome-panel)' $desktopfiles`
-        rm -f $matchedfiles
-    fi
-fi
-
-
-# Update the Gnome configuration to reflect WM and desktop appearance
-# IMPORTANT: $MYWM should have a valid .desktop file in
-# /usr/share/applications or in .local/share/applications (for other
-# dirs see log of `gnome-session --debug`) otherwise gsm will complain
-# about it
-
-$GSETTOOL -t boolean -s /apps/nautilus/preferences/show_desktop  ${SHOW_DESKTOP}
-
-if [ "$GNOME3" = "true" ]
-then
-    $GSETTOOL -u $SESSKEY/required_components/windowmanager
-else
-    $GSETTOOL -s $SESSKEY/required_components/windowmanager ${MYWM} -t string
-
-    if [ "$MYWM" = "awesome" ]
-    then
-        $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[windowmanager]"
-        $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[gnome-settings-daemon]"
-    else
-        $GSETTOOL -s -t list --list-type string $SESSKEY/required_components_list "[filemanager,panel,windowmanager]"
-        $GSETTOOL -s -t list --list-type string $SESSKEY/default_session "[gnome-settings-daemon]"
-    fi
-fi
-
+$GSETTOOL -u $SESSKEY/required_components/windowmanager
 
 #if something does not work as expected start gnome-session with --debug and look into .xsession-errors
 #-a starts only the *.desktop files in the specified dir instead of the WM  (ex: -a /home/thomas/dumm)
 #exec strace -fF -o /tmp/gnome-session-trace /usr/bin/gnome-session
-exec ssh-agent /usr/bin/awesome
 
-#echo TESTVARS
-#echo $GNOME3
-#echo $MYWM
-if [ "$GNOME3" = "true" -a "$MYWM" = "awesome" ]
-then
-    rm -f ~/.config/gnome-session/saved-session/gnome-shell.desktop
-    #exec gnome-session --debug --session=awesome
-    exec gnome-session --session=awesome
-else
-    export WINDOW_MANAGER=/usr/bin/$1
-    exec gnome-session
+gpg-agent --daemon --enable-ssh-support \
+          --write-env-file "${HOME}/.gpg-agent-info"
+
+if [ -f "${HOME}/.gpg-agent-info" ]; then
+   . "${HOME}/.gpg-agent-info"
+   export GPG_AGENT_INFO
+   export SSH_AUTH_SOCK
 fi
+
+exec /usr/bin/awesome
+
+#rm -f ~/.config/gnome-session/saved-session/gnome-shell.desktop
+#exec gnome-session --debug --session=awesome
