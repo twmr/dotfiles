@@ -37,6 +37,7 @@
 ;; TOGGLE MENU BAR
 (global-set-key (kbd "C-%") 'menu-bar-mode)
 
+(global-set-key (kbd "M-p") 'ace-window)
 
 ;; smex stuff
 (global-set-key (kbd "M-x") 'smex)

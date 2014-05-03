@@ -26,6 +26,7 @@
   '(json-mode
     solarized-theme
     smart-mode-line
+    ace-window
     ;; moe-theme
     )
   "A list of packages to ensure are installed at launch.")
@@ -79,6 +80,7 @@
           ;; expand-region ;; temp. disabled because atm it triggers the
           ;; error void var. er/add-pyhon-.. while opening a python file
           ace-jump-mode
+          ;; ace-window			
           yasnippet
           flx
           smex
