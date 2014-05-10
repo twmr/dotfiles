@@ -171,7 +171,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
 
-    prepath $HOME/sandbox/pycharm-community-3.1/bin
+    prepath $HOME/sandbox/pycharm-community-135.763/bin
     prepath $EMBINPATH
     prepath $MYMPI_BIN_PATH
     prepath $LOCSOFT/bin

@@ -65,6 +65,7 @@
         '(auto-complete
           git-modes
           magit
+          magit-filenotify
           perspective
           projectile
           direx
