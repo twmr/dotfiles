@@ -87,7 +87,6 @@
           smex
           flycheck
           dired+
-          dired-details
           ;;replace+
           find-file-in-repository
           fill-column-indicator
