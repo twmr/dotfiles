@@ -10,7 +10,8 @@
 
 
 ;: LINUM
-(global-linum-mode 1)
+(when (string= system-name "pc-52-rh.ims.ac.at")
+  (global-linum-mode 1))
 
 ;; (when window-system
 ;;   (set-fringe-mode '(8 . 0))
