@@ -3,18 +3,17 @@
 ;; if project-persist-mode is not installed install it using package.el
 (project-persist-mode 1) ;; C-c P n; C-c P f
 
+(define-key projectile-mode-map (kbd "s-s") 'projectile-persp-switch-project)
 
 (defvar thi::directory-list '(
-                              "/opt/sandboxes"
-                              "/opt/sandboxes/current_branch"
-                              "/opt/sandboxes/trunk"
-
                               "~/gitrepos/POC-scripts/branches/version2.0"
                               "~/gitrepos/pyspu/branches/version0.8"
 
                               "~/gitrepos/tools"
                               "~/gitrepos/tools/future"
                               "~/gitrepos/tools/alpha"
+                              "~/gitrepos/tools/beta1"
+                              "~/gitrepos/tools/beta2"
 
                               "~/gitrepos/imshelperscripts"
                               "~/gitrepos/hwsimuenv"
