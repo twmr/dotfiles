@@ -28,6 +28,9 @@
 current workspace name is shown in green in the modeline
 **** =C-x x right= next workspace
 **** =C-x x left= prev workspace
+*** =M-p= ace-window
+*** =M-1= switch to window with label 1 (ace-window)
+*** =M-2= switch to window with label 2 ... (ace-window)
 ** Dired
 =C-x C-j= dired jump (jumps to a dired buffer of the directory of the
 current file); equivalent to =C-x d RET=
