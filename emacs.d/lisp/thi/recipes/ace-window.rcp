@@ -1,0 +1,4 @@
+(:name ace-window
+       :description "BLUB"
+       :type github
+       :pkgname "abo-abo/ace-window")
