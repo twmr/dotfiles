@@ -140,7 +140,10 @@
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
-(defvar thi::theme 'solarized-light)
+;; (defvar thi::theme 'solarized-light)
+(if (string= system-name "pc-52-rh.ims.co.at")
+    (defvar thi::theme 'solarized-light)
+    (defvar thi::theme 'solarized-dark))
 (if (daemonp)
     (add-hook 'after-make-frame-functions
               '(lambda (f)
