@@ -119,6 +119,9 @@ fi
 if [ "$HOSTNAME" = "cobra" ]; then
     hash -d pst=${HOME}/gitrepos/POC-scripts/trunk
     hash -d psc=${HOME}/gitrepos/POC-scripts/branches/version2.0
+    hash -d tol=~/gitrepos/tools
+    hash -d tal=~/gitrepos/tools/alpha
+    hash -d tbl=~/gitrepos/tools/beta1
 fi
 
 DOTFDIR=${GITR}/dotfiles
