@@ -70,10 +70,9 @@ URxvt*color15:                 S_base3
 
 
 
-
 Emacs.FontBackend:      xft
 !Emacs.font:             ProFont-9
-Emacs.font:             Source Code Pro:size=12
+Emacs.font:             Source Code Pro:size=11
 ! Emacs.font:             Anonymous Pro:size=12
 ! Emacs.font:             DejaVu Sans Mono:size=11
 ! Emacs.font:             Sans-10
