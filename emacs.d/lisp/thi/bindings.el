@@ -26,6 +26,7 @@
 (global-set-key [f6] 'magit-status)
 (global-set-key [f7] 'magit-run-gitk)
 (global-set-key [f8] 'open-file-at-cursor)
+(global-set-key [f10] 'toggle-frame-fullscreen)
 
 (global-set-key (kbd "C-x g") 'magit-status)
 
