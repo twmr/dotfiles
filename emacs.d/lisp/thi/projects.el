@@ -11,9 +11,13 @@
 
                               "~/gitrepos/tools"
                               "~/gitrepos/tools/future"
+                              "~/gitrepos/tools/future/server_configs/coldfire"
                               "~/gitrepos/tools/alpha"
+                              "~/gitrepos/tools/alpha/server_configs/coldfire"
                               "~/gitrepos/tools/beta1"
+                              "~/gitrepos/tools/beta1/server_configs/coldfire"
                               "~/gitrepos/tools/beta2"
+                              "~/gitrepos/tools/beta2/server_configs/coldfire"
 
                               "~/gitrepos/imshelperscripts"
                               "~/gitrepos/hwsimuenv"
