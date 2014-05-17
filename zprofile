@@ -140,7 +140,9 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PETSC_DIR=${GITR}/petsc
     export PETSC_ARCH="arch-linux64-complex-fft-debug"
 
-    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1 --with-c2html=0 --with-mpi=0"
+    # as of May 2014 these flags work
+    export PETSC_MAIN_FLAGS="--download-openmpi  --with-c2html=0 --with-c++-support=1 --with-scalar-type=complex --with-fortran-kernels=1  --download-fftw=1 --with-x11=0 --with-clanguage=cxx --with-shared-libraries"
+    # export PETSC_MAIN_FLAGS="--with-c2html=0 --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1 --download-f-blas-lapack=1"
     export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
     export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
     # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
