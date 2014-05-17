@@ -10,6 +10,7 @@
 
 (define-key term-mode-map (kbd "M-x") 'smex)
 (define-key term-raw-map (kbd "M-x") 'smex)
+(define-key term-raw-map (kbd "M-p") 'ace-window)
 
 
 ;; force ansi-term to be utf-8 after it launches
