@@ -169,9 +169,6 @@
 (load "thi/term")
 (load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
-(load "thi/python") ;; we need to load it manually because python.conf.el
-                    ;; does not get loaded using our el-get specific loader
-
 (custom-set-faces '(window-numbering-face
                     ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
 (window-numbering-mode 1)
