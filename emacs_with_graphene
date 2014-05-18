@@ -25,4 +25,3 @@
 
 (require 'sr-speedbar)
 (global-set-key [f6] 'sr-speedbar-toggle)
-

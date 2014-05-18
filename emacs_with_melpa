@@ -31,7 +31,6 @@
     flycheck
     nlinum
     ethan-wspace
-    ;; powerline
     smart-mode-line
     flx-ido)
   "A list of packages to ensure are installed at launch.")
@@ -56,6 +55,8 @@
 
 (require 'smart-mode-line)
 (add-hook 'after-init-hook 'sml/setup)
+;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
+(setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 (load-theme 'solarized-light t)
 ;; (load-theme 'zenburn t)
 
