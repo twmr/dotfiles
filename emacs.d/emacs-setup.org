@@ -20,7 +20,8 @@
 (from there =C-m= can be used to open the CWD in dired)
 =C-d= open the dired-buffer
 ** Buffers
-*** =C-x left/right= switch buffer
+*** =C-x left= move to previous buffer (current window)
+*** =C-x right= move to next buffer (current window)
 *** =comma [0-9]= comma is evil-leader key
 *** =comma qq= other frame (or use awesome =super []=)
 *** =comma oo= new frame
@@ -30,13 +31,19 @@ current workspace name is shown in green in the modeline
 **** =C-x x left= prev workspace
 *** =M-p= ace-window
 *** =M-1= switch to window with label 1 (ace-window)
+or use =comma [0-9]= instead (but M-1 only requires one hand, hmm)
 *** =M-2= switch to window with label 2 ... (ace-window)
+*** =C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other windows! does
+the same as C-x 1 (which works in all modes)
 ** Dired
 *** =C-x C-j= dired jump (jumps to a dired buffer of the directory of the
 current file); equivalent to =C-x d RET=
 *** =C-x C-q= editable dired mode (to rename files easily (when done press =C-c C-c=
 see
 http://www.reddit.com/r/emacs/comments/25m7ae/help_rename_multi_filename_in_dired/
+*** in dired buffer
+**** "DEL" dired-up-directory
+**** "/" search in current dir
 ** Function Keys
 =F2=
 If I'm already in an ansi-term, but it's called "*ansi-term*" rename it.
@@ -61,11 +68,6 @@ If I'm in another non-terminal buffer, switch to a buffer called "*ansi-term*" o
 =C-.= jump to definition (jedi)
 =C-,= jump back (jedi)
 =C-c d= show doc (jedi)
-** Buffer management
-=C-x left= move to previous buffer (current window)
-=C-x right= move to next buffer (current window)
-=C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other windows! does
-the same as C-x 1 (which works in all modes)
 ** evil
 =C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other
 windows! does the same as =C-x 1=
