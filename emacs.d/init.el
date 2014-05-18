@@ -167,7 +167,6 @@
 (load "thi/nxml")
 (load "thi/compilation")
 (load "thi/term")
-(load "vendor/lambda-mode") ;; useful for python development
 (load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
 (load "thi/python") ;; we need to load it manually because python.conf.el
@@ -194,5 +193,6 @@
 (add-hook 'after-init-hook #'global-undo-tree-mode)
 (add-hook 'after-init-hook #'yas-global-mode 1)
 (add-hook 'after-init-hook #'persp-mode 1)
+(add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
 
 ;;; init.el ends here
