@@ -1,10 +1,10 @@
 ;;; graphene-theme.el --- The Graphene theme -- some simple additions to any theme to improve the look of speedbar, linum, etc.
 ;;
-;; Copyright (c) 2013 Robert Dallas Gray
+;; Copyright (c) 2014 Robert Dallas Gray
 ;;
 ;; Author: Robert Dallas Gray <mail@robertdallasgray.com>
 ;; URL: https://github.com/rdallasgray/graphene
-;; Version: 0.3.17
+;; Version: 0.7.0
 ;; Keywords: defaults
 
 ;; This file is not part of GNU Emacs.
@@ -12,7 +12,7 @@
 ;;; Commentary:
 
 ;; Graphene is a set of default settings and functionality to make Emacs a little friendlier.
-;; The theme works with any other active theme to provide a pleasing default look. 
+;; The theme works with any other active theme to provide a pleasing default look.
 
 ;;; License:
 
@@ -141,7 +141,68 @@
  `(flymake-warnline
    ((t (:background unspecified
                     :foreground unspecified
-                    :inherit font-lock-preprocessor-face)))))
+                    :inherit font-lock-preprocessor-face))))
+ `(web-mode-symbol-face
+   ((t (:foreground unspecified
+                    :inherit font-lock-constant-face))))
+ `(web-mode-builtin-face
+   ((t (:foreground unspecified
+                    :inherit default))))
+ `(web-mode-doctype-face
+   ((t (:foreground unspecified
+                    :inherit font-lock-comment-face))))
+ `(web-mode-html-tag-face
+   ((t (:foreground unspecified
+                    :inherit font-lock-function-name-face))))
+ `(web-mode-html-attr-name-face
+   ((t (:foreground unspecified
+                    :inherit font-lock-variable-name-face))))
+ `(web-mode-html-param-name-face
+   ((t (:foreground unspecified
+                    :inherit font-lock-constant-face))))
+ `(web-mode-whitespace-face
+   ((t (:foreground unspecified
+                    :inherit whitespace-space))))
+ `(web-mode-block-face
+   ((t (:foreground unspecified
+                    :inherit highlight))))
+ `(sp-show-pair-match-face
+   ((t (:foreground unspecified
+                    :background unspecified
+                    :inherit show-paren-match))))
+ `(sp-show-pair-mismatch-face
+   ((t (:foreground unspecified
+                    :background unspecified
+                    :inherit show-paren-mismatch))))
+ `(vr/match-0
+   ((t (:background unspecified
+                    :foreground unspecified
+                    :inherit font-lock-regexp-grouping-construct
+                    :inverse-video t))))
+ `(vr/match-1
+   ((t (:background unspecified
+                    :foreground unspecified
+                    :inherit font-lock-regexp-grouping-backslash
+                    :inverse-video t))))
+ `(vr/group-0
+   ((t (:background unspecified
+                    :foreground unspecified
+                    :inherit font-lock-keyword-face
+                    :inverse-video t))))
+ `(vr/group-1
+   ((t (:background unspecified
+                    :foreground unspecified
+                    :inherit font-lock-function-name-face
+                    :inverse-video t))))
+ `(vr/group-2
+   ((t (:background unspecified
+                    :foreground unspecified
+                    :inherit font-lock-constant-face
+                    :inverse-video t))))
+ `(whitespace-space
+   ((t (:foreground unspecified
+                    :background unspecified
+                    :inherit highlight)))))
 
 
 ;;;###autoload
