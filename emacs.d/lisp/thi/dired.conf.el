@@ -4,6 +4,8 @@
        'dired-find-alternate-file) ; was dired-advertised-find-file
      (evil-define-key 'normal dired-mode-map (kbd "`")
        '(lambda () (interactive) (find-alternate-file "..")))
+     (evil-define-key 'normal dired-mode-map (kbd "<DEL>")
+       'dired-up-directory)
 
   ;; C-a is nicer in dired if it moves back to start of files
      (defun dired-back-to-start-of-files ()
