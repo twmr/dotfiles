@@ -32,8 +32,11 @@ current workspace name is shown in green in the modeline
 *** =M-1= switch to window with label 1 (ace-window)
 *** =M-2= switch to window with label 2 ... (ace-window)
 ** Dired
-=C-x C-j= dired jump (jumps to a dired buffer of the directory of the
+*** =C-x C-j= dired jump (jumps to a dired buffer of the directory of the
 current file); equivalent to =C-x d RET=
+*** =C-x C-q= editable dired mode (to rename files easily (when done press =C-c C-c=
+see
+http://www.reddit.com/r/emacs/comments/25m7ae/help_rename_multi_filename_in_dired/
 ** Function Keys
 =F2=
 If I'm already in an ansi-term, but it's called "*ansi-term*" rename it.
@@ -42,6 +45,9 @@ If I'm in another non-terminal buffer, switch to a buffer called "*ansi-term*" o
 =F5= magit grep
 =F6= magit status
 =F7= open file at cursor
+=F9= recently used files
+=F10= fullscreen
+=F12= dir browser
 ** python development
 *** yasnippet python snippets
 + class *suppa*
