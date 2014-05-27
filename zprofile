@@ -194,6 +194,13 @@ elif [ "$HOSTNAME" = "pc-52-rh" ]; then
 
     export TOOLSREPO=${GITR}/tools
 
+    # CPT stuff
+    export PROFI=$GITR/Profi
+    export PATH=$PROFI/bin:$PATH
+    export CFLIGHT=$GITR/cFlight
+    export PATH=$CFLIGHT:$PATH
+
+
 elif [ "$HOSTNAME" = "thisch" ]; then
     intel_arch=""
 
