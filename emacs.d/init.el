@@ -144,7 +144,7 @@
 
 (defvar thi::theme
   (if (string= system-name "pc-52-rh.ims.co.at")
-    'solarized-light
+    'solarized-dark
     'solarized-dark))
 (if (daemonp)
     (add-hook 'after-make-frame-functions

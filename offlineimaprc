@@ -1,0 +1,23 @@
+[general]
+accounts = ims
+maxsyncaccounts = 3
+pythonfile = ~/.offlineimap.py
+
+[Account ims]
+localrepository = Local
+remoterepository = Remote
+
+[Repository Local]
+type = Maildir
+localfolders = ~/Maildir
+
+[Repository Remote]
+type = IMAP
+remotehost = imap.ims.co.at
+remoteport = 143
+remoteuser = thomas.hisch@ims.co.at
+remotepasseval = mailpasswd("ims")
+ssl = no
+maxconnections = 1
+realdelete = no
+cert_fingerprint = fd761423277880a16618a367d377034ec0b0aabc
