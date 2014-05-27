@@ -47,16 +47,16 @@ $GSETTOOL -u $SESSKEY/required_components/windowmanager
 #-a starts only the *.desktop files in the specified dir instead of the WM  (ex: -a /home/thomas/dumm)
 #exec strace -fF -o /tmp/gnome-session-trace /usr/bin/gnome-session
 
-gpg-agent --daemon --enable-ssh-support \
-          --write-env-file "${HOME}/.gpg-agent-info"
+#gpg-agent --daemon --enable-ssh-support \
+#         --write-env-file "${HOME}/.gpg-agent-info"
 
-if [ -f "${HOME}/.gpg-agent-info" ]; then
-   . "${HOME}/.gpg-agent-info"
-   export GPG_AGENT_INFO
-   export SSH_AUTH_SOCK
-fi
+#if [ -f "${HOME}/.gpg-agent-info" ]; then
+#   . "${HOME}/.gpg-agent-info"
+#   export GPG_AGENT_INFO
+#   export SSH_AUTH_SOCK
+#fi
 
-exec /usr/bin/awesome
+exec ssh-agent /usr/bin/awesome
 
 #rm -f ~/.config/gnome-session/saved-session/gnome-shell.desktop
 #exec gnome-session --debug --session=awesome
