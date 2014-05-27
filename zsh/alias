@@ -112,8 +112,10 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
 
     alias opbrunn='ssh operator@brunn -X'
     alias oppoc='ssh operator@poc-pc.poc2.ims.co.at -X'
+    alias opb1='ssh operator@b1 -X'
     alias devbrunn='ssh devel@brunn -X'
     alias devpoc='ssh devel@poc-pc.poc2.ims.co.at -X'
+    alias devb1='ssh devel@b1 -X'
 
 fi
 if [ "$HOSTNAME" = "cobra" ]; then
