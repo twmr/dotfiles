@@ -30,6 +30,7 @@
                                   latex-mode
                                   wl-summary-mode
                                   git-commit-mode
+                                  mu4e-compose-mode
                                   direx-mode
                                   compilation-mode))
 
