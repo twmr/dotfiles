@@ -14,6 +14,7 @@
  '(jedi:get-in-function-call-delay 0.4)
  '(magit-completing-read-function (quote magit-ido-completing-read))
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
+ '(magit-use-overlays nil)
  '(matlab-indent-level 2)
  '(org-file-apps
    (quote
