@@ -94,7 +94,10 @@
 ;;           (lambda () (c-toggle-auto-hungry-state 1)))
 
 (add-hook 'c-mode-common-hook
-          (lambda () (c-toggle-hungry-state 1)))
+          (lambda ()
+            (c-toggle-hungry-state 1)
+            (superword-mode 1)
+            ))
 
 ;; makes delete map to hungry mode
 ;;(defun thi-map-delete-hungry ()
