@@ -67,6 +67,7 @@
           magit
           magit-filenotify
           perspective
+          ibuffer-perspective
           projectile
           direx
           ;; magithub
