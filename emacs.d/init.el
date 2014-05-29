@@ -82,7 +82,6 @@
           ;; expand-region ;; temp. disabled because atm it triggers the
           ;; error void var. er/add-pyhon-.. while opening a python file
           ace-jump-mode
-          ;; ace-window			
           yasnippet
           flx
           smex
