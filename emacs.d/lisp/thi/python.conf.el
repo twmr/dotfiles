@@ -16,14 +16,13 @@
 ;; (defvar ac-source-python
 ;;   '((candidates .
 ;;                 (lambda ()
-;;                   (mapcar '(lambda (completion)
+;;                   (mapcar (lambda (completion)
 ;;                              (first (last (split-string completion "\\." t))))
 ;;                           (python-symbol-completions (python-partial-symbol)))))))
 
 
 ;; (add-hook 'python-mode-hook
 ;;              (lambda() (setq ac-sources '(ac-source-python))))
-
 
 ;;force loading of python-cell-mode
 (require 'python-cell)

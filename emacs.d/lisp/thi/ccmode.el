@@ -91,10 +91,10 @@
 ;; mode -> h in modeline) for C-based languages (including java) for
 ;; current keybindings see - cc-mode manual
 ;; (add-hook 'c-mode-common-hook
-;;           '(lambda () (c-toggle-auto-hungry-state 1)))
+;;           (lambda () (c-toggle-auto-hungry-state 1)))
 
 (add-hook 'c-mode-common-hook
-          '(lambda () (c-toggle-hungry-state 1)))
+          (lambda () (c-toggle-hungry-state 1)))
 
 ;; makes delete map to hungry mode
 ;;(defun thi-map-delete-hungry ()

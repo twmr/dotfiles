@@ -1,11 +1,11 @@
 ;; fixes non working tab-key in ansi-term
 ;; see http://stackoverflow.com/questions/18278310/emacs-ansi-term-not-tab-completing
 (add-hook 'term-mode-hook
-          (lambda() (progn
-                      (setq yas-dont-activate t)
-                      (setq global-hl-line-mode nil) ;; disable hl-line-mode
-                      (goto-address-mode) ;; clickable urls
-                      )))
+          (lambda () (progn
+                 (setq yas-dont-activate t)
+                 (setq global-hl-line-mode nil) ;; disable hl-line-mode
+                 (goto-address-mode) ;; clickable urls
+                 )))
 
 
 (define-key term-mode-map (kbd "M-x") 'smex)
