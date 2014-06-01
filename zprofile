@@ -109,12 +109,14 @@ if [ "$HOSTNAME" = "mustang" ]; then
     #MPI4PY
     PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
 
-    #QTcreator version
-    QTCV="2.6.2"
-
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LOCSOFT}/lib:${P4PYLIB}:${S4PYLIB} #:${LD_LIBRARY_PATH}
-    # export EMBINPATH=${HOME}/gitrepos/emacs/src
-    export PATH=${LOCSOFT}/bin:${MYMPI_BIN_PATH}:${MATLAB_BIN}:${EMBINPATH}:$HOME/qtcreator-${QTCV}/bin/:$PATH
+    export EMBINPATH=${HOME}/gitrepos/emacs/src
+
+    prepath ${LOCSOFT}/bin
+    prepath ${MYMPI_BIN_PATH}
+    prepath ${MATLAB_BIN}
+    prepath ${EMBINPATH}
+    prepath $HOME/.bin
 
 elif [ "$HOSTNAME" = "cobra" ]; then
 
