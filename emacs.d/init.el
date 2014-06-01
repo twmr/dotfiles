@@ -27,6 +27,8 @@
     solarized-theme
     smart-mode-line
     ace-window
+    project-persist
+    moz-controller
     ;; moe-theme
     )
   "A list of packages to ensure are installed at launch.")
@@ -73,7 +75,7 @@
           ;; magithub
           git-modes
           ;; calfw
-          org-mode
+          ;; org-mode
           cmake-mode
           eassist
           haskell-mode
