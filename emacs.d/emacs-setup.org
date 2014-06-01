@@ -10,6 +10,8 @@
  verify that all where installed successfully with
  $ flake8 --version
  2.0 (pep8: 1.4.3, pyflakes: 0.6.1, naming: 0.2)
+** fonts
+=di adobe-source-code-pro-fonts=
 * Key Bindings
 ** IDO Mode
 =S-F11= open recent directories (uses recentf-list)
