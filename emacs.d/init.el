@@ -72,6 +72,7 @@
           ibuffer-perspective
           projectile
           direx
+          julia-mode
           ;; magithub
           git-modes
           ;; calfw
