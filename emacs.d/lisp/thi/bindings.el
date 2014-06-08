@@ -50,6 +50,11 @@
 (global-set-key (kbd "C-q") 'er/expand-region)
 (global-set-key (kbd "C-S-q") 'er/contract-region)
 
+;; multiple cursors
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 ;;key-chords
 (eval-after-load 'key-chord
   '(key-chord-define-global "fg" 'iy-go-to-char))
