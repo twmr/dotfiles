@@ -16,6 +16,7 @@
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(magit-use-overlays nil)
  '(matlab-indent-level 2)
+ '(notmuch-show-logo nil)
  '(org-file-apps
    (quote
     ((auto-mode . emacs)
