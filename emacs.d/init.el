@@ -90,6 +90,8 @@
           smex
           flycheck
           dired+
+          dired-efap
+          notmuch
           ;;replace+
           find-file-in-repository
           fill-column-indicator
