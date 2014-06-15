@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ipython embed
+# key: iemb
+# --
+import IPython; IPython.embed()
