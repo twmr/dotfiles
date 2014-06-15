@@ -16,6 +16,10 @@
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(magit-use-overlays nil)
  '(matlab-indent-level 2)
+ '(notmuch-saved-searches
+   (quote
+    ((:name "inbox" :query "tag:inbox")
+     (:name "unread" :query "tag:unread"))))
  '(notmuch-show-logo nil)
  '(org-file-apps
    (quote

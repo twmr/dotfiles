@@ -165,6 +165,7 @@
 (load "thi/bindings")
 (load "thi/projects")
 (load "thi/ido")
+(load "thi/mail")
 (load "thi/ccmode")
 ;; I don't need a latex setup atm
 ;;(load "thi/latex")
