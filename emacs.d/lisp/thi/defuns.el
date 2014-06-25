@@ -201,3 +201,14 @@ Works by adjusting the right margin."
       (ansi-term term-cmd))
      (t
       (ansi-term term-cmd arg)))))
+
+(defun replace-in-buffer ()
+  (interactive)
+  (save-excursion
+    (if (equal mark-active nil) (mark-word))
+    (setq curr-word (buffer-substring-no-properties (mark) (point)))
+    (setq old-string (read-string "OLD string: " curr-word))
+    (setq new-string (read-string "NEW string: " old-string))
+    (query-replace old-string new-string nil (point-min) (point-max))
+    )
+  )

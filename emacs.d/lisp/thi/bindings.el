@@ -7,9 +7,9 @@
 ;; How to Define Keyboard Shortcuts in Emacs
 ;; http://xahlee.org/emacs/keyboard_shortcuts.html
 
-(global-set-key [f1] 'query-replace)
+;; (global-set-key [f1] 'query-replace)
 ;; (global-set-key [f1] 'yas/expand)
-;; (global-set-key [f2] 'hippie-expand)
+(global-set-key [f1] 'hippie-expand)
 (global-set-key (kbd "<f2>") 'visit-ansi-term)
 (global-set-key (kbd "<C-f3>") 'persp-switch)
 
@@ -22,6 +22,7 @@
 
 
 ;; (global-set-key [f4] 'query-replace)
+(global-set-key [f4] 'replace-in-buffer)
 (global-set-key [f5] 'magit-grep)
 (global-set-key [f6] 'magit-status)
 (global-set-key [f7] 'magit-run-gitk)
