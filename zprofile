@@ -96,10 +96,10 @@ if [ "$HOSTNAME" = "mustang" ]; then
     #./configure  #suffices
 
     #PETSC4PY
-    PSUFF="linux-x86_64-2.7" #Python suffix
+    PYSUFF="linux-x86_64-2.7" #Python suffix
     export PETSC4PY_DIR=${MYSRCDIR}/petsc4py-1.2
-    P4PYLIB=${PETSCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
-    P4PYPATH=${PETSCPY_DIR}/build/lib.${PYSUFF} #/petsc4py
+    P4PYLIB=${PETSC4PY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
+    P4PYPATH=${PETSC4PY_DIR}/build/lib.${PYSUFF} #/petsc4py
 
     #SLEPC4PY
     export SLEPC4PY_DIR=${MYSRCDIR}/slepc4py-1.2
@@ -149,19 +149,19 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
     # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
 
-    export SLEPC_DIR=${GITR}/slepc-dev
+    export SLEPC_DIR=${GITR}/slepc
     # ./confgigure
 
     #PETSC4PY
-    PSUFF="linux-x86_64-2.7" #Python suffix
+    PYSUFF="linux-x86_64-2.7" #Python suffix
     export PETSC4PY_DIR=${GITR}/petsc4py
-    P4PYLIB=${PETSCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
-    P4PYPATH=${PETSCPY_DIR}/build/lib.${PYSUFF} #/petsc4py
+    P4PYLIB=${PETSC4PY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
+    P4PYPATH=${PETSC4PY_DIR}/build/lib.${PYSUFF} #/petsc4py
 
     #SLEPC4PY
     export SLEPC4PY_DIR=${GITR}/slepc4py
-    S4PYLIB=${SLEPCPY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
-    S4PYPATH=${SLEPCPY_DIR}/build/lib.${PYSUFF} #/slepc4py
+    S4PYLIB=${SLEPC4PY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
+    S4PYPATH=${SLEPC4PY_DIR}/build/lib.${PYSUFF} #/slepc4py
 
     #MPI4PY
     PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
@@ -298,14 +298,14 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     #PETSC4PY
     export PETSC4PY_DIR=${MYSRCDIR}/petsc4py-dev
     # P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
-    P4PYLIB=${PETSCPY_DIR}/build/temp.linux-x86_64-2.7/$PETSC_ARCH/src
-    P4PYPATH=${PETSCPY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
+    P4PYLIB=${PETSC4PY_DIR}/build/temp.linux-x86_64-2.7/$PETSC_ARCH/src
+    P4PYPATH=${PETSC4PY_DIR}/build/lib.linux-x86_64-2.7 #/petsc4py
 
     #SLEPC4PY
     export SLEPC4PY_DIR=${MYSRCDIR}/slepc4py-dev
     # S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-cxx-release/src
-    S4PYLIB=${SLEPCPY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-intel-cxx-debug/src
-    S4PYPATH=${SLEPCPY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
+    S4PYLIB=${SLEPC4PY_DIR}/build/temp.linux-x86_64-2.7/arch-linux2-intel-cxx-debug/src
+    S4PYPATH=${SLEPC4PY_DIR}/build/lib.linux-x86_64-2.7 #/slepc4py
 
     #MPI4PY (do I need this ??)
     PYMPIPATH=/usr/lib/python2.7/dist-packages/mpi4py
