@@ -70,6 +70,7 @@ If I'm in another non-terminal buffer, switch to a buffer called "*ansi-term*" o
 =C-.= jump to definition (jedi)
 =C-,= jump back (jedi)
 =C-c d= show doc (jedi)
+=C-`= jump to a certain function in a buffer (using helm and semantic)
 ** evil
 =C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other
 windows! does the same as =C-x 1=

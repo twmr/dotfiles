@@ -72,6 +72,7 @@
           ibuffer-perspective
           projectile
           direx
+          helm ;; helm is awesome!
           julia-mode
           ;; magithub
           git-modes
