@@ -78,6 +78,9 @@ windows! does the same as =C-x 1=
 ** Editing
 =M-b M-u= upcase backward word
 =M-h= mark paragraph
+** Searching
+*** regular expressions
+play with =re-builder= (in std. emacs)
 ** Projectile
 =C-x f= open file in repository (using fuzzy matching)
 =C-c P n= new project
