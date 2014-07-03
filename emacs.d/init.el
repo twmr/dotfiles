@@ -77,7 +77,7 @@
           ;; magithub
           git-modes
           ;; calfw
-          ;; org-mode
+          org-mode
           cmake-mode
           eassist
           haskell-mode
