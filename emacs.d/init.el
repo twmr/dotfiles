@@ -74,7 +74,6 @@
           direx
           helm ;; helm is awesome!
           julia-mode
-          ;; magithub
           git-modes
           ;; calfw
           org-mode
