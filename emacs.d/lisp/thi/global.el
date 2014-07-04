@@ -207,19 +207,19 @@
 ;; (add-hook 'prog-mode-hook 'esk-add-watchwords)
 ;; (add-hook 'LaTeX-mode-hook 'esk-add-watchwords)
 
-;; from emacs-wiki
-(defun unfill-paragraph ()
-  (interactive)
-  (let ((fill-column (point-max)))
-    (fill-paragraph nil)))
+;; ;; from emacs-wiki
+;; (defun unfill-paragraph ()
+;;   (interactive)
+;;   (let ((fill-column (point-max)))
+;;     (fill-paragraph nil)))
 
-(defun unfill-region ()
-  (interactive)
-  (let ((fill-column (point-max)))
-    (fill-region (region-beginning) (region-end) nil)))
+;; (defun unfill-region ()
+;;   (interactive)
+;;   (let ((fill-column (point-max)))
+;;     (fill-region (region-beginning) (region-end) nil)))
 
-(define-key global-map "\M-Q" 'unfill-paragraph)
-(define-key global-map "\C-\M-q" 'unfill-region)
+;; (define-key global-map "\M-Q" 'unfill-paragraph)
+;; (define-key global-map "\C-\M-q" 'unfill-region)
 
 ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
 (defun unfill-paragraph ()
