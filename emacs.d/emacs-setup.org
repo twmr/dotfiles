@@ -22,6 +22,8 @@
 (from there =C-m= can be used to open the CWD in dired)
 =C-d= open the dired-buffer
 ** Buffers
+*** ibuffer
+mark open buffers with =m=, kill marked buffers with =k=
 *** =C-x left= move to previous buffer (current window)
 *** =C-x right= move to next buffer (current window)
 *** =comma [0-9]= comma is evil-leader key
