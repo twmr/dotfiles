@@ -43,6 +43,7 @@
 (global-set-key (kbd "M-p") 'ace-window)
 
 ;; smex stuff
+;; (global-set-key (kbd "M-x") 'helm-M-x) ;; i don't like this
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
@@ -131,3 +132,11 @@
 
 (global-set-key (kbd "C-c s") 'sr-speedbar-select-window)
 (global-set-key [f6] 'sr-speedbar-toggle)
+
+(global-set-key (kbd "C-c h b") 'helm-mini)
+(global-set-key (kbd "C-c h m") 'helm-man-woman)
+(global-set-key (kbd "C-c h f") 'helm-find)
+(global-set-key (kbd "C-c h l") 'helm-locate)
+(global-set-key (kbd "C-c h o") 'helm-occur) ;; in current buffer
+(global-set-key (kbd "C-c h r") 'helm-resume)
+(global-set-key (kbd "C-c h g") 'helm-do-grep)
