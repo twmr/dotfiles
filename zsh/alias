@@ -83,6 +83,8 @@ alias ipy='ipython'
 alias bp='bpython-curtsies'
 alias pyc='pycharm.sh'
 alias py='python'
+alias piu='py setup.py install --user'
+alias pib='py setup.py build'
 
 alias di='sudo dnf install'
 alias dnu='sudo dnf update'
