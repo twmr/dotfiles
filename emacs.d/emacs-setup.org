@@ -81,6 +81,7 @@ windows! does the same as =C-x 1=
 ** Searching
 *** regular expressions
 play with =re-builder= (in std. emacs)
+quit re-builder with =C-g=
 ** Projectile
 =C-x f= open file in repository (using fuzzy matching)
 =C-c P n= new project
