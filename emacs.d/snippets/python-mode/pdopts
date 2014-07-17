@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: pandas column options
+# key: pdopts
+# --
+pd.set_option('display.width', 1000)
+pd.set_option('display.max_colwidth', 100)
