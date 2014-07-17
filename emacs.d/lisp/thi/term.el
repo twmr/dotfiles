@@ -27,3 +27,17 @@
 ;;         (kill-buffer buffer))
 ;;     ad-do-it))
 ;; (ad-activate 'term-sentinel)
+
+;; see https://github.com/renard/chezwam-el/blob/master/chezwam-term.el
+(defun cw:term:backward-word ()
+  "Move backward work in term-mode."
+  (interactive)
+  (term-send-raw-string "\eb"))
+
+(defun cw:term:forward-word ()
+  "Move forward work in term-mode."
+  (interactive)
+  (term-send-raw-string "\ef"))
+
+(define-key term-raw-map (kbd "<M-right>") 'cw:term:forward-word)
+(define-key term-raw-map (kbd "<M-left>") 'cw:term:backward-word)

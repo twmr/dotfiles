@@ -51,7 +51,9 @@
                                 t))))
 
 
-;; todo integrate it into ido better and bind it to some Vimpulse/Viper keys
 (global-set-key [f11] 'recentf-ido-find-file)
 (global-set-key [S-f11] 'recentf-ido-find-dir)
-(define-key recentf-mode-map (kbd "C-e") 'ido-my-edit-input)
+
+;; TODO somehow if this is activated C-e in eshell and ansi-term triggers
+;; ide-my-edit-input - whyyy??
+;;(define-key recentf-mode-map (kbd "C-e") 'ido-my-edit-input)
