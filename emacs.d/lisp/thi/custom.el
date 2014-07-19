@@ -7,6 +7,7 @@
  '(comint-prompt-read-only t)
  '(cursor-color nil)
  '(evil-mode-line-format (quote before))
+ '(git-commit-mode-hook (quote (turn-on-auto-fill)))
  '(ido-auto-merge-delay-time 2.7)
  '(ido-enable-tramp-completion nil)
  '(ido-max-window-height 30)
