@@ -16,6 +16,7 @@
  '(magit-status-buffer-switch-function (quote switch-to-buffer))
  '(magit-use-overlays nil)
  '(matlab-indent-level 2)
+ '(mode-require-final-newline nil)
  '(notmuch-saved-searches
    (quote
     ((:name "inbox" :query "tag:inbox")
