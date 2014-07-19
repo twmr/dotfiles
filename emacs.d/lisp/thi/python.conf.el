@@ -25,12 +25,13 @@
 ;;              (lambda() (setq ac-sources '(ac-source-python))))
 
 ;;force loading of python-cell-mode
-(require 'python-cell)
+;; (require 'python-cell)
+
 
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'python-mode-hook #'fci-mode 1)
 (add-hook 'python-mode-hook #'highlight-indentation-mode 1)
-(add-hook 'python-mode-hook #'python-cell-mode 1)
+;; (add-hook 'python-mode-hook #'python-cell-mode 1)
 (add-hook 'python-mode-hook #'yas-minor-mode 1)
 (add-hook 'python-mode-hook #'superword-mode 1)
 (add-hook 'python-mode-hook #'semantic-mode 1)
@@ -47,7 +48,6 @@
 
 ;; see http://tuhdo.github.io/helm-intro.html#sec-6
 (define-key python-mode-map (kbd "C-`") 'helm-semantic-or-imenu)
-
 
 
 ;; TESTING CODE
