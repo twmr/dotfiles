@@ -9,7 +9,6 @@
  '(evil-mode-line-format (quote before))
  '(git-commit-mode-hook (quote (turn-on-auto-fill)))
  '(ido-auto-merge-delay-time 2.7)
- '(ido-enable-tramp-completion nil)
  '(ido-max-window-height 30)
  '(ido-use-faces t)
  '(jedi:get-in-function-call-delay 0.4)

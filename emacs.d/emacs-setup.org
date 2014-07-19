@@ -14,6 +14,8 @@
 =di adobe-source-code-pro-fonts=
 * Key Bindings
 ** IDO Mode
+=C-c C-f= ido open file 
+to open a file as superuse type =C-c C-f= and then =/sudo= then =TAB/enter= multiple times
 =S-F11= open recent directories (uses recentf-list)
 =F11= open recent files (uses recentf-list)
 =F12= dired directory open  (uses thi::directory-list)
