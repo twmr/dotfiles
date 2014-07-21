@@ -23,6 +23,10 @@ to open a file as superuse type =C-c C-f= and then =/sudo= then =TAB/enter= mult
 =C-f= switches to the default find-file interface
 (from there =C-m= can be used to open the CWD in dired)
 =C-d= open the dired-buffer
+** Image Mode
+*** =<del>= go back to dired buffer of the current dir
+*** =<right>= go to next file in dir
+*** =<left>= go to prev file in dir
 ** Buffers
 *** ibuffer
 mark open buffers with =m=, kill marked buffers with =k=
