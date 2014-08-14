@@ -27,6 +27,9 @@ to open a file as superuse type =C-c C-f= and then =/sudo= then =TAB/enter= mult
 *** =<del>= go back to dired buffer of the current dir
 *** =<right>= go to next file in dir
 *** =<left>= go to prev file in dir
+** Helm
+=help-man-woman= open man page
+=C-c h= helm-mini (cool buffer switching tool)
 ** Buffers
 *** ibuffer
 mark open buffers with =m=, kill marked buffers with =k=
