@@ -1,35 +1,35 @@
-(setq user-mail-address "thomas.hisch@ims.co.at"
+(setq user-mail-address "thomas.hisch@tuwien.ac.at"
       user-full-name "Thomas Hisch")
 
 (defvar th:email-addresses
   '("t.hisch@gmail\\.com"
-    "thomas.hisch@ims\\.co\\.at")
+    "thomas.hisch@tuwien\\.ac\\.at")
   "Regexp of my email addreses.")
+
+;; do I need this ??
+(setq notmuch-identities
+  '("thomas.hisch@tuwien.ac.at"))
 
 (defvar th:email-addresses-regexp
   (concat "^\\("
           (mapconcat 'identity th:email-addresses "\\|")
           "\\)$"))
 
-(setq ims-smtp-port 25)
-(setq ims-smtp-host "mail.ims.co.at")
-
-(when (string= system-name "pc-52-rh.ims.co.at")
-  (setq ims-smtp-port 587)
-  (setq ims-smtp-host "smtp.ims.co.at"))
+(setq tu-smtp-port 587)
+(setq tu-smtp-host "mail.tuwien.ac.at")
 
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "xdg-open")
 
 ;; Configure outbound mail (SMTP)
-(setq smtpmail-starttls-credentials `((,ims-smtp-host ,ims-smtp-port nil nil))
-      smtpmail-smtp-server ims-smtp-host
+(setq smtpmail-starttls-credentials `((,tu-smtp-host ,tu-smtp-port nil nil))
+      smtpmail-smtp-server tu-smtp-host
       smtpmail-local-dmain "thisch.org"
-      smtpmail-default-smtp-server ims-smtp-host
+      smtpmail-default-smtp-server tu-smtp-host
       send-mail-function 'smtpmail-send-it
       message-send-mail-function 'smtpmail-send-it
-      smtpmail-smtp-service ims-smtp-port
-      smtpmail-auth-credentials `((,ims-smtp-host ,ims-smtp-port "thomas.hisch" nil))
+      smtpmail-smtp-service tu-smtp-port
+      smtpmail-auth-credentials `((,tu-smtp-host ,tu-smtp-port "thisch" nil))
       smtpmail-debug-info t
       smtpmail-debug-verb t)
 

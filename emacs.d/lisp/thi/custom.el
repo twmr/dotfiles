@@ -18,6 +18,7 @@
  '(magit-use-overlays nil)
  '(matlab-indent-level 2)
  '(mode-require-final-newline nil)
+ '(notmuch-fcc-dirs "Sent")
  '(notmuch-saved-searches
    (quote
     ((:name "inbox" :query "tag:inbox")
