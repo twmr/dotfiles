@@ -7,7 +7,9 @@
 (setq magit-save-some-buffers nil)
 
 (add-hook 'magit-mode-hook
-          (lambda () (setq yas/dont-activate t)))
+          (lambda ()
+            (setq yas/dont-activate t)))
+            ;; (magit-filenotify-mode 1)))
 (add-hook 'magit-mode-hook 'turn-on-magit-svn)
 
 ;; (define-key magit-mode-map (kbd "M-3") 'split-window-horizontally) ; was magit-show-level-3
@@ -51,3 +53,13 @@
           (jump-to-register :magit-fullscreen))
 
 (define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+
+;; Add a "latest commits" section
+;; (magit-define-section-jumper latest   "Latest commits")
+;; (defun vbe:magit-insert-latest-commits ()
+;;   (magit-git-section 'latest "Latest commits:"
+;;                      (apply-partially 'magit-wash-log 'unique)
+;;                      "log" "--format=format:* %h %s"
+;;                      (magit-diff-abbrev-arg)
+;;                      "HEAD~5..HEAD"))
+;; (add-to-list 'magit-status-sections-hook 'vbe:magit-insert-latest-commits t)

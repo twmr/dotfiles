@@ -178,6 +178,8 @@ Works by adjusting the right margin."
     ))
   (let ((is-term (string= "term-mode" major-mode))
         (is-running (term-check-proc (buffer-name)))
+        ;; todo use this variable
+        ;; (cpersp-name (persp-name persp-curr))
         (term-cmd "/bin/zsh")
         (anon-term (get-buffer "*ansi-term*")))
     (cond

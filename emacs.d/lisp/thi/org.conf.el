@@ -85,6 +85,7 @@
 
 ;;   (define-key org-mode-map (kbd "C-c )") 'reftex-citation)
 ;;   (define-key org-mode-map (kbd "C-c (") 'org-mode-reftex-search))
+(define-key org-mode-map (kbd "C-`") 'helm-semantic-or-imenu)
 
 ;; (add-hook 'org-mode-hook 'org-mode-reftex-setup)
 (add-hook 'org-mode-hook 'turn-on-visual-line-mode)

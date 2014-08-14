@@ -65,10 +65,11 @@
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
-(dolist (hook '(text-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode 1))))
-(dolist (hook '(change-log-mode-hook log-edit-mode-hook))
-  (add-hook hook (lambda () (flyspell-mode -1))))
+;; FIXME temporary fix this because committing in magit takes so long
+;; (dolist (hook '(text-mode-hook))
+;;   (add-hook hook (lambda () (flyspell-mode 1))))
+;; (dolist (hook '(change-log-mode-hook log-edit-mode-hook))
+;;   (add-hook hook (lambda () (flyspell-mode -1))))
 
 ;; automatically adds marks
 (eval-after-load 'auto-mark
@@ -342,6 +343,8 @@
 
 ;; (windmove-default-keybindings)        ; Move between frames with Shift+arrow
 (show-paren-mode t)
+;; (add-hook 'minibuffer-setup-hook '(lambda () (set (make-local-variable 'show-paren-mode) nil)))
+;; (add-hook 'minibuffer-exit-hook #'show-paren-mode t)
 (url-handler-mode 1)                    ; Allow to open URL
 (mouse-avoidance-mode 'animate)         ; Move the mouse away
 (ffap-bindings)                         ; Use ffap
