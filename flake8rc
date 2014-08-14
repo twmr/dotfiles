@@ -1,3 +1,4 @@
 [flake8]
 # E501: linelength check
-ignore = E501,W293
+# ignore = E501,W293
+ignore = E501,E226
