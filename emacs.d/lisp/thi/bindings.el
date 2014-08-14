@@ -58,6 +58,9 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
+;; hungry-delete
+;; (global-set-key (kbd "M-<backspace>") #'hungry-delete-backward)
+
 ;;key-chords
 (eval-after-load 'key-chord
   '(key-chord-define-global "fg" 'iy-go-to-char))

@@ -1,4 +1,4 @@
-;;; personal-emacs-contig --- by thomas hisch
+;;; personal-emacs-config --- by thomas hisch
 
 ;; (setq debug-on-error t)
 
@@ -64,7 +64,8 @@
       `(load ,(concat thi::config-dir "/" file)))))
 
 (setq thi::packages
-        '(auto-complete
+        '(;; hungry-delete ;; http://endlessparentheses.com/hungry-delete-mode.html
+          auto-complete
           git-modes
           magit
           magit-filenotify
@@ -197,5 +198,6 @@
 (add-hook 'after-init-hook #'yas-global-mode 1)
 (add-hook 'after-init-hook #'persp-mode 1)
 (add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
+;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
 
 ;;; init.el ends here
