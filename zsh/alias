@@ -79,7 +79,7 @@ alias removelog='rm -f`find . -iname "*.log"`'
 
 alias st='~/Downloads/sublime_text_3/sublime_text'
 
-alias ipy='ipython'
+alias ipy='ipython --no-confirm-exit'
 alias bp='bpython-curtsies'
 alias pyc='pycharm.sh'
 alias py='python'
