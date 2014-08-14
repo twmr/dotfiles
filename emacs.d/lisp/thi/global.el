@@ -55,6 +55,7 @@
 (menu-bar-mode -1)                      ; Kill the menu bar
 (set-scroll-bar-mode 'right)            ; Scrollbar on the right
 (scroll-bar-mode -1)                    ; But no scrollbar
+(horizontal-scroll-bar-mode -1)         ; But no scrollbar
 
 (size-indication-mode)
 ;;default font is now set in .Xresources
