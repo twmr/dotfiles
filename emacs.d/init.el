@@ -16,7 +16,7 @@
 
 (require 'package)
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (package-initialize)
 
 (when (not package-archive-contents)
@@ -64,65 +64,65 @@
       `(load ,(concat thi::config-dir "/" file)))))
 
 (setq thi::packages
-        '(;; hungry-delete ;; http://endlessparentheses.com/hungry-delete-mode.html
-          auto-complete
-          git-modes
-          magit
-          magit-filenotify
-          perspective
-          ibuffer-perspective
-          projectile
-          direx
-          helm ;; helm is awesome!
-          julia-mode
-          git-modes
-          ;; calfw
-          org-mode
-          cmake-mode
-          eassist
-          haskell-mode
-          markdown-mode
-          yaml-mode
-          ;; expand-region ;; temp. disabled because atm it triggers the
-          ;; error void var. er/add-pyhon-.. while opening a python file
-          ace-jump-mode
-          yasnippet
-          flx
-          smex
-          flycheck
-          dired+
-          dired-efap
-          notmuch
-          ;;replace+
-          find-file-in-repository
-          fill-column-indicator
-          ethan-wspace
-          lua-mode
-          ;;minimap
-          evil-leader
-          evil
-          evil-numbers
-          python-cell
-          epc
-          jedi
-          ;; gnuplot-mode ;; not needed atm
-          ;; iedit
-          protobuf-mode
-          ;;rainbow-mode
-          rainbow-delimiters
-          highlight-indentation
-          ;; sr-speedbar (commented out as long as there is no upstream fix for the ad-advised-.. problem)
-          ;; browse-kill-ring
-          bbdb
-          ;; nognus
-          ;; go-mode
-          el-get
-          ;; multi-term
-          browse-kill-ring
-          goto-last-change
-          idle-highlight-mode
-          window-numbering
-          mmm-mode))
+      '(;; hungry-delete ;; http://endlessparentheses.com/hungry-delete-mode.html
+        auto-complete
+        git-modes
+        magit
+        magit-filenotify
+        perspective
+        ibuffer-perspective
+        projectile
+        direx
+        helm ;; helm is awesome!
+        julia-mode
+        git-modes
+        ;; calfw
+        org-mode
+        cmake-mode
+        eassist
+        haskell-mode
+        markdown-mode
+        yaml-mode
+        ;; expand-region ;; temp. disabled because atm it triggers the
+        ;; error void var. er/add-pyhon-.. while opening a python file
+        ace-jump-mode
+        yasnippet
+        flx
+        smex
+        flycheck
+        dired+
+        dired-efap
+        notmuch
+        ;;replace+
+        find-file-in-repository
+        fill-column-indicator
+        ethan-wspace
+        lua-mode
+        ;;minimap
+        evil-leader
+        evil
+        evil-numbers
+        python-cell
+        epc
+        jedi
+        ;; gnuplot-mode ;; not needed atm
+        ;; iedit
+        protobuf-mode
+        ;;rainbow-mode
+        rainbow-delimiters
+        highlight-indentation
+        ;; sr-speedbar (commented out as long as there is no upstream fix for the ad-advised-.. problem)
+        ;; browse-kill-ring
+        bbdb
+        ;; nognus
+        ;; go-mode
+        el-get
+        ;; multi-term
+        browse-kill-ring
+        goto-last-change
+        idle-highlight-mode
+        window-numbering
+        mmm-mode))
 
 (when (string= system-name "pc-52-rh.ims.co.at")
   (delete 'org-mode thi::packages)
@@ -150,7 +150,7 @@
 
 (defvar thi::theme
   (if (string= system-name "pc-52-rh.ims.co.at")
-    'solarized-dark
+      'solarized-dark
     'solarized-dark))
 (if (daemonp)
     (add-hook 'after-make-frame-functions
