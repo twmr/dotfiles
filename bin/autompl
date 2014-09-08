@@ -1,0 +1,16 @@
+#!/bin/bash
+
+directory=$1
+elist="E111,E112,E113,E121,E122,E123,E124,E125,E126,E127,E128,E129,E131,E265"
+elist="$elist,E225,E226,E227,E228,E24"
+
+#todo spaces around binary operators: ==, %, - or: do not add spaces around *, **, and /
+#does sympy have a coding style checker ?
+#autopep8 should have support for styles (for consistency)
+
+echo $directory, $elist
+for x in `git ls-files "$directory/*.py"`; do
+    echo "autopepping $x"
+    #autopep8 -i --max-line-length=78 --ignore $elist $x
+    autopep8 -i --max-line-length=78 $x
+done
