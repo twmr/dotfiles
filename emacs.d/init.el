@@ -108,7 +108,6 @@
         jedi
         ;; gnuplot-mode ;; not needed atm
         ;; iedit
-        protobuf-mode
         ;;rainbow-mode
         rainbow-delimiters
         highlight-indentation
