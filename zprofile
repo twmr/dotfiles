@@ -27,16 +27,8 @@ export GIT_AUTHOR_EMAIL="`git config user.email`"
 export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 
-ONVSC=`hostname | egrep '(l01|r[0-9]+{2}n[0-9]+{2})' `
-
 # Exports
-if [ -z "$ONVSC" ]; then
-    export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
-else
-    echo "loading zprofile"
-    echo onvsc: $ONVSC
-fi
-
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
 export MYSRCDIR=$HOME/local/src
 export LOCSOFT=$HOME/local/software
 export GITR=$HOME/gitrepos
@@ -132,6 +124,9 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export BOOST_SRC_PATH=$MYSRCDIR/boost_1_52_0
 
+    export NETGENPATH=${GITR}/netgen-cmake/build/cmake/build/ng
+    export NETGENDIR=${GITR}/netgen-cmake/ng #netgen needs this envvar
+
     #parallel stuff (mpi + petsc + slepc)
 
     export MYMPI_INC_PATH=/usr/include/openmpi-x86_64
@@ -142,8 +137,11 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PETSC_DIR=${GITR}/petsc
     export PETSC_ARCH="arch-linux64-complex-fft-debug"
 
+    # dolfin does not support complex petscscalars
+    export PETSC_ARCH="arch-linux64-fft-debug"
+    export PETSC_MAIN_FLAGS="--download-mpi  --with-c2html=0 --with-c++-support=1 --with-fortran-kernels=1  --download-fftw=1 --with-x11=0 --with-clanguage=cxx --with-shared-libraries"
     # as of May 2014 these flags work
-    export PETSC_MAIN_FLAGS="--download-openmpi  --with-c2html=0 --with-c++-support=1 --with-scalar-type=complex --with-fortran-kernels=1  --download-fftw=1 --with-x11=0 --with-clanguage=cxx --with-shared-libraries"
+    # export PETSC_MAIN_FLAGS="--download-openmpi  --with-c2html=0 --with-c++-support=1 --with-scalar-type=complex --with-fortran-kernels=1  --download-fftw=1 --with-x11=0 --with-clanguage=cxx --with-shared-libraries"
     # export PETSC_MAIN_FLAGS="--with-c2html=0 --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1 --download-f-blas-lapack=1"
     export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
     export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
@@ -175,7 +173,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
 
-    prepath $HOME/sandbox/pycharm-community-135.763/bin
+    prepath $HOME/software/pycharm-community-3.4.1/bin
     prepath $EMBINPATH
     prepath $MYMPI_BIN_PATH
     prepath $LOCSOFT/bin
@@ -183,6 +181,9 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $HOME/.local/bin
     prepath $HOME/bin
     prepath $HOME/.cabal/bin
+    prepath $HOME/.cask/bin
+    prepath $GITR/julia
+    prepath $NETGENPATH
 
 elif [ "$HOSTNAME" = "pc-52-rh" ]; then
     export HDEPS=/opt/hisch_deps
@@ -320,68 +321,6 @@ elif [ "$HOSTNAME" = "thisch" ]; then
     #CXXFLAGS='-fPIC' CFLAGS='-fPIC' ./configure --prefix=${LOCSOFT} --enable-shared --without-matlab --with-cxx
     #make && make install
 
-elif [ "$ONVSC" ]; then
-    arch=""
-    export LANG="C"
-    export LC_ALL="C"
-
-    export TOGL_PATH=${LOCSOFT}/lib/Togl1.7
-    export NETGENDIR=${LOCSOFT}/bin
-    export NETGEN_SRC_PATH=${MYSRCDIR}/netgen_with_icc/netgen #version from ml
-    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHOST -I$LOCSOFT/include" ./configure --prefix=$LOCSOFT --with-togl=$TOGL_PATH
-
-    export NGSOLVE_SRC_PATH=${MYSRCDIR}/ngsolve-dev/ngsolve
-    #libtoolize && autoreconf && automake --add-missing && autoreconf
-    #ich glaube mit -xHost gehts nicht
-    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -I$LOCSOFT/include" ./configure --prefix=$LOCSOFT
-
-    export RANDOMLAS=$HOME/gitrepos/randomlas
-
-    #python distribution
-    export EPDPATH=$LOCSOFT/epd-7.3-2-rh5-x86_64
-
-    #MPI stuff
-    #TODO use appropriate includes set by mpi-selector
-    export MYMPI_INC_PATH=/usr/mpi/qlogic/include
-    export MYMPI_LIB_PATH=/usr/mpi/qlogic/lib64
-
-    export BOOST_SRC_PATH=$MYSRCDIR/boost_1_50_0
-
-    export CFFEM_REPO=${HOME}/gitrepos/cf-fem-lib
-    export CFBD=${CFFEM_REPO}/build_release_single
-    export CFBDMPI=${CFFEM_REPO}/build
-    #NONMPI BUILD
-    #LANG=C CC=icc CXX=icpc CXXFLAGS="-O3 -xHost -ipo -openmp -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
-
-    #MPI BUILD
-    #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHost -ipo -openmp -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
-
-    #MPI BUILD (without openmp)
-    #LANG=C CC=mpicc CXX=mpicxx CXXFLAGS="-O3 -xHost -ipo -I$MYSRCDIR" cmake -DBOOST_ROOT=$BOOST_SRC_PATH -DCMAKE_BUILD_TYPE=Release -DNETGEN_SOURCE_DIR=$NETGEN_SRC_PATH -DCMAKE_INSTALL_PREFIX=$LOCSOFT -DENABLE_NLOPT=1 -DENABLE_MPI=1 -DCMAKE_EXE_LINKER_FLAGS="-shared-intel" ..
-
-    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1"
-    export PETSC_DEBUGGING="--with-debugging=no" #RELEASE BUILD
-    export PETSC_OPT_FLAGS="CXXOPTFLAGS='-O3 -xHost -ipo' COPTFLAGS='-O3 -xHost -ipo' FOPTFLAGS='-O3 -xHost -ipo'"
-    export PETSC_BLAS_DIR="/opt/intel/Compiler/11.1/046/mkl/lib"
-
-    #wenn man slepc-dev vewendet muss man noch --download-sowing setzen
-    #ERROR: cannot generate Fortran stubs; try configuring PETSc with --download-sowing or use a mercurial version of PETSc
-    export PETSC_MAIN_FLAGS="${PETSC_MAIN_FLAGS} --download-sowing"
-
-    # ./configure ${PETSC_MAIN_FLAGS} --with-blas-lapack-dir=${PETSC_BLAS_DIR} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
-
-    export PETSC_DIR=${MYSRCDIR}/petsc-3.3-p2
-    #export PETSC_ARCH="arch-linux2-cxx-debug"
-    export PETSC_ARCH=intel-cxx-complex_release-mumps
-    export SLEPC_DIR=${MYSRCDIR}/slepc-dev
-
-    export EMBINPATH=/usr/local/bin
-    export PATH=$EPDPATH/bin:$HOME/bin:${LOCSOFT}/bin:$PATH
-    export LD_LIBRARY_PATH=${LOCSOFT}/lib:${LD_LIBRARY_PATH}
-
-    #for the xml_pp program
-    export PERLLIB=/home/lv70072/thisch/bin/
-
 else
     arch=""
 fi
@@ -396,17 +335,7 @@ if [ "${PUBDOC}" ]; then
     hash -d pubdoc=${PUBDOC}
 fi
 
-if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
-    if [ -z "${RANDOMLAS}" ]; then
-        echo Warning RANDOMLAS not defined
-    else
-        hash -d rand=${RANDOMLAS}
-    fi
-    # if [ -z "${LAMBDAFOUR}" ]; then
-    #     echo Warning LAMDDAFOUR not defined
-    # else
-    #     hash -d lamb=${LAMBDAFOUR}
-    # fi
+if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" ]; then
     if [ -z "${CFFEM_REPO}" ]; then
         echo Warning CFFEM_REPO not defined
     else
@@ -417,12 +346,6 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     #cffemlib + simulation stuff
     export PYTHONPATH=${CFFEM_REPO}/tools/in2d_creator_scripts:${RANDOMLAS}/scripts:${RANDOMLAS}:${LOCSOFT}/lib/python2.7/site-packages
     if [ "${GITR}" ]; then
-        if [ -d "${GITR}/matplotlib2tikz" ]; then
-            export PYTHONPATH=${GITR}/matplotlib2tikz:${PYTHONPATH}
-        fi
-        if [ -d "${GITR}/matlab2tikz" ]; then
-            export MATLAB2TIKZ=${GITR}/matlab2tikz
-        fi
         if [ "${LMPRO}" ]; then
             if [ -d "${LMPRO}" ]; then
                 export PYTHONPATH=${LMPRO}:${PYTHONPATH}
@@ -450,7 +373,6 @@ if [ "$HOSTNAME" = "thisch" -o -n "$ONVSC" -o "$HOSTNAME" = "mustang" ]; then
     fi
 
     export LD_LIBRARY_PATH=${CFBDMPI}/lib:${LD_LIBRARY_PATH}
-
 fi
 
 . ~/.zsh/linuxconsole

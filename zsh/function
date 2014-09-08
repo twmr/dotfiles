@@ -47,6 +47,10 @@ function started() {
     fi
 }
 
+function melmacs() {
+    emacs -Q --eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)"
+}
+
 function enconda() {
     export PATH=$HOME/anaconda/bin:$HOME/miniconda/bin:$PATH
 }
@@ -79,6 +83,14 @@ _emacs_setup() {
 
 function emacs_melpa_setup() {
     _emacs_setup "emacs_with_melpa"
+}
+
+function emacs_comp_setup() {
+    _emacs_setup "emacs_with_company"
+}
+
+function emacs_test_setup() {
+    _emacs_setup "emacs_with_test"
 }
 
 function emacs_elget_setup() {
