@@ -21,6 +21,8 @@
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "xdg-open")
 
+(setq message-signature-file "~/.signature")
+
 ;; Configure outbound mail (SMTP)
 (setq smtpmail-starttls-credentials `((,tu-smtp-host ,tu-smtp-port nil nil))
       smtpmail-smtp-server tu-smtp-host
