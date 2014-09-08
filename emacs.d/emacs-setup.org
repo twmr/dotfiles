@@ -2,7 +2,13 @@
 
 * Dependencies
 ** jedi
+*** fresh install
 =yi python-virtualenv=
+call =jedi:install-server= from within emacs
+*** reinstall jedi virtualenv
+ =remove =~/.emacs.d/.python-env...=
+ =remove =~/.pydistutils.cfg=
+call =jedi:install-server= from within emacs
 ** Flycheck python dependencies
  install the flake8 tool https://pypi.python.org/pypi/flake8
  and pep8-naming https://github.com/flintwork/pep8-naming
@@ -12,6 +18,9 @@
  2.0 (pep8: 1.4.3, pyflakes: 0.6.1, naming: 0.2)
 ** fonts
 =di adobe-source-code-pro-fonts=
+** org pdf export
+=di 'tex(wrapfig.sty)'=
+=di 'tex(ulem.sty)'=
 * Key Bindings
 ** IDO Mode
 =C-c C-f= ido open file 
@@ -30,9 +39,11 @@ to open a file as superuse type =C-c C-f= and then =/sudo= then =TAB/enter= mult
 ** Helm
 =help-man-woman= open man page
 =C-c h= helm-mini (cool buffer switching tool)
+=C-c ph= select multiple projects (=C-space=) type =C-s= incremental grep in multiple projects (helm projectile)
 ** Buffers
 *** ibuffer
-mark open buffers with =m=, kill marked buffers with =k=
+mark open buffers with =m=, kill marked buffers with =D=
+(alternative mark buffers for deletion with =d= execute selection with =x=)
 *** =C-x left= move to previous buffer (current window)
 *** =C-x right= move to next buffer (current window)
 *** =comma [0-9]= comma is evil-leader key
@@ -48,6 +59,13 @@ or use =comma [0-9]= instead (but M-1 only requires one hand, hmm)
 *** =M-2= switch to window with label 2 ... (ace-window)
 *** =C-w o= (in normal mode) NOT in emacs mode or insert mode!. delete ALL other windows! does
 the same as C-x 1 (which works in all modes)
+** Tramp
+Sam Steingold <sds@gnu.org> writes:
+>>> However, sometimes the way I connect is more convoluted, e.g., I need
+>>> to ssh to server, then sudo to the right user, only then invoke a
+>>> command.
+
+/ssh:user1@host|sudo:user2@host:
 ** Dired
 *** =C-x C-j= dired jump (jumps to a dired buffer of the directory of the
 current file); equivalent to =C-x d RET=
