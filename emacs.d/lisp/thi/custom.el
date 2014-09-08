@@ -6,7 +6,13 @@
  '(blink-cursor-mode nil)
  '(comint-input-ignoredups t)
  '(comint-prompt-read-only t)
+ '(company-frontends
+   (quote
+    (company-echo-metadata-frontend company-preview-frontend)))
  '(cursor-color nil)
+ '(custom-safe-themes
+   (quote
+    ("6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(evil-mode-line-format (quote before))
  '(git-commit-mode-hook (quote (turn-on-auto-fill)))
  '(ido-auto-merge-delay-time 2.7)
@@ -41,9 +47,16 @@
  '(preview-scale-function 1.5)
  '(preview-transparent-color (quote (highlight :background)))
  '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")))
+ '(rm-blacklist
+   (quote
+    (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
+ '(rm-excluded-modes
+   (quote
+    (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
  '(safe-local-variable-values
    (quote
-    ((TeX-master)
+    ((whitespace-style face tabs trailing lines-tail)
+     (TeX-master)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
            (add-hook
             (quote write-contents-functions)

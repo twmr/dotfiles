@@ -22,8 +22,6 @@
     )
   )
 
-(global-set-key [f9] 'my-compile)
-
 ;; (defun my-compilation-hook ()
 ;;   "Make sure that the compile window is splitting vertically"
 ;;   (progn

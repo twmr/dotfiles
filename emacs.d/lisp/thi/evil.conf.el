@@ -93,5 +93,7 @@
         (image-dired-mode . emacs)
         (image-dired-thumbnail-mode . emacs)
         (speedbar-mode . emacs)
+        (quickrun/mode . emacs)
+        (makey-key-mode . emacs)
         )
       do (evil-set-initial-state mode state))

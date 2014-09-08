@@ -29,3 +29,4 @@
                                   thi::directory-list)
                           nil t))))
 (global-set-key [f12] 'thi::directorychooser)
+(add-hook 'dired-mode-hook 'dired-turn-on-discover)

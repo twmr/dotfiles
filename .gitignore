@@ -35,3 +35,6 @@ matplotlib/tex.cache
 /emacs.d/.mc-lists.el
 /emacs.d/games/
 /emacs.d/projectile.cache
+/emacs.d/.python-environments/
+/emacs.d/.cask/
+/emacs.d/bbdb

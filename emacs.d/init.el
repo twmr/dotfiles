@@ -65,7 +65,8 @@
 
 (setq thi::packages
       '(;; hungry-delete ;; http://endlessparentheses.com/hungry-delete-mode.html
-        auto-complete
+        ;; auto-complete
+        company-mode
         git-modes
         magit
         magit-filenotify
@@ -90,7 +91,7 @@
         flx
         smex
         flycheck
-        dired+
+        ;;dired+
         dired-efap
         notmuch
         ;;replace+
@@ -111,9 +112,11 @@
         ;;rainbow-mode
         rainbow-delimiters
         highlight-indentation
+        discover
         ;; sr-speedbar (commented out as long as there is no upstream fix for the ad-advised-.. problem)
         ;; browse-kill-ring
-        bbdb
+        ;; bbdb
+        ;;bbdb-vcard
         ;; nognus
         ;; go-mode
         el-get
@@ -122,6 +125,7 @@
         goto-last-change
         idle-highlight-mode
         window-numbering
+        quickrun
         mmm-mode))
 
 (when (string= system-name "pc-52-rh.ims.co.at")
@@ -151,7 +155,7 @@
 (defvar thi::theme
   (if (string= system-name "pc-52-rh.ims.co.at")
       'solarized-dark
-    'solarized-dark))
+    'solarized-light))
 (if (daemonp)
     (add-hook 'after-make-frame-functions
               '(lambda (f)
@@ -171,18 +175,20 @@
 ;; I don't need a latex setup atm
 ;;(load "thi/latex")
 (load "thi/recentf")
-(load "thi/nxml")
+;;(load "thi/nxml")
 (load "thi/compilation")
 (load "thi/term")
 (load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
+(load "vendor/hist") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
 (custom-set-faces '(window-numbering-face
                     ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
 (window-numbering-mode 1)
+(require 'url-tramp)
 
 ;;customizations for el-get packages
 ;;TODO automatically load these files when the el-get packs are loaded
-(load "thi/auto-complete")
+;; (load "thi/auto-complete")
 
 ;; (load "vendor/key-chord") ;; from emacs-rocks
 ;; (load "vendor/iy-go-to-char")
@@ -199,5 +205,7 @@
 (add-hook 'after-init-hook #'persp-mode 1)
 (add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
 ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
+(add-hook 'after-init-hook #'global-company-mode)
+(add-hook 'after-init-hook #'global-discover-mode)
 
 ;;; init.el ends here
