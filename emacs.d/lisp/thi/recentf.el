@@ -6,6 +6,7 @@
 
 (require 'recentf)
 (recentf-mode 1)
+(setq recentf-keep '(file-remote-p file-readable-p))
 (setq recentf-max-menu-items 60)
 (setq recentf-max-saved-items 500)
 (setq recentf-exclude '("COMMIT_EDITMSG"
