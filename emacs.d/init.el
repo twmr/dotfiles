@@ -51,6 +51,7 @@
     (when (not (package-installed-p p))
       (package-install p))))
 
+
 (package-initialize)
 
 ;; http://comments.gmane.org/gmane.emacs.vim-emulation/1700
@@ -84,8 +85,7 @@
         haskell-mode
         markdown-mode
         yaml-mode
-        ;; expand-region ;; temp. disabled because atm it triggers the
-        ;; error void var. er/add-pyhon-.. while opening a python file
+        expand-region
         ace-jump-mode
         yasnippet
         flx
