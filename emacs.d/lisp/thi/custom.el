@@ -6,9 +6,6 @@
  '(blink-cursor-mode nil)
  '(comint-input-ignoredups t)
  '(comint-prompt-read-only t)
- '(company-frontends
-   (quote
-    (company-echo-metadata-frontend company-preview-frontend)))
  '(cursor-color nil)
  '(custom-safe-themes
    (quote
