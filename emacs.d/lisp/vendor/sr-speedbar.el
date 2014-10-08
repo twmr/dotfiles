@@ -310,6 +310,7 @@ Default is nil."
          (set symbol value)
          ;; ad-advised-definition-p no longer exists on Emacs 24.4 as of 2014-01-03.
          (if (or (and (>= emacs-major-version 24) (>= emacs-minor-version 4))
+                 (>= emacs-major-version 25)
                  (string-match "24\\.3\\.50\\..*" emacs-version))
              (when (ad-is-advised 'other-window)
                (sr-speedbar-handle-other-window-advice value))
