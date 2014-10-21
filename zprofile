@@ -83,7 +83,6 @@ if [ "$HOSTNAME" = "mustang" ]; then
     export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
     # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
 
-
     export SLEPC_DIR=${MYSRCDIR}/slepc-3.2-p3
     #./configure  #suffices
 
@@ -109,6 +108,31 @@ if [ "$HOSTNAME" = "mustang" ]; then
     prepath ${MATLAB_BIN}
     prepath ${EMBINPATH}
     prepath $HOME/.bin
+
+elif [ "$HOSTNAME" = "dirac" ]; then
+    prepath $HOME/bin
+    prepath $HOME/.local/bin
+    export EMBINPATH=${HOME}/gitrepos/emacs/src
+    prepath ${EMBINPATH}
+
+    export PETSC_DIR="${GITR}/fenics/petsc"
+    export SLEPC_DIR="${GITR}/fenics/slepc"
+    export PETSC_ARCH="arch-real-cxx-debug"
+
+    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=real --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --with-c2html=0"
+    export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
+    # --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib
+    export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
+    # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
+
+    #./configure  #suffices
+
+    export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
+
+    prepath /usr/lib64/openmpi/bin
+    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LD_LIBRARY_PATH}
+    prepath $HOME/software/local/bin
+    export NETGENDIR=$HOME/gitrepos/netgen/netgen/ng
 
 elif [ "$HOSTNAME" = "cobra" ]; then
 

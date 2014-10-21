@@ -52,6 +52,7 @@ alias qtc='qtcreator'
 alias mat='matlab -nosplash'
 alias cmat='matlab -nodesktop -nosplash -nojvm'
 
+
 embin="/usr/bin/emacs"
 if [ "$EMBINPATH" ]; then
     embin="$EMBINPATH/emacs"
@@ -83,6 +84,7 @@ alias bp='bpython-curtsies'
 alias pyc='pycharm.sh'
 alias py='python'
 alias piu='py setup.py install --user'
+alias pi='py setup.py install'
 alias pib='py setup.py build'
 
 alias di='sudo dnf install'
@@ -113,18 +115,16 @@ if [ "$HOSTNAME" = "pc-52-rh" ]; then
     alias devb1='ssh devel@b1 -X'
 
 fi
-if [ "$HOSTNAME" = "cobra" ]; then
-    hash -d pst=${HOME}/gitrepos/POC-scripts/trunk
-    hash -d psc=${HOME}/gitrepos/POC-scripts/branches/version2.0
-    hash -d tol=~/gitrepos/tools
-    hash -d tal=~/gitrepos/tools/alpha
-    hash -d tbl=~/gitrepos/tools/beta1
+if [ "$HOSTNAME" = "dirac" ]; then
+    alias vsc='ssh thisch@vsc.tuwien.ac.at -X -A'
+    alias vsc2='ssh thisch@vsc2.tuwien.ac.at -X -A'
 fi
 
 DOTFDIR=${GITR}/dotfiles
 hash -d conf=${HOME}/.config
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
+hash -d diss=${GITR}/diss
 hash -d dotf=${DOTFDIR}
 hash -d emd=${DOTFDIR}/emacs.d
 hash -d egd=${DOTFDIR}/emacs.d/el-get
