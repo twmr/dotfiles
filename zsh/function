@@ -47,6 +47,13 @@ function started() {
     fi
 }
 
+function cenvdir() {
+    echo $HOME/miniconda/envs/$CONDA_DEFAULT_ENV
+}
+function switchcurenv() {
+    cd `cenvdir`
+}
+
 function melmacs() {
     emacs -Q --eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)"
 }
