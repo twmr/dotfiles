@@ -39,6 +39,11 @@ prepath() {
     [ -d "${1}" ] && [[ ! "${PATH}" =~ "${1}" ]] && PATH="${1}:${PATH}"
 }
 
+preldlpath() {
+    # prepend path to LD_LIBRARY_PATH
+    [ -d "${1}" ] && [[ ! "${LD_LIBRARY_PATH}" =~ "${1}" ]] && LD_LIBRARY_PATH="${1}:${LD_LIBRARY_PATH}"
+}
+
 if [ "$HOSTNAME" = "mustang" ]; then
     arch="" #intel64"
     #intel_version="11.1/046"
@@ -117,7 +122,9 @@ elif [ "$HOSTNAME" = "dirac" ]; then
 
     export PETSC_DIR="${GITR}/fenics/petsc"
     export SLEPC_DIR="${GITR}/fenics/slepc"
-    export PETSC_ARCH="arch-real-cxx-debug"
+    export PETSC_DIR="${GITR}/fenics/dev/petsc"
+    export SLEPC_DIR="${GITR}/fenics/dev/slepc"
+    export PETSC_ARCH="dev-arch-real-cxx-debug"
 
     export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=real --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --with-c2html=0"
     export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
@@ -127,12 +134,15 @@ elif [ "$HOSTNAME" = "dirac" ]; then
 
     #./configure  #suffices
 
+    export NETGENDIR=~/software/local/bin
     export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
 
     prepath /usr/lib64/openmpi/bin
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LD_LIBRARY_PATH}
     prepath $HOME/software/local/bin
-    export NETGENDIR=$HOME/gitrepos/netgen/netgen/ng
+    preldlpath $HOME/software/local/lib
+
+    export MAKEOPTS='-j`nproc`'
 
 elif [ "$HOSTNAME" = "cobra" ]; then
 
