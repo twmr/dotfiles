@@ -119,9 +119,10 @@ elif [ "$HOSTNAME" = "dirac" ]; then
     prepath $HOME/.local/bin
     export EMBINPATH=${HOME}/gitrepos/emacs/src
     prepath ${EMBINPATH}
+    export DDIR=${GITR}/diss
 
-    export PETSC_DIR="${GITR}/fenics/petsc"
-    export SLEPC_DIR="${GITR}/fenics/slepc"
+    # export PETSC_DIR="${GITR}/fenics/petsc"
+    # export SLEPC_DIR="${GITR}/fenics/slepc"
     export PETSC_DIR="${GITR}/fenics/dev/petsc"
     export SLEPC_DIR="${GITR}/fenics/dev/slepc"
     export PETSC_ARCH="dev-arch-real-cxx-debug"
@@ -136,6 +137,8 @@ elif [ "$HOSTNAME" = "dirac" ]; then
 
     export NETGENDIR=~/software/local/bin
     export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
+
+    export PYTHONPATH=$DDIR/pysalt:${GITR}/cf-fem-lib/tools/in2d_creator_scripts:$PYTHONPATH
 
     prepath /usr/lib64/openmpi/bin
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LD_LIBRARY_PATH}
