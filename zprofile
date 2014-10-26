@@ -36,12 +36,12 @@ export BROWSER=google-chrome
 
 prepath() {
     # prepend path to PATH
-    [ -d "${1}" ] && [[ ! "${PATH}" =~ "${1}" ]] && PATH="${1}:${PATH}"
+    [ -d "${1}" ] && [[ ! "${PATH}" =~ ${1} ]] && PATH="${1}:${PATH}"
 }
 
 preldlpath() {
     # prepend path to LD_LIBRARY_PATH
-    [ -d "${1}" ] && [[ ! "${LD_LIBRARY_PATH}" =~ "${1}" ]] && LD_LIBRARY_PATH="${1}:${LD_LIBRARY_PATH}"
+    [ -d "${1}" ] && [[ ! "${LD_LIBRARY_PATH}" =~ ${1} ]] && LD_LIBRARY_PATH="${1}:${LD_LIBRARY_PATH}"
 }
 
 if [ "$HOSTNAME" = "mustang" ]; then
