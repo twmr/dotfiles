@@ -36,7 +36,7 @@
  '(org-log-done nil)
  '(package-archives
    (quote
-    (("melpa" . "http://melpa.milkbox.net/packages/")
+    (("melpa" . "http://melpa.org/packages/")
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(preview-default-option-list
    (quote
