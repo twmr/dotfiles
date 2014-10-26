@@ -28,6 +28,7 @@
     project-persist
     moz-controller
     ;; moe-theme
+    aggressive-indent
     )
   "A list of packages to ensure are installed at launch.")
 
@@ -195,6 +196,8 @@
 ;; (vendor 'auto-mark)
 
 (put 'dired-find-alternate-file 'disabled nil)
+
+(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook #'global-undo-tree-mode)
