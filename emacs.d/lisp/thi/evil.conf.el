@@ -95,5 +95,6 @@
         (speedbar-mode . emacs)
         (quickrun/mode . emacs)
         (makey-key-mode . emacs)
+        (flycheck-error-list-mode . emacs)
         )
       do (evil-set-initial-state mode state))

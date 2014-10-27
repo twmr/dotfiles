@@ -90,6 +90,7 @@ alias pib='py setup.py build'
 alias di='sudo dnf install'
 alias dnu='sudo dnf update'
 alias ds='sudo dnf search'
+alias dr='sudo dnf remove'
 
 #named directories
 HOSTNAME=`hostname`
