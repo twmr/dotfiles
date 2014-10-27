@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: mpi rank check
+# key: rank
+# --
+do.MPI.rank(do.mpi_comm_world()) == 0
