@@ -92,6 +92,8 @@ alias dnu='sudo dnf update'
 alias ds='sudo dnf search'
 alias dr='sudo dnf remove'
 
+alias cmx='chmod +x'
+
 #named directories
 HOSTNAME=`hostname`
 if [ "$HOSTNAME" = "pc-52-rh" ]; then
@@ -119,6 +121,8 @@ fi
 if [ "$HOSTNAME" = "dirac" ]; then
     alias vsc='ssh thisch@vsc.tuwien.ac.at -X -A'
     alias vsc2='ssh thisch@vsc2.tuwien.ac.at -X -A'
+    alias ng='LD_PRELOAD=~/libpardiso500-GNU481-X86-64.so:/usr/lib64/libm.so:/usr/lib64/liblapack.so:/usr/lib64/libblas.so  netgen'
+    hash -d t3=${GITR}/task3
 fi
 
 DOTFDIR=${GITR}/dotfiles
