@@ -26,6 +26,8 @@
     smart-mode-line
     ace-window
     project-persist
+    undo-tree
+    perspective
     moz-controller
     ;; moe-theme
     aggressive-indent
@@ -70,7 +72,6 @@
         git-modes
         magit
         magit-filenotify
-        perspective
         ibuffer-perspective
         projectile
         direx
