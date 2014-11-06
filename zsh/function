@@ -15,6 +15,32 @@ function src() {
     source ~/.zshrc
 }
 
+function fenicsswitch() {
+    choices=(dev v14)
+
+    ver=$1
+
+    if [[ ! ${choices[*]} =~ $ver ]]; then
+        echo "invalid choice $ver (allowed: $choices)"
+        return 1
+    fi
+
+    echo "switching to fenics $ver"
+    enconda
+    # TODO check that readline is not installed via conda
+
+    if [ $ver = 'dev' ]; then
+        source activate py27_fenics15dev_petsc35
+        #conda info -e
+    elif [ $ver = '14' ]; then
+        source activate py27_fenics14_petsc34
+    fi
+
+    echo "PYTHONPATH:"
+    pp $PYTHONPATH
+}
+
+
 #kill emacs daemon
 function ked() {
     echo "trying to kill emacs"
