@@ -127,7 +127,7 @@ elif [ "$HOSTNAME" = "dirac" ]; then
     export SLEPC_DIR="${GITR}/fenics/dev/slepc"
     export PETSC_ARCH="dev-arch-real-cxx-debug"
 
-    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=real --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --with-c2html=0"
+    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=real --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --with-c2html=0 --download-mumps"
     export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
     # --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib
     export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
@@ -138,11 +138,12 @@ elif [ "$HOSTNAME" = "dirac" ]; then
     export NETGENDIR=~/software/local/bin
     export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
 
-    export PYTHONPATH=$DDIR/pysalt:${GITR}/cf-fem-lib/tools/in2d_creator_scripts:$PYTHONPATH
+    export PYTHONPATH=$GITR/task3:$DDIR/pysalt:${GITR}/cf-fem-lib/tools/in2d_creator_scripts:$PYTHONPATH
 
     prepath /usr/lib64/openmpi/bin
     export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LD_LIBRARY_PATH}
     prepath $HOME/software/local/bin
+    prepath $GITR/task3/scripts
     preldlpath $HOME/software/local/lib
 
     export MAKEOPTS='-j`nproc`'
