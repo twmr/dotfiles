@@ -1,5 +1,6 @@
 [flake8]
 # E501: linelength check
 # N806: lowercase variable name
+# N806: argument name should be lowercase
 # ignore = E501,W293
-ignore = E501,E226,N806
+ignore = E501,E226,N806,N803
