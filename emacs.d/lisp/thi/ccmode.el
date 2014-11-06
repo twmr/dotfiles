@@ -99,6 +99,9 @@
             (superword-mode 1)
             ))
 
+(define-key c-mode-map (kbd "C-`") 'helm-semantic-or-imenu)
+(define-key c++-mode-map (kbd "C-`") 'helm-semantic-or-imenu)
+
 ;; makes delete map to hungry mode
 ;;(defun thi-map-delete-hungry ()
 ;;  (define-key c-mode-base-map [backspace] 'c-hungry-backspace))
