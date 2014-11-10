@@ -65,8 +65,8 @@ alias ec="$consoleemacs"
 # alias emacs="$embin"
 #alias emacs="$guiemacs"
 
-alias ipycomp='(cd ${GITR}/ipython && git pull && python3 ./setup.py build && sudo python3 ./setup.py install)'
-alias in='ipython3 notebook'
+alias in='ipython notebook'
+alias env3k='enconda; workon py3k'
 
 alias svim='sudo /usr/bin/vim'
 alias v='vim'
