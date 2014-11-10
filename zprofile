@@ -223,25 +223,6 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $GITR/julia
     prepath $NETGENPATH
 
-elif [ "$HOSTNAME" = "pc-52-rh" ]; then
-    export HDEPS=/opt/hisch_deps
-    export GITR=${HOME}/gitrepos
-    DOTFPATH=${GITR}/dotfiles
-    export EMBINPATH=$GITR/emacs/src
-    export PATH=$GITR/pyspu/branches/version0.8/bin:${HOME}/software/pycharm/bin:${HOME}/.local/bin:${DOTFPATH}/bin:${EMBINPATH}:$PATH
-    export PYTHONPATH=$GITR/pyspu/branches/version0.8:$PYTHONPATH
-
-    export JDK_HOME=$HOME/software/jdk1.7.0_51
-
-    export TOOLSREPO=${GITR}/tools
-
-    # CPT stuff
-    export PROFI=$GITR/Profi
-    export PATH=$PROFI/bin:$PATH
-    export CFLIGHT=$GITR/cFlight
-    export PATH=$CFLIGHT:$PATH
-
-
 elif [ "$HOSTNAME" = "thisch" ]; then
     intel_arch=""
 
