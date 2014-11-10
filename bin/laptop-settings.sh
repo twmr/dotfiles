@@ -5,11 +5,11 @@ SET_INT_PROP="xinput set-prop --type=int --format=8"
 if [ $(id -u) = "0" ]; then
     echo "superuser"
 
-#dirty writeback time
+    #dirty writeback time
     echo 1500 > /proc/sys/vm/dirty_writeback_centisecs
 
-#enable wireless powersaving
-#read status with iwpriv eth1 get_power
+    #enable wireless powersaving
+    #read status with iwpriv eth1 get_power
     iwpriv eth1 set_power 5
 
     exit 0;
