@@ -1,0 +1,50 @@
+#!/usr/bin/env python2
+from __future__ import print_function
+
+import sys
+import os
+
+pdir = os.environ['PETSC_DIR']
+parch = os.environ['PETSC_ARCH']
+print("PETSC_DIR %s" % pdir)
+print("PETSC_ARCH %s" % parch)
+os.chdir(pdir)
+
+sys.path.insert(0, os.path.abspath(os.path.join(pdir, 'config')))
+import configure
+
+### make sure
+fedora_deps=[
+    'bison',
+    'flex',
+    'lapack-devel',
+    'blas-devel',
+    'valgrind',
+    'valgrind-devel',
+]
+
+print('di ' + ' '.join(fedora_deps))
+
+
+configure_options = [
+    '--enable-mpi=1',
+    '--download-mpich', # i have problems with openmpi, therefore mpich
+    '--download-metis',
+    '--download-parmetis',
+    '--download-ptscotch',
+    '--with-c++-support=1',
+    '--with-scalar-type=real',
+    '--with-x11=0',
+    '--with-clanguage=cxx',
+    '--with-shared-libraries=1',
+    '--with-fortran-kernels=1',
+    '--download-sowing',
+    '--with-c2html=0',
+    '--with-debugging=1',
+    'CXXOPTFLAGS=-O3',
+    'COPTFLAGS=-O3',
+    'FOPTFLAGS=-03',
+    'PETSC_ARCH=' + parch,
+]
+
+configure.petsc_configure(configure_options)

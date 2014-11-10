@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+from __future__ import print_function
+
+import sys
+import os
+import pexpect
+
+# pdir = os.environ['PETSC_DIR']
+# parch = os.environ['PETSC_ARCH']
+# print("PETSC_DIR %s" % pdir)
+# print("PETSC_ARCH %s" % parch)
+# os.chdir(pdir)
+
+fedora_deps = [
+    'eigen3-devel',
+    'swig',
+    'boost-devel',
+    'hdf5-mpich',
+    'hdf5-mpich-devel',  # provides the H5pubconf.h file needed for
+                         # detection of parallel hdf5 support in
+                         # dolfin/cmake
+    'hdf5-devel',
+    'vtk-python',
+    'cppunit',
+    'qt-devel',
+    'jsoncpp',  # also call this:
+]
+
+# missing symlinks (TODO file bug report!)
+# _ ln -s /usr/lib64/libjsoncpp.so{.0,}
+# _ ln -s /usr/lib64/libjsoncpp.so{.0,}
+# _ ln -s /usr/lib64/libnetcdf.so{.7,}
+
+print('di ' + ' '.join(fedora_deps))
+
+cmakeargs = [
+    '-DDOLFIN_ENABLE_VTK=1',
+    '-DDOLFIN_ENABLE_MPI=1',
+    '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
+    '..']
+cmakeargs = list(map(os.path.expandvars, cmakeargs))
+
+
+print("execute cmake %s in %s?" % (' '.join(cmakeargs), os.getcwd()))
+
+p = pexpect.spawn('cmake', cmakeargs, timeout=None,
+                  logfile=sys.stdout)
+line = p.readline()
+while line:
+    # DO OTHER STUFF
+    line = p.readline()
