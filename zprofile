@@ -149,7 +149,6 @@ elif [ "$HOSTNAME" = "dirac" ]; then
     export MAKEOPTS='-j`nproc`'
 
 elif [ "$HOSTNAME" = "cobra" ]; then
-
     export PUBDOC=$HOME/gitrepos/publication
     DOTFPATH=$HOME/gitrepos/dotfiles
 
@@ -165,55 +164,19 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export NETGENPATH=${GITR}/netgen-cmake/build/cmake/build/ng
     export NETGENDIR=${GITR}/netgen-cmake/ng #netgen needs this envvar
 
-    #parallel stuff (mpi + petsc + slepc)
-
-    export MYMPI_INC_PATH=/usr/include/openmpi-x86_64
-    export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
-    export MYMPI_BIN_PATH=/usr/lib64/openmpi/bin
-
-    # for light-matter project
-    export PETSC_DIR=${GITR}/petsc
-    export PETSC_ARCH="arch-linux64-complex-fft-debug"
-
-    # dolfin does not support complex petscscalars
-    export PETSC_ARCH="arch-linux64-fft-debug"
-    export PETSC_MAIN_FLAGS="--download-mpi  --with-c2html=0 --with-c++-support=1 --with-fortran-kernels=1  --download-fftw=1 --with-x11=0 --with-clanguage=cxx --with-shared-libraries"
+    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-fortran-kernels=1 --with-x11=0 --with-clanguage=cxx --with-shared-libraries --download-mpich --with-ptscotch=1 --download-ptscotch --with-c2html=0
+"
     # as of May 2014 these flags work
     # export PETSC_MAIN_FLAGS="--download-openmpi  --with-c2html=0 --with-c++-support=1 --with-scalar-type=complex --with-fortran-kernels=1  --download-fftw=1 --with-x11=0 --with-clanguage=cxx --with-shared-libraries"
     # export PETSC_MAIN_FLAGS="--with-c2html=0 --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1 --download-f-blas-lapack=1"
     export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
     export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
-    # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
-
-    export SLEPC_DIR=${GITR}/slepc
-    # ./confgigure
-
-    #PETSC4PY
-    PYSUFF="linux-x86_64-2.7" #Python suffix
-    export PETSC4PY_DIR=${GITR}/petsc4py
-    P4PYLIB=${PETSC4PY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
-    P4PYPATH=${PETSC4PY_DIR}/build/lib.${PYSUFF} #/petsc4py
-
-    #SLEPC4PY
-    export SLEPC4PY_DIR=${GITR}/slepc4py
-    S4PYLIB=${SLEPC4PY_DIR}/build/temp.${PYSUFF}/$PETSC_ARCH/src
-    S4PYPATH=${SLEPC4PY_DIR}/build/lib.${PYSUFF} #/slepc4py
-
-    #MPI4PY
-    PYMPIPATH=/usr/lib64/python2.7/site-packages/openmpi
-    export PYTHONPATH=$PYMPIPATH
-
-    #IMS STUFF
-    export HWSIMUENV=${GITR}/hwsimuenv
-    export TOOLSREPO=${GITR}/tools
+    # ./configure ${PETSC_MAIN_FLAGS}
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
 
-    export LD_LIBRARY_PATH=${P4PYLIB}:${S4PYLIB}:${MYMPI_LIB_PATH}
-
-    prepath $HOME/software/pycharm-community-3.4.1/bin
+    # prepath $HOME/software/pycharm-community-3.4.1/bin
     prepath $EMBINPATH
-    prepath $MYMPI_BIN_PATH
     prepath $LOCSOFT/bin
     prepath $DOTFPATH/bin
     prepath $HOME/.local/bin
