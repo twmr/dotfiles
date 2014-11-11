@@ -27,7 +27,6 @@ function fenicsswitch() {
 
     echo "switching to fenics $ver"
     enconda
-    # TODO check that readline is not installed via conda
 
     if [ $ver = 'dev' ]; then
         export PETSC_DIR=${GITR}/fenics/dev/petsc
@@ -44,6 +43,14 @@ function fenicsswitch() {
         source activate py27_fenics14_petsc34
     fi
 
+    # otherwise findPackage(Qt4) in cmake fails)
+    (conda list | grep "^qt " > /dev/null) && \
+        echo "!!!!!DANGER qt in conda installed!!!!"
+
+    # TODO find out why I have to remove readline
+    (conda list | grep "^readline " > /dev/null) && \
+        echo "!!!!!DANGER readline in conda installed!!!!"
+
     echo "PYTHONPATH:"
     pp $PYTHONPATH
 
@@ -55,6 +62,7 @@ function fenicsswitch() {
 
     echo "\nPETSC GIT BRANCH: $pbranch"
     echo "SLEPC GIT BRANCH: $sbranch"
+    hash -d fen=${GITR}/fenics/dev
 }
 
 
