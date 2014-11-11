@@ -3,6 +3,8 @@ from __future__ import print_function
 
 import sys
 import os
+import pexpect
+import argparse
 
 pdir = os.environ['PETSC_DIR']
 parch = os.environ['PETSC_ARCH']
@@ -10,11 +12,16 @@ print("PETSC_DIR %s" % pdir)
 print("PETSC_ARCH %s" % parch)
 os.chdir(pdir)
 
+
+parser = argparse.ArgumentParser(
+    description='helper script to compile petsc on fedora')
+parser.add_argument('-y', '--assume-yes', action='store_true')
+args = parser.parse_args()
+
 sys.path.insert(0, os.path.abspath(os.path.join(pdir, 'config')))
 import configure
 
-### make sure
-fedora_deps=[
+fedora_deps = [
     'bison',
     'flex',
     'lapack-devel',
@@ -27,11 +34,26 @@ print('di ' + ' '.join(fedora_deps))
 
 
 configure_options = [
-    '--enable-mpi=1',
-    '--download-mpich', # i have problems with openmpi, therefore mpich
-    '--download-metis',
-    '--download-parmetis',
+    '--download-mpich',  # i have problems with openmpi, therefore mpich
+    # '--download-openmpi',
+    # '--with-openmp=1',
+
+    # '--with-mpi-dir=/usr/lib64/openmpi',  # make sure to add a symlink
+    # _ ln -s /usr/include/openmpi-x86_64/ include otherwise I get multiple
+    # warnings that /usr/lib64/openmpi/include is not found
+
+    # '--with-mpi-lib=/usr/lib64/openmpi/lib',
+    # '--with-mpi-include=/usr/include/openmpi-x86_64',
+
+    '--download-scalapack',
+    '--download-suitesparse',
+    # '--download-metis',
+    # '--download-parmetis',
+    '--download-mumps',
+    '--download-scotch',
     '--download-ptscotch',
+    # '--download-hypre',
+    # '--download-pastix',  # compilation problem
     '--with-c++-support=1',
     '--with-scalar-type=real',
     '--with-x11=0',
@@ -40,11 +62,41 @@ configure_options = [
     '--with-fortran-kernels=1',
     '--download-sowing',
     '--with-c2html=0',
-    '--with-debugging=1',
-    'CXXOPTFLAGS=-O3',
-    'COPTFLAGS=-O3',
-    'FOPTFLAGS=-03',
+    # 'CXXOPTFLAGS="-O3 -fopenmp"',
+    # 'COPTFLAGS="-O3 -fopenmp"',
+    # 'FOPTFLAGS="-03 -fopenmp"',
+    '--with-debugging=0',  # NOTE: in a debug build openmp parallelization
+                           # is disabled!  'CXXOPTFLAGS=-O3 -fopenmp',
+                           # 'COPTFLAGS=-O3 -fopenmp', 'FOPTFLAGS=-03
+                           # -fopenmp',
     'PETSC_ARCH=' + parch,
 ]
+print('\n'.join(configure_options))
 
 configure.petsc_configure(configure_options)
+
+rawint = ''
+if not args.assume_yes:
+    rawint = raw_input('\n' + '#'*80 +
+                       '\ncall make to compile petsc? [Yn] ')
+if rawint in ['y', 'Y', '']:
+
+    make_args = ['PETSC_DIR=' + pdir,
+                 'PETSC_ARCH=' + parch,
+                 'all']
+    print("call make %s" % ' '.join(make_args))
+    p = pexpect.spawn('make', make_args, timeout=None,
+                      logfile=sys.stdout)
+    line = p.readline()
+    while line:
+        line = p.readline()
+
+    make_args = ['PETSC_DIR=' + pdir,
+                 'PETSC_ARCH=' + parch,
+                 'test']
+    print("call make %s" % ' '.join(make_args))
+    p = pexpect.spawn('make', make_args, timeout=None,
+                      logfile=sys.stdout)
+    line = p.readline()
+    while line:
+        line = p.readline()

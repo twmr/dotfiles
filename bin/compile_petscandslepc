@@ -1,0 +1,6 @@
+#!/bin/bash
+
+rm -rf $PETSC_DIR/$PETSC_ARCH
+rm -rf $SLEPC_DIR/$PETSC_ARCH
+compile_petsc -y
+compile_slepc

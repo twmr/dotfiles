@@ -3,9 +3,39 @@ from __future__ import print_function
 
 import sys
 import os
+import pexpect
+
+print(sys.version_info)
+print(sys.version)
 
 sdir = os.environ['SLEPC_DIR']
 print("SLEPC_DIR %s" % sdir)
 os.chdir(sdir)
+parch = os.environ['PETSC_ARCH']
+print("PETSC_ARCH %s" % parch)
 
-execfile(os.path.abspath(os.path.join(sdir, 'config', 'configure.py')))
+p = pexpect.spawn('./configure', [], timeout=None,
+                  logfile=sys.stdout)
+line = p.readline()
+while line:
+    line = p.readline()
+
+make_args = ['SLEPC_DIR=' + sdir,
+             'PETSC_ARCH=' + parch,
+             'all']
+print("call make %s" % ' '.join(make_args))
+p = pexpect.spawn('make', make_args, timeout=None,
+                  logfile=sys.stdout)
+line = p.readline()
+while line:
+    line = p.readline()
+
+make_args = ['SLEPC_DIR=' + sdir,
+             'PETSC_ARCH=' + parch,
+             'test']
+print("call make %s" % ' '.join(make_args))
+p = pexpect.spawn('make', make_args, timeout=None,
+                  logfile=sys.stdout)
+line = p.readline()
+while line:
+    line = p.readline()
