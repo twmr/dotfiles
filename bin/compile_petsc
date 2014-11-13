@@ -32,19 +32,7 @@ fedora_deps = [
 
 print('di ' + ' '.join(fedora_deps))
 
-
 configure_options = [
-    '--download-mpich',  # i have problems with openmpi, therefore mpich
-    # '--download-openmpi',
-    # '--with-openmp=1',
-
-    # '--with-mpi-dir=/usr/lib64/openmpi',  # make sure to add a symlink
-    # _ ln -s /usr/include/openmpi-x86_64/ include otherwise I get multiple
-    # warnings that /usr/lib64/openmpi/include is not found
-
-    # '--with-mpi-lib=/usr/lib64/openmpi/lib',
-    # '--with-mpi-include=/usr/include/openmpi-x86_64',
-
     '--download-scalapack',
     '--download-suitesparse',
     # '--download-metis',
@@ -71,6 +59,21 @@ configure_options = [
                            # -fopenmp',
     'PETSC_ARCH=' + parch,
 ]
+
+# use the 'module' command in fedora to load settings for the desired mpi
+# library
+if 'MPI_INCLUDE' not in os.environ or not os.path.exists(
+        os.environ['MPI_INCLUDE']):
+    configure_options.insert(0, '--download-mpich')
+    # '--download-openmpi',
+
+    # '--with-mpi-dir=/usr/lib64/openmpi',  # make sure to add a symlink
+    # _ ln -s /usr/include/openmpi-x86_64/ include otherwise I get multiple
+    # warnings that /usr/lib64/openmpi/include is not found
+
+    # '--with-mpi-lib=/usr/lib64/openmpi/lib',
+    # '--with-mpi-include=/usr/include/openmpi-x86_64',
+
 print('\n'.join(configure_options))
 
 configure.petsc_configure(configure_options)

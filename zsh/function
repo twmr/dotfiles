@@ -54,8 +54,11 @@ function fenicsswitch() {
     (conda list | grep "^readline " > /dev/null) && \
         echo "!!!!!DANGER readline in conda installed!!!!"
 
-    echo "PYTHONPATH:"
+    echo "\nPYTHONPATH:"
     pp $PYTHONPATH
+
+    echo "\nLD_LIBRARY_PATH:"
+    pp $LD_LIBRARY_PATH
 
     echo "\nPETSC_DIR: $PETSC_DIR"
     pbranch=`(cd $PETSC_DIR && git symbolic-ref HEAD)`

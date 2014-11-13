@@ -40,6 +40,27 @@ cmakeargs = [
     '..']
 cmakeargs = list(map(os.path.expandvars, cmakeargs))
 
+# make sure to patch CMakeLists.txt (
+# --- a/CMakeLists.txt
+# +++ b/CMakeLists.txt
+# @@ -447,6 +447,8 @@ if (DOLFIN_ENABLE_HDF5)
+#        set(HDF5_FOUND false)
+#      endif()
+#    endif()
+# +
+# +  set(HDF5_LIBRARIES "$ENV{MPI_LIB}/libhdf5.so" "/usr/lib64/libz.so" "/usr/lib64/libdl.so" "/usr/lib64/libm.so")
+#  endif()
+
+#  # Check for PaStiX
+# @@ -569,6 +571,11 @@ if (DOLFIN_ENABLE_VTK)
+#        message(STATUS "Found VTK: ${VTK_DIR} (found version \"${VTK_VERSION}\")")
+#      endif()
+#    endif()
+# +
+# +  set(VTK_INCLUDE_DIRS "/usr/include/vtk" ${VTK_INCLUDE_DIRS})
+# +  message(STATUS "vtk include dirs: ${VTK_INCLUDE_DIRS}")
+#  endif()
+
 
 print("execute cmake %s in %s?" % (' '.join(cmakeargs), os.getcwd()))
 
