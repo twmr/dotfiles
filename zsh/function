@@ -43,6 +43,9 @@ function fenicsswitch() {
         source activate py27_fenics14_petsc34
     fi
 
+    echo "loading openmpi module"
+    module load mpi/openmpi-`uname -p`
+
     # otherwise findPackage(Qt4) in cmake fails)
     (conda list | grep "^qt " > /dev/null) && \
         echo "!!!!!DANGER qt in conda installed!!!!"
