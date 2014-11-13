@@ -121,27 +121,9 @@ elif [ "$HOSTNAME" = "dirac" ]; then
     prepath ${EMBINPATH}
     export DDIR=${GITR}/diss
 
-    # export PETSC_DIR="${GITR}/fenics/petsc"
-    # export SLEPC_DIR="${GITR}/fenics/slepc"
-    export PETSC_DIR="${GITR}/fenics/dev/petsc"
-    export SLEPC_DIR="${GITR}/fenics/dev/slepc"
-    export PETSC_ARCH="dev-arch-real-cxx-debug"
-
-    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-scalar-type=real --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --with-c2html=0 --download-mumps"
-    export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
-    # --with-blas-lapack-dir=/opt/intel/Compiler/11.1/046/mkl/lib
-    export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
-    # ./configure ${PETSC_MAIN_FLAGS} ${PETSC_OPT_FLAGS} ${PETSC_DEBUGGING}
-
-    #./configure  #suffices
-
     export NETGENDIR=~/software/local/bin
-    export MYMPI_LIB_PATH=/usr/lib64/openmpi/lib
-
     export PYTHONPATH=$GITR/task3:$DDIR/pysalt:${GITR}/cf-fem-lib/tools/in2d_creator_scripts:$PYTHONPATH
 
-    prepath /usr/lib64/openmpi/bin
-    export LD_LIBRARY_PATH=${MYMPI_LIB_PATH}:${LD_LIBRARY_PATH}
     prepath $HOME/software/local/bin
     prepath $GITR/task3/scripts
     preldlpath $HOME/software/local/lib
@@ -163,15 +145,6 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export NETGENPATH=${GITR}/netgen-cmake/build/cmake/build/ng
     export NETGENDIR=${GITR}/netgen-cmake/ng #netgen needs this envvar
-
-    export PETSC_MAIN_FLAGS="--with-c++-support=1 --with-fortran-kernels=1 --with-x11=0 --with-clanguage=cxx --with-shared-libraries --download-mpich --with-ptscotch=1 --download-ptscotch --with-c2html=0
-"
-    # as of May 2014 these flags work
-    # export PETSC_MAIN_FLAGS="--download-openmpi  --with-c2html=0 --with-c++-support=1 --with-scalar-type=complex --with-fortran-kernels=1  --download-fftw=1 --with-x11=0 --with-clanguage=cxx --with-shared-libraries"
-    # export PETSC_MAIN_FLAGS="--with-c2html=0 --with-c++-support=1 --with-scalar-type=complex --with-x11=0 --with-clanguage=cxx --with-shared-libraries=1 --with-fortran-kernels=1 --download-sowing --download-fftw=1 --download-f-blas-lapack=1"
-    export PETSC_DEBUGGING="--with-debugging=1" #DEBUG BUILD
-    export PETSC_OPT_FLAGS="CXXOPTFLAGS=-O3 COPTFLAGS=-O3 FOPTFLAGS=-03"
-    # ./configure ${PETSC_MAIN_FLAGS}
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
 
