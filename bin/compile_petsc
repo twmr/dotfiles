@@ -35,13 +35,13 @@ print('di ' + ' '.join(fedora_deps))
 configure_options = [
     '--download-scalapack',
     '--download-suitesparse',
-    # '--download-metis',
-    # '--download-parmetis',
+    '--download-metis',
+    '--download-parmetis',
     '--download-mumps',
     '--download-scotch',
     '--download-ptscotch',
-    # '--download-hypre',
-    # '--download-pastix',  # compilation problem
+    '--download-hypre',
+    '--download-pastix',  # compilation problem
     '--with-c++-support=1',
     '--with-scalar-type=real',
     '--with-x11=0',

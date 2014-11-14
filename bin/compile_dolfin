@@ -5,11 +5,12 @@ import sys
 import os
 import pexpect
 
-# pdir = os.environ['PETSC_DIR']
-# parch = os.environ['PETSC_ARCH']
-# print("PETSC_DIR %s" % pdir)
-# print("PETSC_ARCH %s" % parch)
-# os.chdir(pdir)
+ddir = os.environ['DOLFIN_DIR']
+darch = os.environ['DOLFIN_ARCH']
+print("DOLFIN_DIR %s" % ddir)
+print("DOLFIN_ARCH %s" % darch)
+os.chdir(os.path.join(ddir, darch))
+
 
 fedora_deps = [
     'eigen3-devel',
@@ -31,7 +32,8 @@ fedora_deps = [
 # _ ln -s /usr/lib64/libjsoncpp.so{.0,}
 # _ ln -s /usr/lib64/libnetcdf.so{.7,}
 
-print('di ' + ' '.join(fedora_deps))
+print('(make sure that the following deps are installed\n'
+      'di ' + ' '.join(fedora_deps))
 
 cmakeargs = [
     '-DDOLFIN_ENABLE_VTK=1',
