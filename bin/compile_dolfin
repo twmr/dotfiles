@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 from __future__ import print_function
 
 import sys
@@ -14,18 +14,32 @@ os.chdir(os.path.join(ddir, darch))
 
 fedora_deps = [
     'eigen3-devel',
-    'swig',
+    'swig',  # NOTE: you need swig 3.0.3 or newer to use dolfin with python3
     'boost-devel',
     'hdf5-mpich',
     'hdf5-mpich-devel',  # provides the H5pubconf.h file needed for
                          # detection of parallel hdf5 support in
                          # dolfin/cmake
+    'hdf5-openmpi',
+    'hdf5-openmpi-devel',
     'hdf5-devel',
     'vtk-python',
     'cppunit',
     'qt-devel',
     'jsoncpp',  # also call this:
 ]
+
+# as swig 3.0.3 was not yet released you have to compile the master branch
+# from github
+# ./autogen.sh
+# ./configure --prefix=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV
+# make && make install (ignore the yodl2man error)
+
+
+# make sure that you patched FindHDF5.cmake
+#     set( HDF5_Fortran_HL_LIBRARY_NAMES_INIT hdf5hl_fortran
+#          ${HDF5_Fortran_LIBRARY_NAMES_INIT} )
+# +   list( APPEND HDF5_INCLUDE_DIRS $ENV{MPI_INCLUDE} )
 
 # missing symlinks (TODO file bug report!)
 # _ ln -s /usr/lib64/libjsoncpp.so{.0,}
@@ -43,6 +57,8 @@ cmakeargs = [
 cmakeargs = list(map(os.path.expandvars, cmakeargs))
 
 # make sure to patch CMakeLists.txt (
+# TODO: is it possible to replace just the first entry of HDF5_LIBRARIES
+# instead of hardcoding all entries in this patch?
 # --- a/CMakeLists.txt
 # +++ b/CMakeLists.txt
 # @@ -447,6 +447,8 @@ if (DOLFIN_ENABLE_HDF5)
@@ -66,9 +82,17 @@ cmakeargs = list(map(os.path.expandvars, cmakeargs))
 
 print("execute cmake %s in %s?" % (' '.join(cmakeargs), os.getcwd()))
 
-p = pexpect.spawn('cmake', cmakeargs, timeout=None,
-                  logfile=sys.stdout)
+p = pexpect.spawn('cmake', cmakeargs, timeout=None, logfile=sys.stdout)
 line = p.readline()
 while line:
-    # DO OTHER STUFF
+    line = p.readline()
+
+p = pexpect.spawn('make', ['-j4'], timeout=None, logfile=sys.stdout)
+line = p.readline()
+while line:
+    line = p.readline()
+
+p = pexpect.spawn('make', ['install'], timeout=None, logfile=sys.stdout)
+line = p.readline()
+while line:
     line = p.readline()

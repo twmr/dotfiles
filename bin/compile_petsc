@@ -41,7 +41,7 @@ configure_options = [
     '--download-scotch',
     '--download-ptscotch',
     '--download-hypre',
-    '--download-pastix',  # compilation problem
+    '--download-pastix',
     '--with-c++-support=1',
     '--with-scalar-type=real',
     '--with-x11=0',
@@ -54,9 +54,7 @@ configure_options = [
     # 'COPTFLAGS="-O3 -fopenmp"',
     # 'FOPTFLAGS="-03 -fopenmp"',
     '--with-debugging=0',  # NOTE: in a debug build openmp parallelization
-                           # is disabled!  'CXXOPTFLAGS=-O3 -fopenmp',
-                           # 'COPTFLAGS=-O3 -fopenmp', 'FOPTFLAGS=-03
-                           # -fopenmp',
+                           # is disabled!
     'PETSC_ARCH=' + parch,
 ]
 

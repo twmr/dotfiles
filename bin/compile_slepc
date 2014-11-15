@@ -14,7 +14,7 @@ os.chdir(sdir)
 parch = os.environ['PETSC_ARCH']
 print("PETSC_ARCH %s" % parch)
 
-p = pexpect.spawn('./configure', [], timeout=None,
+p = pexpect.spawn('python2', ['./configure'], timeout=None,
                   logfile=sys.stdout)
 line = p.readline()
 while line:
