@@ -1,0 +1,76 @@
+#!/bin/zsh
+
+function fenicsswitch() {
+    choices=(dev v14)
+
+    ver=$1
+
+    if [[ ! ${choices[*]} =~ $ver ]]; then
+        echo "invalid choice $ver (allowed: $choices)"
+        return 1
+    fi
+
+    echo "switching to fenics $ver"
+    enconda
+
+    if [ $ver = 'dev' ]; then
+        devdir=${GITR}/fenics/dev
+        export PETSC_DIR=$devdir/petsc
+        export SLEPC_DIR=$devdir/slepc
+        export PETSC_ARCH="arch-linux64"
+        export DOLFIN_DIR=$devdir/dolfin
+        export BEMPP_DIR=$devdir/bempp
+        if [ "$HOSTNAME" = "cobra" ]; then
+            source activate py34_fenics15dev_petsc35
+        elif [ "$HOSTNAME" = "dirac" ]; then
+            source activate py27_fenics15dev_petsc35
+        fi
+        #conda info -e
+        export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
+    elif [ $ver = '14' ]; then
+        source activate py27_fenics14_petsc34
+    fi
+    export DOLFIN_ARCH="build_fed_openmpi"
+    export BEMPP_ARCH="build"
+
+    echo "loading openmpi module"
+    module load mpi/openmpi-`uname -p`
+
+    # otherwise findPackage(Qt4) in cmake fails)
+    (conda list | grep "^qt " > /dev/null) && \
+        echo "!!!!!DANGER qt in conda installed!!!!" && \
+        conda remove --yes qt
+
+    # TODO find out why I have to remove readline
+    (conda list | grep "^readline " > /dev/null) && \
+        echo "!!!!!DANGER readline in conda installed!!!!" && \
+        conda remove --yes readline
+
+    # (for mshr)
+    (conda list | grep "^xz " > /dev/null) && \
+        echo "!!!!!DANGER xz in conda installed!!!!" && \
+        conda remove --yes xz
+
+    echo "\nPYTHONPATH:"
+    pp $PYTHONPATH
+
+    echo "\nLD_LIBRARY_PATH:"
+    pp $LD_LIBRARY_PATH
+
+    echo "\nPETSC_DIR: $PETSC_DIR"
+    pbranch=`(cd $PETSC_DIR && git symbolic-ref HEAD)`
+    sbranch=`(cd $SLEPC_DIR && git symbolic-ref HEAD)`
+    pcommit=`(cd $PETSC_DIR && git log --pretty=format:'%h %ad' -n 1 HEAD)`
+    scommit=`(cd $SLEPC_DIR && git log --pretty=format:'%h %ad' -n 1 HEAD)`
+    echo "PETSC_ARCH: $PETSC_ARCH"
+    echo "SLEPC_DIR: $SLEPC_DIR"
+    echo "DOLFIN_DIR: $DOLFIN_DIR"
+    echo "DOLFIN_ARCH: $DOLFIN_ARCH"
+    # TODO check if dirs exist
+    echo "BEMPP_DIR: $BEMPP_DIR"
+    echo "BEMPP_ARCH: $BEMPP_ARCH"
+
+    echo "\nPETSC GIT BRANCH: $pbranch @ $pcommit"
+    echo "SLEPC GIT BRANCH: $sbranch @ $scommit"
+    hash -d fen=${GITR}/fenics/dev
+}
