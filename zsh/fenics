@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 function fenicsswitch() {
-    choices=(dev v14)
+    choices=(dev devpy27 v14)
 
     ver=$1
 
@@ -27,11 +27,30 @@ function fenicsswitch() {
         fi
         #conda info -e
         export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
+        export DOLFIN_ARCH="build_fed_openmpi"
+        export BEMPP_ARCH="build_dev" # atm builds v2.0
+    elif [ $ver = 'devpy27' ]; then
+        devdir=${GITR}/fenics/dev
+        export PETSC_DIR=$devdir/petsc
+        export SLEPC_DIR=$devdir/slepc
+        export PETSC_ARCH="arch-linux64"
+        export DOLFIN_DIR=$devdir/dolfin
+        export BEMPP_DIR=$devdir/bempp
+        if [ "$HOSTNAME" = "cobra" ]; then
+            source activate py27_fenics15dev_petsc35
+        fi
+        #conda info -e
+        export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
+        export BEMPP_ARCH="build_v2.0"
+        export DOLFIN_ARCH="build_fed_openmpi_py27"
     elif [ $ver = '14' ]; then
+        # TODO
         source activate py27_fenics14_petsc34
     fi
-    export DOLFIN_ARCH="build_fed_openmpi"
-    export BEMPP_ARCH="build"
+
+    # if [ -d $CONDA_ENV_DIR/$CONDA_DEFAULT_ENV/bempp ]; then
+    #     export PYTHONPATH=$CONDA_ENV_DIR/$CONDA_DEFAULT_ENV/bempp/python:$PYTHONPATH
+    # fi
 
     echo "loading openmpi module"
     module load mpi/openmpi-`uname -p`
