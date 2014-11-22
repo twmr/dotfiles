@@ -96,33 +96,15 @@ alias cmx='chmod +x'
 
 #named directories
 HOSTNAME=`hostname`
-if [ "$HOSTNAME" = "pc-52-rh" ]; then
-    alias svnextlist="svn propget svn:externals -R"
-    hash -d pst=${HOME}/gitrepos/POC-scripts/trunk
-    hash -d psc=${HOME}/gitrepos/POC-scripts/branches/version2.0
-    hash -d psb=${HOME}/gitrepos/POC-scripts-POC4IMO
-    hash -d tol=~/gitrepos/tools
-    hash -d tal=~/gitrepos/tools/alpha
-    hash -d tbl=~/gitrepos/tools/beta1
-    hash -d pyspu=~/gitrepos/pyspu.git/trunk
-
-    alias simutestrunner='python testrunner.py -c tests/testconfig_simulation.json -s localhost -p 26999 -u localhost -l 8000 -t 120 --debug'
-
-    alias tsp='~/gitrepos/pyspu/branches/version0.8/tsplotter/tsplotter'
-
-    alias opbrunn='ssh operator@brunn -X'
-    alias oppoc='ssh operator@poc-pc.poc2.ims.co.at -X'
-    alias opb1='ssh operator@b1 -X'
-    alias devbrunn='ssh devel@brunn -X'
-    alias devpoc='ssh devel@poc-pc.poc2.ims.co.at -X'
-    alias devb1='ssh devel@b1 -X'
-
-fi
 if [ "$HOSTNAME" = "dirac" ]; then
     alias vsc='ssh thisch@vsc.tuwien.ac.at -X -A'
     alias vsc2='ssh thisch@vsc2.tuwien.ac.at -X -A'
     alias ng='LD_PRELOAD=~/libpardiso500-GNU481-X86-64.so:/usr/lib64/libm.so:/usr/lib64/liblapack.so:/usr/lib64/libblas.so  netgen'
     hash -d t3=${GITR}/task3
+fi
+if [ "$HOSTNAME" = "cobra" ]; then
+    hash -d t3=${GITR}/diss/task3
+    hash -d pys=${GITR}/diss/pysalt
 fi
 
 DOTFDIR=${GITR}/dotfiles
