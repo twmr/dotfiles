@@ -180,7 +180,6 @@
 (load "thi/compilation")
 (load "thi/term")
 (load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
-(load "vendor/hist") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
 (custom-set-faces '(window-numbering-face
                     ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
