@@ -79,6 +79,7 @@ cmakeargs = list(map(os.path.expandvars, cmakeargs))
 # +  message(STATUS "vtk include dirs: ${VTK_INCLUDE_DIRS}")
 #  endif()
 
+# NOTE: conda vtk package breaks jit compilation of do.Expression('3') !!!
 
 print("execute cmake %s in %s?" % (' '.join(cmakeargs), os.getcwd()))
 
