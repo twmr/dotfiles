@@ -33,7 +33,7 @@ function fenicsswitch() {
         devdir=${GITR}/fenics/dev
         export PETSC_DIR=$devdir/petsc
         export SLEPC_DIR=$devdir/slepc
-        export PETSC_ARCH="arch-linux64"
+        export PETSC_ARCH="arch_linux64_py27"
         export DOLFIN_DIR=$devdir/dolfin
         export BEMPP_DIR=$devdir/bempp
         if [ "$HOSTNAME" = "cobra" ]; then
