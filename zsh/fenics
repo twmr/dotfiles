@@ -55,12 +55,12 @@ function fenicsswitch() {
     echo "loading openmpi module"
     module load mpi/openmpi-`uname -p`
 
-    # otherwise findPackage(Qt4) in cmake fails)
+    # otherwise find_package(Qt4) in cmake fails
     (conda list | grep "^qt " > /dev/null) && \
         echo "!!!!!DANGER qt in conda installed!!!!" && \
         conda remove --yes qt
 
-    # TODO find out why I have to remove readline
+    # see https://github.com/ContinuumIO/anaconda-issues/issues/152
     (conda list | grep "^readline " > /dev/null) && \
         echo "!!!!!DANGER readline in conda installed!!!!" && \
         conda remove --yes readline
@@ -68,6 +68,12 @@ function fenicsswitch() {
     # (for mshr)
     (conda list | grep "^xz " > /dev/null) && \
         echo "!!!!!DANGER xz in conda installed!!!!" && \
+        conda remove --yes xz
+
+    # fixes compilation of dolfin.Expression('3')
+    # (for vtk)
+    (conda list | grep "^vtk " > /dev/null) && \
+        echo "!!!!!DANGER vtk in conda installed!!!!" && \
         conda remove --yes xz
 
     echo "\nPYTHONPATH:"
