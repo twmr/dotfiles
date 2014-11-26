@@ -125,6 +125,7 @@
         idle-highlight-mode
         window-numbering
         quickrun
+        dockerfile-mode
         mmm-mode))
 
 (when (string= system-name "pc-52-rh.ims.co.at")
@@ -149,7 +150,6 @@
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
-;; (defvar thi::theme 'solarized-light)
 (defvar thi::theme 'sanityinc-tomorrow-night)
 
 ;; (defvar thi::theme
@@ -179,7 +179,6 @@
 (load "thi/compilation")
 (load "thi/term")
 (load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
-(load "vendor/hist") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
 (custom-set-faces '(window-numbering-face
                     ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
@@ -199,7 +198,7 @@
 
 (put 'dired-find-alternate-file 'disabled nil)
 
-(add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
+;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook #'global-undo-tree-mode)

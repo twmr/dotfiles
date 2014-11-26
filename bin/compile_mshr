@@ -1,0 +1,41 @@
+#!/usr/bin/env python2
+from __future__ import print_function
+
+import sys
+import os
+import pexpect
+
+ddir = os.environ['DOLFIN_DIR']
+darch = os.environ['DOLFIN_ARCH']
+print("DOLFIN_DIR %s" % ddir)
+print("DOLFIN_ARCH %s" % darch)
+os.chdir(os.path.join(ddir, '..', 'mshr', darch))
+
+cmakeargs = [
+    '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
+    '..']
+cmakeargs = list(map(os.path.expandvars, cmakeargs))
+
+# make sure to check that the version of PythonInterp is src/CMakeLists.txt
+# is set to the correct value
+
+# TODO make sure to create a symlink (for petsc4py swig files)
+# cd $CONDA_ENV_DIR/$CONDA_DEFAULT_ENV/include
+# ln -s ../lib/python2.7/site-packages/petsc4py/include/petsc4py .
+
+print("execute cmake %s in %s?" % (' '.join(cmakeargs), os.getcwd()))
+
+p = pexpect.spawn('cmake', cmakeargs, timeout=None, logfile=sys.stdout)
+line = p.readline()
+while line:
+    line = p.readline()
+
+p = pexpect.spawn('make', ['-j4'], timeout=None, logfile=sys.stdout)
+line = p.readline()
+while line:
+    line = p.readline()
+
+p = pexpect.spawn('make', ['install'], timeout=None, logfile=sys.stdout)
+line = p.readline()
+while line:
+    line = p.readline()

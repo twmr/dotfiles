@@ -143,21 +143,23 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export BOOST_SRC_PATH=$MYSRCDIR/boost_1_52_0
 
-    export NETGENPATH=${GITR}/netgen-cmake/build/cmake/build/ng
-    export NETGENDIR=${GITR}/netgen-cmake/ng #netgen needs this envvar
+    export NETGENDIR=~/software/local/bin #netgen needs this envvar
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
 
+    export CONDA_ENV_DIR=$HOME/miniconda/envs
+
     # prepath $HOME/software/pycharm-community-3.4.1/bin
     prepath $EMBINPATH
-    prepath $LOCSOFT/bin
+    prepath $HOME/software/local/bin
     prepath $DOTFPATH/bin
     prepath $HOME/.local/bin
     prepath $HOME/bin
     prepath $HOME/.cabal/bin
     prepath $HOME/.cask/bin
     prepath $GITR/julia
-    prepath $NETGENPATH
+
+    export PYTHONPATH=${GITR}/diss/pysalt:${GITR}/diss/task3:$PYTHOPATH
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     intel_arch=""
