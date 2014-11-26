@@ -86,6 +86,7 @@ alias py='python'
 alias piu='py setup.py install --user'
 alias pi='py setup.py install'
 alias pib='py setup.py build'
+alias pympi='mpirun -n `nproc` python'
 
 alias di='sudo dnf install'
 alias dnu='sudo dnf update'
