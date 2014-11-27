@@ -143,7 +143,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export BOOST_SRC_PATH=$MYSRCDIR/boost_1_52_0
 
-    export NETGENDIR=~/software/local/bin #netgen needs this envvar
+    export NETGENDIR=~/local/bin #netgen needs this envvar
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
 
@@ -151,8 +151,8 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     # prepath $HOME/software/pycharm-community-3.4.1/bin
     prepath $EMBINPATH
-    prepath $HOME/software/local/bin
     prepath $DOTFPATH/bin
+    prepath $HOME/local/bin
     prepath $HOME/.local/bin
     prepath $HOME/bin
     prepath $HOME/.cabal/bin

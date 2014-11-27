@@ -46,9 +46,9 @@ plugins=(tmux sudo)
 source $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
+. ~/.zsh/alias
 . ~/.zsh/function
 . ~/.zsh/fenics
-. ~/.zsh/alias
 . ~/.zsh/keybindings
 # . ~/.zsh/prompt
 . ~/.zsh/emacs

@@ -66,7 +66,6 @@ alias ec="$consoleemacs"
 #alias emacs="$guiemacs"
 
 alias in='ipython notebook'
-alias env3k='enconda; workon py3k'
 
 alias svim='sudo /usr/bin/vim'
 alias v='vim'
@@ -106,6 +105,7 @@ fi
 if [ "$HOSTNAME" = "cobra" ]; then
     hash -d t3=${GITR}/diss/task3
     hash -d pys=${GITR}/diss/pysalt
+    alias ng='netgen'
 fi
 
 DOTFDIR=${GITR}/dotfiles
