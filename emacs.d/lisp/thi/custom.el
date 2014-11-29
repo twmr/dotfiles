@@ -52,7 +52,8 @@
     (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
  '(safe-local-variable-values
    (quote
-    ((whitespace-style face tabs trailing lines-tail)
+    ((encoding . utf-8)
+     (whitespace-style face tabs trailing lines-tail)
      (TeX-master)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
            (add-hook
