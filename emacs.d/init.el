@@ -99,6 +99,7 @@
         fill-column-indicator
         ethan-wspace
         lua-mode
+        paredit
         ;;minimap
         evil-leader
         evil
