@@ -7,22 +7,6 @@
 (define-key projectile-mode-map (kbd "s-s") 'projectile-persp-switch-project)
 
 (defvar thi::directory-list '(
-                              "~/gitrepos/POC-scripts/branches/version2.0"
-                              "~/gitrepos/pyspu/branches/version0.8"
-
-                              "~/gitrepos/tools"
-                              "~/gitrepos/tools/future"
-                              "~/gitrepos/tools/future/server_configs/coldfire"
-                              "~/gitrepos/tools/alpha"
-                              "~/gitrepos/tools/alpha/server_configs/coldfire"
-                              "~/gitrepos/tools/beta1"
-                              "~/gitrepos/tools/beta1/server_configs/coldfire"
-                              "~/gitrepos/tools/beta2"
-                              "~/gitrepos/tools/beta2/server_configs/coldfire"
-
-                              "~/gitrepos/imshelperscripts"
-                              "~/gitrepos/hwsimuenv"
-
                               "~/gitrepos/dotfiles/emacs.d"
                               "~/gitrepos/dotfiles/emacs.d/thi"
                               "~/gitrepos/dotfiles/emacs.d/el-get"
