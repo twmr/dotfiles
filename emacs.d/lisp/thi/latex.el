@@ -9,7 +9,7 @@
 (setq TeX-command-force "")
 (add-hook 'LaTeX-mode-hook
           (lambda ()
-            ; 'a' for ask, change to anything you want
+            ;; 'a' for ask, change to anything you want
             (define-key LaTeX-mode-map "\C-c\C-a"
               (lambda (arg) (interactive "P")
                 (let ((TeX-command-force nil))
@@ -59,8 +59,8 @@
 (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
 (add-hook 'LaTeX-mode-hook 'TeX-PDF-mode)
 (eval-after-load "tex"
- '(add-to-list 'TeX-expand-list
-              '("%u" okular-make-url)))
+  '(add-to-list 'TeX-expand-list
+                '("%u" okular-make-url)))
 
 (defun okular-make-url () (concat
                "file://"

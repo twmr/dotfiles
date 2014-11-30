@@ -174,7 +174,7 @@
 (load "thi/mail")
 (load "thi/ccmode")
 ;; I don't need a latex setup atm
-;;(load "thi/latex")
+(load "thi/latex")
 (load "thi/recentf")
 ;;(load "thi/nxml")
 (load "thi/compilation")
