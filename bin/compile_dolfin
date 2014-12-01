@@ -57,7 +57,7 @@ cmakeargs = [
     '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
     '..']
 if debug:
-    cmakeargs.instert(0, '-DCMAKE_BUILD_TYPE=Debug')
+    cmakeargs.insert(0, '-DCMAKE_BUILD_TYPE=Debug')
 cmakeargs = list(map(os.path.expandvars, cmakeargs))
 
 # make sure to patch CMakeLists.txt (
