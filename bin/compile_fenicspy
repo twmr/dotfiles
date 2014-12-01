@@ -1,0 +1,15 @@
+#!/bin/zsh
+# TODO env var
+fenrepos=~/gitrepos/fenics/dev
+
+for x in ffc fiat instant ufl;
+do
+    echo $x
+    (cd $fenrepos/$x && echo `pwd` && git pull)
+done
+
+for x in ffc fiat instant ufl;
+do
+    echo "python setup.py install in $x"
+    (cd $fenrepos/$x && python setup.py install)
+done
