@@ -11,7 +11,6 @@ function fenicsswitch() {
     fi
 
     echo "switching to fenics $ver"
-    enconda
 
     if [ $ver = 'dev' ]; then
         devdir=${GITR}/fenics/dev
@@ -29,20 +28,22 @@ function fenicsswitch() {
         export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
         export DOLFIN_ARCH="build_fed_openmpi"
         export BEMPP_ARCH="build_dev" # atm builds v2.0
+        export FEN=$devdir
     elif [ $ver = 'devpy27' ]; then
         devdir=${GITR}/fenics/dev
         export PETSC_DIR=$devdir/petsc
         export SLEPC_DIR=$devdir/slepc
+        # export PETSC_ARCH="arch_linux64_py27_debug"
         export PETSC_ARCH="arch_linux64_py27"
         export DOLFIN_DIR=$devdir/dolfin
         export BEMPP_DIR=$devdir/bempp
-        if [ "$HOSTNAME" = "cobra" ]; then
-            source activate py27_fenics15dev_petsc35
-        fi
+        source activate py27
         #conda info -e
         export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
         export BEMPP_ARCH="build_v2.0"
-        export DOLFIN_ARCH="build_fed_openmpi_py27"
+        #export DOLFIN_ARCH="build_openmpi_py27"
+        export DOLFIN_ARCH="build_openmpi_py27_debug"
+        export FEN=$devdir
     elif [ $ver = '14' ]; then
         # TODO
         source activate py27_fenics14_petsc34
@@ -52,33 +53,34 @@ function fenicsswitch() {
     #     export PYTHONPATH=$CONDA_ENV_DIR/$CONDA_DEFAULT_ENV/bempp/python:$PYTHONPATH
     # fi
 
-    echo "loading openmpi module"
-    module load mpi/openmpi-`uname -p`
-    echo "done"
-
     echo "checking installed conda packages"
     pkgs=`conda list`
 
     # otherwise find_package(Qt4) in cmake fails
-    (echo $pkgs | grep "^qt " > /dev/null) && \
+    echo $pkgs | grep "^qt " > /dev/null && \
         echo "!!!!!DANGER qt in conda installed!!!!" && \
         conda remove --yes qt
 
     # see https://github.com/ContinuumIO/anaconda-issues/issues/152
-    (echo $pkgs | grep "^readline " > /dev/null) && \
+    echo $pkgs | grep "^readline " > /dev/null && \
         echo "!!!!!DANGER readline in conda installed!!!!" && \
         conda remove --yes readline
 
     # (for mshr)
-    (echo $pkgs | grep "^xz " > /dev/null) && \
+    echo $pkgs | grep "^xz " > /dev/null && \
         echo "!!!!!DANGER xz in conda installed!!!!" && \
         conda remove --yes xz
 
     # fixes compilation of dolfin.Expression('3')
     # (for vtk)
-    (echo $pkgs | grep "^vtk " > /dev/null) && \
+    echo $pkgs | grep "^vtk " > /dev/null && \
         echo "!!!!!DANGER vtk in conda installed!!!!" && \
-        conda remove --yes xz
+        conda remove --yes vtk
+
+    # fixes reading of xml.gz meshfiles in parallel on vsc2 (xmlSAXUserParseFile)
+    echo $pkgs | grep "^zlib " > /dev/null && \
+        echo "!!!!!DANGER zlib in conda installed!!!!" && \
+        conda remove --yes zlib
 
     echo "\nPYTHONPATH:"
     pp $PYTHONPATH
