@@ -60,25 +60,30 @@ function fenicsswitch() {
     pkgs=`conda list`
 
     # otherwise find_package(Qt4) in cmake fails
-    (echo $pkgs | grep "^qt " > /dev/null) && \
+    echo $pkgs | grep "^qt " > /dev/null && \
         echo "!!!!!DANGER qt in conda installed!!!!" && \
         conda remove --yes qt
 
     # see https://github.com/ContinuumIO/anaconda-issues/issues/152
-    (echo $pkgs | grep "^readline " > /dev/null) && \
+    echo $pkgs | grep "^readline " > /dev/null && \
         echo "!!!!!DANGER readline in conda installed!!!!" && \
         conda remove --yes readline
 
     # (for mshr)
-    (echo $pkgs | grep "^xz " > /dev/null) && \
+    echo $pkgs | grep "^xz " > /dev/null && \
         echo "!!!!!DANGER xz in conda installed!!!!" && \
         conda remove --yes xz
 
     # fixes compilation of dolfin.Expression('3')
     # (for vtk)
-    (echo $pkgs | grep "^vtk " > /dev/null) && \
+    echo $pkgs | grep "^vtk " > /dev/null && \
         echo "!!!!!DANGER vtk in conda installed!!!!" && \
-        conda remove --yes xz
+        conda remove --yes vtk
+
+    # fixes reading of xml.gz meshfiles in parallel on vsc2 (xmlSAXUserParseFile)
+    echo $pkgs | grep "^zlib " > /dev/null && \
+        echo "!!!!!DANGER zlib in conda installed!!!!" && \
+        conda remove --yes zlib
 
     echo "\nPYTHONPATH:"
     pp $PYTHONPATH
