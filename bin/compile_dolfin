@@ -11,6 +11,8 @@ print("DOLFIN_DIR %s" % ddir)
 print("DOLFIN_ARCH %s" % darch)
 os.chdir(os.path.join(ddir, darch))
 
+debug = 'debug' in darch.lower()
+print("DEBUG BUILD %s" % debug)
 
 fedora_deps = [
     'eigen3-devel',
@@ -54,6 +56,8 @@ cmakeargs = [
     '-DDOLFIN_ENABLE_MPI=1',
     '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
     '..']
+if debug:
+    cmakeargs.instert(0, '-DCMAKE_BUILD_TYPE=Debug')
 cmakeargs = list(map(os.path.expandvars, cmakeargs))
 
 # make sure to patch CMakeLists.txt (

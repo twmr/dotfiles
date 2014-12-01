@@ -12,6 +12,8 @@ print("PETSC_DIR %s" % pdir)
 print("PETSC_ARCH %s" % parch)
 os.chdir(pdir)
 
+debug = 'debug' in parch.lower()
+print("DEBUG BUILD %s" % debug)
 
 parser = argparse.ArgumentParser(
     description='helper script to compile petsc on fedora')
@@ -53,8 +55,7 @@ configure_options = [
     # 'CXXOPTFLAGS="-O3 -fopenmp"',
     # 'COPTFLAGS="-O3 -fopenmp"',
     # 'FOPTFLAGS="-03 -fopenmp"',
-    '--with-debugging=0',  # NOTE: in a debug build openmp parallelization
-                           # is disabled!
+    '--with-debugging=%d' % int(debug),
     'PETSC_ARCH=' + parch,
 ]
 
@@ -81,7 +82,6 @@ if not args.assume_yes:
     rawint = raw_input('\n' + '#'*80 +
                        '\ncall make to compile petsc? [Yn] ')
 if rawint in ['y', 'Y', '']:
-
     make_args = ['PETSC_DIR=' + pdir,
                  'PETSC_ARCH=' + parch,
                  'all']
