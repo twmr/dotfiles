@@ -14,6 +14,8 @@ os.chdir(pdir)
 
 debug = 'debug' in parch.lower()
 print("DEBUG BUILD %s" % debug)
+complextype = 'complex' in parch.lower()
+print("PETSCSCALAR=complex:  %s" % complextype)
 
 parser = argparse.ArgumentParser(
     description='helper script to compile petsc on fedora')
@@ -45,7 +47,7 @@ configure_options = [
     '--download-hypre',
     '--download-pastix',
     '--with-c++-support=1',
-    '--with-scalar-type=real',
+    '--with-scalar-type=%s' % ('complex' if complextype else 'real'),
     '--with-x11=0',
     '--with-clanguage=cxx',
     '--with-shared-libraries=1',
