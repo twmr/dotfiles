@@ -93,49 +93,51 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 
-if hostname == "pc-52-rh" then
+if hostname == "dirac" then
    monitors = {
-      prim = 1,
-      second = 2
+      -- index corresponds to a screen in the range 1..screen.count()
+      left = 1,
+      right = 2
    }
    tags = {
-      namessecond  = { "1main","2emacs","3web","4scripts","5jeol",
-                       "6remote","7vm","8keller","9brunn", "10tmp",
-                       "11nemo", "12tmp", "13tmp" },
-      names  = { 1,2,3,4,5,6,7,8,9 }
+      namesright  = { 1,2,3,4,5,6,7,"mpi",9 },
+      namesleft  = { "1main","2emacs","3web","4scripts","5jeol",
+                     "6remote","7vm","8keller","9brunn", "10tmp",
+                     "11nemo", "12tmp", "13tmp" }
    }
    lockcmd = "xscreensaver-command -lock"
-   defaultlayoutidmon2 = 1 --4
-   defaultlayoutidmon1 = 1
+   defaultlayoutidmonleft = 1 --4
+   defaultlayoutidmonright = 1
 else
    monitors = {
-      prim = 2,
-      second = 1
+      left = 2,
+      right = 1
    }
    tags = {
-      names  = { "doc","vsc","web","qtc", "mail", "nonuni",7,8,9 },
-      namessecond  = { "vsc",2,3,4,5,6,7,8,9 }
+      namesleft  = { "doc","vsc","web","qtc", "mail", "nonuni",7,8,9 },
+      namesright  = { "vsc",2,3,4,5,6,7,8,9 }
    }
    lockcmd = "gnome-screensaver-command -l"
-   defaultlayoutidmon2 = 1
-   defaultlayoutidmon1 = 1
+   defaultlayoutidmonleft = 1
+   defaultlayoutidmonright = 1
 end
 
 if screen.count() == 1 then
-   monitors.prim = 1
-   monitors.seond = 1
+   monitors.left = 1
+   monitors.right = 1
    tags = {
-      namessecond  = { "doc","vsc","web","qtc", "nonuni",6,7,8,9}
+      namesleft = { "doc","vsc","web","qtc","other",6,7,8,9}
    }
 end
 
 for s = 1, screen.count() do
-   if s > 1 then
-     tags[s] = awful.tag(tags.names, s, layouts[defaultlayoutidmon2])
+   if s == monitors.left then
+     tags[s] = awful.tag(tags.namesleft, s, layouts[defaultlayoutidmonleft])
    else
-     tags[s] = awful.tag(tags.namessecond, s, layouts[defaultlayoutidmon1])
+     tags[s] = awful.tag(tags.namesright, s, layouts[defaultlayoutidmonright])
    end
    awful.tag.setproperty(tags[s][5], "mwfact", 0.13)
+   -- awful.layout.set(awful.layout.suit.fair, tags[2][8])
 end
 -- }}}
 
@@ -297,8 +299,8 @@ globalkeys = awful.util.table.join(
             end
         end),
 
-    awful.key({ modkey }, "]", function () awful.screen.focus(monitors.second) end),
-    awful.key({ modkey }, "[", function () awful.screen.focus(monitors.prim) end),
+    awful.key({ modkey }, "]", function () awful.screen.focus(monitors.right) end),
+    awful.key({ modkey }, "[", function () awful.screen.focus(monitors.left) end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () exec(settings.term)       end),
@@ -613,9 +615,15 @@ awful.rules.rules = {
     --   properties = { floating = true } },
     -- { rule = { class = "gimp" },
     --   properties = { floating = true } },
-   --  { rule = { class = "Firefox", instance = "Navigator" },
-   --    properties = { tag = tags[monitors.prim][3] }
-   --  },
+    -- { rule = { class = "Firefox", instance = "Navigator" },
+    --   properties = { tag = tags[monitors.prim][3] }
+    -- },
+    { rule = { class = "XTerm", instance = "xterm" },
+      properties = { tag = tags[monitors.right][8] }
+    },
+    { rule = { class = "URxvt", instance = "mpi" },
+      properties = { tag = tags[monitors.right][8] }
+    },
     -- { rule = { instance = "chromium-browser" },
       -- properties = { tag = tags[monitors.prim][3] } },
     -- { rule = { instance = "google-chrome" },
@@ -648,9 +656,9 @@ awful.rules.rules = {
    --  -- { rule = { class = "Gnome-Control-Center" instance = "gnome-control-center" },
    --  --  properties = { floating = true }, callback = awful.titlebar.add
    --  --},
-   --  { rule = { class = "Virt-manager", instance = "virt-manager" },
-   --    properties = { floating = true }
-   --  },
+    { rule = { class = "Toplevel"},
+      properties = { floating = true }
+    },
    -- { rule = { class = "Thunderbird", instance = "Mail" },
    --   properties = { tag = tags[monitors.second][1] }
    -- },
