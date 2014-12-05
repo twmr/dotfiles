@@ -52,6 +52,7 @@ alias qtc='qtcreator'
 alias mat='matlab -nosplash'
 alias cmat='matlab -nodesktop -nosplash -nojvm'
 
+alias i='noglob i'
 
 embin="/usr/bin/emacs"
 if [ "$EMBINPATH" ]; then
