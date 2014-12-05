@@ -45,7 +45,7 @@ configure_options = [
     '--download-scotch',
     '--download-ptscotch',
     '--download-hypre',
-    '--download-pastix',
+    '--download-pastix',  # see petsc issue 84
     '--with-c++-support=1',
     '--with-scalar-type=%s' % ('complex' if complextype else 'real'),
     '--with-x11=0',
@@ -54,12 +54,18 @@ configure_options = [
     '--with-fortran-kernels=1',
     '--download-sowing',
     '--with-c2html=0',
-    # 'CXXOPTFLAGS="-O3 -fopenmp"',
-    # 'COPTFLAGS="-O3 -fopenmp"',
-    # 'FOPTFLAGS="-03 -fopenmp"',
     '--with-debugging=%d' % int(debug),
     'PETSC_ARCH=' + parch,
 ]
+
+performance_flags = True
+if performance_flags:
+    # TODO -fopenmp? -flto
+    configure_options.extend([
+        'CXXOPTFLAGS=-O3 -march=native',
+        'COPTFLAGS=-O3 -march=native',
+        'FOPTFLAGS=-O3 -march=native'])
+
 
 # use the 'module' command in fedora to load settings for the desired mpi
 # library
