@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 function fenicsswitch() {
-    choices=(dev devpy27 v14)
+    choices=(dev devpy27 devpy27complex v14)
 
     ver=$1
 
@@ -29,11 +29,15 @@ function fenicsswitch() {
         export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
         export DOLFIN_ARCH="build_fed_openmpi"
         export BEMPP_ARCH="build_dev" # atm builds v2.0
-    elif [ $ver = 'devpy27' ]; then
+    elif [ $ver = 'devpy27' -o $ver = 'devpy27complex' ]; then
         devdir=${GITR}/fenics/dev
         export PETSC_DIR=$devdir/petsc
         export SLEPC_DIR=$devdir/slepc
-        export PETSC_ARCH="arch_linux64_py27"
+        if [ $ver = 'devpy27complex' ]; then
+            export PETSC_ARCH="arch_linux64_py27_complex"
+        else
+            export PETSC_ARCH="arch_linux64_py27"
+        fi
         export DOLFIN_DIR=$devdir/dolfin
         export BEMPP_DIR=$devdir/bempp
         if [ "$HOSTNAME" = "cobra" ]; then
@@ -43,6 +47,7 @@ function fenicsswitch() {
         export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
         export BEMPP_ARCH="build_v2.0"
         export DOLFIN_ARCH="build_fed_openmpi_py27"
+        # export DOLFIN_ARCH="build_fed_openmpi_py27_debug"
     elif [ $ver = '14' ]; then
         # TODO
         source activate py27_fenics14_petsc34
