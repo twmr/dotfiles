@@ -85,6 +85,14 @@ function fenicsswitch() {
         echo "!!!!!DANGER zlib in conda installed!!!!" && \
         conda remove --yes zlib
 
+    # parallel support not compiled into hdf5 lib
+    echo $pkgs | grep "^hdf5 " > /dev/null && \
+        echo "!!!!!DANGER hdf5 in conda installed!!!!" && \
+        conda remove --yes hdf5
+    echo $pkgs | grep "^h5py " > /dev/null && \
+        echo "!!!!!DANGER h5py in conda installed!!!!" && \
+        conda remove --yes h5py
+
     echo "\nPYTHONPATH:"
     pp $PYTHONPATH
 
