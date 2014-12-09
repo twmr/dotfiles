@@ -62,13 +62,14 @@
   '(add-to-list 'TeX-expand-list
                 '("%u" okular-make-url)))
 
-(defun okular-make-url () (concat
-               "file://"
-               (expand-file-name (funcall file (TeX-output-extension) t)
-                       (file-name-directory (TeX-master-file)))
-               "#src:"
-               (TeX-current-line)
-               (TeX-current-file-name-master-relative)))
+(defun okular-make-url ()
+  (concat
+   "file://"
+   (expand-file-name (funcall file (TeX-output-extension) t)
+                     (file-name-directory (TeX-master-file)))
+   "#src:"
+   (TeX-current-line)
+   (TeX-current-file-name-master-relative)))
 
 (setq TeX-view-program-list '(("Okular" "okular --unique %u")))
 (setq TeX-view-program-selection '((output-pdf "Okular") (output-dvi "Okular")))
