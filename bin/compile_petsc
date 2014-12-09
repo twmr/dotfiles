@@ -45,7 +45,7 @@ configure_options = [
     '--download-scotch',
     '--download-ptscotch',
     '--download-hypre',
-    '--download-pastix',  # see petsc issue 84
+    # '--download-pastix',  # see petsc issue 84
     '--with-c++-support=1',
     '--with-scalar-type=%s' % ('complex' if complextype else 'real'),
     '--with-x11=0',
@@ -57,6 +57,7 @@ configure_options = [
     '--with-debugging=%d' % int(debug),
     'PETSC_ARCH=' + parch,
 ]
+configure_options = [x for x in configure_options if x is not None]
 
 performance_flags = True
 if performance_flags:

@@ -9,10 +9,15 @@ ddir = os.environ['DOLFIN_DIR']
 darch = os.environ['DOLFIN_ARCH']
 print("DOLFIN_DIR %s" % ddir)
 print("DOLFIN_ARCH %s" % darch)
-os.chdir(os.path.join(ddir, darch))
+destdir = os.path.join(ddir, darch)
+if not os.path.exists(destdir):
+    os.makedirs(destdir)
+
+os.chdir(destdir)
 
 debug = 'debug' in darch.lower()
 print("DEBUG BUILD %s" % debug)
+
 
 fedora_deps = [
     'eigen3-devel',
@@ -28,7 +33,7 @@ fedora_deps = [
     'vtk-python',
     'cppunit',
     'qt-devel',
-    'jsoncpp',  # also call this:
+    'jsoncpp',
 ]
 
 # as swig 3.0.3 was not yet released you have to compile the master branch

@@ -5,7 +5,7 @@ fenrepos=~/gitrepos/fenics/dev
 for x in ffc fiat instant ufl;
 do
     echo $x
-    (cd $fenrepos/$x && echo `pwd` && git pull)
+    (cd $fenrepos/$x && echo `pwd` && git pull && git clean -d -f -x)
 done
 
 for x in ffc fiat instant ufl;
