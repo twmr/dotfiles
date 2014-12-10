@@ -4,6 +4,7 @@ from __future__ import print_function
 import sys
 import os
 import pexpect
+from getpass import getuser
 
 ddir = os.environ['DOLFIN_DIR']
 darch = os.environ['DOLFIN_ARCH']
@@ -18,6 +19,7 @@ os.chdir(destdir)
 debug = 'debug' in darch.lower()
 print("DEBUG BUILD %s" % debug)
 
+username = getuser()
 
 fedora_deps = [
     'eigen3-devel',
@@ -56,8 +58,10 @@ fedora_deps = [
 print('(make sure that the following deps are installed\n'
       'di ' + ' '.join(fedora_deps))
 
+enable_vtk = not username == 'jenkins'
+
 cmakeargs = [
-    '-DDOLFIN_ENABLE_VTK=1',
+    '-DDOLFIN_ENABLE_VTK=%d' % int(enable_vtk),
     '-DDOLFIN_ENABLE_MPI=1',
     '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
     '..']
