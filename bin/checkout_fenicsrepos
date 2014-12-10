@@ -9,7 +9,7 @@ bbrepos = ['petsc/petsc@maint',
            'fenics-project/ufl',
            'fenics-project/fiat',
            'fenics-project/dolfin',
-           'benjamink/mshr']
+           'benjamik/mshr']
 
 for repo in bbrepos:
     if '@' in repo:
