@@ -1,0 +1,22 @@
+#!/usr/bin/env python
+from subprocess import check_output
+
+bbrepos = ['petsc/petsc@maint',
+           'petsc/petsc4py@maint',
+           'slepc/slepc@maint',
+           'fenics-project/instant',
+           'fenics-project/ffc',
+           'fenics-project/ufl',
+           'fenics-project/fiat',
+           'fenics-project/dolfin',
+           'benjamink/mshr']
+
+for repo in bbrepos:
+    if '@' in repo:
+        repo, branch = repo.split('@')
+        cmd = ['git', 'clone', '--depth=1', '-b', branch,
+               'git@bitbucket.com:%s' % repo]
+    else:
+        cmd = ['git', 'clone', '--depth=1', 'git@bitbucket.com:%s' % repo]
+    print(' '.join(cmd))
+    check_output(cmd)
