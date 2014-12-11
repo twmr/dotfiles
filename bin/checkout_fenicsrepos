@@ -1,0 +1,41 @@
+#!/usr/bin/env python
+import os
+from subprocess import check_output
+
+bbrepos = ['petsc/petsc@maint',
+           'petsc/petsc4py@maint',
+           'slepc/slepc@maint',
+           'fenics-project/instant',
+           'fenics-project/ffc',
+           'fenics-project/ufl',
+           'fenics-project/fiat',
+           'fenics-project/dolfin',
+           'benjamik/mshr']
+
+for repo in bbrepos:
+    if '@' in repo:
+        repo, branch = repo.split('@')
+        cmd = ['git', 'clone', '--depth=1', '-b', branch,
+               'git@bitbucket.com:%s' % repo]
+    else:
+        cmd = ['git', 'clone', '--depth=1', 'git@bitbucket.com:%s' % repo]
+    if os.path.exists(repo.split('/')[-1]):
+        print("skipping %s because it already exists" % repo)
+        continue
+    print(' '.join(cmd))
+    check_output(cmd)
+
+ghrepos = ['bempp/bempp@release_2.0']
+
+for repo in ghrepos:
+    if '@' in repo:
+        repo, branch = repo.split('@')
+        cmd = ['git', 'clone', '--depth=1', '-b', branch,
+               'https://github.com/%s' % repo]
+    else:
+        cmd = ['git', 'clone', '--depth=1', 'https://github.com/%s' % repo]
+    if os.path.exists(repo.split('/')[-1]):
+        print("skipping %s because it already exists" % repo)
+        continue
+    print(' '.join(cmd))
+    check_output(cmd)

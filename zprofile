@@ -121,12 +121,15 @@ elif [ "$HOSTNAME" = "dirac" ]; then
     prepath ${EMBINPATH}
     export DDIR=${GITR}/diss
 
-    export NETGENDIR=~/software/local/bin
+    export NETGENDIR=/opt/ngngs/bin
     export PYTHONPATH=$GITR/task3:$DDIR/pysalt:${GITR}/cf-fem-lib/tools/in2d_creator_scripts:$PYTHONPATH
 
-    prepath $HOME/software/local/bin
+    # prepath $HOME/software/local/bin
+    prepath $NETGENDIR
     prepath $GITR/task3/scripts
     preldlpath $HOME/software/local/lib
+
+    export CONDA_ENV_DIR=$HOME/miniconda/envs
 
     export MAKEOPTS='-j`nproc`'
 

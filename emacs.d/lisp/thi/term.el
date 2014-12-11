@@ -2,16 +2,15 @@
 ;; see http://stackoverflow.com/questions/18278310/emacs-ansi-term-not-tab-completing
 (add-hook 'term-mode-hook
           (lambda () (progn
-                 (setq yas-dont-activate t)
-                 (setq global-hl-line-mode nil) ;; disable hl-line-mode
-                 (goto-address-mode) ;; clickable urls
-                 )))
-
+                  (setq yas-dont-activate t)
+                  (setq global-hl-line-mode nil) ;; disable hl-line-mode
+                  (goto-address-mode) ;; clickable urls
+                  (evil-mode -1)
+                  )))
 
 (define-key term-mode-map (kbd "M-x") 'smex)
 (define-key term-raw-map (kbd "M-x") 'smex)
 (define-key term-raw-map (kbd "M-p") 'ace-window)
-
 
 ;; force ansi-term to be utf-8 after it launches
 (defadvice ansi-term (after advise-ansi-term-coding-system activate)

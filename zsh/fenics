@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 function fenicsswitch() {
-    choices=(dev devpy27 v14)
+    choices=(dev devpy27 devpy27complex v14)
 
     ver=$1
 
@@ -29,12 +29,15 @@ function fenicsswitch() {
         export DOLFIN_ARCH="build_fed_openmpi"
         export BEMPP_ARCH="build_dev" # atm builds v2.0
         export FEN=$devdir
-    elif [ $ver = 'devpy27' ]; then
+    elif [ $ver = 'devpy27' -o $ver = 'devpy27complex' ]; then
         devdir=${GITR}/fenics/dev
         export PETSC_DIR=$devdir/petsc
         export SLEPC_DIR=$devdir/slepc
-        # export PETSC_ARCH="arch_linux64_py27_debug"
-        export PETSC_ARCH="arch_linux64_py27"
+        if [ $ver = 'devpy27complex' ]; then
+            export PETSC_ARCH="arch_linux64_py27_complex"
+        else
+            export PETSC_ARCH="arch_linux64_py27"
+        fi
         export DOLFIN_DIR=$devdir/dolfin
         export BEMPP_DIR=$devdir/bempp
         source activate py27
@@ -81,6 +84,14 @@ function fenicsswitch() {
     echo $pkgs | grep "^zlib " > /dev/null && \
         echo "!!!!!DANGER zlib in conda installed!!!!" && \
         conda remove --yes zlib
+
+    # parallel support not compiled into hdf5 lib
+    echo $pkgs | grep "^hdf5 " > /dev/null && \
+        echo "!!!!!DANGER hdf5 in conda installed!!!!" && \
+        conda remove --yes hdf5
+    echo $pkgs | grep "^h5py " > /dev/null && \
+        echo "!!!!!DANGER h5py in conda installed!!!!" && \
+        conda remove --yes h5py
 
     echo "\nPYTHONPATH:"
     pp $PYTHONPATH

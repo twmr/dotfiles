@@ -129,6 +129,7 @@
         ("\\.F90\\'" . f90-mode)
         ("\\.m\\'" . matlab-mode)
         ("\\.json\\'" . js2-mode)
+        ("\\.job\\'" . shell-script-mode)
         ("gitconfig$" . gitconfig-mode)
         ("\\.\\(md\\|markdown\\)\\'" . markdown-mode)
         ("bash\\(rc\\|_profile\\)$" . shell-script-mode)

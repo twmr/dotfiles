@@ -36,7 +36,8 @@ while line:
     line = p.readline()
 
 
-bempy = os.path.expandvars('$CONDA_ENV_DIR/$CONDA_DEFAULT_ENV/bempp/python')
+# bempy = os.path.expandvars('$CONDA_ENV_DIR/$CONDA_DEFAULT_ENV/bempp/python')
+bempy = os.path.expandvars('$HOME/bempp/python')
 pypacks = ['bempp', 'PyTrilinos']
 spdir = os.path.expandvars(
     '$CONDA_ENV_DIR/$CONDA_DEFAULT_ENV/lib/python2.7/site-packages')

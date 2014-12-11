@@ -451,9 +451,8 @@ function cfmatlab() {
 
 function ipycomp() {
     (enconda &&
-     source activate py3k &&
+     workon py3k &&
      echo `python --version` &&
      cd ${GITR}/ipython &&
-     git pull &&
-     python ./setup.py build && sudo `which python` ./setup.py install)
+     git pull && pi)
 }

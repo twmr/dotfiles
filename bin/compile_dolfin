@@ -4,15 +4,22 @@ from __future__ import print_function
 import sys
 import os
 import pexpect
+from getpass import getuser
 
 ddir = os.environ['DOLFIN_DIR']
 darch = os.environ['DOLFIN_ARCH']
 print("DOLFIN_DIR %s" % ddir)
 print("DOLFIN_ARCH %s" % darch)
-os.chdir(os.path.join(ddir, darch))
+destdir = os.path.join(ddir, darch)
+if not os.path.exists(destdir):
+    os.makedirs(destdir)
+
+os.chdir(destdir)
 
 debug = 'debug' in darch.lower()
 print("DEBUG BUILD %s" % debug)
+
+username = getuser()
 
 fedora_deps = [
     'eigen3-devel',
@@ -28,7 +35,7 @@ fedora_deps = [
     'vtk-python',
     'cppunit',
     'qt-devel',
-    'jsoncpp',  # also call this:
+    'jsoncpp',
 ]
 
 # as swig 3.0.3 was not yet released you have to compile the master branch
@@ -51,13 +58,15 @@ fedora_deps = [
 print('(make sure that the following deps are installed\n'
       'di ' + ' '.join(fedora_deps))
 
+enable_vtk = not username == 'jenkins'
+
 cmakeargs = [
-    '-DDOLFIN_ENABLE_VTK=1',
+    '-DDOLFIN_ENABLE_VTK=%d' % int(enable_vtk),
     '-DDOLFIN_ENABLE_MPI=1',
     '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
     '..']
 if debug:
-    cmakeargs.instert(0, '-DCMAKE_BUILD_TYPE=Debug')
+    cmakeargs.insert(0, '-DCMAKE_BUILD_TYPE=Debug')
 cmakeargs = list(map(os.path.expandvars, cmakeargs))
 
 # make sure to patch CMakeLists.txt (

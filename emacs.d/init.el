@@ -14,46 +14,6 @@
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 
-(require 'package)
-(package-initialize)
-
-(when (not package-archive-contents)
-  (package-refresh-contents))
-
-(defvar prelude-packages
-  '(json-mode
-    solarized-theme
-    smart-mode-line
-    ace-window
-    project-persist
-    undo-tree
-    perspective
-    moz-controller
-    ;; moe-theme
-    aggressive-indent
-    )
-  "A list of packages to ensure are installed at launch.")
-
-;; TODO rewrite prelude-packages-installed-p s.t. it does not required "cl"
-(require 'cl-lib)
-(require 'cl)
-(defun prelude-packages-installed-p ()
-  (loop for p in prelude-packages
-        when (not (package-installed-p p)) do (return nil)
-        finally (return t)))
-
-(unless (prelude-packages-installed-p)
-  ;; check for new packages (package versions)
-  (message "%s" "Emacs Prelude is now refreshing its package database...")
-  (package-refresh-contents)
-  (message "%s" " done.")
-  ;; install the missing packages
-  (dolist (p prelude-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
-
-
-(package-initialize)
 
 ;; http://comments.gmane.org/gmane.emacs.vim-emulation/1700
 (setq evil-want-C-i-jump nil)
@@ -72,6 +32,7 @@
         git-modes
         magit
         magit-filenotify
+        perspective
         ibuffer-perspective
         projectile
         direx
@@ -87,6 +48,7 @@
         yaml-mode
         expand-region
         ace-jump-mode
+        ace-window
         yasnippet
         flx
         smex
@@ -144,10 +106,43 @@
 
 (add-to-list 'el-get-recipe-path (concat thi::config-dir "/recipes"))
 
-;; (el-get 'sync)
-;; (setq el-get-is-lazy t)
-;; (setq el-get-byte-compile nil)
 (el-get 'sync thi::packages)
+
+(require 'package)
+(package-initialize)
+
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(defvar prelude-packages
+  '(json-mode
+    solarized-theme
+    smart-mode-line
+    auctex
+    project-persist
+    undo-tree
+    moz-controller
+    aggressive-indent
+    )
+  "A list of packages to ensure are installed at launch.")
+
+;; TODO rewrite prelude-packages-installed-p s.t. it does not required "cl"
+(require 'cl-lib)
+(require 'cl)
+(defun prelude-packages-installed-p ()
+  (loop for p in prelude-packages
+        when (not (package-installed-p p)) do (return nil)
+        finally (return t)))
+
+(unless (prelude-packages-installed-p)
+  ;; check for new packages (package versions)
+  (message "%s" "Emacs Prelude is now refreshing its package database...")
+  (package-refresh-contents)
+  (message "%s" " done.")
+  ;; install the missing packages
+  (dolist (p prelude-packages)
+    (when (not (package-installed-p p))
+      (package-install p))))
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
