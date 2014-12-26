@@ -146,7 +146,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export BOOST_SRC_PATH=$MYSRCDIR/boost_1_52_0
 
-    export NETGENDIR=~/local/bin #netgen needs this envvar
+    export NETGENDIR=/opt/ngngs/bin
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
 
@@ -161,6 +161,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $HOME/.cabal/bin
     prepath $HOME/.cask/bin
     prepath $GITR/julia
+    prepath $NETGENDIR
 
     export PYTHONPATH=${GITR}/diss/pysalt:${GITR}/diss/task3:$PYTHOPATH
 
