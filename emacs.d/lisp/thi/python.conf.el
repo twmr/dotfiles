@@ -1,7 +1,7 @@
 ;; ;; the following code does not work when we run emacs from a remove pc (ssh)
 
-(setq python-shell-interpreter "ipython"
-      python-shell-interpreter-args "-i")
+;; (setq python-shell-interpreter "ipython"
+;;       python-shell-interpreter-args "-i")
 
 (setq python-skeleton-autoinsert t)
 
