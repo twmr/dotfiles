@@ -26,6 +26,7 @@ call =jedi:install-server= from within emacs
 *
 ** latex 
 =di emacs-auctex= (installs tex-preview)
+=di texlive-chktex-bin= (flycheck checker)
 * Key Bindings
 ** IDO Mode
 =C-c C-f= ido open file 
