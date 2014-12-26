@@ -9,7 +9,7 @@
 
 (define-key projectile-mode-map (kbd "s-s") 'projectile-persp-switch-project)
 
-(setq projectile-switch-project-action 'projectile-find-dir)
+;; (setq projectile-switch-project-action 'projectile-find-dir)
 ;; With this setting, once you have selected your project, you will remain in Projectile's completion system to select a sub-directory of your project, and then that sub-directory is opened for you in a dired buffer. If you use this setting, then you will probably also want to set
 (setq projectile-find-dir-includes-top-level t)
 
