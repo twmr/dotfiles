@@ -204,5 +204,6 @@
 ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
 (add-hook 'after-init-hook #'global-company-mode)
 (add-hook 'after-init-hook #'global-discover-mode)
+(add-hook 'after-init-hook #'helm-projectile-on)
 
 ;;; init.el ends here
