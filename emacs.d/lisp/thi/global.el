@@ -275,6 +275,25 @@
      ;; C-c C-q -> C-g
      (define-key reb-mode-map (kbd "C-g") 'reb-copy-and-quit)))
 
+;; Stolen from Magnar's code to do the same thing for dired
+;; http://whattheemacsd.com/setup-dired.el-02.html
+(defun ibuffer-back-to-top ()
+  (interactive)
+  (beginning-of-buffer)
+  (next-line 3))
+
+(defun ibuffer-jump-to-bottom ()
+  (interactive)
+  (end-of-buffer)
+  (next-line -2)
+  (beginning-of-line))
+
+(eval-after-load 'ibuffer
+  '(progn
+     (define-key ibuffer-mode-map
+       (vector 'remap 'end-of-buffer) 'ibuffer-jump-to-bottom)
+     (define-key ibuffer-mode-map
+       (vector 'remap 'beginning-of-buffer) 'ibuffer-back-to-top)))
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Yank and Paste
