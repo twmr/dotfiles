@@ -250,3 +250,55 @@ Works by adjusting the right margin."
     (query-replace old-string new-string nil (point-min) (point-max))
     )
   )
+
+;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+(defun unfill-paragraph ()
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+
+(defun unfill-region ()
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-region (region-beginning) (region-end) nil)))
+
+;; Original idea from
+;; http://www.opensubscriber.com/message/emacs-devel@gnu.org/10971693.html
+(defun comment-dwim-line (&optional arg)
+  "Replacement for the comment-dwim command.
+        If no region is selected and current line is not blank and we are not at the end of the line,
+        then comment current line.
+        Replaces default behaviour of comment-dwim, when it inserts comment at the end of the line."
+  (interactive "*P")
+  (comment-normalize-vars)
+  (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+      (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+    (comment-dwim arg)))
+(global-set-key "\M-;" 'comment-dwim-line)
+
+;; taken from https://gist.github.com/mooz/890562
+(defun my-reb-query-replace-regexp ()
+  "Call `query-replace-regexp' with current regexp of RE-builder"
+  (interactive)
+  (reb-update-regexp)
+  (let ((re (reb-target-binding reb-regexp)))
+    (flet ((query-replace-read-from
+            (prompt regexp-flag)
+            ;; body
+            re))
+      (pop-to-buffer reb-target-buffer)
+      (call-interactively 'query-replace-regexp))))
+
+;; Stolen from Magnar's code to do the same thing for dired
+;; http://whattheemacsd.com/setup-dired.el-02.html
+(defun ibuffer-back-to-top ()
+  (interactive)
+  (beginning-of-buffer)
+  (next-line 3))
+
+(defun ibuffer-jump-to-bottom ()
+  (interactive)
+  (end-of-buffer)
+  (next-line -2)
+  (beginning-of-line))
