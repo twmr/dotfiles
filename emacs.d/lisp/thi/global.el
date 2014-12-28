@@ -344,7 +344,6 @@
 (setq scroll-conservatively 10000)
 (setq visible-bell t)
 (setq-default fill-column 76)
-(setq user-full-name "Thomas Hisch")
 
 (set-default 'indicate-buffer-boundaries '((up . nil) (down . nil) (t . left)))
 (setq next-screen-context-lines 5)      ; I want to keep more lines when
