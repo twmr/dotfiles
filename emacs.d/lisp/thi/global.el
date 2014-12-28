@@ -8,11 +8,14 @@
 (setq inhibit-startup-screen t)
 (setq default-indicate-empty-lines nil)
 
-
 ;: LINUM
 (when (eq 'thi::theme 'solarized-light)
   (face-spec-set 'linum
-                 '((t (:inherit (quote shadow) :background "#d7d7af" :foreground "#87875f" :slant normal :height 66)))))
+                 '((t (:inherit (quote shadow)
+                                :background "#d7d7af"
+                                :foreground "#87875f"
+                                :slant normal
+                                :height 66)))))
 (when (string= system-name "pc-52-rh.ims.ac.at")
   (global-linum-mode 1))
 
