@@ -162,16 +162,16 @@
 
 (load "thi/defuns")
 (load "thi/global")
+(load "thi/danjou")
 (load "thi/vc")
 (load "thi/bindings")
 (load "thi/projects")
 (load "thi/ido")
 (load "thi/mail")
 (load "thi/ccmode")
-;; I don't need a latex setup atm
 (load "thi/latex")
 (load "thi/recentf")
-;;(load "thi/nxml")
+(load "thi/nxml")
 (load "thi/compilation")
 (load "thi/term")
 (load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
