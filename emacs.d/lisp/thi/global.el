@@ -27,15 +27,16 @@
 ;; linum should be disabled for certain modes where linenumbers do not
 ;; make sense
 ;; http://www.emacswiki.org/emacs/LineNumbers
-(setq linum-disabled-modes-list '(eshell-mode
-                                  org-mode
-                                  DocView-mode
-                                  latex-mode
-                                  wl-summary-mode
-                                  git-commit-mode
-                                  mu4e-compose-mode
+(setq linum-disabled-modes-list '(compilation-mode
                                   direx-mode
-                                  compilation-mode))
+                                  DocView-mode
+                                  eshell-mode
+                                  git-commit-mode
+                                  latex-mode
+                                  magit-status-mode
+                                  mu4e-compose-mode
+                                  org-mode
+                                  wl-summary-mode))
 
 ;; fill-column-indicator
 (setq-default fci-rule-column 80)
