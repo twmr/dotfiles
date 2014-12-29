@@ -156,42 +156,6 @@
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-
-(defcustom thi::programming-language-major-modes
-  '(prog-mode     ; This is the mode perl, makefile, lisp-mode, scheme-mode,
-                  ; emacs-lisp-mode, sh-mode, java-mode, c-mode, c++-mode,
-                  ; python-mode inherits from.
-    lua-mode
-    cmake-mode
-    tex-mode                            ; LaTeX inherits
-    sgml-mode                           ; HTML inherits
-    css-mode
-    nxml-mode
-    diff-mode
-    haskell-mode
-    rst-mode)
-  "What considering as programming languages.")
-
-(defun thi::customize-programming-language-mode ()
-  (font-lock-add-keywords
-   nil
-   '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\|NOTE\\|REFACTOR\\|FIX\\)"
-      1
-      '(:box (:color "grey10" :line-width 2) :background "red" :bold t :foreground "yellow")
-      prepend)))
-  ;; (idle-highlight-mode 1)
-  ;; temporarily disabled the rainbow modes as i think they cause speed problems
-  ;; (rainbow-mode 1)
-  ;; (rainbow-delimiters-mode 1)
-  (setq show-trailing-whitespace t)
-  ;; (flyspell-prog-mode)
-  )
-
-(dolist (mode thi::programming-language-major-modes)
-  (add-hook
-   (intern (concat (symbol-name mode) "-hook"))
-   'thi::customize-programming-language-mode))
-
 ;; (semantic-mode 1)
 ;; see http://www.gnu.org/software/emacs/manual/html_node/semantic/Sticky-Func-Mode.html#Sticky-Func-Mode
 ;; (global-semantic-stickyfunc-mode 1)
