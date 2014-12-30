@@ -52,8 +52,8 @@ fedora_deps = [
 
 # missing symlinks (TODO file bug report!)
 # _ ln -s /usr/lib64/libjsoncpp.so{.0,}
-# _ ln -s /usr/lib64/libjsoncpp.so{.0,}
 # _ ln -s /usr/lib64/libnetcdf.so{.7,}
+# _ ln -s /usr/lib64/libnetcdf_c++.so{.4,}
 
 print('(make sure that the following deps are installed\n'
       'di ' + ' '.join(fedora_deps))
