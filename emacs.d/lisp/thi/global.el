@@ -89,8 +89,8 @@
         edit-server-start-hook
         markdown-mode-hook))
   (add-hook hook (lambda () (progn
-                              (variable-pitch-mode t)
-                              (wrap-column-mode)))))
+                              (variable-pitch-mode t)))))
+                              ;; (wrap-column-mode)))))
 
 (add-hook 'ibuffer-hook
          (lambda ()
