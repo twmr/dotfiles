@@ -132,6 +132,7 @@ elif [ "$HOSTNAME" = "dirac" ]; then
     export CONDA_ENV_DIR=$HOME/miniconda/envs
 
     export MAKEOPTS='-j`nproc`'
+    export PARDISOLIB=/opt/libpardiso500-GNU481-X86-64.so
 
 elif [ "$HOSTNAME" = "cobra" ]; then
     export PUBDOC=$HOME/gitrepos/publication
