@@ -114,7 +114,7 @@ if [ "$HOSTNAME" = "mustang" ]; then
     prepath ${EMBINPATH}
     prepath $HOME/.bin
 
-elif [ "$HOSTNAME" = "dirac" ]; then
+elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     prepath $HOME/bin
     prepath $HOME/.local/bin
     export EMBINPATH=${HOME}/gitrepos/emacs/src
@@ -122,18 +122,19 @@ elif [ "$HOSTNAME" = "dirac" ]; then
     export DDIR=${GITR}/diss
 
     export NETGENDIR=/opt/ngngs/bin
-    export PYTHONPATH=$GITR/task3:$DDIR/pysalt:${GITR}/cf-fem-lib/tools/in2d_creator_scripts:$PYTHONPATH
+    export PYTHONPATH=$GITR/diss/task3:$DDIR/pysalt:${GITR}/cf-fem-lib/tools/in2d_creator_scripts:$PYTHONPATH
 
     # prepath $HOME/software/local/bin
     prepath $NETGENDIR
-    prepath $GITR/task3/scripts
+    prepath $GITR/diss/task3/scripts
     preldlpath $HOME/software/local/lib
 
     export CONDA_ENV_DIR=$HOME/miniconda/envs
 
     export MAKEOPTS='-j`nproc`'
-    export PARDISOLIB=/opt/libpardiso500-GNU481-X86-64.so
-
+    export PARDISO_LIB=/opt/libpardiso500-GNU481-X86-64.so
+    ulimlimit=`free | grep '^Mem' | gawk '{ print(int($2 * 0.95)) }'`
+    ulimit -v $ulimlimit
 elif [ "$HOSTNAME" = "cobra" ]; then
     export PUBDOC=$HOME/gitrepos/publication
     DOTFPATH=$HOME/gitrepos/dotfiles
