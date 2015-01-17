@@ -44,6 +44,10 @@ preldlpath() {
     [ -d "${1}" ] && [[ ! "${LD_LIBRARY_PATH}" =~ ${1} ]] && LD_LIBRARY_PATH="${1}:${LD_LIBRARY_PATH}"
 }
 
+if [ -e $HOME/software/sublime_text_3/sublime_text ]; then
+    prepath $HOME/software/sublime_text_3/
+fi
+
 if [ "$HOSTNAME" = "mustang" ]; then
     arch="" #intel64"
     #intel_version="11.1/046"
@@ -139,7 +143,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export PUBDOC=$HOME/gitrepos/publication
     DOTFPATH=$HOME/gitrepos/dotfiles
 
-    export JDK_HOME=$HOME/sandbox/jdk1.7.0_40
+    export JDK_HOME=$HOME/software/jdk1.7.0_40
 
     export MATLAB_BIN=/opt/MATLAB/R2012a/bin
 
