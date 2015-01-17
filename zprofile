@@ -166,6 +166,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $NETGENDIR
 
     export PYTHONPATH=${GITR}/diss/pysalt:${GITR}/diss/task3:$PYTHOPATH
+    preldlpath $GITR/diss/task3/numprocs
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     intel_arch=""

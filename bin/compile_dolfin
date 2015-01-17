@@ -84,6 +84,8 @@ cmakeargs = list(map(os.path.expandvars, cmakeargs))
 # +  set(HDF5_LIBRARIES "$ENV{MPI_LIB}/libhdf5.so" "/usr/lib64/libz.so" "/usr/lib64/libdl.so" "/usr/lib64/libm.so")
 #  endif()
 
+# vtkWarpScalars fix:
+
 #  # Check for PaStiX
 # @@ -569,6 +571,11 @@ if (DOLFIN_ENABLE_VTK)
 #        message(STATUS "Found VTK: ${VTK_DIR} (found version \"${VTK_VERSION}\")")

@@ -200,11 +200,11 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 (add-hook 'after-init-hook #'global-undo-tree-mode)
 (add-hook 'after-init-hook #'yas-global-mode 1)
-(add-hook 'after-init-hook #'persp-mode 1)
 (add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
 ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
 (add-hook 'after-init-hook #'global-company-mode)
 (add-hook 'after-init-hook #'global-discover-mode)
 (add-hook 'after-init-hook #'helm-projectile-on)
+(add-hook 'after-init-hook #'persp-mode)
 
 ;;; init.el ends here
