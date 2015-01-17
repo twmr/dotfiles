@@ -59,7 +59,7 @@ configure_options = [
 ]
 configure_options = [x for x in configure_options if x is not None]
 
-performance_flags = True
+performance_flags = not debug
 if performance_flags:
     # TODO -fopenmp? -flto
     olevel = 3

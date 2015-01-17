@@ -22,7 +22,7 @@ function fenicsswitch() {
         export BEMPP_DIR=$devdir/bempp
         if [ "$HOSTNAME" = "cobra" ]; then
             source activate py34_fenics15dev_petsc35
-        elif [ "$HOSTNAME" = "dirac" ]; then
+        elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
             source activate py27_fenics15dev_petsc35
         fi
         #conda info -e
