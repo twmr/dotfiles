@@ -1,6 +1,6 @@
 #!/bin/sh
 
-outleft=LVDS1
+outleft=HDMI2
 outright=VGA1
 xrandr --output ${outleft} --auto
 xrandr --output ${outright} --auto

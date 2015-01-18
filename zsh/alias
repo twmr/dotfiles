@@ -97,16 +97,16 @@ alias cmx='chmod +x'
 
 #named directories
 HOSTNAME=`hostname`
-if [ "$HOSTNAME" = "dirac" ]; then
+if [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     alias vsc='ssh thisch@vsc.tuwien.ac.at -X -A'
     alias vsc2='ssh thisch@vsc2.tuwien.ac.at -X -A'
-    alias ng='LD_PRELOAD=~/libpardiso500-GNU481-X86-64.so:/usr/lib64/libm.so:/usr/lib64/liblapack.so:/usr/lib64/libblas.so  netgen'
+    alias ng='LD_PRELOAD=/opt/libpardiso500-GNU481-X86-64.so:/usr/lib64/libm.so:/usr/lib64/liblapack.so:/usr/lib64/libblas.so  netgen'
     hash -d t3=${GITR}/task3
 fi
 if [ "$HOSTNAME" = "cobra" ]; then
     hash -d t3=${GITR}/diss/task3
     hash -d pys=${GITR}/diss/pysalt
-    alias ng='netgen'
+    alias ng='LD_PRELOAD=/opt/libpardiso500-GNU481-X86-64.so:/usr/lib64/libm.so:/usr/lib64/liblapack.so:/usr/lib64/libblas.so  netgen'
 fi
 
 DOTFDIR=${GITR}/dotfiles

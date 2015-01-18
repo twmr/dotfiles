@@ -3,3 +3,8 @@ create_default_packages:
   - pip
   - setuptools
   - cython
+
+channels:
+  - file:///home/thomas/miniconda/conda-bld
+  # - http://conda.binstar.org/thisch
+  - defaults

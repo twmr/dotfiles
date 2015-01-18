@@ -12,6 +12,7 @@ print("DOLFIN_ARCH %s" % darch)
 os.chdir(os.path.join(ddir, '..', 'mshr', darch))
 
 cmakeargs = [
+    '-DCMAKE_BUILD_TYPE=Release',
     '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
     '..']
 cmakeargs = list(map(os.path.expandvars, cmakeargs))

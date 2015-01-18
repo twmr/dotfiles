@@ -52,8 +52,8 @@ fedora_deps = [
 
 # missing symlinks (TODO file bug report!)
 # _ ln -s /usr/lib64/libjsoncpp.so{.0,}
-# _ ln -s /usr/lib64/libjsoncpp.so{.0,}
 # _ ln -s /usr/lib64/libnetcdf.so{.7,}
+# _ ln -s /usr/lib64/libnetcdf_c++.so{.4,}
 
 print('(make sure that the following deps are installed\n'
       'di ' + ' '.join(fedora_deps))
@@ -64,6 +64,8 @@ cmakeargs = [
     '-DDOLFIN_ENABLE_VTK=%d' % int(enable_vtk),
     '-DDOLFIN_ENABLE_MPI=1',
     '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
+    '-DCMAKE_CXX_FLAGS=-O3 -march=native',
+    '-DCMAKE_VERBOSE_MAKEFILE=1',
     '..']
 if debug:
     cmakeargs.insert(0, '-DCMAKE_BUILD_TYPE=Debug')
@@ -81,6 +83,8 @@ cmakeargs = list(map(os.path.expandvars, cmakeargs))
 # +
 # +  set(HDF5_LIBRARIES "$ENV{MPI_LIB}/libhdf5.so" "/usr/lib64/libz.so" "/usr/lib64/libdl.so" "/usr/lib64/libm.so")
 #  endif()
+
+# vtkWarpScalars fix:
 
 #  # Check for PaStiX
 # @@ -569,6 +571,11 @@ if (DOLFIN_ENABLE_VTK)

@@ -21,6 +21,12 @@ call =jedi:install-server= from within emacs
 ** org pdf export
 =di 'tex(wrapfig.sty)'=
 =di 'tex(ulem.sty)'=
+** notmuch
+*** install sphinx via pip
+*
+** latex 
+=di emacs-auctex= (installs tex-preview)
+=di texlive-chktex-bin= (flycheck checker)
 * Key Bindings
 ** IDO Mode
 =C-c C-f= ido open file 
@@ -140,6 +146,8 @@ sshing into remote hosts and typing C-c C-f opens the remote CWD using tramp
 if bash_profile is configured correctly (http://www.enigmacurry.com/category/emacs/2/)
 
 see description for F2 keybinding
+** unicode
+*** =C-x 8 RET= insert unicode, or use =helm-ucs=
 * Key Bindings Graphene Setup
 ** python flycheck
 =C-c ! c= force check of file

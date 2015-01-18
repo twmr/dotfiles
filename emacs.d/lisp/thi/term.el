@@ -5,7 +5,7 @@
                   (setq yas-dont-activate t)
                   (setq global-hl-line-mode nil) ;; disable hl-line-mode
                   (goto-address-mode) ;; clickable urls
-                  (evil-mode -1)
+                  ;; (evil-mode -1)
                   )))
 
 (define-key term-mode-map (kbd "M-x") 'smex)

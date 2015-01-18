@@ -5,6 +5,7 @@ from subprocess import check_output
 bbrepos = ['petsc/petsc@maint',
            'petsc/petsc4py@maint',
            'slepc/slepc@maint',
+           'slepc/slepc4py@maint',
            'fenics-project/instant',
            'fenics-project/ffc',
            'fenics-project/ufl',

@@ -59,13 +59,15 @@ configure_options = [
 ]
 configure_options = [x for x in configure_options if x is not None]
 
-performance_flags = True
+performance_flags = not debug
 if performance_flags:
     # TODO -fopenmp? -flto
+    olevel = 3
+    extra = ''  # ' -flto'
     configure_options.extend([
-        'CXXOPTFLAGS=-O3 -march=native',
-        'COPTFLAGS=-O3 -march=native',
-        'FOPTFLAGS=-O3 -march=native'])
+        'CXXOPTFLAGS=-O%d -march=native%s' % (olevel, extra),
+        'COPTFLAGS=-O%d -march=native%s' % (olevel, extra),
+        'FOPTFLAGS=-O%d -march=native%s' % (olevel, extra)])
 
 
 # use the 'module' command in fedora to load settings for the desired mpi
@@ -83,6 +85,7 @@ if 'MPI_INCLUDE' not in os.environ or not os.path.exists(
     # '--with-mpi-include=/usr/include/openmpi-x86_64',
 
 print('\n'.join(configure_options))
+# print(' '.join(configure_options))
 
 configure.petsc_configure(configure_options)
 

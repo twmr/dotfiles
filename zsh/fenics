@@ -21,7 +21,7 @@ function fenicsswitch() {
         export BEMPP_DIR=$devdir/bempp
         if [ "$HOSTNAME" = "cobra" ]; then
             source activate py34_fenics15dev_petsc35
-        elif [ "$HOSTNAME" = "dirac" ]; then
+        elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
             source activate py27_fenics15dev_petsc35
         fi
         #conda info -e
@@ -60,36 +60,36 @@ function fenicsswitch() {
     pkgs=`conda list`
 
     # otherwise find_package(Qt4) in cmake fails
-    echo $pkgs | grep "^qt " > /dev/null && \
+    echo $pkgs | grep "^qt " | grep -v "<pip>" > /dev/null && \
         echo "!!!!!DANGER qt in conda installed!!!!" && \
         conda remove --yes qt
 
     # see https://github.com/ContinuumIO/anaconda-issues/issues/152
-    echo $pkgs | grep "^readline " > /dev/null && \
+    echo $pkgs | grep "^readline " | grep -v "<pip>" > /dev/null && \
         echo "!!!!!DANGER readline in conda installed!!!!" && \
         conda remove --yes readline
 
     # (for mshr)
-    echo $pkgs | grep "^xz " > /dev/null && \
+    echo $pkgs | grep "^xz " | grep -v "<pip>" > /dev/null && \
         echo "!!!!!DANGER xz in conda installed!!!!" && \
         conda remove --yes xz
 
     # fixes compilation of dolfin.Expression('3')
     # (for vtk)
-    echo $pkgs | grep "^vtk " > /dev/null && \
+    echo $pkgs | grep "^vtk " | grep -v "<pip>" > /dev/null && \
         echo "!!!!!DANGER vtk in conda installed!!!!" && \
         conda remove --yes vtk
 
     # fixes reading of xml.gz meshfiles in parallel on vsc2 (xmlSAXUserParseFile)
-    echo $pkgs | grep "^zlib " > /dev/null && \
+    echo $pkgs | grep "^zlib " | grep -v "<pip>" > /dev/null && \
         echo "!!!!!DANGER zlib in conda installed!!!!" && \
         conda remove --yes zlib
 
     # parallel support not compiled into hdf5 lib
-    echo $pkgs | grep "^hdf5 " > /dev/null && \
+    echo $pkgs | grep "^hdf5 "  | grep -v "<pip>" > /dev/null && \
         echo "!!!!!DANGER hdf5 in conda installed!!!!" && \
         conda remove --yes hdf5
-    echo $pkgs | grep "^h5py " > /dev/null && \
+    echo $pkgs | grep "^h5py " | grep -v "<pip>" > /dev/null && \
         echo "!!!!!DANGER h5py in conda installed!!!!" && \
         conda remove --yes h5py
 

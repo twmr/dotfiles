@@ -3,7 +3,7 @@
 
 pwd=$PWD
 filename=`basename $0`
-excludes=".gitignore .gitmodules laptop-settings.sh $filename xsessions/ gentoo xinitrc.opensuse"
+excludes=".gitignore .gitmodules laptop-settings.sh $filename xsessions/ gentoo bin emacs_with*"
 confdirs="awesome gnome-terminal"
 
 hostname=`hostname`
@@ -12,11 +12,17 @@ if test ${hostname} == "thisch"; then
     excludes = "${exlcudes} vpnc/"
 fi
 
+if ! test -e "$HOME/bin"; then
+    echo ln -s "$pwd/bin" "$HOME"
+    ln -s "$pwd/bin" "$HOME"
+fi
+
 for file in `git ls-files | sed 's/\/.*/\//' | uniq`; do
     skip=0
 
     for exclude in $excludes; do
-        if test $file = $exclude; then
+        if [[ "$file" =~ "$exclude" ]]; then
+            echo $file skipped
             skip=1
             break
         fi
