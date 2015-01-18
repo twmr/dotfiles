@@ -4,6 +4,10 @@ from __future__ import print_function
 import sys
 import os
 import pexpect
+import socket
+
+hostname = socket.gethostname()
+vsc2 = hostname.startswith('l21.')
 
 ddir = os.environ['DOLFIN_DIR']
 darch = os.environ['DOLFIN_ARCH']
@@ -13,8 +17,13 @@ os.chdir(os.path.join(ddir, '..', 'mshr', darch))
 
 cmakeargs = [
     '-DCMAKE_BUILD_TYPE=Release',
-    '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
+    '-DCMAKE_INSTALL_PREFIX=$CONDA_ENV_DIR/$CONDA_DEFAULT_ENV',
     '..']
+if vsc2:
+    cmakeargs.insert(1, '-DCMAKE_CXX_COMPILER=$HOME/../liertzer/gcc491/bin/g++')
+    cmakeargs.insert(2, '-DCMAKE_C_COMPILER=$HOME/../liertzer/gcc491/bin/gcc')
+    cmakeargs.insert(3, '-DMPFR_INCLUDE_DIR=$HOME/software/local/include')
+    cmakeargs.insert(4, '-DMPFR_LIBRARIES=$HOME/software/local/lib/libmpfr.so')
 cmakeargs = list(map(os.path.expandvars, cmakeargs))
 
 # make sure to check that the version of PythonInterp is src/CMakeLists.txt

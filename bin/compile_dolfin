@@ -5,6 +5,7 @@ import sys
 import os
 import pexpect
 from getpass import getuser
+import socket
 
 ddir = os.environ['DOLFIN_DIR']
 darch = os.environ['DOLFIN_ARCH']
@@ -20,6 +21,7 @@ debug = 'debug' in darch.lower()
 print("DEBUG BUILD %s" % debug)
 
 username = getuser()
+hostname = socket.gethostname()
 
 fedora_deps = [
     'eigen3-devel',
@@ -58,17 +60,23 @@ fedora_deps = [
 print('(make sure that the following deps are installed\n'
       'di ' + ' '.join(fedora_deps))
 
-enable_vtk = not username == 'jenkins'
+vsc2 = hostname.startswith('l21.')
+enable_vtk = not username == 'jenkins' and not vsc2
+verbose = True
 
 cmakeargs = [
     '-DDOLFIN_ENABLE_VTK=%d' % int(enable_vtk),
     '-DDOLFIN_ENABLE_MPI=1',
-    '-DCMAKE_INSTALL_PREFIX=$HOME/miniconda/envs/$CONDA_DEFAULT_ENV',
     '-DCMAKE_CXX_FLAGS=-O3 -march=native',
-    '-DCMAKE_VERBOSE_MAKEFILE=1',
+    '-DCMAKE_VERBOSE_MAKEFILE=%d' % int(verbose),
+    '-DCMAKE_INSTALL_PREFIX=$CONDA_ENV_DIR/$CONDA_DEFAULT_ENV',
     '..']
 if debug:
     cmakeargs.insert(0, '-DCMAKE_BUILD_TYPE=Debug')
+if vsc2:
+    cmakeargs.insert(1, '-DCMAKE_CXX_COMPILER=$HOME/../liertzer/gcc491/bin/g++')
+    cmakeargs.insert(2, '-DCMAKE_C_COMPILER=$HOME/../liertzer/gcc491/bin/gcc')
+    cmakeargs.insert(3, '-DEIGEN3_INCLUDE_DIR=$HOME/software/local/include/eigen3')
 cmakeargs = list(map(os.path.expandvars, cmakeargs))
 
 # make sure to patch CMakeLists.txt (
