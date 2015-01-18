@@ -88,8 +88,7 @@
         idle-highlight-mode
         window-numbering
         quickrun
-        dockerfile-mode
-        mmm-mode))
+        dockerfile-mode))
 
 (when (string= system-name "pc-52-rh.ims.co.at")
   (delete 'org-mode thi::packages)
