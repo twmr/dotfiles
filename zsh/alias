@@ -76,6 +76,7 @@ alias nautilus='nautilus --no-desktop'
 
 alias removepyc='rm -f `find . -iname "*.pyc"`'
 alias removelog='rm -f`find . -iname "*.log"`'
+alias removeng='rm -f `find . -iname "ng.ini" -o -iname "ng.prof" -o -iname "ngmesh.ini"`'
 
 alias st='~/Downloads/sublime_text_3/sublime_text'
 
