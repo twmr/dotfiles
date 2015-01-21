@@ -11,6 +11,7 @@ function fenicsswitch() {
     fi
 
     echo "switching to fenics $ver"
+    enconda
 
     if [ $ver = 'dev' ]; then
         devdir=${GITR}/fenics/dev
@@ -115,4 +116,6 @@ function fenicsswitch() {
     echo "\nPETSC GIT BRANCH: $pbranch @ $pcommit"
     echo "SLEPC GIT BRANCH: $sbranch @ $scommit"
     hash -d fen=${GITR}/fenics/dev
+
+    export LD_LIBRARY_PATH=~t3/numprocs:$LD_LIBRARY_PATH
 }
