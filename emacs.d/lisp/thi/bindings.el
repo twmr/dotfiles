@@ -44,6 +44,8 @@
 
 (global-set-key (kbd "M-p") 'ace-window)
 
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; smex stuff
 ;; (global-set-key (kbd "M-x") 'helm-M-x) ;; i don't like this
 (global-set-key (kbd "M-x") 'smex)

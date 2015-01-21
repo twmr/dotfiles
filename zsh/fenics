@@ -29,6 +29,7 @@ function fenicsswitch() {
         export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
         export DOLFIN_ARCH="build_fed_openmpi"
         export BEMPP_ARCH="build_dev" # atm builds v2.0
+        export FEN=$devdir
     elif [ $ver = 'devpy27' -o $ver = 'devpy27complex' ]; then
         devdir=${GITR}/fenics/dev
         export PETSC_DIR=$devdir/petsc
@@ -40,14 +41,13 @@ function fenicsswitch() {
         fi
         export DOLFIN_DIR=$devdir/dolfin
         export BEMPP_DIR=$devdir/bempp
-        if [ "$HOSTNAME" = "cobra" ]; then
-            source activate py27_fenics15dev_petsc35
-        fi
+        source activate py27
         #conda info -e
         export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
         export BEMPP_ARCH="build_v2.0"
-        export DOLFIN_ARCH="build_fed_openmpi_py27"
-        # export DOLFIN_ARCH="build_fed_openmpi_py27_debug"
+        #export DOLFIN_ARCH="build_openmpi_py27"
+        export DOLFIN_ARCH="build_openmpi_py27_debug"
+        export FEN=$devdir
     elif [ $ver = '14' ]; then
         # TODO
         source activate py27_fenics14_petsc34
@@ -56,10 +56,6 @@ function fenicsswitch() {
     # if [ -d $CONDA_ENV_DIR/$CONDA_DEFAULT_ENV/bempp ]; then
     #     export PYTHONPATH=$CONDA_ENV_DIR/$CONDA_DEFAULT_ENV/bempp/python:$PYTHONPATH
     # fi
-
-    echo "loading openmpi module"
-    module load mpi/openmpi-`uname -p`
-    echo "done"
 
     echo "checking installed conda packages"
     pkgs=`conda list`
@@ -120,4 +116,6 @@ function fenicsswitch() {
     echo "\nPETSC GIT BRANCH: $pbranch @ $pcommit"
     echo "SLEPC GIT BRANCH: $sbranch @ $scommit"
     hash -d fen=${GITR}/fenics/dev
+
+    export LD_LIBRARY_PATH=~t3/numprocs:$LD_LIBRARY_PATH
 }
