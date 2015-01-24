@@ -167,8 +167,10 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $HOME/.cabal/bin
     prepath $HOME/.cask/bin
     prepath $GITR/julia
+    prepath $GITR/software_setup_scripts
     prepath $NETGENDIR
 
+    export PARDISO_LIB=/opt/libpardiso500-GNU481-X86-64.so
     export PYTHONPATH=${GITR}/diss/pysalt:${GITR}/diss/task3:$PYTHOPATH
     preldlpath $GITR/diss/task3/numprocs
 
