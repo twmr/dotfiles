@@ -123,6 +123,7 @@
     moz-controller
     aggressive-indent
     use-package
+    hydra
     )
   "A list of packages to ensure are installed at launch.")
 
