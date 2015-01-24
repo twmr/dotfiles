@@ -3,7 +3,7 @@
 
 pwd=$PWD
 filename=`basename $0`
-excludes=".gitignore .gitmodules laptop-settings.sh $filename xsessions/ gentoo bin emacs_with*"
+excludes=".gitignore .gitmodules laptop-settings.sh $filename xsessions/ gentoo bin emacs_with* inputrc"
 confdirs="awesome gnome-terminal"
 
 hostname=`hostname`
