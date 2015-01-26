@@ -38,3 +38,5 @@ matplotlib/tex.cache
 /emacs.d/.python-environments/
 /emacs.d/.cask/
 /emacs.d/bbdb
+/bin/.sync/
+/bin/btsync

@@ -88,8 +88,7 @@
         idle-highlight-mode
         window-numbering
         quickrun
-        dockerfile-mode
-        mmm-mode))
+        dockerfile-mode))
 
 (when (string= system-name "pc-52-rh.ims.co.at")
   (delete 'org-mode thi::packages)
@@ -123,6 +122,8 @@
     undo-tree
     moz-controller
     aggressive-indent
+    use-package
+    hydra
     )
   "A list of packages to ensure are installed at launch.")
 
@@ -143,6 +144,10 @@
   (dolist (p prelude-packages)
     (when (not (package-installed-p p))
       (package-install p))))
+
+(require 'use-package)
+
+
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
