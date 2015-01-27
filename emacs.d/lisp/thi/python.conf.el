@@ -32,7 +32,7 @@
 ;; (add-hook 'python-mode-hook #'python-cell-mode 1)
 (add-hook 'python-mode-hook #'yas-minor-mode 1)
 (add-hook 'python-mode-hook #'superword-mode 1)
-(add-hook 'python-mode-hook #'rainbow-delimiters-mode 1)
+;; (add-hook 'python-mode-hook #'rainbow-delimiters-mode 1) ;; simply too slow
 ;; (add-hook 'python-mode-hook #'semantic-mode 1)
 ;; TODO this does not work ?!??!
 ;; (add-hook 'python-mode-hook #'turn-on-auto-fill 1)
