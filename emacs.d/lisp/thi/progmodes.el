@@ -21,7 +21,8 @@
       '(:box (:color "grey10" :line-width 2) :background "red" :bold t :foreground "yellow")
       prepend)))
   (setq show-trailing-whitespace t)
-  (rainbow-delimiters-mode 1)
+  ;; (eldoc-mode nil)
+  ;; (rainbow-delimiters-mode 1)
   ;; (idle-highlight-mode 1)
   ;; temporarily disabled the rainbow modes as i think they cause speed problems
   ;; (rainbow-mode 1)

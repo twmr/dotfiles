@@ -116,6 +116,7 @@
         ("\\(M\\|m\\|GNUm\\)akefile\\(\\.in\\)?" . makefile-mode)
         ("\\.pl$"   . perl-mode)
         ("\\.pm$"   . perl-mode)
+        ("\\.pdf$"   . pdf-view-mode)
         ("\\.java$" . java-mode)
         ("\\.txt$"  . text-mode)
         ("\\.tex$" . latex-mode)

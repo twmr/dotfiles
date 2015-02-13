@@ -2,21 +2,19 @@
 
 ;; (setq debug-on-error t)
 
-(dolist (p '("/lisp" "/lisp/vendor" "/el-get/el-get" "/el-get/mu4e/mu4e"))
+(dolist (p '("/lisp" "/lisp/vendor" "/el-get/mu4e/mu4e"))
   (add-to-list 'load-path (expand-file-name
                            (concat user-emacs-directory p))))
 
-(defvar thi::cache-file-dir (expand-file-name
-                             (concat (or (getenv "XDG_CACHE_HOME") "~/.cache") "/emacs")))
-(defvar thi::config-dir (expand-file-name
-                         (concat user-emacs-directory "/lisp/thi")))
+(defvar thi::cache-file-dir
+  (expand-file-name
+   (concat (or (getenv "XDG_CACHE_HOME") "~/.cache") "/emacs")))
+(defvar thi::config-dir
+  (expand-file-name
+   (concat user-emacs-directory "/lisp/thi")))
 (setq custom-file (concat thi::config-dir "/custom.el"))
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
-
-
-;; http://comments.gmane.org/gmane.emacs.vim-emulation/1700
-(setq evil-want-C-i-jump nil)
 
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
@@ -25,128 +23,198 @@
     (eval-after-load (match-string-no-properties 1 file)
       `(load ,(concat thi::config-dir "/" file)))))
 
-(setq thi::packages
-      '(;; hungry-delete ;; http://endlessparentheses.com/hungry-delete-mode.html
-        ;; auto-complete
-        company-mode
-        git-modes
-        magit
-        magit-filenotify
-        perspective
-        ibuffer-perspective
-        projectile
-        direx
-        helm ;; helm is awesome!
-        julia-mode
-        git-modes
-        ;; calfw
-        org-mode
-        cmake-mode
-        eassist
-        haskell-mode
-        markdown-mode
-        yaml-mode
-        expand-region
-        ace-jump-mode
-        ace-window
-        yasnippet
-        flx
-        smex
-        flycheck
-        ;;dired+
-        dired-efap
-        notmuch
-        ;;replace+
-        find-file-in-repository
-        fill-column-indicator
-        ethan-wspace
-        lua-mode
-        paredit
-        ;;minimap
-        evil-leader
-        evil
-        evil-numbers
-        python-cell
-        epc
-        jedi
-        ;; gnuplot-mode ;; not needed atm
-        ;; iedit
-        ;;rainbow-mode
-        rainbow-delimiters
-        highlight-indentation
-        discover
-        ;; sr-speedbar (commented out as long as there is no upstream fix for the ad-advised-.. problem)
-        ;; browse-kill-ring
-        ;; bbdb
-        ;;bbdb-vcard
-        ;; nognus
-        ;; go-mode
-        el-get
-        ;; multi-term
-        browse-kill-ring
-        goto-last-change
-        idle-highlight-mode
-        window-numbering
-        quickrun
-        dockerfile-mode))
-
-(when (string= system-name "pc-52-rh.ims.co.at")
-  (delete 'org-mode thi::packages)
-  (delete 'markdown-mode thi::packages))
-
-;; Require el-get to install packages
-(unless (require 'el-get nil t)
-  (url-retrieve
-   "https://raw.github.com/dimitri/el-get/master/el-get-install.el"
-   (lambda (s)
-     (let (el-get-master-branch)
-       (goto-char (point-max))
-       (eval-print-last-sexp)))))
-
-(add-to-list 'el-get-recipe-path (concat thi::config-dir "/recipes"))
-
-(el-get 'sync thi::packages)
-
 (require 'package)
 (package-initialize)
 
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(defvar prelude-packages
-  '(json-mode
-    solarized-theme
-    smart-mode-line
-    auctex
-    project-persist
-    undo-tree
-    moz-controller
-    aggressive-indent
-    use-package
-    hydra
-    )
-  "A list of packages to ensure are installed at launch.")
+(setq thi::packages
+      '(;; hungry-delete ;; http://endlessparentheses.com/hungry-delete-mode.html
+        use-package
+        git-commit-mode
+        git-rebase-mode
+        gitconfig-mode
+        gitignore-mode
+        magit
+        magit-filenotify
+        perspective
+        ;; ibuffer-perspective ;; not avail.
+        projectile
+        direx
+        helm ;; helm is awesome!
+        helm-projectile
+        flx
+        flx-ido
+        smex
+        julia-mode
+        ;; ;; calfw
+        cmake-mode
+        ;; eassist
+        ;; haskell-mode
+        markdown-mode
+        yaml-mode
+        expand-region
+        ace-window
+        smart-mode-line
+        auctex
+        project-persist
+        undo-tree
+        moz-controller
+        ;; aggressive-indent
+        ;; yasnippet
+        ;; ;; dired+
+        ;; dired-efap
+        ;; notmuch
+        ;; ;; replace+
+        ;; find-file-in-repository
+        ;; ;; python-cell
+        ;; epc
+        ;; ;; company-anaconda
+        ;; ;; jedi (hard dependency on auto-complete mode)
 
-;; TODO rewrite prelude-packages-installed-p s.t. it does not required "cl"
-(require 'cl-lib)
-(require 'cl)
-(defun prelude-packages-installed-p ()
-  (loop for p in prelude-packages
-        when (not (package-installed-p p)) do (return nil)
-        finally (return t)))
-
-(unless (prelude-packages-installed-p)
-  ;; check for new packages (package versions)
-  (message "%s" "Emacs Prelude is now refreshing its package database...")
-  (package-refresh-contents)
-  (message "%s" " done.")
-  ;; install the missing packages
-  (dolist (p prelude-packages)
-    (when (not (package-installed-p p))
-      (package-install p))))
+        ;; fill-column-indicator
+        ;; ethan-wspace
+        ;; lua-mode
+        ;; paredit
+        ;; ;; minimap
+        ;; ;; gnuplot-mode ;; not needed atm
+        ;; ;; iedit
+        ;; ;; rainbow-mode
+        ;; ;; rainbow-delimiters
+        ;; highlight-indentation
+        ;; discover
+        ;; ;; sr-speedbar (commented out as long as there is no upstream fix for the ad-advised-.. problem)
+        ;; ;; browse-kill-ring
+        ;; ;; bbdb
+        ;; ;; bbdb-vcard
+        ;; ;; nognus
+        ;; ;; go-mode
+        ;; ;; multi-term
+        ;; browse-kill-ring
+        ;; goto-last-change
+        ;; idle-highlight-mode
+        ;; quickrun
+        ;; dockerfile-mode
+        ;; json-mode
+        ;; solarized-theme
+        ))
 
 (require 'use-package)
+;; https://github.com/alezost/emacs-config/prog.el
 
+(use-package ace-jump-mode :ensure t :defer t
+  :init
+  (progn
+    (autoload 'ace-jump-mode "ace-jump-mode" nil t)
+    (bind-key "C-." 'ace-jump-mode)))
+
+(use-package company :ensure t :defer t
+  :idle (global-company-mode))
+
+(use-package ethan-wspace :ensure t :defer t
+  :init
+  (progn
+    (add-hook 'prog-mode-hook #'ethan-wspace-mode 1)
+    )
+  )
+
+(use-package python
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode))
+
+(use-package flycheck
+  :ensure t
+  :defer t
+  :idle (global-flycheck-mode))
+
+(use-package helm :ensure t :defer t)
+
+(use-package hydra :ensure t :defer t
+  :init
+  (progn
+    (defhydra hydra-zoom (global-map "<f5>")
+      ;; Now, <f5> g 4g 2l will zoom in 5 times, and zoom out 2 times for a
+      ;; total of +3 zoom.
+      "zoom"
+      ("g" text-scale-increase "in")
+      ("l" text-scale-decrease "out"))
+    (global-set-key
+     (kbd "C-M-o")
+     (defhydra hydra-window ()
+       ;; http://oremacs.com/2015/02/03/one-hydra-two-hydra/
+       "window"
+       ("h" windmove-left)
+       ("j" windmove-down)
+       ("k" windmove-up)
+       ("l" windmove-right)
+       ("a" (lambda ()
+              (interactive)
+              (ace-window 1)
+              (add-hook 'ace-window-end-once-hook
+                        'hydra-window/body))
+        "ace")
+       ("v" (lambda ()
+              (interactive)
+              (split-window-right)
+              (windmove-right))
+        "vert")
+       ("x" (lambda ()
+              (interactive)
+              (split-window-below)
+              (windmove-down))
+        "horz")
+       ("s" (lambda ()
+              (interactive)
+              (ace-window 4)
+              (add-hook 'ace-window-end-once-hook
+                        'hydra-window/body))
+        "swap")
+       ("d" (lambda ()
+              (interactive)
+              (ace-window 16)
+              (add-hook 'ace-window-end-once-hook
+                        'hydra-window/body))
+        "del")
+       ("o" delete-other-windows "1" :color blue)
+       ("i" ace-maximize-window "a1" :color blue)
+       ("q" nil "cancel")))))
+
+(use-package undo-tree
+  :ensure t
+  :defer t
+  :init
+  (progn
+    (add-hook 'after-init-hook #'global-undo-tree-mode)
+    )
+  )
+
+(use-package pdf-tools
+  :ensure t
+  :defer t
+  :init
+  (progn
+    (autoload 'pdf-view-mode "pdf-tools" nil t)
+    (pdf-tools-install)
+    )
+  )
+
+(use-package window-numbering
+  :ensure t
+  :defer t
+  :init
+  (progn
+    (custom-set-faces '(window-numbering-face
+                        ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
+    (window-numbering-mode 1))
+  )
+
+(use-package zop-to-char
+  :ensure t
+  :defer t
+  :init
+  (progn
+    (bind-key "M-z" 'zop-to-char)))
 
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
@@ -182,34 +250,32 @@
 (load "thi/term")
 (load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
-(custom-set-faces '(window-numbering-face
-                    ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
-(window-numbering-mode 1)
+
+(defun join-line-vim-style ()
+  (interactive)
+  (save-excursion
+    (let ((start (progn
+                   (end-of-line)
+                   (insert " ")
+                   (point-at-eol)))
+          (end (progn
+                 (forward-line)
+                 (back-to-indentation)
+                 (point))))
+         (delete-region start end))))
+
+(global-set-key (kbd "C-c j") 'join-line-vim-style)
+
 (require 'url-tramp)
-
-;;customizations for el-get packages
-;;TODO automatically load these files when the el-get packs are loaded
-;; (load "thi/auto-complete")
-
-;; (load "vendor/key-chord") ;; from emacs-rocks
-;; (load "vendor/iy-go-to-char")
-;; (key-chord-mode 1)
-
-;; TODO activate this when you think you need it
-;; (vendor 'auto-mark)
 
 (put 'dired-find-alternate-file 'disabled nil)
 
 ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
-
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(add-hook 'after-init-hook #'global-undo-tree-mode)
-(add-hook 'after-init-hook #'yas-global-mode 1)
-(add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
-;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
-(add-hook 'after-init-hook #'global-company-mode)
-(add-hook 'after-init-hook #'global-discover-mode)
-(add-hook 'after-init-hook #'helm-projectile-on)
-(add-hook 'after-init-hook #'persp-mode)
+;; (add-hook 'after-init-hook #'yas-global-mode 1)
+;; (add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
+;; ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
+;; (add-hook 'after-init-hook #'global-discover-mode)
+;; (add-hook 'after-init-hook #'helm-projectile-on)
+;; (add-hook 'after-init-hook #'persp-mode)
 
 ;;; init.el ends here

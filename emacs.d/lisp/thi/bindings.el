@@ -146,7 +146,7 @@
 (define-key minibuffer-local-map (kbd "<down>") 'next-complete-history-element)
 
 (global-set-key (kbd "C-c s") 'sr-speedbar-select-window)
-(global-set-key [f6] 'sr-speedbar-toggle)
+;; (global-set-key [f6] 'sr-speedbar-toggle)
 
 (global-set-key (kbd "C-c h b") 'helm-mini)
 (global-set-key (kbd "C-c h m") 'helm-man-woman)
@@ -174,3 +174,6 @@
        (vector 'remap 'end-of-buffer) 'ibuffer-jump-to-bottom)
      (define-key ibuffer-mode-map
        (vector 'remap 'beginning-of-buffer) 'ibuffer-back-to-top)))
+
+(global-set-key (kbd "M-o") 'smart-open-line)
+(global-set-key (kbd "M-O") 'smart-open-line-above)

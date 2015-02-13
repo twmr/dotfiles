@@ -167,3 +167,10 @@ see description for F2 keybinding
 * Integrationtests
 ** ido flx
 *** start emacs and type M-x rb after starting gnus and loading an org file -> revert-buffer is expected
+* emacs key bindings
+** delete whole line  =C-S-backspace=
+** open line above =M-O=
+** open line below =M-o=
+** kill current line (and yank it back) =C-S-backspace C-y=
+** mark current defnu =mark-defun= =C-M-h=
+** vim join lines =C-c j=
