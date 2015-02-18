@@ -10,7 +10,7 @@
           (lambda ()
             (setq yas/dont-activate t)))
             ;; (magit-filenotify-mode 1)))
-(add-hook 'magit-mode-hook 'turn-on-magit-svn)
+;; (add-hook 'magit-mode-hook 'turn-on-magit-svn)
 
 ;; (define-key magit-mode-map (kbd "M-3") 'split-window-horizontally) ; was magit-show-level-3
 ;; (define-key magit-mode-map (kbd "M-2") 'split-window-vertically)   ; was magit-show-level-2
