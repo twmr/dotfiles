@@ -117,6 +117,7 @@ if [ "$HOSTNAME" = "mustang" ]; then
     prepath ${MATLAB_BIN}
     prepath ${EMBINPATH}
     prepath $HOME/.bin
+    prepath $GITR/diss/task3/scripts
 
 elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     prepath $HOME/bin
@@ -169,10 +170,13 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $GITR/julia
     prepath $GITR/software_setup_scripts
     prepath $NETGENDIR
+    prepath $GITR/diss/task3/scripts
 
     export PARDISO_LIB=/opt/libpardiso500-GNU481-X86-64.so
     export PYTHONPATH=${GITR}/diss/pysalt:${GITR}/diss/task3:$PYTHOPATH
     preldlpath $GITR/diss/task3/numprocs
+
+    # /opt/intel/bin/compilervars.sh intel64
 
 elif [ "$HOSTNAME" = "thisch" ]; then
     intel_arch=""
