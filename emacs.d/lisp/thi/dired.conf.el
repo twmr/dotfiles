@@ -1,3 +1,8 @@
+;; C-a is nicer in dired if it moves back to start of files
+(defun dired-back-to-start-of-files ()
+  (interactive)
+  (backward-char (- (current-column) 2)))
+
 (eval-after-load 'evil
   '(progn
      (evil-define-key 'normal dired-mode-map (kbd "<return>")
@@ -6,17 +11,23 @@
        '(lambda () (interactive) (find-alternate-file "..")))
      (evil-define-key 'normal dired-mode-map (kbd "<DEL>")
        'dired-up-directory)
-
-  ;; C-a is nicer in dired if it moves back to start of files
-     (defun dired-back-to-start-of-files ()
-       (interactive)
-       (backward-char (- (current-column) 2)))
      (evil-define-key 'normal dired-mode-map (kbd "C-a")
        'dired-back-to-start-of-files)
   )
 )
 ;;http://www.ergoemacs.org/emacs/emacs_dired_tips.html
 
+(define-key dired-mode-map (kbd "<return>")
+  'dired-find-alternate-file) ; was dired-advertised-find-file
+
+(define-key dired-mode-map (kbd "`")
+  '(lambda () (interactive) (find-alternate-file "..")))
+
+(define-key dired-mode-map (kbd "<DEL>")
+  'dired-up-directory)
+
+(define-key dired-mode-map (kbd "C-a")
+  'dired-back-to-start-of-files)
 
 (defun thi::directorychooser ()
   "Use ido to select a recently used directory from the `thi::directory-list'"
@@ -29,4 +40,3 @@
                                   thi::directory-list)
                           nil t))))
 (global-set-key [f12] 'thi::directorychooser)
-(add-hook 'dired-mode-hook 'dired-turn-on-discover)
