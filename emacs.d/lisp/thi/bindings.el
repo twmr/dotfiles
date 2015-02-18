@@ -23,11 +23,8 @@
 
 ;; (global-set-key [f4] 'query-replace)
 ;; (global-set-key [f4] 'replace-in-buffer)
-(global-set-key [f4] 're-builder)
+;; (global-set-key [f4] 're-builder)
 ;; (global-set-key [f5] 'magit-grep)
-(hydra-create "<f5>"
-  '(("g" text-scale-increase)
-    ("l" text-scale-decrease)))
 (global-set-key [f6] 'magit-status)
 (global-set-key [f7] 'magit-run-gitk)
 (global-set-key [f8] 'open-file-at-cursor)
