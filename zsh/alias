@@ -94,6 +94,8 @@ alias dnu='sudo dnf update'
 alias ds='sudo dnf search'
 alias dr='sudo dnf remove'
 
+alias ka='sudo killall'
+
 alias cmx='chmod +x'
 
 #named directories
