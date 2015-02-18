@@ -26,7 +26,8 @@
 ;; (add-hook 'python-mode-hook (lambda ()
 ;;                               (setq-default-fill-column 72)))
 
-(add-hook 'python-mode-hook 'jedi:setup)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (add-hook 'python-mode-hook 'company-anaconda)
 (add-hook 'python-mode-hook #'fci-mode 1)
 (add-hook 'python-mode-hook #'highlight-indentation-mode 1)
 ;; (add-hook 'python-mode-hook #'python-cell-mode 1)
@@ -41,9 +42,9 @@
 
 ;; redefine jedi's C-. (jedi:goto-definition)
 ;; to remember position, and set C-, to jump back
-(define-key python-mode-map (kbd "C-.") 'jedi:jump-to-definition)
-(define-key python-mode-map (kbd "C-,") 'jedi:jump-back)
-(define-key python-mode-map (kbd "C-c d") 'jedi:show-doc)
+;; (define-key python-mode-map (kbd "C-.") 'jedi:jump-to-definition)
+;; (define-key python-mode-map (kbd "C-,") 'jedi:jump-back)
+;; (define-key python-mode-map (kbd "C-c d") 'jedi:show-doc)
 
 ;; see http://tuhdo.github.io/helm-intro.html#sec-6
 (define-key python-mode-map (kbd "C-`") 'helm-semantic-or-imenu)
