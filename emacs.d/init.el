@@ -128,7 +128,9 @@
   :defer t
   :idle (global-flycheck-mode))
 
+(use-package fill-column-indicator :ensure t :defer t)
 (use-package helm :ensure t :defer t)
+
 
 (use-package hydra :ensure t :defer t
   :init
@@ -139,6 +141,12 @@
       "zoom"
       ("g" text-scale-increase "in")
       ("l" text-scale-decrease "out"))
+
+    (defhydra hydra-zoom (global-map "<f4>")
+      "shift"
+      ("h" python-indent-shift-left "left")
+      ("l" python-indent-shift-right "right"))
+
     (global-set-key
      (kbd "C-M-o")
      (defhydra hydra-window ()
