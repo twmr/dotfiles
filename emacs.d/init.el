@@ -16,6 +16,8 @@
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 
+(setq paradox-execute-asynchronously t)
+
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
 (dolist (file (directory-files thi::config-dir))
@@ -215,6 +217,8 @@
     (window-numbering-mode 1))
   )
 
+(use-package yasnippet :ensure t :defer t)
+
 (use-package zop-to-char
   :ensure t
   :defer t
@@ -282,6 +286,6 @@
 ;; ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
 ;; (add-hook 'after-init-hook #'global-discover-mode)
 ;; (add-hook 'after-init-hook #'helm-projectile-on)
-;; (add-hook 'after-init-hook #'persp-mode)
+(add-hook 'after-init-hook #'persp-mode)
 
 ;;; init.el ends here
