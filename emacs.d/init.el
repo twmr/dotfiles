@@ -42,7 +42,6 @@
         ;; ibuffer-perspective ;; not avail.
         projectile
         direx
-        helm ;; helm is awesome!
         helm-projectile
         flx
         flx-ido
@@ -59,7 +58,6 @@
         smart-mode-line
         auctex
         project-persist
-        undo-tree
         moz-controller
         ;; aggressive-indent
         ;; yasnippet
