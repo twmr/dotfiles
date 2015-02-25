@@ -92,9 +92,10 @@
                               (variable-pitch-mode t)))))
                               ;; (wrap-column-mode)))))
 
-(add-hook 'ibuffer-hook
-         (lambda ()
-           (ibuffer-perspective-list)))
+;; ibuffer-perspective is not available via package.el
+;; (add-hook 'ibuffer-hook
+;;          (lambda ()
+;;            (ibuffer-perspective-list)))
 
 ;; Go into proper mode according to file extension
 (setq auto-mode-alist
