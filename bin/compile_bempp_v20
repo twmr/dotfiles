@@ -48,6 +48,8 @@ print("bem prefix dir %s" % bempy)
 for x in pypacks:
     srcdir = os.path.join(bempy, x)
     dstdir = os.path.join(spdir, x)
+    if os.path.exists(dstdir):
+        os.unlink(dstdir)
 
     print("%s links to %s" % (dstdir, srcdir))
     os.symlink(srcdir, dstdir)
