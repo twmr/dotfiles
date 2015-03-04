@@ -320,3 +320,17 @@ Position the cursor at its beginning, according to the current mode."
   (interactive)
   (move-end-of-line nil)
   (newline-and-indent))
+
+
+(defun join-line-vim-style ()
+  (interactive)
+  (save-excursion
+    (let ((start (progn
+                   (end-of-line)
+                   (insert " ")
+                   (point-at-eol)))
+          (end (progn
+                 (forward-line)
+                 (back-to-indentation)
+                 (point))))
+         (delete-region start end))))

@@ -38,16 +38,11 @@
         git-rebase-mode
         gitconfig-mode
         gitignore-mode
-        magit
         magit-filenotify
         perspective
         ;; ibuffer-perspective ;; not avail.
-        projectile
         direx
         helm-projectile
-        flx
-        flx-ido
-        smex
         julia-mode
         ;; ;; calfw
         cmake-mode
@@ -119,9 +114,40 @@
     )
   )
 
+(use-package highlight-indentation :ensure t)
+
+(use-package magit :ensure t)
+
 (use-package python
   :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode))
+  :interpreter ("python" . python-mode)
+  ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
+  ;; (("C-`" . 'helm-semantic-or-imenu))
+  ;; :init (progn
+  ;;         (load "thi/python.conf.el"))
+  :init
+  (progn
+    (with-eval-after-load 'helm
+      (bind-key "C-`" #'helm-semantic-or-imenu python-mode-map)
+      )
+    )
+  )
+
+(use-package jedi :ensure t
+  :disabled t
+  ;; redefine jedi's C-. (jedi:goto-definition)
+  ;; to remember position, and set C-, to jump back
+  :bind (("C-." . jedi:jump-to-definition)
+   ("C-," . jedi:jump-back)
+   ("C-c d" . jedi:show-doc))
+  :init
+  (progn
+    (add-hook 'python-mode-hook 'jedi:setup)
+    ))
+
+(use-package fill-column-indicator :ensure t)
+(use-package flx :ensure t)
+(use-package flx-ido :ensure t)
 
 (use-package flycheck
   :ensure t
@@ -129,6 +155,7 @@
   :idle (global-flycheck-mode))
 
 (use-package fill-column-indicator :ensure t :defer t)
+
 (use-package helm :ensure t :defer t)
 
 
@@ -188,14 +215,16 @@
        ("i" ace-maximize-window "a1" :color blue)
        ("q" nil "cancel")))))
 
+
+(use-package smex :ensure t)
+
 (use-package undo-tree
   :ensure t
   :defer t
-  :init
-  (progn
-    (add-hook 'after-init-hook #'global-undo-tree-mode)
-    )
-  )
+  :idle (add-hook 'after-init-hook #'global-undo-tree-mode))
+
+(use-package projectile :ensure t :defer t
+  :idle (projectile-global-mode t))
 
 (use-package pdf-tools
   :ensure t
@@ -261,20 +290,7 @@
 (load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
 
-(defun join-line-vim-style ()
-  (interactive)
-  (save-excursion
-    (let ((start (progn
-                   (end-of-line)
-                   (insert " ")
-                   (point-at-eol)))
-          (end (progn
-                 (forward-line)
-                 (back-to-indentation)
-                 (point))))
-         (delete-region start end))))
 
-(global-set-key (kbd "C-c j") 'join-line-vim-style)
 
 (require 'url-tramp)
 
