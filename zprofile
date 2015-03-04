@@ -126,10 +126,14 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     prepath ${EMBINPATH}
     export DDIR=${GITR}/diss
 
+    prepath $GITR/software_setup_scripts
+    prepath $GITR/fenics/dev/slepc/src/eps/examples/tutorials
+
     export NETGENDIR=/opt/ngngs/bin
     export PYTHONPATH=$GITR/diss/task3:$DDIR/pysalt:${GITR}/cf-fem-lib/tools/in2d_creator_scripts:$PYTHONPATH
 
     # prepath $HOME/software/local/bin
+    prepath /opt/intel/bin
     prepath $NETGENDIR
     prepath $GITR/diss/task3/scripts
     preldlpath $HOME/software/local/lib

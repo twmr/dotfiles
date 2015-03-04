@@ -5,7 +5,7 @@ function remove_conda_packs() {
 }
 
 function fenicsswitch() {
-    choices=(maint maintcomplex dev devpy27 devpy27complex v14)
+    choices=(maint maintcomplex dev devpy27 devpy27complex)
 
     ver=$1
 
@@ -30,7 +30,7 @@ function fenicsswitch() {
 
     elif [ $ver = 'maintcomplex' ]; then
         # NO DOLFIN FOR COMPLEX PETSCSCALARs
-        export BP_COMPLEX=1
+        export BP_COMPLEX=true
         source petscmaintvars.sh
         source activate $CUR_CONDA_ENV
     fi
@@ -38,24 +38,6 @@ function fenicsswitch() {
     if [ $ver = 'dev' ]; then
         echo "dev is not supported atm"
         return 1
-
-        # devdir=${GITR}/fenics/dev
-        # export PETSC_DIR=$devdir/petsc
-        # export SLEPC_DIR=$devdir/slepc
-        # export PETSC_ARCH="arch-linux64"
-        # export DOLFIN_DIR=$devdir/dolfin
-        # export BEMPP_DIR=$devdir/bempp
-        # if [ "$HOSTNAME" = "cobra" ]; then
-        #     #source activate py34_fenics15dev_petsc35
-        #     source activate py27_fenics15dev_petsc35
-        # elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
-        #     source activate py27_fenics15dev_petsc35
-        # fi
-        # #conda info -e
-        # export PATH=$PETSC_DIR/$PETSC_ARCH/bin:$PATH
-        # export DOLFIN_ARCH="build_fed_openmpi"
-        # export BEMPP_ARCH="build_dev" # atm builds v2.0
-        # export FEN=$devdir
     elif [ $ver = 'devpy27' -o $ver = 'devpy27complex' ]; then
         devdir=${GITR}/fenics/dev
         export PETSC_DIR=$devdir/petsc
