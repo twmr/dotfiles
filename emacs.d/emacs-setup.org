@@ -38,6 +38,26 @@ to open a file as superuse type =C-c C-f= and then =/sudo= then =TAB/enter= mult
 =C-f= switches to the default find-file interface
 (from there =C-m= can be used to open the CWD in dired)
 =C-d= open the dired-buffer
+** Project Management
+interesting projects: projectile, persp-mode, helm-projectile 
+???
+projectile saves list of known projects in
+~/.emacs.d/projectile-bookmarks.eld
+
+=C-c p p= switch project, opens a helm buffer with a list of files in the
+project once you have selected a project you want to switch to
+
+(setq projectile-switch-project-action 'projectile-dired)
+With this setting, once you have selected your project, the top-level directory of the project is immediately opened for you in a dired buffer.
+
+(setq projectile-switch-project-action 'projectile-find-dir)
+With this setting, once you have selected your project, you will remain in Projectile's completion system to select a sub-directory of your project, and then that sub-directory is opened for you in a dired buffer. If you use this setting, then you will probably also want to set
+
+(setq projectile-find-dir-includes-top-level t)
+
+in order to allow for the occasions where you want to select the top-level directory.
+
+
 ** Image Mode
 *** =<del>= go back to dired buffer of the current dir
 *** =<right>= go to next file in dir
@@ -73,6 +93,7 @@ Sam Steingold <sds@gnu.org> writes:
 
 /ssh:user1@host|sudo:user2@host:
 ** Dired
+*** =+= create directory
 *** =C-x C-j= dired jump (jumps to a dired buffer of the directory of the
 current file); equivalent to =C-x d RET=
 *** =C-x C-q= editable dired mode (to rename files easily (when done press =C-c C-c=
@@ -81,6 +102,7 @@ http://www.reddit.com/r/emacs/comments/25m7ae/help_rename_multi_filename_in_dire
 *** in dired buffer
 **** "DEL" dired-up-directory
 **** "/" search in current dir
+**** "?" opens a magit-like help buffer
 ** Function Keys
 =F2=
 If I'm already in an ansi-term, but it's called "*ansi-term*" rename it.
