@@ -158,7 +158,6 @@
 
 (use-package helm :ensure t :defer t)
 
-
 (use-package hydra :ensure t :defer t
   :init
   (progn
@@ -217,6 +216,9 @@
 
 
 (use-package smex :ensure t)
+
+;; requires semantic-mode to be enabled
+(use-package stickyfunc-enhance :ensure t)
 
 (use-package undo-tree
   :ensure t
