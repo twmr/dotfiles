@@ -270,9 +270,12 @@
     (add-hook 'after-make-frame-functions
               '(lambda (f)
                  (with-selected-frame f
-                   (when (window-system f) (load-theme thi::theme t)))))
-  (load-theme thi::theme t))
-(sml/setup)
+                   (when (window-system f)
+                     (load-theme thi::theme t)
+                     (sml/setup)))))
+  (progn
+    (load-theme thi::theme t)
+    (sml/setup)))
 
 (load "thi/defuns")
 (load "thi/global")
