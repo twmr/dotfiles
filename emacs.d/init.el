@@ -98,6 +98,8 @@
 (require 'use-package)
 ;; https://github.com/alezost/emacs-config/prog.el
 
+(use-package paradox :ensure t)
+
 (use-package ace-jump-mode :ensure t :defer t
   :init
   (progn
