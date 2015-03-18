@@ -108,7 +108,18 @@
     (bind-key "C-." 'ace-jump-mode)))
 
 (use-package company :ensure t :defer t
-  :idle (global-company-mode))
+  :config (progn
+            (defun company-complete-common-or-cycle ()
+              "Insert the common part of all candidates, or select the next one."
+              (interactive)
+              (when (company-manual-begin)
+                (let ((tick (buffer-chars-modified-tick)))
+                  (call-interactively 'company-complete-common)
+                  (when (eq tick (buffer-chars-modified-tick))
+                    (let ((company-selection-wrap-around t))
+                      (call-interactively 'company-select-next))))))
+            (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+            (global-company-mode)))
 
 (use-package ethan-wspace :ensure t :defer t
   :init
@@ -131,7 +142,7 @@
   :init
   (progn
     (with-eval-after-load 'helm
-      (bind-key "C-`" #'helm-semantic-or-imenu python-mode-map)
+      (bind-key "C-`" #'helm-semantic-or-imenu 'python-mode-map)
       )
     )
   )
@@ -155,7 +166,7 @@
 (use-package flycheck
   :ensure t
   :defer t
-  :idle (global-flycheck-mode))
+  :config (global-flycheck-mode))
 
 (use-package fill-column-indicator :ensure t :defer t)
 
@@ -226,10 +237,10 @@
 (use-package undo-tree
   :ensure t
   :defer t
-  :idle (add-hook 'after-init-hook #'global-undo-tree-mode))
+  :config (add-hook 'after-init-hook #'global-undo-tree-mode))
 
 (use-package projectile :ensure t :defer t
-  :idle (projectile-global-mode t))
+  :config (projectile-global-mode t))
 
 (use-package pdf-tools
   :ensure t
@@ -297,7 +308,6 @@
 (load "thi/term")
 (load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
-
 
 
 (require 'url-tramp)
