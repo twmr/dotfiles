@@ -45,7 +45,6 @@
         helm-projectile
         julia-mode
         ;; ;; calfw
-        cmake-mode
         ;; eassist
         ;; haskell-mode
         markdown-mode
@@ -107,6 +106,8 @@
     (autoload 'ace-jump-mode "ace-jump-mode" nil t)
     (bind-key "C-." 'ace-jump-mode)))
 
+(use-package cmake-mode :ensure t :defer t)
+
 (use-package company :ensure t :defer t
   :config (progn
             (defun company-complete-common-or-cycle ()
@@ -129,6 +130,7 @@
   )
 
 (use-package highlight-indentation :ensure t)
+(use-package paradox :ensure t :defer t)
 
 (use-package magit :ensure t)
 
