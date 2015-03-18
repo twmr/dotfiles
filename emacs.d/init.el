@@ -95,7 +95,8 @@
         ;; solarized-theme
         ))
 
-(require 'use-package)
+(eval-when-compile
+  (require 'use-package))
 ;; https://github.com/alezost/emacs-config/prog.el
 
 (use-package paradox :ensure t)
