@@ -48,6 +48,10 @@ function started() {
     fi
 }
 
+function ginf() {
+    cat "$(git rev-parse --show-toplevel)"/.git/config
+}
+
 function cenvdir() {
     echo $HOME/miniconda/envs/$CONDA_DEFAULT_ENV
 }
