@@ -106,6 +106,7 @@
     (autoload 'ace-jump-mode "ace-jump-mode" nil t)
     (bind-key "C-." 'ace-jump-mode)))
 
+(use-package color-identifiers-mode :ensure t :defer t)
 (use-package cmake-mode :ensure t :defer t)
 
 (use-package company :ensure t :defer t
@@ -190,6 +191,23 @@
       ("l" python-indent-shift-right "right"))
 
     (global-set-key
+     (kbd "C-x h")
+     (defhydra hydra-apropos (:color blue
+                                     :hint nil)
+       "
+_a_propos        _c_ommand
+_d_ocumentation  _l_ibrary
+_v_ariable       _u_ser-option
+^ ^          valu_e_"
+       ("a" apropos)
+       ("d" apropos-documentation)
+       ("v" apropos-variable)
+       ("c" apropos-command)
+       ("l" apropos-library)
+       ("u" apropos-user-option)
+       ("e" apropos-value)))
+
+    (global-set-key
      (kbd "C-M-o")
      (defhydra hydra-window ()
        ;; http://oremacs.com/2015/02/03/one-hydra-two-hydra/
@@ -230,6 +248,16 @@
        ("i" ace-maximize-window "a1" :color blue)
        ("q" nil "cancel")))))
 
+(use-package multiple-cursors :ensure t :defer t
+  :bind (("C-c m e"   . mc/mark-more-like-this-extended)
+         ("C-c m h"   . mc/mark-all-like-this-dwim)
+         ("C-c m l"   . mc/edit-lines)
+         ("C-c m n"   . mc/mark-next-like-this)
+         ("C-c m p"   . mc/mark-previous-like-this)
+         ("C-c m r"   . vr/mc-mark)
+         ("C-c m C-a" . mc/edit-beginnings-of-lines)
+         ("C-c m C-e" . mc/edit-ends-of-lines)
+         ("C-c m C-s" . mc/mark-all-in-region)))
 
 (use-package smex :ensure t)
 
@@ -272,6 +300,8 @@
   :init
   (progn
     (bind-key "M-z" 'zop-to-char)))
+
+(use-package zotelo :ensure t :defer t)
 
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
