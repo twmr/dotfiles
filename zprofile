@@ -157,7 +157,9 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export BOOST_SRC_PATH=$MYSRCDIR/boost_1_52_0
 
-    export NETGENDIR=/opt/ngngs/bin
+    #export NETGENDIR=/opt/ngngs/bin
+    export NETGENDIR=/opt/ngngs6/bin
+    export PYTHONPATH=/opt/ngngs6/lib64/python3.4/site-packages:$PYTHONPATH
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
 
