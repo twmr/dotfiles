@@ -100,6 +100,8 @@
 
 (use-package paradox :ensure t)
 
+(use-package matlab-mode :ensure t :defer t)
+
 (use-package ace-jump-mode :ensure t :defer t
   :init
   (progn
@@ -168,7 +170,10 @@
 
 (use-package flycheck
   :ensure t
-  :defer t
+  :init (progn
+          (setq flycheck-highlighting-mode 'lines)
+          (setq flycheck-display-errors-delay 0.4)
+          (setq flycheck-completion-system 'ido))
   :config (global-flycheck-mode))
 
 (use-package fill-column-indicator :ensure t :defer t)
