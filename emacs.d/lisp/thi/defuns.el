@@ -278,17 +278,17 @@ Works by adjusting the right margin."
 (global-set-key "\M-;" 'comment-dwim-line)
 
 ;; taken from https://gist.github.com/mooz/890562
-(defun my-reb-query-replace-regexp ()
-  "Call `query-replace-regexp' with current regexp of RE-builder"
-  (interactive)
-  (reb-update-regexp)
-  (let ((re (reb-target-binding reb-regexp)))
-    (flet ((query-replace-read-from
-            (prompt regexp-flag)
-            ;; body
-            re))
-      (pop-to-buffer reb-target-buffer)
-      (call-interactively 'query-replace-regexp))))
+;; (defun my-reb-query-replace-regexp ()
+;;   "Call `query-replace-regexp' with current regexp of RE-builder"
+;;   (interactive)
+;;   (reb-update-regexp)
+;;   (let ((re (reb-target-binding reb-regexp)))
+;;     (flet ((query-replace-read-from
+;;             (prompt regexp-flag)
+;;             ;; body
+;;             re))
+;;       (pop-to-buffer reb-target-buffer)
+;;       (call-interactively 'query-replace-regexp))))
 
 ;; Stolen from Magnar's code to do the same thing for dired
 ;; http://whattheemacsd.com/setup-dired.el-02.html
