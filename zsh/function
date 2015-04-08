@@ -48,10 +48,6 @@ function started() {
     fi
 }
 
-function ginf() {
-    cat "$(git rev-parse --show-toplevel)"/.git/config
-}
-
 function cenvdir() {
     echo $HOME/miniconda/envs/$CONDA_DEFAULT_ENV
 }
@@ -141,6 +137,7 @@ function GG() { grep -RiI --exclude-dir=.svn  --exclude-dir=.git $* * }
 
 # git functions
 function ga() { git add $* }
+function gf() { git fetch $* }
 function gd() { git diff --ignore-submodules $* }
 function gg() { git grep $* }
 function glol() { git lola $* }
@@ -163,6 +160,12 @@ function gco() {
         git checkout $1
     fi
 }
+
+function ginf() {
+    cat "$(git rev-parse --show-toplevel)"/.git/config
+}
+
+
 
 function sco() {
     args=""
