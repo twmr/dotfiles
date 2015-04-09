@@ -135,7 +135,11 @@
 (use-package highlight-indentation :ensure t)
 (use-package paradox :ensure t :defer t)
 
-(use-package magit :ensure t)
+(use-package magit :ensure t
+  :init
+  (progn
+    (setq magit-last-seen-setup-instructions "1.4.0")
+    ))
 
 (use-package python
   :mode ("\\.py\\'" . python-mode)
