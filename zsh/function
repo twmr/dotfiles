@@ -160,6 +160,7 @@ function gco() {
         git checkout $1
     fi
 }
+function gpr() { git pull rebase $* }
 
 function ginf() {
     cat "$(git rev-parse --show-toplevel)"/.git/config
