@@ -9,7 +9,7 @@
  '(cursor-color nil)
  '(custom-safe-themes
    (quote
-    ("6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
+    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(evil-mode-line-format (quote before))
  '(git-commit-mode-hook (quote (turn-on-auto-fill)))
  '(ido-auto-merge-delay-time 2.7)
@@ -40,14 +40,15 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (highlight-indentation yasnippet projectile helm fill-column-indicator magit evil discover zop-to-char yaml-mode window-numbering use-package undo-tree sx solarized-theme smex smart-mode-line project-persist project-explorer perspective pdf-tools origami moz-controller magit-filenotify julia-mode json-mode iedit hydra htmlize helm-projectile gitignore-mode gitconfig-mode flycheck flx-ido f expand-region ethan-wspace dynamic-fonts direx company color-theme-sanityinc-tomorrow cmake-mode bbdb-vcard auctex aggressive-indent ace-window 2048-game)))
+    (ace-jump-mode multiple-cursors color-identifiers-mode matlab-mode zotelo stickyfunc-enhance company-jedi paradox highlight-indentation yasnippet projectile helm fill-column-indicator magit evil discover zop-to-char yaml-mode window-numbering use-package undo-tree sx solarized-theme smex smart-mode-line project-persist project-explorer perspective pdf-tools origami moz-controller magit-filenotify julia-mode json-mode iedit hydra htmlize helm-projectile gitignore-mode gitconfig-mode flycheck flx-ido f expand-region ethan-wspace dynamic-fonts direx company color-theme-sanityinc-tomorrow cmake-mode bbdb-vcard auctex aggressive-indent ace-window 2048-game)))
+ '(paradox-github-token t)
  '(preview-default-option-list
    (quote
     ("displaymath" "floats" "graphics" "textmath" "showlabels")))
  '(preview-scale-function 1.5)
  '(preview-transparent-color (quote (highlight :background)))
  '(python-shell-prompt-detect-enabled nil)
- '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")))
+ '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")) t)
  '(rm-blacklist
    (quote
     (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
@@ -60,16 +61,16 @@
      (whitespace-style face tabs trailing lines-tail)
      (TeX-master)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-           (add-hook
-            (quote write-contents-functions)
-            (lambda nil
-              (delete-trailing-whitespace)
-              nil))
-           (require
-            (quote whitespace))
-           "Sometimes the mode needs to be toggled off and on."
-           (whitespace-mode 0)
-           (whitespace-mode 1))
+	   (add-hook
+	    (quote write-contents-functions)
+	    (lambda nil
+	      (delete-trailing-whitespace)
+	      nil))
+	   (require
+	    (quote whitespace))
+	   "Sometimes the mode needs to be toggled off and on."
+	   (whitespace-mode 0)
+	   (whitespace-mode 1))
      (whitespace-line-column . 80)
      (whitespace-style face trailing lines-tail)
      (c-offsets-alist
@@ -93,12 +94,12 @@
       (objc-method-call-cont c-lineup-ObjC-method-call-colons c-lineup-ObjC-method-call +)
       (objc-method-args-cont . c-lineup-ObjC-method-args)
       (objc-method-intro .
-                         [0])
+			 [0])
       (friend . 0)
       (cpp-define-intro c-lineup-cpp-define +)
       (cpp-macro-cont . +)
       (cpp-macro .
-                 [0])
+		 [0])
       (inclass . +)
       (stream-op . c-lineup-streamop)
       (arglist-cont-nonempty c-lineup-gcc-asm-reg c-lineup-arglist)
