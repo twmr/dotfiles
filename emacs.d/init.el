@@ -139,7 +139,8 @@
   :init
   (progn
     (setq magit-last-seen-setup-instructions "1.4.0")
-    ))
+    )
+  )
 
 (use-package python
   :mode ("\\.py\\'" . python-mode)
@@ -148,12 +149,12 @@
   ;; (("C-`" . 'helm-semantic-or-imenu))
   ;; :init (progn
   ;;         (load "thi/python.conf.el"))
-  :init
-  (progn
-    (with-eval-after-load 'helm
-      (bind-key "C-`" #'helm-semantic-or-imenu 'python-mode-map)
-      )
-    )
+  ;; :init
+  ;; (progn
+  ;;   (with-eval-after-load 'helm
+  ;;     (bind-key "C-`" #'helm-semantic-or-imenu 'python-mode-map)
+  ;;     )
+  ;;   )
   )
 
 (use-package jedi :ensure t
@@ -177,7 +178,9 @@
   :init (progn
           (setq flycheck-highlighting-mode 'lines)
           (setq flycheck-display-errors-delay 0.4)
-          (setq flycheck-completion-system 'ido))
+          (setq flycheck-completion-system 'ido)
+          (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+          )
   :config (global-flycheck-mode))
 
 (use-package fill-column-indicator :ensure t :defer t)
