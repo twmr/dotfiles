@@ -130,7 +130,7 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     prepath $GITR/fenics/dev/slepc/src/eps/examples/tutorials
 
     export NETGENDIR=/opt/ngngs/bin
-    export PYTHONPATH=$GITR/diss/task3:$DDIR/pysalt:${GITR}/cf-fem-lib/tools/in2d_creator_scripts:$PYTHONPATH
+    export PYTHONPATH=$GITR/diss/task3:$DDIR/pysalt:$PYTHONPATH
 
     # prepath $HOME/software/local/bin
     prepath /opt/intel/bin
