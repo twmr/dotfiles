@@ -624,6 +624,9 @@ awful.rules.rules = {
     { rule = { class = "URxvt", instance = "mpi" },
       properties = { tag = tags[monitors.right][8] }
     },
+    { rule = { class = "krunner" },
+      properties = { floating = true }
+    },
     -- { rule = { instance = "chromium-browser" },
       -- properties = { tag = tags[monitors.prim][3] } },
     -- { rule = { instance = "google-chrome" },
