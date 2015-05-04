@@ -139,8 +139,8 @@
   :init
   (progn
     (setq magit-last-seen-setup-instructions "1.4.0")
-    )
-  )
+    (setq magit-completing-read-function 'ivy-completing-read)
+    ))
 
 (use-package python
   :mode ("\\.py\\'" . python-mode)
@@ -273,6 +273,11 @@ _v_ariable       _u_ser-option
 
 (use-package smex :ensure t)
 
+(use-package swiper :ensure t
+  :bind (("C-h v" . counsel-describe-variable)
+         ("C-h f" . counsel-describe-function)
+         ("C-h s" . counsel-info-lookup-symbol)))
+
 ;; requires semantic-mode to be enabled
 (use-package stickyfunc-enhance :ensure t)
 
@@ -282,7 +287,10 @@ _v_ariable       _u_ser-option
   :config (add-hook 'after-init-hook #'global-undo-tree-mode))
 
 (use-package projectile :ensure t :defer t
-  :config (projectile-global-mode t))
+  :config (progn
+            (projectile-global-mode t)
+            (setq projectile-completion-system 'ivy)
+  ))
 
 (use-package pdf-tools
   :ensure t

@@ -2,8 +2,6 @@
 (require 'perspective)
 (projectile-global-mode)
 
-(setq projectile-completion-system 'helm)
-
 ;; if project-persist-mode is not installed install it using package.el
 (project-persist-mode 1) ;; C-c P n; C-c P f
 
