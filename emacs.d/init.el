@@ -125,6 +125,8 @@
             (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
             (global-company-mode)))
 
+(use-package cython-mode :ensure t :defer t)
+
 (use-package ethan-wspace :ensure t :defer t
   :init
   (progn
