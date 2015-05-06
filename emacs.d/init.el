@@ -275,7 +275,8 @@
 
 (use-package smex :ensure t)
 
-(use-package swiper :ensure t
+(use-package swiper :ensure t)
+(use-package counsel :ensure t
   :bind (("C-h v" . counsel-describe-variable)
          ("C-h f" . counsel-describe-function)
          ("C-h s" . counsel-info-lookup-symbol)))
