@@ -157,13 +157,13 @@
 (define-key global-map "\M-Q" 'unfill-paragraph)
 (define-key global-map "\M-\C-q" 'unfill-region)
 
-(eval-after-load 're-builder
-  '(lambda ()
-     (define-key reb-mode-map (kbd "C-c %") 'my-reb-query-replace-regexp)
-     (define-key reb-mode-map (kbd "C-s") 'reb-next-match)
-     (define-key reb-mode-map (kbd "C-r") 'reb-prev-match)
-     ;; C-c C-q -> C-g
-     (define-key reb-mode-map (kbd "C-g") 'reb-copy-and-quit)))
+;; (eval-after-load 're-builder
+;;   '(lambda ()
+;;      (define-key reb-mode-map (kbd "C-c %") 'my-reb-query-replace-regexp)
+;;      (define-key reb-mode-map (kbd "C-s") 'reb-next-match)
+;;      (define-key reb-mode-map (kbd "C-r") 'reb-prev-match)
+;;      ;; C-c C-q -> C-g
+;;      (define-key reb-mode-map (kbd "C-g") 'reb-copy-and-quit)))
 
 (eval-after-load 'ibuffer
   '(progn
