@@ -292,8 +292,12 @@
 (use-package projectile :ensure t :defer t
   :config (progn
             (projectile-global-mode t)
-            (setq projectile-completion-system 'ivy)
-  ))
+            ;; (setq projectile-completion-system 'ivy)
+            (setq projectile-completion-system 'ido)
+            ))
+
+(use-package helm-projectile :ensure t :defer t)
+
 
 (use-package pdf-tools
   :ensure t
