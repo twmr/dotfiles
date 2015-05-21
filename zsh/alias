@@ -105,6 +105,7 @@ if [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" -o "$HOSTNAME" = "cobra" ]; 
     alias vsc2='ssh thisch@vsc2.tuwien.ac.at -X -A'
     alias vsc3='ssh -p 27 thisch2@vsc3.vsc.ac.at -X -A'
     alias vsc3new='ssh -p 27 thisch@vsc3.vsc.ac.at -X -A'
+    alias vsc3itp='ssh -p 27 thisch3@vsc3.vsc.ac.at -X -A'
 
     alias ng='LD_PRELOAD=/opt/libpardiso500-GNU481-X86-64.so:/usr/lib64/libm.so:/usr/lib64/liblapack.so:/usr/lib64/libblas.so  netgen'
     hash -d pys=${GITR}/diss/pysalt
