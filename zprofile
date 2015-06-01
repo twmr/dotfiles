@@ -129,6 +129,8 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     prepath $GITR/software_setup_scripts
     prepath $GITR/fenics/dev/slepc/src/eps/examples/tutorials
 
+    export PETSC_MAINT_DIR=$GITR/fenics
+
     export NETGENDIR=/opt/ngngs/bin
     export PYTHONPATH=$GITR/diss/task3:$DDIR/pysalt:$PYTHONPATH
 
