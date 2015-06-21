@@ -11,6 +11,7 @@ alias cp='cp -v'
 alias mplayer='mplayer -idx'
 alias wget='wget --timeout 10'
 alias grep='grep --color=auto'
+alias cua='conda update --all'
 
 alias -g G='| egrep'
 
