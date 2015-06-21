@@ -139,6 +139,7 @@
         ("gitconfig$" . gitconfig-mode)
         ("\\.\\(md\\|markdown\\)\\'" . markdown-mode)
         ("bash\\(rc\\|_profile\\)$" . shell-script-mode)
+        ("\\.pdf\\'" . pdf-view-mode)
         ("\\.zsh\\'" . shell-script-mode)
         ("ChangeLog\\'" . change-log-mode)
         ("change\\.log\\'" . change-log-mode)
