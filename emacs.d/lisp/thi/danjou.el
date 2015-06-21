@@ -2,7 +2,7 @@
 (setq frame-title-format '("" invocation-name ": %b"))
 ;; keyboard scroll one line at a time
 (setq scroll-conservatively 10000)
-(setq visible-bell t)
+;; (setq visible-bell t)
 (setq-default fill-column 76)
 
 (set-default 'indicate-buffer-boundaries '((up . nil) (down . nil) (t . left)))
