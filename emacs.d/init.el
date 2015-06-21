@@ -315,6 +315,17 @@
 
     ))
 
+(use-package imenu-anywhere
+  :ensure t
+  :defer t
+  :init (global-set-key (kbd "C-.") 'imenu-anywhere)
+  :config (defun jcs-use-package ()
+            (add-to-list 'imenu-generic-expression
+             '("Used Packages"
+               "\\(^\\s-*(use-package +\\)\\(\\_<.+\\_>\\)" 2)))
+  (add-hook 'emacs-lisp-mode-hook #'jcs-use-package))
+
+
 (use-package multiple-cursors :ensure t :defer t
   :bind (("C-c m e"   . mc/mark-more-like-this-extended)
          ("C-c m h"   . mc/mark-all-like-this-dwim)
