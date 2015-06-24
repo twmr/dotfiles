@@ -1,0 +1,4 @@
+#!/bin/bash
+#echo "num args" $#
+#echo "all args" $*
+python2 -c "import numpy as np; import scipy.constants as co; print('wavelength: %s um -> f=%s THz' % ($*, co.c/$*/1e6))"

@@ -1,0 +1,2 @@
+#!/bin/bash
+python2 -c "import numpy as np; import scipy.constants as co; print('frequency: %s THz -> lambda=%s um' % ($*, co.c/$*/1e6))"
