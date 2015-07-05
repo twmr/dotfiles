@@ -1,7 +1,7 @@
 ;;; It's Magit! An Emacs mode for Git.
 
-(setq magit-repo-dirs `(,"~/gitrepos" "~/.emacs.d" "~/.emacs.d/el-get/el-get"))
-(setq magit-commit-signoff nil) ;; TODO set this to nil only for IMS repos
+(setq magit-repository-directories `(,"~/gitrepos" "~/.emacs.d"))
+;; (setq magit-commit-signoff nil)
 (setq magit-remote-ref-format 'remote-slash-branch)
 (setq magit-completing-read-function 'magit-ido-completing-read)
 (setq magit-save-some-buffers nil)
@@ -40,19 +40,10 @@
      (lambda (s)
        (magit-section-set-hidden s (not (magit-section-hidden s)))))))
 
-;; full screen magit-status
-(defadvice magit-status (around magit-fullscreen activate)
-    (window-configuration-to-register :magit-fullscreen)
-      ad-do-it
-        (delete-other-windows))
-
-(defun magit-quit-session ()
-    "Restores the previous window configuration and kills the magit buffer"
-      (interactive)
-        (kill-buffer)
-          (jump-to-register :magit-fullscreen))
-
-(define-key magit-status-mode-map (kbd "q") 'magit-quit-session)
+(setq magit-status-buffer-switch-function
+      (lambda (buffer) ; there might already be an Emacs function which does this
+        (pop-to-buffer buffer)
+        (delete-other-windows)))
 
 ;; Add a "latest commits" section
 ;; (magit-define-section-jumper latest   "Latest commits")

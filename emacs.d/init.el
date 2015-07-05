@@ -135,14 +135,13 @@
   )
 
 (use-package highlight-indentation :ensure t)
-(use-package paradox :ensure t :defer t)
 
 (use-package magit :ensure t
   :init
   (progn
-    (setq magit-last-seen-setup-instructions "1.4.0")
     (setq magit-completing-read-function 'ivy-completing-read)
-    ))
+    )
+  )
 
 (use-package python
   :mode ("\\.py\\'" . python-mode)
