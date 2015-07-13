@@ -5,6 +5,6 @@ create_default_packages:
   - cython
 
 channels:
-  - file:///home/thomas/miniconda/conda-bld
+  # - file:///home/thomas/miniconda/conda-bld
   # - http://conda.binstar.org/thisch
   - defaults
