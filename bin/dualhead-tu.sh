@@ -1,6 +1,6 @@
 #!/bin/sh
 
-outleft=VGA1
+outleft=HDMI1
 outright=HDMI2
 xrandr --output ${outleft} --auto
 xrandr --output ${outright} --auto
