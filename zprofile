@@ -133,6 +133,7 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
 
     export NETGENDIR=$HOME/opt/ngngs6/bin
     export PYTHONPATH=$GITR/diss/task3:$DDIR/pysalt:$PYTHONPATH
+    export PYTHONPATH=$GITR/diss/t4:$PYTHONPATH
 
     # prepath $HOME/software/local/bin
     prepath /opt/intel/bin
@@ -140,12 +141,14 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     prepath $GITR/diss/task3/scripts
     preldlpath $HOME/software/local/lib
 
+    prepath $HOME/software/Zotero_linux-x86_64
+
     export CONDA_ENV_DIR=$HOME/miniconda/envs
 
     export MAKEOPTS='-j`nproc`'
     export PARDISO_LIB=/opt/libpardiso500-GNU481-X86-64.so
-    ulimlimit=`free | grep '^Mem' | gawk '{ print(int($2 * 0.95)) }'`
-    ulimit -v $ulimlimit
+    #ulimlimit=`free | grep '^Mem' | gawk '{ print(int($2 * 0.95)) }'`
+    #ulimit -v $ulimlimit
 elif [ "$HOSTNAME" = "cobra" ]; then
     export PUBDOC=$HOME/gitrepos/publication
     DOTFPATH=$HOME/gitrepos/dotfiles

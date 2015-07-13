@@ -52,6 +52,7 @@ alias qtc='qtcreator'
 
 alias mat='matlab -nosplash'
 alias cmat='matlab -nodesktop -nosplash -nojvm'
+alias zot='run_zotero.sh'
 
 alias i='noglob i'
 
