@@ -18,8 +18,8 @@ alias -g G='| egrep'
 # alias pip='python-pip'
 
 #python stuff
-alias workon='source activate'
-alias workoff='source deactivate'
+alias workon='enconda && source activate'
+alias workoff='enconda && source deactivate'
 
 #function call
 alias ex=extract_archive
