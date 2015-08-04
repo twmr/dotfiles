@@ -100,9 +100,10 @@ URxvt*loginShell:       true
 !URxvt*termName:         rxvt-unicode
 URxvt*secondaryScroll:  true
 !URxvt*perl-lib:         /usr/lib/urxvt/perl/
-!URxvt*perl-ext-common:  default,matcher,searchable-scrollback
-!URxvt*urlLauncher:      chromium-browser
-!URxvt*matcher.button:   1
+URxvt.perl-ext-common:  default,matcher
+!,searchable-scrollback
+URxvt.url-launcher:      /bin/google-chrome
+URxvt.matcher.button:   1
 !URxvt*cutchars:         BACKSLASH '"'&()*,;<=>?@[]{|}
 
 !URxvt*visualBell:       true
