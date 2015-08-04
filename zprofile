@@ -153,7 +153,6 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     #ulimlimit=`free | grep '^Mem' | gawk '{ print(int($2 * 0.95)) }'`
     #ulimit -v $ulimlimit
 elif [ "$HOSTNAME" = "cobra" ]; then
-    export PUBDOC=$HOME/gitrepos/publication
     DOTFPATH=$HOME/gitrepos/dotfiles
 
     export JDK_HOME=$HOME/software/jdk1.7.0_40
@@ -170,11 +169,13 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     # export PYTHONPATH=$HOME/opt/ngngs6/lib64/python3.4/site-packages:$PYTHONPATH
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
+    export EMBINPATH2=${HOME}/gitrepos/emacs/lib-src
 
     export CONDA_ENV_DIR=$HOME/miniconda/envs
 
     # prepath $HOME/software/pycharm-community-3.4.1/bin
     prepath $EMBINPATH
+    prepath $EMBINPATH2
     prepath $DOTFPATH/bin
     prepath $HOME/local/bin
     prepath $HOME/.local/bin
@@ -185,6 +186,8 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $GITR/software_setup_scripts
     prepath $NETGENDIR
     prepath $GITR/diss/task3/scripts
+    prepath $HOME/software/Zotero_linux-x86_64
+
 
     export PARDISO_LIB=/opt/libpardiso500-GNU481-X86-64.so
     export PYTHONPATH=${GITR}/diss/pysalt:${GITR}/diss/task3:$PYTHOPATH
