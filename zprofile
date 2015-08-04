@@ -34,6 +34,9 @@ export LOCSOFT=$HOME/local/software
 export GITR=$HOME/gitrepos
 export BROWSER=google-chrome
 
+# FEDORA STUFF
+export W3MIMGDISPLAY_PATH=/usr/libexec/w3m/w3mimgdisplay # needed by 'ranger' file browser
+
 prepath() {
     # prepend path to PATH
     [ -d "${1}" ] && [[ ! "${PATH}" =~ ${1} ]] && PATH="${1}:${PATH}"
