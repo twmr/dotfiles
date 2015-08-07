@@ -11,15 +11,31 @@ alias cp='cp -v'
 alias mplayer='mplayer -idx'
 alias wget='wget --timeout 10'
 alias grep='grep --color=auto'
+
+# conda
 alias cua='conda update --all'
-
-alias -g G='| egrep'
-
-# alias pip='python-pip'
-
-#python stuff
+alias ci='conda install'
+alias cr='conda remove --use-index-cache'
 alias workon='enconda && source activate'
 alias workoff='enconda && source deactivate'
+
+# python stuff
+alias tr='testrunner.py'
+alias femtr='tr -S fem'
+alias bemtr='tr -S bem'
+alias extr='tr -S examples'
+alias rng='ranger'
+# alias pip='python-pip'
+alias ipy='ipython --no-confirm-exit'
+alias bp='bpython-curtsies'
+alias pyc='pycharm.sh'
+alias py='python'
+alias piu='py setup.py install --user'
+alias pi='py setup.py install'
+alias pib='py setup.py build'
+alias pympi='mpirun -n `nproc` python'
+
+alias -g G='| egrep'
 
 #function call
 alias ex=extract_archive
@@ -76,20 +92,21 @@ alias v='vim'
 alias pgnup='gnuplot -persist'
 alias nautilus='nautilus --no-desktop'
 
-alias removepyc='rm -f `find . -iname "*.pyc"`'
+function nestedrm() {
+    files=$(find . -iname "$1")
+    # TODO extra check
+    echo $files
+    rm -f $files
+}
+
+alias removepyc='rm -f `find . -iname "*.pyc" -o -iname "__pycache__"`'
 alias removelog='rm -f`find . -iname "*.log"`'
-alias removeng='rm -f `find . -iname "ng.ini" -o -iname "ng.prof" -o -iname "ngmesh.ini"`'
+alias removeng='rm -f `find . -iname "ng.ini" \
+                           -o -iname "ng.prof" \
+                           -o -iname "ngmesh.ini" \
+                           -o -iname "ng0.trace"`'
 
 alias st='sublime_text'
-
-alias ipy='ipython --no-confirm-exit'
-alias bp='bpython-curtsies'
-alias pyc='pycharm.sh'
-alias py='python'
-alias piu='py setup.py install --user'
-alias pi='py setup.py install'
-alias pib='py setup.py build'
-alias pympi='mpirun -n `nproc` python'
 
 alias di='sudo dnf install'
 alias dnu='sudo dnf update'
