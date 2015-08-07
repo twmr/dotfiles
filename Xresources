@@ -95,8 +95,8 @@ URxvt*saveLines:        32767
 URxvt*scrollBar:        false
 URxvt*scrollBar_right:  true
 URxvt*loginShell:       true
-!URxvt*shading:          10
-!URxvt*transparent:      true
+URxvt*shading:          10
+URxvt*transparent:      true
 !URxvt*termName:         rxvt-unicode
 URxvt*secondaryScroll:  true
 !URxvt*perl-lib:         /usr/lib/urxvt/perl/
