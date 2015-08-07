@@ -39,12 +39,20 @@ export W3MIMGDISPLAY_PATH=/usr/libexec/w3m/w3mimgdisplay # needed by 'ranger' fi
 
 prepath() {
     # prepend path to PATH
-    [ -d "${1}" ] && [[ ! "${PATH}" =~ ${1} ]] && PATH="${1}:${PATH}"
+    if [ -d "${1}" ]; then
+        [[ ! "${PATH}" =~ ${1} ]] && PATH="${1}:${PATH}"
+    else
+        echo "can't add ${1} to PATH because it does not exist"
+    fi
 }
 
 preldlpath() {
     # prepend path to LD_LIBRARY_PATH
-    [ -d "${1}" ] && [[ ! "${LD_LIBRARY_PATH}" =~ ${1} ]] && LD_LIBRARY_PATH="${1}:${LD_LIBRARY_PATH}"
+    if [ -d "${1}" ]; then
+        [[ ! "${LD_LIBRARY_PATH}" =~ ${1} ]] && LD_LIBRARY_PATH="${1}:${LD_LIBRARY_PATH}"
+    else
+        echo "can't add ${1} to LD_LIB path because it does not exist"
+    fi
 }
 
 if [ -e $HOME/software/sublime_text_3/sublime_text ]; then
