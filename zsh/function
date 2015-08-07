@@ -71,10 +71,6 @@ function enconda() {
     export PATH=$HOME/miniconda/bin:$PATH
 }
 
-function enpy34() {
-    export PATH=$HOME/sandbox/Python-3.4.0:$PATH
-}
-
 _emacs_setup() {
     local name=$1
     echo $name
