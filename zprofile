@@ -131,6 +131,9 @@ if [ "$HOSTNAME" = "mustang" ]; then
     prepath $GITR/diss/task3/scripts
 
 elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
+    module purge
+    module load mpi/openmpi-x86_64
+
     prepath $HOME/bin
     prepath $HOME/.local/bin
     export EMBINPATH=${HOME}/gitrepos/emacs/src
@@ -138,11 +141,11 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     export DDIR=${GITR}/diss
 
     prepath $GITR/software_setup_scripts
-    prepath $GITR/fenics/dev/slepc/src/eps/examples/tutorials
+    # prepath $GITR/fenics/dev/slepc/src/eps/examples/tutorials
 
     export PETSC_MAINT_DIR=$GITR/fenics
 
-    export NETGENDIR=$HOME/opt/ngngs6/bin
+    export NETGENDIR=$HOME/opt/ngngs5/bin
     export PYTHONPATH=$GITR/diss/task3:$DDIR/pysalt:$PYTHONPATH
     export PYTHONPATH=$GITR/diss/t4:$PYTHONPATH
 
@@ -150,7 +153,8 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     prepath /opt/intel/bin
     prepath $NETGENDIR
     prepath $GITR/diss/task3/scripts
-    preldlpath $HOME/software/local/lib
+
+    preldlpath $GITR/diss/task3/numprocs_ng5
 
     prepath $HOME/software/Zotero_linux-x86_64
 
