@@ -110,14 +110,15 @@ if hostname == "dirac" then
    defaultlayoutidmonright = 1
 else
    monitors = {
-      left = 2,
-      right = 1
+      left = 1,
+      right = 2
    }
    tags = {
       namesleft  = { "doc","vsc","web","qtc", "mail", "nonuni",7,8,9 },
-      namesright  = { "vsc",2,3,4,5,6,7,8,9 }
+      namesright  = { "vsc","mail",3,4,5,6,7,8,9 }
    }
    lockcmd = "gnome-screensaver-command -l"
+   lockcmd = "xscreensaver-command -lock"
    defaultlayoutidmonleft = 1
    defaultlayoutidmonright = 1
 end
@@ -662,9 +663,9 @@ awful.rules.rules = {
     { rule = { class = "Toplevel"},
       properties = { floating = true }
     },
-   -- { rule = { class = "Thunderbird", instance = "Mail" },
-   --   properties = { tag = tags[monitors.second][1] }
-   -- },
+    { rule = { class = "Thunderbird", instance = "Mail" },
+      properties = { tag = tags[monitors.right][2] }
+    },
     -- { rule = { class = "Emacs", instance = "emacs" },
     --   properties = { tag = tags[monitors.second][2] }
     -- },
