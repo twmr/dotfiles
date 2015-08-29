@@ -165,6 +165,9 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     #ulimlimit=`free | grep '^Mem' | gawk '{ print(int($2 * 0.95)) }'`
     #ulimit -v $ulimlimit
 elif [ "$HOSTNAME" = "cobra" ]; then
+    module purge
+    module load mpi/openmpi-x86_64
+
     DOTFPATH=$HOME/gitrepos/dotfiles
 
     export JDK_HOME=$HOME/software/jdk1.7.0_40
@@ -189,10 +192,8 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $EMBINPATH
     prepath $EMBINPATH2
     prepath $DOTFPATH/bin
-    prepath $HOME/local/bin
     prepath $HOME/.local/bin
     prepath $HOME/bin
-    prepath $HOME/.cabal/bin
     prepath $HOME/.cask/bin
     prepath $GITR/julia
     prepath $GITR/software_setup_scripts
