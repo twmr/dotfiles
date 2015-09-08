@@ -13,14 +13,16 @@ alias wget='wget --timeout 10'
 alias grep='grep --color=auto'
 
 # conda
-alias cua='conda update --all'
-alias ci='conda install'
-alias cr='conda remove --use-index-cache'
+alias cua='enconda && conda update --all'
+alias ci='enconda && conda install'
+alias cs='enconda && conda search'
+alias cinf='enconda && conda info -e'
+alias cr='enconda && conda remove --use-index-cache'
 alias workon='enconda && source activate'
 alias workoff='enconda && source deactivate'
 
 # python stuff
-alias tr='testrunner.py'
+alias tr='py testrunner.py'
 alias femtr='tr -S fem'
 alias bemtr='tr -S bem'
 alias extr='tr -S examples'
