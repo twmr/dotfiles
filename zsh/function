@@ -67,6 +67,7 @@ function melmacs() {
 }
 
 function enconda() {
+    type conda &>/dev/null && return
     perl -e 'exit(!(grep(m{^$ENV{HOME}/miniconda/bin$},split(":", $ENV{PATH}))) > 0)' && return
     export PATH=$HOME/miniconda/bin:$PATH
 }
@@ -157,6 +158,10 @@ function gco() {
         git checkout $1
     fi
 }
+function gcf() {
+    git checkout -f $*
+}
+
 function gpr() { git pull --rebase $* }
 
 function ginf() {
