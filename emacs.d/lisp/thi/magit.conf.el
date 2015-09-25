@@ -2,7 +2,7 @@
 
 (setq magit-repository-directories `(,"~/gitrepos" "~/.emacs.d"))
 ;; (setq magit-commit-signoff nil)
-(setq magit-remote-ref-format 'remote-slash-branch)
+;; (setq magit-remote-ref-format 'remote-slash-branch)
 (setq magit-completing-read-function 'magit-ido-completing-read)
 (setq magit-save-some-buffers nil)
 
@@ -17,28 +17,28 @@
 ;; (define-key magit-mode-map (kbd "M-1") 'delete-other-windows)      ; was magit-show-level-1
 
 ;; TODO reordering (untracked-files) doesn't seem to work!??!
-(remove-hook 'magit-status-sections-hook 'magit-insert-stashes)
-;; (remove-hook 'magit-status-sections-hook 'magit-insert-untracked-files)
-(remove-hook 'magit-status-sections-hook 'magit-insert-status-local-line)
-(remove-hook 'magit-status-sections-hook 'magit-insert-status-remote-line)
-(remove-hook 'magit-status-sections-hook 'magit-insert-status-head-line)
-(remove-hook 'magit-status-sections-hook 'magit-insert-status-tags-line)
-(remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-commits)
-(remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-commits)
+;; (remove-hook 'magit-status-sections-hook 'magit-insert-stashes)
+;; ;; (remove-hook 'magit-status-sections-hook 'magit-insert-untracked-files)
+;; (remove-hook 'magit-status-sections-hook 'magit-insert-status-local-line)
+;; (remove-hook 'magit-status-sections-hook 'magit-insert-status-remote-line)
+;; (remove-hook 'magit-status-sections-hook 'magit-insert-status-head-line)
+;; (remove-hook 'magit-status-sections-hook 'magit-insert-status-tags-line)
+;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-commits)
+;; (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-commits)
 ;; (add-hook 'magit-status-sections-hook 'magit-insert-untracked-files t)
 
-(defun magit-pull ()
-  (interactive)
-  (magit-run-git-async "pull" "--rebase" "-v"))
+;; (defun magit-pull ()
+;;   (interactive)
+;;   (magit-run-git-async "pull" "--rebase" "-v"))
 
-(defun magit-toggle-section () ;; overwrite magit-toggle-section function
-  "Toggle hidden status of current section."
-  (interactive)
-  (if (eq 'hunk (first (magit-section-context-type (magit-current-section))))
-      (magit-toggle-file-section)
-    (magit-section-hideshow
-     (lambda (s)
-       (magit-section-set-hidden s (not (magit-section-hidden s)))))))
+;; (defun magit-toggle-section () ;; overwrite magit-toggle-section function
+;;   "Toggle hidden status of current section."
+;;   (interactive)
+;;   (if (eq 'hunk (first (magit-section-context-type (magit-current-section))))
+;;       (magit-toggle-file-section)
+;;     (magit-section-hideshow
+;;      (lambda (s)
+;;        (magit-section-set-hidden s (not (magit-section-hidden s)))))))
 
 (setq magit-status-buffer-switch-function
       (lambda (buffer) ; there might already be an Emacs function which does this
