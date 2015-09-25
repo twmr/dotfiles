@@ -72,6 +72,15 @@ function enconda() {
     export PATH=$HOME/miniconda/bin:$PATH
 }
 
+function dired() {
+    if [ $# -gt 0 ]; then
+        dirname="$1"
+    else
+        dirname="$HOME"
+    fi
+    emacsclient -c -eval "(dired \"$dirname\")"
+}
+
 _emacs_setup() {
     local name=$1
     echo $name
