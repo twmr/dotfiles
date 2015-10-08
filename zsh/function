@@ -29,6 +29,13 @@ function ked() {
     fi
 }
 
+# update emacs
+function eup()
+{
+    cd ~gr/emacs
+    gpl
+    compile_emacs
+}
 function started() {
     if [ $# -gt 0 ]; then
         if [ "$1" = "-f" ]; then
