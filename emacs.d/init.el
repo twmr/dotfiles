@@ -56,7 +56,6 @@
         project-persist
         moz-controller
         ;; aggressive-indent
-        ;; yasnippet
         ;; ;; dired+
         ;; dired-efap
         ;; notmuch
@@ -359,7 +358,17 @@
             (setq projectile-completion-system 'ido)
             ))
 
-(use-package helm-projectile :ensure t :defer t)
+(use-package helm-projectile :ensure t :defer t
+  :init
+  ;; https://www.reddit.com/r/emacs/comments/3m8i5r/helmprojectile_quickly_findcreate_new_file_in/
+  (helm-projectile-on)
+  (setq projectile-switch-project-action 'helm-projectile)
+  (defvar helm-source-file-not-found
+    (helm-build-dummy-source
+        "Create file"
+      :action 'find-file))
+  (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
+  )
 
 
 (use-package pdf-tools
@@ -414,8 +423,9 @@
 
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
-(setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
-(defvar thi::theme 'sanityinc-tomorrow-night)
+;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
+;; (defvar thi::theme 'sanityinc-tomorrow-night)
+(defvar thi::theme 'aurora)
 
 ;; (defvar thi::theme
 ;;   (if (string= system-name "dirac")
