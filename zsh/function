@@ -32,9 +32,9 @@ function ked() {
 # update emacs
 function eup()
 {
-    cd ~gr/emacs
-    gpl
-    compile_emacs
+    (cd ~gr/emacs
+     gpl
+     compile_emacs)
 }
 function started() {
     if [ $# -gt 0 ]; then
