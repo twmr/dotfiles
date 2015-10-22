@@ -173,6 +173,8 @@
 (use-package flx :ensure t)
 (use-package flx-ido :ensure t)
 
+(use-package evil :ensure t)
+
 (use-package flycheck
   :ensure t
   :init (progn
