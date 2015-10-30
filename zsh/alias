@@ -93,6 +93,7 @@ alias v='vim'
 
 alias pgnup='gnuplot -persist'
 alias nautilus='nautilus --no-desktop'
+alias kpx='~/gitrepos/keepassx/build/src/keepassx'
 
 function nestedrm() {
     files=$(find . -iname "$1")

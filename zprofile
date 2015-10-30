@@ -195,7 +195,6 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $HOME/.local/bin
     prepath $HOME/bin
     prepath $HOME/.cask/bin
-    prepath $GITR/julia
     prepath $GITR/software_setup_scripts
     prepath $NETGENDIR
     prepath $GITR/diss/task3/scripts
