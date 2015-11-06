@@ -3,21 +3,24 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#263238" "#74CBC4" "#546D7A" "#C792EA" "#82B1FF" "#FFCB6B" "#FF516D" "#CDD3D3"])
  '(blink-cursor-mode nil)
  '(comint-input-ignoredups t)
  '(comint-prompt-read-only t)
  '(cursor-color nil)
  '(custom-safe-themes
    (quote
-    ("a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
+    ("790e74b900c074ac8f64fa0b610ad05bcfece9be44e8f5340d2d94c1e47538de" "001240593e0c4d5322cbf44da17d5987618809acf22f60c0d22a0dc71971a0f2" "bed4d169698488b8b5b90f7dbdbaca2e7b9c4a18727adbb7b3ddcb4df0577ce0" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
  '(evil-mode-line-format (quote before))
- '(git-commit-mode-hook (quote (turn-on-auto-fill)))
+ '(fci-rule-color "#232A2F")
+ '(git-commit-mode-hook (quote (turn-on-auto-fill)) t)
  '(ido-auto-merge-delay-time 2.7)
  '(ido-max-window-height 30)
  '(ido-use-faces t)
  '(jedi:get-in-function-call-delay 0.4)
  '(magit-completing-read-function (quote magit-ido-completing-read))
- '(magit-status-buffer-switch-function (quote switch-to-buffer))
+ '(magit-status-buffer-switch-function (quote switch-to-buffer) t)
  '(magit-use-overlays nil)
  '(matlab-indent-level 2)
  '(mode-require-final-newline nil)
@@ -40,15 +43,16 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (ace-jump-mode multiple-cursors color-identifiers-mode matlab-mode zotelo stickyfunc-enhance company-jedi paradox highlight-indentation yasnippet projectile helm fill-column-indicator magit evil discover zop-to-char yaml-mode window-numbering use-package undo-tree sx solarized-theme smex smart-mode-line project-persist project-explorer perspective pdf-tools origami moz-controller magit-filenotify julia-mode json-mode iedit hydra htmlize helm-projectile gitignore-mode gitconfig-mode flycheck flx-ido f expand-region ethan-wspace dynamic-fonts direx company color-theme-sanityinc-tomorrow cmake-mode bbdb-vcard auctex aggressive-indent ace-window 2048-game)))
+    (pdf-tools ranger helm-flx jenkins org-beautify-theme org-bullets rainbow-delimiters ein aurora-theme ido-completing-read+ helm-github-stars paradox spinner sequences minimap js2-mode imenu-anywhere rust-mode ocodo-svg-modelines ace-jump-mode multiple-cursors color-identifiers-mode matlab-mode zotelo stickyfunc-enhance highlight-indentation yasnippet projectile helm fill-column-indicator magit evil discover zop-to-char yaml-mode window-numbering use-package undo-tree sx solarized-theme smex smart-mode-line project-persist project-explorer perspective origami moz-controller magit-filenotify julia-mode json-mode iedit hydra htmlize helm-projectile gitignore-mode gitconfig-mode flycheck flx-ido f expand-region ethan-wspace dynamic-fonts direx company color-theme-sanityinc-tomorrow cmake-mode bbdb-vcard auctex aggressive-indent ace-window 2048-game)))
  '(paradox-github-token t)
  '(preview-default-option-list
    (quote
     ("displaymath" "floats" "graphics" "textmath" "showlabels")))
  '(preview-scale-function 1.5)
  '(preview-transparent-color (quote (highlight :background)))
+ '(projectile-git-command "git ls-files -zc --exclude-standard")
  '(python-shell-prompt-detect-enabled nil)
- '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")) t)
+ '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")))
  '(rm-blacklist
    (quote
     (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
@@ -61,16 +65,16 @@
      (whitespace-style face tabs trailing lines-tail)
      (TeX-master)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-	   (add-hook
-	    (quote write-contents-functions)
-	    (lambda nil
-	      (delete-trailing-whitespace)
-	      nil))
-	   (require
-	    (quote whitespace))
-	   "Sometimes the mode needs to be toggled off and on."
-	   (whitespace-mode 0)
-	   (whitespace-mode 1))
+           (add-hook
+            (quote write-contents-functions)
+            (lambda nil
+              (delete-trailing-whitespace)
+              nil))
+           (require
+            (quote whitespace))
+           "Sometimes the mode needs to be toggled off and on."
+           (whitespace-mode 0)
+           (whitespace-mode 1))
      (whitespace-line-column . 80)
      (whitespace-style face trailing lines-tail)
      (c-offsets-alist
@@ -94,12 +98,12 @@
       (objc-method-call-cont c-lineup-ObjC-method-call-colons c-lineup-ObjC-method-call +)
       (objc-method-args-cont . c-lineup-ObjC-method-args)
       (objc-method-intro .
-			 [0])
+                         [0])
       (friend . 0)
       (cpp-define-intro c-lineup-cpp-define +)
       (cpp-macro-cont . +)
       (cpp-macro .
-		 [0])
+                 [0])
       (inclass . +)
       (stream-op . c-lineup-streamop)
       (arglist-cont-nonempty c-lineup-gcc-asm-reg c-lineup-arglist)
@@ -193,7 +197,29 @@
    (quote
     (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
  '(sml/mode-width 10)
- '(sml/name-width 14))
+ '(sml/name-width 14)
+ '(vc-annotate-background "#2B3B40")
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#74CBC4")
+     (40 . "#74CBC4")
+     (60 . "#C2E982")
+     (80 . "#FFC400")
+     (100 . "#C792EA")
+     (120 . "#C792EA")
+     (140 . "#546D7A")
+     (160 . "#546D7A")
+     (180 . "#FF516D")
+     (200 . "#9FC59F")
+     (220 . "#859900")
+     (240 . "#F77669")
+     (260 . "#FF516D")
+     (280 . "#82B1FF")
+     (300 . "#82B1FF")
+     (320 . "#82B1FF")
+     (340 . "#D9F5DD")
+     (360 . "#FFCB6B"))))
+ '(vc-annotate-very-old-color "#FFCB6B"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
