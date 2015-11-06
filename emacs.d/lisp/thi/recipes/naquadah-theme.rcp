@@ -1,6 +1,0 @@
-(:name naquadah-theme
-       :description "Naquadah theme for Emacs"
-       :type git
-       :url "http://git.naquadah.org/git/naquadah-theme.git"
-       :post-init (add-to-list 'custom-theme-load-path
-                               default-directory))

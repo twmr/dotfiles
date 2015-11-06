@@ -1,4 +1,0 @@
-(:name python-cell
-       :description "BLUB"
-       :type github
-       :pkgname "thisch/python-cell.el")

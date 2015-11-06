@@ -1,5 +1,0 @@
-(:name ibuffer-perspective
-       :description "Group ibuffer's list by perspective"
-       :type github
-       :depends (perspective)
-       :pkgname "wstucker/ibuffer-perspective")

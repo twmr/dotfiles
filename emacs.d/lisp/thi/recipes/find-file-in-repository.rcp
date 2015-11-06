@@ -1,4 +1,0 @@
-(:name find-file-in-repository
-       :description "BLUB"
-       :type github
-       :pkgname "hoffstaetter/find-file-in-repository")
