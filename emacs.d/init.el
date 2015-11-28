@@ -31,68 +31,6 @@
 (when (not package-archive-contents)
   (package-refresh-contents))
 
-(setq thi::packages
-      '(;; hungry-delete ;; http://endlessparentheses.com/hungry-delete-mode.html
-        use-package
-        git-commit-mode
-        git-rebase-mode
-        gitconfig-mode
-        gitignore-mode
-        magit-filenotify
-        perspective
-        ;; ibuffer-perspective ;; not avail.
-        direx
-        helm-projectile
-        julia-mode
-        ;; ;; calfw
-        ;; eassist
-        ;; haskell-mode
-        markdown-mode
-        yaml-mode
-        expand-region
-        ace-window
-        smart-mode-line
-        auctex
-        project-persist
-        moz-controller
-        ;; aggressive-indent
-        ;; ;; dired+
-        ;; dired-efap
-        ;; notmuch
-        ;; ;; replace+
-        ;; find-file-in-repository
-        ;; ;; python-cell
-        ;; epc
-        ;; ;; company-anaconda
-        ;; ;; jedi (hard dependency on auto-complete mode)
-
-        ;; fill-column-indicator
-        ;; ethan-wspace
-        ;; lua-mode
-        ;; paredit
-        ;; ;; minimap
-        ;; ;; gnuplot-mode ;; not needed atm
-        ;; ;; iedit
-        ;; ;; rainbow-mode
-        ;; ;; rainbow-delimiters
-        ;; highlight-indentation
-        ;; discover
-        ;; ;; sr-speedbar (commented out as long as there is no upstream fix for the ad-advised-.. problem)
-        ;; ;; browse-kill-ring
-        ;; ;; bbdb
-        ;; ;; bbdb-vcard
-        ;; ;; nognus
-        ;; ;; go-mode
-        ;; ;; multi-term
-        ;; browse-kill-ring
-        ;; goto-last-change
-        ;; idle-highlight-mode
-        ;; quickrun
-        ;; dockerfile-mode
-        ;; json-mode
-        ;; solarized-theme
-        ))
-
 (eval-when-compile
   (require 'use-package))
 ;; https://github.com/alezost/emacs-config/prog.el
