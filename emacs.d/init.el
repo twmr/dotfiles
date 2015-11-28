@@ -45,22 +45,27 @@
     (autoload 'ace-jump-mode "ace-jump-mode" nil t)
     (bind-key "C-." 'ace-jump-mode)))
 
+(use-package auto-complete :ensure t
+  :init
+  (progn
+    (global-auto-complete-mode)))
+
 (use-package color-identifiers-mode :ensure t :defer t)
 (use-package cmake-mode :ensure t :defer t)
 
-(use-package company :ensure t :defer t
-  :config (progn
-            (defun company-complete-common-or-cycle ()
-              "Insert the common part of all candidates, or select the next one."
-              (interactive)
-              (when (company-manual-begin)
-                (let ((tick (buffer-chars-modified-tick)))
-                  (call-interactively 'company-complete-common)
-                  (when (eq tick (buffer-chars-modified-tick))
-                    (let ((company-selection-wrap-around t))
-                      (call-interactively 'company-select-next))))))
-            (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
-            (global-company-mode)))
+;; (use-package company :ensure t :defer t
+;;   :config (progn
+;;             (defun company-complete-common-or-cycle ()
+;;               "Insert the common part of all candidates, or select the next one."
+;;               (interactive)
+;;               (when (company-manual-begin)
+;;                 (let ((tick (buffer-chars-modified-tick)))
+;;                   (call-interactively 'company-complete-common)
+;;                   (when (eq tick (buffer-chars-modified-tick))
+;;                     (let ((company-selection-wrap-around t))
+;;                       (call-interactively 'company-select-next))))))
+;;             (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
+;;             (global-company-mode)))
 
 (use-package cython-mode :ensure t :defer t)
 
