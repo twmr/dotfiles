@@ -1,5 +1,21 @@
 #+STARTUP: indent
 
+eshell
+alias | sed -E "s/^([^=]*)=(.*)$/alias \1 \2 \$*/g; s/'\\\''/'/g;" >>
+~/.emacs.d/eshell/alias
+
+
++ minor customization (remove ls..)
+==
+alias | sed -E "s/^([^=]*)=(.*)$/alias \1 \2 \$*/g;" >> ~/.emacs.d/eshell/alias
+==
+
+TODO swiper 
+TODO helm-swoop
+TODO ivy (ivy find file - ssh?)
+TODO helm-projectile 
+* ivy
+
 * Dependencies
 ** jedi
 *** fresh install
