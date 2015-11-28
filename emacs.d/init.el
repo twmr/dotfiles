@@ -339,7 +339,11 @@
 
 (use-package smex :ensure t)
 
-(use-package swiper :ensure t)
+(use-package swiper :ensure t
+  :config (ivy-mode 1)
+  :bind (("C-s" . swiper))
+  )
+
 (use-package counsel :ensure t
   :bind (("C-h v" . counsel-describe-variable)
          ("C-h f" . counsel-describe-function)
