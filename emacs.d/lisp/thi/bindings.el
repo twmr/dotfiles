@@ -14,8 +14,8 @@
 (global-set-key (kbd "<C-f3>") 'persp-switch)
 
 (defun switch-to-previous-buffer ()
-      (interactive)
-      (switch-to-buffer (other-buffer (current-buffer) 1)))
+  (interactive)
+  (switch-to-buffer (other-buffer (current-buffer) 1)))
 (global-set-key (kbd "<f3>") 'switch-to-previous-buffer)
 
 ;; (global-set-key [f3] 'dabbrev-expand)
@@ -49,7 +49,7 @@
 ;; smex stuff
 ;; (global-set-key (kbd "M-x") 'helm-M-x) ;; i don't like this
 (global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
+;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 

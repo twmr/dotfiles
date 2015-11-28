@@ -52,7 +52,7 @@
  '(preview-transparent-color (quote (highlight :background)))
  '(projectile-git-command "git ls-files -zc --exclude-standard")
  '(python-shell-prompt-detect-enabled nil)
- '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")))
+ '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")) t)
  '(rm-blacklist
    (quote
     (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
@@ -65,16 +65,16 @@
      (whitespace-style face tabs trailing lines-tail)
      (TeX-master)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-           (add-hook
-            (quote write-contents-functions)
-            (lambda nil
-              (delete-trailing-whitespace)
-              nil))
-           (require
-            (quote whitespace))
-           "Sometimes the mode needs to be toggled off and on."
-           (whitespace-mode 0)
-           (whitespace-mode 1))
+	   (add-hook
+	    (quote write-contents-functions)
+	    (lambda nil
+	      (delete-trailing-whitespace)
+	      nil))
+	   (require
+	    (quote whitespace))
+	   "Sometimes the mode needs to be toggled off and on."
+	   (whitespace-mode 0)
+	   (whitespace-mode 1))
      (whitespace-line-column . 80)
      (whitespace-style face trailing lines-tail)
      (c-offsets-alist
@@ -98,12 +98,12 @@
       (objc-method-call-cont c-lineup-ObjC-method-call-colons c-lineup-ObjC-method-call +)
       (objc-method-args-cont . c-lineup-ObjC-method-args)
       (objc-method-intro .
-                         [0])
+			 [0])
       (friend . 0)
       (cpp-define-intro c-lineup-cpp-define +)
       (cpp-macro-cont . +)
       (cpp-macro .
-                 [0])
+		 [0])
       (inclass . +)
       (stream-op . c-lineup-streamop)
       (arglist-cont-nonempty c-lineup-gcc-asm-reg c-lineup-arglist)
