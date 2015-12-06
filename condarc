@@ -3,6 +3,7 @@ create_default_packages:
   - pip
   - setuptools
   - cython
+  - ptpython
 
 channels:
   # - file:///home/thomas/miniconda/conda-bld
