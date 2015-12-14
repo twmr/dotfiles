@@ -2,7 +2,7 @@
 
 ;; (setq debug-on-error t)
 
-(dolist (p '("/lisp" "/lisp/vendor" "/el-get/mu4e/mu4e"))
+(dolist (p '("/lisp" "/lisp/vendor"))
   (add-to-list 'load-path (expand-file-name
                            (concat user-emacs-directory p))))
 
