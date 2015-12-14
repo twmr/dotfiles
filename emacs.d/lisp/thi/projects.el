@@ -21,7 +21,6 @@
 
                               "~/gitrepos/dotfiles/emacs.d"
                               "~/gitrepos/dotfiles/emacs.d/thi"
-                              "~/gitrepos/dotfiles/emacs.d/el-get"
                               ))
 
 (require 'cl)
