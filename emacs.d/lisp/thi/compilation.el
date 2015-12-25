@@ -8,6 +8,14 @@
 ;; buffer scroll automatically, if something fails jump to the first error and if not kill
 ;; the buffer
 
+;; see http://stackoverflow.com/questions/13397737
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region compilation-filter-start (point))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
+
 (defun my-compile ()
   "Run compile and resize the compile window"
   (interactive)
