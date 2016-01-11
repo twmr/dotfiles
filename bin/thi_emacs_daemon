@@ -1,0 +1,18 @@
+#!/bin/bash
+
+embin="/usr/bin/emacs"
+if [ "$EMBINPATH" ]; then
+    embin="$EMBINPATH/emacs"
+fi
+echo "embin=$embin"
+
+pgrep -u $USER -x "emacs"
+pgrep -u $USER -x "emacs" > /dev/null
+
+RETVAL=$?
+if [ $RETVAL -eq 0 ]; then
+    echo "emacs-daemon already running"
+else
+    echo "$embin --daemon"
+    $embin --daemon
+fi
