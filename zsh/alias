@@ -103,12 +103,13 @@ function nestedrm() {
     rm -f $files
 }
 
-alias removepyc='rm -f `find . -iname "*.pyc" -o -iname "__pycache__"`'
+alias removepyc='rm -f `find . -iname "*.pyc"` && rm -rf `find . -iname "__pycache__"`'
 alias removelog='rm -f`find . -iname "*.log"`'
 alias removeng='rm -f `find . -iname "ng.ini" \
                            -o -iname "ng.prof" \
                            -o -iname "ngmesh.ini" \
                            -o -iname "ng0.trace"`'
+alias removelatex='rm -f `find . -iname "*.log" -o -iname "*.aux" -o -iname "*.out"` && rm -rf `find . -iname auto -type d`'
 
 alias st='sublime_text'
 
