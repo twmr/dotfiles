@@ -4,6 +4,7 @@ create_default_packages:
   - setuptools
   - cython
   - ptpython
+  - flake8
 
 channels:
   # - file:///home/thomas/miniconda/conda-bld
