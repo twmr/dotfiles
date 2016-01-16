@@ -38,6 +38,13 @@ alias pi='py setup.py install'
 alias pib='py setup.py build'
 alias pympi='mpirun -n `nproc` python'
 
+# remove py2 stuff and use py3 tools:
+# remove the aliases once fedora has switched to python3
+alias pep8='python3-pep8'
+alias flake8='python3-flake8'
+alias pyflakes='python3-pyflakes'
+alias coverage='python3-coverage'
+
 alias -g G='| egrep'
 
 #function call
