@@ -135,9 +135,14 @@ if [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" -o "$HOSTNAME" = "cobra" ]; 
     hash -d pys=${GITR}/diss/pysalt
     hash -d t3=${GITR}/diss/task3
     hash -d t4=${GITR}/diss/t4
+    hash -d pyd=${GITR}/diss/pydipole
+    hash -d myd=${GITR}/diss/mydipole
+    hash -d rloc=~/ownCloud/Shared/Random_Lasers/
 fi
 
 DOTFDIR=${GITR}/dotfiles
+hash -d oc=${HOME}/ownCloud
+hash -d ocrl=${HOME}/ownCloud/Shared/Random_Lasers
 hash -d conf=${HOME}/.config
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
