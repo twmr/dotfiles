@@ -191,6 +191,10 @@ function ginf() {
     cat "$(git rev-parse --show-toplevel)"/.git/config
 }
 
+function gsed() {
+    for x in `git ls-files`; do sed -i $1 $x; done
+}
+
 
 
 function sco() {
