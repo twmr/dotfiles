@@ -51,6 +51,7 @@ source $ZSH/oh-my-zsh.sh
 # Customize to your needs...
 . ~/.zsh/alias
 . ~/.zsh/function
+. ~/.zsh/notebook
 . ~/.zsh/fenics
 . ~/.zsh/keybindings
 # . ~/.zsh/prompt
