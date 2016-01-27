@@ -70,9 +70,8 @@ if [ "$BROWSER" ]; then
 fi
 # auto open regular files
 alias -s txt='e'
-alias -s pdf='evince'
+alias -s pdf='okular'
 
-alias ev='evince'
 alias wcat='wget -q -O -'
 alias reboot='sudo reboot'
 alias qtc='qtcreator'
