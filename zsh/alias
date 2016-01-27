@@ -35,6 +35,7 @@ alias pyc='pycharm.sh'
 alias py='python'
 alias piu='py setup.py install --user'
 alias pi='py setup.py install'
+alias pd='py setup.py develop'
 alias pib='py setup.py build'
 alias pympi='mpirun -n `nproc` python'
 
