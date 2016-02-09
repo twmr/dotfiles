@@ -94,7 +94,8 @@ alias ec="$consoleemacs"
 # alias emacs="$embin"
 #alias emacs="$guiemacs"
 
-alias in='ipython notebook'
+alias jn='jupyter notebook'
+alias in='jupyter notebook'
 
 alias svim='sudo /usr/bin/vim'
 alias v='vim'
