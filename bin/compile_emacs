@@ -1,6 +1,9 @@
 #!/bin/sh
 
 ./autogen.sh
-./configure CFLAGS="-ggdb3 -O0" CXXFLAGS="-ggdb3 -O0" LDFLAGS="-ggdb3" --enable-checking --enable-asserts --with-xpm=yes --with-jpeg=no --with-gif=no --with-tiff=no --with-x-toolkit=gtk3 
+# ./configure CFLAGS="-ggdb3 -O0" CXXFLAGS="-ggdb3 -O0" LDFLAGS="-ggdb3" --enable-checking --enable-asserts --with-xpm=yes --with-jpeg=no --with-gif=no --with-tiff=no --with-x-toolkit=gtk3
+# ./configure CFLAGS="-flto -O3" CXXFLAGS="-flto -O3" LDFLAGS="-flto"  --enable-checking --enable-asserts --with-xpm=yes --with-jpeg=no --with-gif=no --with-tiff=no --with-x-toolkit=gtk3
+./configure CFLAGS="-O3" CXXFLAGS="-O3" --enable-checking --enable-asserts --with-xpm=yes --with-jpeg=no --with-gif=no --with-tiff=no --with-x-toolkit=gtk3
+
 # ./configure --with-xpm=yes --with-jpeg=no --with-gif=no --with-tiff=no --with-x-toolkit=gtk3 --enable-link-time-optimization
 make
