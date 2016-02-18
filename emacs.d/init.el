@@ -368,7 +368,10 @@
   (progn
     (bind-key "M-z" 'zop-to-char)))
 
-(use-package zotelo :ensure t :defer t)
+(use-package zotelo :ensure t :defer t
+  :init
+  (progn
+    (add-hook 'TeX-mode-hook 'zotelo-minor-mode)))
 
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
