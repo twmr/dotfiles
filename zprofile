@@ -203,7 +203,7 @@ elif [ "$HOSTNAME" = "cobra" ]; then
 
     export PARDISO_LIB=/opt/libpardiso500-GNU481-X86-64.so
     export PYTHONPATH=${GITR}/diss/pysalt:${GITR}/diss/task3:$PYTHOPATH
-    preldlpath $GITR/diss/task3/numprocs
+    preldlpath $GITR/diss/task3/numprocs_ng5
 
     # /opt/intel/bin/compilervars.sh intel64
 
