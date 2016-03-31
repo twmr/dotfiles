@@ -28,7 +28,7 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 
 # Exports
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
+export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin
 export MYSRCDIR=$HOME/local/src
 export LOCSOFT=$HOME/local/software
 export GITR=$HOME/gitrepos
