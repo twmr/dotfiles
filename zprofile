@@ -28,7 +28,7 @@ export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 
 # Exports
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
+export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin
 export MYSRCDIR=$HOME/local/src
 export LOCSOFT=$HOME/local/software
 export GITR=$HOME/gitrepos
@@ -154,9 +154,11 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     prepath $NETGENDIR
     prepath $GITR/diss/task3/scripts
 
+    preldlpath /usr/local/lib64
     preldlpath $GITR/diss/task3/numprocs_ng5
 
     prepath $HOME/software/Zotero_linux-x86_64
+    prepath $HOME/software/pycharm-community-5.0/bin
 
     export CONDA_ENV_DIR=$HOME/miniconda/envs
 
