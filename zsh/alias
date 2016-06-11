@@ -47,6 +47,7 @@ alias pympi='mpirun -n `nproc` python'
 #alias pyflakes='python3-pyflakes'
 #alias coverage='python3-coverage'
 #alias pip='pip' # TODO only use this alias if not in conda environment
+alias upxonsh='pip3.4 install xonsh --user -U'
 
 alias -g G='| egrep'
 
