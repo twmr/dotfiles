@@ -7,10 +7,7 @@ fi
 
 function initzsh {
 	echo "loading zsh"
-	if [ -f ~/.zprofile ]; then
-	  . ~/.zprofile
-	fi
-	exec zsh
+	exec zsh -l # start a login shell
 }
 
 function initcfbuild {
