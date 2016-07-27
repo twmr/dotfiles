@@ -57,6 +57,10 @@ source $ZSH/oh-my-zsh.sh
 # . ~/.zsh/prompt
 . ~/.zsh/emacs
 
+if [ -d ~/.zsh.d/ -a ! "$(ls -A ~/.zsh.d/ 2> /dev/null)" = "" ]; then
+ . ~/.zsh.d/*
+fi
+
 setopt interactivecomments # pound sign in interactive prompt
 setopt nohup  # don't kill child processes of the current zsh when the zsh
               # process is killed
