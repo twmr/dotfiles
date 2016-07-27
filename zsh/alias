@@ -47,7 +47,8 @@ alias pympi='mpirun -n `nproc` python'
 #alias pyflakes='python3-pyflakes'
 #alias coverage='python3-coverage'
 #alias pip='pip' # TODO only use this alias if not in conda environment
-alias upxonsh='pip3.4 install xonsh --user -U'
+# alias upxonsh='pip3.4 install xonsh --user -U'
+alias upxonsh='pip3.5 install git+https://github.com/xonsh/xonsh.git --user -U'
 
 alias -g G='| egrep'
 
@@ -116,10 +117,10 @@ function nestedrm() {
 
 alias removepyc='rm -f `find . -iname "*.pyc"` && rm -rf `find . -iname "__pycache__"`'
 alias removelog='rm -f`find . -iname "*.log"`'
-alias removeng='rm -f `find . -iname "ng.ini" \
-                           -o -iname "ng.prof" \
-                           -o -iname "ngmesh.ini" \
-                           -o -iname "ng0.trace"`'
+#alias removeng='rm -f `find . -iname "ng.ini" \
+#                           -o -iname "ng.prof" \
+#                           -o -iname "ngmesh.ini" \
+#                           -o -iname "ng0.trace"`'
 alias removelatex='rm -f `find . -iname "*.log" -o -iname "*.aux" -o -iname "*.out"` && rm -rf `find . -iname auto -type d`'
 
 alias st='sublime_text'
