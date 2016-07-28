@@ -44,16 +44,26 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(tmux sudo)
+plugins=(tmux sudo suse)
 
 source $ZSH/oh-my-zsh.sh
+
+autoload -U colors zsh/terminfo
+colors
+setopt prompt_subst
+PR_NO_COLOR="%{$terminfo[sgr0]%}"
+for color in RED GREEN YELLOW BLUE MAGENTA CYAN WHITE; do
+    eval PR_$color='%{$terminfo[bold]$fg[${(L)color}]%}'
+    eval PR_LIGHT_$color='%{$fg[${(L)color}]%}'
+done
+
 
 # Customize to your needs...
 . ~/.zsh/alias
 . ~/.zsh/function
 . ~/.zsh/notebook
-. ~/.zsh/fenics
 . ~/.zsh/keybindings
+#. ~/.zsh/opts
 # . ~/.zsh/prompt
 . ~/.zsh/emacs
 
@@ -61,6 +71,8 @@ if [ -d ~/.zsh.d/ -a ! "$(ls -A ~/.zsh.d/ 2> /dev/null)" = "" ]; then
  . ~/.zsh.d/*
 fi
 
+
+setopt cdablevars # support for $> dotf # changes CWD
 setopt interactivecomments # pound sign in interactive prompt
 setopt nohup  # don't kill child processes of the current zsh when the zsh
               # process is killed
