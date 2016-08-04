@@ -22,10 +22,11 @@ export IGNOREEOF=3
 HOSTNAME=`hostname`
 
 # see http://blog.vanutsteen.nl/2013/04/30/using-your-desktop-s-git-author-everywhere-you-ssh/
-export GIT_AUTHOR_NAME="`git config user.name`"
-export GIT_AUTHOR_EMAIL="`git config user.email`"
-export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
-export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
+# TODO this makes it hard to use different settings for different projects
+# export GIT_AUTHOR_NAME="`git config user.name`"
+# export GIT_AUTHOR_EMAIL="`git config user.email`"
+# export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
+# export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
 
 # Exports
 export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin
