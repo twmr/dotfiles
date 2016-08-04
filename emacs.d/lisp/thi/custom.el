@@ -15,6 +15,9 @@
  '(evil-mode-line-format (quote before))
  '(fci-rule-color "#232A2F")
  '(git-commit-mode-hook (quote (turn-on-auto-fill)) t)
+ '(grep-find-ignored-directories
+   (quote
+    ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "build")))
  '(ido-auto-merge-delay-time 2.7)
  '(ido-max-window-height 30)
  '(ido-use-faces t)
