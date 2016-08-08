@@ -31,6 +31,10 @@
 (global-set-key (kbd "<S-f9>") 'my-compile)
 (global-set-key (kbd "<f9>") 'quickrun)
 (global-set-key [f10] 'toggle-frame-fullscreen)
+(global-set-key [f11] 'helm-mini)
+;; (global-set-key [f11] 'recentf-ido-find-file)
+(global-set-key [S-f11] 'recentf-ido-find-dir)
+
 
 (global-set-key (kbd "C-x g") 'magit-status)
 

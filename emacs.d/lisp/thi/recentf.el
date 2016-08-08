@@ -51,10 +51,6 @@
                                 nil
                                 t))))
 
-
-(global-set-key [f11] 'recentf-ido-find-file)
-(global-set-key [S-f11] 'recentf-ido-find-dir)
-
 ;; TODO somehow if this is activated C-e in eshell and ansi-term triggers
 ;; ide-my-edit-input - whyyy??
 ;;(define-key recentf-mode-map (kbd "C-e") 'ido-my-edit-input)
