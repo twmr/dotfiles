@@ -12,6 +12,16 @@
             ;; (magit-filenotify-mode 1)))
 ;; (add-hook 'magit-mode-hook 'turn-on-magit-svn)
 
+;; https://github.com/magit/magit/issues/2683
+(defun my-magit-hunk-recenter-top ()
+  (when (and (memq this-command '(magit-stage magit-unstage))
+             (magit-section-when '((hunk file)) t)
+             ;; TODO also check if previously at beg of window.
+             ;; using information saved before the refresh
+             )
+    (recenter (min (max 0 scroll-margin)
+                   (truncate (/ (window-body-height) 4.0))))))
+
 ;; (define-key magit-mode-map (kbd "M-3") 'split-window-horizontally) ; was magit-show-level-3
 ;; (define-key magit-mode-map (kbd "M-2") 'split-window-vertically)   ; was magit-show-level-2
 ;; (define-key magit-mode-map (kbd "M-1") 'delete-other-windows)      ; was magit-show-level-1
