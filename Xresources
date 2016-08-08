@@ -8,18 +8,13 @@ Xcursor.theme:          neutral
 
 xscreensaver.mode:      blank
 
-! solarized theme
-#define S_yellow        #b58900
-#define S_orange        #cb4b16
-#define S_red           #dc322f
-#define S_magenta       #d33682
-#define S_violet        #6c71c4
-#define S_blue          #268bd2
-#define S_cyan          #2aa198
-#define S_green         #859900
 
-! Dark
+! To only apply colors to your terminal, for example, prefix
+! the color assignment statement with its name. Example:
 !
+! URxvt*background:            S_base03
+
+! https://github.com/solarized/xresources/blob/master/Xresources.light
 #define S_base03        #002b36
 #define S_base02        #073642
 #define S_base01        #586e75
@@ -29,47 +24,77 @@ xscreensaver.mode:      blank
 #define S_base2         #eee8d5
 #define S_base3         #fdf6e3
 
-! Light
+*background:            S_base3
+*foreground:            S_base00
+*fadeColor:             S_base3
+*cursorColor:           S_base01
+*pointerColorBackground:S_base1
+*pointerColorForeground:S_base01
+
+#define S_yellow        #b58900
+#define S_orange        #cb4b16
+#define S_red           #dc322f
+#define S_magenta       #d33682
+#define S_violet        #6c71c4
+#define S_blue          #268bd2
+#define S_cyan          #2aa198
+#define S_green         #859900
+
+!! black dark/light
+*color0:                S_base02
+*color8:                S_base03
 !
-!#define S_base03        #fdf6e3
-!#define S_base02        #eee8d5
-!#define S_base01        #93a1a1
-!#define S_base00        #839496
-!#define S_base0         #657b83
-!#define S_base1         #586e75
-!#define S_base2         #073642
-!#define S_base3         #002b36
-
-! To only apply colors to your terminal, for example, prefix
-! the color assignment statement with its name. Example:
+!!! red dark/light
+*color1:                S_red
+*color9:                S_orange
 !
-! URxvt*background:            S_base03
+!!! green dark/light
+*color2:                S_green
+*color10:               S_base01
+!
+!!! yellow dark/light
+*color3:                S_yellow
+*color11:               S_base00
+!
+!!! blue dark/light
+*color4:                S_blue
+*color12:               S_base0
+!
+!!! magenta dark/light
+*color5:                S_magenta
+*color13:               S_violet
+!
+!!! cyan dark/light
+*color6:                S_cyan
+*color14:               S_base1
+!
+!!! white dark/light
+*color7:                S_base2
+*color15:               S_base3
 
-URxvt*background:              S_base03
-URxvt*foreground:              S_base0
-!URxvt*fading:                  40
-!URxvt*fadeColor:               S_base03
-URxvt*cursorColor:             S_base1
-URxvt*pointerColorBackground:  S_base01
-URxvt*pointerColorForeground:  S_base1
 
-URxvt*color0:                  S_base02
-URxvt*color1:                  S_red
-URxvt*color2:                  S_green
-URxvt*color3:                  S_yellow
-URxvt*color4:                  S_blue
-URxvt*color5:                  S_magenta
-URxvt*color6:                  S_cyan
-URxvt*color7:                  S_base2
-URxvt*color9:                  S_orange
-URxvt*color8:                  S_base03
-URxvt*color10:                 S_base01
-URxvt*color11:                 S_base00
-URxvt*color12:                 S_base0
-URxvt*color13:                 S_violet
-URxvt*color14:                 S_base1
-URxvt*color15:                 S_base3
-
+!!! shiva
+! URxvt*cursorColor:         #b092a4
+! URxvt*tintColor:           #EEEEEE
+! URxvt*background:          #000000
+! URxvt*foreground:          #e1e2db
+! 
+! URxvt*color0:              rgb:00/00/00
+! URxvt*color1:              rgb:cd/5c/5c
+! URxvt*color2:              rgb:27/CA/25
+! URxvt*color3:              rgb:d2/b4/8c
+! URxvt*color4:              rgb:5f/7b/8a
+! URxvt*color5:              rgb:cd/cd/b4
+! URxvt*color6:              rgb:68/68/68
+! URxvt*color7:              rgb:ff/ff/ff
+! URxvt*color8:              rgb:3C/3C/3C
+! URxvt*color9:              rgb:D6/93/00
+! URxvt*color10:             rgb:95/c7/49
+! URxvt*color11:             rgb:cd/cd/c1
+! URxvt*color12:             rgb:36/7F/C5
+! URxvt*color13:             rgb:cd/cd/b4
+! URxvt*color14:             rgb:77/87/98
+! URxvt*color15:             rgb:ff/ff/ff
 
 
 Emacs.FontBackend:      xft
@@ -110,30 +135,7 @@ URxvt.matcher.button:   1
 !URxvt*keysym.C-u:       perl:matcher
 !URxvt*urgentOnBell:     true
 !URxvt*inheritPixmap:    true
-!urxvt*cursorColor:      #b092a4
-!URxvt*tintColor:        #EEEEEE
-!URxvt*background:       #000000
-!URxvt*foreground:       #e1e2db
 URxvt.iconFile:         /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg
-
-!!! shiva
-!*color0:              rgb:00/00/00
-!*color1:              rgb:cd/5c/5c
-!*color2:              rgb:27/CA/25
-!*color3:              rgb:d2/b4/8c
-!*color4:              rgb:5f/7b/8a
-!*color5:              rgb:cd/cd/b4
-!*color6:              rgb:68/68/68
-!*color7:              rgb:ff/ff/ff
-!*color8:              rgb:3C/3C/3C
-!*color9:              rgb:D6/93/00
-!*color10:             rgb:95/c7/49
-!*color11:             rgb:cd/cd/c1
-!*color12:             rgb:36/7F/C5
-!*color13:             rgb:cd/cd/b4
-!*color14:             rgb:77/87/98
-!*color15:             rgb:ff/ff/ff
-
 
 xterm*internalBorder:        0
 xterm*loginShell:         true
@@ -169,3 +171,33 @@ xterm*color12:     #94bff3
 xterm*color13:     #ec93d3
 xterm*color14:     #93e0e3
 xterm*color15:     #ffffff
+
+st.font:			-*-fixed-*-*-*-*-10-*-*-*-*-*-*-1
+st.bold_font:			0
+st.background:			#131415
+st.foreground:			#A3BAD0
+st.cursorColor:			#8d9b53
+st.termname:			xterm-256color
+st.shell:			/bin/sh
+st.bellvolume:			100
+st.tabspaces:			8
+st.chscale:			1.0
+st.cwscale:			1.0
+
+st.color0:			#353540
+st.color8:			#545466
+st.color1:			#8c5760
+st.color9:			#b26f7a
+st.color2:			#7b8c58
+st.color10:			#9db270
+st.color3:			#8c6e43
+st.color11:			#b28c55
+st.color4:			#58698c
+st.color12:			#7086b2
+st.color5:			#7b5e7d
+st.color13:			#9c77b2
+st.color6:			#66808c
+st.color14:			#82a2b2
+st.color7:			#8c8b8b
+st.color15:			#b8b8c8
+
