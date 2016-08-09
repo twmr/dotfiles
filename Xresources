@@ -135,7 +135,9 @@ URxvt.matcher.button:   1
 !URxvt*keysym.C-u:       perl:matcher
 !URxvt*urgentOnBell:     true
 !URxvt*inheritPixmap:    true
-URxvt.iconFile:         /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg
+!URxvt.iconFile:         /usr/share/icons/gnome/scalable/apps/utilities-terminal-symbolic.svg
+URxvt.iconFile:          /usr/share/icons/Adwaita/scalable/apps/utilities-terminal-symbolic.svg
+
 
 xterm*internalBorder:        0
 xterm*loginShell:         true
