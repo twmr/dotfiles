@@ -16,6 +16,14 @@ function src() {
 }
 
 
+function urxvtc() {
+    /bin/urxvtc "$@"
+    if [ $? -eq 2 ]; then
+        /bin/urxvtd -q -o -f
+        /bin/urxvtc "$@"
+    fi
+}
+
 #kill emacs daemon
 function ked() {
     echo "trying to kill emacs"
