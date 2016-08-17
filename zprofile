@@ -60,13 +60,8 @@ if [ -e $HOME/software/sublime_text_3/sublime_text ]; then
     prepath $HOME/software/sublime_text_3/
 fi
 
-if [ "$HOSTNAME" = "PC-16609" ]; then
-    prepath $HOME/bin
-    prepath $HOME/.local/bin
-    prepath $HOME/sandbox/hwsimuenv
-    prepath $HOME/software/python_352/bin
-    export EMBINPATH=${HOME}/gitrepos/emacs/src
-    alias upxonsh='pip3 install git+https://github.com/xonsh/xonsh.git --user -U'
+if [ -e ~/.zsh.d/zprofile ]; then
+    . ~/.zsh.d/zprofile
 
 elif [ "$HOSTNAME" = "mustang" ]; then
     arch="" #intel64"
