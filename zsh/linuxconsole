@@ -20,6 +20,8 @@ if [ "$TERM" = "linux" ]; then
     echo -en "\e]P7dcdccc" #zen-white (norm. lightgrey)
     echo -en "\e]PFffffff" #zen-bright-white (norm. white)
     # avoid artefacts
+    # TODO it's better to set the font in /etc/vconsole.conf
+    # man 5 vconsole.conf
     setfont -v ter-112n # needs the terminus-fonts-console package installed!
     clear
 fi
