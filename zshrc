@@ -10,6 +10,10 @@ ZSH=$HOME/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="afowler"
+ZSH_THEME="dogenpunk"
+#ZSH_THEME="flazz"
+#ZSH_THEME="thomashisch"
+ZSH_THEME="afowler"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -19,7 +23,7 @@ ZSH_THEME="afowler"
 # CASE_SENSITIVE="true"
 
 # Comment this out to disable bi-weekly auto-update checks
-DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="false"
 
 # Uncomment to change how often before auto-updates occur? (in days)
 # export UPDATE_ZSH_DAYS=13

@@ -155,6 +155,7 @@ URxvt.perl-ext-common:  default,matcher
 URxvt.url-launcher:      /bin/google-chrome
 URxvt.matcher.button:   1
 !URxvt*cutchars:         BACKSLASH '"'&()*,;<=>?@[]{|}
+!URxvt.intensityStyles:   false  ! WARNING: this changs the colors in the terminal a bit, arrrgg
 
 !URxvt*visualBell:       true
 !URxvt*keysym.C-u:       perl:matcher
@@ -178,26 +179,26 @@ xterm*charClass:     33:48,35-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,126:4
 xterm*utf8:          2
 xterm*eightBitInput: true
 xterm*faceName:      terminus:pixelsize=12
-xterm*cursorColor:   #FFFFFF
-! Zenburn
-xterm*background:  #222222
-xterm*foreground:  #dcdccc
-xterm*color0:      #1E2320
-xterm*color1:      #705050
-xterm*color2:      #60b48a
-xterm*color3:      #dfaf8f
-xterm*color4:      #506070
-xterm*color5:      #dc8cc3
-xterm*color6:      #8cd0d3
-xterm*color7:      #dcdccc
-xterm*color8:      #709080
-xterm*color9:      #dca3a3
-xterm*color10:     #c3bf9f
-xterm*color11:     #f0dfaf
-xterm*color12:     #94bff3
-xterm*color13:     #ec93d3
-xterm*color14:     #93e0e3
-xterm*color15:     #ffffff
+! xterm*cursorColor:   #FFFFFF
+! ! Zenburn
+! xterm*background:  #222222
+! xterm*foreground:  #dcdccc
+! xterm*color0:      #1E2320
+! xterm*color1:      #705050
+! xterm*color2:      #60b48a
+! xterm*color3:      #dfaf8f
+! xterm*color4:      #506070
+! xterm*color5:      #dc8cc3
+! xterm*color6:      #8cd0d3
+! xterm*color7:      #dcdccc
+! xterm*color8:      #709080
+! xterm*color9:      #dca3a3
+! xterm*color10:     #c3bf9f
+! xterm*color11:     #f0dfaf
+! xterm*color12:     #94bff3
+! xterm*color13:     #ec93d3
+! xterm*color14:     #93e0e3
+! xterm*color15:     #ffffff
 
 st.font:			-*-fixed-*-*-*-*-10-*-*-*-*-*-*-1
 st.bold_font:			0
