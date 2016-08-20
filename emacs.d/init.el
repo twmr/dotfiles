@@ -123,7 +123,6 @@
   :init (progn
           (setq flycheck-highlighting-mode 'lines)
           (setq flycheck-display-errors-delay 0.4)
-          (setq flycheck-completion-system 'ido)
           (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
           )
   :config (global-flycheck-mode))
