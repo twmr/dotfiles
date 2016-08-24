@@ -3,6 +3,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
    ["#263238" "#74CBC4" "#546D7A" "#C792EA" "#82B1FF" "#FFCB6B" "#FF516D" "#CDD3D3"])
  '(blink-cursor-mode nil)
@@ -46,7 +48,7 @@
      ("gnu" . "http://elpa.gnu.org/packages/"))))
  '(package-selected-packages
    (quote
-    (pdf-tools ranger helm-flx jenkins org-beautify-theme org-bullets rainbow-delimiters ein aurora-theme ido-completing-read+ helm-github-stars paradox spinner sequences minimap js2-mode imenu-anywhere rust-mode ocodo-svg-modelines ace-jump-mode multiple-cursors color-identifiers-mode matlab-mode zotelo stickyfunc-enhance highlight-indentation yasnippet projectile helm fill-column-indicator magit evil discover zop-to-char yaml-mode window-numbering use-package undo-tree sx solarized-theme smex smart-mode-line project-persist project-explorer perspective origami moz-controller magit-filenotify julia-mode json-mode iedit hydra htmlize helm-projectile gitignore-mode gitconfig-mode flycheck flx-ido f expand-region ethan-wspace dynamic-fonts direx company color-theme-sanityinc-tomorrow cmake-mode bbdb-vcard auctex aggressive-indent ace-window 2048-game)))
+    (rainbow-identifiers jabber counsel ivy swiper ivy-bibtex bonjourmadame color-theme-sanityinc-solarized mmm-mode fireplace auctex-latexmk anaconda-mode auto-complete-mode indent-guide bpr pdf-tools ranger helm-flx jenkins org-beautify-theme org-bullets rainbow-delimiters ein aurora-theme ido-completing-read+ helm-github-stars paradox spinner sequences minimap js2-mode imenu-anywhere rust-mode ocodo-svg-modelines ace-jump-mode multiple-cursors color-identifiers-mode matlab-mode zotelo stickyfunc-enhance highlight-indentation yasnippet projectile helm fill-column-indicator magit evil discover zop-to-char yaml-mode window-numbering use-package undo-tree sx solarized-theme smex smart-mode-line project-persist project-explorer perspective origami moz-controller magit-filenotify julia-mode json-mode iedit hydra htmlize helm-projectile gitignore-mode gitconfig-mode flycheck flx-ido f expand-region ethan-wspace dynamic-fonts direx company color-theme-sanityinc-tomorrow cmake-mode bbdb-vcard auctex aggressive-indent ace-window 2048-game)))
  '(paradox-github-token t)
  '(preview-default-option-list
    (quote
@@ -55,7 +57,7 @@
  '(preview-transparent-color (quote (highlight :background)))
  '(projectile-git-command "git ls-files -zc --exclude-standard")
  '(python-shell-prompt-detect-enabled nil)
- '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")) t)
+ '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble")))
  '(rm-blacklist
    (quote
     (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
@@ -68,16 +70,16 @@
      (whitespace-style face tabs trailing lines-tail)
      (TeX-master)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-	   (add-hook
-	    (quote write-contents-functions)
-	    (lambda nil
-	      (delete-trailing-whitespace)
-	      nil))
-	   (require
-	    (quote whitespace))
-	   "Sometimes the mode needs to be toggled off and on."
-	   (whitespace-mode 0)
-	   (whitespace-mode 1))
+           (add-hook
+            (quote write-contents-functions)
+            (lambda nil
+              (delete-trailing-whitespace)
+              nil))
+           (require
+            (quote whitespace))
+           "Sometimes the mode needs to be toggled off and on."
+           (whitespace-mode 0)
+           (whitespace-mode 1))
      (whitespace-line-column . 80)
      (whitespace-style face trailing lines-tail)
      (c-offsets-alist
@@ -101,12 +103,12 @@
       (objc-method-call-cont c-lineup-ObjC-method-call-colons c-lineup-ObjC-method-call +)
       (objc-method-args-cont . c-lineup-ObjC-method-args)
       (objc-method-intro .
-			 [0])
+                         [0])
       (friend . 0)
       (cpp-define-intro c-lineup-cpp-define +)
       (cpp-macro-cont . +)
       (cpp-macro .
-		 [0])
+                 [0])
       (inclass . +)
       (stream-op . c-lineup-streamop)
       (arglist-cont-nonempty c-lineup-gcc-asm-reg c-lineup-arglist)
