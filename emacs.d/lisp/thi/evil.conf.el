@@ -99,5 +99,6 @@
         (quickrun/mode . emacs)
         (makey-key-mode . emacs)
         (flycheck-error-list-mode . emacs)
+        (paradox-menu-mode . emacs)
         )
       do (evil-set-initial-state mode state))
