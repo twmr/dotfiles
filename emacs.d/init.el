@@ -318,6 +318,10 @@
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
   )
 
+(use-package which-key :ensure t
+  :config
+    (setq which-key-paging-key "<f5>")
+  )
 
 (use-package pdf-tools
   :ensure t
