@@ -200,7 +200,18 @@ function ginf() {
 }
 
 function gsed() {
-    for x in `git ls-files`; do sed -i $1 $x; done
+    for x in `git ls-files`; do
+
+        if [ -h $x ]; then
+            # symbolic link
+            continue
+        fi
+
+        if [ -f $x ]; then
+            sed -i $1 $x;
+        fi
+
+    done
 }
 
 
