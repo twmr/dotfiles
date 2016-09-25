@@ -2,6 +2,8 @@
 
 ;; (setq python-shell-interpreter "ipython"
 ;;       python-shell-interpreter-args "-i")
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--simple-prompt")
 
 (setq python-skeleton-autoinsert t)
 
@@ -27,6 +29,7 @@
 ;;                               (setq-default-fill-column 72)))
 
 ;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (add-hook 'python-mode-hook 'anaconda-mode)
 ;; (add-hook 'python-mode-hook 'company-anaconda)
 (add-hook 'python-mode-hook #'fci-mode 1)
 (add-hook 'python-mode-hook #'highlight-indentation-mode 1)
