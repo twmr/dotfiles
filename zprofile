@@ -60,9 +60,10 @@ if [ -e $HOME/software/sublime_text_3/sublime_text ]; then
     prepath $HOME/software/sublime_text_3/
 fi
 
+[ -e $HOME/.bin ] && prepath $HOME/.bin
+
 if [ -e ~/.zsh.d/zprofile ]; then
     . ~/.zsh.d/zprofile
-
 elif [ "$HOSTNAME" = "mustang" ]; then
     arch="" #intel64"
     #intel_version="11.1/046"
@@ -131,7 +132,6 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     prepath ${MYMPI_BIN_PATH}
     prepath ${MATLAB_BIN}
     prepath ${EMBINPATH}
-    prepath $HOME/.bin
     prepath $GITR/diss/task3/scripts
 
 elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
@@ -181,12 +181,9 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     export MATLAB_BIN=/opt/MATLAB/R2012a/bin
 
     export RANDOMLAS=${GITR}/randomlas
-    export CFFEM_REPO=${GITR}/cf-fem-lib
-
-    export BOOST_SRC_PATH=$MYSRCDIR/boost_1_52_0
 
     #export NETGENDIR=/opt/ngngs/bin
-    export NETGENDIR=$HOME/opt/ngngs5/bin
+    # export NETGENDIR=$HOME/opt/ngngs5/bin
     # export PYTHONPATH=$HOME/opt/ngngs6/lib64/python3.4/site-packages:$PYTHONPATH
 
     export EMBINPATH=${HOME}/gitrepos/emacs/src
@@ -202,10 +199,10 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $HOME/bin
     prepath $HOME/.cask/bin
     prepath $GITR/software_setup_scripts
-    prepath $NETGENDIR
+    #prepath $NETGENDIR
     prepath $GITR/diss/task3/scripts
     prepath $HOME/software/Zotero_linux-x86_64
-
+    prepath $HOME/software/pycharm-community-2016.2.2/bin
 
     export PARDISO_LIB=/opt/libpardiso500-GNU481-X86-64.so
     export PYTHONPATH=${GITR}/diss/pysalt:${GITR}/diss/task3:$PYTHOPATH
