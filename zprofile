@@ -38,22 +38,26 @@ export BROWSER=google-chrome
 # FEDORA STUFF
 export W3MIMGDISPLAY_PATH=/usr/libexec/w3m/w3mimgdisplay # needed by 'ranger' file browser
 
-prepath() {
-    # prepend path to PATH
-    if [ -d "${1}" ]; then
-        [[ ! "${PATH}" =~ ${1} ]] && PATH="${1}:${PATH}"
+
+_pre_generic_path() {
+    if [ -d "${2}" ]; then
+        [[ ! "${(P)1}" =~ "${2}" ]] && eval "${1}=${2}:${(P)1}"
     else
-        echo "can't add ${1} to PATH because it does not exist"
+        echo "can't add ${2} to ${1} because it does not exist"
     fi
 }
 
+
+prepath() {
+    _pre_generic_path PATH $1
+}
+
 preldlpath() {
-    # prepend path to LD_LIBRARY_PATH
-    if [ -d "${1}" ]; then
-        [[ ! "${LD_LIBRARY_PATH}" =~ ${1} ]] && LD_LIBRARY_PATH="${1}:${LD_LIBRARY_PATH}"
-    else
-        echo "can't add ${1} to LD_LIB path because it does not exist"
-    fi
+    _pre_generic_path LD_LIBRARY_PATH $1
+}
+
+prepypath() {
+    _pre_generic_path PYTHONPATH $1
 }
 
 if [ -e $HOME/software/sublime_text_3/sublime_text ]; then
@@ -150,8 +154,9 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     export PETSC_MAINT_DIR=$GITR/fenics
 
     export NETGENDIR=$HOME/opt/ngngs5/bin
-    export PYTHONPATH=$GITR/diss/task3:$DDIR/pysalt:$PYTHONPATH
-    export PYTHONPATH=$GITR/diss/t4:$PYTHONPATH
+    prepypath $DDIR/task3
+    prepypath $DDIR/pysalt
+    prepypath $DDIR/t4
 
     # prepath $HOME/software/local/bin
     prepath /opt/intel/bin
@@ -205,7 +210,6 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $HOME/software/pycharm-community-2016.2.2/bin
 
     export PARDISO_LIB=/opt/libpardiso500-GNU481-X86-64.so
-    export PYTHONPATH=${GITR}/diss/pysalt:${GITR}/diss/task3:$PYTHOPATH
     preldlpath $GITR/diss/task3/numprocs_ng5
 
     # /opt/intel/bin/compilervars.sh intel64
