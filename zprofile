@@ -137,7 +137,6 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     prepath ${MYMPI_BIN_PATH}
     prepath ${MATLAB_BIN}
     prepath ${EMBINPATH}
-    prepath $GITR/diss/task3/scripts
 
 elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     module purge
