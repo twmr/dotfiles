@@ -65,6 +65,7 @@ if [ -e $HOME/software/sublime_text_3/sublime_text ]; then
 fi
 
 [ -e $HOME/.bin ] && prepath $HOME/.bin
+[ -e $HOME/.local/bin ] && prepath $HOME/.local/bin
 
 if [ -e ~/.zsh.d/zprofile ]; then
     . ~/.zsh.d/zprofile
@@ -143,7 +144,6 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     module load mpi/openmpi-x86_64
 
     prepath $HOME/bin
-    prepath $HOME/.local/bin
     export EMBINPATH=${HOME}/gitrepos/emacs/src
     prepath ${EMBINPATH}
     export DDIR=${GITR}/diss
@@ -200,7 +200,6 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $EMBINPATH
     prepath $EMBINPATH2
     prepath $DOTFPATH/bin
-    prepath $HOME/.local/bin
     prepath $HOME/bin
     prepath $HOME/.cask/bin
     prepath $GITR/software_setup_scripts
