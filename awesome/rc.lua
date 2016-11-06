@@ -55,7 +55,8 @@ local modkey = "Mod4"
 beautiful.init(awful.util.getdir("config") .. "/theme.lua")
 
 settings = {}
-settings.term = 'urxvt256c-ml'
+-- settings.term = 'urxvt256c-ml'
+settings.term = 'urxvt256c -e /home/thomas/.local/bin/xonsh'
 -- settings.term = 'gnome-terminal'
 settings.browser1 = browser
 settings.browser2 = 'chromium-browser'
@@ -93,43 +94,29 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 
-if hostname == "dirac" then
-   monitors = {
-      -- index corresponds to a screen in the range 1..screen.count()
-      left = 1,
-      right = 2
-   }
-   tags = {
-      namesright  = { 1,2,3,4,5,6,7,"mpi",9 },
-      namesleft  = { "1main","2emacs","3web","4scripts","5jeol",
-                     "6remote","7vm","8keller","9brunn", "10tmp",
-                     "11nemo", "12tmp", "13tmp" }
-   }
-   lockcmd = "xscreensaver-command -lock"
-   defaultlayoutidmonleft = 1 --4
-   defaultlayoutidmonright = 1
-else
-   monitors = {
-      left = 1,
-      right = 2
-   }
-   tags = {
-      namesleft  = { "doc","vsc","web","qtc", "mail", "nonuni",7,8,9 },
-      namesright  = { "vsc","mail",3,4,5,6,7,8,9 }
-   }
-   lockcmd = "gnome-screensaver-command -l"
-   lockcmd = "xscreensaver-command -lock"
-   defaultlayoutidmonleft = 1
-   defaultlayoutidmonright = 1
-end
+-- lockcmd = "gnome-screensaver-command -l"
+lockcmd = "xscreensaver-command -lock"
+
+monitors = {
+   left = 1,
+   right = 2
+}
 
 if screen.count() == 1 then
    monitors.left = 1
    monitors.right = 1
    tags = {
-      namesleft = { "doc","vsc","web","qtc","other",6,7,8,9}
+      namesleft  = {1,2,3,4,5,6,7,8,9},
    }
+else
+   tags = {
+      namesleft  = {1,2,3,4,5,6,7,8,9},
+      namesright  = {1,2,3,4,5,6,7,8,9},
+   }
+   defaultlayoutidmonleft = 1
+   defaultlayoutidmonright = 1
 end
+
 
 for s = 1, screen.count() do
    if s == monitors.left then
