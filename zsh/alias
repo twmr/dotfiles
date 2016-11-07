@@ -52,6 +52,7 @@ alias pympi='mpirun -n `nproc` python'
 #alias pip='pip' # TODO only use this alias if not in conda environment
 # alias upxonsh='pip3.4 install xonsh --user -U'
 alias upxonsh='pip3.5 install git+https://github.com/xonsh/xonsh.git --user -U'
+alias upjenkins='pip install git+https://github.com/pycontribs/jenkinsapi.git --user -U'
 
 alias -g G='| egrep'
 
