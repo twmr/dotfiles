@@ -34,6 +34,8 @@ do
     end)
 end
 
+
+
 -- Themes define colours, icons, and wallpapers
 local home     = os.getenv("HOME")
 local hostname = os.getenv("HOSTNAME")
@@ -120,6 +122,8 @@ for s = 1, screen.count() do
    awful.tag.setproperty(tags[s][5], "mwfact", 0.13)
    -- awful.layout.set(awful.layout.suit.fair, tags[2][8])
 end
+
+
 
 -- Create a laucher widget and a main menu
 myawesomemenu = {
@@ -242,6 +246,8 @@ root.buttons(awful.util.table.join(
     awful.button({ }, 5, awful.tag.viewprev)
 ))
 
+
+
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
