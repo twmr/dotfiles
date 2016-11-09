@@ -11,7 +11,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
--- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
 if awesome.startup_errors then
@@ -34,11 +33,8 @@ do
         in_error = false
     end)
 end
--- }}}
 
--- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
-
 local home     = os.getenv("HOME")
 local hostname = os.getenv("HOSTNAME")
 local browser  = os.getenv("BROWSER")
@@ -56,10 +52,11 @@ beautiful.init(awful.util.getdir("config") .. "/theme.lua")
 
 settings = {}
 -- settings.term = 'urxvt256c-ml'
-settings.term = 'urxvt256c -e /home/thomas/.local/bin/xonsh'
+--settings.term = 'urxvt256c -e /home/thomas/.local/bin/xonsh'
+settings.term = 'urxvt256c -e /bin/zsh'
 -- settings.term = 'gnome-terminal'
 settings.browser1 = browser
-settings.browser2 = 'chromium-browser'
+settings.browser2 = browser --'chromium-browser'
 settings.editor = 'emacsclient -n -c'
 settings.editor2 = 'gvim'
 settings.filemanager = 'nemo ' .. home
@@ -81,17 +78,13 @@ local layouts =
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier
 }
--- }}}
 
--- {{{ Wallpaper
 if beautiful.wallpaper then
     for s = 1, screen.count() do
         gears.wallpaper.maximized(beautiful.wallpaper, s, true)
     end
 end
--- }}}
 
--- {{{ Tags
 -- Define a tag table which hold all screen tags.
 
 -- lockcmd = "gnome-screensaver-command -l"
@@ -113,9 +106,9 @@ else
       namesleft  = {1,2,3,4,5,6,7,8,9},
       namesright  = {1,2,3,4,5,6,7,8,9},
    }
-   defaultlayoutidmonleft = 1
-   defaultlayoutidmonright = 1
 end
+defaultlayoutidmonleft = 2
+defaultlayoutidmonright = 2
 
 
 for s = 1, screen.count() do
@@ -127,9 +120,7 @@ for s = 1, screen.count() do
    awful.tag.setproperty(tags[s][5], "mwfact", 0.13)
    -- awful.layout.set(awful.layout.suit.fair, tags[2][8])
 end
--- }}}
 
--- {{{ Menu
 -- Create a laucher widget and a main menu
 myawesomemenu = {
    { "manual", settings.term .. " -e man awesome" },
@@ -152,9 +143,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
--- }}}
 
--- {{{ Wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 
@@ -246,17 +235,13 @@ for s = 1, screen.count() do
 
     mywibox[s]:set_widget(layout)
 end
--- }}}
 
-
--- {{{ Mouse bindings
 root.buttons(awful.util.table.join(
     awful.button({ }, 3, function () mymainmenu:toggle() end),
     awful.button({ }, 4, awful.tag.viewnext),
     awful.button({ }, 5, awful.tag.viewprev)
 ))
 
--- {{{ Key bindings
 globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),
@@ -290,6 +275,9 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "]", function () awful.screen.focus(monitors.right) end),
     awful.key({ modkey }, "[", function () awful.screen.focus(monitors.left) end),
 
+    awful.key({ modkey }, "#" .. 11, awful.tag.viewnext ),
+    awful.key({ modkey }, "#" .. 10, awful.tag.viewprev ),
+
     -- Standard program
     awful.key({ modkey,           }, "Return", function () exec(settings.term)       end),
     awful.key({ modkey            }, "e",      function () exec(settings.editor)     end),
@@ -313,8 +301,59 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", altkey }, "l",     function () exec(lockcmd)                 end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () exec("gnome-do")           end)
+    awful.key({ modkey },            "r",     function () exec("krunner")           end)
 )
+
+
+local keynumber = 0
+for s = 1, screen.count() do
+   keynumber = math.min(9, math.max(#tags[s], keynumber));
+end
+
+-- Be careful: we use keycodes to make it works on any keyboard layout.
+-- This should map on the top row of your keyboard, usually 1 to 9.
+for i = 3, keynumber do
+    globalkeys = awful.util.table.join(globalkeys,
+        awful.key({ modkey }, "#" .. i + 9,
+                  function ()
+                        local screen = mouse.screen
+                        local tag = awful.tag.gettags(screen)[i]
+                        if tag then
+                           awful.tag.viewonly(tag)
+                        end
+                  end),
+        awful.key({ modkey, "Control" }, "#" .. i + 9,
+                  function ()
+                      local screen = mouse.screen
+                      local tag = awful.tag.gettags(screen)[i]
+                      if tag then
+                         awful.tag.viewtoggle(tag)
+                      end
+                  end),
+        awful.key({ modkey, "Shift" }, "#" .. i + 9,
+                  function ()
+                      local tag = awful.tag.gettags(client.focus.screen)[i]
+                      if client.focus and tag then
+                          awful.client.movetotag(tag)
+                     end
+                  end),
+        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
+                  function ()
+                      local tag = awful.tag.gettags(client.focus.screen)[i]
+                      if client.focus and tag then
+                          awful.client.toggletag(tag)
+                      end
+                  end))
+end
+
+root.keys(globalkeys)
+
+
+clientbuttons = awful.util.table.join(
+    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
+    awful.button({ modkey }, 1, awful.mouse.client.move),
+    awful.button({ modkey }, 3, awful.mouse.client.resize))
+
 
 clientkeys = awful.util.table.join(
     awful.key({ modkey,           }, "f",      function (c) c.fullscreen = not c.fullscreen  end),
@@ -347,9 +386,7 @@ clientkeys = awful.util.table.join(
     end)
 )
 
--- {{{ Key bindings
---
--- {{{ Global keys
+
 -- globalkeys = awful.util.table.join(
 --     -- {{{ Applications
 --     awful.key({ modkey }, "e", function () exec(settings.editor) end),
@@ -510,52 +547,6 @@ clientkeys = awful.util.table.join(
 -- }}}
 
 
--- Bind all key numbers to tags.
--- Be careful: we use keycodes to make it works on any keyboard layout.
--- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
-    globalkeys = awful.util.table.join(globalkeys,
-        awful.key({ modkey }, "#" .. i + 9,
-                  function ()
-                        local screen = mouse.screen
-                        local tag = awful.tag.gettags(screen)[i]
-                        if tag then
-                           awful.tag.viewonly(tag)
-                        end
-                  end),
-        awful.key({ modkey, "Control" }, "#" .. i + 9,
-                  function ()
-                      local screen = mouse.screen
-                      local tag = awful.tag.gettags(screen)[i]
-                      if tag then
-                         awful.tag.viewtoggle(tag)
-                      end
-                  end),
-        awful.key({ modkey, "Shift" }, "#" .. i + 9,
-                  function ()
-                      local tag = awful.tag.gettags(client.focus.screen)[i]
-                      if client.focus and tag then
-                          awful.client.movetotag(tag)
-                     end
-                  end),
-        awful.key({ modkey, "Control", "Shift" }, "#" .. i + 9,
-                  function ()
-                      local tag = awful.tag.gettags(client.focus.screen)[i]
-                      if client.focus and tag then
-                          awful.client.toggletag(tag)
-                      end
-                  end))
-end
-
-clientbuttons = awful.util.table.join(
-    awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-    awful.button({ modkey }, 1, awful.mouse.client.move),
-    awful.button({ modkey }, 3, awful.mouse.client.resize))
-
--- Set keys
-root.keys(globalkeys)
--- }}}
-
 -- {{{ Keyboard digits
 -- local keynumber = 0
 -- for s = 1, screen.count() do
@@ -617,8 +608,8 @@ awful.rules.rules = {
     },
     -- { rule = { instance = "chromium-browser" },
       -- properties = { tag = tags[monitors.prim][3] } },
-    -- { rule = { instance = "google-chrome" },
-      -- properties = { tag = tags[monitors.prim][3] } },
+    { rule = { instance = "google-chrome" },
+      properties = { tag = tags[1][4] } },
    --  { rule = { class = "Skype", instance = "skype" },
    --    properties = { tag = tags[monitors.prim][5], split = 250, target = "master" }
    --  },
