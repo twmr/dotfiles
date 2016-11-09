@@ -30,3 +30,9 @@
 	default = simple
 [oh-my-zsh]
 	hide-status = 1
+[url "git://anongit.kde.org/"]
+	insteadOf = kde:
+[url "ssh://git@git.kde.org/"]
+	pushInsteadOf = kde:
+[url "git@git.kde.org:"]
+	pushInsteadOf = kde:
