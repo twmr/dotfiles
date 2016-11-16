@@ -72,7 +72,12 @@ done
 . ~/.zsh/emacs
 
 if [ -d ~/.zsh.d/ -a ! "$(ls -A ~/.zsh.d/ 2> /dev/null)" = "" ]; then
- . ~/.zsh.d/*
+   # see https://superuser.com/questions/397307
+   fnames=`find ~/.zsh.d/ -maxdepth 1 -type f  ! -name 'zprofile'`
+   for fname in $fnames; do
+       #echo $fname
+       . ~/.zsh.d/*
+   done
 fi
 
 
