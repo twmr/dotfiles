@@ -36,3 +36,15 @@
 	pushInsteadOf = kde:
 [url "git@git.kde.org:"]
 	pushInsteadOf = kde:
+
+# http://stackoverflow.com/questions/14273531/how-to-sort-git-tags-by-version-string-order-of-form-rc-x-y-z-w
+# https://github.com/git/git/commit/f57610a1ff7a547d1e11e24f942b1703cea81f81
+[tag]
+	sort = version:refname
+[versionsort]
+	prereleaseSuffix = alpha
+	prereleaseSuffix = .alpha
+	prereleaseSuffix = beta
+	prereleaseSuffix = .beta
+	prereleaseSuffix = rc
+	prereleaseSuffix = .rc
