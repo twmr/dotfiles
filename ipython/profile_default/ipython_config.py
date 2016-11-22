@@ -4,3 +4,5 @@ c.TerminalIPythonApp.profile = u'default'
 c.TerminalInteractiveShell.history_length = 10000
 c.TerminalInteractiveShell.autoindent = True
 c.TerminalInteractiveShell.confirm_exit = False
+c.TerminalInteractiveShell.color_info = True
+c.TerminalInteractiveShell.colors = 'NoColor'
