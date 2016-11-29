@@ -1,0 +1,5 @@
+# files taken from https://babushk.in/posts/offlineimap-systemd.html
+
+start service with 
+systemctl --user enable offlineimap.timer
+systemctl --user start offlineimap.timer
