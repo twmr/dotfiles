@@ -15,7 +15,7 @@ fi
 export OOO_FORCE_DESKTOP='gnome'
 export EDITOR="emacs" #is an alias to emacsclient
 export VISUAL="$EDITOR"
-export PAGER="vless"
+export PAGER="less"
 export HISTCONTROL=ignoredups
 export IGNOREEOF=3
 # export AWT_TOOLKIT=MToolkit # for matlab
