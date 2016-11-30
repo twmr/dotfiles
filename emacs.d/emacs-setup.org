@@ -19,16 +19,19 @@ TODO helm-projectile
 * Dependencies
 ** jedi
 *** fresh install
-=yi python-virtualenv=
+=di python-virtualenv=
 call =jedi:install-server= from within emacs
 *** reinstall jedi virtualenv
  =remove =~/.emacs.d/.python-env...=
  =remove =~/.pydistutils.cfg=
 call =jedi:install-server= from within emacs
 ** Flycheck python dependencies
- install the flake8 tool https://pypi.python.org/pypi/flake8
- and pep8-naming https://github.com/flintwork/pep8-naming
- and pyflakes https://github.com/pyflakes/pyflakes
+=di python3-flake8 python3-pyflakes=
+=_ pip3 install pep8-naming=
+
+# install the flake8 tool https://pypi.python.org/pypi/flake8
+# and pep8-naming https://github.com/flintwork/pep8-naming
+# and pyflakes https://github.com/pyflakes/pyflakes
  verify that all where installed successfully with
  $ flake8 --version
  2.0 (pep8: 1.4.3, pyflakes: 0.6.1, naming: 0.2)
@@ -45,8 +48,7 @@ call =jedi:install-server= from within emacs
 =di texlive-chktex-bin= (flycheck checker)
 * Key Bindings
 ** IDO Mode
-=C-c C-f= ido open file 
-to open a file as superuse type =C-c C-f= and then =/sudo= then =TAB/enter= multiple times
+to open a file as superuser type =C-c C-f= and then =/sudo= then =TAB/enter= multiple times
 =S-F11= open recent directories (uses recentf-list)
 =F11= open recent files (uses recentf-list)
 =F12= dired directory open  (uses thi::directory-list)
@@ -74,6 +76,9 @@ With this setting, once you have selected your project, you will remain in Proje
 in order to allow for the occasions where you want to select the top-level directory.
 
 
+rectangle mark mode
+C-x space
+C-t to insert text (see http://emacs.stackexchange.com/questions/9637/rectangle-insert-in-emacs-24-4)
 ** Image Mode
 *** =<del>= go back to dired buffer of the current dir
 *** =<right>= go to next file in dir
