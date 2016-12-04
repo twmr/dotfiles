@@ -131,8 +131,8 @@ xscreensaver.mode:      blank
 ! *color15:               S_base3
 !
 
-sanityinc-tomorrow-night
-from https://github.com/chriskempson/tomorrow-theme/blob/master/Xdefaults/Tomorrow%20Night
+! sanityinc-tomorrow-night
+! from https://github.com/chriskempson/tomorrow-theme/blob/master/Xdefaults/Tomorrow%20Night
 *foreground:   #c5c8c6
 *background:   #1d1f21
 *cursorColor:  #aeafad
