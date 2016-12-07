@@ -13,12 +13,6 @@
 
 
 (defvar thi::directory-list '(
-                              "~/gitrepos/diss"
-                              "~/gitrepos/diss/pysalt"
-                              "~/gitrepos/diss/task3"
-                              "~/gitrepos/netgen/netgen"
-                              "~/gitrepos/ngsolve/ngsolve"
-
                               "~/gitrepos/dotfiles/emacs.d"
                               "~/gitrepos/dotfiles/emacs.d/thi"
                               ))
