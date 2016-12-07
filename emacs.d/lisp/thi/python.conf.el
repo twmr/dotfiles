@@ -60,3 +60,5 @@
 ;;                                                                  (and " <" (or "codecell" "markdowncell") ">"))
 ;;                                                          line-end)))
 ;;                                         1 '(:weight bold :overline t) prepend)))
+
+(add-hook 'inferior-python-mode-hook (lambda () (global-hl-line-mode 0)))
