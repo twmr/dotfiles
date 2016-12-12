@@ -30,10 +30,6 @@
  '(matlab-indent-level 2)
  '(mode-require-final-newline nil)
  '(notmuch-fcc-dirs "Sent")
- '(notmuch-saved-searches
-   (quote
-    ((:name "inbox" :query "tag:inbox")
-     (:name "unread" :query "tag:unread"))))
  '(notmuch-show-logo nil)
  '(org-file-apps
    (quote

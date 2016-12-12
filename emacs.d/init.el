@@ -35,6 +35,14 @@
   (require 'use-package))
 ;; https://github.com/alezost/emacs-config/prog.el
 
+;; (use-package anaconda-mode :ensure t)
+
+(use-package bpr :ensure t
+  :init
+  (progn
+    (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
+    (setq bpr-process-mode #'comint-mode)))
+
 (use-package paradox :ensure t)
 
 (use-package matlab-mode :ensure t :defer t)
@@ -113,6 +121,9 @@
     ))
 
 (use-package fill-column-indicator :ensure t)
+(use-package visual-fill-column
+  :ensure t
+  :config (global-flycheck-mode))
 (use-package flx :ensure t)
 (use-package flx-ido :ensure t)
 
@@ -281,9 +292,16 @@
 
 (use-package smex :ensure t)
 
-(use-package swiper :ensure t
-  :config (ivy-mode 1)
-  :bind (("C-s" . swiper))
+(use-package swiper
+  :ensure t
+  :config
+  (ivy-mode 1)
+  ;; (bind-keys :map swiper-map
+  ;;            ("C-." (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'symbol))))))
+  ;;            ((kbd "M-.") (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'word))))))
+
+  ;; :bind (("C-s" . swiper))
+
   )
 
 (use-package counsel :ensure t
