@@ -290,6 +290,10 @@
          ("C-c m C-e" . mc/edit-ends-of-lines)
          ("C-c m C-s" . mc/mark-all-in-region)))
 
+(use-package pip-requirements :ensure t :defer t)
+
+(use-package python-switch-quotes :ensure t :defer t)
+
 (use-package smex :ensure t)
 
 (use-package swiper
