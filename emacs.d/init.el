@@ -77,6 +77,10 @@
 
 (use-package cython-mode :ensure t :defer t)
 
+(use-package dashboard
+  :config
+  (dashboard-setup-startup-hook))
+
 (use-package ethan-wspace :ensure t :defer t
   :init
   (progn
