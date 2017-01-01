@@ -186,7 +186,7 @@ Emacs.font:             Source Code Pro:size=11
 ! Emacs.font:             Anonymous Pro:size=12
 ! Emacs.font:             DejaVu Sans Mono:size=11
 ! Emacs.font:             Sans-10
-! Emacs.menuBar:          off
+Emacs.menuBar:          off
 Emacs.verticalScrollBars: off
 Emacs.geometry:         100x70
 
