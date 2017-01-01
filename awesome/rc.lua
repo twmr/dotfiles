@@ -62,7 +62,7 @@ settings.browser2 = browser --'chromium-browser'
 settings.editor = 'emacsclient -n -c'
 settings.editor2 = 'gvim'
 settings.filemanager = 'nemo ' .. home
-settings.music = 'rhythmbox'
+settings.music = 'spotify'
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 local layouts =
