@@ -4,6 +4,10 @@
 ;;http://stackoverflow.com/questions/9900232/changing-color-themes-emacs-24-order-matters
 (setq evil-default-cursor t)
 
+(define-key evil-normal-state-map (kbd "*")
+  (lambda () (interactive) (swiper (format "\\<%s\\>" (thing-at-point 'symbol)))))
+(define-key evil-normal-state-map (kbd "#")
+  (lambda () (interactive) (swiper (format "\\<%s\\>" (thing-at-point 'word)))))
 ;;TODO modeline color changes
 
 ;; (defvar evil-normal-mode-line-background (face-background 'mode-line))
