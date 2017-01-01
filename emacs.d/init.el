@@ -76,7 +76,10 @@
 
 (use-package cython-mode :ensure t :defer t)
 
-(use-package dashboard
+(use-package dashboard :ensure t
+  :init
+  (progn
+    (setq dashboard-startup-banner 'logo))
   :config
   (dashboard-setup-startup-hook))
 
