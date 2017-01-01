@@ -44,8 +44,6 @@
 
 (use-package paradox :ensure t)
 
-(use-package matlab-mode :ensure t :defer t)
-
 (use-package ace-jump-mode :ensure t :defer t
   :init
   (progn
