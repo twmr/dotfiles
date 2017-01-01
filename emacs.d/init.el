@@ -87,8 +87,11 @@
   :init
   (progn
     (add-hook 'prog-mode-hook #'ethan-wspace-mode 1)
-    )
-  )
+    (defun thi::tabs-are-less-evil ()
+      (setq ethan-wspace-errors (remove 'tabs ethan-wspace-errors)))
+    (add-hook 'makefile-mode-hook 'thi::tabs-are-less-evil)
+    (add-hook 'sh-mode-hook 'thi::tabs-are-less-evil)
+    ))
 
 (use-package highlight-indentation :ensure t)
 
