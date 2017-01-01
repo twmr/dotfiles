@@ -102,6 +102,10 @@
     )
   )
 
+(use-package page-break-lines :ensure t :defer t
+  :config
+  (global-page-break-lines-mode))
+
 (use-package python
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
