@@ -335,6 +335,12 @@
   :defer t
   :config (add-hook 'after-init-hook #'global-undo-tree-mode))
 
+(use-package perspective :ensure t :disabled t
+  ;; disabled because it still uses frame local variables
+  :config
+     (project-persist-mode 1) ;; C-c P n; C-c P f
+  )
+
 (use-package projectile :ensure t :defer t
   :config (progn
             (projectile-global-mode t)
