@@ -350,6 +350,11 @@
             (setq projectile-completion-system 'ido)
             ))
 
+(use-package project-persist :ensure t :defer t
+  :config
+  (project-persist-mode t) ;; C-c P n; C-c P f
+)
+
 (use-package helm-projectile :ensure t :defer t
   :init
   ;; https://www.reddit.com/r/emacs/comments/3m8i5r/helmprojectile_quickly_findcreate_new_file_in/
