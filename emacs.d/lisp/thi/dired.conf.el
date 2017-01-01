@@ -28,17 +28,3 @@
 
 (define-key dired-mode-map (kbd "C-a")
   'dired-back-to-start-of-files)
-
-(eval-after-load 'ido
-  '(progn
-    (defun thi::directorychooser ()
-      "Use ido to select a recently used directory from the `thi::directory-list'"
-      (interactive)
-      (let ((home (expand-file-name (getenv "HOME"))))
-        (dired
-         (ido-completing-read "Directory open: "
-                              (mapcar (lambda (path)
-                                        (replace-regexp-in-string home "~" path))
-                                      thi::directory-list)
-                              nil t))))
-    (global-set-key [f12] 'thi::directorychooser)))
