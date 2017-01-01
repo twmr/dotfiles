@@ -37,3 +37,15 @@
 
 ;; kill buffer after sending mail
 (setq message-kill-buffer-on-exit t)
+
+(defun expand-only-unread-hook () (interactive)
+       (let ((unread nil)
+             (open (notmuch-show-get-message-ids-for-open-messages)))
+         (notmuch-show-mapc (lambda ()
+                              (when (member "unread" (notmuch-show-get-tags))
+                                (setq unread t))))
+         (when unread
+           (let ((notmuch-show-hook (remove 'expand-only-unread-hook notmuch-show-hook)))
+             (notmuch-show-filter-thread "tag:unread")))))
+
+(add-hook 'notmuch-show-hook 'expand-only-unread-hook)
