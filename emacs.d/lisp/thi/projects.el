@@ -1,5 +1,3 @@
-;; (load-library "perspective")
-(require 'perspective)
 (projectile-global-mode)
 
 ;; if project-persist-mode is not installed install it using package.el
