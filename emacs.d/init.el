@@ -50,15 +50,17 @@
     (autoload 'ace-jump-mode "ace-jump-mode" nil t)
     (bind-key "C-." 'ace-jump-mode)))
 
-(use-package auto-complete :ensure t
-  :init
-  (progn
-    (global-auto-complete-mode)))
+;; (use-package auto-complete :ensure t
+;;   :init
+;;   (progn
+;;     (global-auto-complete-mode)))
 
 (use-package color-identifiers-mode :ensure t :defer t)
 (use-package cmake-mode :ensure t :defer t)
 
-;; (use-package company :ensure t :defer t
+(use-package company :ensure t :defer t
+  :config
+  (global-company-mode))
 ;;   :config (progn
 ;;             (defun company-complete-common-or-cycle ()
 ;;               "Insert the common part of all candidates, or select the next one."
