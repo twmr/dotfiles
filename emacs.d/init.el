@@ -11,6 +11,17 @@
 (defvar thi::config-dir
   (expand-file-name
    (concat user-emacs-directory "/lisp/thi")))
+(require 'cl-lib) ;; cl-delete-if-not
+(defvar thi::directory-list
+  (cl-delete-if-not
+   'file-exists-p
+   (mapcar (lambda (path)
+             (replace-regexp-in-string (getenv "HOME") "~" path))
+           '(
+             "~/gitrepos/dotfiles/emacs.d"
+             "~/gitrepos/dotfiles/emacs.d/lisp/thi"
+             ))))
+
 (setq custom-file (concat thi::config-dir "/custom.el"))
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
@@ -435,6 +446,22 @@
     (add-hook 'TeX-mode-hook 'zotelo-minor-mode)))
 
 
+(use-package ido :ensure t
+  :init
+  (progn
+    (defun thi::directorychooser ()
+      "Use ido to select a recently used directory from the `thi::directory-list'"
+      (interactive)
+      (let ((home (expand-file-name (getenv "HOME"))))
+        (dired
+         (ido-completing-read "Directory open: "
+                              (mapcar (lambda (path)
+                                        (replace-regexp-in-string home "~" path))
+                                      thi::directory-list)
+                              nil t))))
+    (global-set-key [f12] 'thi::directorychooser)))
+
+
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 (defvar thi::theme 'sanityinc-tomorrow-night)
@@ -463,7 +490,6 @@
 (load "thi/vc")
 (load "thi/recentf")
 (load "thi/bindings")
-(load "thi/projects")
 (load "thi/ido")
 (load "thi/mail")
 (load "thi/ccmode")
