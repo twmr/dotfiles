@@ -15,5 +15,5 @@
                               "~/gitrepos/dotfiles/emacs.d/thi"
                               ))
 
-(require 'cl)
+(require 'cl-lib)
 (delete-if-not 'file-exists-p thi::directory-list)
