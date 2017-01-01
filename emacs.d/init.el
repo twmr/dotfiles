@@ -1,4 +1,5 @@
 ;;; personal-emacs-config --- by thomas hisch
+;;; Code:
 (setq debug-on-error t)
 
 (dolist (p '("/lisp" "/lisp/vendor"))
@@ -26,8 +27,6 @@
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 
-(setq paradox-execute-asynchronously t)
-
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
 (dolist (file (directory-files thi::config-dir))
@@ -48,12 +47,13 @@
 ;; (use-package anaconda-mode :ensure t)
 
 (use-package bpr :ensure t
-  :init
-  (progn
-    (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
-    (setq bpr-process-mode #'comint-mode)))
+  :config
+  (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
+  (setq bpr-process-mode #'comint-mode))
 
-(use-package paradox :ensure t)
+(use-package paradox :ensure t
+  :config
+  (setq paradox-execute-asynchronously t))
 
 (use-package ace-jump-mode :ensure t :defer t
   :init
