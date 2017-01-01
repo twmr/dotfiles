@@ -310,6 +310,8 @@
 
 (use-package smex :ensure t)
 
+(use-package sr-speedbar :ensure t)
+
 (use-package swiper
   :ensure t
   :config
@@ -455,7 +457,6 @@
 (load "thi/nxml")
 (load "thi/compilation")
 (load "thi/term")
-(load "vendor/sr-speedbar") ;; contains the fix for emacs-24.4
 (load "thi/graphene")
 
 
