@@ -8,4 +8,5 @@ create_default_packages:
 channels:
   # - file:///home/thomas/miniconda/conda-bld
   # - http://conda.binstar.org/thisch
-  - defaults
+    - conda-forge
+    - defaults
