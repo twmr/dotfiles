@@ -17,7 +17,7 @@
   (cl-delete-if-not
    'file-exists-p
    (mapcar (lambda (path)
-             (replace-regexp-in-string (getenv "HOME") "~" path))
+             (replace-regexp-in-string "~" (getenv "HOME") path))
            '(
              "~/gitrepos/dotfiles/emacs.d"
              "~/gitrepos/dotfiles/emacs.d/lisp/thi"
