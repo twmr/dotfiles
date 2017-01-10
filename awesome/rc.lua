@@ -337,7 +337,8 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", altkey }, "l",     function () exec(lockcmd) end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () exec("krunner") end),
+    awful.key({ modkey },            "r",     function () exec("dmenu_run") end),
+    awful.key({ modkey, "Shift" },            "r",     function () exec("krunner") end),
 --    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
 --              {description = "run prompt", group = "launcher"}),
 
