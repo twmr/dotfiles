@@ -499,6 +499,7 @@
 (load "thi/term")
 (load "thi/graphene")
 
+(global-eldoc-mode -1)
 
 (require 'url-tramp)
 
