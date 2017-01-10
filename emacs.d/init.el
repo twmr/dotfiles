@@ -327,6 +327,17 @@
   :ensure t
   :config
   (ivy-mode 1)
+  :init
+  (progn
+    (defun thi::directorychooser ()
+      "Use ido to select a recently used directory from the `thi::directory-list'"
+      (interactive)
+      (dired
+       (ivy-completing-read "Directory open: "
+                            thi::directory-list
+                            nil t)))
+    (global-set-key [f12] 'thi::directorychooser)))
+
   ;; (bind-keys :map swiper-map
   ;;            ("C-." (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'symbol))))))
   ;;            ((kbd "M-.") (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'word))))))
@@ -444,23 +455,6 @@
   :init
   (progn
     (add-hook 'TeX-mode-hook 'zotelo-minor-mode)))
-
-
-(use-package ido :ensure t
-  :init
-  (progn
-    (defun thi::directorychooser ()
-      "Use ido to select a recently used directory from the `thi::directory-list'"
-      (interactive)
-      (let ((home (expand-file-name (getenv "HOME"))))
-        (dired
-         (ido-completing-read "Directory open: "
-                              (mapcar (lambda (path)
-                                        (replace-regexp-in-string home "~" path))
-                                      thi::directory-list)
-                              nil t))))
-    (global-set-key [f12] 'thi::directorychooser)))
-
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
