@@ -73,8 +73,11 @@ function switchcurenv() {
 function env3k() {
     enconda
     workon py3k
-    export PYTHONPATH=~/local/lib/python3.4/site-packages:$PYTHONPATH
-    export LD_LIBRARY_PATH=~/local/lib:$LD_LIBRARY_PATH
+}
+
+function env36() {
+    enconda
+    workon py36
 }
 
 function melmacs() {
