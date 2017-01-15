@@ -199,13 +199,12 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     prepath $EMBINPATH
     prepath $EMBINPATH2
     prepath $DOTFPATH/bin
-    prepath $HOME/bin
     prepath $HOME/.cask/bin
     prepath $GITR/software_setup_scripts
     #prepath $NETGENDIR
     prepath $GITR/diss/task3/scripts
     prepath $HOME/software/Zotero_linux-x86_64
-    prepath $HOME/software/pycharm-community-2016.2.2/bin
+    prepath $HOME/software/pycharm/bin
 
     export PARDISO_LIB=/opt/libpardiso500-GNU481-X86-64.so
     preldlpath $GITR/diss/task3/numprocs_ng5
