@@ -175,8 +175,8 @@ elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
     #ulimlimit=`free | grep '^Mem' | gawk '{ print(int($2 * 0.95)) }'`
     #ulimit -v $ulimlimit
 elif [ "$HOSTNAME" = "cobra" ]; then
-    module purge
-    module load mpi/openmpi-x86_64
+    # module purge
+    # module load mpi/openmpi-x86_64
 
     DOTFPATH=$HOME/gitrepos/dotfiles
 
