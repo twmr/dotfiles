@@ -66,10 +66,6 @@
 (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
-;; text size
-(global-set-key (kbd "C-x +") 'text-scale-increase)
-(global-set-key (kbd "C-x -") 'text-scale-decrease)
-
 ;; hungry-delete
 ;; (global-set-key (kbd "M-<backspace>") #'hungry-delete-backward)
 
