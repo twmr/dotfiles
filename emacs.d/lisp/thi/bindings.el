@@ -35,7 +35,6 @@
 ;; (global-set-key [f11] 'recentf-ido-find-file)
 (global-set-key [S-f11] 'recentf-ido-find-dir)
 
-
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; replace buffermenu with ibuffer
@@ -47,8 +46,6 @@
 (global-set-key (kbd "C-%") 'menu-bar-mode)
 
 (global-set-key (kbd "M-p") 'ace-window)
-
-(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; smex stuff
 ;; (global-set-key (kbd "M-x") 'helm-M-x) ;; i don't like this
