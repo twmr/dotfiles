@@ -1,0 +1,5 @@
+#!/bin/sh
+":"; exec emacs --quick --script "$0" -f main -- "$0" "$@" # -*- mode: emacs-lisp; lexical-binding: t; -*-
+
+;; Hier kann nun Emacs Lisp Code folgen ...
+(message "Hallo Emacs Skript!")
