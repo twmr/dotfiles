@@ -1,6 +1,6 @@
 ;;; personal-emacs-config --- by thomas hisch
 ;;; Code:
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 (dolist (p '("/lisp" "/lisp/vendor"))
   (add-to-list 'load-path (expand-file-name
