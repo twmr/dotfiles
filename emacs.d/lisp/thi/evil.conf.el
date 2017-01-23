@@ -90,7 +90,8 @@
 (delete 'term-mode evil-insert-state-modes)
 
 ;; see https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el
-(loop for (mode . state) in
+(require 'cl-lib)
+(cl-loop for (mode . state) in
       '(
         (eshell-mode . emacs)
         (shell-mode . emacs)
@@ -107,5 +108,6 @@
         (dashboard-mode . emacs)
         (python-mode . emacs)
         (emacs-lisp-mode . emacs)
+        (text-mode . emacs)
         )
       do (evil-set-initial-state mode state))
