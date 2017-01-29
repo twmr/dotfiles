@@ -46,11 +46,6 @@
 
 ;; (use-package anaconda-mode :ensure t)
 
-(use-package bpr :ensure t
-  :config
-  (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
-  (setq bpr-process-mode #'comint-mode))
-
 (use-package paradox :ensure t
   :config
   (setq paradox-execute-asynchronously t))
@@ -65,6 +60,17 @@
 ;;   :init
 ;;   (progn
 ;;     (global-auto-complete-mode)))
+
+(use-package better-shell
+    :ensure t
+    :bind (("C-'" . better-shell-shell)
+           ("C-;" . better-shell-remote-open)))
+
+(use-package bpr :ensure t
+  :config
+  (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
+  (setq bpr-process-mode #'comint-mode))
+
 
 (use-package color-identifiers-mode :ensure t :defer t)
 (use-package cmake-mode :ensure t :defer t)
