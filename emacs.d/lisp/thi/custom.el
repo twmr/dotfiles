@@ -30,6 +30,15 @@
  '(matlab-indent-level 2)
  '(mode-require-final-newline nil)
  '(notmuch-fcc-dirs "Sent")
+ '(notmuch-saved-searches
+   (quote
+    ((:name "INBOX (folder)" :query "folder:INBOX" :key "I")
+     (:name "inbox" :query "tag:inbox" :key "i")
+     (:name "unread" :query "tag:unread" :key "u")
+     (:name "flagged" :query "tag:flagged" :key "f")
+     (:name "sent" :query "tag:sent" :key "t")
+     (:name "drafts" :query "tag:draft" :key "d")
+     (:name "all mail" :query "*" :key "a"))))
  '(notmuch-show-logo nil)
  '(org-file-apps
    (quote
