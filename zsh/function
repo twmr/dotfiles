@@ -70,14 +70,19 @@ function switchcurenv() {
     cd `cenvdir`
 }
 
-function env3k() {
+function env2k() {
     enconda
-    workon py3k
+    workon py27
 }
 
-function env36() {
+function env3k() {
     enconda
     workon py36
+}
+
+function env35() {
+    enconda
+    workon py35
 }
 
 function melmacs() {
