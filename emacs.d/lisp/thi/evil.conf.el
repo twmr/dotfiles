@@ -109,5 +109,7 @@
         (python-mode . emacs)
         (emacs-lisp-mode . emacs)
         (text-mode . emacs)
+        (shell-script-mode . emacs)
+        (yaml-mode . emacs)
         )
       do (evil-set-initial-state mode state))
