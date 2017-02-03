@@ -412,7 +412,8 @@
 (use-package pdf-tools
   :ensure t
   :config
-    (pdf-tools-install)
+    (unless (daemonp)
+      (pdf-tools-install))
     (setq-default pdf-view-display-size 'fit-page)
     (bind-keys :map pdf-view-mode-map
         ("\\" . hydra-pdftools/body)
