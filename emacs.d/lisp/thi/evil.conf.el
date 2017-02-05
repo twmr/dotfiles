@@ -97,6 +97,7 @@
         (shell-mode . emacs)
         (term-mode . emacs)
         (compilation-mode . emacs)
+        (dired-mode . emacs)
         (image-mode . emacs)
         (image-dired-mode . emacs)
         (image-dired-thumbnail-mode . emacs)
