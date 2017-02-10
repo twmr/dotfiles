@@ -2,13 +2,15 @@
 ;;; Code:
 ;; (setq debug-on-error t)
 
+(require 'xdg)
+
 (dolist (p '("/lisp" "/lisp/vendor"))
   (add-to-list 'load-path (expand-file-name
                            (concat user-emacs-directory p))))
 
 (defvar thi::cache-file-dir
   (expand-file-name
-   (concat (or (getenv "XDG_CACHE_HOME") "~/.cache") "/emacs")))
+   (concat (xdg-cache-home) "/emacs")))
 (defvar thi::config-dir
   (expand-file-name
    (concat user-emacs-directory "/lisp/thi")))
