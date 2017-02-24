@@ -510,7 +510,7 @@
 
 ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 ;; (add-hook 'after-init-hook #'yas-global-mode 1)
-;; (add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
+(add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
 ;; ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
 ;; (add-hook 'after-init-hook #'global-discover-mode)
 ;; (add-hook 'after-init-hook #'helm-projectile-on)
