@@ -12,6 +12,7 @@ alias mplayer='mplayer -idx'
 alias wget='wget --timeout 10'
 alias grep='grep --color=auto'
 alias tmux='tmux -2' # if tmux messes up on 256color terminals
+alias vim='nvim'
 
 alias start_btsync='btsync --config ~/btsync_config/config.json'
 
@@ -131,6 +132,7 @@ alias removelatex='rm -f `find . -iname "*.log" -o -iname "*.aux" -o -iname "*.o
 alias st='sublime_text'
 
 alias di='sudo dnf install'
+alias dinf='sudo dnf info'
 alias dnu='sudo dnf update'
 alias ds='sudo dnf search'
 alias dr='sudo dnf remove'
