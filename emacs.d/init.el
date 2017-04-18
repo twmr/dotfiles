@@ -496,7 +496,8 @@
 (load "thi/ido")
 (load "thi/mail")
 (load "thi/ccmode")
-(load "thi/latex")
+;; TODO eval-after-loadify
+;; (load "thi/latex")
 (load "thi/nxml")
 (load "thi/compilation")
 (load "thi/term")
@@ -511,9 +512,10 @@
 ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 ;; (add-hook 'after-init-hook #'yas-global-mode 1)
 (add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
+(add-hook 'after-init-hook #'global-eldoc-mode -1)
 ;; ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
 ;; (add-hook 'after-init-hook #'global-discover-mode)
 ;; (add-hook 'after-init-hook #'helm-projectile-on)
-;; (add-hook 'after-init-hook #'persp-mode)
+(add-hook 'after-init-hook #'persp-mode)
 
 ;;; init.el ends here
