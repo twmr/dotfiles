@@ -112,6 +112,7 @@
     (add-hook 'sh-mode-hook 'thi::tabs-are-less-evil)
     ))
 
+(use-package help-mode+ :ensure t)
 (use-package highlight-indentation :ensure t)
 
 (use-package magit :ensure t
