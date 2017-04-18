@@ -286,3 +286,22 @@ Position the cursor at its beginning, according to the current mode."
                  (back-to-indentation)
                  (point))))
          (delete-region start end))))
+
+;; taken from https://www.reddit.com/r/emacs/comments/5xgo5o/switch_python_interpreter/
+(defun my/python-switch-version ()
+  (interactive)
+  (setq python-shell-interpreter
+        (if (string-equal python-shell-interpreter "python3") "python" "python3"))
+  (setq elpy-rpc-backend
+        (if (string-equal elpy-rpc-backend "python") "python3" "python"))
+  (message python-shell-interpreter))
+
+
+
+(defun my/python-toggle-ipython ()
+  (interactive)
+  (setq python-shell-interpreter
+        (if (string-equal (substring python-shell-interpreter 0 1) "p")
+            (concat "i" python-shell-interpreter)
+          (substring python-shell-interpreter 1)))
+  (message python-shell-interpreter))
