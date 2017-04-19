@@ -180,6 +180,7 @@ function gg() { git grep $* }
 function glol() { git lola $* }
 function gk() { gitk --all $* & }
 function gl() { git log $* }
+function glu() { git log -u $* }
 function gs() { git status --ignore-submodules $* }
 function gsvr() { git svn rebase $* }
 function gp() { git push $* }
