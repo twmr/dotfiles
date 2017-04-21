@@ -1,12 +1,12 @@
 (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
 (set-face-attribute 'org-block nil :inherit 'fixed-pitch)
 
-(setq org-agenda-files (quote ("~/gitrepos/orgnotes/studium.org"
-                               "~/gitrepos/orgnotes/laserPA.org"
-                               "~/gitrepos/orgnotes/diplomarbeit.org"
-                               "~/gitrepos/orgnotes/physik.org"
-                               "~/gitrepos/orgnotes/ims.org"
-                               "~/gitrepos/orgnotes/emacs.org")))
+;; (setq org-agenda-files (quote ("~/gitrepos/orgnotes/studium.org"
+;;                                "~/gitrepos/orgnotes/laserPA.org"
+;;                                "~/gitrepos/orgnotes/diplomarbeit.org"
+;;                                "~/gitrepos/orgnotes/physik.org"
+;;                                "~/gitrepos/orgnotes/ims.org"
+;;                                "~/gitrepos/orgnotes/emacs.org")))
 
 
 (org-babel-do-load-languages
