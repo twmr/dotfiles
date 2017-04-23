@@ -179,8 +179,9 @@ Emacs.geometry:         100x70
 !!! (x=`tput op` y=`printf %76s`;for i in {0..256};do o=00$i;echo -e ${o:${#o}-3:3} `tput setaf $i;tput setab $i`${y// /=}$x;done)
 !!!!!!!!!!!!
 URxvt*geometry:         70x50
-URxvt*font:             xft:terminus:size=9
-! URxvt*font:             xft:Profont:size=9
+!URxvt*font:             xft:xos4-terminus:size=9
+!URxvt*font:             xft:Profont:size=8
+URxvt*font:             xft:Profont:size=9
 URxvt*saveLines:        32767
 URxvt*scrollBar:        false
 URxvt*scrollBar_right:  true
