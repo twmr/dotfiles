@@ -136,6 +136,7 @@ alias dinf='sudo dnf info'
 alias dnu='sudo dnf update'
 alias ds='sudo dnf search'
 alias dr='sudo dnf remove'
+alias drq='sudo dnf repoquery --installed'
 
 alias ka='sudo killall'
 
