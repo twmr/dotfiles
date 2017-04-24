@@ -315,6 +315,8 @@
                "\\(^\\s-*(use-package +\\)\\(\\_<.+\\_>\\)" 2)))
   (add-hook 'emacs-lisp-mode-hook #'jcs-use-package))
 
+(use-package ini-mode :ensure t :defer t)
+
 (use-package lua-mode :ensure t :defer t)
 
 (use-package multiple-cursors :ensure t :defer t
