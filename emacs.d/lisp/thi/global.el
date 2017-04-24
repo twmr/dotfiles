@@ -55,8 +55,6 @@
 
 (line-number-mode 1)                    ; Show line number
 (column-number-mode 1)                  ; Show colum number
-(tool-bar-mode -1)                      ; Kill the toolbar
-(menu-bar-mode -1)                      ; Kill the menu bar
 (set-scroll-bar-mode 'right)            ; Scrollbar on the right
 (scroll-bar-mode -1)                    ; But no scrollbar
 (horizontal-scroll-bar-mode -1)         ; But no scrollbar
