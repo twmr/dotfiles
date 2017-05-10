@@ -95,6 +95,8 @@
       '(
         (eshell-mode . emacs)
         (shell-mode . emacs)
+        (sh-mode . emacs)
+        (shell-script-mode . emacs)
         (term-mode . emacs)
         (compilation-mode . emacs)
         (dired-mode . emacs)
@@ -113,5 +115,6 @@
         (shell-script-mode . emacs)
         (org-mode . emacs)
         (yaml-mode . emacs)
+        (json-mode . emacs)
         )
       do (evil-set-initial-state mode state))

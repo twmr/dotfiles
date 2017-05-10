@@ -317,6 +317,8 @@
 
 (use-package ini-mode :ensure t :defer t)
 
+(use-package json-mode :ensure t :defer t)
+
 (use-package lua-mode :ensure t :defer t)
 
 (use-package multiple-cursors :ensure t :defer t

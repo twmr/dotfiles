@@ -132,7 +132,7 @@
         ("\\.asm\\'" . asm-mode)
         ("\\.F90\\'" . f90-mode)
         ("\\.m\\'" . matlab-mode)
-        ("\\.json\\'" . js2-mode)
+        ("\\.json\\'" . json-mode)
         ("\\.job\\'" . shell-script-mode)
         ("gitconfig$" . gitconfig-mode)
         ("\\.\\(md\\|markdown\\)\\'" . markdown-mode)
