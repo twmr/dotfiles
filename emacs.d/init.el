@@ -171,7 +171,16 @@
 
 (use-package fill-column-indicator :ensure t :defer t)
 
-(use-package helm :ensure t :defer t)
+(use-package helm
+  :ensure t
+  :defer t
+  :config (progn
+            (defun thi::directorychooser ()
+              "Use ido to select a recently used directory from the `thi::directory-list'."
+              (interactive)
+              (dired
+               (helm-comp-read "Directory open:" thi::directory-list :fuzzy t)))
+            (global-set-key [f12] 'thi::directorychooser)))
 
 (use-package hydra :ensure t
   :init
@@ -334,20 +343,10 @@
 
 (use-package sr-speedbar :ensure t)
 
-(use-package swiper
-  :ensure t
-  :config
-  (ivy-mode 1)
-  :init
-  (progn
-    (defun thi::directorychooser ()
-      "Use ido to select a recently used directory from the `thi::directory-list'"
-      (interactive)
-      (dired
-       (ivy-completing-read "Directory open: "
-                            thi::directory-list
-                            nil t)))
-    (global-set-key [f12] 'thi::directorychooser)))
+;; (use-package swiper
+;;   :ensure t
+;;   :config
+;;   (ivy-mode 1))
 
   ;; (bind-keys :map swiper-map
   ;;            ("C-." (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'symbol))))))
