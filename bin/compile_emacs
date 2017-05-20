@@ -52,16 +52,11 @@ set -e
 
 
 ./configure \
-    CFLAGS="-O3" \
-    CXXFLAGS="-O3" \
-    --enable-checking=all \
-    --with-xpm=yes \
-    --with-jpeg=no \
-    --with-gif=no \
-    --with-tiff=no \
     --with-x-toolkit=gtk3 \
-    --without-pop
-    # --enable-link-time-optimization  # compilation fails with lto
+    --with-xpm \
+    --without-jpeg \
+    --without-gifo \
+    --without-tiff
 
 make bootstrap
 make
