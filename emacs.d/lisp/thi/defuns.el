@@ -297,7 +297,6 @@ Position the cursor at its beginning, according to the current mode."
   (message python-shell-interpreter))
 
 
-
 (defun my/python-toggle-ipython ()
   (interactive)
   (setq python-shell-interpreter
@@ -305,3 +304,29 @@ Position the cursor at its beginning, according to the current mode."
             (concat "i" python-shell-interpreter)
           (substring python-shell-interpreter 1)))
   (message python-shell-interpreter))
+
+
+(defcustom default-messages-to-show 4
+  "Default number of messages for `show-some-last-messages'.")
+
+(defun show-some-last-messages (count)
+  "Show COUNT last lines of the `*Messages*' buffer."
+  (interactive "P")
+  (setq count (if count (prefix-numeric-value count)
+    default-messages-to-show))
+  (save-excursion
+  (set-buffer "*Messages*")
+  (let ((prev-point-max (point-max-marker))
+    (inhibit-read-only t))
+    (message "%s"
+       (progn
+     (set-buffer "*Messages*")
+     (buffer-substring-no-properties
+      (progn
+      (goto-char (point-max))
+      (unless (bolp)
+        (insert "\n"))
+      (forward-line (- count))
+      (point))
+      (point-max))))
+    (delete-region (point-max) prev-point-max))))
