@@ -99,12 +99,6 @@
 
 (use-package cython-mode :ensure t :defer t)
 
-(use-package dashboard :ensure t
-  :init
-  (progn
-    (setq dashboard-startup-banner 'logo))
-  :config
-  (dashboard-setup-startup-hook))
 
 (use-package ethan-wspace :ensure t :defer t
   :init
