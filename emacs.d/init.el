@@ -99,6 +99,9 @@
 
 (use-package cython-mode :ensure t :defer t)
 
+(use-package elpy :ensure t
+  :init
+  (elpy-enable))
 
 (use-package ethan-wspace :ensure t :defer t
   :init
