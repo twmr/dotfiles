@@ -54,9 +54,10 @@
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
+(global-set-key (kbd "C-q") 'quoted-insert)
 ;; expand-region
-(global-set-key (kbd "C-q") 'er/expand-region)
-(global-set-key (kbd "C-S-q") 'er/contract-region)
+;; (global-set-key (kbd "C-q") 'er/expand-region)
+;; (global-set-key (kbd "C-S-q") 'er/contract-region)
 
 ;; multiple cursors
 (global-set-key (kbd "C->") 'mc/mark-next-like-this)
