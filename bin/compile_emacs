@@ -3,14 +3,67 @@
 set -x
 set -e
 
+# TODO generalize script
+
 ./autogen.sh
-# ./configure CFLAGS="-ggdb3 -O0" CXXFLAGS="-ggdb3 -O0" LDFLAGS="-ggdb3" --enable-checking --enable-asserts --with-xpm=yes --with-jpeg=no --with-gif=no --with-tiff=no --with-x-toolkit=gtk3
-# ./configure CFLAGS="-flto -O3" CXXFLAGS="-flto -O3" LDFLAGS="-flto"  --enable-checking --enable-asserts --with-xpm=yes --with-jpeg=no --with-gif=no --with-tiff=no --with-x-toolkit=gtk3
+
+# ./configure \
+#     CFLAGS="-ggdb3 -O0" \
+#     CXXFLAGS="-ggdb3 -O0" \
+#     LDFLAGS="-ggdb3" \
+#     --enable-checking \
+#     --enable-asserts \
+#     --with-xpm=yes \
+#     --with-jpeg=no \
+#     --with-gif=no \
+#     --with-tiff=no \
+#     --with-x-toolkit=gtk3
+
+# ./configure \
+#     CFLAGS="-flto -O3" \
+#     CXXFLAGS="-flto -O3" \
+#     LDFLAGS="-flto" \
+#     --enable-checking \
+#     --enable-asserts \
+#     --with-xpm=yes \
+#     --with-jpeg=no \
+#     --with-gif=no \
+#     --with-tiff=no \
+#     --with-x-toolkit=gtk3
+
+# ./configure \
+#     CFLAGS="-O3" \
+#     CXXFLAGS="-O3" \
+#     --enable-checking \
+#     --with-xpm=yes \
+#     --with-jpeg=no \
+#     --with-gif=no \
+#     --with-tiff=no \
+#     --with-x-toolkit=gtk3 \
+#     --with-xwidgets
+
+# ./configure \
+#     --with-xpm=yes \
+#     --with-jpeg=no \
+#     --with-gif=no \
+#     --with-tiff=no \
+#     --with-x-toolkit=gtk3 \
+#     --enable-link-time-optimization
 
 
-./configure CFLAGS="-O3" CXXFLAGS="-O3" --enable-checking --with-xpm=yes --with-jpeg=no --with-gif=no --with-tiff=no --with-x-toolkit=gtk3 --with-xwidgets
+./configure \
+    CFLAGS="-O3" \
+    CXXFLAGS="-O3" \
+    --enable-checking=all \
+    --with-xpm=yes \
+    --with-jpeg=no \
+    --with-gif=no \
+    --with-tiff=no \
+    --with-x-toolkit=gtk3 \
+    --without-pop
+    # --enable-link-time-optimization  # compilation fails with lto
 
-# ./configure --with-xpm=yes --with-jpeg=no --with-gif=no --with-tiff=no --with-x-toolkit=gtk3 --enable-link-time-optimization
+make bootstrap
 make
 
-rm  src/emacs-2*
+rm src/emacs-2*
