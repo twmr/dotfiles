@@ -485,6 +485,7 @@
               '(lambda (f)
                  (with-selected-frame f
                    (when (window-system f)
+                     (tool-bar-mode -1)
                      (load-theme thi::theme t)
                      (sml/setup)))))
   (progn
