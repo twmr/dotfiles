@@ -357,10 +357,10 @@
 
   ;; :bind (("C-s" . swiper))
 
-(use-package counsel :ensure t
-  :bind (("C-h v" . counsel-describe-variable)
-         ("C-h f" . counsel-describe-function)
-         ("C-h s" . counsel-info-lookup-symbol)))
+(use-package counsel :ensure t)
+  ;; :bind (("C-h v" . counsel-describe-variable)
+  ;;        ("C-h f" . counsel-describe-function)
+  ;;        ("C-h s" . counsel-info-lookup-symbol)))
 
 ;; requires semantic-mode to be enabled
 (use-package stickyfunc-enhance :ensure t)
