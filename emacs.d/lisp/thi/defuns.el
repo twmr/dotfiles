@@ -330,3 +330,11 @@ Position the cursor at its beginning, according to the current mode."
       (point))
       (point-max))))
     (delete-region (point-max) prev-point-max))))
+
+
+(defun pretty-python-path ()
+  (interactive)
+  ;; TODO replace /home/thomas by ~
+  ;; TODO #lines that can be output using "message" are limited
+  (message "PYTHONPATH\n%s" (mapconcat #'identity (split-string
+                                                   (getenv "PYTHONPATH") ":") "\n")))
