@@ -60,6 +60,7 @@
    (quote
     (persp-mode cython-anaconda picpocket elpy help-mode+ build-helper company-jedi bshell rainbow-identifiers jabber counsel ivy swiper ivy-bibtex bonjourmadame color-theme-sanityinc-solarized mmm-mode fireplace anaconda-mode auto-complete-mode indent-guide bpr pdf-tools ranger helm-flx jenkins org-beautify-theme org-bullets rainbow-delimiters ein aurora-theme ido-completing-read+ helm-github-stars paradox spinner sequences minimap js2-mode imenu-anywhere rust-mode ocodo-svg-modelines ace-jump-mode multiple-cursors color-identifiers-mode matlab-mode zotelo stickyfunc-enhance highlight-indentation yasnippet projectile helm fill-column-indicator magit evil discover zop-to-char yaml-mode window-numbering use-package undo-tree sx solarized-theme smex smart-mode-line project-persist project-explorer perspective origami moz-controller magit-filenotify julia-mode json-mode iedit hydra htmlize helm-projectile gitignore-mode gitconfig-mode flycheck flx-ido f expand-region ethan-wspace dynamic-fonts direx company color-theme-sanityinc-tomorrow cmake-mode bbdb-vcard aggressive-indent ace-window 2048-game)))
  '(paradox-github-token t)
+ '(persp-init-frame-behaviour nil)
  '(preview-default-option-list
    (quote
     ("displaymath" "floats" "graphics" "textmath" "showlabels")))
