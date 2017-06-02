@@ -531,10 +531,15 @@ function genpasswd() {
 
 function git_prompt_info() {
     local ref
-    # TODO walk up directory tree
-    if [ -e .git/HEAD ]; then
-        ref=$(cat .git/HEAD)
-        ref=${ref/ref: /}
-        echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
-  fi
+    S="${PWD}"
+    while [ -n "${S}" ]
+    do
+        if [ -e "${S}/.git/HEAD" ]; then
+            ref=$(cat ${S}/.git/HEAD)
+            ref=${ref/ref: /}
+            echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+            return
+        fi
+        S=${S%/*}
+    done
 }
