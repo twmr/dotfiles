@@ -9,11 +9,6 @@ ZSH=$HOME/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="afowler"
-ZSH_THEME="dogenpunk"
-#ZSH_THEME="flazz"
-#ZSH_THEME="thomashisch"
-ZSH_THEME="afowler"
 
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
@@ -68,7 +63,7 @@ done
 . ~/.zsh/notebook
 . ~/.zsh/keybindings
 #. ~/.zsh/opts
-# . ~/.zsh/prompt
+. ~/.zsh/theme.zsh-theme
 . ~/.zsh/emacs
 
 if [ -d ~/.zsh.d/ -a ! "$(ls -A ~/.zsh.d/ 2> /dev/null)" = "" ]; then
@@ -79,6 +74,8 @@ if [ -d ~/.zsh.d/ -a ! "$(ls -A ~/.zsh.d/ 2> /dev/null)" = "" ]; then
        . $fname
    done
 fi
+
+
 
 
 setopt cdablevars # support for $> dotf # changes CWD
