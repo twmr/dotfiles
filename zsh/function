@@ -528,3 +528,13 @@ function genpasswd() {
     [ "$tmp" = "" ] && tmp=16
     tr -dc "A-Za-z0-9_!@=" < /dev/urandom | head -c ${tmp} | xargs
 }
+
+function git_prompt_info() {
+    local ref
+    # TODO walk up directory tree
+    if [ -e .git/HEAD ]; then
+        ref=$(cat .git/HEAD)
+        ref=${ref/ref: /}
+        echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  fi
+}
