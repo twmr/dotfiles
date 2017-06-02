@@ -1,4 +1,27 @@
-if [ $UID -eq 0 ]; then CARETCOLOR="red"; else CARETCOLOR="blue"; fi
+# -*- mode: sh -*-
+
+function git_prompt_info() {
+    local ref
+    S="${PWD}"
+
+    while [ -n "${S}" ]
+    do
+        if [ -e "${S}/.git/HEAD" ]; then
+            ref=$(cat ${S}/.git/HEAD)
+            ref=${ref/ref: /}
+            echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+            return
+        fi
+        S=${S%/*}
+    done
+}
+
+
+if [ $UID -eq 0 ]; then
+    CARETCOLOR="red"
+else
+    CARETCOLOR="blue"
+fi
 
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
 
