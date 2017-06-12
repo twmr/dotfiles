@@ -40,11 +40,12 @@ end
 -- Themes define colours, icons, font and wallpapers.
 -- beautiful.init(awful.util.getdir("config") .. "/solarized_light/theme.lua")
 beautiful.init(awful.util.getdir("config") .. "/theme.lua")
+-- beautiful.init(awful.util.get_themes_dir() .. "xresources/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 -- terminal = 'urxvt256c-ml'
 -- terminal = 'urxvt256c -e /home/thomas/.local/bin/xonsh'
-terminal = "urxvt256c -e /bin/zsh"
+terminal = "urxvt256c-ml -e /bin/zsh"
 -- terminal = "urxvt"
 -- terminal = 'gnome-terminal'
 
