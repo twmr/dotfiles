@@ -22,10 +22,10 @@ fi
 
 # Set the background color
 #/usr/bin/xsetroot -solid black
-#pgrep -x -u $USER urxvtd > /dev/null || urxvtd -o -f &
+pgrep -x -u $USER urxvt256c-mld > /dev/null || urxvt256c-mld -o -f &
 
 #The following line is now in gnome-session
-# pgrep -u $USER emacs > /dev/null || emacs --daemon &
+pgrep -u $USER emacs > /dev/null || emacs --daemon &
 
 #international keyboard layout
 #setxkbmap us altgr-intl
