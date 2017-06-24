@@ -41,9 +41,11 @@ fi
 
 #~/gitrepos/dotfiles/bin/dualhead-ims.sh
 
-/usr/bin/gnome-keyring-daemon --start --components=pkcs11
-/usr/bin/gnome-keyring-daemon --start --components=ssh
-/usr/bin/gnome-keyring-daemon --start --components=gpg
+# this should be handled by PAM (/etc/pam.d/sddm)
+#/usr/bin/gnome-keyring-daemon
+#/usr/bin/gnome-keyring-daemon --start --components=pkcs11
+#/usr/bin/gnome-keyring-daemon --start --components=ssh
+#/usr/bin/gnome-keyring-daemon --start --components=gpg
 
 #$GSETTOOL -u $SESSKEY/required_components/windowmanager
 
@@ -60,7 +62,8 @@ fi
 #   export SSH_AUTH_SOCK
 #fi
 
-nm-applet &
+nm-applet &  # if this asks you for your password, sth. is wrong with your gnome keyring config (see gnote entry)
+LD_LIBRARY_PATH=/opt/qt-5.4/lib64 /bin/nextcloud &
 
 exec ssh-agent `which awesome`
 
