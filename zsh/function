@@ -223,7 +223,13 @@ function gsed() {
     done
 }
 
-
+function gitgrep_in_sandbox() {
+    for X in $(find . -maxdepth 1 -type d); do
+        [ -d $X/.git ] && (cd $X;
+                           echo $X;
+                           GIT_PAGER=cat git grep $*)
+    done
+}
 
 function sco() {
     args=""
