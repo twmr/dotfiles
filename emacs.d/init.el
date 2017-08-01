@@ -383,6 +383,10 @@
 (use-package projectile :ensure t :defer t
   :config (progn
             (projectile-global-mode t)
+
+             ;; needed for the ignore files feature in .projectile (see https://emacs.stackexchange.com/a/16964/2761)
+            (setq projectile-indexing-method 'native)
+
             ;; (setq projectile-completion-system 'ivy)
             (setq projectile-completion-system 'ido)
             ;; (setq projectile-switch-project-action 'projectile-find-dir)
