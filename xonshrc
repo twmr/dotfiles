@@ -1,2 +1,7 @@
-$AUTO_CD=True
-$PROMPT="#> "
+$AUTO_CD = True
+#PROMPT="#> "
+#SHELL_TYPE=prompt_toolkit
+$UPDATE_COMPLETIONS_ON_KEYPRESS = True
+$SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
+
+alias dotf='cd ~/gitrepos/dotfiles'
