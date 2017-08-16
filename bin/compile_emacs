@@ -6,6 +6,7 @@ set -e
 # TODO generalize script
 
 ./autogen.sh
+./autogen.sh git
 
 # ./configure \
 #     CFLAGS="-ggdb3 -O0" \
@@ -55,7 +56,7 @@ set -e
     --with-x-toolkit=gtk3 \
     --with-xpm \
     --without-jpeg \
-    --without-gifo \
+    --without-gif \
     --without-tiff
 
 make bootstrap
