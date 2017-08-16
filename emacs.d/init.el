@@ -117,7 +117,7 @@
 
 (use-package help-mode+ :ensure t)
 
-(use-package highlight-function-calls
+(use-package highlight-function-calls :ensure t
   :config
   (add-hook 'emacs-lisp-mode-hook 'highlight-function-calls-mode))
 
