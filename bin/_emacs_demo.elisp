@@ -1,5 +1,40 @@
 #!/bin/sh
-":"; exec emacs --quick --script "$0" -f main -- "$0" "$@" # -*- mode: emacs-lisp; lexical-binding: t; -*-
+":"; exec emacs --quick --script "$0" -f main -- "$0" "$@"  # -*- mode: emacs-lisp; lexical-binding: t; -*-
 
-;; Hier kann nun Emacs Lisp Code folgen ...
-(message "Hallo Emacs Skript!")
+;; see https://www.lunaryorn.com/posts/emacs-script-pitfalls.html
+;; and http://www.pro-linux.de/artikel/2/1866/4,emacs-lisp-mode.html
+
+;; Initialisierung einer globalen Variable zum Speichern des Skriptpfads. Mit
+;; defvar deklarierte Variablen sind "speziell". Dies bedeuted für sie gilt nach
+;; wie vor dynamic-binding.
+(defvar script-path "")
+
+;; Die main Funktion, welche nach Einlesen des Skriptes ausgeführt wird.
+(defun main ()
+  ;; Durch setzen dieser Variablen wird bei Fehlern ein Backtrace angezeigt.
+  ;; Das ist nützlich, um das debuggen des Skriptes zu vereinfachen.
+  (setq debug-on-error t)
+  ;; Der -- separator wird mit an das Skript übergeben. Die folgende Anweisung
+  ;; entfernt dieses Argument aus der Liste der Argumente, welche in der Liste
+  ;; namens argv zu finden sind.
+  (pop argv)
+  ;; Das nächste Argument in argv ist der Skriptpfad der im Folgenden in der
+  ;; oben initialisierten globalen Variable script-path gespeichert wird.
+  (setq script-path (pop argv))
+  ;; Sind noch Argumente uebrig, soll eine Fehlermeldung ausgegeben werden.
+  ;; Eine leere Liste ist in Emacs Lisp gleichbedeutend zu einem
+  ;; False anderer Programmiersprachen.
+  (when argv
+    ;; Die Funktion message gibt Daten an stderr aus
+    (message "Dem Skript %s wurden folgende Argumente uebergeben:\n\n\t%s\n"
+       script-path (mapconcat #'identity argv "\n\t"))
+    ;; Mit folgendem Befehl kann ein Exit Code an die Shell übergeben
+    ;; werden.
+    (kill-emacs 1))
+  ;; Schließlich ein Beispiel, wie Nutzerinput in einer lokalen Variable name gespeichert
+  ;; und ausgegeben wird. Mit princ erfolgt die Ausgabe der Daten an stdout.
+  (let ((name (read-from-minibuffer "Wie ist dein Name? ")))
+    (princ (format "Hallo %s\n" name)))
+
+  ;; Nach erfolgreicher Ausführung ist der Exit Code 0.
+  (kill-emacs 0))

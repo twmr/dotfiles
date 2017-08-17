@@ -138,7 +138,11 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     prepath ${MATLAB_BIN}
     prepath ${EMBINPATH}
 
-elif [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" ]; then
+elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
+    prepath $HOME/bin
+    prepath $HOME/.cargo/bin
+
+elif [ "$HOSTNAME" = "dirac" ]; then
     module purge
     module load mpi/openmpi-x86_64
 

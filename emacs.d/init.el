@@ -116,6 +116,11 @@
     ))
 
 (use-package help-mode+ :ensure t)
+
+(use-package highlight-function-calls :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook 'highlight-function-calls-mode))
+
 (use-package highlight-indentation :ensure t)
 
 (use-package magit :ensure t
