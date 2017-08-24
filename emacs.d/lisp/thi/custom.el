@@ -21,6 +21,7 @@
  '(evil-mode-line-format (quote before))
  '(fci-rule-color "#232A2F")
  '(git-commit-mode-hook (quote (turn-on-auto-fill)) t)
+ '(global-eldoc-mode nil)
  '(grep-find-ignored-directories
    (quote
     ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "build")))
