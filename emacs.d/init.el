@@ -130,6 +130,10 @@
     )
   )
 
+(use-package magit-gerrit :ensure t
+  :if (string= system-name "PC-16609")
+  )
+
 (use-package page-break-lines :ensure t :defer t
   :config
   (global-page-break-lines-mode))
