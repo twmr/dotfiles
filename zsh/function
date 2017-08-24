@@ -190,6 +190,7 @@ function gpl() { git pull $* }
 function gps() { git push $* }
 function gsr() { git svn rebase $* }
 function gri() { git rebase -i $* }
+function grev() { git review $* }
 function gf() { git fetch $* }
 function gco() {
     if [ -z "$1" ]; then
