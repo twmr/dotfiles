@@ -166,9 +166,6 @@
     ))
 
 (use-package fill-column-indicator :ensure t)
-(use-package visual-fill-column
-  :ensure t
-  :config (global-flycheck-mode))
 (use-package flx :ensure t)
 (use-package flx-ido :ensure t)
 
@@ -472,11 +469,6 @@
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
   )
 
-(use-package which-key :ensure t
-  :config
-    (setq which-key-paging-key "<f5>")
-  )
-
 (use-package pdf-tools
   :ensure t
   :config
@@ -506,6 +498,13 @@
         ("r"  . pdf-view-reset-slice))
      (use-package org-pdfview
        :ensure t))
+
+(use-package visual-fill-column :ensure t)
+
+(use-package which-key :ensure t
+  :config
+    (setq which-key-paging-key "<f5>")
+  )
 
 (use-package window-numbering
   :ensure t
