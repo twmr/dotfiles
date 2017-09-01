@@ -355,8 +355,9 @@
             (setq jabber-chat-buffer-format "jabber-%n")
             (setq jabber-groupchat-buffer-format "jabber-gc-%n")
 
-            (setq jabber-muc-autojoin '("hpc_sd@conference.srv-voip-04"))
-            (setq jabber-muc-autojoin '("sd@conference.srv-voip-04"))
+            (setq jabber-muc-autojoin
+                  '("hpc_sd@conference.srv-voip-04"
+                    "sd@conference.srv-voip-04"))
 
             (defun notify-jabber-notify (from buf text proposed-alert)
               "(jabber.el hook) Notify of new Jabber chat messages via notify.el"
