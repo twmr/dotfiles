@@ -12,9 +12,8 @@
 	cp = cherry-pick
 	co = commit
 	dc = diff --color-words
-[user]
-	name = Thomas Hisch
-	email = t.hisch@gmail.com
+[include]
+	path = ~/.git_identity
 [color]
 	ui = auto
 [pack]
