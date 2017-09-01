@@ -353,6 +353,7 @@
             (setq jabber-avatar-verbose nil)
             (setq jabber-vcard-avatars-retrieve nil)
             (setq jabber-chat-buffer-format "jabber-%n")
+            (setq jabber-groupchat-buffer-format "jabber-gc-%n")
 
             (setq jabber-muc-autojoin '("hpc_sd@conference.srv-voip-04"))
             (setq jabber-muc-autojoin '("sd@conference.srv-voip-04"))
