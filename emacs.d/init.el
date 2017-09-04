@@ -333,7 +333,7 @@
 
 (use-package jabber
   :ensure t
-  :if (string= system-name "PC-16609")
+  :if (string= (system-name) "PC-16609")
   :config (progn
             (setq jabber-invalid-certificate-servers '("srv-voip-04"))
             (setq jabber-connection-ssl-program "starttls")
