@@ -180,6 +180,8 @@
           )
   :config (global-flycheck-mode))
 
+(use-package flycheck-pycheckers :ensure t)
+
 (use-package fill-column-indicator :ensure t :defer t)
 
 (use-package helm
