@@ -340,10 +340,11 @@
             (setq jabber-invalid-certificate-servers '("srv-voip-04"))
             (setq jabber-connection-ssl-program "starttls")
             (setq jabber-account-list
-                  '(
-                    ("thomas.hisch@srv-voip-04"
-                     ;; (:network-server . "conference.srv-voip-04")
-                     )))
+                  (when (string= (system-name) "PC-16609")
+                    '("thomas.hisch@srv-voip-04")
+                    '("tomtom@ottorocker.nsupdate.info")
+                    ;; (:network-server . "conference.srv-voip-04")
+                    ))
             (setq jabber-history-enabled t)
             (setq jabber-backlog-number 100)
             (setq jabber-backlog-days 30)
@@ -357,9 +358,10 @@
             (setq jabber-chat-buffer-format "jabber-%n")
             (setq jabber-groupchat-buffer-format "jabber-gc-%n")
 
-            (setq jabber-muc-autojoin
-                  '("hpc_sd@conference.srv-voip-04"
-                    "sd@conference.srv-voip-04"))
+            (if (string= (system-name) "PC-16609")
+              (setq jabber-muc-autojoin
+                    '("hpc_sd@conference.srv-voip-04"
+                      "sd@conference.srv-voip-04")))
 
             (defun notify-jabber-notify (from buf text proposed-alert)
               "(jabber.el hook) Notify of new Jabber chat messages via notify.el"
