@@ -12,7 +12,6 @@ alias mplayer='mplayer -idx'
 alias wget='wget --timeout 10'
 alias grep='grep --color=auto'
 alias tmux='tmux -2' # if tmux messes up on 256color terminals
-alias vim='nvim'
 
 alias start_btsync='btsync --config ~/btsync_config/config.json'
 
