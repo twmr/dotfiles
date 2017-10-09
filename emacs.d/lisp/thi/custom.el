@@ -20,6 +20,9 @@
     (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
  '(evil-mode-line-format (quote before))
  '(fci-rule-color "#232A2F")
+ '(git-commit-known-pseudo-headers
+   (quote
+    ("Signed-off-by" "Acked-by" "Modified-by" "Cc" "Suggested-by" "Reported-by" "Tested-by" "Reviewed-by" "Fixes" "Related" "Change-Id")))
  '(git-commit-mode-hook (quote (turn-on-auto-fill)) t)
  '(global-eldoc-mode nil)
  '(grep-find-ignored-directories

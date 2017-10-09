@@ -115,6 +115,41 @@
     (add-hook 'sh-mode-hook 'thi::tabs-are-less-evil)
     ))
 
+(use-package git-commit :ensure t
+  :bind (:map git-commit-mode-map
+              ("C-c C-f" . git-commit-fix-redmine-insert)
+              ("C-c C-r" . git-commit-related-redmine-insert))
+  :init
+  (progn
+    (defun git-commit-insert-redmine-header (header ticketnumber)
+      (setq header (format "%s: #%s" header ticketnumber))
+      (save-excursion
+        (goto-char (point-max))
+        (cond ((re-search-backward "^[-a-zA-Z]+: [^<]+? <[^>]+>" nil t)
+               (end-of-line)
+               (insert ?\n header)
+               (unless (= (char-after) ?\n)
+                 (insert ?\n)))
+              (t
+               (while (re-search-backward (concat "^" comment-start) nil t))
+               (unless (looking-back "\n\n" nil)
+                 (insert ?\n))
+               (insert header ?\n)))
+        (unless (or (eobp) (= (char-after) ?\n))
+          (insert ?\n))))
+
+    (defun git-commit-read-redmine-ticket ()
+      (list (read-string "Ticket Number: ")))
+
+    (defun git-commit-fix-redmine-insert (ticketnumber)
+      (interactive (git-commit-read-redmine-ticket))
+      (git-commit-insert-redmine-header "Fixes" ticketnumber))
+
+    (defun git-commit-related-redmine-insert (ticketnumber)
+      (interactive (git-commit-read-redmine-ticket))
+      (git-commit-insert-redmine-header "Related" ticketnumber))))
+
+
 (use-package help-mode+ :ensure t)
 
 (use-package highlight-function-calls :ensure t
@@ -580,7 +615,6 @@
 (require 'url-tramp)
 
 (put 'dired-find-alternate-file 'disabled nil)
-
 ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 ;; (add-hook 'after-init-hook #'yas-global-mode 1)
 (add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
