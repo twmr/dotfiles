@@ -541,5 +541,5 @@ function genpasswd() {
     tmp=$1
     echo $tmp
     [ "$tmp" = "" ] && tmp=16
-    tr -dc "A-Za-z0-9_!@=" < /dev/urandom | head -c ${tmp} | xargs
+    /usr/bin/tr -dc "A-Za-z0-9_!@=" < /dev/urandom | head -c ${tmp} | xargs
 }
