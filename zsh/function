@@ -192,6 +192,14 @@ function gsr() { git svn rebase $* }
 function gri() { git rebase -i $* }
 function grev() { git review $* }
 function gf() { git fetch $* }
+function grv() { git review $* }
+function grvd() {
+    if [ -z "$1" ]; then
+        git review -l
+    else
+        git review -d $*
+    fi
+}
 function gco() {
     if [ -z "$1" ]; then
         git checkout master
