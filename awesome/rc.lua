@@ -45,7 +45,8 @@ beautiful.init(awful.util.getdir("config") .. "/theme.lua")
 -- This is used later as the default terminal and editor to run.
 -- terminal = 'urxvt256c-ml'
 -- terminal = 'urxvt256c -e /home/thomas/.local/bin/xonsh'
-terminal = "urxvt256c-ml -e /bin/zsh"
+terminal = "terminator"
+-- terminal = "urxvt256c-ml -e /bin/zsh"
 -- terminal = "urxvt"
 -- terminal = 'gnome-terminal'
 
@@ -299,6 +300,9 @@ globalkeys = awful.util.table.join(
             end
         end,
         {description = "go back", group = "client"}),
+
+    awful.key({ modkey }, "]", function () awful.screen.focus(1) end),
+    awful.key({ modkey }, "[", function () awful.screen.focus(2) end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
