@@ -222,13 +222,15 @@
 (use-package helm
   :ensure t
   :defer t
+  :bind (("C-x C-h" . helm-mini)
+         ([f12] . thi::directorychooser))
   :config (progn
             (defun thi::directorychooser ()
               "Use ido to select a recently used directory from the `thi::directory-list'."
               (interactive)
               (dired
-               (helm-comp-read "Directory open:" thi::directory-list :fuzzy t)))
-            (global-set-key [f12] 'thi::directorychooser)))
+               (helm-comp-read "Directory open:" thi::directory-list :fuzzy t)))))
+
 
 (use-package hydra :ensure t
   :init
