@@ -111,6 +111,8 @@
         ;; ("SCons\\(cript\\|truct\\)$"    . python-mode)
         ("SConscript$"    . python-mode)
         ("SConstruct$"    . python-mode)
+        ("xonshrc$"    . python-mode)
+        ("\\.xsh$"    . python-mode)
         ("\\.ma?k\\'" . makefile-mode)
         ("\\(M\\|m\\|GNUm\\)akefile\\(\\.in\\)?" . makefile-mode)
         ("\\.pl$"   . perl-mode)
