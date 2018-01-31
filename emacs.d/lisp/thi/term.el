@@ -13,8 +13,8 @@
 (define-key term-raw-map (kbd "M-p") 'ace-window)
 
 ;; force ansi-term to be utf-8 after it launches
-(defadvice ansi-term (after advise-ansi-term-coding-system activate)
-  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+;; (defadvice ansi-term (after advise-ansi-term-coding-system activate)
+;;   (set-process-coding-system 'utf-8-unix 'utf-8-unix))
 
 ;; http://echosa.github.io/blog/2012/06/06/improving-ansi-term/
 ;; close the terminal buffer automatically on exit
