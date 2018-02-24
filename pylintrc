@@ -78,7 +78,9 @@ enable=import-error,
        boolean-datetime,
        # Has common issues with our style due to
        # https://github.com/PyCQA/pylint/issues/210
-       unused-variable
+       unused-variable,
+       undefined-variable,
+       too-few-format-args
 
 # Things we'd like to enable someday:
 # redefined-outer-name (requires a bunch of work to clean up our code first)
@@ -140,7 +142,6 @@ enable=import-error,
        # truncated-format-string,
        # missing-format-string-key,
        # mixed-format-string,
-       # too-few-format-args,
        # bad-str-strip-call,
        # too-many-format-args,
        # bad-format-character,
