@@ -68,8 +68,8 @@
 ;; (global-set-key (kbd "M-<backspace>") #'hungry-delete-backward)
 
 ;;key-chords
-;; (eval-after-load 'key-chord
-;;   '(key-chord-define-global "fg" 'iy-go-to-char))
+;; (with-eval-after-load 'key-chord
+;;   (key-chord-define-global "fg" 'iy-go-to-char))
 ;; (key-chord-define-global "df" 'iy-go-to-char-backward)
 
 ;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
@@ -155,16 +155,16 @@
 (define-key global-map "\M-Q" 'unfill-paragraph)
 (define-key global-map "\M-\C-q" 'unfill-region)
 
-;; (eval-after-load 're-builder
-;;   '(lambda ()
+;; (with-eval-after-load 're-builder
+;;   (progn
 ;;      (define-key reb-mode-map (kbd "C-c %") 'my-reb-query-replace-regexp)
 ;;      (define-key reb-mode-map (kbd "C-s") 'reb-next-match)
 ;;      (define-key reb-mode-map (kbd "C-r") 'reb-prev-match)
 ;;      ;; C-c C-q -> C-g
 ;;      (define-key reb-mode-map (kbd "C-g") 'reb-copy-and-quit)))
 
-(eval-after-load 'ibuffer
-  '(progn
+(with-eval-after-load 'ibuffer
+  (progn
      (define-key ibuffer-mode-map
        (vector 'remap 'end-of-buffer) 'ibuffer-jump-to-bottom)
      (define-key ibuffer-mode-map

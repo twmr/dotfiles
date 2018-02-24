@@ -74,8 +74,8 @@
 ;;   (add-hook hook (lambda () (flyspell-mode -1))))
 
 ;; automatically adds marks
-(eval-after-load 'auto-mark
-  '(global-auto-mark-mode 1))
+(with-eval-after-load 'auto-mark
+  (global-auto-mark-mode 1))
 
 ;; If there is a tab, make it the size of 2 spaces
 ;; TODO Check if this causes problems with fgallina/python.el
