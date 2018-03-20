@@ -36,9 +36,6 @@
     (eval-after-load (match-string-no-properties 1 file)
       `(load ,(concat thi::config-dir "/" file)))))
 
-(require 'package)
-(package-initialize)
-
 ;; Bootstrap `use-package'
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
