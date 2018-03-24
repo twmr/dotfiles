@@ -155,6 +155,7 @@
                 ("\\`\\..*emacs\\'" . emacs-lisp-mode)
                 ("[:/]_emacs\\'" . emacs-lisp-mode)
                 ("\\.gp$" . gnuplot-mode)
+                ("pylintrc" . conf-mode)
                 )
               auto-mode-alist))
 
