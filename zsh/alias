@@ -125,12 +125,18 @@ alias removelatex='rm -f `find . -iname "*.log" -o -iname "*.aux" -o -iname "*.o
 
 alias st='sublime_text'
 
-alias di='sudo aptitude install'
-alias dinf='sudo dnf info'
-alias dnu='sudo aptitude update && sudo aptitude upgrade'
-alias ds='sudo aptitude search'
-alias dr='sudo dnf remove'
-alias drq='sudo dnf repoquery --installed'
+if [ -e /usr/bin/dnf ]; then
+    alias di='sudo dnf install'
+    alias dinf='sudo dnf info'
+    alias dnu='sudo dnf update'
+    alias ds='sudo dnf search'
+    alias dr='sudo dnf remove'
+    alias drq='sudo dnf repoquery --installed'
+else
+    alias di='sudo aptitude install'
+    alias dnu='sudo aptitude update && sudo aptitude upgrade'
+    alias ds='sudo aptitude search'
+fi
 
 alias ka='sudo killall'
 
