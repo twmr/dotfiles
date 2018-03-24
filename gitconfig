@@ -47,3 +47,5 @@
 	prereleaseSuffix = .beta
 	prereleaseSuffix = rc
 	prereleaseSuffix = .rc
+[merge]
+	conflictStyle = diff3
