@@ -142,6 +142,9 @@ elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
     prepath $HOME/bin
     prepath $HOME/.cargo/bin
 
+    # Ubuntu make installation of Ubuntu Make binary symlink
+    prepath $HOME/.local/share/umake/bin
+
 elif [ "$HOSTNAME" = "dirac" ]; then
     module purge
     module load mpi/openmpi-x86_64
