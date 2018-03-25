@@ -92,7 +92,7 @@ if [ "$EMBINPATH" ]; then
 fi
 
 consoleemacs="emacsclient -nw -a $embin"
-guiemacs="emacsclient -nc" # -a $embin"
+guiemacs="emacsclient -n" # -a $embin"
 alias e="$guiemacs"
 alias ec="$consoleemacs"
 # alias emacs="$embin"
