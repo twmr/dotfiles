@@ -6,95 +6,81 @@
  '(ansi-color-faces-vector
    [default bold shadow italic underline bold bold-italic bold])
  '(ansi-color-names-vector
-   ["#263238" "#74CBC4" "#546D7A" "#C792EA" "#82B1FF" "#FFCB6B" "#FF516D" "#CDD3D3"])
+   (vector "#c5c8c6" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#b294bb" "#8abeb7" "#373b41"))
  '(blink-cursor-mode nil)
  '(comint-input-ignoredups t)
  '(comint-prompt-read-only t)
  '(cursor-color nil)
  '(custom-safe-themes
-   (quote
-    ("790e74b900c074ac8f64fa0b610ad05bcfece9be44e8f5340d2d94c1e47538de" "001240593e0c4d5322cbf44da17d5987618809acf22f60c0d22a0dc71971a0f2" "bed4d169698488b8b5b90f7dbdbaca2e7b9c4a18727adbb7b3ddcb4df0577ce0" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default)))
+   '("408e753da5ce585ad73a0388b50749ef4dcf2b047583fb1378516576e40fa71b" "790e74b900c074ac8f64fa0b610ad05bcfece9be44e8f5340d2d94c1e47538de" "001240593e0c4d5322cbf44da17d5987618809acf22f60c0d22a0dc71971a0f2" "bed4d169698488b8b5b90f7dbdbaca2e7b9c4a18727adbb7b3ddcb4df0577ce0" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "6a37be365d1d95fad2f4d185e51928c789ef7a4ccf17e7ca13ad63a8bf5b922f" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" default))
  '(elpy-eldoc-show-current-function nil)
  '(elpy-modules
-   (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults)))
- '(evil-mode-line-format (quote before))
+   '(elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults))
+ '(evil-mode-line-format 'before)
  '(fci-rule-color "#232A2F")
+ '(flycheck-pycheckers-checkers '(pylint pep8))
  '(git-commit-known-pseudo-headers
-   (quote
-    ("Signed-off-by" "Acked-by" "Modified-by" "Cc" "Suggested-by" "Reported-by" "Tested-by" "Reviewed-by" "Fixes" "Related" "Change-Id")))
- '(git-commit-mode-hook (quote (turn-on-auto-fill)) t)
+   '("Signed-off-by" "Acked-by" "Modified-by" "Cc" "Suggested-by" "Reported-by" "Tested-by" "Reviewed-by" "Fixes" "Related" "Change-Id"))
+ '(git-commit-mode-hook '(turn-on-auto-fill) t)
  '(global-eldoc-mode nil)
  '(grep-find-ignored-directories
-   (quote
-    ("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "build")))
+   '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "build"))
  '(ido-auto-merge-delay-time 2.7)
  '(ido-max-window-height 30)
  '(ido-use-faces t)
  '(jedi:get-in-function-call-delay 0.4)
- '(magit-completing-read-function (quote magit-ido-completing-read))
- '(magit-status-buffer-switch-function (quote switch-to-buffer) t)
+ '(magit-completing-read-function 'magit-ido-completing-read)
+ '(magit-status-buffer-switch-function 'switch-to-buffer t)
  '(magit-use-overlays nil)
  '(matlab-indent-level 2)
  '(mode-require-final-newline nil)
  '(notmuch-fcc-dirs "Sent")
  '(notmuch-saved-searches
-   (quote
-    ((:name "INBOX (folder)" :query "folder:INBOX" :key "I")
+   '((:name "INBOX (folder)" :query "folder:INBOX" :key "I")
      (:name "inbox" :query "tag:inbox" :key "i")
      (:name "unread" :query "tag:unread" :key "u")
      (:name "flagged" :query "tag:flagged" :key "f")
      (:name "sent" :query "tag:sent" :key "t")
      (:name "drafts" :query "tag:draft" :key "d")
-     (:name "all mail" :query "*" :key "a"))))
+     (:name "all mail" :query "*" :key "a")))
  '(notmuch-show-logo nil)
  '(org-file-apps
-   (quote
-    ((auto-mode . emacs)
+   '((auto-mode . emacs)
      ("\\.mm\\'" . default)
      ("\\.x?html?\\'" . default)
-     ("pdf" . "evince %s"))))
+     ("pdf" . "evince %s")))
  '(org-log-done nil)
  '(package-archives
-   (quote
-    (("melpa" . "http://melpa.org/packages/")
+   '(("melpa" . "http://melpa.org/packages/")
      ("gnu" . "http://elpa.gnu.org/packages/")
-     ("elpy" . "http://jorgenschaefer.github.io/packages/"))))
+     ("elpy" . "http://jorgenschaefer.github.io/packages/")))
  '(package-selected-packages
-   (quote
-    (persp-mode cython-anaconda picpocket elpy help-mode+ build-helper company-jedi bshell rainbow-identifiers jabber counsel ivy swiper ivy-bibtex bonjourmadame color-theme-sanityinc-solarized mmm-mode fireplace anaconda-mode auto-complete-mode indent-guide bpr pdf-tools ranger helm-flx jenkins org-beautify-theme org-bullets rainbow-delimiters ein aurora-theme ido-completing-read+ helm-github-stars paradox spinner sequences minimap js2-mode imenu-anywhere rust-mode ocodo-svg-modelines ace-jump-mode multiple-cursors color-identifiers-mode matlab-mode zotelo stickyfunc-enhance highlight-indentation yasnippet projectile helm fill-column-indicator magit evil discover zop-to-char yaml-mode window-numbering use-package undo-tree sx solarized-theme smex smart-mode-line project-persist project-explorer perspective origami moz-controller magit-filenotify julia-mode json-mode iedit hydra htmlize helm-projectile gitignore-mode gitconfig-mode flycheck flx-ido f expand-region ethan-wspace dynamic-fonts direx company color-theme-sanityinc-tomorrow cmake-mode bbdb-vcard aggressive-indent ace-window 2048-game)))
+   '(posframe panda-theme pos-tip docker-compose-mode flycheck-pycheckers paredit highlight-function-calls emojify magit-gerrit which-key sr-speedbar python-switch-quotes pip-requirements lua-mode ini-mode flx visual-fill-column page-break-lines cython-mode better-shell cython-anaconda picpocket elpy help-mode+ build-helper company-jedi bshell rainbow-identifiers jabber counsel ivy swiper ivy-bibtex bonjourmadame color-theme-sanityinc-solarized mmm-mode fireplace anaconda-mode auto-complete-mode indent-guide bpr pdf-tools ranger helm-flx jenkins org-beautify-theme org-bullets rainbow-delimiters ein aurora-theme ido-completing-read+ helm-github-stars paradox spinner sequences minimap js2-mode imenu-anywhere rust-mode ocodo-svg-modelines ace-jump-mode multiple-cursors color-identifiers-mode matlab-mode zotelo stickyfunc-enhance highlight-indentation yasnippet projectile helm fill-column-indicator magit evil discover zop-to-char yaml-mode window-numbering use-package undo-tree sx solarized-theme smex smart-mode-line project-persist project-explorer perspective origami moz-controller magit-filenotify julia-mode json-mode iedit hydra htmlize helm-projectile gitignore-mode gitconfig-mode flycheck flx-ido f expand-region ethan-wspace dynamic-fonts direx company color-theme-sanityinc-tomorrow cmake-mode bbdb-vcard aggressive-indent ace-window 2048-game))
  '(paradox-github-token t)
  '(persp-init-frame-behaviour nil)
  '(preview-default-option-list
-   (quote
-    ("displaymath" "floats" "graphics" "textmath" "showlabels")))
+   '("displaymath" "floats" "graphics" "textmath" "showlabels"))
  '(preview-scale-function 1.5)
- '(preview-transparent-color (quote (highlight :background)))
+ '(preview-transparent-color '(highlight :background))
  '(projectile-git-command "git ls-files -zc --exclude-standard")
  '(projectile-globally-ignored-directories
-   (quote
-    (".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build")))
+   '(".idea" ".ensime_cache" ".eunit" ".git" ".hg" ".fslckout" "_FOSSIL_" ".bzr" "_darcs" ".tox" ".svn" ".stack-work" "build"))
  '(python-shell-prompt-detect-enabled nil)
- '(recentf-exclude (quote ("COMMIT_EDITMSG" ".newsrc-dribble" "ido.last")))
+ '(recentf-exclude '("COMMIT_EDITMSG" ".newsrc-dribble" "ido.last"))
  '(rm-blacklist
-   (quote
-    (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
+   '(" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction"))
  '(rm-excluded-modes
-   (quote
-    (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
+   '(" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction"))
  '(safe-local-variable-values
-   (quote
-    ((encoding . utf-8)
+   '((encoding . utf-8)
      (whitespace-style face tabs trailing lines-tail)
      (TeX-master)
      (eval ignore-errors "Write-contents-functions is a buffer-local alternative to before-save-hook"
-           (add-hook
-            (quote write-contents-functions)
-            (lambda nil
-              (delete-trailing-whitespace)
-              nil))
-           (require
-            (quote whitespace))
+           (add-hook 'write-contents-functions
+                     (lambda nil
+                       (delete-trailing-whitespace)
+                       nil))
+           (require 'whitespace)
            "Sometimes the mode needs to be toggled off and on."
            (whitespace-mode 0)
            (whitespace-mode 1))
@@ -198,10 +184,9 @@
      (c-tab-always-indent . t)
      (TeX-master . "manuscript.tex")
      (nxml-child-indent . 4)
-     (TeX-master . t))))
+     (TeX-master . t)))
  '(semantic-new-buffer-setup-functions
-   (quote
-    ((c-mode . semantic-default-c-setup)
+   '((c-mode . semantic-default-c-setup)
      (c++-mode . semantic-default-c-setup)
      (html-mode . semantic-default-html-setup)
      (java-mode . wisent-java-default-setup)
@@ -214,35 +199,35 @@
      (makefile-makepp-mode . semantic-default-make-setup)
      (makefile-bsdmake-mode . semantic-default-make-setup)
      (makefile-imake-mode . semantic-default-make-setup)
-     (makefile-mode . semantic-default-make-setup))))
+     (makefile-mode . semantic-default-make-setup)))
  '(sml/active-background-color "gray25")
  '(sml/hidden-modes
-   (quote
-    (" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction")))
+   '(" hl-p" " Undo-Tree" " Projectile" " yas" " ew:mnlt" " AC" " Interaction"))
  '(sml/mode-width 10)
  '(sml/name-width 14)
- '(vc-annotate-background "#2B3B40")
+ '(tramp-syntax 'default nil (tramp))
+ '(tramp-verbose 2 nil (tramp))
+ '(vc-annotate-background nil)
  '(vc-annotate-color-map
-   (quote
-    ((20 . "#74CBC4")
-     (40 . "#74CBC4")
-     (60 . "#C2E982")
-     (80 . "#FFC400")
-     (100 . "#C792EA")
-     (120 . "#C792EA")
-     (140 . "#546D7A")
-     (160 . "#546D7A")
-     (180 . "#FF516D")
-     (200 . "#9FC59F")
-     (220 . "#859900")
-     (240 . "#F77669")
-     (260 . "#FF516D")
-     (280 . "#82B1FF")
-     (300 . "#82B1FF")
-     (320 . "#82B1FF")
-     (340 . "#D9F5DD")
-     (360 . "#FFCB6B"))))
- '(vc-annotate-very-old-color "#FFCB6B"))
+   '((20 . "#cc6666")
+     (40 . "#de935f")
+     (60 . "#f0c674")
+     (80 . "#b5bd68")
+     (100 . "#8abeb7")
+     (120 . "#81a2be")
+     (140 . "#b294bb")
+     (160 . "#cc6666")
+     (180 . "#de935f")
+     (200 . "#f0c674")
+     (220 . "#b5bd68")
+     (240 . "#8abeb7")
+     (260 . "#81a2be")
+     (280 . "#b294bb")
+     (300 . "#cc6666")
+     (320 . "#de935f")
+     (340 . "#f0c674")
+     (360 . "#b5bd68")))
+ '(vc-annotate-very-old-color nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
