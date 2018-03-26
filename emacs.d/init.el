@@ -365,8 +365,6 @@
                "\\(^\\s-*(use-package +\\)\\(\\_<.+\\_>\\)" 2)))
   (add-hook 'emacs-lisp-mode-hook #'jcs-use-package))
 
-(use-package ini-mode :ensure t :defer t)
-
 (use-package ivy
   :ensure t
   :config (setq ivy-use-selectable-prompt t))
