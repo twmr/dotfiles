@@ -542,6 +542,12 @@
      (use-package org-pdfview
        :ensure t))
 
+(use-package rg :ensure t
+  ;; https://github.com/dajva/rg.el
+  ;; select word and type "M-s d"
+  :config
+  (rg-enable-default-bindings (kbd "M-s")))
+
 (use-package visual-fill-column :ensure t)
 
 (use-package which-key :ensure t
