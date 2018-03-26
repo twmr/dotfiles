@@ -550,11 +550,21 @@
      (use-package org-pdfview
        :ensure t))
 
+(use-package wgrep-ag :ensure t)
+
 (use-package rg :ensure t
   ;; https://github.com/dajva/rg.el
   ;; select word and type "M-s d"
+  ;; In *rg* buffer:
+  ;;   C-c c-p start wgrep mode
+  ;;   C-c c   increase context (toggle)
+  :hook wgrep-ag-setup
   :config
-  (rg-enable-default-bindings (kbd "M-s")))
+  (progn
+    (rg-enable-default-bindings (kbd "M-s"))
+    ;; (setq rg-show-header nil)
+    (rg-define-toggle "--context 3" (kbd "C-c c"))
+  ))
 
 (use-package visual-fill-column :ensure t)
 
