@@ -367,6 +367,10 @@
 
 (use-package ini-mode :ensure t :defer t)
 
+(use-package ivy
+  :ensure t
+  :config (setq ivy-use-selectable-prompt t))
+
 ;; (use-package jabber
 ;;   :ensure t
 ;;   :if (string= (system-name) "PC-16609")
