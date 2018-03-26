@@ -10,8 +10,18 @@
 	aliases = config --get-regexp ^alias\\.
 	al = !git aliases
 	cp = cherry-pick
-	co = commit
-	dc = diff --color-words
+  co = commit
+  dc = diff --color-words
+  find-file = "!for branch in $(git for-each-ref --format=\"%(refname)\" refs/remotes/origin); do \
+               if git ls-tree -r --name-only $branch | grep \"$1\" > /dev/null; then \
+                   echo \"${branch}:\"; \
+                   git ls-tree -r --name-only $branch | nl -bn -w3 | grep \"$1\"; fi; \
+               done; :"
+	find-file-local = "!for branch in $(git for-each-ref --format=\"%(refname)\" refs/heads); do if git ls-tree -r --name-only $branch | grep \"$1\" > /dev/null; then  echo \"${branch}:\"; git ls-tree -r --name-only $branch | nl -bn -w3 | grep \"$1\"; fi; done; :"
+	grep-all = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>'); : "
+	grep-all-stable = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep '\\-stable'); : "
+	grep-all-testing = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep testing); : "
+	grep-all-unstable = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' |grep unstable); : "
 [include]
 	path = ~/.git_identity
 [color]
