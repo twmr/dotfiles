@@ -230,6 +230,7 @@
   :bind (("C-x C-h" . helm-mini)
          ([f12] . thi::directorychooser))
   :config (progn
+            (setq helm-mode-fuzzy-match t)
             (defun thi::directorychooser ()
               "Use ido to select a recently used directory from the `thi::directory-list'."
               (interactive)
