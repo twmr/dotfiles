@@ -212,7 +212,8 @@
           )
   :config (global-flycheck-mode))
 
-(use-package flycheck-pycheckers :ensure t)
+(use-package flycheck-pycheckers :ensure t
+  :init (setq flycheck-pycheckers-checkers '(pylint pep8)))
 
 (use-package fill-column-indicator :ensure t :defer t)
 
