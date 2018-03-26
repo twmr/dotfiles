@@ -367,57 +367,57 @@
 
 (use-package ini-mode :ensure t :defer t)
 
-(use-package jabber
-  :ensure t
-  :if (string= (system-name) "PC-16609")
-  :config (progn
-            (setq jabber-invalid-certificate-servers '("srv-voip-04"))
-            (setq jabber-connection-ssl-program "starttls")
-            (setq jabber-account-list
-                  (when (string= (system-name) "PC-16609")
-                    '("thomas.hisch@srv-voip-04")
-                    '("tomtom@ottorocker.nsupdate.info")
-                    ;; (:network-server . "conference.srv-voip-04")
-                    ))
-            (setq jabber-history-enabled t)
-            (setq jabber-backlog-number 100)
-            (setq jabber-backlog-days 30)
-            (setq jabber-auto-reconnect t)
-            (setq jabber-roster-show-title nil)
-            (setq jabber-roster-show-bindings nil)
-            (setq jabber-show-offline-contacts nil)
+;; (use-package jabber
+;;   :ensure t
+;;   :if (string= (system-name) "PC-16609")
+;;   :config (progn
+;;             (setq jabber-invalid-certificate-servers '("srv-voip-04"))
+;;             (setq jabber-connection-ssl-program "starttls")
+;;             (setq jabber-account-list
+;;                   (when (string= (system-name) "PC-16609")
+;;                     '("thomas.hisch@srv-voip-04")
+;;                     '("tomtom@ottorocker.nsupdate.info")
+;;                     ;; (:network-server . "conference.srv-voip-04")
+;;                     ))
+;;             (setq jabber-history-enabled t)
+;;             (setq jabber-backlog-number 100)
+;;             (setq jabber-backlog-days 30)
+;;             (setq jabber-auto-reconnect t)
+;;             (setq jabber-roster-show-title nil)
+;;             (setq jabber-roster-show-bindings nil)
+;;             (setq jabber-show-offline-contacts nil)
 
-            (setq jabber-avatar-verbose nil)
-            (setq jabber-vcard-avatars-retrieve nil)
-            (setq jabber-chat-buffer-format "jabber-%n")
-            (setq jabber-groupchat-buffer-format "jabber-gc-%n")
+;;             (setq jabber-avatar-verbose nil)
+;;             (setq jabber-vcard-avatars-retrieve nil)
+;;             (setq jabber-chat-buffer-format "jabber-%n")
+;;             (setq jabber-groupchat-buffer-format "jabber-gc-%n")
 
-            (if (string= (system-name) "PC-16609")
-              (setq jabber-muc-autojoin
-                    '("hpc_sd@conference.srv-voip-04"
-                      "sd@conference.srv-voip-04")))
+;;             (if (string= (system-name) "PC-16609")
+;;               (setq jabber-muc-autojoin
+;;                     '("hpc_sd@conference.srv-voip-04"
+;;                       "sd@conference.srv-voip-04")))
 
-            (defun notify-jabber-notify (from buf text proposed-alert)
-              "(jabber.el hook) Notify of new Jabber chat messages via notify.el"
-              (when (or jabber-message-alert-same-buffer
-                        (not (memq (selected-window) (get-buffer-window-list buf))))
-                (if (jabber-muc-sender-p from)
-                    (notify (format "(PM) %s"
-                                    (jabber-jid-displayname (jabber-jid-user from)))
-                            (format "%s: %s" (jabber-jid-resource from) text)))
-                (notify (format "%s" (jabber-jid-displayname from))
-                        text)))
-            (add-hook 'jabber-alert-message-hooks 'notify-jabber-notify)
+;;             (defun notify-jabber-notify (from buf text proposed-alert)
+;;               "(jabber.el hook) Notify of new Jabber chat messages via notify.el"
+;;               (when (or jabber-message-alert-same-buffer
+;;                         (not (memq (selected-window) (get-buffer-window-list buf))))
+;;                 (if (jabber-muc-sender-p from)
+;;                     (notify (format "(PM) %s"
+;;                                     (jabber-jid-displayname (jabber-jid-user from)))
+;;                             (format "%s: %s" (jabber-jid-resource from) text)))
+;;                 (notify (format "%s" (jabber-jid-displayname from))
+;;                         text)))
+;;             (add-hook 'jabber-alert-message-hooks 'notify-jabber-notify)
 
-            ;; Preventing messages in the echo area from clobbering the mini buffer
-            ;; (define-jabber-alert echo "Show a message in the echo area"
-            ;;   (lambda (msg)
-            ;;     (unless (minibuffer-prompt)
-            ;;       (message "%s" msg))))
+;;             ;; Preventing messages in the echo area from clobbering the mini buffer
+;;             ;; (define-jabber-alert echo "Show a message in the echo area"
+;;             ;;   (lambda (msg)
+;;             ;;     (unless (minibuffer-prompt)
+;;             ;;       (message "%s" msg))))
 
-            ;; (setq jabber-roster-line-format  " %c %-25n %u %-8s  %S  %a")
-            (setq jabber-roster-line-format  " %c %-25n %u %-8s  %S")
-            ))
+;;             ;; (setq jabber-roster-line-format  " %c %-25n %u %-8s  %S  %a")
+;;             (setq jabber-roster-line-format  " %c %-25n %u %-8s  %S")
+;;             ))
 
 (use-package json-mode :ensure t :defer t)
 
