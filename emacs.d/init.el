@@ -20,9 +20,16 @@
    'file-exists-p
    (mapcar (lambda (path)
              (replace-regexp-in-string "~" (getenv "HOME") path))
-           '(
+           '("~/.zsh.d"
+             "~/.zsh"
              "~/gitrepos/dotfiles/emacs.d"
              "~/gitrepos/dotfiles/emacs.d/lisp/thi"
+             "~/sandbox/unstable/expses"
+             "~/sandbox/unstable/pocscripts"
+             "~/sandbox/unstable/tools"
+             "~/sandbox/unstable/configdb"
+             "~/sandbox/unstable/pyhwctrl"
+             "~/sandbox/unstable/jobqueue"
              ))))
 
 (setq custom-file (concat thi::config-dir "/custom.el"))
