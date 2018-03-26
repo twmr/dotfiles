@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Emacs Client
+# make sure that the correct emacsclient lib is in your $PATH
+Exec=emacsclient -n %u
+Icon=emacs-icon
+Type=Application
+Terminal=false
+MimeType=application/pdf;
