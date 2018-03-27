@@ -53,6 +53,7 @@ set -e
 
 
 ./configure \
+    --prefix=/opt/emacs \
     --with-x-toolkit=gtk3 \
     --with-xpm \
     --without-jpeg \
@@ -61,5 +62,6 @@ set -e
 
 make bootstrap
 make
+make install
 
-rm src/emacs-2*
+# rm src/emacs-2*

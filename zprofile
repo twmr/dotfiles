@@ -141,9 +141,12 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
     prepath $HOME/bin
     prepath $HOME/.cargo/bin
+    prepath /opt/emacs/bin
 
     # Ubuntu make installation of Ubuntu Make binary symlink
     prepath $HOME/.local/share/umake/bin
+
+    preldlpath /opt/emacs/lib
 
 elif [ "$HOSTNAME" = "dirac" ]; then
     module purge
