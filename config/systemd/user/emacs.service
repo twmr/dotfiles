@@ -1,0 +1,20 @@
+# systemctl --user enable emacs
+# systemctl --user start emacs
+# systemctl --user stop emacs
+# systemctl --user disable emacs
+
+[Unit]
+Description=Emacs: the extensible, self-documenting text editor
+
+[Service]
+Type=forking
+ExecStart=/opt/emacs/bin/emacs --daemon
+ExecStop=/opt/emacs/bin/emacsclient --eval "(progn (setq kill-emacs-hook 'nil) (kill-emacs))"
+Restart=always
+
+# Remove the limit in startup timeout, since emacs
+# cloning and building all packages can take time
+TimeoutStartSec=0
+
+[Install]
+WantedBy=default.target
