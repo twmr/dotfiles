@@ -1,0 +1,3 @@
+# taken from https://dodwell.us/security/ssh-agent-systemd.html
+# with this line I don't need to manually call ssh-add anylonger
+AddKeysToAgent  yes
