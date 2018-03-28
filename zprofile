@@ -150,6 +150,9 @@ elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
 
     preldlpath /opt/emacs/lib
 
+    # ssh-agent is started using a systemd user-service
+    export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.socket
+
 elif [ "$HOSTNAME" = "dirac" ]; then
     module purge
     module load mpi/openmpi-x86_64
