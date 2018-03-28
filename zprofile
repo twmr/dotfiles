@@ -1,5 +1,5 @@
 #!/bin/zsh
-echo "in ~/.zprofile"
+echo "loading ~/.zprofile"
 
 #
 # Dircolors...
