@@ -1,4 +1,6 @@
 #!/bin/zsh
+echo "in ~/.zprofile"
+
 #
 # Dircolors...
 eval `dircolors -b ~/.dircolors`
