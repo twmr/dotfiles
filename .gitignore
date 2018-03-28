@@ -42,4 +42,4 @@ matplotlib/tex.cache
 /bin/btsync
 /emacs.d/.sx/
 *.sqlite
-config/systemd/user/multi-user.target.wants
+/config/systemd/user/default.target.wants/
