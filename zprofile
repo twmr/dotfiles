@@ -15,7 +15,8 @@ fi
 #export LANG=en_US.UTF-8
 #export LOCALE=en_US.UTF-8
 export OOO_FORCE_DESKTOP='gnome'
-export EDITOR="emacs" #is an alias to emacsclient
+#export EDITOR="emacs" #is an alias to emacsclient
+export EDITOR="emacsclient -nc"
 export VISUAL="$EDITOR"
 export PAGER="less"
 export HISTCONTROL=ignoredups
@@ -396,3 +397,5 @@ fi
 
 #[[ $- != *i* ]] && return
 #[[ -z "$TMUX" ]] && exec tmux
+
+export PATH="$HOME/.cargo/bin:$PATH"
