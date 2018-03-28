@@ -1,0 +1,16 @@
+# https://dodwell.us/security/ssh-agent-systemd.html
+
+# This service should only be used on hosts, where ssh-agent is not started
+# by the desktop environment !!!
+
+[Unit]
+Description=SSH key agent
+
+[Service]
+Type=forking
+# Make sure that this env var is also used in your shell!!
+Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+ExecStart=/usr/bin/ssh-agent -a $SSH_AUTH_SOCK
+
+[Install]
+WantedBy=default.target
