@@ -1,15 +1,13 @@
 # https://dodwell.us/security/ssh-agent-systemd.html
 
-# This service should only be used on hosts, where ssh-agent is not started
-# by the desktop environment !!!  Even if gpg-agent starts a ssh-agent it
-# is possible to start a new ssh-agent using this service and use it.
-
+# This service can also be used on hosts, where ssh-agent is started
+# by the desktop environment (through gpg-agent e.g.)
 [Unit]
 Description=SSH key agent
 
 [Service]
 Type=forking
-# Make sure that this env var is also used in your shell!!
+# Make sure that this env var is also used in your shell (-> zprofile)!!
 # Note that in some desktop-envs SSH_AUTH_SOCK is already set somehow....
 # NOTE: %t -> is the same as $XDG_RUNTIME_DIR
 Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
