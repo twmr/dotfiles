@@ -24,43 +24,12 @@ function urxvtc() {
     fi
 }
 
-#kill emacs daemon
-function ked() {
-    echo "trying to kill emacs"
-    pgrep -u $USER "emacs" > /dev/null
-    RETVAL=$?
-    if [ $RETVAL -eq 0 ]; then
-        echo "killing emacs on " `date` >> ~/.emacs.d/emacs-server.log
-        emacsclient -nw -e '(kill-emacs)'
-    else
-        echo "no emacs-daemon is running"
-    fi
-}
-
 # update emacs
 function eup()
 {
     (cd ~gr/emacs
      gpl
      compile_emacs)
-}
-function started() {
-    if [ $# -gt 0 ]; then
-        if [ "$1" = "-f" ]; then
-            echo "$embin --daemon"
-            $embin --daemon
-            return
-        fi
-    fi
-
-    pgrep -u $USER "emacs" > /dev/null
-    RETVAL=$?
-    if [ $RETVAL -eq 0 ]; then
-        echo "emacs-daemon already running"
-    else
-        echo "$embin --daemon"
-        $embin --daemon
-    fi
 }
 
 function cenvdir() {
