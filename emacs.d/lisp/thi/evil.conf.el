@@ -8,6 +8,7 @@
   (lambda () (interactive) (swiper (format "\\<%s\\>" (thing-at-point 'symbol)))))
 (define-key evil-normal-state-map (kbd "#")
   (lambda () (interactive) (swiper (format "\\<%s\\>" (thing-at-point 'word)))))
+
 ;;TODO modeline color changes
 
 ;; (defvar evil-normal-mode-line-background (face-background 'mode-line))
@@ -86,35 +87,3 @@
 ;;     (push 'escape unread-command-events))
 ;;        (t (setq unread-command-events (append unread-command-events
 ;;                           (list evt))))))))
-
-(delete 'term-mode evil-insert-state-modes)
-
-;; see https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el
-(require 'cl-lib)
-(cl-loop for (mode . state) in
-      '(
-        (eshell-mode . emacs)
-        (shell-mode . emacs)
-        (sh-mode . emacs)
-        (shell-script-mode . emacs)
-        (term-mode . emacs)
-        (compilation-mode . emacs)
-        (dired-mode . emacs)
-        (image-mode . emacs)
-        (image-dired-mode . emacs)
-        (image-dired-thumbnail-mode . emacs)
-        (speedbar-mode . emacs)
-        (quickrun/mode . emacs)
-        (makey-key-mode . emacs)
-        (flycheck-error-list-mode . emacs)
-        (paradox-menu-mode . emacs)
-        (dashboard-mode . emacs)
-        (python-mode . emacs)
-        (emacs-lisp-mode . emacs)
-        (text-mode . emacs)
-        (shell-script-mode . emacs)
-        (org-mode . emacs)
-        (yaml-mode . emacs)
-        (json-mode . emacs)
-        )
-      do (evil-set-initial-state mode state))

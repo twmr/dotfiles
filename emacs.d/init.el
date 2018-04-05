@@ -14,7 +14,7 @@
 (defvar thi::config-dir
   (expand-file-name
    (concat user-emacs-directory "/lisp/thi")))
-(require 'cl-lib) ;; cl-delete-if-not
+(require 'cl-lib) ;; cl-delete-if-not, cl-loop
 (defvar thi::directory-list
   (cl-delete-if-not
    'file-exists-p
@@ -208,7 +208,38 @@
 (use-package flx :ensure t)
 (use-package flx-ido :ensure t)
 
-;; (use-package evil :ensure t)
+(use-package evil :ensure t
+  :init (progn
+          (delete 'term-mode evil-insert-state-modes)
+
+          ;;see https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el
+          (cl-loop for (mode . state) in
+                   '(
+                     (eshell-mode . emacs)
+                     (shell-mode . emacs)
+                     (sh-mode . emacs)
+                     (shell-script-mode . emacs)
+                     (term-mode . emacs)
+                     (compilation-mode . emacs)
+                     (dired-mode . emacs)
+                     (image-mode . emacs)
+                     (image-dired-mode . emacs)
+                     (image-dired-thumbnail-mode . emacs)
+                     (speedbar-mode . emacs)
+                     (quickrun/mode . emacs)
+                     (makey-key-mode . emacs)
+                     (flycheck-error-list-mode . emacs)
+                     (paradox-menu-mode . emacs)
+                     (dashboard-mode . emacs)
+                     (python-mode . emacs)
+                     (emacs-lisp-mode . emacs)
+                     (text-mode . emacs)
+                     (shell-script-mode . emacs)
+                     (org-mode . emacs)
+                     (yaml-mode . emacs)
+                     (json-mode . emacs)
+                     )
+                   do (evil-set-initial-state mode state))))
 
 (use-package flycheck
   :ensure t
