@@ -209,8 +209,8 @@
 (use-package flx-ido :ensure t)
 
 (use-package evil :ensure t
-  :init (progn
-          (delete 'term-mode evil-insert-state-modes)
+  :config (progn
+          ;; (delete 'term-mode evil-insert-state-modes)
 
           ;;see https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el
           (cl-loop for (mode . state) in
