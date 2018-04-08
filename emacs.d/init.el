@@ -628,6 +628,9 @@
   (progn
     (add-hook 'TeX-mode-hook 'zotelo-minor-mode)))
 
+(use-package color-theme-sanityinc-tomorrow :ensure t)
+(use-package smart-mode-line :ensure t)
+
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 (defvar thi::theme 'sanityinc-tomorrow-night)
