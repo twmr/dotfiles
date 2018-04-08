@@ -154,7 +154,8 @@
       (git-commit-insert-redmine-header "Related" ticketnumber))))
 
 
-(use-package help-mode+ :ensure t)
+;; TODO help-mode+ is unavailable??
+;; (use-package help-mode+ :ensure t)
 
 (use-package highlight-function-calls :ensure t
   :config
