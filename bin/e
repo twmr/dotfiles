@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# echo starting e with $*
+if [ "$(emacsclient -e \
+        '(< 1 (length (frame-list)))')" = "nil" ]; then
+    echo no frame is open
+    emacsclient -n -c $*
+else
+    echo attaching to existing frame
+    emacsclient -n $*
+fi

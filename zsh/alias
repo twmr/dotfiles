@@ -91,13 +91,6 @@ if [ "$EMBINPATH" ]; then
     embin="$EMBINPATH/emacs"
 fi
 
-consoleemacs="emacsclient -nw -a $embin"
-guiemacs="emacsclient -n" # -a $embin"
-alias e="$guiemacs"
-alias ec="$consoleemacs"
-# alias emacs="$embin"
-#alias emacs="$guiemacs"
-
 alias jn='jupyter notebook'
 alias in='jupyter notebook'
 
