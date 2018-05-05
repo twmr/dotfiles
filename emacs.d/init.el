@@ -105,6 +105,8 @@
 
 (use-package cython-mode :ensure t :defer t)
 
+(use-package dockerfile-mode :ensure t :defer t)
+
 (use-package elpy :ensure t
   :init
   (elpy-enable))
