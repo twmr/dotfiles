@@ -218,12 +218,14 @@
           ;;see https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el
           (cl-loop for (mode . state) in
                    '(
+                     (fundamental-mode . emacs)
                      (eshell-mode . emacs)
                      (shell-mode . emacs)
                      (sh-mode . emacs)
                      (shell-script-mode . emacs)
                      (term-mode . emacs)
                      (compilation-mode . emacs)
+                     (dockerfile-mode . emacs)
                      (dired-mode . emacs)
                      (image-mode . emacs)
                      (image-dired-mode . emacs)
