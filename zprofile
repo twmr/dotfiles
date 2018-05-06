@@ -70,7 +70,8 @@ fi
 [ -e $HOME/.bin ] && prepath $HOME/.bin
 [ -e $HOME/.local/bin ] && prepath $HOME/.local/bin
 
-prepath $HOME/.fzf/bin
+# needed for distributions where there is no fzf package available (ubuntu)
+[ -e $HOME/.fzf/bin ] && prepath $HOME/.fzf/bin
 
 if [ -e ~/.zsh.d/zprofile ]; then
     . ~/.zsh.d/zprofile

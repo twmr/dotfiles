@@ -84,10 +84,17 @@ setopt nohup  # don't kill child processes of the current zsh when the zsh
               # process is killed
 
 # Setup fzf
+# TODO oneliner
+if [ -e $HOME/.fzf ]; then
+    fzfdir=$HOME/.fzf
+else
+    fzfdir=/usr/share/fzf
+fi
+
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "$fzfdir/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "$HOME/.fzf/shell/key-bindings.zsh"
+source "$fzfdir/shell/key-bindings.zsh"
