@@ -70,6 +70,8 @@ fi
 [ -e $HOME/.bin ] && prepath $HOME/.bin
 [ -e $HOME/.local/bin ] && prepath $HOME/.local/bin
 
+prepath $HOME/.fzf/bin
+
 if [ -e ~/.zsh.d/zprofile ]; then
     . ~/.zsh.d/zprofile
 elif [ "$HOSTNAME" = "mustang" ]; then

@@ -82,3 +82,12 @@ setopt cdablevars # support for $> dotf # changes CWD
 setopt interactivecomments # pound sign in interactive prompt
 setopt nohup  # don't kill child processes of the current zsh when the zsh
               # process is killed
+
+# Setup fzf
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "$HOME/.fzf/shell/key-bindings.zsh"
