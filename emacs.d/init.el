@@ -556,6 +556,27 @@
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
   )
 
+(add-hook 'org-mode-hook
+            (lambda ()
+              (mapc
+               (lambda (face)
+                 (set-face-attribute face nil :inherit 'fixed-pitch))
+               (list 'org-code
+                     'org-link
+                     'org-block
+                     'org-table
+                     'org-block-begin-line
+                     'org-block-end-line
+                     'org-meta-line
+                     'org-document-info-keyword))))
+
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . nil)
+     (gnuplot . t)
+     (python . t))))
+
 (use-package pdf-tools
   :ensure t
   :config
