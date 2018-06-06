@@ -165,6 +165,8 @@
 
 (use-package highlight-indentation :ensure t)
 
+(use-package ssh-config-mode :ensure t)
+
 (use-package magit :ensure t
   :init
   (progn
