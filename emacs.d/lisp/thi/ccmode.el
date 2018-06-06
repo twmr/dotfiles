@@ -10,39 +10,49 @@
 
 ;; set linux c-style if filename or directory contains the string
 ;; linux
-(defun maybe-linux-style ()
-  (when (and buffer-file-name
-             (string-match "linux" buffer-file-name))
-    (c-set-style "Linux")))
-(add-hook 'c-mode-hook 'maybe-linux-style)
+;; (defun maybe-linux-style ()
+;;   (when (and buffer-file-name
+;;              (string-match "linux" buffer-file-name))
+;;     (c-set-style "Linux")))
+;; (add-hook 'c-mode-hook 'maybe-linux-style)
 
-(defun cf-fem-lib-style ()
-  (interactive)
-  (message (buffer-file-name))
-  (when (and buffer-file-name
-             (or (string-match "cf-fem-lib" buffer-file-name)
-                 (string-match "pyspu" buffer-file-name)
-                 (string-match "Sessa" buffer-file-name)))
-    (progn
-      (c-set-style "stroustrup")
-      (setq c-basic-offset 2)
-      (c-set-offset 'inclass 2)
-      ;; (c-set-offset 'access-label 0)
-      ;; (c-set-offset 'topmost-intro 0)
-      )
-    ;; (setq-default c-basic-offset 2
-    ;;               tab-width 2
-    ;;               indent-tabs-mode nil)
-    ))
-(add-hook 'c++-mode-hook 'cf-fem-lib-style)
+;; (defun cf-fem-lib-style ()
+;;   (interactive)
+;;   (message (buffer-file-name))
+;;   (when (and buffer-file-name
+;;              (or (string-match "cf-fem-lib" buffer-file-name)
+;;                  (string-match "pyspu" buffer-file-name)
+;;                  (string-match "Sessa" buffer-file-name)))
+;;     (progn
+;;       (c-set-style "stroustrup")
+;;       (setq c-basic-offset 2)
+;;       (c-set-offset 'inclass 2)
+;;       ;; (c-set-offset 'access-label 0)
+;;       ;; (c-set-offset 'topmost-intro 0)
+;;       )
+;;     ;; (setq-default c-basic-offset 2
+;;     ;;               tab-width 2
+;;     ;;               indent-tabs-mode nil)
+;;     ))
+
+;; (defun compilation-cffemlib-stuff ()
+;;   (when (string-match "cf-fem-lib" buffer-file-name)
+;;     ;; (make-local-variable 'compile-command)
+;;     ;; (setq 'compile-commnad "cd /home/thomas/gitrepos/tudadoc && make")
+;;     (set (make-local-variable 'compilation-read-command) nil)
+;;     (set (make-local-variable 'compile-command)
+;;          "cd ~/cf-fem-lib/build && make")))
+
+;; (add-hook 'c++-mode-hook 'cf-fem-lib-style)
+;; (add-hook 'c++-mode-hook 'compilation-cffemlib-stuff)
+
 
 (defun ims-style ()
   (interactive)
   (message (buffer-file-name))
   (when (and buffer-file-name
-             (or (string-match "sandboxes" buffer-file-name)
-                 (string-match "trunk" buffer-file-name)
-                 (string-match "POC4IMO" buffer-file-name)))
+             (or (string-match "sandbox" buffer-file-name)
+                 (string-match "erenik" buffer-file-name)))
     (progn
       (c-set-style "stroustrup")
       (setq c-basic-offset 2)
@@ -54,16 +64,8 @@
     ;;               tab-width 2
     ;;               indent-tabs-mode nil)
     ))
-(add-hook 'c++-mode-hook 'cf-fem-lib-style)
+(add-hook 'c++-mode-hook 'ims-style)
 
-(defun compilation-cffemlib-stuff ()
-  (when (string-match "cf-fem-lib" buffer-file-name)
-    ;; (make-local-variable 'compile-command)
-    ;; (setq 'compile-commnad "cd /home/thomas/gitrepos/tudadoc && make")
-    (set (make-local-variable 'compilation-read-command) nil)
-    (set (make-local-variable 'compile-command)
-         "cd ~/cf-fem-lib/build && make")))
-(add-hook 'c++-mode-hook 'compilation-cffemlib-stuff)
 
 ;; do not create newlines for electric keys if the following line is
 ;; nonblank
@@ -93,11 +95,11 @@
 ;; (add-hook 'c-mode-common-hook
 ;;           (lambda () (c-toggle-auto-hungry-state 1)))
 
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (c-toggle-hungry-state 1)
-            (superword-mode 1)
-            ))
+;; (add-hook 'c-mode-common-hook
+;;           (lambda ()
+;;             (c-toggle-hungry-state 1)
+;;             (superword-mode 1)
+;;             ))
 
 (define-key c-mode-map (kbd "C-`") 'helm-semantic-or-imenu)
 (define-key c++-mode-map (kbd "C-`") 'helm-semantic-or-imenu)
