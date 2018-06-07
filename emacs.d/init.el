@@ -515,8 +515,10 @@
   :defer t
   :config (add-hook 'after-init-hook #'global-undo-tree-mode))
 
+(use-package persp-mode :ensure t)
+
 (use-package perspective :ensure t :disabled t
-  ;; disabled because it still uses frame local variables
+  ;; disabled because it does not yet support persp-2.0
   (bind-keys :map projectile-mode-map
         ("s-s" . projecile-persp-switch-project))
   :config
@@ -710,6 +712,6 @@
 ;; ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
 ;; (add-hook 'after-init-hook #'global-discover-mode)
 ;; (add-hook 'after-init-hook #'helm-projectile-on)
-;; (add-hook 'after-init-hook #'persp-mode)
+(add-hook 'after-init-hook #'persp-mode)
 
 ;;; init.el ends here
