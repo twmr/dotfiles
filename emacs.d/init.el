@@ -220,6 +220,7 @@
           ;;see https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el
           (cl-loop for (mode . state) in
                    '(
+                     (conf-mode . emacs)
                      (compilation-mode . emacs)
                      (dashboard-mode . emacs)
                      (dired-mode . emacs)
