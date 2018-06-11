@@ -235,6 +235,7 @@
                      (makey-key-mode . emacs)
                      (org-mode . emacs)
                      (paradox-menu-mode . emacs)
+                     (protobuf-mode . emacs)
                      (python-mode . emacs)
                      (quickrun/mode . emacs)
                      (sh-mode . emacs)
@@ -610,6 +611,9 @@
         ("r"  . pdf-view-reset-slice))
      (use-package org-pdfview
        :ensure t))
+
+(use-package protobuf-mode
+  :ensure t)
 
 (use-package wgrep-ag :ensure t)
 
