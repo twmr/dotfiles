@@ -638,8 +638,7 @@
 ;; an alternative to "rg"
 ;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
 (use-package deadgrep :ensure t
-  :init
-  (global-set-key (kbd "<f5>") #'deadgrep))
+  :bind ("<f7>" . deadgrep))
 
 (use-package visual-fill-column :ensure t)
 
