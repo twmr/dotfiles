@@ -129,6 +129,7 @@ else
     alias di='sudo aptitude install'
     alias dnu='sudo aptitude update && sudo aptitude upgrade'
     alias ds='sudo aptitude search'
+    alias dr='sudo aptitude remove'
 fi
 
 alias ka='sudo killall'
