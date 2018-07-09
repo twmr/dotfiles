@@ -35,6 +35,7 @@
 (setq custom-file (concat thi::config-dir "/custom.el"))
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
+(mkdir (concat thi::cache-file-dir "/backups") t)
 
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
@@ -689,6 +690,20 @@
   (progn
     (load-theme thi::theme t)
     (sml/setup)))
+
+(with-eval-after-load 'files
+  (setq backup-directory-alist `(("." . ,(concat thi::cache-file-dir
+                                                 "backups"))))
+  (setq kept-old-versions 5)
+  (setq delete-old-versions t)
+  (setq backup-by-copying t)
+  (setq version-control t)
+
+  (setq auto-save-list-file-prefix
+        (concat thi::cache-file-dir ".auto-saves-"))
+  (setq auto-save-file-name-transforms
+        `((".*" ,thi::cache-file-dir t))))
+
 
 (load "thi/defuns")
 (load "thi/global")
