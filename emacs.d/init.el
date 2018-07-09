@@ -635,6 +635,12 @@
     (rg-define-toggle "--context 3" (kbd "C-c c"))
   ))
 
+;; an alternative to "rg"
+;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
+(use-package deadgrep :ensure t
+  :init
+  (global-set-key (kbd "<f5>") #'deadgrep))
+
 (use-package visual-fill-column :ensure t)
 
 (use-package which-key :ensure t
