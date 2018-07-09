@@ -622,11 +622,13 @@
   ;; https://github.com/dajva/rg.el
   ;; select word and type "M-s d"
   ;; In *rg* buffer:
-  ;;   C-c c-p start wgrep mode
+  ;;   C-c C-p start wgrep mode
   ;;   C-c c   increase context (toggle)
   :hook wgrep-ag-setup
   :config
   (progn
+    (rg-define-search thi::gg :files "*")
+
     (rg-enable-default-bindings (kbd "M-s"))
     ;; (setq rg-show-header nil)
     (rg-define-toggle "--context 3" (kbd "C-c c"))
