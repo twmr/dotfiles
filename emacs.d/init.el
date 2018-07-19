@@ -727,7 +727,6 @@
 (load "thi/nxml")
 (load "thi/compilation")
 (load "thi/term")
-(load "thi/graphene")
 
 (global-eldoc-mode -1)
 
