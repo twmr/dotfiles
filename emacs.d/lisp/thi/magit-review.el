@@ -19,6 +19,10 @@
               "Upload"
               (?u "upload"  magit-review-upload-popup)))
 
+
+;; add "Gerrit" action to magit-dispatch popup
+(magit-define-popup-action 'magit-dispatch-popup ?g "Gerrit" 'magit-review-popup)
+
 ;; is a magit-popup the correct way to implement for this?
 (magit-define-popup magit-review-upload-popup
   "Popup console for uploading a change."
