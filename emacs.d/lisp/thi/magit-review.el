@@ -49,3 +49,23 @@
   (interactive)
   ;; TODO
   (message (format "uploading ... %s" (magit-review-upload-arguments))))
+
+;; (defun magit-gitreview-test ()
+;;   (interactive)
+;;   ;; (let* ((approver (cdr-safe (assoc 'by approval)))
+;;   ;;  (approvname (cdr-safe (assoc 'name approver)))
+;;   ;;  (approvemail (cdr-safe (assoc 'email approver)))
+;;   ;;  (type (cdr-safe (assoc 'type approval)))
+;;   ;;  (verified (string= type "Verified"))
+;;   ;;  (codereview (string= type "Code-Review"))
+;;   ;;  (score (cdr-safe (assoc 'value approval))))
+
+;;   (magit-insert-section (gitreview)
+;;     (insert "Hello World" "\n")))
+;;     ;; (insert (magit-gerrit-pretty-print-reviewer approvname approvemail
+;;     ;;                                             (and codereview score)
+;;     ;;                                             (and verified score))
+;;     ;;           "\n")))
+;; ;; )
+
+;; (remove-hook 'magit-status-sections-hook 'magit-gitreview-test)
