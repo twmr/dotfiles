@@ -1,0 +1,51 @@
+;; my personal git-review integration in magit
+;; *) download a change
+;;   - download change metadata (number, branch, msg; see output of git-review -l) using "git review -l" or REST API and make the number make it possible to select changes
+;; *) update current change
+;;   - if you simply want to download the change again
+;; TODO handle interactive uploads (typing yes when calling git-review)
+;; *) upload for review
+;;   - option for reviewer-names (with completion, sorted by most recently used)
+;;   - option for topic-name (with completion (my created topicnames))
+;;   -
+
+(global-set-key (kbd "C-x i") 'magit-review-popup)
+
+(magit-define-popup magit-review-popup
+  "Popup console for review commands."
+  :man-page "git-review"
+  :actions  '("Download"
+              (?d "change"  magit-review-download-change)
+              "Upload"
+              (?u "upload"  magit-review-upload-popup)))
+
+;; is a magit-popup the correct way to implement for this?
+(magit-define-popup magit-review-upload-popup
+  "Popup console for uploading a change."
+  :man-page "git-review"
+  :options  '(
+              ;; add the possibility to cycle through a list of list of reviewers
+              (?r "reviewers"                        "--reviewer=")
+
+              (?t "topic"                            "--topic="))
+  :actions  '((?u "upload"  magit-review-upload-run)))
+
+(defvar magit-review-download-change-history nil)
+
+;; https://magit.vc/manual/magit-popup/Defining-Prefix-and-Suffix-Commands.html#Defining-Prefix-and-Suffix-Commands
+(defun magit-review-download-change (change)
+  ;; todo ivy like completion
+  (interactive (list (read-string "Change #: " nil
+                                  'magit-review-download-change-history)))
+
+  (magit-git-command (format "git review -d %s" change)))
+
+(defun magit-review-upload-change ()
+  (interactive)
+  ;; TODO
+  (message "WIP"))
+
+(defun magit-review-upload-run ()
+  (interactive)
+  ;; TODO
+  (message (format "uploading ... %s" (magit-review-upload-arguments))))

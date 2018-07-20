@@ -727,6 +727,7 @@
 (load "thi/nxml")
 (load "thi/compilation")
 (load "thi/term")
+(load "thi/magit-review")
 
 (global-eldoc-mode -1)
 
