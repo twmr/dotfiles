@@ -39,9 +39,13 @@
 ;; https://magit.vc/manual/magit-popup/Defining-Prefix-and-Suffix-Commands.html#Defining-Prefix-and-Suffix-Commands
 (defun magit-review-download-change (change)
   ;; todo ivy like completion
-  (interactive (list (read-string "Change #: " nil
-                                  'magit-review-download-change-history)))
-
+  (interactive (list
+                ;; todo default value: most recent change in current repo
+                ;; (see help text of ivy-completing-read)
+                (ivy-completing-read "Change #: "
+                                     magit-review-download-change-history
+                                     nil
+                                     nil)))
   (magit-git-command (format "git review -d %s" change)))
 
 (defun magit-review-upload-change ()
