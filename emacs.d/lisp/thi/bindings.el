@@ -35,6 +35,8 @@
 ;; (global-set-key [f11] 'recentf-ido-find-file)
 (global-set-key [S-f11] 'recentf-ido-find-dir)
 
+(global-set-key (kbd "<C-return>") 'other-window)
+
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; replace buffermenu with ibuffer
