@@ -32,7 +32,7 @@
               (?r "reviewers"                        "--reviewer=")
 
               (?t "topic"                            "--topic="))
-  :actions  '((?u "upload"  magit-review-upload-run)))
+  :actions  '((?u "upload"  magit-review-upload-change)))
 
 (defvar magit-review-download-change-history nil)
 
@@ -49,11 +49,6 @@
   (magit-git-command (format "git review -d %s" change)))
 
 (defun magit-review-upload-change ()
-  (interactive)
-  ;; TODO
-  (message "WIP"))
-
-(defun magit-review-upload-run ()
   (let (
         (review-args (string-join (magit-review-upload-arguments) " ")))
     (message (format "uploading change (%s)" review-args))
