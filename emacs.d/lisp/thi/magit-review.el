@@ -54,9 +54,11 @@
   (message "WIP"))
 
 (defun magit-review-upload-run ()
-  (interactive)
-  ;; TODO
-  (message (format "uploading ... %s" (magit-review-upload-arguments))))
+  (let (
+        (review-args (string-join (magit-review-upload-arguments) " ")))
+    (message (format "uploading change (%s)" review-args))
+    (magit-git-command (format "git review %s" review-args))))
+
 
 ;; (defun magit-gitreview-test ()
 ;;   (interactive)
