@@ -104,6 +104,14 @@
 ;;  :config
 ;;  (add-hook 'python-mode-hook 'anaconda-mode))
 
+(use-package counsel
+  :ensure t
+  :after ivy
+  ;; :bind (("C-h v" . counsel-describe-variable)
+  ;;        ("C-h f" . counsel-describe-function)
+  ;;        ("C-h s" . counsel-info-lookup-symbol)))
+  :config (counsel-mode))
+
 (use-package cython-mode :ensure t :defer t)
 
 (use-package dockerfile-mode :ensure t :defer t)
@@ -420,7 +428,32 @@
 
 (use-package ivy
   :ensure t
-  :config (setq ivy-use-selectable-prompt t))
+  :diminish
+  :bind (("C-c C-r" . ivy-resume)
+         ("C-x B" . ivy-switch-buffer-other-window))
+  :custom
+  (ivy-count-format "(%d/%d) ")
+  (ivy-display-style 'fancy)
+  (ivy-use-virtual-buffers t)
+  ;; needed for fuzzy matching (see https://oremacs.com/2016/01/06/ivy-flx/)
+  (ivy-re-builders-alist
+   '((t . ivy--regex-fuzzy)))
+  (ivy-initial-inputs-alist nil)
+  ;; todo not really needed?
+  (ivy-use-selectable-prompt t)
+  :config (ivy-mode))
+
+(use-package ivy-rich
+  :ensure t
+  :after ivy
+  :custom
+  (ivy-virtual-abbreviate 'full
+                          ivy-rich-switch-buffer-align-virtual-buffer t
+                          ivy-rich-path-style 'abbrev)
+  :config
+  (ivy-set-display-transformer 'ivy-switch-buffer
+                               'ivy-rich-switch-buffer-transformer))
+
 
 ;; (use-package jabber
 ;;   :ensure t
@@ -497,21 +530,14 @@
 
 (use-package sr-speedbar :ensure t)
 
-;; (use-package swiper
-;;   :ensure t
-;;   :config
-;;   (ivy-mode 1))
-
+(use-package swiper
+  :ensure t
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)))
   ;; (bind-keys :map swiper-map
   ;;            ("C-." (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'symbol))))))
   ;;            ((kbd "M-.") (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'word))))))
-
-  ;; :bind (("C-s" . swiper))
-
-(use-package counsel :ensure t)
-  ;; :bind (("C-h v" . counsel-describe-variable)
-  ;;        ("C-h f" . counsel-describe-function)
-  ;;        ("C-h s" . counsel-info-lookup-symbol)))
 
 ;; requires semantic-mode to be enabled
 (use-package stickyfunc-enhance :ensure t)
