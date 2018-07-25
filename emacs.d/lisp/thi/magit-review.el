@@ -55,6 +55,34 @@
     (magit-git-command (format "git review %s" review-args))))
 
 
+(defun magit-review-upload-change2 (topic reviewers)
+  "abc"
+  (interactive "Stopic name:\nSreviewers")
+  (message (format "topicname:%s reviewers:%s" topic reviewers)))
+
+
+(defvar magit-review-download3-topic-history nil)
+(defvar magit-review-download3-reviewers-history nil)
+
+(defun magit-review-uplaod-change3 (topic reviewers)
+  ;; todo ivy like completion
+  (interactive (list
+                ;; todo default value: most recent change in current repo
+                ;; (see help text of ivy-completing-read)
+                (ivy-completing-read "Topic: "
+                                     magit-review-download3-topic-history
+                                     nil
+                                     nil
+
+
+                                     )
+                ;; todo sort words alphabetically
+                (ivy-completing-read "Reviewers: "
+                                     magit-review-download3-reviewers-history
+                                     nil
+                                     nil)))
+  (message (format "topicname:%s reviewers:%s" topic reviewers)))
+
 ;; (defun magit-gitreview-test ()
 ;;   (interactive)
 ;;   ;; (let* ((approver (cdr-safe (assoc 'by approval)))
