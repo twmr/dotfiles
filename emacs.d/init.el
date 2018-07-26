@@ -453,6 +453,11 @@
   (ivy-use-selectable-prompt t)
   :config (ivy-mode))
 
+(use-package ivy-hydra
+  ;; type C-o to see hydra help in completion list
+  :ensure t
+  :after ivy)
+
 (use-package ivy-rich
   :ensure t
   :after ivy
