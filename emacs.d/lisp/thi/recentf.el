@@ -27,7 +27,7 @@
          (filename-list
           (remove-duplicates (mapcar #'car file-assoc-list)
                              :test #'string=))
-         (filename (ido-completing-read "Choose recent file: "
+         (filename (ivy-completing-read "Choose recent file: "
                                         filename-list nil t)))
     (when filename
       (find-file (cdr (assoc filename file-assoc-list))))))
@@ -46,7 +46,7 @@
          (dirname-list
           (remove-duplicates (mapcar #'car dir-assoc-list)
                              :test #'string=)))
-    (dired (ido-completing-read "Choose recent dir: "
+    (dired (ivy-completing-read "Choose recent dir: "
                                 dirname-list
                                 nil
                                 t))))
