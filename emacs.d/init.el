@@ -34,11 +34,24 @@
 
 ;; TODO try to get rid of the custom.el file, which is hard to keep in version control
 ;; see https://github.com/jwiegley/use-package/pull/508
-(setq custom-file (concat thi::config-dir "/custom.el"))
+;; see https://www.reddit.com/r/emacs/comments/53zpv9/how_do_i_get_emacs_to_stop_adding_custom_fields/
+;; (setq custom-file (concat thi::config-dir "/custom.el"))
+(setq custom-file "/dev/null")
 
-(load custom-file 'noerror)
+;; (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 (mkdir (concat thi::cache-file-dir "/backups") t)
+
+;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
+;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
+(defvar thi::theme 'sanityinc-tomorrow-night)
+;; (defvar thi::theme 'solarized-light)
+;; (defvar thi::theme 'tango-dark)
+
+;; (defvar thi::theme
+;;   (if (string= system-name "dirac")
+;;       'solarized-dark
+;;     'solarized-light))
 
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
@@ -723,29 +736,22 @@
     (add-hook 'TeX-mode-hook 'zotelo-minor-mode)))
 
 (use-package color-theme-sanityinc-tomorrow :ensure t)
-(use-package smart-mode-line :ensure t)
 
-;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
-;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
-(defvar thi::theme 'sanityinc-tomorrow-night)
-;; (defvar thi::theme 'solarized-light)
-;; (defvar thi::theme 'tango-dark)
-
-;; (defvar thi::theme
-;;   (if (string= system-name "dirac")
-;;       'solarized-dark
-;;     'solarized-light))
-(if (daemonp)
-    (add-hook 'after-make-frame-functions
-              '(lambda (f)
-                 (with-selected-frame f
-                   (when (window-system f)
-                     (tool-bar-mode -1)
-                     (load-theme thi::theme t)
-                     (sml/setup)))))
-  (progn
-    (load-theme thi::theme t)
-    (sml/setup)))
+(use-package smart-mode-line :ensure t
+  :custom
+  (sml/no-confirm-load-theme t)
+  :config
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                '(lambda (f)
+                   (with-selected-frame f
+                     (when (window-system f)
+                       (tool-bar-mode -1)
+                       (load-theme thi::theme t)
+                       (sml/setup)))))
+    (progn
+      (load-theme thi::theme t)
+      (sml/setup))))
 
 (with-eval-after-load 'files
   (setq backup-directory-alist `(("." . ,(concat thi::cache-file-dir
