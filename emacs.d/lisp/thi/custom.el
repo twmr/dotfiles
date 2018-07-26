@@ -29,7 +29,6 @@
  '(ido-max-window-height 30)
  '(ido-use-faces t)
  '(jedi:get-in-function-call-delay 0.4)
- '(magit-completing-read-function 'magit-ido-completing-read)
  '(magit-status-buffer-switch-function 'switch-to-buffer t)
  '(magit-use-overlays nil)
  '(matlab-indent-level 2)

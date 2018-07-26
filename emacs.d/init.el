@@ -179,11 +179,8 @@
 (use-package ssh-config-mode :ensure t)
 
 (use-package magit :ensure t
-  :init
-  (progn
-    (setq magit-completing-read-function 'ivy-completing-read)
-    )
-  )
+  :custom
+  (magit-completing-read-function 'ivy-completing-read))
 
 (use-package magit-gerrit :ensure t
   :if (string= system-name "PC-16609")
