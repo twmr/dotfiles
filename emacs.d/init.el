@@ -547,8 +547,6 @@
 
 (use-package python-switch-quotes :ensure t :defer t)
 
-(use-package smex :ensure t)
-
 (use-package sr-speedbar :ensure t)
 
 (use-package swiper
