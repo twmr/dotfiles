@@ -517,3 +517,13 @@ function genpasswd() {
     [ "$tmp" = "" ] && tmp=16
     /usr/bin/tr -dc "A-Za-z0-9_!@=" < /dev/urandom | head -c ${tmp} | xargs
 }
+
+function ec() {
+    if [ "$(emacsclient -e '(< 1 (length (frame-list)))')" = "nil" ]; then
+        # no frame are open
+        emacsclient -n -c $*
+    else
+        emacsclient -n -c $*
+        #emacsclient -n $*
+    fi
+}
