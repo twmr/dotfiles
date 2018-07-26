@@ -32,7 +32,10 @@
              "~/sandbox/unstable/jobqueue"
              ))))
 
+;; TODO try to get rid of the custom.el file, which is hard to keep in version control
+;; see https://github.com/jwiegley/use-package/pull/508
 (setq custom-file (concat thi::config-dir "/custom.el"))
+
 (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 (mkdir (concat thi::cache-file-dir "/backups") t)
