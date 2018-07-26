@@ -445,7 +445,8 @@
   (ivy-use-virtual-buffers t)
   ;; needed for fuzzy matching (see https://oremacs.com/2016/01/06/ivy-flx/)
   (ivy-re-builders-alist
-   '((t . ivy--regex-fuzzy)))
+   ;; '((t . ivy--regex-fuzzy)))
+   '((t . ivy--regex-plus)))
   (ivy-initial-inputs-alist nil)
   ;; todo not really needed?
   (ivy-use-selectable-prompt t)
