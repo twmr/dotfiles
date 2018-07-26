@@ -25,9 +25,6 @@
  '(global-eldoc-mode nil)
  '(grep-find-ignored-directories
    '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "build"))
- '(ido-auto-merge-delay-time 2.7)
- '(ido-max-window-height 30)
- '(ido-use-faces t)
  '(jedi:get-in-function-call-delay 0.4)
  '(magit-status-buffer-switch-function 'switch-to-buffer t)
  '(magit-use-overlays nil)

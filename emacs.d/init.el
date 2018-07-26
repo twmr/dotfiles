@@ -425,6 +425,15 @@
                "\\(^\\s-*(use-package +\\)\\(\\_<.+\\_>\\)" 2)))
   (add-hook 'emacs-lisp-mode-hook #'jcs-use-package))
 
+(use-package ido
+  :disabled t
+  :custom
+  (ido-auto-merge-delay-time 2.7)
+  (ido-max-window-height 30)
+  (ido-use-faces t)
+  :config
+  (load "thi/ido"))
+
 (use-package ivy
   :ensure t
   :diminish
@@ -745,7 +754,6 @@
 (load "thi/vc")
 (load "thi/recentf")
 (load "thi/bindings")
-(load "thi/ido")
 (load "thi/mail")
 (load "thi/ccmode")
 ;; TODO eval-after-loadify
