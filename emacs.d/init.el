@@ -435,8 +435,14 @@
   (load "thi/ido"))
 
 (use-package ivy
+  ;; see https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
   :ensure t
   :diminish
+  ;; nice things about ivy:
+  ;; *) to keep the completion buffer open (even after a candidate was selected) type
+  ;;    (see http://oremacs.com/swiper/#example---define-a-new-command-with-several-actions)
+  ;;    C-c C-o  (opens an ivy occur buffer)
+  ;;    now type j and k for naviation and oo for jumping to the selection
   :bind (("C-c C-r" . ivy-resume)
          ("C-x B" . ivy-switch-buffer-other-window))
   :custom
