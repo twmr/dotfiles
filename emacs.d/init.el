@@ -442,6 +442,7 @@
   :custom
   (ivy-count-format "(%d/%d) ")
   (ivy-display-style 'fancy)
+  (ivy-height 15)
   (ivy-use-virtual-buffers t)
   ;; needed for fuzzy matching (see https://oremacs.com/2016/01/06/ivy-flx/)
   (ivy-re-builders-alist
