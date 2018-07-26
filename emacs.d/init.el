@@ -572,8 +572,8 @@
             ;; ;; needed for the ignore files feature in .projectile (see https://emacs.stackexchange.com/a/16964/2761)
             ;; (setq projectile-indexing-method 'native)
 
-            ;; (setq projectile-completion-system 'ivy)
-            (setq projectile-completion-system 'ido)
+            (setq projectile-completion-system 'ivy)
+            ;; (setq projectile-completion-system 'ido)
             ;; (setq projectile-switch-project-action 'projectile-find-dir)
 
             ;; With this setting, once you have selected your project, you
