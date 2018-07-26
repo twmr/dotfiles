@@ -59,7 +59,7 @@
   :config
   (setq paradox-execute-asynchronously t))
 
-(use-package paredit-mode :ensure t)
+(use-package paredit :ensure t)
 
 (use-package ace-jump-mode :ensure t :defer t
   :init
