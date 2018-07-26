@@ -786,6 +786,9 @@
 ;; ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
 ;; (add-hook 'after-init-hook #'global-discover-mode)
 ;; (add-hook 'after-init-hook #'helm-projectile-on)
-(add-hook 'after-init-hook #'persp-mode)
+
+;; use the desktop-save infrastructure, which I don't like
+;; can this be disabled somehow?
+;; (add-hook 'after-init-hook #'persp-mode)
 
 ;;; init.el ends here
