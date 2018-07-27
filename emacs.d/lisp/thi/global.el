@@ -149,6 +149,7 @@
                 ("\\.gp$" . gnuplot-mode)
                 ("pylintrc" . conf-mode)
                 ("\\.service$" . conf-mode)
+                ("Dockerfile" . dockefile-mode)
                 )
               auto-mode-alist))
 
