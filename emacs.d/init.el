@@ -460,7 +460,9 @@
   ;;    C-c C-o  (opens an ivy occur buffer)
   ;;    now type j and k for naviation and oo for jumping to the selection
   :bind (("C-c C-r" . ivy-resume)
-         ("C-x B" . ivy-switch-buffer-other-window))
+         ("C-x B" . ivy-switch-buffer-other-window)
+         :map ivy-minibuffer-map
+         ("TAB" . ivy-next-line))
   :custom
   (ivy-count-format "(%d/%d) ")
   (ivy-display-style 'fancy)
