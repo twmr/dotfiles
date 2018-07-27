@@ -160,7 +160,7 @@ function gsvr() { git svn rebase $* }
 function gp() { git push $* }
 function gc() { git commit -m "$*" }
 function gcl() { git clone "$*" }
-function gpl() { git pull $* }
+function gpl() { git pull --recurse-submodules=yes $* }
 function gps() { git push $* }
 function gsr() { git svn rebase $* }
 function gri() { git rebase -i $* }
