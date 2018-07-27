@@ -681,7 +681,14 @@
        :ensure t))
 
 (use-package protobuf-mode
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'protobuf-mode-hook
+            (lambda ()
+              (progn
+                (setq c-basic-offset 4)
+                (setq tab-width 4)))))
+
 
 (use-package wgrep-ag :ensure t)
 
