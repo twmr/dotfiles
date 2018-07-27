@@ -80,7 +80,8 @@ enable=import-error,
        # https://github.com/PyCQA/pylint/issues/210
        unused-variable,
        undefined-variable,
-       too-few-format-args
+       too-few-format-args,
+       syntax-error,
 
 # Things we'd like to enable someday:
 # redefined-outer-name (requires a bunch of work to clean up our code first)
