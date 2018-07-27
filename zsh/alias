@@ -109,6 +109,10 @@ function nestedrm() {
 }
 
 alias removepyc='rm -f `find . -iname "*.pyc"` && rm -rf `find . -iname "__pycache__"`'
+
+#FIXME don't create pyc files as superuser
+alias removepycsudo='sudo rm -f `find . -iname "*.pyc"` && sudo rm -rf `find . -iname "__pycache__"`'
+
 alias removelog='rm -f`find . -iname "*.log"`'
 #alias removeng='rm -f `find . -iname "ng.ini" \
 #                           -o -iname "ng.prof" \
