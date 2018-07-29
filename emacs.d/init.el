@@ -38,6 +38,11 @@
 ;; (setq custom-file (concat thi::config-dir "/custom.el"))
 (setq custom-file "/dev/null")
 
+(setq package-archives
+   '(("melpa" . "http://melpa.org/packages/")
+     ("gnu" . "http://elpa.gnu.org/packages/")
+     ("elpy" . "http://jorgenschaefer.github.io/packages/")))
+
 ;; (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
 (mkdir (concat thi::cache-file-dir "/backups") t)
