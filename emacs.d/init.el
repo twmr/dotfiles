@@ -153,14 +153,15 @@
     (add-hook 'sh-mode-hook 'thi::tabs-are-less-evil)
     ))
 
-(use-package git-commit :ensure t
+(use-package git-commit
+  :ensure t
   :bind (:map git-commit-mode-map
-              ("C-c C-f" . git-commit-fix-redmine-insert)
-              ("C-c C-r" . git-commit-related-redmine-insert))
-  :init
+              ("C-c C-f" . git-commit-fix-jira-insert)
+              ("C-c C-r" . git-commit-related-jira-insert))
+  :config
   (progn
-    (defun git-commit-insert-redmine-header (header ticketnumber)
-      (setq header (format "%s: #%s" header ticketnumber))
+    (defun git-commit-insert-jira-header (header ticket)
+      (setq header (format "%s: %s" header ticket))
       (save-excursion
         (goto-char (point-max))
         (cond ((re-search-backward "^[-a-zA-Z]+: [^<]+? <[^>]+>" nil t)
@@ -176,16 +177,16 @@
         (unless (or (eobp) (= (char-after) ?\n))
           (insert ?\n))))
 
-    (defun git-commit-read-redmine-ticket ()
-      (list (read-string "Ticket Number: ")))
+    (defun git-commit-read-jira-ticket ()
+      (list (read-string "Jira Ticket: ")))
 
-    (defun git-commit-fix-redmine-insert (ticketnumber)
-      (interactive (git-commit-read-redmine-ticket))
-      (git-commit-insert-redmine-header "Fixes" ticketnumber))
+    (defun git-commit-fix-jira-insert (ticket)
+      (interactive (git-commit-read-jira-ticket))
+      (git-commit-insert-jira-header "Fixes" ticket))
 
-    (defun git-commit-related-redmine-insert (ticketnumber)
-      (interactive (git-commit-read-redmine-ticket))
-      (git-commit-insert-redmine-header "Related" ticketnumber))))
+    (defun git-commit-related-jira-insert (ticket)
+      (interactive (git-commit-read-jira-ticket))
+      (git-commit-insert-jira-header "Related" ticket))))
 
 
 ;; TODO help-mode+ is unavailable??
