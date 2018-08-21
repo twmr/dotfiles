@@ -585,6 +585,8 @@
 (use-package stickyfunc-enhance :ensure t)
 
 (use-package undo-tree
+  ;; C-/ undo (without the undo tree graph) !!!
+  ;; M-_ redo (without the undo tree graph) !!!
   :ensure t
   :defer t
   :config (add-hook 'after-init-hook #'global-undo-tree-mode))
