@@ -144,6 +144,8 @@
   (elpy-enable))
 
 (use-package ethan-wspace :ensure t :defer t
+  :custom
+  (mode-require-final-newline nil)
   :init
   (progn
     (add-hook 'prog-mode-hook #'ethan-wspace-mode 1)
