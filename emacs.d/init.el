@@ -66,9 +66,11 @@
       `(load ,(concat thi::config-dir "/" file)))))
 
 ;; Bootstrap `use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+(if (fboundp 'package-installed-p)
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+  (require 'use-package))
 
 (eval-when-compile
   (require 'use-package))
@@ -77,6 +79,8 @@
 ;; (use-package anaconda-mode :ensure t)
 
 (use-package paradox :ensure t
+  :custom
+  (paradox-github-token t)
   :config
   (setq paradox-execute-asynchronously t))
 
@@ -87,6 +91,11 @@
   (progn
     (autoload 'ace-jump-mode "ace-jump-mode" nil t)
     (bind-key "C-." 'ace-jump-mode)))
+
+(use-package all-the-icons-ivy
+  :ensure t
+  :config
+  (all-the-icons-ivy-setup))
 
 ;; (use-package auto-complete :ensure t
 ;;   :init
@@ -127,17 +136,17 @@
 ;;  :config
 ;;  (add-hook 'python-mode-hook 'anaconda-mode))
 
-(use-package counsel
-  :ensure t
-  :after ivy
-  ;; :bind (("C-h v" . counsel-describe-variable)
-  ;;        ("C-h f" . counsel-describe-function)
-  ;;        ("C-h s" . counsel-info-lookup-symbol)))
-  :config (progn
-            (counsel-mode)
-            (ivy-set-actions  ;; hit M-o to see available actions
-             'counsel-find-file
-             '(("s" magit-status "gitstat")))))
+;; (use-package counsel
+;;   :ensure t
+;;   :after ivy
+;;   ;; :bind (("C-h v" . counsel-describe-variable)
+;;   ;;        ("C-h f" . counsel-describe-function)
+;;   ;;        ("C-h s" . counsel-info-lookup-symbol)))
+;;   :config (progn
+;;             (counsel-mode)
+;;             (ivy-set-actions  ;; hit M-o to see available actions
+;;              'counsel-find-file
+;;              '(("s" magit-status "gitstat")))))
 
 (use-package cython-mode :ensure t :defer t)
 
@@ -207,6 +216,7 @@
 (use-package ssh-config-mode :ensure t)
 
 (use-package magit
+  ;; bindings: C-c M-g: magit-file-popup (use it in a buffer)
   :ensure t
   :custom
   (magit-completing-read-function 'ivy-completing-read))
@@ -479,9 +489,9 @@
   (ivy-height 15)
   (ivy-use-virtual-buffers t)
   ;; needed for fuzzy matching (see https://oremacs.com/2016/01/06/ivy-flx/)
-  (ivy-re-builders-alist
-   ;; '((t . ivy--regex-fuzzy)))
-   '((t . ivy--regex-plus)))
+  ;; (ivy-re-builders-alist
+  ;;  ;; '((t . ivy--regex-fuzzy)))
+  ;;  '((t . ivy--subseq-fuzzy)))
   (ivy-initial-inputs-alist nil)
   ;; todo not really needed?
   (ivy-use-selectable-prompt t)
@@ -492,16 +502,16 @@
   :ensure t
   :after ivy)
 
-(use-package ivy-rich
-  :ensure t
-  :after ivy
-  :custom
-  (ivy-virtual-abbreviate 'full
-                          ivy-rich-switch-buffer-align-virtual-buffer t
-                          ivy-rich-path-style 'abbrev)
-  :config
-  (ivy-set-display-transformer 'ivy-switch-buffer
-                               'ivy-rich-switch-buffer-transformer))
+;; (use-package ivy-rich
+;;   :ensure t
+;;   :after ivy
+;;   :custom
+;;   (ivy-virtual-abbreviate 'full
+;;                           ivy-rich-switch-buffer-align-virtual-buffer t
+;;                           ivy-rich-path-style 'abbrev)
+;;   :config
+;;   (ivy-set-display-transformer 'ivy-switch-buffer
+;;                                'ivy-rich-switch-buffer-transformer))
 
 
 ;; (use-package jabber
@@ -614,7 +624,6 @@
             ;; (setq projectile-indexing-method 'native)
 
             (setq projectile-completion-system 'ivy)
-            ;; (setq projectile-completion-system 'ido)
             ;; (setq projectile-switch-project-action 'projectile-find-dir)
 
             ;; With this setting, once you have selected your project, you
@@ -661,6 +670,16 @@
    '((emacs-lisp . nil)
      (gnuplot . t)
      (python . t))))
+
+;; (use-package org-projectile
+;;   :bind (("C-c n p" . org-projectile-project-todo-completing-read)
+;;          ("C-c c" . org-capture))
+;;   :config
+;;   (progn
+;;     (setq org-projectile-projects-file "~/projects.org")
+;;     (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+;;     (push (org-projectile-project-todo-entry) org-capture-templates))
+;;   :ensure t)
 
 (use-package pdf-tools
   :ensure t
@@ -803,6 +822,76 @@
 (load "thi/term")
 (load "thi/magit-review")
 
+
+;; taken from http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html
+;; if (aspell installed) { use aspell}
+;; else if (hunspell installed) { use hunspell }
+;; whatever spell checker I use, I always use English dictionary
+;; I prefer use aspell because:
+;; 1. aspell is older
+;; 2. looks Kevin Atkinson still get some road map for aspell:
+;; @see http://lists.gnu.org/archive/html/aspell-announce/2011-09/msg00000.html
+;; (defun flyspell-detect-ispell-args (&optional run-together)
+;;   "if RUN-TOGETHER is true, spell check the CamelCase words."
+;;   (let (args)
+;;     (cond
+;;      ((string-match  "aspell$" ispell-program-name)
+;;       ;; Force the English dictionary for aspell
+;;       ;; Support Camel Case spelling check (tested with aspell 0.6)
+;;       (setq args (list "--sug-mode=ultra" "--lang=en_US"))
+;;       (if run-together
+;;           (setq args (append args '("--run-together"))))
+;;      ((string-match "hunspell$" ispell-program-name)
+;;       ;; Force the English dictionary for hunspell
+;;       (setq args "-d en_US"))
+;;      args))))
+
+(cond
+ ((executable-find "aspell")
+  ;; you may also need `ispell-extra-args'
+  (setq ispell-program-name "aspell"))
+ ((executable-find "hunspell")
+  (setq ispell-program-name "hunspell")
+
+  ;; Please note that `ispell-local-dictionary` itself will be passed to hunspell cli with "-d"
+  ;; it's also used as the key to lookup ispell-local-dictionary-alist
+  ;; if we use different dictionary
+  (setq ispell-local-dictionary "en_US")
+  (setq ispell-local-dictionary-alist
+        '(("en_US" "[[:alpha:]]" "[^[:alpha:]]" "[']"
+           nil ("-d" "en_US") nil utf-8))))
+ (t (setq ispell-program-name nil)))
+
+;; ispell-cmd-args is useless, it's the list of *extra* arguments we will append to the ispell process when "ispell-word" is called.
+;; ispell-extra-args is the command arguments which will *always* be used when start ispell process
+;; Please note when you use hunspell, ispell-extra-args will NOT be used.
+;; Hack ispell-local-dictionary-alist instead.
+;; (setq-default ispell-extra-args (flyspell-detect-ispell-args t))
+;; ;; (setq ispell-cmd-args (flyspell-detect-ispell-args))
+;; (defadvice ispell-word (around my-ispell-word activate)
+;;   (let ((old-ispell-extra-args ispell-extra-args))
+;;     (ispell-kill-ispell t)
+;;     (setq ispell-extra-args (flyspell-detect-ispell-args))
+;;     ad-do-it
+;;     (setq ispell-extra-args old-ispell-extra-args)
+;;     (ispell-kill-ispell t)))
+
+;; (defadvice flyspell-auto-correct-word (around my-flyspell-auto-correct-word activate)
+;;   (let ((old-ispell-extra-args ispell-extra-args))
+;;     (ispell-kill-ispell t)
+;;     ;; use emacs original arguments
+;;     (setq ispell-extra-args (flyspell-detect-ispell-args))
+;;     ad-do-it
+;;     ;; restore our own ispell arguments
+;;     (setq ispell-extra-args old-ispell-extra-args)
+;;     (ispell-kill-ispell t)))
+
+;; (defun text-mode-hook-setup ()
+;;   ;; Turn off RUN-TOGETHER option when spell check text-mode
+;;   (setq-local ispell-extra-args (flyspell-detect-ispell-args)))
+;; (add-hook 'text-mode-hook 'text-mode-hook-setup)
+
+
 (global-eldoc-mode -1)
 
 (require 'url-tramp)
@@ -819,5 +908,13 @@
 ;; use the desktop-save infrastructure, which I don't like
 ;; can this be disabled somehow?
 ;; (add-hook 'after-init-hook #'persp-mode)
+
+;; testing https://github.com/abo-abo/swiper/pull/1518
+;; (try "https://raw.githubusercontent.com/MaskRay/swiper/8ca04e88c0c536e6ac8b169b37eba74892678f82/ivy.el")
+;; (require 'ivy)
+;; (setq ivy-re-builders-alist
+;;    '((t . ivy--subseq-fuzzy)))
+
+
 
 ;;; init.el ends here
