@@ -791,7 +791,6 @@
 (load "thi/global")
 (load "thi/progmodes")
 (load "thi/danjou")
-(load "thi/vc")
 (load "thi/recentf")
 (load "thi/bindings")
 (load "thi/mail")
