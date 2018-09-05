@@ -256,6 +256,7 @@
                      (conf-mode . emacs)
                      (compilation-mode . emacs)
                      (dashboard-mode . emacs)
+                     (deadgrep-mode . emacs)
                      (dired-mode . emacs)
                      (dockerfile-mode . emacs)
                      (emacs-lisp-mode . emacs)
