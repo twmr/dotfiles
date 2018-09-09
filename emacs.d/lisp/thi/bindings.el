@@ -75,8 +75,8 @@
 ;;   (key-chord-define-global "fg" 'iy-go-to-char))
 ;; (key-chord-define-global "df" 'iy-go-to-char-backward)
 
-;; (global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "C-x C-f") 'ido-find-file)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+;; (global-set-key (kbd "C-x C-f") 'ido-find-file)
 (global-set-key (kbd "C-x f") 'projectile-find-file)
 
 
