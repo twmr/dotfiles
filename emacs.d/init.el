@@ -226,6 +226,19 @@
   (global-page-break-lines-mode))
 
 (use-package python
+  :custom
+  ;; django style:
+  ;;
+  ;; \"\"\"
+  ;; Process foo, return bar.
+  ;; \"\"\"
+
+  ;; \"\"\"
+  ;; Process foo, return bar.
+
+  ;; If processing fails throw ProcessingError.
+  ;; \"\"\"
+  (python-fill-docstring-style 'django)
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
