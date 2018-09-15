@@ -775,6 +775,8 @@
     (window-numbering-mode 1))
   )
 
+(use-package yaml-mode :ensure t :defer t)
+
 (use-package yasnippet :ensure t :defer t)
 
 (use-package zop-to-char
