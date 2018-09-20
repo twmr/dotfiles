@@ -219,6 +219,8 @@
   ;; bindings: C-c M-g: magit-file-popup (use it in a buffer)
   :ensure t
   :custom
+  (magit-repository-directories `(("~/gitrepos" . 1)
+                                  ("~/.emacs.d" . 0)))
   (magit-completing-read-function 'ivy-completing-read))
 
 (use-package page-break-lines :ensure t :defer t
@@ -293,6 +295,7 @@
                      (image-mode . emacs)
                      (json-mode . emacs)
                      (makey-key-mode . emacs)
+                     (magit-repolist-mode . emacs)
                      (org-mode . emacs)
                      (paradox-menu-mode . emacs)
                      (protobuf-mode . emacs)

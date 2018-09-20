@@ -1,6 +1,5 @@
 ;;; It's Magit! An Emacs mode for Git.
 
-(setq magit-repository-directories `(,"~/gitrepos" "~/.emacs.d"))
 ;; (setq magit-commit-signoff nil)
 ;; (setq magit-remote-ref-format 'remote-slash-branch)
 (setq magit-completing-read-function 'magit-ido-completing-read)
