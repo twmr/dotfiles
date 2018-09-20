@@ -92,10 +92,10 @@
     (autoload 'ace-jump-mode "ace-jump-mode" nil t)
     (bind-key "C-." 'ace-jump-mode)))
 
-(use-package all-the-icons-ivy
-  :ensure t
-  :config
-  (all-the-icons-ivy-setup))
+;; (use-package all-the-icons-ivy
+;;   :ensure t
+;;   :config
+;;   (all-the-icons-ivy-setup))
 
 ;; (use-package auto-complete :ensure t
 ;;   :init
