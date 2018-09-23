@@ -9,7 +9,6 @@
           (lambda ()
             (setq yas/dont-activate t)))
             ;; (magit-filenotify-mode 1)))
-;; (add-hook 'magit-mode-hook 'turn-on-magit-svn)
 
 ;; https://github.com/magit/magit/issues/2683
 (defun my-magit-hunk-recenter-top ()
