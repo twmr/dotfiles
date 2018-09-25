@@ -30,6 +30,7 @@
              "~/sandbox/unstable/configdb"
              "~/sandbox/unstable/pyhwctrl"
              "~/sandbox/unstable/jobqueue"
+             "~/Nextcloud/study_math/"
              ))))
 
 ;; TODO try to get rid of the custom.el file, which is hard to keep in version control
