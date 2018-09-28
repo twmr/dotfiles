@@ -762,6 +762,8 @@
 (use-package deadgrep :ensure t
   :bind ("<f7>" . deadgrep))
 
+(use-package smex :ensure t :config (load "thi/ido.el"))
+
 (use-package visual-fill-column :ensure t)
 
 (use-package which-key :ensure t

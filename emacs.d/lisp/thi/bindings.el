@@ -51,8 +51,8 @@
 
 ;; smex stuff
 ;; (global-set-key (kbd "M-x") 'helm-M-x) ;; i don't like this
-;; (global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "M-x") 'smex)
+;; (global-set-key (kbd "M-x") 'counsel-M-x)
 ;; (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 ;; This is your old M-x.
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
