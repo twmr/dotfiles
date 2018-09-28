@@ -937,6 +937,10 @@
 ;; (setq ivy-re-builders-alist
 ;;    '((t . ivy--subseq-fuzzy)))
 
+;; TODO move this into the use-package macros above
+(with-eval-after-load 'flycheck
+   (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
 
 ;;; init.el ends here
+(put 'downcase-region 'disabled nil)
