@@ -5,6 +5,8 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
+export ZSH_THEME=bureau
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
@@ -63,7 +65,7 @@ done
 . ~/.zsh/notebook
 . ~/.zsh/keybindings
 #. ~/.zsh/opts
-. ~/.zsh/theme.zsh-theme
+# . ~/.zsh/theme.zsh-theme
 . ~/.zsh/emacs
 
 if [ -d ~/.zsh.d/ -a ! "$(ls -A ~/.zsh.d/ 2> /dev/null)" = "" ]; then
@@ -74,9 +76,6 @@ if [ -d ~/.zsh.d/ -a ! "$(ls -A ~/.zsh.d/ 2> /dev/null)" = "" ]; then
        . $fname
    done
 fi
-
-
-
 
 setopt cdablevars # support for $> dotf # changes CWD
 setopt interactivecomments # pound sign in interactive prompt
