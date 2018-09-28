@@ -353,7 +353,7 @@
       ("g" text-scale-increase "in")
       ("l" text-scale-decrease "out"))
 
-    (defhydra hydra-shift (global-map "<f4>")
+    (defhydra hydra-shift (global-map "<f6>")
       "shift"
       ("h" python-indent-shift-left "left")
       ("l" python-indent-shift-right "right"))
