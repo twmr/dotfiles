@@ -174,6 +174,10 @@
   :bind (:map git-commit-mode-map
               ("C-c C-f" . git-commit-fix-jira-insert)
               ("C-c C-r" . git-commit-related-jira-insert))
+  :custom
+  ;; according to https://chris.beams.io/posts/git-commit/
+  (git-commit-summary-max-length 50)
+  (git-commit-fill-column 72)
   :config
   (progn
     (defun git-commit-insert-jira-header (header ticket)
