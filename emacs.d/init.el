@@ -212,6 +212,16 @@
 ;; TODO help-mode+ is unavailable??
 ;; (use-package help-mode+ :ensure t)
 
+(use-package helpful :ensure t
+  :config
+  ;; Note that the built-in `describe-function' includes both functions
+  ;; and macros. `helpful-function' is functions only, so we provide
+  ;; `helpful-callable' as a drop-in replacement.
+  (global-set-key (kbd "C-h f") #'helpful-callable)
+
+  (global-set-key (kbd "C-h v") #'helpful-variable)
+  (global-set-key (kbd "C-h k") #'helpful-key))
+
 (use-package highlight-function-calls :ensure t
   :config
   (add-hook 'emacs-lisp-mode-hook 'highlight-function-calls-mode))
@@ -295,6 +305,7 @@
                      (flycheck-error-list-mode . emacs)
                      (fundamental-mode . emacs)
                      (help-mode . emacs)
+                     (helpful-mode . emacs)
                      (image-dired-mode . emacs)
                      (image-dired-thumbnail-mode . emacs)
                      (image-mode . emacs)
