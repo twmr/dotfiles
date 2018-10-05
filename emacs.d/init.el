@@ -153,6 +153,12 @@
 
 (use-package dockerfile-mode :ensure t :defer t)
 
+(use-package eglot :ensure t
+  :config
+  (add-to-list 'eglot-server-programs
+               `(python-mode . ("pyls" "-v" "--tcp" "--host"
+                                "localhost" "--port" :autoport))))
+
 (use-package elpy :ensure t
   :init
   (elpy-enable))
