@@ -137,17 +137,17 @@
 ;;  :config
 ;;  (add-hook 'python-mode-hook 'anaconda-mode))
 
-;; (use-package counsel
-;;   :ensure t
-;;   :after ivy
-;;   ;; :bind (("C-h v" . counsel-describe-variable)
-;;   ;;        ("C-h f" . counsel-describe-function)
-;;   ;;        ("C-h s" . counsel-info-lookup-symbol)))
-;;   :config (progn
-;;             (counsel-mode)
-;;             (ivy-set-actions  ;; hit M-o to see available actions
-;;              'counsel-find-file
-;;              '(("s" magit-status "gitstat")))))
+(use-package counsel
+  :ensure t
+  :after ivy
+  ;; :bind (("C-h v" . counsel-describe-variable)
+  ;;        ("C-h f" . counsel-describe-function)
+  ;;        ("C-h s" . counsel-info-lookup-symbol)))
+  :config (progn
+            (counsel-mode)
+            (ivy-set-actions  ;; hit M-o to see available actions
+             'counsel-find-file
+             '(("s" magit-status "gitstat")))))
 
 (use-package cython-mode :ensure t :defer t)
 
