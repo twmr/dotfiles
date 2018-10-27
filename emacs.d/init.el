@@ -159,9 +159,9 @@
                `(python-mode . ("pyls" "-v" "--tcp" "--host"
                                 "localhost" "--port" :autoport))))
 
-(use-package elpy :ensure t
-  :init
-  (elpy-enable))
+;; (use-package elpy :ensure t
+;;   :init
+;;   (elpy-enable))
 
 (use-package ethan-wspace :ensure t :defer t
   :custom
