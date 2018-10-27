@@ -804,7 +804,10 @@
 
 (use-package yaml-mode :ensure t :defer t)
 
-(use-package yasnippet :ensure t :defer t)
+(use-package yasnippet :ensure t)
+
+;; for pdb snippet type tr[TAB] in a python-mode buffer
+(use-package yasnippet-snippets :ensure t)
 
 (use-package zop-to-char
   :ensure t
