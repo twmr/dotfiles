@@ -137,6 +137,10 @@
 ;;  :config
 ;;  (add-hook 'python-mode-hook 'anaconda-mode))
 
+
+(defun magit-status-action (x)
+  (magit-status x))
+
 (use-package counsel
   :ensure t
   :after ivy
@@ -146,8 +150,8 @@
   :config (progn
             (counsel-mode)
             (ivy-set-actions  ;; hit M-o to see available actions
-             'counsel-find-file
-             '(("s" magit-status "gitstat")))))
+             t
+             '(("s" magit-status-action "gitstat")))))
 
 (use-package cython-mode :ensure t :defer t)
 
