@@ -146,7 +146,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 
 elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
     prepath $HOME/bin
-    prepath $HOME/.cargo/bin
+    # prepath $HOME/.cargo/bin
     prepath /opt/emacs/bin
 
     # Ubuntu make installation of Ubuntu Make binary symlink
