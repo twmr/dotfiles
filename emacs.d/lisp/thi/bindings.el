@@ -178,3 +178,5 @@
 (global-set-key (kbd "C-c j") 'join-line-vim-style)
 (global-set-key (kbd "C-S-d") 'duplicate-line)
 (global-set-key "\M-;" 'comment-dwim-line)
+(global-set-key (kbd "C-S-j") 'move-line-down)
+(global-set-key (kbd "C-S-k") 'move-line-up)
