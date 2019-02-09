@@ -227,7 +227,6 @@ Works by adjusting the right margin."
   (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
       (comment-or-uncomment-region (line-beginning-position) (line-end-position))
     (comment-dwim arg)))
-(global-set-key "\M-;" 'comment-dwim-line)
 
 ;; taken from https://gist.github.com/mooz/890562
 ;; (defun my-reb-query-replace-regexp ()
@@ -350,3 +349,22 @@ buffer is not visiting a file."
       (find-file (concat "/sudo:root@localhost:"
                          (ido-read-file-name "Find file(as root): ")))
     (find-alternate-file (concat "/sudo:root@localhost:" buffer-file-name))))
+
+
+(defun kill-other-buffers ()
+    "Kill all other buffers."
+    (interactive)
+    (mapc 'kill-buffer
+          (delq (current-buffer)
+                (remove-if-not 'buffer-file-name (buffer-list)))))
+
+
+(defun duplicate-line ()
+  (interactive)
+  (let ((col (current-column)))
+    (move-beginning-of-line 1)
+    (kill-line)
+    (yank)
+    (newline)
+    (yank)
+    (move-to-column col)))

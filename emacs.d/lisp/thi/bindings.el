@@ -176,3 +176,5 @@
 (global-set-key (kbd "M-o") 'smart-open-line)
 (global-set-key (kbd "M-O") 'smart-open-line-above)
 (global-set-key (kbd "C-c j") 'join-line-vim-style)
+(global-set-key (kbd "C-S-d") 'duplicate-line)
+(global-set-key "\M-;" 'comment-dwim-line)
