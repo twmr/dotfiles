@@ -9,6 +9,8 @@
 ;;   - option for topic-name (with completion (my created topicnames))
 ;;   -
 
+(require 'magit)
+
 (global-set-key (kbd "C-x i") 'magit-review-popup)
 
 (magit-define-popup magit-review-popup
