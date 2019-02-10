@@ -65,10 +65,6 @@
 ;: Logical Behavour
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
-;; automatically adds marks
-(with-eval-after-load 'auto-mark
-  (global-auto-mark-mode 1))
-
 ;; If there is a tab, make it the size of 2 spaces
 ;; TODO Check if this causes problems with fgallina/python.el
 (setq-default tab-width 2)
