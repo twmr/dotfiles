@@ -4,16 +4,15 @@
 
 (require 'xdg)
 
-(dolist (p '("/lisp" "/lisp/vendor"))
-  (add-to-list 'load-path (expand-file-name
-                           (concat user-emacs-directory p))))
+(add-to-list 'load-path (expand-file-name
+                         (concat user-emacs-directory "/user-lisp")))
 
 (defvar thi::cache-file-dir
   (expand-file-name
    (concat (xdg-cache-home) "/emacs")))
 (defvar thi::config-dir
   (expand-file-name
-   (concat user-emacs-directory "/lisp/thi")))
+   (concat user-emacs-directory "/user-lisp")))
 (require 'cl-lib) ;; cl-delete-if-not, cl-loop
 (defvar thi::directory-list
   (cl-delete-if-not
@@ -23,7 +22,7 @@
            '("~/.zsh.d"
              "~/.zsh"
              "~/gitrepos/dotfiles/emacs.d"
-             "~/gitrepos/dotfiles/emacs.d/lisp/thi"
+             "~/gitrepos/dotfiles/emacs.d/user-lisp"
              "~/sandbox/unstable/expses"
              "~/sandbox/unstable/pocscripts"
              "~/sandbox/unstable/tools"
@@ -307,7 +306,9 @@
 
 (use-package fill-column-indicator :ensure t)
 (use-package flx :ensure t)
-(use-package flx-ido :ensure t)
+(use-package flx-ido :ensure t
+  :config
+  (flx-ido-mode))
 
 (use-package evil :ensure t
   :config (progn
@@ -524,7 +525,7 @@
   (ido-max-window-height 30)
   (ido-use-faces t)
   :config
-  (load "thi/ido"))
+  (load "thi-ido"))
 
 (use-package ivy
   ;; see https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
@@ -800,7 +801,7 @@
 (use-package deadgrep :ensure t
   :bind ("<f7>" . deadgrep))
 
-(use-package smex :ensure t :config (load "thi/ido.el"))
+(use-package smex :ensure t :config (load "thi-ido.el"))
 
 (use-package visual-fill-column :ensure t)
 
@@ -870,20 +871,20 @@
         `((".*" ,thi::cache-file-dir t))))
 
 
-(load "thi/defuns")
-(load "thi/global")
-(load "thi/progmodes")
-(load "thi/danjou")
-(load "thi/recentf")
-(load "thi/bindings")
-(load "thi/mail")
-(load "thi/ccmode")
+(load "thi-defuns")
+(load "thi-global")
+(load "thi-progmodes")
+(load "thi-danjou")
+(load "thi-recentf")
+(load "thi-bindings")
+(load "thi-mail")
+(load "thi-ccmode")
 ;; TODO eval-after-loadify
-;; (load "thi/latex")
-(load "thi/nxml")
-(load "thi/compilation")
-(load "thi/term")
-(load "thi/magit-review")
+;; (load "thi-latex")
+(load "thi-nxml")
+(load "thi-compilation")
+(load "thi-term")
+(load "thi-magit-review")
 
 
 ;; taken from http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html
