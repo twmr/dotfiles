@@ -6,3 +6,6 @@ $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
 
 aliases['dotf'] = ('cd', '~/gitrepos/dotfiles')
 aliases['gs'] = ('git', 'status')
+aliases['gg'] = ('git', 'grep')
+aliases['gd'] = ('git', 'diff')
+aliases['reload_xonshrc'] = ("source", "~/.xonshrc")
