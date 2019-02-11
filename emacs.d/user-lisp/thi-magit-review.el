@@ -29,14 +29,15 @@
 (magit-define-popup magit-review-upload-popup
   "Popup console for uploading a change."
   :man-page "git-review"
-  :options  '(
-              ;; add the possibility to cycle through a list of list of reviewers
-              (?r "reviewers"                        "--reviewer=")
+  ;; :options  '(
+  ;;             ;; add the possibility to cycle through a list of list of reviewers
+  ;;             (?r "reviewers"                        "--reviewer=")
 
-              (?t "topic"                            "--topic="))
-  :actions  '((?u "upload"  magit-review-upload-change)))
+  ;;             (?t "topic"                            "--topic="))
+  :actions  '((?u "upload"  magit-review-upload-change3)))
 
 (defvar magit-review-download-change-history nil)
+
 
 ;; https://magit.vc/manual/magit-popup/Defining-Prefix-and-Suffix-Commands.html#Defining-Prefix-and-Suffix-Commands
 (defun magit-review-download-change (change)
@@ -50,17 +51,21 @@
                                      nil)))
   (magit-git-command (format "git review -d %s" change)))
 
-(defun magit-review-upload-change ()
+(defun magit-review-upload-change2 ()
   (let (
         (review-args (string-join (magit-review-upload-arguments) " ")))
     (message (format "uploading change (%s)" review-args))
+
+
     (magit-git-command (format "git review %s" review-args))))
 
 
-(defun magit-review-upload-change2 (topic reviewers)
-  "abc"
-  (interactive "Stopic name:\nSreviewers")
-  (message (format "topicname:%s reviewers:%s" topic reviewers)))
+(defun magit-review-upload-change (&optional args)
+  (interactive (list (magit-review-upload-arguments)))
+  ;; (interactive "Stopic name:\nSreviewers")
+  (let (
+        (review-args (string-join (magit-review-upload-arguments) " ")))
+    (message (format "review args: %s" review-args))))
 
 
 (defvar magit-review-download3-topic-history nil)
@@ -83,7 +88,35 @@
                                      magit-review-download3-reviewers-history
                                      nil
                                      nil)))
-  (message (format "topicname:%s reviewers:%s" topic reviewers)))
+
+  (if (and (equal "" topic) (equal "" reviewers))
+      (magit-git-command "git review")
+    (magit-git-command (format
+                        "git review -t %s --reviewers %s"
+                        topic reviewers))))
+
+
+(defvar magit-review-completion-topic-history nil)
+(defvar magit-review-completion-reviewers-history nil)
+
+(defun mystuff(topic-name reviewers)
+  (interactive (list
+                (ivy-read "Enter the topic name (optional): "
+                          magit-review-completion-topic-history :sort nil)
+                (ivy-read "Enter the reviewers (optional): "
+                          magit-review-completion-reviewers-history :sort nil)))
+  (message (format "t %s r %s" topic-name reviewers)))
+
+
+  ;; (unless (null 'topic-name)
+  ;;   (message "topic defined"))
+  ;; (unless (null 'reviewers)
+  ;;   (message (format "rev defined %s" reviewers))))
+
+
+    ;; ;;   (push topic-name (cdr (last magit-review-download-change-history))))
+    ;; (message (format "cr returned %s" topic-name)))
+
 
 ;; (defun magit-gitreview-test ()
 ;;   (interactive)
