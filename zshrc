@@ -67,6 +67,9 @@ done
 #. ~/.zsh/opts
 # . ~/.zsh/theme.zsh-theme
 . ~/.zsh/emacs
+if [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
+    . ~/.zsh/fzf
+fi
 
 if [ -d ~/.zsh.d/ -a ! "$(ls -A ~/.zsh.d/ 2> /dev/null)" = "" ]; then
    # see https://superuser.com/questions/397307
@@ -82,18 +85,4 @@ setopt interactivecomments # pound sign in interactive prompt
 setopt nohup  # don't kill child processes of the current zsh when the zsh
               # process is killed
 
-# Setup fzf
-# TODO oneliner
-if [ -e $HOME/.fzf ]; then
-    fzfdir=$HOME/.fzf
-else
-    fzfdir=/usr/share/fzf
-fi
 
-# Auto-completion
-# ---------------
-[[ $- == *i* ]] && source "$fzfdir/shell/completion.zsh" 2> /dev/null
-
-# Key bindings
-# ------------
-source "$fzfdir/shell/key-bindings.zsh"

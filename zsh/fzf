@@ -1,0 +1,17 @@
+# Setup fzf
+# TODO oneliner
+if [ -e $HOME/.fzf ]; then
+    fzfdir=$HOME/.fzf
+else
+    fzfdir=/usr/share/fzf
+fi
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "$fzfdir/shell/completion.zsh" 2> /dev/null
+
+# Key bindings
+# ------------
+source "$fzfdir/shell/key-bindings.zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
