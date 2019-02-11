@@ -159,15 +159,18 @@
 (use-package dumb-jump :ensure t
   :custom
   (dumb-jump-force-searcher 'rg)
+  (dumb-jump-selector 'ivy)
   :bind (("M-g o" . dumb-jump-go-other-window)
          ("M-g j" . dumb-jump-go)
          ("M-g i" . dumb-jump-go-prompt)
          ("M-g x" . dumb-jump-go-prefer-external)
          ("M-g z" . dumb-jump-go-prefer-external-other-window)
-         ("M-g p" . dumb-jump-back))
-  :config
-  ;; TODO support jumping in multi git-repo project
-  (add-hook 'python-mode-hook 'dumb-jump-mode))
+         ("M-g p" . dumb-jump-back)
+         ;; :map python-mode-map
+         ;; ("M-." . dumb-jump-go)
+         ;; ("M-," . dumb-jump-back)
+         )
+  )
 
 (use-package eglot :ensure t
   :config
@@ -280,6 +283,12 @@
   (python-fill-docstring-style 'django)
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
+  :config
+  ;; TODO support jumping in multi git-repo project
+  (add-hook 'python-mode-hook 'dumb-jump-mode)
+  (define-key python-mode-map (kbd "M-.") 'dumb-jump-go)
+  (define-key python-mode-map (kbd "M-,") 'dumb-jump-back)
+
   ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
   ;; (("C-`" . 'helm-semantic-or-imenu))
   ;; :init (progn
