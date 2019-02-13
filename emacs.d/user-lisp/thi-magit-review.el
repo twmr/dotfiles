@@ -79,21 +79,19 @@
                 (ivy-completing-read "Topic: "
                                      magit-review-download3-topic-history
                                      nil
-                                     nil
-
-
-                                     )
+                                     nil)
                 ;; todo sort words alphabetically
                 (ivy-completing-read "Reviewers: "
                                      magit-review-download3-reviewers-history
                                      nil
                                      nil)))
-
-  (if (and (equal "" topic) (equal "" reviewers))
-      (magit-git-command "git review")
-    (magit-git-command (format
-                        "git review -t %s --reviewers %s"
-                        topic reviewers))))
+  (let ((cmdstr "git review"))
+    (unless (equal "" topic)
+      (setq cmdstr (concat cmdstr " -t " topic)))
+    (unless (equal "" reviewers)
+      (setq cmdstr (concat cmdstr " --reviewers " reviewers)))
+    ;; TODO does not work if git review is interactive
+    (magit-git-command cmdstr)))
 
 
 (defvar magit-review-completion-topic-history nil)
