@@ -201,6 +201,8 @@ gerrit-upload: (current args: %(concat (git-review-upload-current-cmd-args)))
 (add-hook 'after-init-hook #'git-review-load-lists)
 
 
+(global-set-key (kbd "C-x i") 'hydra-gerrit-upload/body)
+
 ;;;;;;;;;;;;;;;;;;;;; OLD ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
