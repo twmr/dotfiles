@@ -13,10 +13,16 @@
 ;;; Code:
 
 (require 'magit)
+(require 'hydra)
 (require 'recentf)
 
 (defvar git-review-upload-topic-history nil "List of recently used topic names.")
 (defvar git-review-upload-reviewers-history nil "List of recently user reviewers.")
+
+;; these two vars are many needed for the hyra-based implementation because
+;; I don't know how I can communicate between different heads of the hydra
+(defvar git-review-last-reviewers nil "...")
+(defvar git-review-last-topic nil "...")
 
 (defalias 'git-review-dump-variable 'recentf-dump-variable)
 (defalias 'git-review-save-file-modes 'recentf-save-file-modes)
@@ -93,17 +99,79 @@ Read data from the file specified by `git-review-save-file'."
   (let ((cmdstr "git review"))
     (unless (equal "" topic)
       (push topic git-review-upload-topic-history)
+      (setq git-review-upload-topic-history (remove-duplicates git-review-upload-topic-history :test 'string=))
       (setq cmdstr (concat cmdstr " -t " topic)))
     (unless (equal "" reviewers)
       (push reviewers git-review-upload-reviewers-history)
+      (setq git-review-upload-reviewers-history (remove-duplicates git-review-upload-reviewers-history :test 'string=))
       (setq cmdstr (concat cmdstr " --reviewers " reviewers)))
-    ;; (message cmdstr)))
 
     (git-review-save-lists)
 
+    ;; (message cmdstr)))
     ;; TODO does not work if git review is interactive
     (magit-git-command cmdstr)))
 
+
+(defun gerrit-add-reviewers nil
+  (interactive)
+  (let ((reviewers (ivy-completing-read
+                    "Reviewers (space separated): "
+                    git-review-upload-reviewers-history
+                    nil nil nil nil
+                    ;; default value set to LRU reviewers value
+                    (car git-review-upload-reviewers-history)
+                    )))
+    (setq git-review-last-reviewers reviewers)
+    (unless (equal "" reviewers)
+      ;; todo simplify the duplicate handling
+      (push reviewers git-review-upload-reviewers-history)
+      (setq git-review-upload-reviewers-history (remove-duplicates git-review-upload-reviewers-history
+                                                                   :test 'string=)))))
+
+
+(defun gerrit-set-topic nil
+  (interactive)
+  (let ((topic (ivy-completing-read
+                "Topic: "
+                git-review-upload-topic-history
+                nil nil nil nil
+                ;; default value set to LRU topic name
+                (car git-review-upload-topic-history)
+                )))
+    (setq git-review-last-topic topic)
+    (unless (equal "" topic)
+      ;; todo simplify the duplicate handling
+      (push topic git-review-upload-topic-history)
+      (setq git-review-upload-topic-history (remove-duplicates git-review-upload-topic-history
+                                                               :test 'string=)))))
+
+
+(defun gerrit-do-upload nil
+  (interactive)
+  ;; todo handle empty history
+  (let ((reviewers git-review-last-reviewers)
+        (topic git-review-last-topic)
+        (cmdstr "git review"))
+    (unless (equal "" topic)
+      (setq cmdstr (concat cmdstr " -t " topic)))
+    (unless (equal "" reviewers)
+      (setq cmdstr (concat cmdstr " --reviewers " reviewers)))
+
+    (message cmdstr)))
+
+
+(defhydra hydra-gerrit-upload (:color amaranth ;; foreign-keys warning, blue heads exit hydra
+                               :hint nil ;; show hint in the echo area
+                               :body-pre (progn
+                                           (setq git-review-last-topic "")
+                                           (setq git-review-last-reviewers "")))
+  "gerrit-upload"
+  ;; TODO show currently selected reviewers/topic/... in the hint message
+  ;;
+  ("r" gerrit-add-reviewers "Add reviewers")
+  ("t" gerrit-set-topic "Set topic")
+  ("RET" gerrit-do-upload "Run git-reivew" :color blue))
 
 
 (add-hook 'after-init-hook #'git-review-load-lists)
