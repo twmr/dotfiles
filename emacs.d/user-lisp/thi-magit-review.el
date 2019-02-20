@@ -182,13 +182,34 @@ Read data from the file specified by `git-review-save-file'."
 
 ;; (global-set-key (kbd "C-x i") 'magit-review-popup)
 
-;; (magit-define-popup magit-review-popup
+
+(defun magit-review-upload-change-pu (&optional args)
+  (interactive (list (magit-review-upload-arguments)))
+  ;; (let (
+  ;;       (review-args (string-join (magit-review-upload-arguments) " ")))
+  ;;   (message (format "review args: %s" review-args))))
+  (let ((review-args (magit-review-upload-arguments)))
+    (message (format "review args: %s" (car review-args)))))
+
+
+(magit-define-popup magit-review-upload-popup
+  "Popup console for uploading a change."
+  :man-page "git-review"
+  :options  '(
+              ;; add the possibility to cycle through a list of list of reviewers
+              (?r "reviewers"                        "--reviewers=")
+
+              (?t "topic"                            "--topic="))
+  :actions  '((?u "upload"  magit-review-upload-change-pu)))
+
+
+ ;; (magit-define-popup magit-review-popup
 ;;   "Popup console for review commands."
 ;;   :man-page "git-review"
 ;;   :actions  '("Download"
-;;               (?d "change"  magit-review-download-change)
+;;               (?d "change"  magit-review-download-change-pu)
 ;;               "Upload"
-;;               (?u "upload"  magit-review-upload-popup)))
+;;               (?u "upload"  magit-review-upload-change-pu)))
 
 
 ;; ;; add "Gerrit" action to magit-dispatch popup
@@ -207,16 +228,16 @@ Read data from the file specified by `git-review-save-file'."
 
 
 ;; ;; https://magit.vc/manual/magit-popup/Defining-Prefix-and-Suffix-Commands.html#Defining-Prefix-and-Suffix-Commands
-;; (defun magit-review-download-change (change)
-;;   ;; todo ivy like completion
-;;   (interactive (list
-;;                 ;; todo default value: most recent change in current repo
-;;                 ;; (see help text of ivy-completing-read)
-;;                 (ivy-completing-read "Change #: "
-;;                                      magit-review-download-change-history
-;;                                      nil
-;;                                      nil)))
-;;   (magit-git-command (format "git review -d %s" change)))
+(defun magit-review-download-change (change)
+  ;; todo ivy like completion
+  (interactive (list
+                ;; todo default value: most recent change in current repo
+                ;; (see help text of ivy-completing-read)
+                (ivy-completing-read "Change #: "
+                                     magit-review-download-change-history
+                                     nil
+                                     nil)))
+  (magit-git-command (format "git review -d %s" change)))
 
 ;; (defun magit-review-upload-change2 ()
 ;;   (let (
@@ -227,12 +248,6 @@ Read data from the file specified by `git-review-save-file'."
 ;;     (magit-git-command (format "git review %s" review-args))))
 
 
-;; (defun magit-review-upload-change (&optional args)
-;;   (interactive (list (magit-review-upload-arguments)))
-;;   ;; (interactive "Stopic name:\nSreviewers")
-;;   (let (
-;;         (review-args (string-join (magit-review-upload-arguments) " ")))
-;;     (message (format "review args: %s" review-args))))
 
 ;; (defvar magit-review-completion-topic-history nil)
 ;; (defvar magit-review-completion-reviewers-history nil)
