@@ -96,7 +96,7 @@ Read data from the file specified by `git-review-save-file'."
                                      )))
 
 
-  (let ((cmdstr "git review"))
+  (let ((cmdstr "git review --yes"))
     (unless (equal "" topic)
       (push topic git-review-upload-topic-history)
       (setq git-review-upload-topic-history (remove-duplicates git-review-upload-topic-history :test 'string=))
@@ -152,7 +152,7 @@ Read data from the file specified by `git-review-save-file'."
   ;; todo handle empty history
   (let ((reviewers git-review-last-reviewers)
         (topic git-review-last-topic)
-        (cmdstr "git review"))
+        (cmdstr "git review --yes"))
     (unless (equal "" topic)
       (setq cmdstr (concat cmdstr " -t " topic)))
     (unless (equal "" reviewers)
