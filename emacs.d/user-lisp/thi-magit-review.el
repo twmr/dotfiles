@@ -130,7 +130,7 @@ Read data from the file specified by `git-review-save-file'."
     (magit-git-command cmdstr)))
 
 
-(defmacro gerrit-completing-set (msg history &optional last)
+(defmacro git-review-upload-completing-set (msg history &optional last)
   ;;; what if I want to enter only a substring ?
   ;;; https://github.com/abo-abo/swiper/pull/1049/files
   `(let ((value (ivy-completing-read
@@ -147,55 +147,55 @@ Read data from the file specified by `git-review-save-file'."
       (push value ,history)
       (setq ,history (remove-duplicates ,history :test 'string=)))))
 
-(defun gerrit-add-reviewers nil
+(defun git-review-upload-add-reviewers nil
   (interactive)
-  (gerrit-completing-set "Reviewers (space separated): "
-                         git-review-upload-reviewers-history
-                         git-review-last-reviewers))
+  (git-review-upload-completing-set "Reviewers (space separated): "
+                                    git-review-upload-reviewers-history
+                                    git-review-last-reviewers))
 
-(defun gerrit-set-topic nil
+(defun git-review-upload-set-topic nil
   (interactive)
-  (gerrit-completing-set "Topic: "
-                         git-review-upload-topic-history
-                         git-review-last-topic))
+  (git-review-upload-completing-set "Topic: "
+                                    git-review-upload-topic-history
+                                    git-review-last-topic))
 
-(defun gerrit-set-args nil
+(defun git-review-upload-set-args nil
   (interactive)
-  (gerrit-completing-set "Args (space separated): "
-                         git-review-upload-args-history
-                         git-review-upload-args))
+  (git-review-upload-completing-set "Args (space separated): "
+                                    git-review-upload-args-history
+                                    git-review-upload-args))
 
-
-(defun gerrit-do-upload nil
-  (interactive)
-  ;; todo handle empty history
+(defun git-review-upload-current-cmd-args nil
   (let ((reviewers git-review-last-reviewers)
         (topic git-review-last-topic)
         (args git-review-upload-args)
-        (cmdstr "git review --yes"))
+        (cmdstr "--yes"))
     (unless (equal "" topic)
       (setq cmdstr (concat cmdstr " -t " topic)))
     (unless (equal "" reviewers)
       (setq cmdstr (concat cmdstr " --reviewers " reviewers)))
     (unless (equal "" args)
-      (setq cmdstr (concat cmdstr " " args " ")))
+      (setq cmdstr (concat cmdstr " " args)))
+    cmdstr))
 
-    (message cmdstr)))
+(defun git-review-upload-run nil
+  (interactive)
+  (message (concat "git review " git-review-upload-current-cmd-args)))
 
-
-(defhydra hydra-gerrit-upload (:color amaranth ;; foreign-keys warning, blue heads exit hydra
+(defhydra hydra-git-review-upload-upload (:color amaranth ;; foreign-keys warning, blue heads exit hydra
                                :hint nil ;; show hint in the echo area
+                               :columns 1
                                :body-pre (progn
                                            (setq git-review-last-topic "")
                                            (setq git-review-last-reviewers "")
                                            (setq git-review-upload-args git-review-upload-default-args)))
-  "gerrit-upload"
-  ;; TODO show currently selected reviewers/topic/... in the hint message
-  ;;
-  ("r" gerrit-add-reviewers "Add reviewers")
-  ("t" gerrit-set-topic "Set topic")
-  ("a" gerrit-set-args "Set additional args")
-  ("RET" gerrit-do-upload "Run git-reivew" :color blue))
+  "
+gerrit-upload: (current args: %(concat (git-review-upload-current-cmd-args)))
+"
+  ("r" git-review-upload-add-reviewers "Add reviewers")
+  ("t" git-review-upload-set-topic "Set topic")
+  ("a" git-review-upload-set-args "Set additional args")
+  ("RET" git-review-upload-run "Run git-reivew" :color blue))
 
 
 (add-hook 'after-init-hook #'git-review-load-lists)
