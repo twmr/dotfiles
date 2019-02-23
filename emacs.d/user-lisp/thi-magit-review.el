@@ -10,6 +10,16 @@
 ;;   -
 
 
+;;; TODO
+;; set assignee for git-review (cli) app,
+;; assignee can not be set via git push options (https://gerrit-review.googlesource.com/Documentation/user-upload.html). Those push options are used when uploading a change via git-review.
+;; take a look at pygerrit2 (github) - write small script, which sets assignee instead
+
+;; -f is probably needed by some devs (the default for some devs)
+;; show selected values in hydra
+
+;; https://gerrit-review.googlesource.com/Documentation/rest-api-changes.html#add-reviewer
+
 ;;; Code:
 
 (require 'magit)
@@ -20,7 +30,7 @@
 (defvar git-review-upload-reviewers-history nil "List of recently used reviewers.")
 (defvar git-review-upload-args-history nil "List of recently used args for git-review cmd.")
 
-;; these two vars are many needed for the hyra-based implementation because
+;; these two vars are many needed for the hydra-based implementation because
 ;; I don't know how I can communicate between different heads of the hydra
 (defvar git-review-last-reviewers nil "...")
 (defvar git-review-last-topic nil "...")
