@@ -17,12 +17,14 @@
 (require 'recentf)
 
 (defvar git-review-upload-topic-history nil "List of recently used topic names.")
-(defvar git-review-upload-reviewers-history nil "List of recently user reviewers.")
+(defvar git-review-upload-reviewers-history nil "List of recently used reviewers.")
+(defvar git-review-upload-args-history nil "List of recently used args for git-review cmd.")
 
 ;; these two vars are many needed for the hyra-based implementation because
 ;; I don't know how I can communicate between different heads of the hydra
 (defvar git-review-last-reviewers nil "...")
 (defvar git-review-last-topic nil "...")
+(defvar git-review-upload-args nil "...")
 
 (defalias 'git-review-dump-variable 'recentf-dump-variable)
 (defalias 'git-review-save-file-modes 'recentf-save-file-modes)
@@ -65,6 +67,11 @@ Write data into the file specified by `git-review-save-file'."
         nil)
     (error
      (warn "git-review: %s" (error-message-string error)))))
+
+(defcustom git-review-upload-default-args ""
+  "Default args used when calling 'git review' to upload a change."
+  :group 'git-review
+  :type 'string)
 
 
 (defun git-review-load-lists ()
@@ -113,38 +120,40 @@ Read data from the file specified by `git-review-save-file'."
     (magit-git-command cmdstr)))
 
 
+(defmacro gerrit-completing-set (msg history &optional last)
+  ;;; what if I want to enter only a substring ?
+  ;;; https://github.com/abo-abo/swiper/pull/1049/files
+  `(let ((value (ivy-completing-read
+                  ,msg
+                  ,history
+                  nil nil nil nil
+                  ;; default value set to LRU reviewers value
+                  (car ,history)
+                  )))
+     (unless (null ,last)
+       (setq ,last value))
+    (unless (equal "" value)
+      ;; todo simplify the duplicate handling
+      (push value ,history)
+      (setq ,history (remove-duplicates ,history :test 'string=)))))
+
 (defun gerrit-add-reviewers nil
   (interactive)
-  (let ((reviewers (ivy-completing-read
-                    "Reviewers (space separated): "
-                    git-review-upload-reviewers-history
-                    nil nil nil nil
-                    ;; default value set to LRU reviewers value
-                    (car git-review-upload-reviewers-history)
-                    )))
-    (setq git-review-last-reviewers reviewers)
-    (unless (equal "" reviewers)
-      ;; todo simplify the duplicate handling
-      (push reviewers git-review-upload-reviewers-history)
-      (setq git-review-upload-reviewers-history (remove-duplicates git-review-upload-reviewers-history
-                                                                   :test 'string=)))))
-
+  (gerrit-completing-set "Reviewers (space separated): "
+                         git-review-upload-reviewers-history
+                         git-review-last-reviewers))
 
 (defun gerrit-set-topic nil
   (interactive)
-  (let ((topic (ivy-completing-read
-                "Topic: "
-                git-review-upload-topic-history
-                nil nil nil nil
-                ;; default value set to LRU topic name
-                (car git-review-upload-topic-history)
-                )))
-    (setq git-review-last-topic topic)
-    (unless (equal "" topic)
-      ;; todo simplify the duplicate handling
-      (push topic git-review-upload-topic-history)
-      (setq git-review-upload-topic-history (remove-duplicates git-review-upload-topic-history
-                                                               :test 'string=)))))
+  (gerrit-completing-set "Topic: "
+                         git-review-upload-topic-history
+                         git-review-last-topic))
+
+(defun gerrit-set-args nil
+  (interactive)
+  (gerrit-completing-set "Args (space separated): "
+                         git-review-upload-args-history
+                         git-review-upload-args))
 
 
 (defun gerrit-do-upload nil
@@ -152,11 +161,14 @@ Read data from the file specified by `git-review-save-file'."
   ;; todo handle empty history
   (let ((reviewers git-review-last-reviewers)
         (topic git-review-last-topic)
+        (args git-review-upload-args)
         (cmdstr "git review --yes"))
     (unless (equal "" topic)
       (setq cmdstr (concat cmdstr " -t " topic)))
     (unless (equal "" reviewers)
       (setq cmdstr (concat cmdstr " --reviewers " reviewers)))
+    (unless (equal "" args)
+      (setq cmdstr (concat cmdstr " " args " ")))
 
     (message cmdstr)))
 
@@ -165,12 +177,14 @@ Read data from the file specified by `git-review-save-file'."
                                :hint nil ;; show hint in the echo area
                                :body-pre (progn
                                            (setq git-review-last-topic "")
-                                           (setq git-review-last-reviewers "")))
+                                           (setq git-review-last-reviewers "")
+                                           (setq git-review-upload-args git-review-upload-default-args)))
   "gerrit-upload"
   ;; TODO show currently selected reviewers/topic/... in the hint message
   ;;
   ("r" gerrit-add-reviewers "Add reviewers")
   ("t" gerrit-set-topic "Set topic")
+  ("a" gerrit-set-args "Set additional args")
   ("RET" gerrit-do-upload "Run git-reivew" :color blue))
 
 
