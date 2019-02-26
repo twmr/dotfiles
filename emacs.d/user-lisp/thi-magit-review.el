@@ -8,7 +8,9 @@
 ;;   - option for reviewer-names (with completion, sorted by most recently used)
 ;;   - option for topic-name (with completion (my created topicnames))
 ;;   -
-
+;;
+;; (add-hook 'after-init-hook #'git-review-load-lists)
+;; (global-set-key (kbd "C-x i") 'hydra-gerrit-upload/body)
 
 ;;; TODO
 ;; set assignee for git-review (cli) app,
@@ -147,25 +149,26 @@ Read data from the file specified by `git-review-save-file'."
       (push value ,history)
       (setq ,history (remove-duplicates ,history :test 'string=)))))
 
-(defun git-review-upload-add-reviewers nil
+(defun git-review-upload-add-reviewers ()
   (interactive)
   (git-review-upload-completing-set "Reviewers (space separated): "
                                     git-review-upload-reviewers-history
                                     git-review-last-reviewers))
 
-(defun git-review-upload-set-topic nil
+(defun git-review-upload-set-topic ()
   (interactive)
   (git-review-upload-completing-set "Topic: "
                                     git-review-upload-topic-history
                                     git-review-last-topic))
 
-(defun git-review-upload-set-args nil
+(defun git-review-upload-set-args ()
   (interactive)
   (git-review-upload-completing-set "Args (space separated): "
                                     git-review-upload-args-history
                                     git-review-upload-args))
 
-(defun git-review-upload-current-cmd-args nil
+(defun git-review-upload-current-cmd-args ()
+  (interactive)
   (let ((reviewers git-review-last-reviewers)
         (topic git-review-last-topic)
         (args git-review-upload-args)
@@ -178,11 +181,13 @@ Read data from the file specified by `git-review-save-file'."
       (setq cmdstr (concat cmdstr " " args)))
     cmdstr))
 
-(defun git-review-upload-run nil
-  (interactive)
-  (message (concat "git review " git-review-upload-current-cmd-args)))
+(defun git-review-upload-run ()
+  (interactiv
+  (let ((cmdstr (concat "git review " (git-review-upload-current-cmd-args))))
+    ;; (message cmdstr)
+    (magit-git-command cmdstr)))
 
-(defhydra hydra-git-review-upload-upload (:color amaranth ;; foreign-keys warning, blue heads exit hydra
+(defhydra hydra-git-review-upload (:color amaranth ;; foreign-keys warning, blue heads exit hydra
                                :hint nil ;; show hint in the echo area
                                :columns 1
                                :body-pre (progn
@@ -197,11 +202,18 @@ gerrit-upload: (current args: %(concat (git-review-upload-current-cmd-args)))
   ("a" git-review-upload-set-args "Set additional args")
   ("RET" git-review-upload-run "Run git-reivew" :color blue))
 
+(defun gerrit-download nil
+  (interactive)
+  ;; todo download all changenr for current project
+
+  (let ((changenr (ivy-completing-read
+                  "Change NR: " nil nil nil)))
+    ;; (message changenr)))
+    (magit-git-command (concat "git review -d " changenr))))
+
 
 (add-hook 'after-init-hook #'git-review-load-lists)
-
-
-(global-set-key (kbd "C-x i") 'hydra-gerrit-upload/body)
+(global-set-key (kbd "C-x i") 'hydra-git-review-upload/body)
 
 ;;;;;;;;;;;;;;;;;;;;; OLD ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -209,24 +221,24 @@ gerrit-upload: (current args: %(concat (git-review-upload-current-cmd-args)))
 ;; (global-set-key (kbd "C-x i") 'magit-review-popup)
 
 
-(defun magit-review-upload-change-pu (&optional args)
-  (interactive (list (magit-review-upload-arguments)))
-  ;; (let (
-  ;;       (review-args (string-join (magit-review-upload-arguments) " ")))
-  ;;   (message (format "review args: %s" review-args))))
-  (let ((review-args (magit-review-upload-arguments)))
-    (message (format "review args: %s" (car review-args)))))
+;; (defun magit-review-upload-change-pu (&optional args)
+;;   (interactive (list (magit-review-upload-arguments)))
+;;   ;; (let (
+;;   ;;       (review-args (string-join (magit-review-upload-arguments) " ")))
+;;   ;;   (message (format "review args: %s" review-args))))
+;;   (let ((review-args (magit-review-upload-arguments)))
+;;     (message (format "review args: %s" (car review-args)))))
 
 
-(magit-define-popup magit-review-upload-popup
-  "Popup console for uploading a change."
-  :man-page "git-review"
-  :options  '(
-              ;; add the possibility to cycle through a list of list of reviewers
-              (?r "reviewers"                        "--reviewers=")
+;; (magit-define-popup magit-review-upload-popup
+;;   "Popup console for uploading a change."
+;;   :man-page "git-review"
+;;   :options  '(
+;;               ;; add the possibility to cycle through a list of list of reviewers
+;;               (?r "reviewers"                        "--reviewers=")
 
-              (?t "topic"                            "--topic="))
-  :actions  '((?u "upload"  magit-review-upload-change-pu)))
+;;               (?t "topic"                            "--topic="))
+;;   :actions  '((?u "upload"  magit-review-upload-change-pu)))
 
 
  ;; (magit-define-popup magit-review-popup
