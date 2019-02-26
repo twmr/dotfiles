@@ -1,40 +1,50 @@
+;; my personal gerrit integration in emacs.
+;;
+;; (load 'gerrit)
+;; (add-hook 'after-init-hook #'gerrit-load-lists)
+;; (global-set-key (kbd "C-x i") 'hydra-upload)
+
+;;; Code:
+
+(require 'cl-lib)  ;; for remove-duplicates
 (require 'magit)
 (require 'hydra)
 (require 'recentf)
+(require 's)
 
-(defvar git-review-upload-topic-history nil "List of recently used topic names.")
-(defvar git-review-upload-reviewers-history nil "List of recently used reviewers.")
-(defvar git-review-upload-args-history nil "List of recently used args for git-review cmd.")
+(defvar gerrit-upload-topic-history nil "List of recently used topic names.")
+(defvar gerrit-upload-reviewers-history nil "List of recently used reviewers.")
+(defvar gerrit-upload-args-history nil "List of recently used args for git-review cmd.")
 
 ;; these two vars are many needed for the hydra-based implementation because
 ;; I don't know how I can communicate between different heads of the hydra
-(defvar git-review-last-reviewers nil "...")
-(defvar git-review-last-topic nil "...")
-(defvar git-review-upload-args nil "...")
+(defvar gerrit-last-reviewers nil "...")
+(defvar gerrit-last-topic nil "...")
+(defvar gerrit-upload-args nil "...")
 
-(defalias 'git-review-dump-variable 'recentf-dump-variable)
-(defalias 'git-review-save-file-modes 'recentf-save-file-modes)
+(defalias 'gerrit-dump-variable 'recentf-dump-variable)
+(defalias 'gerrit-save-file-modes 'recentf-save-file-modes)
 
-(defgroup git-review nil
+(defgroup gerrit nil
   "Maintain a menu of recently opened files."
   :version "26.1"
   ;; which group should be used?
   :group 'files)
 
-(defcustom git-review-download-max-saved-items 200
-  "Maximum number of items of the git-review lists that will be saved.
+(defcustom gerrit-download-max-saved-items 200
+  "Maximum number of items of the gerrit lists that will be saved.
 A nil value means to save the whole lists."
-  :group 'git-review
+  :group 'gerrit
   :type 'integer)
 
-(defcustom git-review-save-file (locate-user-emacs-file ".git-review")
+(defcustom gerrit-save-file (locate-user-emacs-file ".git-review")
   "File to save the recent lists into."
-  :group 'git-review
+  :group 'gerrit
   :type 'file)
 
-(defun git-review-save-lists ()
+(defun gerrit-save-lists ()
   "Save the recent lists.
-Write data into the file specified by `git-review-save-file'."
+Write data into the file specified by `gerrit-save-file'."
   (interactive)
   (condition-case error
       (with-temp-buffer
@@ -42,35 +52,35 @@ Write data into the file specified by `git-review-save-file'."
         (set-buffer-file-coding-system 'utf-8-emacs)
         (insert (format-message ";;; Automatically generated on %s.\n"
                                 (current-time-string)))
-        (git-review-dump-variable 'git-review-upload-topic-history git-review-download-max-saved-items)
-        (git-review-dump-variable 'git-review-upload-reviewers-history git-review-download-max-saved-items)
+        (gerrit-dump-variable 'gerrit-upload-topic-history gerrit-download-max-saved-items)
+        (gerrit-dump-variable 'gerrit-upload-reviewers-history gerrit-download-max-saved-items)
         (insert "\n\n;; Local Variables:\n"
                 ";; coding: utf-8-emacs\n"
                 ";; End:\n")
         (let ((inhibit-message t))
-          (write-file (expand-file-name git-review-save-file)))
-        (set-file-modes git-review-save-file #o600)
+          (write-file (expand-file-name gerrit-save-file)))
+        (set-file-modes gerrit-save-file #o600)
         nil)
     (error
-     (warn "git-review: %s" (error-message-string error)))))
+     (warn "gerrit: %s" (error-message-string error)))))
 
-(defcustom git-review-upload-default-args ""
+(defcustom gerrit-upload-default-args ""
   "Default args used when calling 'git review' to upload a change."
-  :group 'git-review
+  :group 'gerrit
   :type 'string)
 
-(defun git-review-load-lists ()
+(defun gerrit-load-lists ()
   "Load a previously saved recent list.
-Read data from the file specified by `git-review-save-file'."
+Read data from the file specified by `gerrit-save-file'."
   (interactive)
 
-  (let ((file (expand-file-name git-review-save-file))
+  (let ((file (expand-file-name gerrit-save-file))
         ;; We do not want Tramp asking for passwords.
         (non-essential t))
     (when (file-readable-p file)
       (load-file file))))
 
-(defmacro git-review-upload-completing-set (msg history &optional last)
+(defmacro gerrit-upload-completing-set (msg history &optional last)
   ;;; what if I want to enter only a substring ?
   ;;; https://github.com/abo-abo/swiper/pull/1049/files
   `(let ((value (ivy-completing-read
@@ -87,29 +97,29 @@ Read data from the file specified by `git-review-save-file'."
       (push value ,history)
       (setq ,history (remove-duplicates ,history :test 'string=)))))
 
-(defun git-review-upload-add-reviewers ()
+(defun gerrit-upload-add-reviewers ()
   (interactive)
-  (git-review-upload-completing-set "Reviewers (space separated): "
-                                    git-review-upload-reviewers-history
-                                    git-review-last-reviewers))
+  (gerrit-upload-completing-set "Reviewers (space separated): "
+                                    gerrit-upload-reviewers-history
+                                    gerrit-last-reviewers))
 
-(defun git-review-upload-set-topic ()
+(defun gerrit-upload-set-topic ()
   (interactive)
-  (git-review-upload-completing-set "Topic: "
-                                    git-review-upload-topic-history
-                                    git-review-last-topic))
+  (gerrit-upload-completing-set "Topic: "
+                                    gerrit-upload-topic-history
+                                    gerrit-last-topic))
 
-(defun git-review-upload-set-args ()
+(defun gerrit-upload-set-args ()
   (interactive)
-  (git-review-upload-completing-set "Args (space separated): "
-                                    git-review-upload-args-history
-                                    git-review-upload-args))
+  (gerrit-upload-completing-set "Args (space separated): "
+                                    gerrit-upload-args-history
+                                    gerrit-upload-args))
 
-(defun git-review-upload-current-cmd-args ()
+(defun gerrit-upload-current-cmd-args ()
   (interactive)
-  (let ((reviewers git-review-last-reviewers)
-        (topic git-review-last-topic)
-        (args git-review-upload-args)
+  (let ((reviewers gerrit-last-reviewers)
+        (topic gerrit-last-topic)
+        (args gerrit-upload-args)
         (cmdstr "--yes"))
     (unless (equal "" topic)
       (setq cmdstr (concat cmdstr " -t " topic)))
@@ -119,39 +129,40 @@ Read data from the file specified by `git-review-save-file'."
       (setq cmdstr (concat cmdstr " " args)))
     cmdstr))
 
-(defun git-review-upload-run ()
+(defun gerrit-upload-run ()
   (interactive)
-  (let ((cmdstr (concat "git review " (git-review-upload-current-cmd-args))))
+  (let ((cmdstr (concat "git review " (gerrit-upload-current-cmd-args))))
     ;; (message cmdstr)
     (magit-git-command cmdstr)))
 
-(defhydra hydra-git-review-upload (:color amaranth ;; foreign-keys warning, blue heads exit hydra
+(defhydra hydra-gerrit-upload (:color amaranth ;; foreign-keys warning, blue heads exit hydra
                                :hint nil ;; show hint in the echo area
                                :columns 1
                                :body-pre (progn
-                                           (setq git-review-last-topic "")
-                                           (setq git-review-last-reviewers "")
-                                           (setq git-review-upload-args git-review-upload-default-args)))
+                                           (setq gerrit-last-topic "")
+                                           (setq gerrit-last-reviewers "")
+                                           (setq gerrit-upload-args gerrit-upload-default-args)))
   "
-gerrit-upload: (current args: %(concat (git-review-upload-current-cmd-args)))
+gerrit-upload: (current args: %(concat (gerrit-upload-current-cmd-args)))
 "
-  ("r" git-review-upload-add-reviewers "Add reviewers")
-  ("t" git-review-upload-set-topic "Set topic")
-  ("a" git-review-upload-set-args "Set additional args")
-  ("RET" git-review-upload-run "Run git-reivew" :color blue))
+  ("r" gerrit-upload-add-reviewers "Add reviewers")
+  ("t" gerrit-upload-set-topic "Set topic")
+  ("a" gerrit-upload-set-args "Set additional args")
+  ("RET" gerrit-upload-run "Run git-reivew" :color blue))
+
+(defalias 'gerrit-upload 'hydra-gerrit-upload/body)
 
 (defun gerrit-download ()
   "Download change from the gerrit server."
   (interactive)
-  ;; todo download all changenr for current project
+  (let ((open-changes (shell-command-to-string "git review -l")))
 
-  (let ((changenr (ivy-completing-read
-                  "Change NR: " nil nil nil)))
-    ;; (message changenr)))
-    (magit-git-command (concat "git review -d " changenr))))
-
-
-(add-hook 'after-init-hook #'git-review-load-lists)
-(global-set-key (kbd "C-x i") 'hydra-git-review-upload/body)
+    ;; remove last two lines
+    (setq open-changes (nbutlast (s-lines open-changes) 2))
+    ;; (message (s-join "\n" open-changes))
+    (let ((changenr (ivy-completing-read
+                     "Download Change: " open-changes nil nil)))
+      (magit-git-command (concat "git review -d "
+                                 (car (s-split " " (s-trim changenr))))))))
 
 (provide 'gerrit)
