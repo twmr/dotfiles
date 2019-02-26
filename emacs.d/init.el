@@ -893,7 +893,11 @@
 (load "thi-nxml")
 (load "thi-compilation")
 (load "thi-term")
-(load "thi-magit-review")
+(load "gerrit")
+
+(add-hook 'after-init-hook #'gerrit-load-lists)
+(global-set-key (kbd "C-x i") 'gerrit-upload)
+(global-set-key (kbd "C-x o") 'gerrit-download)
 
 
 ;; taken from http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html
