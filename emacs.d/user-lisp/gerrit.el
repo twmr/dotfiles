@@ -165,4 +165,27 @@ gerrit-upload: (current args: %(concat (gerrit-upload-current-cmd-args)))
       (magit-git-command (concat "git review -d "
                                  (car (s-split " " (s-trim changenr))))))))
 
+(defun magit-gerrit-insert-status ()
+  (let* ((name "hello world"))
+    (magit-insert-section (gerrit)
+      (magit-insert-heading "Open Gerrit Reviews")
+      (magit-insert-section (gerrit-info)
+        (insert (format "Name:   %s\n" name))
+        (insert (format "Name0:   %s\n" name))
+        (magit-insert-heading)
+        (insert (format "Name2:   %s\n" name))
+        ;; (magit-insert-heading)
+        (insert (format "Name3:   %s\n" name)))
+      (magit-insert-section (gerrit-dummy)
+        (magit-insert-heading
+          (propertize "Diagram\n"
+                      'face 'magit-section-secondary-heading))
+          (insert
+           (with-temp-buffer
+             (magit-git-insert "status")
+           ;;   (re-search-backward "^Untracked")
+           ;;   (delete-region (point) (point-max))
+             (buffer-string)))))))
+
+(add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
 (provide 'gerrit)
