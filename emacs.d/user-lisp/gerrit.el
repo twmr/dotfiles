@@ -168,6 +168,7 @@ gerrit-upload: (current args: %(concat (gerrit-upload-current-cmd-args)))
 (defun magit-gerrit-insert-status ()
   (let* ((name "hello world"))
     (magit-insert-section (gerrit)
+      ;; TODO tabulated-list-init-header
       (magit-insert-heading "Open Gerrit Reviews")
       (magit-insert-section (gerrit-info)
         (insert (format "Name:   %s\n" name))
