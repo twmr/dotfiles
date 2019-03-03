@@ -84,6 +84,8 @@
 
 (use-package paredit :ensure t)
 
+(use-package pyimport :ensure t)
+
 (use-package ace-jump-mode :ensure t :defer t
   :init
   (progn
@@ -284,8 +286,9 @@
   :config
   ;; TODO support jumping in multi git-repo project
   (add-hook 'python-mode-hook 'dumb-jump-mode)
-  (define-key python-mode-map (kbd "M-.") 'dumb-jump-go)
-  (define-key python-mode-map (kbd "M-,") 'dumb-jump-back)
+  (define-key python-mode-map (kbd "M-.") #'dumb-jump-go)
+  (define-key python-mode-map (kbd "M-,") #'dumb-jump-back)
+  (define-key python-mode-map (kbd "C-c C-i") #'pyimport-insert-missing)
 
   ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
   ;; (("C-`" . 'helm-semantic-or-imenu))
