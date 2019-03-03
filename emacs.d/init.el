@@ -666,6 +666,8 @@
 ;; requires semantic-mode to be enabled
 (use-package stickyfunc-enhance :ensure t)
 
+(use-package typescript-mode :ensure t)
+
 (use-package undo-tree
   ;; C-/ undo (without the undo tree graph) !!!
   ;; M-_ redo (without the undo tree graph) !!!
