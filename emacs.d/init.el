@@ -76,21 +76,11 @@
 
 ;; (use-package anaconda-mode :ensure t)
 
-(use-package paradox :ensure t
-  :custom
-  (paradox-github-token t)
-  :config
-  (setq paradox-execute-asynchronously t))
-
-(use-package paredit :ensure t)
-
-(use-package pyimport :ensure t)
-
-(use-package ace-jump-mode :ensure t :defer t
-  :init
-  (progn
-    (autoload 'ace-jump-mode "ace-jump-mode" nil t)
-    (bind-key "C-." 'ace-jump-mode)))
+;; (use-package ace-jump-mode :ensure t :defer t
+;;   :init
+;;   (progn
+;;     (autoload 'ace-jump-mode "ace-jump-mode" nil t)
+;;     (bind-key "C-." 'ace-jump-mode)))
 
 ;; (use-package all-the-icons-ivy
 ;;   :ensure t
@@ -111,7 +101,6 @@
   :config
   (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
   (setq bpr-process-mode #'comint-mode))
-
 
 (use-package color-identifiers-mode :ensure t :defer t)
 (use-package cmake-mode :ensure t :defer t)
@@ -136,9 +125,7 @@
 ;;  :config
 ;;  (add-hook 'python-mode-hook 'anaconda-mode))
 
-
-(defun magit-status-action (x)
-  (magit-status x))
+(use-package color-theme-sanityinc-tomorrow :ensure t)
 
 (use-package counsel
   :ensure t
@@ -148,11 +135,17 @@
   ;;        ("C-h s" . counsel-info-lookup-symbol)))
   :config (progn
             (counsel-mode)
+            (defun magit-status-action (x)
+              (magit-status x))
             (ivy-set-actions  ;; hit M-o to see available actions
              t
              '(("s" magit-status-action "gitstat")))))
 
 (use-package cython-mode :ensure t :defer t)
+
+;; alternative to "rg"
+;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
+(use-package deadgrep :ensure t)
 
 (use-package dockerfile-mode :ensure t :defer t)
 
@@ -182,6 +175,48 @@
 ;;   :init
 ;;   (elpy-enable))
 
+(use-package evil :ensure t
+  :config (progn
+          ;; (delete 'term-mode evil-insert-state-modes)
+
+          ;;see https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el
+          (cl-loop for (mode . state) in
+                   '(
+                     (conf-mode . emacs)
+                     (c++-mode . emacs)
+                     (compilation-mode . emacs)
+                     (dashboard-mode . emacs)
+                     (deadgrep-mode . emacs)
+                     (dired-mode . emacs)
+                     (dockerfile-mode . emacs)
+                     (emacs-lisp-mode . emacs)
+                     (eshell-mode . emacs)
+                     (flycheck-error-list-mode . emacs)
+                     (fundamental-mode . emacs)
+                     (help-mode . emacs)
+                     (helpful-mode . emacs)
+                     (image-dired-mode . emacs)
+                     (image-dired-thumbnail-mode . emacs)
+                     (image-mode . emacs)
+                     (json-mode . emacs)
+                     (makey-key-mode . emacs)
+                     (magit-repolist-mode . emacs)
+                     (org-mode . emacs)
+                     (paradox-menu-mode . emacs)
+                     (protobuf-mode . emacs)
+                     (python-mode . emacs)
+                     (quickrun/mode . emacs)
+                     (sh-mode . emacs)
+                     (shell-mode . emacs)
+                     (shell-script-mode . emacs)
+                     (shell-script-mode . emacs)
+                     (speedbar-mode . emacs)
+                     (term-mode . emacs)
+                     (text-mode . emacs)
+                     (yaml-mode . emacs)
+                     )
+                   do (evil-set-initial-state mode state))))
+
 (use-package ethan-wspace :ensure t :defer t
   :custom
   (mode-require-final-newline nil)
@@ -193,6 +228,27 @@
     (add-hook 'makefile-mode-hook 'thi::tabs-are-less-evil)
     (add-hook 'sh-mode-hook 'thi::tabs-are-less-evil)
     ))
+(use-package fill-column-indicator :ensure t)
+(use-package flx :ensure t)
+(use-package flx-ido :ensure t
+  :config
+  (flx-ido-mode))
+
+(use-package flycheck
+  :ensure t
+  :init (progn
+          (setq flycheck-highlighting-mode 'lines)
+          (setq flycheck-display-errors-delay 0.4)
+          (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+          (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup)
+          )
+  :config (global-flycheck-mode))
+
+(use-package flycheck-pycheckers
+  :ensure t
+  :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
+
+(use-package fill-column-indicator :ensure t :defer t)
 
 (use-package git-commit
   :ensure t
@@ -253,131 +309,6 @@
 
 (use-package highlight-indentation :ensure t)
 
-(use-package ssh-config-mode :ensure t)
-
-(use-package magit
-  ;; bindings: C-c M-g: magit-file-popup (use it in a buffer)
-  :ensure t
-  :custom
-  (magit-repository-directories `(("~/gitrepos" . 1)
-                                  ("~/.emacs.d" . 0)))
-  (magit-completing-read-function 'ivy-completing-read))
-
-(use-package page-break-lines :ensure t :defer t
-  :config
-  (global-page-break-lines-mode))
-
-(use-package python
-  :custom
-  ;; django style:
-  ;;
-  ;; \"\"\"
-  ;; Process foo, return bar.
-  ;; \"\"\"
-
-  ;; \"\"\"
-  ;; Process foo, return bar.
-
-  ;; If processing fails throw ProcessingError.
-  ;; \"\"\"
-  (python-fill-docstring-style 'django)
-  :mode ("\\.py\\'" . python-mode)
-  :interpreter ("python" . python-mode)
-  :config
-  ;; TODO support jumping in multi git-repo project
-  (add-hook 'python-mode-hook 'dumb-jump-mode)
-  (define-key python-mode-map (kbd "M-.") #'dumb-jump-go)
-  (define-key python-mode-map (kbd "M-,") #'dumb-jump-back)
-  (define-key python-mode-map (kbd "C-c C-i") #'pyimport-insert-missing)
-
-  ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
-  ;; (("C-`" . 'helm-semantic-or-imenu))
-  ;; :init (progn
-  ;;         (load "thi/python.conf.el"))
-  ;; :init
-  ;; (progn
-  ;;   (with-eval-after-load 'helm
-  ;;     (bind-key "C-`" #'helm-semantic-or-imenu 'python-mode-map)
-  ;;     )
-  ;;   )
-  )
-
-(use-package jedi :ensure t
-  :disabled t
-  ;; redefine jedi's C-. (jedi:goto-definition)
-  ;; to remember position, and set C-, to jump back
-  :bind (("C-." . jedi:jump-to-definition)
-   ("C-," . jedi:jump-back)
-   ("C-c d" . jedi:show-doc))
-  :init
-  (progn
-    (add-hook 'python-mode-hook 'jedi:setup)
-    ))
-
-(use-package fill-column-indicator :ensure t)
-(use-package flx :ensure t)
-(use-package flx-ido :ensure t
-  :config
-  (flx-ido-mode))
-
-(use-package evil :ensure t
-  :config (progn
-          ;; (delete 'term-mode evil-insert-state-modes)
-
-          ;;see https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el
-          (cl-loop for (mode . state) in
-                   '(
-                     (conf-mode . emacs)
-                     (c++-mode . emacs)
-                     (compilation-mode . emacs)
-                     (dashboard-mode . emacs)
-                     (deadgrep-mode . emacs)
-                     (dired-mode . emacs)
-                     (dockerfile-mode . emacs)
-                     (emacs-lisp-mode . emacs)
-                     (eshell-mode . emacs)
-                     (flycheck-error-list-mode . emacs)
-                     (fundamental-mode . emacs)
-                     (help-mode . emacs)
-                     (helpful-mode . emacs)
-                     (image-dired-mode . emacs)
-                     (image-dired-thumbnail-mode . emacs)
-                     (image-mode . emacs)
-                     (json-mode . emacs)
-                     (makey-key-mode . emacs)
-                     (magit-repolist-mode . emacs)
-                     (org-mode . emacs)
-                     (paradox-menu-mode . emacs)
-                     (protobuf-mode . emacs)
-                     (python-mode . emacs)
-                     (quickrun/mode . emacs)
-                     (sh-mode . emacs)
-                     (shell-mode . emacs)
-                     (shell-script-mode . emacs)
-                     (shell-script-mode . emacs)
-                     (speedbar-mode . emacs)
-                     (term-mode . emacs)
-                     (text-mode . emacs)
-                     (yaml-mode . emacs)
-                     )
-                   do (evil-set-initial-state mode state))))
-
-(use-package flycheck
-  :ensure t
-  :init (progn
-          (setq flycheck-highlighting-mode 'lines)
-          (setq flycheck-display-errors-delay 0.4)
-          (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
-          (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup)
-          )
-  :config (global-flycheck-mode))
-
-(use-package flycheck-pycheckers
-  :ensure t
-  :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
-
-(use-package fill-column-indicator :ensure t :defer t)
-
 (use-package helm
   :ensure t
   :defer t
@@ -390,6 +321,18 @@
               (interactive)
               (dired
                (helm-comp-read "Directory open:" thi::directory-list :fuzzy t)))))
+
+(use-package helm-projectile :ensure t :defer t
+  :init
+  ;; https://www.reddit.com/r/emacs/comments/3m8i5r/helmprojectile_quickly_findcreate_new_file_in/
+  (helm-projectile-on)
+  (setq projectile-switch-project-action 'helm-projectile)
+  (defvar helm-source-file-not-found
+    (helm-build-dummy-source
+        "Create file"
+      :action 'find-file))
+  (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
+  )
 
 
 (use-package hydra :ensure t
@@ -633,9 +576,29 @@
 ;;             (setq jabber-roster-line-format  " %c %-25n %u %-8s  %S")
 ;;             ))
 
+(use-package jedi :ensure t
+  :disabled t
+  ;; redefine jedi's C-. (jedi:goto-definition)
+  ;; to remember position, and set C-, to jump back
+  :bind (("C-." . jedi:jump-to-definition)
+   ("C-," . jedi:jump-back)
+   ("C-c d" . jedi:show-doc))
+  :init
+  (progn
+    (add-hook 'python-mode-hook 'jedi:setup)
+    ))
+
 (use-package json-mode :ensure t :defer t)
 
 (use-package lua-mode :ensure t :defer t)
+
+(use-package magit
+  ;; bindings: C-c M-g: magit-file-popup (use it in a buffer)
+  :ensure t
+  :custom
+  (magit-repository-directories `(("~/gitrepos" . 1)
+                                  ("~/.emacs.d" . 0)))
+  (magit-completing-read-function 'ivy-completing-read))
 
 (use-package multiple-cursors :ensure t :defer t
   :bind (("C-c m e"   . mc/mark-more-like-this-extended)
@@ -648,107 +611,17 @@
          ("C-c m C-e" . mc/edit-ends-of-lines)
          ("C-c m C-s" . mc/mark-all-in-region)))
 
-(use-package pip-requirements :ensure t :defer t)
-
-(use-package python-switch-quotes :ensure t :defer t)
-
-(use-package sr-speedbar :ensure t)
-
-(use-package swiper
-  :ensure t
-  :after ivy
-  :bind (("C-s" . swiper)
-         ("C-r" . swiper)))
-  ;; (bind-keys :map swiper-map
-  ;;            ("C-." (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'symbol))))))
-  ;;            ((kbd "M-.") (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'word))))))
-
-;; requires semantic-mode to be enabled
-(use-package stickyfunc-enhance :ensure t)
-
-(use-package typescript-mode :ensure t)
-
-(use-package undo-tree
-  ;; C-/ undo (without the undo tree graph) !!!
-  ;; M-_ redo (without the undo tree graph) !!!
-  :ensure t
-  :defer t
-  :config (add-hook 'after-init-hook #'global-undo-tree-mode))
-
-(use-package persp-mode :ensure t)
-
-(use-package perspective :ensure t :disabled t
-  ;; disabled because it does not yet support persp-2.0
-  (bind-keys :map projectile-mode-map
-        ("s-s" . projecile-persp-switch-project))
+(use-package page-break-lines :ensure t :defer t
   :config
-  (project-persist-mode 1) ;; C-c P n; C-c P f
-  )
+  (global-page-break-lines-mode))
 
-(use-package projectile :ensure t :defer t
-  :config (progn
-            (projectile-global-mode t)
-
-            ;; ;; needed for the ignore files feature in .projectile (see https://emacs.stackexchange.com/a/16964/2761)
-            ;; (setq projectile-indexing-method 'native)
-
-            (setq projectile-completion-system 'ivy)
-            ;; (setq projectile-switch-project-action 'projectile-find-dir)
-
-            ;; With this setting, once you have selected your project, you
-            ;; will remain in Projectile's completion system to select a
-            ;; sub-directory of your project, and then that sub-directory is
-            ;; opened for you in a dired buffer. If you use this setting,
-            ;; then you will probably also want to set
-            (setq projectile-find-dir-includes-top-level t)))
-
-(use-package project-persist :ensure t :defer t
+(use-package paradox :ensure t
+  :custom
+  (paradox-github-token t)
   :config
-  (project-persist-mode t) ;; C-c P n; C-c P f
-)
+  (setq paradox-execute-asynchronously t))
 
-(use-package helm-projectile :ensure t :defer t
-  :init
-  ;; https://www.reddit.com/r/emacs/comments/3m8i5r/helmprojectile_quickly_findcreate_new_file_in/
-  (helm-projectile-on)
-  (setq projectile-switch-project-action 'helm-projectile)
-  (defvar helm-source-file-not-found
-    (helm-build-dummy-source
-        "Create file"
-      :action 'find-file))
-  (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
-  )
-
-(add-hook 'org-mode-hook
-            (lambda ()
-              (mapc
-               (lambda (face)
-                 (set-face-attribute face nil :inherit 'fixed-pitch))
-               (list 'org-code
-                     'org-link
-                     'org-block
-                     'org-table
-                     'org-block-begin-line
-                     'org-block-end-line
-                     'org-meta-line
-                     'org-document-info-keyword))))
-
-(with-eval-after-load 'org
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . nil)
-     (gnuplot . t)
-     (python . t))))
-
-;; (use-package org-projectile
-;;   :bind (("C-c n p" . org-projectile-project-todo-completing-read)
-;;          ("C-c c" . org-capture))
-;;   :config
-;;   (progn
-;;     (setq org-projectile-projects-file "~/projects.org")
-;;     (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
-;;     (push (org-projectile-project-todo-entry) org-capture-templates))
-;;   :ensure t)
+(use-package paredit :ensure t)
 
 (use-package pdf-tools
   :ensure t
@@ -780,6 +653,39 @@
      (use-package org-pdfview
        :ensure t))
 
+(use-package persp-mode :ensure t)
+
+(use-package perspective :ensure t :disabled t
+  ;; disabled because it does not yet support persp-2.0
+  (bind-keys :map projectile-mode-map
+        ("s-s" . projecile-persp-switch-project))
+  :config
+  (project-persist-mode 1) ;; C-c P n; C-c P f
+  )
+
+(use-package pip-requirements :ensure t :defer t)
+
+(use-package projectile :ensure t :defer t
+  :config (progn
+            (projectile-global-mode t)
+
+            ;; ;; needed for the ignore files feature in .projectile (see https://emacs.stackexchange.com/a/16964/2761)
+            ;; (setq projectile-indexing-method 'native)
+
+            (setq projectile-completion-system 'ivy)
+            ;; (setq projectile-switch-project-action 'projectile-find-dir)
+
+            ;; With this setting, once you have selected your project, you
+            ;; will remain in Projectile's completion system to select a
+            ;; sub-directory of your project, and then that sub-directory is
+            ;; opened for you in a dired buffer. If you use this setting,
+            ;; then you will probably also want to set
+            (setq projectile-find-dir-includes-top-level t)))
+
+(use-package project-persist :ensure t :defer t
+  :config
+  (project-persist-mode t) ;; C-c P n; C-c P f
+)
 (use-package protobuf-mode
   :ensure t
   :config
@@ -789,8 +695,44 @@
                 (setq c-basic-offset 4)
                 (setq tab-width 4)))))
 
+(use-package pyimport :ensure t)
 
-(use-package wgrep-ag :ensure t)
+(use-package python
+  :custom
+  ;; django style:
+  ;;
+  ;; \"\"\"
+  ;; Process foo, return bar.
+  ;; \"\"\"
+
+  ;; \"\"\"
+  ;; Process foo, return bar.
+
+  ;; If processing fails throw ProcessingError.
+  ;; \"\"\"
+  (python-fill-docstring-style 'django)
+  :mode ("\\.py\\'" . python-mode)
+  :interpreter ("python" . python-mode)
+  :config
+  ;; TODO support jumping in multi git-repo project
+  (add-hook 'python-mode-hook 'dumb-jump-mode)
+  (define-key python-mode-map (kbd "M-.") #'dumb-jump-go)
+  (define-key python-mode-map (kbd "M-,") #'dumb-jump-back)
+  (define-key python-mode-map (kbd "C-c C-i") #'pyimport-insert-missing)
+
+  ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
+  ;; (("C-`" . 'helm-semantic-or-imenu))
+  ;; :init (progn
+  ;;         (load "thi/python.conf.el"))
+  ;; :init
+  ;; (progn
+  ;;   (with-eval-after-load 'helm
+  ;;     (bind-key "C-`" #'helm-semantic-or-imenu 'python-mode-map)
+  ;;     )
+  ;;   )
+  )
+
+(use-package python-switch-quotes :ensure t :defer t)
 
 (use-package rg :ensure t
   ;; https://github.com/dajva/rg.el
@@ -808,14 +750,83 @@
     (rg-define-toggle "--context 3" (kbd "C-c c"))
   ))
 
-;; an alternative to "rg"
-;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
-(use-package deadgrep :ensure t
-  :bind ("<f7>" . deadgrep))
+(use-package smart-mode-line :ensure t
+  :custom
+  (sml/no-confirm-load-theme t)
+  :config
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                '(lambda (f)
+                   (with-selected-frame f
+                     (when (window-system f)
+                       (tool-bar-mode -1)
+                       (load-theme thi::theme t)
+                       (sml/setup)))))
+    (progn
+      (load-theme thi::theme t)
+      (sml/setup))))
 
 (use-package smex :ensure t :config (load "thi-ido.el"))
 
+(use-package sr-speedbar :ensure t)
+
+(use-package ssh-config-mode :ensure t)
+
+;; requires semantic-mode to be enabled
+(use-package stickyfunc-enhance :ensure t)
+
+(use-package swiper
+  :ensure t
+  :after ivy
+  :bind (("C-s" . swiper)
+         ("C-r" . swiper)))
+  ;; (bind-keys :map swiper-map
+  ;;            ("C-." (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'symbol))))))
+  ;;            ((kbd "M-.") (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'word))))))
+
+(use-package typescript-mode :ensure t)
+
+(use-package undo-tree
+  ;; C-/ undo (without the undo tree graph) !!!
+  ;; M-_ redo (without the undo tree graph) !!!
+  :ensure t
+  :defer t
+  :config (add-hook 'after-init-hook #'global-undo-tree-mode))
+
+(add-hook 'org-mode-hook
+            (lambda ()
+              (mapc
+               (lambda (face)
+                 (set-face-attribute face nil :inherit 'fixed-pitch))
+               (list 'org-code
+                     'org-link
+                     'org-block
+                     'org-table
+                     'org-block-begin-line
+                     'org-block-end-line
+                     'org-meta-line
+                     'org-document-info-keyword))))
+
 (use-package visual-fill-column :ensure t)
+
+(with-eval-after-load 'org
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . nil)
+     (gnuplot . t)
+     (python . t))))
+
+;; (use-package org-projectile
+;;   :bind (("C-c n p" . org-projectile-project-todo-completing-read)
+;;          ("C-c c" . org-capture))
+;;   :config
+;;   (progn
+;;     (setq org-projectile-projects-file "~/projects.org")
+;;     (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+;;     (push (org-projectile-project-todo-entry) org-capture-templates))
+;;   :ensure t)
+
+(use-package wgrep-ag :ensure t)
 
 (use-package which-key :ensure t
   :config
@@ -845,29 +856,6 @@
   :init
   (progn
     (bind-key "M-z" 'zop-to-char)))
-
-(use-package zotelo :ensure t :defer t
-  :init
-  (progn
-    (add-hook 'TeX-mode-hook 'zotelo-minor-mode)))
-
-(use-package color-theme-sanityinc-tomorrow :ensure t)
-
-(use-package smart-mode-line :ensure t
-  :custom
-  (sml/no-confirm-load-theme t)
-  :config
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                '(lambda (f)
-                   (with-selected-frame f
-                     (when (window-system f)
-                       (tool-bar-mode -1)
-                       (load-theme thi::theme t)
-                       (sml/setup)))))
-    (progn
-      (load-theme thi::theme t)
-      (sml/setup))))
 
 (with-eval-after-load 'files
   (setq backup-directory-alist `(("." . ,(concat thi::cache-file-dir
