@@ -145,7 +145,19 @@
 
 ;; alternative to "rg"
 ;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
-(use-package deadgrep :ensure t)
+(use-package deadgrep :ensure t
+  :config
+  ;; override deadgrep--project-root to include support for dumb-jump files (.dumbjump, .dumbjumpignore)
+  (defun deadgrep--project-root ()
+  "Guess the project root of the given FILE-PATH."
+  (let ((root default-directory)
+        (project (locate-dominating-file default-directory #'dumb-jump-get-config)))
+    (when project
+      (setq root project)
+    (when root
+      (deadgrep--lookup-override root))))
+  )
+  )
 
 (use-package dockerfile-mode :ensure t :defer t)
 
