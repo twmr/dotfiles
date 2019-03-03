@@ -66,11 +66,9 @@
       `(load ,(concat thi::config-dir "/" file)))))
 
 ;; Bootstrap `use-package'
-(if (fboundp 'package-installed-p)
-    (unless (package-installed-p 'use-package)
-      (package-refresh-contents)
-      (package-install 'use-package))
-  (require 'use-package))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 (eval-when-compile
   (require 'use-package))
