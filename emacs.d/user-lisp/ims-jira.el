@@ -1,3 +1,5 @@
+;;; ims-jira.el --- Jira integration @ IMS -*- lexical-binding: t; -*-
+
 (defcustom ims-jira-host "jira.rnd.ims.co.at"
   "hostname of the jira instance"
   :group 'ims-jira
@@ -35,7 +37,7 @@
                (fields (map-elt result 'fields)))
           (map-elt fields 'summary)))))
 
-;; (get-jira-ticket-summary "RD-872")
+;; (ims-jira-get-ticket-summary "RD-872")
 ;; (message (ims-jira-authentication))
 
 (provide 'ims-jira)
