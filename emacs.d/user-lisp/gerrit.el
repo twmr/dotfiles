@@ -1,3 +1,4 @@
+;;; gerrit.el --- Gerrit integration @ IMS -*- lexical-binding: t; -*-
 ;; my personal gerrit integration in emacs.
 ;;
 ;; (load 'gerrit)
