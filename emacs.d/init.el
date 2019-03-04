@@ -248,6 +248,8 @@
 
 (use-package flycheck
   :ensure t
+  :custom
+  (flycheck-python-pylint-executable "python3")
   :init (progn
           (setq flycheck-highlighting-mode 'lines)
           (setq flycheck-display-errors-delay 0.4)
