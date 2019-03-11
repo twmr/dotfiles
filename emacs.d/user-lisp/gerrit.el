@@ -160,6 +160,7 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
 (defun gerrit-download ()
   "Download change from the gerrit server."
   (interactive)
+  ;; TODO handle non-zero exit status (see https://stackoverflow.com/questions/23299314/finding-the-exit-code-of-a-shell-command-in-elisp)
   (let ((open-changes (shell-command-to-string "git review -l")))
 
     ;; remove last two lines
