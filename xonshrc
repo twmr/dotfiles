@@ -1,11 +1,24 @@
+# https://github.com/ninjaaron/xonsh-quickstart
 $AUTO_CD = True
 #PROMPT = "#> "
-#SHELL_TYPE = prompt_toolkit
-$UPDATE_COMPLETIONS_ON_KEYPRESS = True
+$SHELL_TYPE = 'prompt_toolkit2'
+# $UPDATE_COMPLETIONS_ON_KEYPRESS = True
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
 
+"""
+completions from history (ghost text) can be selectd using either the
+right arrow key or Ctrl-e.
+
+FIXME job-control problems (Ctrl-z Ctrl-\ ... see
+https://github.com/xonsh/xonsh/issues/1103
+and https://xon.sh/tutorial.html?highlight=pause
+"""
 aliases['dotf'] = ('cd', '~/gitrepos/dotfiles')
+aliases['gr'] = ('cd', '~/gitrepos')
 aliases['gs'] = ('git', 'status')
 aliases['gg'] = ('git', 'grep')
 aliases['gd'] = ('git', 'diff')
+aliases['gpl'] = ('git', 'pull')
+aliases['gpr'] = ('git', 'pull', '--rebase')
 aliases['reload_xonshrc'] = ("source", "~/.xonshrc")
+aliases['src'] = aliases['reload_xonshrc']
