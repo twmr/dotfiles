@@ -83,6 +83,9 @@
 ;;          (lambda ()
 ;;            (ibuffer-perspective-list)))
 
+(define-derived-mode xonsh-mode python-mode "Xonsh Mode"
+  "A mode for .xsh files.")
+
 ;; Go into proper mode according to file extension
 (setq auto-mode-alist
       (append '(( "\\.C$"    . c++-mode)
@@ -99,8 +102,6 @@
                 ;; ("SCons\\(cript\\|truct\\)$"    . python-mode)
                 ("SConscript$"    . python-mode)
                 ("SConstruct$"    . python-mode)
-                ("xonshrc$"    . python-mode)
-                ("\\.xsh$"    . python-mode)
                 ("\\.ma?k\\'" . makefile-mode)
                 ("\\(M\\|m\\|GNUm\\)akefile\\(\\.in\\)?" . makefile-mode)
                 ("\\.pl$"   . perl-mode)
@@ -146,6 +147,9 @@
                 ("pylintrc" . conf-mode)
                 ("\\.service$" . conf-mode)
                 ("Dockerfile" . dockefile-mode)
+                ("\\.xsh\\'" . xonsh-mode)
+                ("\\.xonshrc\\'" . xonsh-mode)
+                ("xonshrc" . xonsh-mode)
                 )
               auto-mode-alist))
 

@@ -725,6 +725,7 @@
   ;; If processing fails throw ProcessingError.
   ;; \"\"\"
   (python-fill-docstring-style 'django)
+  (python-indent-guess-indent-offset-verbose nil)
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
   :config
