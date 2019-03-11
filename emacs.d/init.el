@@ -264,6 +264,15 @@
 
 (use-package fill-column-indicator :ensure t :defer t)
 
+(use-package gerrit
+  :custom
+  (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
+  :config
+  (progn
+    (add-hook 'after-init-hook #'gerrit-load-lists)
+    (global-set-key (kbd "C-x i") 'gerrit-upload)
+    (global-set-key (kbd "C-x o") 'gerrit-download)))
+
 (use-package git-commit
   :ensure t
   :bind (:map git-commit-mode-map
@@ -900,14 +909,7 @@
 (load "thi-compilation")
 (load "thi-term")
 
-(setq gerrit-save-file (concat thi::cache-file-dir "/git-review"))
-(load "gerrit")
 (load "ims-jira")
-
-(add-hook 'after-init-hook #'gerrit-load-lists)
-
-(global-set-key (kbd "C-x i") 'gerrit-upload)
-(global-set-key (kbd "C-x o") 'gerrit-download)
 
 
 ;; taken from http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html
