@@ -32,7 +32,7 @@
   ;; which group should be used?
   :group 'files)
 
-(defcustom gerrit-download-max-saved-items 200
+(defcustom gerrit-upload-max-saved-items 200
   "Maximum number of items of the gerrit lists that will be saved.
 A nil value means to save the whole lists."
   :group 'gerrit
@@ -53,8 +53,8 @@ Write data into the file specified by `gerrit-save-file'."
         (set-buffer-file-coding-system 'utf-8-emacs)
         (insert (format-message ";;; Automatically generated on %s.\n"
                                 (current-time-string)))
-        (gerrit-dump-variable 'gerrit-upload-topic-history gerrit-download-max-saved-items)
-        (gerrit-dump-variable 'gerrit-upload-reviewers-history gerrit-download-max-saved-items)
+        (gerrit-dump-variable 'gerrit-upload-topic-history gerrit-upload-max-saved-items)
+        (gerrit-dump-variable 'gerrit-upload-reviewers-history gerrit-upload-max-saved-items)
         (insert "\n\n;; Local Variables:\n"
                 ";; coding: utf-8-emacs\n"
                 ";; End:\n")
@@ -74,7 +74,6 @@ Write data into the file specified by `gerrit-save-file'."
   "Load a previously saved recent list.
 Read data from the file specified by `gerrit-save-file'."
   (interactive)
-
   (let ((file (expand-file-name gerrit-save-file))
         ;; We do not want Tramp asking for passwords.
         (non-essential t))
@@ -99,29 +98,33 @@ Read data from the file specified by `gerrit-save-file'."
       (setq ,history (remove-duplicates ,history :test 'string=)))))
 
 (defun gerrit-upload-add-reviewers ()
+  "Interactively ask for space separated reviewers."
   (interactive)
   (gerrit-upload-completing-set "Reviewers (space separated): "
                                     gerrit-upload-reviewers-history
                                     gerrit-last-reviewers))
 
 (defun gerrit-upload-set-topic ()
+  "Interactively ask for a topic name."
   (interactive)
   (gerrit-upload-completing-set "Topic: "
                                     gerrit-upload-topic-history
                                     gerrit-last-topic))
 
 (defun gerrit-upload-set-args ()
+  "Interactively ask for arguments that are passed to git-review."
   (interactive)
   (gerrit-upload-completing-set "Args (space separated): "
                                     gerrit-upload-args-history
                                     gerrit-upload-args))
 
-(defun gerrit-upload-current-cmd-args ()
+(defun gerrit-upload-create-git-review-cmd ()
+  "Created cmdstr for git-review."
   (interactive)
   (let ((reviewers gerrit-last-reviewers)
         (topic gerrit-last-topic)
         (args gerrit-upload-args)
-        (cmdstr "--yes"))
+        (cmdstr "git review --yes"))
     (unless (equal "" topic)
       (setq cmdstr (concat cmdstr " -t " topic)))
     (unless (equal "" reviewers)
@@ -132,7 +135,7 @@ Read data from the file specified by `gerrit-save-file'."
 
 (defun gerrit-upload-run ()
   (interactive)
-  (let ((cmdstr (concat "git review " (gerrit-upload-current-cmd-args))))
+  (let ((cmdstr (gerrit-upload-create-git-review-cmd)))
     ;; (message cmdstr)
     (magit-git-command cmdstr)))
 
@@ -144,7 +147,7 @@ Read data from the file specified by `gerrit-save-file'."
                                            (setq gerrit-last-reviewers "")
                                            (setq gerrit-upload-args gerrit-upload-default-args)))
   "
-gerrit-upload: (current args: %(concat (gerrit-upload-current-cmd-args)))
+gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
 "
   ("r" gerrit-upload-add-reviewers "Add reviewers")
   ("t" gerrit-upload-set-topic "Set topic")

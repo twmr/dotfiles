@@ -899,10 +899,13 @@
 (load "thi-nxml")
 (load "thi-compilation")
 (load "thi-term")
+
+(setq gerrit-save-file (concat thi::cache-file-dir "/git-review"))
 (load "gerrit")
 (load "ims-jira")
 
 (add-hook 'after-init-hook #'gerrit-load-lists)
+
 (global-set-key (kbd "C-x i") 'gerrit-upload)
 (global-set-key (kbd "C-x o") 'gerrit-download)
 
