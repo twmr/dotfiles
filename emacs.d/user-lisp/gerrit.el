@@ -3,7 +3,8 @@
 ;;
 ;; (load 'gerrit)
 ;; (add-hook 'after-init-hook #'gerrit-load-lists)
-;; (global-set-key (kbd "C-x i") 'hydra-upload)
+;; (global-set-key (kbd "C-x i") 'gerrit-upload)
+;; (global-set-key (kbd "C-x o") 'gerrit-download)
 
 ;;; Code:
 
