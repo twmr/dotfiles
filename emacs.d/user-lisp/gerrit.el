@@ -85,39 +85,39 @@ Read data from the file specified by `gerrit-save-file'."
   ;;; what if I want to enter only a substring ?
   ;;; https://github.com/abo-abo/swiper/pull/1049/files
   `(let ((value (ivy-completing-read
-                  ,msg
-                  ,history
-                  nil nil nil nil
-                  ;; default value set to LRU reviewers value
-                  (car ,history)
-                  )))
+                 ,msg
+                 ,history
+                 nil nil nil nil
+                 ;; default value set to LRU reviewers value
+                 (car ,history)
+                 )))
      (unless (null ,last)
        (setq ,last value))
-    (unless (equal "" value)
-      ;; todo simplify the duplicate handling
-      (push value ,history)
-      (setq ,history (remove-duplicates ,history :test 'string=)))))
+     (unless (equal "" value)
+       ;; todo simplify the duplicate handling
+       (push value ,history)
+       (setq ,history (remove-duplicates ,history :test 'string=)))))
 
 (defun gerrit-upload-add-reviewers ()
   "Interactively ask for space separated reviewers."
   (interactive)
   (gerrit-upload-completing-set "Reviewers (space separated): "
-                                    gerrit-upload-reviewers-history
-                                    gerrit-last-reviewers))
+                                gerrit-upload-reviewers-history
+                                gerrit-last-reviewers))
 
 (defun gerrit-upload-set-topic ()
   "Interactively ask for a topic name."
   (interactive)
   (gerrit-upload-completing-set "Topic: "
-                                    gerrit-upload-topic-history
-                                    gerrit-last-topic))
+                                gerrit-upload-topic-history
+                                gerrit-last-topic))
 
 (defun gerrit-upload-set-args ()
   "Interactively ask for arguments that are passed to git-review."
   (interactive)
   (gerrit-upload-completing-set "Args (space separated): "
-                                    gerrit-upload-args-history
-                                    gerrit-upload-args))
+                                gerrit-upload-args-history
+                                gerrit-upload-args))
 
 (defun gerrit-upload-create-git-review-cmd ()
   "Created cmdstr for git-review."
