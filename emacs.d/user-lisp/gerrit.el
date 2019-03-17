@@ -177,7 +177,17 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
 
 (defun foobar2 ()
   (interactive)
-  (message "enterpressed (2)"))
+  (cl-destructuring-bind (beg . end)
+      (bounds-of-thing-at-point 'word)
+    (message "enterpressed (2) %s"
+             (buffer-substring-no-properties beg end))))
+
+;;; include votes in  open gerrit review lines
+;;; press "ret" on line opens change in browser
+;;; parse commit messages and show jira tickets (ret on jira tickets opens them)
+;;;
+
+
 
 ;; only for heading
 (defvar magit-open-reviews-section-map
@@ -197,6 +207,22 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
     map)
   "Keymap for `magit-open-reviews' top-level section.")
 
+;; todo defun that queries open reviews and creates a datastructure (alist?)
+;; that can be used in magit-gerrit-insert-status
+
+(defun magit-gerrit--fetch-open-reviews ()
+  ;; we need the following information:
+  ;; changenr, version, name, CR/V, assignee, topic
+  (interactive)
+  `(
+   `(3 "version0.1" "sumo")
+   `(45 "version0.1" "sumo")
+   `(23 "version0.1" "sumo")
+   ))
+
+(dolist (loopvar (magit-gerrit--fetch-open-reviews))
+  (message (prin1-to-string loopvar)))
+
 (defun magit-gerrit-insert-status ()
   (magit-insert-section (open-reviews)
     ;; the behavoir should be similar to "Recent commits"
@@ -206,15 +232,23 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
       (progn
         (magit-insert-section (open-reviews-issue loopvar t)
           (magit-insert-heading
-            (format (format "%%%ds (%%s) %%s\n" (1+ 4)) ;1+ accounts for #
+            (format (format "%%%ds (%%s) %%s http://www.orf.at" (1+ 4)) ;1+ accounts for #
                     (propertize (format "#%d" loopvar))
                     (propertize "version7.0" 'face '(:foreground "red"))
                     (propertize "foobar")))
-          (insert "metadata1\n"))
+            ;; (propertize (format "#%d " loopvar)))
+
+          ;; (insert (propertize "version7.0\n" 'face '(:foreground "red")))
+          ;; (insert "metadata1\n")
+          ;; (insert-button (format "fsf%d" loopvar)
+          ;;                'action (lambda (x) (browse-url (button-get x 'url)))
+          ;;                'url "http://www.fsf.org")
+          (insert ?\n))
+
         ;; (magit-insert-heading)
         ;; (insert "Metadata1: xxx\n")
         ;; (insert "Metadata2: yyy\n")
-        ))
+       ))
     (insert ?\n)
     ))
 
