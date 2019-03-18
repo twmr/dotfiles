@@ -623,7 +623,15 @@
   :custom
   (magit-repository-directories `(("~/gitrepos" . 1)
                                   ("~/.emacs.d" . 0)))
-  (magit-completing-read-function 'ivy-completing-read))
+  (magit-completing-read-function 'ivy-completing-read)
+  :bind
+  (("C-x g" . magit-status))
+  :config
+  (defun magit-gpr ()
+    "Run git pull --rebase in current repo."
+    (interactive)
+    (magit-git-command "git pull --rebase")
+    ))
 
 (use-package multiple-cursors :ensure t :defer t
   :bind (("C-c m e"   . mc/mark-more-like-this-extended)

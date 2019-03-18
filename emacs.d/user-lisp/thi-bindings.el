@@ -37,8 +37,6 @@
 
 (global-set-key (kbd "<C-return>") 'other-window)
 
-(global-set-key (kbd "C-x g") 'magit-status)
-
 ;; replace buffermenu with ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
