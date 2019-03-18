@@ -212,30 +212,33 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
 
 (defun magit-gerrit--fetch-open-reviews ()
   ;; we need the following information:
-  ;; changenr, version, name, CR/V, assignee, topic
+  ;; changenr, version, name, CR/V, assignee, topic, fixes/related ticket
   (interactive)
+  ;; fixme do rest api call here
   `(
-   `(3 "version0.1" "sumo")
-   `(45 "version0.1" "sumo")
-   `(23 "version0.1" "sumo")
+    (3 "version0.1" "topic1" "sumo")
+    (45 "version0.1" "topic2" "sumo")
+    (23 "version0.1" "" "sumo")
    ))
 
-(dolist (loopvar (magit-gerrit--fetch-open-reviews))
-  (message (prin1-to-string loopvar)))
 
 (defun magit-gerrit-insert-status ()
   (magit-insert-section (open-reviews)
     ;; the behavoir should be similar to "Recent commits"
     (magit-insert-heading "Open Gerrit Reviews")
-    (dolist (loopvar `(1245 1249 1222 1234 0091))
+    (dolist (loopvar (magit-gerrit--fetch-open-reviews))
       ;; (magit-insert-heading
       (progn
         (magit-insert-section (open-reviews-issue loopvar t)
           (magit-insert-heading
-            (format (format "%%%ds (%%s) %%s http://www.orf.at" (1+ 4)) ;1+ accounts for #
-                    (propertize (format "#%d" loopvar))
-                    (propertize "version7.0" 'face '(:foreground "red"))
-                    (propertize "foobar")))
+            (format (format "%%%ds (%%s%%s) %%s" (1+ 4)) ;1+ accounts for #
+                    (format "#%d" (nth 0 loopvar))
+                    (propertize (nth 1 loopvar) 'face '(:foreground "red"))
+                    (let ((topicname (nth 2 loopvar)))
+                      (if (< 0 (length topicname))
+                          (propertize (format "@%s" topicname) 'face '(:foreground "green"))
+                        ""))
+                    (nth 3 loopvar)))
             ;; (propertize (format "#%d " loopvar)))
 
           ;; (insert (propertize "version7.0\n" 'face '(:foreground "red")))
@@ -243,12 +246,14 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
           ;; (insert-button (format "fsf%d" loopvar)
           ;;                'action (lambda (x) (browse-url (button-get x 'url)))
           ;;                'url "http://www.fsf.org")
-          (insert ?\n))
+
+          ;; (insert ?\n)
+          )
 
         ;; (magit-insert-heading)
         ;; (insert "Metadata1: xxx\n")
         ;; (insert "Metadata2: yyy\n")
-       ))
+        ))
     (insert ?\n)
     ))
 
