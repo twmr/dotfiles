@@ -175,12 +175,14 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
   (interactive)
   (message "enterpressed"))
 
-(defun foobar2 ()
+(defun magit-open-reviews-open-gerrit-change()
   (interactive)
-  (cl-destructuring-bind (beg . end)
-      (bounds-of-thing-at-point 'word)
-    (message "enterpressed (2) %s"
-             (buffer-substring-no-properties beg end))))
+  ;; TODO avoid using string-match here if possible
+  (message "TODO open gerrit change #%s"
+           (save-match-data
+             (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
+               (and (string-match "^.*#\\([^ ]+\\)" line)
+                    (match-string 1 line))))))
 
 ;;; include votes in  open gerrit review lines
 ;;; press "ret" on line opens change in browser
@@ -203,7 +205,7 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
   (let ((map (make-sparse-keymap)))
     (define-key map "jT" #'magit-todos-jump-to-todos)
     (define-key map "jl" #'magit-todos-list)
-    (define-key map (kbd "RET") 'foobar2)
+    (define-key map (kbd "RET") 'magit-open-reviews-open-gerrit-change)
     map)
   "Keymap for `magit-open-reviews' top-level section.")
 
@@ -213,6 +215,7 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
 (defun magit-gerrit--fetch-open-reviews ()
   ;; we need the following information:
   ;; changenr, version, name, CR/V, assignee, topic, fixes/related ticket
+  ;; sort by modification-date?
   (interactive)
   ;; fixme do rest api call here
   `(
@@ -227,17 +230,19 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
     ;; the behavoir should be similar to "Recent commits"
     (magit-insert-heading "Open Gerrit Reviews")
     (dolist (loopvar (magit-gerrit--fetch-open-reviews))
-      ;; (magit-insert-heading
       (progn
         (magit-insert-section (open-reviews-issue loopvar t)
           (magit-insert-heading
-            (format (format "%%%ds (%%s%%s) %%s" (1+ 4)) ;1+ accounts for #
+            (format (format "%%%ds %%%ds %%s" (1+ 4) 28)
                     (format "#%d" (nth 0 loopvar))
-                    (propertize (nth 1 loopvar) 'face '(:foreground "red"))
-                    (let ((topicname (nth 2 loopvar)))
-                      (if (< 0 (length topicname))
-                          (propertize (format "@%s" topicname) 'face '(:foreground "green"))
-                        ""))
+                    (concat
+                     "("
+                     (let ((topicname (nth 2 loopvar)))
+                       (if (< 0 (length topicname))
+                           (propertize (format "%s@" topicname) 'face '(:foreground "green"))
+                         ""))
+                     (propertize (nth 1 loopvar) 'face '(:foreground "red"))
+                     ")")
                     (nth 3 loopvar)))
             ;; (propertize (format "#%d " loopvar)))
 
