@@ -171,41 +171,25 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
       (magit-git-command (concat "git review -d "
                                  (car (s-split " " (s-trim changenr))))))))
 
-(defun foobar ()
-  (interactive)
-  (message "enterpressed"))
+
 
 (defun magit-open-reviews-open-gerrit-change()
   (interactive)
-  ;; TODO avoid using string-match here if possible
-  (message "TODO open gerrit change #%s"
-           (save-match-data
-             (let ((line (buffer-substring-no-properties (line-beginning-position) (line-end-position))))
-               (and (string-match "^.*#\\([^ ]+\\)" line)
-                    (match-string 1 line))))))
+  (message (prin1-to-string (nth 0 (oref (magit-current-section) value)))))
 
+;;; TODOS:
 ;;; include votes in  open gerrit review lines
 ;;; press "ret" on line opens change in browser
 ;;; parse commit messages and show jira tickets (ret on jira tickets opens them)
 ;;;
 
 
-
-;; only for heading
-(defvar magit-open-reviews-section-map
-  (let ((map (make-sparse-keymap)))
-    (define-key map "jT" #'magit-todos-jump-to-todos)
-    (define-key map "jl" #'magit-todos-list)
-    (define-key map (kbd "RET") 'foobar)
-    map)
-  "Keymap for `magit-open-reviews' top-level section.")
-
 ;; for issues
 (defvar magit-open-reviews-issue-section-map
   (let ((map (make-sparse-keymap)))
     (define-key map "jT" #'magit-todos-jump-to-todos)
     (define-key map "jl" #'magit-todos-list)
-    (define-key map (kbd "RET") 'magit-open-reviews-open-gerrit-change)
+    (define-key map (kbd "RET") #'magit-open-reviews-open-gerrit-change)
     map)
   "Keymap for `magit-open-reviews' top-level section.")
 
