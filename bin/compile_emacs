@@ -58,7 +58,8 @@ set -e
     --with-xpm \
     --without-jpeg \
     --without-gif \
-    --without-tiff
+    --without-tiff \
+    --with-json
 #    --with-xml2 \
 #    --with-cairo \
 #    --with-xwidgets
