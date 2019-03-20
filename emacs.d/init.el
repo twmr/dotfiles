@@ -645,6 +645,37 @@
          ("C-c m C-e" . mc/edit-ends-of-lines)
          ("C-c m C-s" . mc/mark-all-in-region)))
 
+(use-package org
+  :ensure t
+  :custom
+  (org-capture-templates
+   '(("t" ; hotkey
+      "Todo list item" ; name
+      entry ; type
+       (file+headline org-default-notes-file "Tasks") ; heading type and title
+      "* TODO %?\n  %i\n  %a")
+     ("j" "Journal entry"
+      entry
+      (file+olp+datetree "~/org/journal.org")
+      (file "~/.emacs.d/org-templates/journal.orgcaptmpl")))
+   )
+  :bind (("C-c c" . org-capture))
+  :config
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '((emacs-lisp . nil)
+     (python . t))))
+
+;; (use-package org-projectile
+;;   :bind (("C-c n p" . org-projectile-project-todo-completing-read)
+;;          ("C-c c" . org-capture))
+;;   :config
+;;   (progn
+;;     (setq org-projectile-projects-file "~/projects.org")
+;;     (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
+;;     (push (org-projectile-project-todo-entry) org-capture-templates))
+;;   :ensure t)
+
 (use-package page-break-lines :ensure t :defer t
   :config
   (global-page-break-lines-mode))
@@ -843,23 +874,6 @@
                      'org-document-info-keyword))))
 
 (use-package visual-fill-column :ensure t)
-
-(with-eval-after-load 'org
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((emacs-lisp . nil)
-     (gnuplot . t)
-     (python . t))))
-
-;; (use-package org-projectile
-;;   :bind (("C-c n p" . org-projectile-project-todo-completing-read)
-;;          ("C-c c" . org-capture))
-;;   :config
-;;   (progn
-;;     (setq org-projectile-projects-file "~/projects.org")
-;;     (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
-;;     (push (org-projectile-project-todo-entry) org-capture-templates))
-;;   :ensure t)
 
 (use-package wgrep-ag :ensure t)
 
