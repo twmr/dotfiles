@@ -427,16 +427,18 @@ down the URL structure to send the request."
   (interactive)
   (message (prin1-to-string (gerrit-rest-sync "GET" nil "/config/server/version"))))
 
-(defun gerrit-get-info ()
-  ;; WORKS
+(defun gerrit-get-topic-info (topicname)
+  "Return information about open topic"
+  ;; TODO interactively ask for topicname
   (interactive)
   (let* ((topicname "etssimuhwsimuenv")
-         (req (format (concat "/changes/?q=is:open+topic:%s&"
-                              "o=DOWNLOAD_COMMANDS&"
-                              "o=CURRENT_REVISION&"
-                              "o=CURRENT_COMMIT&"
-                              "o=DETAILED_LABELS&"
-                              "o=DETAILED_ACCOUNTS") topicname))
+         (fmtstr (concat "/changes/?q=is:open+topic:%s&"
+                         "o=DOWNLOAD_COMMANDS&"
+                         "o=CURRENT_REVISION&"
+                         "o=CURRENT_COMMIT&"
+                         "o=DETAILED_LABELS&"
+                         "o=DETAILED_ACCOUNTS"))
+         (req (format fmtstr topicname))
          ;; (req "/changes/software%2Fpocscripts~version7.0~I19b86aa77941d0301f2a836b8007a1a26c333090")
          (resp (gerrit-rest-sync "GET" nil req)))
     ;; (setq info-response resp)
