@@ -428,11 +428,9 @@ down the URL structure to send the request."
   (message (prin1-to-string (gerrit-rest-sync "GET" nil "/config/server/version"))))
 
 (defun gerrit-get-topic-info (topicname)
-  "Return information about open topic"
-  ;; TODO interactively ask for topicname
-  (interactive)
-  (let* ((topicname "etssimuhwsimuenv")
-         (fmtstr (concat "/changes/?q=is:open+topic:%s&"
+  "Return information about an open topic"
+  (interactive "sEnter a topic name: ")
+  (let* ((fmtstr (concat "/changes/?q=is:open+topic:%s&"
                          "o=DOWNLOAD_COMMANDS&"
                          "o=CURRENT_REVISION&"
                          "o=CURRENT_COMMIT&"
@@ -448,6 +446,7 @@ down the URL structure to send the request."
 
 ;; (ims-gerrit-get-assignee "software/elab" "version0.2" 7730)
 
+;; (gerrit-get-topic-info "etssimuhwsimuenv")
 
 (defun gerrit-get-current-project ()
   (interactive)
