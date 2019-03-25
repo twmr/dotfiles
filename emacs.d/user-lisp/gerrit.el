@@ -430,6 +430,7 @@ down the URL structure to send the request."
   (message (prin1-to-string (gerrit-rest-sync "GET" nil "/config/server/version"))))
 
 (defun gerrit-get-info ()
+  ;; WORKS
   (interactive)
   (let* ((topicname "etssimuhwsimuenv")
          (req (format (concat "/changes/?q=is:open+topic:%s&"
@@ -440,11 +441,55 @@ down the URL structure to send the request."
                               "o=DETAILED_ACCOUNTS") topicname))
          ;; (req "/changes/software%2Fpocscripts~version7.0~I19b86aa77941d0301f2a836b8007a1a26c333090")
          (resp (gerrit-rest-sync "GET" nil req)))
+    ;; (setq info-response resp)
     ;; (req "/changes/software%2Fpocscripts~version7.0~I19b86aa77941d0301f2a836b8007a1a26c333090"))
     ;; (req "/changes/?q=4900&o=ALL_REVISIONS"))
     (message "%s" (prin1-to-string resp))))
 
 ;; (ims-gerrit-get-assignee "software/elab" "version0.2" 7730)
+
+
+(defun gerrit-get-current-project ()
+  (interactive)
+  (let* ((project (s-chop-suffix ".git"
+                                (nth 1 (s-split ":"
+                                                (nth 0 (magit-config-get-from-cached-list "remote.origin.url")))))))
+    project))
+
+
+(defun gerrit-open-reviews-for-current-project ()
+  (interactive)
+  (let* ((project (gerrit-get-current-project))
+         (json-array-type 'list)
+         (req (format (concat "/changes/?q=is:open+project:%s&"
+                              "o=DOWNLOAD_COMMANDS&"
+                              "o=CURRENT_REVISION&"
+                              "o=CURRENT_COMMIT&"
+                              "o=DETAILED_LABELS&"
+                              "o=DETAILED_ACCOUNTS")
+                      (s-replace-all '(("/" . "%2F")) project)))
+         ;; )
+         (resp (gerrit-rest-sync "GET" nil req)))
+
+    (setq open-reviews-response resp)
+    ;; (cdr (assoc 'subject (cdr (assoc 'commit (cdr (nth 0(cdr (assoc 'revisions (nth 0 open-reviews-response)))))))))
+    (message "%s" (prin1-to-string (nth 0 resp)))))
+
+  ;; TODO get config from remote.origin.url and split string :
+  ;; (message "%s" (nth 1 (s-split ":" (magit-config-get-from-cached-list "remote.origin.url")))))
+
+
+;; (defun gerrit-open-reviews-for-current-project ()
+;;   (interactive)
+;;   (let* ((project (gerrit-get-current-project))
+;;          (req (concat "/changes/?q=is:open+project:software%2Fhwsimuenv"))
+;;          ;; )
+;;          (resp (gerrit-rest-sync "GET" nil req)))
+
+;;     (message "%s" (prin1-to-string req))))
+
+
+
 
 ;; (gerrit-get-info)
 
