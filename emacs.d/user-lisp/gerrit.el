@@ -13,6 +13,11 @@
 (require 'hydra)
 (require 'recentf)
 (require 's)
+(require 'json)
+(require 'url)
+(require 'url-http)
+(require 'url-vars)
+(require 'subr-x)
 
 (defvar gerrit-upload-topic-history nil "List of recently used topic names.")
 (defvar gerrit-upload-reviewers-history nil "List of recently used reviewers.")
@@ -293,8 +298,6 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
              (delete-region (point) (point-max))
              (buffer-string))))))))
 
-
-
 (defun magit-gerrit-insert-status3 (&optional type value)
   "Insert section showing recent commits.
 Show the last `magit-log-section-commit-count' commits."
@@ -324,10 +327,126 @@ Show the last `magit-log-section-commit-count' commits."
                               (--remove (string-prefix-p "-n" it)
                                         magit-log-section-arguments))))))
 
-
-
 ;; (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
 
+;; (let
+;;     ((url "https://api.github.com/repos/thisch/pytest/contents/_pytest/warnings.py?ref=master")
+;;      (url-request-extra-headers
+;;       `(("Content-Type" . "application/json"))))
+;;   (switch-to-buffer-other-window (url-retrieve-synchronously url))
+;;   (goto-char url-http-end-of-headers)
+;;   (when-let ((json-object-type 'hash-table)
+;;            (json-key-type 'symbol)
+;;            (result (json-read))
+;;            (fields (map-elt result '_links))
+;;            (self (map-elt fields 'self)))
+;;     (erase-buffer)
+;;     (insert self)))
+
+(defcustom ims-gerrit-host "gerrit.rnd.ims.co.at"
+  "hostname of the gerrit instance"
+  :group 'ims-jira
+  :type 'string)
+
+(defun ims-gerrit-authentication ()
+  "Return an encoded string with jira username and password."
+  (let ((pass-entry (auth-source-user-and-password ims-gerrit-host)))
+
+    (if-let ((username (nth 0 pass-entry))
+             (password (nth 1 pass-entry)))
+        (base64-encode-string
+         (concat username ":" password)))))
+
+(defun ims-gerrit-get-assignee (project version changeidnr)
+  "Retrieve summary of TICKETID in jira."
+  (let* ((url
+          (concat "https://" ims-gerrit-host
+                  "/config/server/version"))
+                  ;; "/changes/?q=7730&o=ALL_REVISIONS"))
+                  ;; "/changes/?q=7730&o=ALL_REVISIONS"))
+         ;; (format "/changes/%s~%s~%d/assignee" project version changeidnr)))
+         (url-request-method "GET")
+         (url-request-extra-headers
+          `(("Content-Type" . "application/json")
+            ("Authorization" . ,(concat "Basic " (ims-gerrit-authentication)))))
+         )
+
+    ;; (message url)))
+    (switch-to-buffer (url-retrieve-synchronously url))
+    (goto-char url-http-end-of-headers)))
+    ;; (with-current-buffer (url-retrieve-synchronously url)
+    ;;   (goto-char url-http-end-of-headers)
+      ;; (if-let ((json-object-type 'hash-table)
+      ;;          (json-key-type 'symbol)
+      ;;          (result (json-read))
+      ;;          (name (map-elt result 'name)))
+      ;;     (message "Assignee is set to %s" name)))))
+
+
+(defun gerrit-rest-sync (method data &optional path)
+  "Interact with the API using method METHOD and data DATA.
+Optional arg PATH may be provided to specify another location further
+down the URL structure to send the request."
+  (let ((url-request-method method)
+        (url-request-extra-headers
+         `(("Content-Type" . "application/json")
+           ("Authorization" . ,(concat "Basic " (ims-gerrit-authentication)))
+           ))
+        (url-request-data data)
+        (target (concat "https://" ims-gerrit-host "/a" path)))
+
+    (with-current-buffer (url-retrieve-synchronously target)
+      (let ((resp (json-read-from-string
+                   (progn
+                     (goto-char (point-min))
+                     (buffer-substring (search-forward-regexp
+                                        (concat "^" (regexp-quote ")]}'") "$"))
+                                       (point-max))))))
+
+        resp))))
+
+
+;;; DEBUG version of gerrit-reset-sync
+;;; TODO introduce a debug-mode variable that allows to easily debug rest api problems
+;; (defun gerrit-rest-sync (method data &optional path)
+;;   "Interact with the API using method METHOD and data DATA.
+;; Optional arg PATH may be provided to specify another location further
+;; down the URL structure to send the request."
+;;   (let ((url-request-method method)
+;;         (url-request-extra-headers
+;;          `(("Content-Type" . "application/json")
+;;            ("Authorization" . ,(concat "Basic " (ims-gerrit-authentication)))
+;;            ))
+;;         (url-request-data data)
+;;         (target (concat "https://" ims-gerrit-host "/a" path)))
+
+;;     (switch-to-buffer (url-retrieve-synchronously target))
+;;     (insert target)))
+
+;; TODO write some testcases
+
+(defun gerrit-get-server-version ()
+  (interactive)
+  (message (prin1-to-string (gerrit-rest-sync "GET" nil "/config/server/version"))))
+
+(defun gerrit-get-info ()
+  (interactive)
+  (let* ((topicname "etssimuhwsimuenv")
+         (req (format (concat "/changes/?q=is:open+topic:%s&"
+                              "o=DOWNLOAD_COMMANDS&"
+                              "o=CURRENT_REVISION&"
+                              "o=CURRENT_COMMIT&"
+                              "o=DETAILED_LABELS&"
+                              "o=DETAILED_ACCOUNTS") topicname))
+         ;; (req "/changes/software%2Fpocscripts~version7.0~I19b86aa77941d0301f2a836b8007a1a26c333090")
+         (resp (gerrit-rest-sync "GET" nil req)))
+    ;; (req "/changes/software%2Fpocscripts~version7.0~I19b86aa77941d0301f2a836b8007a1a26c333090"))
+    ;; (req "/changes/?q=4900&o=ALL_REVISIONS"))
+    (message "%s" (prin1-to-string resp))))
+
+;; (ims-gerrit-get-assignee "software/elab" "version0.2" 7730)
+
+;; (gerrit-get-info)
 
 (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
 (provide 'gerrit)
