@@ -382,6 +382,14 @@ Show the last `magit-log-section-commit-count' commits."
       ;;          (name (map-elt result 'name)))
       ;;     (message "Assignee is set to %s" name)))))
 
+(defvar gerrit-rest-api-debug-flag nil
+  "Flag needed for debugging problems with the rest API of gerrit.")
+
+(defun gerrit-toggle-api-debug-flag ()
+  "Toggle the internal debug flag."
+  (interactive)
+  (setq gerrit-rest-api-debug-flag (not gerrit-rest-api-debug-flag))
+  (message "set debug flag to '%s'" gerrit-rest-api-debug-flag))
 
 (defun gerrit-rest-sync (method data &optional path)
   "Interact with the API using method METHOD and data DATA.
@@ -395,33 +403,23 @@ down the URL structure to send the request."
         (url-request-data data)
         (target (concat "https://" ims-gerrit-host "/a" path)))
 
-    (with-current-buffer (url-retrieve-synchronously target)
-      (let ((resp (json-read-from-string
-                   (progn
-                     (goto-char (point-min))
-                     (buffer-substring (search-forward-regexp
-                                        (concat "^" (regexp-quote ")]}'") "$"))
-                                       (point-max))))))
+    (if (not gerrit-rest-api-debug-flag)
+        (with-current-buffer (url-retrieve-synchronously target)
+          (let ((resp (json-read-from-string
+                       (progn
+                         (goto-char (point-min))
+                         (buffer-substring (search-forward-regexp
+                                            (concat "^" (regexp-quote ")]}'") "$"))
+                                           (point-max))))))
 
-        resp))))
+            resp))
+      (progn
+        ;; TODO improve this, syntax highlight json code?
+        (switch-to-buffer (url-retrieve-synchronously target))
+        (goto-char (point-min))
+        (insert target)
+        (insert ?\n)))))
 
-
-;;; DEBUG version of gerrit-reset-sync
-;;; TODO introduce a debug-mode variable that allows to easily debug rest api problems
-;; (defun gerrit-rest-sync (method data &optional path)
-;;   "Interact with the API using method METHOD and data DATA.
-;; Optional arg PATH may be provided to specify another location further
-;; down the URL structure to send the request."
-;;   (let ((url-request-method method)
-;;         (url-request-extra-headers
-;;          `(("Content-Type" . "application/json")
-;;            ("Authorization" . ,(concat "Basic " (ims-gerrit-authentication)))
-;;            ))
-;;         (url-request-data data)
-;;         (target (concat "https://" ims-gerrit-host "/a" path)))
-
-;;     (switch-to-buffer (url-retrieve-synchronously target))
-;;     (insert target)))
 
 ;; TODO write some testcases
 
@@ -451,9 +449,10 @@ down the URL structure to send the request."
 
 (defun gerrit-get-current-project ()
   (interactive)
-  (let* ((project (s-chop-suffix ".git"
-                                (nth 1 (s-split ":"
-                                                (nth 0 (magit-config-get-from-cached-list "remote.origin.url")))))))
+  (let* ((project (s-chop-suffix
+                   ".git"
+                   (nth 1 (s-split ":"
+                                   (nth 0 (magit-config-get-from-cached-list "remote.origin.url")))))))
     project))
 
 
@@ -488,10 +487,8 @@ down the URL structure to send the request."
 
 ;;     (message "%s" (prin1-to-string req))))
 
-
-
-
 ;; (gerrit-get-info)
 
 (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
+
 (provide 'gerrit)
