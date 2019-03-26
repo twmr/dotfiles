@@ -198,21 +198,18 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
     map)
   "Keymap for `magit-open-reviews' top-level section.")
 
-;; todo defun that queries open reviews and creates a datastructure (alist?)
-;; that can be used in magit-gerrit-insert-status
-
 (defun magit-gerrit--fetch-open-reviews ()
+  "returns a sequence of (number branch topic subject)"
+  (interactive)
   ;; we need the following information:
   ;; changenr, version, name, CR/V, assignee, topic, fixes/related ticket
   ;; sort by modification-date?
-  (interactive)
-  ;; fixme do rest api call here
-  `(
-    (3 "version0.1" "topic1" "sumo")
-    (45 "version0.1" "topic2" "sumo")
-    (23 "version0.1" "" "sumo")
-   ))
-
+  (condition-case nil
+      (mapcar (lambda (x) (seq-map (lambda (y) (cdr
+                                  (assoc y (cdr x))))
+                          (list '_number 'branch 'topic 'subject)))
+              (gerrit-open-reviews-for-current-project))
+    (error '())))
 
 (defun magit-gerrit-insert-status ()
   (magit-insert-section (open-reviews)
@@ -222,7 +219,7 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
       (progn
         (magit-insert-section (open-reviews-issue loopvar t)
           (magit-insert-heading
-            (format (format "%%%ds %%%ds %%s" (1+ 4) 28)
+            (format (format "%%%ds %%%ds %%s" (1+ 4) 40)
                     (format "#%d" (nth 0 loopvar))
                     (concat
                      "("
@@ -472,12 +469,14 @@ down the URL structure to send the request."
          (resp (gerrit-rest-sync "GET" nil req)))
 
     (setq open-reviews-response resp)
+    resp))
+
+    ;; (message "%s" (prin1-to-string (mapcar #'car resp)))))
     ;; (cdr (assoc 'subject (cdr (assoc 'commit (cdr (nth 0(cdr (assoc 'revisions (nth 0 open-reviews-response)))))))))
-    (message "%s" (prin1-to-string (nth 0 resp)))))
+    ;; (message "%s" (prin1-to-string (nth 0 resp)))))
 
   ;; TODO get config from remote.origin.url and split string :
   ;; (message "%s" (nth 1 (s-split ":" (magit-config-get-from-cached-list "remote.origin.url")))))
-
 
 ;; (defun gerrit-open-reviews-for-current-project ()
 ;;   (interactive)
