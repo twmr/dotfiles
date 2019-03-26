@@ -5,19 +5,20 @@
 ;; (add-hook 'after-init-hook #'gerrit-load-lists)
 ;; (global-set-key (kbd "C-x i") 'gerrit-upload)
 ;; (global-set-key (kbd "C-x o") 'gerrit-download)
+;; (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
 
 ;;; Code:
 
 (require 'cl-lib)  ;; for remove-duplicates
-(require 'magit)
 (require 'hydra)
+(require 'json)
+(require 'magit)
 (require 'recentf)
 (require 's)
-(require 'json)
+(require 'subr-x)
 (require 'url)
 (require 'url-http)
 (require 'url-vars)
-(require 'subr-x)
 
 (defvar gerrit-upload-topic-history nil "List of recently used topic names.")
 (defvar gerrit-upload-reviewers-history nil "List of recently used reviewers.")
@@ -488,7 +489,5 @@ down the URL structure to send the request."
 ;;     (message "%s" (prin1-to-string req))))
 
 ;; (gerrit-get-info)
-
-(add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
 
 (provide 'gerrit)

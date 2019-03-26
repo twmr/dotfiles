@@ -268,11 +268,14 @@
 (use-package fill-column-indicator :ensure t :defer t)
 
 (use-package gerrit
+  :if (string= (system-name) "PC-16609")
   :custom
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
   :config
   (progn
     (add-hook 'after-init-hook #'gerrit-load-lists)
+    (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
+
     (global-set-key (kbd "C-x i") 'gerrit-upload)
     (global-set-key (kbd "C-x o") 'gerrit-download)))
 
