@@ -402,7 +402,7 @@ down the URL structure to send the request."
         (target (concat "https://" ims-gerrit-host "/a" path)))
 
     (if (not gerrit-rest-api-debug-flag)
-        (with-current-buffer (url-retrieve-synchronously target)
+        (with-current-buffer (url-retrieve-synchronously target t)
           (let ((resp (json-read-from-string
                        (progn
                          (goto-char (point-min))
