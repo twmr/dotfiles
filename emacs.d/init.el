@@ -149,6 +149,7 @@
 ;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
 (use-package deadgrep :ensure t
   :after dumb-jump
+  :bind (("C-c d" . deadgreap))
   :config
   ;; override deadgrep--project-root to include support for dumb-jump files (.dumbjump, .dumbjumpignore)
   (defun deadgrep--project-root ()
