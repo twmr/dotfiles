@@ -1,5 +1,21 @@
 ;;; gerrit.el --- Gerrit integration @ IMS -*- lexical-binding: t; -*-
-;; my personal gerrit integration in emacs.
+;;
+;; This package contains
+;;
+;; * defuns for downloading and uploading a change
+;;   git-review is used for this
+;; * open-reviews section in magit
+;;     The gerrit changes for the current project are queried using the rest API
+;;
+;;     section local keymap:
+;;        RET - opens change in browser
+;;
+;; TODO
+;; set assignee for git-review (cli) app,
+;; assignee can not be set via git push options (https://gerrit-review.googlesource.com/Documentation/user-upload.html). Those push options are used when uploading a change via git-review.
+;; take a look at pygerrit2 (github) - write small script, which sets assignee instead
+;;
+;; https://gerrit-review.googlesource.com/Documentation/rest-api-changes.html#add-reviewer
 ;;
 ;; (load 'gerrit)
 ;; (add-hook 'after-init-hook #'gerrit-load-lists)
@@ -24,7 +40,7 @@
 (defvar gerrit-upload-reviewers-history nil "List of recently used reviewers.")
 (defvar gerrit-upload-args-history nil "List of recently used args for git-review cmd.")
 
-;; these two vars are many needed for the hydra-based implementation because
+;; these two vars are mainly needed for the hydra-based implementation because
 ;; I don't know how I can communicate between different heads of the hydra
 (defvar gerrit-last-reviewers nil "...")
 (defvar gerrit-last-topic nil "...")
@@ -90,6 +106,7 @@ Read data from the file specified by `gerrit-save-file'."
 (defmacro gerrit-upload-completing-set (msg history &optional last)
   ;;; what if I want to enter only a substring ?
   ;;; https://github.com/abo-abo/swiper/pull/1049/files
+  ;;; Try C-M-j
   `(let ((value (ivy-completing-read
                  ,msg
                  ,history
