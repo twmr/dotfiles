@@ -106,7 +106,8 @@ Read data from the file specified by `gerrit-save-file'."
 (defmacro gerrit-upload-completing-set (msg history &optional last)
   ;;; what if I want to enter only a substring ?
   ;;; https://github.com/abo-abo/swiper/pull/1049/files
-  ;;; Try C-M-j
+  ;;; C-M-j:  (exits wit the current input instead of the current
+  ;;;          candidate (like other commands).)
   `(let ((value (ivy-completing-read
                  ,msg
                  ,history
