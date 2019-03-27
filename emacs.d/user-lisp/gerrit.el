@@ -181,7 +181,13 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
 
 (defun magit-open-reviews-open-gerrit-change()
   (interactive)
-  (message (prin1-to-string (nth 0 (oref (magit-current-section) value)))))
+  (browse-url (format
+               "https://%s/c/%s"
+               ims-gerrit-host
+               (s-chop-prefix "#"
+                              ;; TOOD avoid using prin1-to-string?!?
+                              (prin1-to-string (nth 0 (oref (magit-current-section) value)))))))
+  ;; (message (prin1-to-string (nth 0 (oref (magit-current-section) value)))))
 
 ;;; TODOS:
 ;;; include votes in  open gerrit review lines
