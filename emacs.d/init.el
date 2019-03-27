@@ -804,6 +804,10 @@
 
 (use-package python-switch-quotes :ensure t :defer t)
 
+(use-package rainbow-delimiters :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
+
 (use-package rg :ensure t
   ;; https://github.com/dajva/rg.el
   ;; select word and type "M-s d"
