@@ -827,21 +827,30 @@
     (rg-define-toggle "--context 3" (kbd "C-c c"))
   ))
 
-(use-package smart-mode-line :ensure t
+
+(use-package doom-modeline
+  :ensure t
   :custom
-  (sml/no-confirm-load-theme t)
-  :config
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                '(lambda (f)
-                   (with-selected-frame f
-                     (when (window-system f)
-                       (tool-bar-mode -1)
-                       (load-theme thi::theme t)
-                       (sml/setup)))))
-    (progn
-      (load-theme thi::theme t)
-      (sml/setup))))
+  (doom-modeline-height 40)
+  :hook (after-init . doom-modeline-mode))
+
+(load-theme thi::theme t)
+
+;; (use-package smart-mode-line :ensure t
+;;   :custom
+;;   (sml/no-confirm-load-theme t)
+;;   :config
+;;   (if (daemonp)
+;;       (add-hook 'after-make-frame-functions
+;;                 '(lambda (f)
+;;                    (with-selected-frame f
+;;                      (when (window-system f)
+;;                        (tool-bar-mode -1)
+;;                        (load-theme thi::theme t)
+;;                        (sml/setup)))))
+;;     (progn
+;;       (load-theme thi::theme t)
+;;       (sml/setup))))
 
 (use-package smex :ensure t :config (load "thi-ido.el"))
 
