@@ -319,6 +319,9 @@
       (interactive (git-commit-read-jira-ticket))
       (git-commit-insert-jira-header "Related" ticket))))
 
+(use-package groovy-mode
+  :ensure t
+  :mode "Jenkinsfile")
 
 ;; TODO help-mode+ is unavailable??
 ;; (use-package help-mode+ :ensure t)
