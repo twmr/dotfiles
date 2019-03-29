@@ -13,24 +13,7 @@
 (defvar thi::config-dir
   (expand-file-name
    (concat user-emacs-directory "/user-lisp")))
-(require 'cl-lib) ;; cl-delete-if-not, cl-loop
-(defvar thi::directory-list
-  (cl-delete-if-not
-   'file-exists-p
-   (mapcar (lambda (path)
-             (replace-regexp-in-string "~" (getenv "HOME") path))
-           '("~/.zsh.d"
-             "~/.zsh"
-             "~/gitrepos/dotfiles/emacs.d"
-             "~/gitrepos/dotfiles/emacs.d/user-lisp"
-             "~/sandbox/unstable/expses"
-             "~/sandbox/unstable/pocscripts"
-             "~/sandbox/unstable/tools"
-             "~/sandbox/unstable/configdb"
-             "~/sandbox/unstable/pyhwctrl"
-             "~/sandbox/unstable/jobqueue"
-             "~/Nextcloud/study_math/"
-             ))))
+(require 'cl-lib) ;; cl-loop
 
 ;; TODO try to get rid of the custom.el file, which is hard to keep in version control
 ;; see https://github.com/jwiegley/use-package/pull/508
@@ -345,15 +328,9 @@
 (use-package helm
   :ensure t
   :defer t
-  :bind (("C-x C-h" . helm-mini)
-         ([f12] . thi::directorychooser))
-  :config (progn
-            (setq helm-mode-fuzzy-match t)
-            (defun thi::directorychooser ()
-              "Use ido to select a recently used directory from the `thi::directory-list'."
-              (interactive)
-              (dired
-               (helm-comp-read "Directory open:" thi::directory-list :fuzzy t)))))
+  :bind (("C-x C-h" . helm-mini))
+  :config
+  (setq helm-mode-fuzzy-match t))
 
 (use-package helm-projectile :ensure t :defer t
   :init
@@ -873,6 +850,11 @@
   ;;            ((kbd "M-.") (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'word))))))
 
 (use-package typescript-mode :ensure t)
+
+(use-package thi-projects
+  :after (hydra helm)
+  :bind (("<f4>" . thi::hydra-project-find-file/body)
+         ("<f12>" . thi::directorychooser)))
 
 (use-package undo-tree
   ;; C-/ undo (without the undo tree graph) !!!
