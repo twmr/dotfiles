@@ -655,17 +655,20 @@
 (use-package org
   :ensure t
   :custom
+  (org-directory "~/org")
+  (org-default-notes-file (concat org-directory "/gtd.org"))
   (org-capture-templates
    '(("t" ; hotkey
       "Todo list item" ; name
       entry ; type
        (file+headline org-default-notes-file "Tasks") ; heading type and title
-      "* TODO %?\n  %i\n  %a")
-     ("j" "Journal entry"
+      "* TODO %U %?")
+     ("j"
+      "Journal entry"
       entry
-      (file+olp+datetree "~/org/journal.org")
-      (file "~/.emacs.d/org-templates/journal.orgcaptmpl")))
-   )
+      (file+olp+datetree (concat org-directory "journal.org")
+      (file "~/.emacs.d/org-templates/journal.oRgcaptmpl")))
+   ))
   :bind (("C-c c" . org-capture))
   :config
   (org-babel-do-load-languages
