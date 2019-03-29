@@ -866,7 +866,6 @@
 
 (use-package swiper
   :ensure t
-  :after ivy
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
   ;; (bind-keys :map swiper-map
