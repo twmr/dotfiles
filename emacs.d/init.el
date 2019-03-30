@@ -331,10 +331,10 @@
   :config
   (setq helm-mode-fuzzy-match t))
 
-(use-package helm-projectile :ensure t :defer t
-  :init
+(use-package helm-projectile :ensure t
+  :config
   ;; https://www.reddit.com/r/emacs/comments/3m8i5r/helmprojectile_quickly_findcreate_new_file_in/
-  (helm-projectile-on)
+  ;; (helm-projectile-on)
   (setq projectile-switch-project-action 'helm-projectile)
   (defvar helm-source-file-not-found
     (helm-build-dummy-source
