@@ -114,7 +114,6 @@
 
 (use-package counsel
   :ensure t
-  :after ivy
   ;; :bind (("C-h v" . counsel-describe-variable)
   ;;        ("C-h f" . counsel-describe-function)
   ;;        ("C-h s" . counsel-info-lookup-symbol)))
