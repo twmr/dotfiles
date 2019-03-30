@@ -512,6 +512,9 @@
   ;; (ivy-re-builders-alist
   ;;  ;; '((t . ivy--regex-fuzzy)))
   ;;  '((t . ivy--subseq-fuzzy)))
+  (ivy-re-builders-alist
+      '((read-file-name-internal . ivy--regex-fuzzy)
+        (t . ivy--regex-plus)))
   (ivy-initial-inputs-alist nil)
   ;; todo not really needed?
   (ivy-use-selectable-prompt t)
