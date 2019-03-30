@@ -163,7 +163,7 @@
          )
   )
 
-(use-package eglot :ensure t
+(use-package eglot :ensure t :defer t
   :config
   (add-to-list 'eglot-server-programs
                `(python-mode . ("pyls" "-v" "--tcp" "--host"
@@ -303,6 +303,7 @@
 
 (use-package groovy-mode
   :ensure t
+  :defer t
   :mode "Jenkinsfile")
 
 ;; TODO help-mode+ is unavailable??
@@ -326,7 +327,6 @@
 
 (use-package helm
   :ensure t
-  :defer t
   :bind (("C-x C-h" . helm-mini))
   :config
   (setq helm-mode-fuzzy-match t))
@@ -670,7 +670,7 @@
   :config
   (global-page-break-lines-mode))
 
-(use-package paradox :ensure t
+(use-package paradox :ensure t :defer t
   :custom
   (paradox-github-token t)
   :config
@@ -680,6 +680,7 @@
 
 (use-package pdf-tools
   :ensure t
+  :defer t
   :config
     (unless (daemonp)
       (pdf-tools-install))
