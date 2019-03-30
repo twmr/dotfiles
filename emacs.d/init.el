@@ -500,6 +500,7 @@
   ;;    C-c C-o  (opens an ivy occur buffer)
   ;;    now type j and k for naviation and oo for jumping to the selection
   :bind (("C-c C-r" . ivy-resume)
+         ("C-x b" . ivy-switch-buffer)
          ("C-x B" . ivy-switch-buffer-other-window)
          :map ivy-minibuffer-map
          ("TAB" . ivy-next-line))
