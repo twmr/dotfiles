@@ -75,8 +75,6 @@
 
 (global-set-key (kbd "C-x C-f") 'counsel-find-file)
 ;; (global-set-key (kbd "C-x C-f") 'ido-find-file)
-(global-set-key (kbd "C-x f") 'projectile-find-file)
-
 
 ;; from better-defaults
 (global-set-key (kbd "M-/") 'hippie-expand)
