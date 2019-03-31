@@ -10,6 +10,10 @@
   (let ((default-directory project-name))
     (condition-case error
         ;; (helm-projectile-find-file) -- problems with emacs repo
+        ;; TODO I need a projetile-find-dir version as well (sometimes I know the dirname but not the filename)
+        ;; TODO if possible use ripgrep for projectile-find-file
+        ;; -> (defun projectile-files-via-ext-command (root command)
+        ;; -> customize projectile-generic-command
         (projectile-find-file)
       (error
        (message "%s: %s" project-name (error-message-string error))))))
