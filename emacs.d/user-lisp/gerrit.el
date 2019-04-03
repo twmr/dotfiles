@@ -273,10 +273,6 @@ down the URL structure to send the request."
          (resp (gerrit-rest-sync "GET" nil req)))
     (message "%s" (prin1-to-string resp))))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; TODO move this to magit-gerrit.el
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defun magit-gerrit--fetch-open-reviews ()
   "Return a sequence of (number branch topic subject)."
   (interactive)
