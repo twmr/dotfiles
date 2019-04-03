@@ -40,6 +40,8 @@
          (interactive)
          (thi::hydra-project-find-file--generic "~/gitrepos/emacs")) "emacs")
 
+  ;; NOTE: All sandboxes need to have a .projectile file!!
+  ;;       maybe add a check?
   ;; TODO caching of file list for the following projects? Maybe it is not needed
   ("d" (lambda ()
          (interactive)
