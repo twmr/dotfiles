@@ -15,6 +15,7 @@
         ;; -> (defun projectile-files-via-ext-command (root command)
         ;; -> customize projectile-generic-command
 
+        ;; TODO sort results (using rg --sort), evaluate performance loss
 
         (let ((projectile-generic-command
                ;; -0 is needed for the \0 line termination.
