@@ -251,7 +251,7 @@
 (use-package fill-column-indicator :ensure t :defer t)
 
 (use-package gerrit
-  :if (string= (system-name) "PC-16609")
+  :if (string= (system-name) "PC-16609.ims.co.at")
   :custom
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
   :config
