@@ -86,3 +86,22 @@ setopt nohup  # don't kill child processes of the current zsh when the zsh
               # process is killed
 
 
+#eval "$(_DEV_COMPLETE=source_zsh dev)"
+
+#. ~/gitrepos/devenv/activation.sh
+#
+# Setup fzf
+# TODO oneliner
+if [ -e $HOME/.fzf ]; then
+    fzfdir=$HOME/.fzf
+else
+    fzfdir=/usr/share/fzf
+fi
+
+# Key bindings
+# ------------
+source "$fzfdir/shell/key-bindings.zsh"
+
+# Auto-completion
+# ---------------
+[[ $- == *i* ]] && source "$fzfdir/shell/completion.zsh" 2> /dev/null
