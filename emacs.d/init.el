@@ -130,8 +130,8 @@
 ;; alternative to "rg"
 ;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
 (use-package deadgrep :ensure t
-  :after dumb-jump
-  :bind (("C-c d" . deadgreap))
+  :after (dumb-jump)
+  :bind (("C-c d" . deadgrep))
   :config
   ;; override deadgrep--project-root to include support for dumb-jump files (.dumbjump, .dumbjumpignore)
   (defun deadgrep--project-root ()
@@ -147,7 +147,9 @@
 
 (use-package dockerfile-mode :ensure t :defer t)
 
-(use-package dumb-jump :ensure t
+(use-package dumb-jump
+  :ensure t
+  :demand t
   :custom
   (dumb-jump-force-searcher 'rg)
   (dumb-jump-selector 'ivy)
