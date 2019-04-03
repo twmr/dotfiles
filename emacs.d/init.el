@@ -729,16 +729,17 @@
 
             ;; ;; needed for the ignore files feature in .projectile (see https://emacs.stackexchange.com/a/16964/2761)
             ;; (setq projectile-indexing-method 'native)
+
+            (setq projectile-completion-system 'ivy)
             ;; (setq projectile-switch-project-action 'projectile-find-dir)
-
-
             ;; With this setting, once you have selected your project, you
             ;; will remain in Projectile's completion system to select a
             ;; sub-directory of your project, and then that sub-directory is
             ;; opened for you in a dired buffer. If you use this setting,
             ;; then you will probably also want to set
-            (setq projectile-find-dir-includes-top-level t))
-  )
+            ;; (setq projectile-find-dir-includes-top-level t)))
+            ))
+
 
 (use-package project-persist :ensure t :defer t
   :config
