@@ -22,7 +22,6 @@
    '("Signed-off-by" "Acked-by" "Modified-by" "Cc" "Suggested-by" "Reported-by" "Tested-by" "Reviewed-by" "Fixes" "Related" "Change-Id"))
  '(git-commit-mode-hook '(turn-on-auto-fill) t)
  '(git-commit-summary-max-length 50)
- '(global-eldoc-mode nil)
  '(grep-find-ignored-directories
    '("SCCS" "RCS" "CVS" "MCVS" ".src" ".svn" ".git" ".hg" ".bzr" "_MTN" "_darcs" "{arch}" "build"))
  '(jedi:get-in-function-call-delay 0.4)

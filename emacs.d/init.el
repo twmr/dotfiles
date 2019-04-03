@@ -1007,15 +1007,11 @@
 ;;   (setq-local ispell-extra-args (flyspell-detect-ispell-args)))
 ;; (add-hook 'text-mode-hook 'text-mode-hook-setup)
 
-
-(global-eldoc-mode -1)
-
 (require 'url-tramp)
 
 ;; (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode)
 ;; (add-hook 'after-init-hook #'yas-global-mode 1)
 (add-hook 'after-init-hook #'global-prettify-symbols-mode 1)
-(add-hook 'after-init-hook #'global-eldoc-mode -1)
 ;; ;; (add-hook 'after-init-hook #'global-hungry-delete-mode 1)
 ;; (add-hook 'after-init-hook #'global-discover-mode)
 ;; (add-hook 'after-init-hook #'helm-projectile-on)
