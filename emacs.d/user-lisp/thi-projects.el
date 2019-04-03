@@ -14,7 +14,18 @@
         ;; TODO if possible use ripgrep for projectile-find-file
         ;; -> (defun projectile-files-via-ext-command (root command)
         ;; -> customize projectile-generic-command
-        (projectile-find-file)
+
+
+        (let ((projectile-generic-command
+               ;; -0 is needed for the \0 line termination.
+               (concat
+                "rg --files -0 "
+                "-g '!site_scons' "
+                "-g '!site_python' "
+                "-g '!node_modules' "
+                "-g '!ijscore' "
+                "-g '!local_configdb' ")))
+          (projectile-find-file))
       (error
        (message "%s: %s" project-name (error-message-string error))))))
 
@@ -29,8 +40,7 @@
          (interactive)
          (thi::hydra-project-find-file--generic "~/gitrepos/emacs")) "emacs")
 
-  ;; TODO caching of file list for the following projects
-  ;; TODO speed up
+  ;; TODO caching of file list for the following projects? Maybe it is not needed
   ("d" (lambda ()
          (interactive)
          (thi::hydra-project-find-file--generic "~/sandbox/drina")) "drina")
