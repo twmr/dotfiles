@@ -4,15 +4,15 @@
 
 (require 'xdg)
 
-(add-to-list 'load-path (expand-file-name
-                         (concat user-emacs-directory "/user-lisp")))
-
 (defvar thi::cache-file-dir
   (expand-file-name
    (concat (xdg-cache-home) "/emacs")))
 (defvar thi::config-dir
   (expand-file-name
    (concat user-emacs-directory "/user-lisp")))
+
+(add-to-list 'load-path thi::config-dir)
+
 (require 'cl-lib) ;; cl-loop
 
 ;; TODO try to get rid of the custom.el file, which is hard to keep in version control

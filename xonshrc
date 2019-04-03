@@ -22,3 +22,8 @@ aliases['gpl'] = ('git', 'pull')
 aliases['gpr'] = ('git', 'pull', '--rebase')
 aliases['reload_xonshrc'] = ("source", "~/.xonshrc")
 aliases['src'] = aliases['reload_xonshrc']
+
+xontrib load fzf-widgets
+#from prompt_toolkit.keys import Keys
+#$fzf_history_binding = Keys.ControlR
+#$fzf_ssh_binding = Keys.ControlS

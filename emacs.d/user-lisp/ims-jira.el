@@ -7,12 +7,16 @@
 
 (defun ims-jira-authentication ()
   "Return an encoded string with jira username and password."
-  (let ((pass-entry (auth-source-user-and-password ims-jira-host)))
+  (interactive)
+  (let ((pass-entry (auth-source-user-and-password "https://containerconf.de")))
 
     (if-let ((username (nth 0 pass-entry))
              (password (nth 1 pass-entry)))
-        (base64-encode-string
-         (concat username ":" password)))))
+
+        (message "%s %s" username password)
+        ;; (base64-encode-string
+        ;;  (concat username ":" password)))))
+      )))
 
 (defun ims-jira-get-ticket-summary (ticketid)
   "Retrieve summary of TICKETID in jira."
