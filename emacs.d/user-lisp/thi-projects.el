@@ -74,6 +74,7 @@
   (interactive)
   (dired
    (helm-comp-read "Directory open:" thi::directory-list :fuzzy t)))
+   ;; (ivy-completing-read "Directory open: " thi::directory-list)))
 
 
 (provide 'thi-projects)
