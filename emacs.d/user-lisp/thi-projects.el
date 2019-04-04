@@ -73,8 +73,7 @@
   "Use helm to select a recently used directory from the `thi::directory-list'."
   (interactive)
   (dired
-   ;; (helm-comp-read "Directory open:" thi::directory-list :fuzzy t)))
-   (ivy-completing-read "Directory open: " thi::directory-list)))
+   (helm-comp-read "Directory open:" thi::directory-list :fuzzy t)))
 
 
 (provide 'thi-projects)

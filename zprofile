@@ -73,7 +73,6 @@ fi
 # needed for distributions where there is no fzf package available (ubuntu)
 [ -e $HOME/.fzf/bin ] && prepath $HOME/.fzf/bin
 
-echo xpshost $HOSTNAME
 if [ -e ~/.zsh.d/zprofile ]; then
     . ~/.zsh.d/zprofile
 elif [ "$HOSTNAME" = "mustang" ]; then
@@ -146,12 +145,9 @@ elif [ "$HOSTNAME" = "mustang" ]; then
     prepath ${EMBINPATH}
 
 elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
-    echo xpshost
     prepath $HOME/bin
     # prepath $HOME/.cargo/bin
     prepath /opt/emacs/bin
-    echo xps
-    prepath $HOME/.cask/bin
 
     # Ubuntu make installation of Ubuntu Make binary symlink
     # prepath $HOME/.local/share/umake/bin
@@ -406,8 +402,3 @@ fi
 #[[ -z "$TMUX" ]] && exec tmux
 
 export PATH="$HOME/.cargo/bin:$PATH"
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi

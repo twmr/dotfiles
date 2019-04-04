@@ -3,7 +3,6 @@ Xft.hinting:            true
 Xft.hintstyle:          hintfull
 Xft.lcdfilter:          lcdfilterlegacy
 Xft.rgba:               rgb
-Xft.dpi: 100
 
 Xcursor.theme:          neutral
 xscreensaver.mode:      blank
