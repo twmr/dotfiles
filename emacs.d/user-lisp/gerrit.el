@@ -25,7 +25,7 @@
 ;; https://gerrit-review.googlesource.com/Documentation/rest-api-changes.html#add-reviewer
 ;;
 ;; (load 'gerrit)
-;; (add-hook 'after-init-hook #'gerrit-load-lists)
+;; (add-hook 'after-init-hook #'gerrit-mode)
 ;; (global-set-key (kbd "C-x i") 'gerrit-upload)
 ;; (global-set-key (kbd "C-x o") 'gerrit-download)
 ;; (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
