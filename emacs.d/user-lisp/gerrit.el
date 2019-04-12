@@ -11,6 +11,13 @@
 ;;        RET - opens change in browser
 ;;
 ;; TODO
+
+;; reviewers (cache each teammember seperately) -> store it in history file
+;;            make it possible to have named groups of reviewers (e.g. pyeven, pyodd, cpp, web, jobdeck)
+;;            allow to configure it via an *.el file
+;;            add/remove single reviewers from selected group (using +/- key bindings)
+;;            ...
+
 ;; set assignee for git-review (cli) app,
 ;; assignee can not be set via git push options (https://gerrit-review.googlesource.com/Documentation/user-upload.html). Those push options are used when uploading a change via git-review.
 ;; take a look at pygerrit2 (github) - write small script, which sets assignee instead
@@ -25,7 +32,7 @@
 
 ;;; Code:
 
-(require 'cl-lib)  ;; for remove-duplicates
+(require 'cl-lib)  ;; for cl-remove-duplicates
 (require 'hydra)
 (require 'json)
 (require 'magit)
@@ -101,6 +108,10 @@ Write data into the file specified by `gerrit-save-file'."
     (error
      (warn "gerrit: %s" (error-message-string error)))))
 
+(defsubst gerrit-enabled-p ()
+  "Return non-nil if gerrit mode is currently enabled."
+  (memq 'gerrit-save-lists kill-emacs-hook))
+
 (defcustom gerrit-upload-default-args ""
   "Default args used when calling 'git review' to upload a change."
   :group 'gerrit
@@ -132,7 +143,7 @@ Read data from the file specified by `gerrit-save-file'."
      (unless (equal "" value)
        ;; todo simplify the duplicate handling
        (push value ,history)
-       (setq ,history (remove-duplicates ,history :test 'string=)))))
+       (setq ,history (cl-remove-duplicates ,history :test 'string=)))))
 
 (defun gerrit-upload-add-reviewers ()
   "Interactively ask for space separated reviewers."
@@ -206,6 +217,18 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
                      "Download Change: " open-changes nil nil)))
       (magit-git-command (concat "git review -d "
                                  (car (s-split " " (s-trim changenr))))))))
+
+;;;###autoload
+(define-minor-mode gerrit-mode
+  "TODO"
+  :global t
+  :group 'gerrit
+  (unless (and gerrit-mode (gerrit-enabled-p))
+    (if gerrit-mode
+        (gerrit-load-lists)
+      (gerrit-save-lists))
+    (let ((hook-setup (if recentf-mode 'add-hook 'remove-hook)))
+      (apply hook-setup '(kill-emacs-hook gerrit-save-lists)))))
 
 
 

@@ -259,8 +259,8 @@
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
   :config
   (progn
-    (add-hook 'after-init-hook #'gerrit-load-lists)
-    (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
+    (add-hook 'after-init-hook #'gerrit-mode)
+    ;; (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
 
     (global-set-key (kbd "C-x i") 'gerrit-upload)
     (global-set-key (kbd "C-x o") 'gerrit-download)))
