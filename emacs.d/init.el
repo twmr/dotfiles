@@ -198,6 +198,7 @@
                      (image-dired-mode . emacs)
                      (image-dired-thumbnail-mode . emacs)
                      (image-mode . emacs)
+                     (inferior-emacs-lisp-mode . emacs)
                      (json-mode . emacs)
                      (makey-key-mode . emacs)
                      (magit-repolist-mode . emacs)
