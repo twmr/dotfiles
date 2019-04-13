@@ -33,6 +33,7 @@
 ;;; Code:
 
 (require 'cl-lib)  ;; for cl-remove-duplicates
+(require 'dash)
 (require 'hydra)
 (require 'json)
 (require 'magit)
@@ -44,7 +45,7 @@
 (require 'url-vars)
 
 (defvar gerrit-upload-topic-history nil "List of recently used topic names.")
-(defvar gerrit-upload-reviewers-history nil "List of recently used reviewers.")
+(defvar gerrit-upload-reviewer-history nil "List of recently used reviewers.")
 (defvar gerrit-upload-args-history nil "List of recently used args for git-review cmd.")
 
 ;; these two vars are mainly needed for the hydra-based implementation because
@@ -97,7 +98,7 @@ Write data into the file specified by `gerrit-save-file'."
         (insert (format-message ";;; Automatically generated on %s.\n"
                                 (current-time-string)))
         (gerrit-dump-variable 'gerrit-upload-topic-history gerrit-upload-max-saved-items)
-        (gerrit-dump-variable 'gerrit-upload-reviewers-history gerrit-upload-max-saved-items)
+        (gerrit-dump-variable 'gerrit-upload-reviewer-history gerrit-upload-max-saved-items)
         (insert "\n\n;; Local Variables:\n"
                 ";; coding: utf-8-emacs\n"
                 ";; End:\n")
@@ -127,49 +128,70 @@ Read data from the file specified by `gerrit-save-file'."
     (when (file-readable-p file)
       (load-file file))))
 
-(defmacro gerrit-upload-completing-set (msg history &optional last)
+(defun gerrit--sort-words (inputstr)
+  "Sort whitespace separated words in INPUTSTR."
+  (with-temp-buffer
+    (insert (s-join "\n" (s-split "\s+" inputstr)))
+    (sort-lines nil (point-min) (point-max))
+    (s-join " " (s-split "\n" (buffer-string)))))
+
+(defmacro gerrit-upload-completing-set (msg history &optional history-excludes)
   ;;; what if I want to enter only a substring ?
   ;;; C-M-j:  (exits wit the current input instead of the current
   ;;;          candidate (like other commands).)
-  `(let ((value (ivy-completing-read
+
+  `(let* ((reduced-history (-difference ,history ,history-excludes))
+          (value (ivy-completing-read
                  ,msg
-                 ,history
+                 reduced-history
                  nil nil nil nil
                  ;; default value set to LRU reviewers value
-                 (car ,history)
+                 (car reduced-history)
                  )))
-     (unless (null ,last)
-       (setq ,last value))
      (unless (equal "" value)
        ;; todo simplify the duplicate handling
        (push value ,history)
-       (setq ,history (cl-remove-duplicates ,history :test 'string=)))))
+       (setq ,history (cl-remove-duplicates ,history :test 'string=)))
+     value))
 
-(defun gerrit-upload-add-reviewers ()
-  "Interactively ask for space separated reviewers."
+(defun gerrit-upload-add-reviewer ()
+  "Interactively ask for to-be-added reviewer name."
   (interactive)
-  (gerrit-upload-completing-set "Reviewers (space separated): "
-                                gerrit-upload-reviewers-history
-                                gerrit-last-reviewers))
+  ;; exclude the ones from the history that have already been added
+  (push (gerrit-upload-completing-set
+         "Reviewer: "
+         gerrit-upload-reviewer-history
+         gerrit-last-reviewers)
+        gerrit-last-reviewers))
+
+(defun gerrit-upload-remove-reviewer ()
+  "Interactively ask for to-be-removed reviewer name."
+  (interactive)
+  (setq gerrit-last-reviewers
+        (delete (gerrit-upload-completing-set
+                 "Reviewer: "
+                 gerrit-last-reviewers)
+                gerrit-last-reviewers)))
 
 (defun gerrit-upload-set-topic ()
   "Interactively ask for a topic name."
   (interactive)
-  (gerrit-upload-completing-set "Topic: "
-                                gerrit-upload-topic-history
-                                gerrit-last-topic))
+  (setq  gerrit-last-topic (gerrit-upload-completing-set
+                            "Topic: "
+                            gerrit-upload-topic-history)))
+
 
 (defun gerrit-upload-set-args ()
   "Interactively ask for arguments that are passed to git-review."
   (interactive)
-  (gerrit-upload-completing-set "Args (space separated): "
-                                gerrit-upload-args-history
-                                gerrit-upload-args))
+  (setq gerrit-upload-args (gerrit-upload-completing-set
+                            "Args (space separated): "
+                            gerrit-upload-args-history)))
 
 (defun gerrit-upload-create-git-review-cmd ()
   "Create cmdstr for git-review."
   (interactive)
-  (let ((reviewers gerrit-last-reviewers)
+  (let ((reviewers (s-join " " gerrit-last-reviewers)) ;;(sort gerrit-last-reviewers #'string<)))
         (topic gerrit-last-topic)
         (args gerrit-upload-args)
         (cmdstr "git review --yes"))
@@ -192,12 +214,14 @@ Read data from the file specified by `gerrit-save-file'."
                                :columns 1
                                :body-pre (progn
                                            (setq gerrit-last-topic "")
-                                           (setq gerrit-last-reviewers "")
+                                           (setq gerrit-last-reviewers '())
                                            (setq gerrit-upload-args gerrit-upload-default-args)))
   "
 gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
 "
-  ("r" gerrit-upload-add-reviewers "Add reviewers")
+  ("r" gerrit-upload-add-reviewer "Add reviewer")
+  ("R" gerrit-upload-remove-reviewer "Remove reviewer")
+  ;; ("g" gerrit-upload-add-review-group "Add review group")
   ("t" gerrit-upload-set-topic "Set topic")
   ("a" gerrit-upload-set-args "Set additional args")
   ("RET" gerrit-upload-run "Run git-reivew" :color blue))
