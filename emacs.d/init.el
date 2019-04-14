@@ -15,16 +15,34 @@
 
 (require 'cl-lib) ;; cl-loop
 
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
+;;;;  Effectively replace use-package with straight-use-package
+;;; https://github.com/raxod502/straight.el/blob/develop/README.md#integration-with-use-package
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
+
+;;; so package-list-packages includes them
+;; (require 'package)
+;; (add-to-list 'package-archives
+;;              '("melpa" . "https://melpa.org/packages/"))
+
 ;; TODO try to get rid of the custom.el file, which is hard to keep in version control
 ;; see https://github.com/jwiegley/use-package/pull/508
 ;; see https://www.reddit.com/r/emacs/comments/53zpv9/how_do_i_get_emacs_to_stop_adding_custom_fields/
 ;; (setq custom-file (concat thi::config-dir "/custom.el"))
 (setq custom-file "/dev/null")
-
-(setq package-archives
-   '(("melpa" . "http://melpa.org/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/")
-     ("elpy" . "http://jorgenschaefer.github.io/packages/")))
 
 ;; (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
@@ -59,38 +77,38 @@
   (require 'use-package))
 ;; https://github.com/alezost/emacs-config/prog.el
 
-;; (use-package anaconda-mode :ensure t)
+;; (use-package anaconda-mode)
 
-;; (use-package ace-jump-mode :ensure t :defer t
+;; (use-package ace-jump-mode
 ;;   :init
 ;;   (progn
 ;;     (autoload 'ace-jump-mode "ace-jump-mode" nil t)
 ;;     (bind-key "C-." 'ace-jump-mode)))
 
 ;; (use-package all-the-icons-ivy
-;;   :ensure t
+;;
 ;;   :config
 ;;   (all-the-icons-ivy-setup))
 
-;; (use-package auto-complete :ensure t
+;; (use-package auto-complete
 ;;   :init
 ;;   (progn
 ;;     (global-auto-complete-mode)))
 
 (use-package better-shell
-    :ensure t
+
     :bind (("C-'" . better-shell-shell)
            ("C-;" . better-shell-remote-open)))
 
-(use-package bpr :ensure t
+(use-package bpr
   :config
   (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
   (setq bpr-process-mode #'comint-mode))
 
-(use-package color-identifiers-mode :ensure t :defer t)
-(use-package cmake-mode :ensure t :defer t)
+(use-package color-identifiers-mode)
+(use-package cmake-mode)
 
-(use-package company :ensure t :defer t
+(use-package company
   :config
   (global-company-mode))
 ;;   :config (progn
@@ -106,14 +124,13 @@
 ;;             (define-key company-active-map (kbd "TAB") 'company-complete-common-or-cycle)
 ;;             (global-company-mode)))
 
-;;(use-package cython-anaconda :ensure t
+;;(use-package cython-anaconda
 ;;  :config
 ;;  (add-hook 'python-mode-hook 'anaconda-mode))
 
-(use-package color-theme-sanityinc-tomorrow :ensure t)
+(use-package color-theme-sanityinc-tomorrow)
 
 (use-package counsel
-  :ensure t
   ;; :bind (("C-h v" . counsel-describe-variable)
   ;;        ("C-h f" . counsel-describe-function)
   ;;        ("C-h s" . counsel-info-lookup-symbol)))
@@ -125,11 +142,11 @@
              t
              '(("s" magit-status-action "gitstat")))))
 
-(use-package cython-mode :ensure t :defer t)
+(use-package cython-mode)
 
 ;; alternative to "rg"
 ;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
-(use-package deadgrep :ensure t
+(use-package deadgrep
   :after (dumb-jump)
   :bind (("C-c d" . deadgrep))
   :config
@@ -145,10 +162,9 @@
   )
   )
 
-(use-package dockerfile-mode :ensure t :defer t)
+(use-package dockerfile-mode)
 
 (use-package dumb-jump
-  :ensure t
   :demand t
   :custom
   (dumb-jump-force-searcher 'rg)
@@ -165,17 +181,17 @@
          )
   )
 
-(use-package eglot :ensure t :defer t
+(use-package eglot
   :config
   (add-to-list 'eglot-server-programs
                `(python-mode . ("pyls" "-v" "--tcp" "--host"
                                 "localhost" "--port" :autoport))))
 
-;; (use-package elpy :ensure t
+;; (use-package elpy
 ;;   :init
 ;;   (elpy-enable))
 
-(use-package evil :ensure t
+(use-package evil
   :config (progn
           ;; (delete 'term-mode evil-insert-state-modes)
 
@@ -218,7 +234,7 @@
                      )
                    do (evil-set-initial-state mode state))))
 
-(use-package ethan-wspace :ensure t :defer t
+(use-package ethan-wspace
   :custom
   (mode-require-final-newline nil)
   :init
@@ -229,14 +245,13 @@
     (add-hook 'makefile-mode-hook 'thi::tabs-are-less-evil)
     (add-hook 'sh-mode-hook 'thi::tabs-are-less-evil)
     ))
-(use-package fill-column-indicator :ensure t)
-(use-package flx :ensure t)
-(use-package flx-ido :ensure t
+(use-package fill-column-indicator)
+(use-package flx)
+(use-package flx-ido
   :config
   (flx-ido-mode))
 
 (use-package flycheck
-  :ensure t
   :custom
   (flycheck-python-pylint-executable "python3")
   :init (progn
@@ -248,25 +263,38 @@
   :config (global-flycheck-mode))
 
 (use-package flycheck-pycheckers
-  :ensure t
+
   :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
 
-(use-package fill-column-indicator :ensure t :defer t)
+(use-package fill-column-indicator)
 
-(use-package gerrit
-  :if (string= (system-name) "PC-16609.ims.co.at")
-  :custom
-  (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
-  :config
-  (progn
-    (add-hook 'after-init-hook #'gerrit-mode)
-    ;; (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
+;; FIXME don't know how to use it in straight.el
+;; (use-package gerrit
+;;   :straight nil
+;;   :if (string= (system-name) "PC-16609.ims.co.at")
+;;   :custom
+;;   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
+;;   :config
+;;   (progn
+;;     (add-hook 'after-init-hook #'gerrit-mode)
+;;     ;; (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
 
-    (global-set-key (kbd "C-x i") 'gerrit-upload)
-    (global-set-key (kbd "C-x o") 'gerrit-download)))
+;;     (global-set-key (kbd "C-x i") 'gerrit-upload)
+;;     (global-set-key (kbd "C-x o") 'gerrit-download)))
+
+(if (string= (system-name) "PC-16609.ims.co.at")
+    (with-eval-after-load 'hydra
+          (with-eval-after-load 'magit
+            (progn
+              (require 'gerrit)
+              (setq gerrit-save-file (concat thi::cache-file-dir "/git-review"))
+              (add-hook 'after-init-hook #'gerrit-mode)
+              ;;     ;; (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
+
+              (global-set-key (kbd "C-x i") 'gerrit-upload)
+              (global-set-key (kbd "C-x o") 'gerrit-download)))))
 
 (use-package git-commit
-  :ensure t
   :bind (:map git-commit-mode-map
               ("C-c C-f" . git-commit-fix-jira-insert)
               ("C-c C-r" . git-commit-related-jira-insert))
@@ -305,14 +333,12 @@
       (git-commit-insert-jira-header "Related" ticket))))
 
 (use-package groovy-mode
-  :ensure t
-  :defer t
   :mode "Jenkinsfile")
 
 ;; TODO help-mode+ is unavailable??
-;; (use-package help-mode+ :ensure t)
+;; (use-package help-mode+)
 
-(use-package helpful :ensure t
+(use-package helpful
   :bind (
   ;; Note that the built-in `describe-function' includes both functions
   ;; and macros. `helpful-function' is functions only, so we provide
@@ -322,19 +348,18 @@
   ("C-h v" . helpful-variable)
   ("C-h k" . helpful-key)))
 
-(use-package highlight-function-calls :ensure t
+(use-package highlight-function-calls
   :config
   (add-hook 'emacs-lisp-mode-hook 'highlight-function-calls-mode))
 
-(use-package highlight-indentation :ensure t)
+(use-package highlight-indentation)
 
 (use-package helm
-  :ensure t
   :bind (("C-x C-h" . helm-mini))
   :config
   (setq helm-mode-fuzzy-match t))
 
-(use-package helm-projectile :ensure t
+(use-package helm-projectile
   :config
   ;; https://www.reddit.com/r/emacs/comments/3m8i5r/helmprojectile_quickly_findcreate_new_file_in/
   ;; (helm-projectile-on)
@@ -347,7 +372,7 @@
   )
 
 
-(use-package hydra :ensure t
+(use-package hydra
   :init
   (progn
     (defhydra hydra-zoom (global-map "<f5>")
@@ -469,13 +494,9 @@
       ("N" pdf-history-forward :color red)
       ("l" image-forward-hscroll :color red)
       ("h" image-backward-hscroll :color red))
-
-
     ))
 
 (use-package imenu-anywhere
-  :ensure t
-  :defer t
   :init (global-set-key (kbd "C-.") 'imenu-anywhere)
   :config (defun jcs-use-package ()
             (add-to-list 'imenu-generic-expression
@@ -494,7 +515,6 @@
 
 (use-package ivy
   ;; see https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
-  :ensure t
   :diminish
   ;; nice things about ivy:
   ;; *) to keep the completion buffer open (even after a candidate was selected) type
@@ -525,11 +545,9 @@
 
 (use-package ivy-hydra
   ;; type C-o to see hydra help in completion list
-  :ensure t
   :after ivy)
 
 ;; (use-package ivy-rich
-;;   :ensure t
 ;;   :after ivy
 ;;   :custom
 ;;   (ivy-virtual-abbreviate 'full
@@ -541,7 +559,7 @@
 
 
 ;; (use-package jabber
-;;   :ensure t
+;;
 ;;   :if (string= (system-name) "PC-16609")
 ;;   :config (progn
 ;;             (setq jabber-invalid-certificate-servers '("srv-voip-04"))
@@ -592,7 +610,7 @@
 ;;             (setq jabber-roster-line-format  " %c %-25n %u %-8s  %S")
 ;;             ))
 
-(use-package jedi :ensure t
+(use-package jedi
   :disabled t
   ;; redefine jedi's C-. (jedi:goto-definition)
   ;; to remember position, and set C-, to jump back
@@ -604,13 +622,12 @@
     (add-hook 'python-mode-hook 'jedi:setup)
     ))
 
-(use-package json-mode :ensure t :defer t)
+(use-package json-mode)
 
-(use-package lua-mode :ensure t :defer t)
+(use-package lua-mode)
 
 (use-package magit
   ;; bindings: C-c M-g: magit-file-popup (use it in a buffer)
-  :ensure t
   :custom
   (magit-repository-directories `(("~/gitrepos" . 1)
                                   ("~/.emacs.d" . 0)))
@@ -624,7 +641,7 @@
     (magit-git-command "git pull --rebase")
     ))
 
-(use-package multiple-cursors :ensure t :defer t
+(use-package multiple-cursors
   :bind (("C-c m e"   . mc/mark-more-like-this-extended)
          ("C-c m h"   . mc/mark-all-like-this-dwim)
          ("C-c m l"   . mc/edit-lines)
@@ -636,7 +653,6 @@
          ("C-c m C-s" . mc/mark-all-in-region)))
 
 (use-package org
-  :ensure t
   :custom
   (org-directory "~/org")
   (org-default-notes-file (concat org-directory "/gtd.org"))
@@ -667,23 +683,23 @@
 ;;     (setq org-projectile-projects-file "~/projects.org")
 ;;     (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
 ;;     (push (org-projectile-project-todo-entry) org-capture-templates))
-;;   :ensure t)
+;;   )
 
-(use-package page-break-lines :ensure t :defer t
+(use-package page-break-lines
   :config
   (global-page-break-lines-mode))
 
-(use-package paradox :ensure t :defer t
+(use-package paradox
   :custom
   (paradox-github-token t)
   :config
   (setq paradox-execute-asynchronously t))
 
-(use-package paredit :ensure t)
+(use-package paredit)
 
 (use-package pdf-tools
-  :ensure t
-  :defer t
+
+
   :config
     (unless (daemonp)
       (pdf-tools-install))
@@ -709,12 +725,11 @@
         ("s"  . pdf-occur)
         ("b"  . pdf-view-set-slice-from-bounding-box)
         ("r"  . pdf-view-reset-slice))
-     (use-package org-pdfview
-       :ensure t))
+     (use-package org-pdfview))
 
-(use-package persp-mode :ensure t)
+(use-package persp-mode)
 
-(use-package perspective :ensure t :disabled t
+(use-package perspective :disabled t
   ;; disabled because it does not yet support persp-2.0
   (bind-keys :map projectile-mode-map
         ("s-s" . projecile-persp-switch-project))
@@ -722,9 +737,9 @@
   (project-persist-mode 1) ;; C-c P n; C-c P f
   )
 
-(use-package pip-requirements :ensure t :defer t)
+(use-package pip-requirements)
 
-(use-package projectile :ensure t
+(use-package projectile
   :custom (projectile-completion-system 'ivy)
   :bind (("C-x f" . projectile-find-file))
   :config (progn
@@ -744,12 +759,11 @@
             ))
 
 
-(use-package project-persist :ensure t :defer t
+(use-package project-persist
   :config
   (project-persist-mode t) ;; C-c P n; C-c P f
 )
 (use-package protobuf-mode
-  :ensure t
   :config
   (add-hook 'protobuf-mode-hook
             (lambda ()
@@ -757,7 +771,7 @@
                 (setq c-basic-offset 4)
                 (setq tab-width 4)))))
 
-(use-package pyimport :ensure t)
+(use-package pyimport)
 
 (use-package python
   :custom
@@ -795,13 +809,13 @@
   ;;   )
   )
 
-(use-package python-switch-quotes :ensure t :defer t)
+(use-package python-switch-quotes)
 
-(use-package rainbow-delimiters :ensure t
+(use-package rainbow-delimiters
   :config
   (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
 
-(use-package rg :ensure t
+(use-package rg
   ;; https://github.com/dajva/rg.el
   ;; select word and type "M-s d"
   ;; In *rg* buffer:
@@ -817,7 +831,7 @@
     (rg-define-toggle "--context 3" (kbd "C-c c"))
   ))
 
-(use-package smart-mode-line :ensure t
+(use-package smart-mode-line
   :custom
   (sml/no-confirm-load-theme t)
   :config
@@ -833,35 +847,43 @@
       (load-theme thi::theme t)
       (sml/setup))))
 
-(use-package smex :ensure t :config (load "thi-ido.el"))
+(use-package smex
+  :config (load "thi-ido.el"))
 
-(use-package sr-speedbar :ensure t)
+(use-package sr-speedbar)
 
-(use-package ssh-config-mode :ensure t)
+;; (use-package ssh-config-mode)
 
 ;; requires semantic-mode to be enabled
-(use-package stickyfunc-enhance :ensure t)
+(use-package stickyfunc-enhance)
 
 (use-package swiper
-  :ensure t
+
   :bind (("C-s" . swiper)
          ("C-r" . swiper)))
   ;; (bind-keys :map swiper-map
   ;;            ("C-." (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'symbol))))))
   ;;            ((kbd "M-.") (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'word))))))
 
-(use-package typescript-mode :ensure t)
+(use-package typescript-mode)
 
-(use-package thi-projects
-  :after (hydra helm)
-  :bind (("<f4>" . thi::hydra-project-find-file/body)
-         ("<f12>" . thi::directorychooser)))
+;; FIXME use straight.el
+;; (use-package thi-projects
+;;   :after (hydra helm)
+;;   :bind (("<f4>" . thi::hydra-project-find-file/body)
+;;          ("<f12>" . thi::directorychooser)))
+
+(with-eval-after-load 'hydra
+  (with-eval-after-load 'helm
+    (require 'thi-projects)
+    (global-set-key (kbd "<f4>") #'thi::hydra-project-find-file/body)
+    (global-set-key (kbd "<f12>") #'thi::directorychooser)))
 
 (use-package undo-tree
   ;; C-/ undo (without the undo tree graph) !!!
   ;; M-_ redo (without the undo tree graph) !!!
-  :ensure t
-  :defer t
+
+
   :config (add-hook 'after-init-hook #'global-undo-tree-mode))
 
 (add-hook 'org-mode-hook
@@ -878,18 +900,16 @@
                      'org-meta-line
                      'org-document-info-keyword))))
 
-(use-package visual-fill-column :ensure t)
+(use-package visual-fill-column)
 
-(use-package wgrep-ag :ensure t)
+(use-package wgrep-ag)
 
-(use-package which-key :ensure t
+(use-package which-key
   :config
     (setq which-key-paging-key "<f5>")
   )
 
 (use-package window-numbering
-  :ensure t
-  :defer t
   :init
   (progn
     (custom-set-faces '(window-numbering-face
@@ -897,16 +917,14 @@
     (window-numbering-mode 1))
   )
 
-(use-package yaml-mode :ensure t :defer t)
+(use-package yaml-mode)
 
-(use-package yasnippet :ensure t)
+(use-package yasnippet)
 
 ;; for pdb snippet type tr[TAB] in a python-mode buffer
-(use-package yasnippet-snippets :ensure t)
+(use-package yasnippet-snippets)
 
 (use-package zop-to-char
-  :ensure t
-  :defer t
   :init
   (progn
     (bind-key "M-z" 'zop-to-char)))
@@ -1042,13 +1060,13 @@
 
 
 
-;; (use-package fill-column-indicator :ensure t)
-;; (use-package flx :ensure t)
-;; (use-package flx-ido :ensure t
+;; (use-package fill-column-indicator)
+;; (use-package flx)
+;; (use-package flx-ido
 ;;   :config
 ;;   (flx-ido-mode))
 
-;; (use-package evil :ensure t
+;; (use-package evil
 ;;   :config (progn
 ;;           ;; (delete 'term-mode evil-insert-state-modes)
 
@@ -1091,7 +1109,7 @@
 ;;                    do (evil-set-initial-state mode state))))
 
 ;; (use-package flycheck
-;;   :ensure t
+;;
 ;;   :init (progn
 ;;           (setq flycheck-highlighting-mode 'lines)
 ;;           (setq flycheck-display-errors-delay 0.4)
@@ -1101,10 +1119,10 @@
 ;;   :config (global-flycheck-mode))
 
 ;; (use-package flycheck-pycheckers
-;;   :ensure t
+;;
 ;;   :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
 
-;; (use-package fill-column-indicator :ensure t :defer t)
+;; (use-package fill-column-indicator)
 
 ;; (use-package python
 ;;   :custom
@@ -1140,7 +1158,7 @@
 ;;   ;;   )
 ;;   )
 
-;; (use-package jedi :ensure t
+;; (use-package jedi
 ;;   :disabled t
 ;;   ;; redefine jedi's C-. (jedi:goto-definition)
 ;;   ;; to remember position, and set C-, to jump back
