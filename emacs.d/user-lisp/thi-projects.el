@@ -2,7 +2,18 @@
 
 (require 'hydra)
 (require 'helm)
-(require 'cl-lib) ;; cl-delete-if-not
+(require 'cl-lib) ;; cl-delete-if-not, cl-loop
+
+;; TODO sort results (using rg --sort), evaluate performance loss
+(setq projectile-generic-command
+      ;; -0 is needed for the \0 line termination.
+      (concat
+       "rg --files -0 "
+       "-g '!site_scons' "
+       "-g '!site_python' "
+       "-g '!node_modules' "
+       "-g '!ijscore' "
+       "-g '!local_configdb' "))
 
 
 (defun thi::hydra-project-find-file--generic (project-name)
@@ -14,19 +25,7 @@
         ;; TODO if possible use ripgrep for projectile-find-file
         ;; -> (defun projectile-files-via-ext-command (root command)
         ;; -> customize projectile-generic-command
-
-        ;; TODO sort results (using rg --sort), evaluate performance loss
-
-        (let ((projectile-generic-command
-               ;; -0 is needed for the \0 line termination.
-               (concat
-                "rg --files -0 "
-                "-g '!site_scons' "
-                "-g '!site_python' "
-                "-g '!node_modules' "
-                "-g '!ijscore' "
-                "-g '!local_configdb' ")))
-          (projectile-find-file))
+        (projectile-find-file)
       (error
        (message "%s: %s" project-name (error-message-string error))))))
 
@@ -44,6 +43,8 @@
   ;; NOTE: All sandboxes need to have a .projectile file!!
   ;;       maybe add a check?
   ;; TODO caching of file list for the following projects? Maybe it is not needed
+
+  ;;(cl-loop for (key . value) in '(("d" . " drina") ("e". "erenik")) collect `(,key (lambda () (interactive) ,value) ,value))
   ("d" (lambda ()
          (interactive)
          (thi::hydra-project-find-file--generic "~/sandbox/drina")) "drina")
