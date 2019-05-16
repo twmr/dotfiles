@@ -899,7 +899,13 @@
 
 (use-package yaml-mode :ensure t :defer t)
 
-(use-package yasnippet :ensure t)
+(use-package yasnippet :ensure t
+  :config
+  (progn
+    (yas-reload-all)
+    (add-hook 'prog-mode-hook #'yas-minor-mode)
+    )
+  )
 
 ;; for pdb snippet type tr[TAB] in a python-mode buffer
 (use-package yasnippet-snippets :ensure t)
