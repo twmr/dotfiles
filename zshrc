@@ -5,7 +5,12 @@
 # Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
 
-export ZSH_THEME=bureau
+if [[ $TERM == "eterm-color" ]]; then
+    # FIXES ugly formatting issue when run inside emacs
+    export ZSH_THEME=3den
+else
+    export ZSH_THEME=bureau
+fi
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
