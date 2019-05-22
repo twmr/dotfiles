@@ -30,34 +30,67 @@
        (message "%s: %s" project-name (error-message-string error))))))
 
 
-;; TODO use projectile-switch-project instead?
-(defhydra thi::hydra-project-find-file (:color blue)
+(defun thi::sandbox-find-file (projectname)
+  (interactive)
+  (thi::hydra-project-find-file--generic (concat "~/sandbox/" projectname)))
+
+(defun thi::temporary-find-file (shortname projectname)
+  (interactive)
+  `(,shortname (lambda ()
+                 (interactive)
+                 (thi::hydra-project-find-file--generic (concat "~/gitrepos/" ,projectname)))
+               ,projectname))
+
+
+(defmacro define-sandbox-hydra (name body docstring hexpr &rest extra-heads)
+  "Define a custom hydra.
+NAME, BODY and DOCSTRING are as in `defhydra'.  HEXPR is an
+expression that is evaluated and should yield a list of hydra
+heads.  EXTRA-HEADS are additional heads, which are not
+evaluated."
+  (let ((heads (eval hexpr)))
+    `(defhydra ,name ,body
+       ,docstring
+       ,@heads
+       ,@extra-heads)))
+
+
+(defvar thi::project-hydra-mapping
+  '(("d" . "drina")
+    ("e". "erenik")
+    ("f". "fiora")
+    ("e". "gaia")
+    ("3". "gaia_py3")
+    ("S". "gaia_py3_stable")
+    ("h". "huxley")
+    ))
+
+
+(defun thi::temporary-find-file (shortname projectname)
+  (interactive)
+  (let* ((projectdir (concat "~/gitrepos/" projectname))
+         (projectiledotfile (concat projectdir "/.projectile")))
+    ;; TODO add .projectile files and dumbjump files
+    (if (not (file-exists-p projectdir))
+        (message "directory %s does not exists - skipping" projectdir)
+      (unless (not (file-exists-p projectiledotfile))
+        (message "projectilefile %s does not exist - Creating...!"
+                 projectiledotfile)
+        (write-regtion "" nil projectiledotfile)
+      ))
+    `(,shortname (lambda ()
+                   (interactive)
+                   (thi::hydra-project-find-file--generic projectdir))
+                 ,projectname)))
+
+
+(define-sandbox-hydra thi::hydra-project-find-file (:color blue)
   "find file in one of the selected projects"
-  ("D" (lambda ()
-         (interactive)
-         (thi::hydra-project-find-file--generic "~/gitrepos/dotfiles")) "dotf")
-  ("E" (lambda ()
-         (interactive)
-         (thi::hydra-project-find-file--generic "~/gitrepos/emacs")) "emacs")
 
-  ;; NOTE: All sandboxes need to have a .projectile file!!
-  ;;       maybe add a check?
-  ;; TODO caching of file list for the following projects? Maybe it is not needed
+  (cl-loop for (shortname . projectname) in thi::project-hydra-mapping
+           collect
+           (thi::temporary-find-file shortname projectname)))
 
-  ;;(cl-loop for (key . value) in '(("d" . " drina") ("e". "erenik")) collect `(,key (lambda () (interactive) ,value) ,value))
-  ("d" (lambda ()
-         (interactive)
-         (thi::hydra-project-find-file--generic "~/sandbox/drina")) "drina")
-  ("f" (lambda ()
-         (interactive)
-         (thi::hydra-project-find-file--generic "~/sandbox/fiora")) "fiora")
-  ("g" (lambda ()
-         (interactive)
-         (thi::hydra-project-find-file--generic "~/sandbox/gaia")) "gaia")
-  ("h" (lambda ()
-         (interactive)
-         (thi::hydra-project-find-file--generic "~/sandbox/huxley")) "huxley")
-)
 
 (defvar thi::directory-list
   (cl-delete-if-not
