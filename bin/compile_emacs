@@ -54,12 +54,13 @@ set -e
 
 ./configure \
     --prefix=/opt/emacs \
-    --with-x-toolkit=gtk3 \
+    --with-x-toolkit=lucid \
     --with-xpm \
     --without-jpeg \
     --without-gif \
     --without-tiff \
     --with-json
+# --with-x-toolkit=gtk3 \
 #    --with-xml2 \
 #    --with-cairo \
 #    --with-xwidgets
