@@ -869,6 +869,8 @@ See URL `https://www.pylint.org/'."
                    (with-selected-frame f
                      (when (window-system f)
                        (tool-bar-mode -1)
+                       (menu-bar-mode -1)
+                       (scroll-bar-mode -1)
                        (load-theme thi::theme t)
                        (sml/setup)))))
     (progn
