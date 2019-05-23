@@ -68,7 +68,7 @@ evaluated."
 
 (defun thi::temporary-find-file (shortname projectname)
   (interactive)
-  (let* ((projectdir (concat "~/gitrepos/" projectname))
+  (let* ((projectdir (concat "~/sandbox/" projectname))
          (projectiledotfile (concat projectdir "/.projectile")))
     ;; TODO add .projectile files and dumbjump files
     (if (not (file-exists-p projectdir))
