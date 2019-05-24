@@ -1,6 +1,5 @@
 import pdb
 import os
-import sys
 
 # Command line history:
 import readline
