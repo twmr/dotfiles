@@ -1,7 +1,10 @@
 import pdb
+import os
+import sys
+
 # Command line history:
 import readline
-histfile = "~/.pdb-pyhist"
+histfile = os.path.expanduser("~/.pdb-pyhist")
 try:
     readline.read_history_file(histfile)
 except IOError:
