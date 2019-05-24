@@ -30,17 +30,6 @@
        (message "%s: %s" project-name (error-message-string error))))))
 
 
-(defun thi::sandbox-find-file (projectname)
-  (interactive)
-  (thi::hydra-project-find-file--generic (concat "~/sandbox/" projectname)))
-
-(defun thi::temporary-find-file (shortname projectname)
-  (interactive)
-  `(,shortname (lambda ()
-                 (interactive)
-                 (thi::hydra-project-find-file--generic (concat "~/gitrepos/" ,projectname)))
-               ,projectname))
-
 
 (defmacro define-sandbox-hydra (name body docstring hexpr &rest extra-heads)
   "Define a custom hydra.
@@ -59,7 +48,7 @@ evaluated."
   '(("d" . "drina")
     ("e". "erenik")
     ("f". "fiora")
-    ("e". "gaia")
+    ("g". "gaia")
     ("3". "gaia_py3")
     ("S". "gaia_py3_stable")
     ("h". "huxley")
@@ -76,17 +65,16 @@ evaluated."
       (unless (not (file-exists-p projectiledotfile))
         (message "projectilefile %s does not exist - Creating...!"
                  projectiledotfile)
-        (write-regtion "" nil projectiledotfile)
-      ))
+        (write-region "" nil projectiledotfile)
+        ))
     `(,shortname (lambda ()
                    (interactive)
-                   (thi::hydra-project-find-file--generic projectdir))
+                   (thi::hydra-project-find-file--generic ,projectdir))
                  ,projectname)))
 
 
 (define-sandbox-hydra thi::hydra-project-find-file (:color blue)
   "find file in one of the selected projects"
-
   (cl-loop for (shortname . projectname) in thi::project-hydra-mapping
            collect
            (thi::temporary-find-file shortname projectname)))
@@ -108,7 +96,7 @@ evaluated."
   (interactive)
   (dired
    (helm-comp-read "Directory open:" thi::directory-list :fuzzy t)))
-   ;; (ivy-completing-read "Directory open: " thi::directory-list)))
+;; (ivy-completing-read "Directory open: " thi::directory-list)))
 
 
 (provide 'thi-projects)
