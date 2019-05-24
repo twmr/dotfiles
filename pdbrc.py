@@ -1,4 +1,18 @@
 import pdb
+# Command line history:
+import readline
+histfile = "~/.pdb-pyhist"
+try:
+    readline.read_history_file(histfile)
+except IOError:
+    pass
+import atexit
+atexit.register(readline.write_history_file, histfile)
+del histfile
+readline.set_history_length(200)
+del atexit
+del readline
+
 
 class Config(pdb.DefaultConfig):
     highlight = True
