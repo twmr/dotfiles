@@ -1,4 +1,4 @@
-;;; personal-emacs-config --- by thomas hisch
+;;; init.el --- presonal emacs config by thisch -*- lexical-binding:t -*-
 ;;; Code:
 ;; (setq debug-on-error t)
 
