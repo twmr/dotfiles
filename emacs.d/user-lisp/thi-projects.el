@@ -1,8 +1,17 @@
+;;; thi-projects.el --- project related stuff -*- lexical-binding:t -*-
+
+;;; Commentary:
+
 ;;; hydra that runs helm-projectile-find-file in specified sandbox
+
+;;; Code:
 
 (require 'hydra)
 (require 'helm)
 (require 'cl-lib) ;; cl-delete-if-not, cl-loop
+(require 'projectile)
+(require 'f)
+(require 'dash)
 
 ;; TODO sort results (using rg --sort), evaluate performance loss
 (setq projectile-generic-command
@@ -28,7 +37,6 @@
         (projectile-find-file)
       (error
        (message "%s: %s" project-name (error-message-string error))))))
-
 
 
 (defmacro define-sandbox-hydra (name body docstring hexpr &rest extra-heads)
@@ -59,14 +67,25 @@ evaluated."
   (interactive)
   (let* ((projectdir (concat "~/sandbox/" projectname))
          (projectiledotfile (concat projectdir "/.projectile")))
-    ;; TODO add .projectile files and dumbjump files
+    ;; add .projectile files and dumbjump files
     (if (not (file-exists-p projectdir))
         (message "directory %s does not exists - skipping" projectdir)
       (unless (not (file-exists-p projectiledotfile))
         (message "projectilefile %s does not exist - Creating...!"
                  projectiledotfile)
-        (write-region "" nil projectiledotfile)
-        ))
+        (write-region "" nil projectiledotfile))
+
+      ;; loop over all directories in projectdir that contain a .git directory
+      (let ((git-repos (-filter (lambda (repo)
+                                  (f-directory? (concat repo "/.git")))
+                                (f-directories projectdir))))
+        ;; create a .dumbjump file in all git repos in the sandbox
+        (mapcar (lambda (repo)
+                  (unless (file-exists-p (concat repo ".dumbjump"))
+                    (message "creating .dumbjump file in %s" repo)
+                    (write-region "" nil (concat repo ".dumbjump"))))
+                git-repos))
+      )
     `(,shortname (lambda ()
                    (interactive)
                    (thi::hydra-project-find-file--generic ,projectdir))
