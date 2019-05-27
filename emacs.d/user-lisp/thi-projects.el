@@ -69,7 +69,7 @@ evaluated."
          (projectiledotfile (concat projectdir "/.projectile")))
     ;; add .projectile files and dumbjump files
     (if (not (file-exists-p projectdir))
-        (message "directory %s does not exists - skipping" projectdir)
+        (message "directory %s does not exist - skipping" projectdir)
       (unless (not (file-exists-p projectiledotfile))
         (message "projectilefile %s does not exist - Creating...!"
                  projectiledotfile)
