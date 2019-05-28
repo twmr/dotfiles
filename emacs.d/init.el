@@ -130,6 +130,9 @@
 ;; alternative to "rg"
 ;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
 (use-package deadgrep :ensure t
+  ;; NOTE on debian systems you have to install the ripgrep binary from https://github.com/BurntSushi/ripgrep/releases, otherwise rg --pcre2 ...  returns PCRE2 is not available in this build of ripgrep
+  ;; deadgrep used rg --pcre2!!
+
   :after (dumb-jump)
   :bind (("C-c d" . deadgrep))
   :config
