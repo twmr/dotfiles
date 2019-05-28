@@ -842,6 +842,7 @@ See URL `https://www.pylint.org/'."
 
 (use-package python-pytest
   :after python
+  ;; see https://shahinism.com/en/posts/emacs-python-pytest/
   :custom
   (python-pytest-arguments
    '("--color"          ;; colored output in the buffer
