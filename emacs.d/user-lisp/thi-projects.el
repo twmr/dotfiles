@@ -79,12 +79,12 @@ evaluated."
       (let ((git-repos (-filter (lambda (repo)
                                   (f-directory? (concat repo "/.git")))
                                 (f-directories projectdir))))
-        ;; create a .dumbjump file in all git repos in the sandbox
-        (mapcar (lambda (repo)
-                  (unless (file-exists-p (concat repo ".dumbjump"))
-                    (message "creating .dumbjump file in %s" repo)
-                    (write-region "" nil (concat repo ".dumbjump"))))
-                git-repos))
+        ;; create a .dumbjumpignore file in all git repos in the sandbox
+        (mapc (lambda (repo)
+                (unless (file-exists-p (concat repo "/.dumbjumpignore"))
+                  (message "creating .dumbjump file in %s" repo)
+                  (write-region "" nil (concat repo "/.dumbjumpignore"))))
+              git-repos))
       )
     `(,shortname (lambda ()
                    (interactive)
