@@ -840,6 +840,26 @@ See URL `https://www.pylint.org/'."
   ;;   )
   )
 
+(use-package python-pytest
+  :after python
+  :custom
+  (python-pytest-arguments
+   '("--color"          ;; colored output in the buffer
+     "--failed-first"   ;; run the previous failed tests first
+     "--maxfail=5"))    ;; exit in 5 continuous failures in a run
+  ;; TODO create key bindings for those functions
+  ;; :config
+  ;; (which-key-declare-prefixes-for-mode 'python-mode "SPC pt" "Testing")
+  ;; (evil-leader/set-key-for-mode 'python-mode
+  ;;   "ptp" 'python-pytest-popup
+  ;;   "ptt" 'python-pytest
+  ;;   "ptf" 'python-pytest-file
+  ;;   "ptF" 'python-pytest-file-dwim
+  ;;   "ptm" 'python-pytest-function
+  ;;   "ptM" 'python-pytest-function-dwim
+  ;;   "ptl" 'python-pytest-last-failed)
+  )
+
 (use-package python-switch-quotes :ensure t :defer t)
 
 (use-package rainbow-delimiters :ensure t
