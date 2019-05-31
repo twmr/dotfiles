@@ -125,6 +125,21 @@
              t
              '(("s" magit-status-action "gitstat")))))
 
+(use-package counsel-projectile
+  ;; installed due to the available `counsel-projectile-rg` command
+
+  ;; C-c p f    counsel-projectile-find-file
+  ;; C-c p d    counsel-projectile-find-dir
+  ;; C-c p s r  counsel-projectile-rg
+  ;; C-c p p    counsel-projectile-switch-project
+  :ensure t
+  :after (counsel)
+  :config (progn
+            (counsel-projectile-mode)
+            (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+            )
+  )
+
 (use-package cython-mode :ensure t :defer t)
 
 ;; alternative to "rg"
