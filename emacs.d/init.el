@@ -772,7 +772,10 @@ See URL `https://www.pylint.org/'."
      (use-package org-pdfview
        :ensure t))
 
-(use-package persp-mode :ensure t)
+(use-package persp-mode :ensure t
+  :config
+  (persp-mode)
+  )
 
 (use-package perspective :ensure t :disabled t
   ;; disabled because it does not yet support persp-2.0
