@@ -259,7 +259,7 @@
           (setq flycheck-highlighting-mode 'lines)
           (setq flycheck-display-errors-delay 0.4)
           (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
-          (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup)
+          ;; (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup)
           )
   :config (global-flycheck-mode))
 
@@ -309,6 +309,8 @@ See URL `https://www.pylint.org/'."
 
 (use-package flycheck-pycheckers
   :ensure t
+  :disabled t
+  ;; TODO replace source-inplace in definition of pycheckers checker by source-original
   :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
 
 (use-package fill-column-indicator :ensure t :defer t)
