@@ -259,6 +259,8 @@
           (setq flycheck-highlighting-mode 'lines)
           (setq flycheck-display-errors-delay 0.4)
           (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
+          (add-hook 'python-mode-hook
+              '(lambda () (flycheck-select-checker 'python-pylint)))
           ;; (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup)
           )
   :config (global-flycheck-mode))
@@ -1124,8 +1126,8 @@ See URL `https://www.pylint.org/'."
 ;;    '((t . ivy--subseq-fuzzy)))
 
 ;; TODO move this into the use-package macros above
-(with-eval-after-load 'flycheck
-   (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
+;; (with-eval-after-load 'flycheck
+;;    (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
 
 ;;; init.el ends here
