@@ -863,6 +863,7 @@ See URL `https://www.pylint.org/'."
   )
 
 (use-package python-pytest
+  :ensure t
   :after python
   ;; see https://shahinism.com/en/posts/emacs-python-pytest/
   :custom
