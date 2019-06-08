@@ -118,5 +118,18 @@ evaluated."
 ;; (ivy-completing-read "Directory open: " thi::directory-list)))
 
 
+(with-eval-after-load 'smart-mode-line
+  (message "eval after load smart mode")
+  (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/" ":DB:"))
+  (add-to-list 'sml/replacer-regexp-list '("^~/gitrepos/" ":Git:"))
+  (add-to-list 'sml/replacer-regexp-list '("^~/gitrepos/dotfiles/emacs.d" ":ED:"))
+  (add-to-list 'sml/replacer-regexp-list '("^~/.emacs.d" ":ED:"))
+
+  (dolist (setting thi::project-hydra-mapping)
+    (add-to-list 'sml/replacer-regexp-list (list
+                                            (concat "^~/sandbox/" (cdr setting))
+                                            (concat ":" (car setting) ":"))))
+)
+
 (provide 'thi-projects)
 ;;; thi-projects.el ends here
