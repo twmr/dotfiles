@@ -169,8 +169,11 @@
      (define-key ibuffer-mode-map
        (vector 'remap 'beginning-of-buffer) 'ibuffer-back-to-top)))
 
-(global-set-key (kbd "M-o") 'smart-open-line)
-(global-set-key (kbd "M-O") 'smart-open-line-above)
+(when (display-graphic-p)
+  ;; without the display-graphic-p check cursor-up/down don't work in terminal mode
+  (global-set-key (kbd "M-o") 'smart-open-line)
+  (global-set-key (kbd "M-O") 'smart-open-line-above))
+
 (global-set-key (kbd "C-c j") 'join-line-vim-style)
 (global-set-key (kbd "C-S-d") 'duplicate-line)
 (global-set-key "\M-;" 'comment-dwim-line)
