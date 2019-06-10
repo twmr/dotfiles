@@ -1025,6 +1025,7 @@ See URL `https://www.pylint.org/'."
 (load "thi-defuns")
 (load "thi-global")
 (load "thi-progmodes")
+(load "thi-projects")
 (load "thi-danjou")
 (load "thi-recentf")
 (load "thi-bindings")

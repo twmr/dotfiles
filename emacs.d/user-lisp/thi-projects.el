@@ -119,7 +119,6 @@ evaluated."
 
 
 (with-eval-after-load 'smart-mode-line
-  (message "eval after load smart mode")
   (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/" ":DB:"))
   (add-to-list 'sml/replacer-regexp-list '("^~/gitrepos/" ":Git:"))
   (add-to-list 'sml/replacer-regexp-list '("^~/gitrepos/dotfiles/emacs.d" ":ED:"))
