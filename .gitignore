@@ -43,3 +43,4 @@ matplotlib/tex.cache
 /emacs.d/.sx/
 *.sqlite
 /config/systemd/user/default.target.wants/
+/emacs.d/transient/history.el
