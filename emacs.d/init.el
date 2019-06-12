@@ -286,6 +286,7 @@ See URL `https://www.pylint.org/'."
               (config-file "--rcfile=" flycheck-pylintrc concat)
               ;; this code is not yet upstream (see PR  #1546
               "--from-stdin" source-original)
+    :standard-input t
     :error-filter
     (lambda (errors)
       (flycheck-sanitize-errors (flycheck-increment-error-columns errors)))
