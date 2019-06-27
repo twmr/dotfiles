@@ -10,13 +10,13 @@
 	aliases = config --get-regexp ^alias\\.
 	al = !git aliases
 	cp = cherry-pick
-  co = commit
-  dc = diff --color-words
-  find-file = "!for branch in $(git for-each-ref --format=\"%(refname)\" refs/remotes/origin); do \
-               if git ls-tree -r --name-only $branch | grep \"$1\" > /dev/null; then \
-                   echo \"${branch}:\"; \
-                   git ls-tree -r --name-only $branch | nl -bn -w3 | grep \"$1\"; fi; \
-               done; :"
+	co = commit
+	dc = diff --color-words
+	find-file = "!for branch in $(git for-each-ref --format=\"%(refname)\" refs/remotes/origin); do \
+			if git ls-tree -r --name-only $branch | grep \"$1\" > /dev/null; then \
+				echo \"${branch}:\"; \
+				git ls-tree -r --name-only $branch | nl -bn -w3 | grep \"$1\"; fi; \
+			done; :"
 	find-file-local = "!for branch in $(git for-each-ref --format=\"%(refname)\" refs/heads); do if git ls-tree -r --name-only $branch | grep \"$1\" > /dev/null; then  echo \"${branch}:\"; git ls-tree -r --name-only $branch | nl -bn -w3 | grep \"$1\"; fi; done; :"
 	grep-all = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>'); : "
 	grep-all-erenik = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep '\\-erenik'); : "
@@ -40,12 +40,6 @@
 	default = simple
 [oh-my-zsh]
 	hide-status = 1
-[url "git://anongit.kde.org/"]
-	insteadOf = kde:
-[url "ssh://git@git.kde.org/"]
-	pushInsteadOf = kde:
-[url "git@git.kde.org:"]
-	pushInsteadOf = kde:
 
 # http://stackoverflow.com/questions/14273531/how-to-sort-git-tags-by-version-string-order-of-form-rc-x-y-z-w
 # https://github.com/git/git/commit/f57610a1ff7a547d1e11e24f942b1703cea81f81
