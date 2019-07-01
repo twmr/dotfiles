@@ -117,6 +117,10 @@
   ;; :bind (("C-h v" . counsel-describe-variable)
   ;;        ("C-h f" . counsel-describe-function)
   ;;        ("C-h s" . counsel-info-lookup-symbol)))
+
+  ;; TODO instructions for using TRAMP
+  :bind (("C-x C-f" . counsel-find-file))
+
   :config (progn
             (counsel-mode)
             (defun magit-status-action (x)
