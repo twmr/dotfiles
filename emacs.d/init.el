@@ -167,6 +167,7 @@
   )
   )
 
+;; see https://ligerlearn.com/using-emacs-edit-files-within-docker-containers/
 (use-package docker-tramp :ensure t :defer t)
 
 (use-package dockerfile-mode :ensure t :defer t)
