@@ -128,13 +128,6 @@ Read data from the file specified by `gerrit-save-file'."
     (when (file-readable-p file)
       (load-file file))))
 
-(defun gerrit--sort-words (inputstr)
-  "Sort whitespace separated words in INPUTSTR."
-  (with-temp-buffer
-    (insert (s-join "\n" (s-split "\s+" inputstr)))
-    (sort-lines nil (point-min) (point-max))
-    (s-join " " (s-split "\n" (buffer-string)))))
-
 (defmacro gerrit-upload-completing-set (msg history &optional history-excludes)
   ;;; what if I want to enter only a substring ?
   ;;; C-M-j:  (exits wit the current input instead of the current
