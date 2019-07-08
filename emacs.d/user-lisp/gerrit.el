@@ -139,7 +139,7 @@ Read data from the file specified by `gerrit-save-file'."
 
 (defmacro gerrit-upload-completing-set (msg history &optional history-excludes)
   ;;; what if I want to enter only a substring ?
-  ;;; C-M-j:  (exits wit the current input instead of the current
+  ;;; C-M-j:  (exits with the current input instead of the current
   ;;;          candidate (like other commands).)
 
   `(let* ((reduced-history (-difference ,history ,history-excludes))
