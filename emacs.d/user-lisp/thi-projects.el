@@ -144,5 +144,13 @@ evaluated."
         (when (string-match "containername=\\(.*\\)" (buffer-string))
           (match-string 1 (buffer-string)))))))
 
+
+(defun thi::dev-open-file-in-docker-container ()
+  (interactive)
+  (let ((user "devel")
+        (containername (thi::dev-open-file-in-docker-container)))
+    ;; TODO check if container is running
+    (counsel-find-file (format "/docker:%s@%s:/usr/" user containername))))
+
 (provide 'thi-projects)
 ;;; thi-projects.el ends here
