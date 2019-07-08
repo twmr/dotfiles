@@ -153,18 +153,30 @@
   ;; deadgrep used rg --pcre2!!
 
   :after (dumb-jump)
-  :bind (("C-c d" . deadgrep))
+  :bind (("C-c d" . deadgrep) ;; in entire project/sandbox
+         ("C-c D" . deadgrep-in-current-repo))
   :config
   ;; override deadgrep--project-root to include support for dumb-jump files (.dumbjump, .dumbjumpignore)
   (defun deadgrep--project-root ()
-  "Guess the project root of the given FILE-PATH."
-  (let ((root default-directory)
-        (project (locate-dominating-file default-directory #'dumb-jump-get-config)))
-    (when project
-      (setq root project)
-    (when root
-      (deadgrep--lookup-override root))))
-  )
+    "Guess the project root of the given FILE-PATH."
+    (let ((root default-directory)
+          (project (locate-dominating-file default-directory #'dumb-jump-get-config)))
+      (when project
+        (setq root project))
+      (when root
+        (deadgrep--lookup-override root))))
+
+  (defun deadgrep-in-current-repo (search-term)
+    (interactive (list (deadgrep--read-search-term)))
+    (let ((deadgrep--project-root
+           (lambda ()
+             (let ((root default-directory)
+                   (project (project-current)))
+               (when project
+                 (setq root project))
+               (when root
+                 (deadgrep--lookup-override root))))))
+      (deadgrep search-term)))
   )
 
 ;; see https://ligerlearn.com/using-emacs-edit-files-within-docker-containers/
