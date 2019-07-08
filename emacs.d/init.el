@@ -266,6 +266,12 @@
     (add-hook 'makefile-mode-hook 'thi::tabs-are-less-evil)
     (add-hook 'sh-mode-hook 'thi::tabs-are-less-evil)
     ))
+
+(use-package expand-region :ensure t :defer t
+  :bind
+  ;;If you expand too far, you can contract the region by pressing - (minus key), or by prefixing the shortcut you defined with a negative argument: C-- C-=.
+  (("C-=" . er/expand-region)))
+
 (use-package fill-column-indicator :ensure t)
 (use-package flx :ensure t)
 (use-package flx-ido :ensure t
