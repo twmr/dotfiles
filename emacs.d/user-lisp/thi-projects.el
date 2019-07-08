@@ -130,5 +130,19 @@ evaluated."
                                             (concat ":" (car setting) ":"))))
 )
 
+(defun thi::dev-parse-containername ()
+  "Parse sandbox.cfg file and return containername."
+  (let* ((sandboxcfgname ".sandbox.cfg")
+         (path (locate-dominating-file default-directory
+                                       (lambda (dir)
+                                         (f-exists? (f-join dir sandboxcfgname))))))
+    (when path
+      ;; TODO error out if path is nil
+      (with-temp-buffer
+        (insert-file-contents (f-join path sandboxcfgname))
+        (keep-lines "containername" (point-min) (point-max))
+        (when (string-match "containername=\\(.*\\)" (buffer-string))
+          (match-string 1 (buffer-string)))))))
+
 (provide 'thi-projects)
 ;;; thi-projects.el ends here
