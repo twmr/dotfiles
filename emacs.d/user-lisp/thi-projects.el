@@ -145,7 +145,7 @@ evaluated."
           (match-string 1 (buffer-string)))))))
 
 
-(defun thi::dev-open-file-in-docker-container ()
+(defun thi::dev-find-file-in-docker-container ()
   (interactive)
   (let ((user "devel"))
     ;; TODO check if container is running
