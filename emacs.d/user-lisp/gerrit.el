@@ -71,6 +71,15 @@ A nil value means to save the whole lists."
 
 (defcustom gerrit-save-file (locate-user-emacs-file ".git-review")
   "File to save the recent lists into."
+  ;; Persistency:
+  ;; The save/load logic was copied from recentf.el
+  ;; Other places in the emacs git repo, where settings are saved/loaded to/from disk are:
+  ;;   savehist-mode
+  ;;   ...
+  ;; See http://mbork.pl/2018-09-10_Persisting_Emacs_variables
+  ;; See https://lists.gnu.org/archive/html/help-gnu-emacs/2018-03/msg00120.html
+
+  ;; TODO outsource this persistency code
   :group 'gerrit
   :type 'file)
 
