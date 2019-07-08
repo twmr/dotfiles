@@ -147,10 +147,11 @@ evaluated."
 
 (defun thi::dev-open-file-in-docker-container ()
   (interactive)
-  (let ((user "devel")
-        (containername (thi::dev-open-file-in-docker-container)))
+  (let ((user "devel"))
     ;; TODO check if container is running
-    (counsel-find-file (format "/docker:%s@%s:/usr/" user containername))))
+    (counsel-find-file (format "/docker:%s@%s:/usr/"
+                               user
+                               (thi::dev-parse-containername)))))
 
 (provide 'thi-projects)
 ;;; thi-projects.el ends here
