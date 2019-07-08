@@ -178,9 +178,9 @@ Read data from the file specified by `gerrit-save-file'."
 (defun gerrit-upload-set-topic ()
   "Interactively ask for a topic name."
   (interactive)
-  (setq  gerrit-last-topic (gerrit-upload-completing-set
-                            "Topic: "
-                            gerrit-upload-topic-history)))
+  (setq gerrit-last-topic (gerrit-upload-completing-set
+                           "Topic: "
+                           gerrit-upload-topic-history)))
 
 
 (defun gerrit-upload-set-args ()
