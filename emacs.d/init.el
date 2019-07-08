@@ -715,7 +715,11 @@ See URL `https://www.pylint.org/'."
     ))
 
 (use-package multiple-cursors :ensure t :defer t
-  :bind (("C-c m e"   . mc/mark-more-like-this-extended)
+  :bind (("C->"       . mc/mark-next-like-this)
+         ("C-<"       . mc/mark-previous-like-this)
+         ("C-c C-<"   . mc/mark-all-like-this)
+
+         ("C-c m e"   . mc/mark-more-like-this-extended)
          ("C-c m h"   . mc/mark-all-like-this-dwim)
          ("C-c m l"   . mc/edit-lines)
          ("C-c m n"   . mc/mark-next-like-this)

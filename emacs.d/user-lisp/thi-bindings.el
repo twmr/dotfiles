@@ -56,10 +56,6 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 (global-set-key (kbd "C-q") 'quoted-insert)
-;; multiple cursors
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 ;; hungry-delete
 ;; (global-set-key (kbd "M-<backspace>") #'hungry-delete-backward)
