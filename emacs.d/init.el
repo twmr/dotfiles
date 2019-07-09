@@ -220,6 +220,7 @@
           (cl-loop for (mode . state) in
                    '(
                      (conf-mode . emacs)
+                     (c-mode . emacs)
                      (c++-mode . emacs)
                      (compilation-mode . emacs)
                      (dashboard-mode . emacs)
