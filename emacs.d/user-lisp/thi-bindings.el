@@ -164,7 +164,14 @@
   (global-set-key (kbd "M-O") 'smart-open-line-above))
 
 (global-set-key (kbd "C-c j") 'join-line-vim-style)
-(global-set-key (kbd "C-S-d") 'duplicate-line)
 (global-set-key "\M-;" 'comment-dwim-line)
+
+(global-set-key (kbd "C-S-d") 'duplicate-line)
 (global-set-key (kbd "C-S-j") 'move-line-down)
 (global-set-key (kbd "C-S-k") 'move-line-up)
+
+;; vscode bindings:
+(global-set-key [(meta shift up)] 'duplicate-line-up)
+(global-set-key [(meta shift down)] 'duplicate-line-down)
+(global-set-key [(meta up)] 'move-line-up)
+(global-set-key [(meta down)] 'move-line-down)

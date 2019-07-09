@@ -367,7 +367,22 @@ buffer is not visiting a file."
     (yank)
     (newline)
     (yank)
+    (move-to-column col)
+    (current-column)
+    )
+  )
+
+
+(defun duplicate-line-up ()
+  (interactive)
+  (let ((col (duplicate-line)))
+    (forward-line -1)
     (move-to-column col)))
+
+
+(defun duplicate-line-down ()
+  (interactive)
+  (duplicate-line))
 
 
  (defun move-line-down ()
