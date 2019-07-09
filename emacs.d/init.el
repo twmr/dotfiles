@@ -975,7 +975,9 @@ See URL `https://www.pylint.org/'."
 
 (use-package thi-projects
   :after (hydra helm)
-  :bind (("<f4>" . thi::hydra-project-find-file/body)
+  :bind (
+         ("<f3>" . thi::hydra-dev-reopen-file-different-sandbox/body)
+         ("<f4>" . thi::hydra-project-find-file/body)
          ("S-<f4>" . thi::dev-find-file-in-docker-container)
          ("<f12>" . thi::directorychooser)))
 

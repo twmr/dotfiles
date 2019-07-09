@@ -153,5 +153,30 @@ evaluated."
                                user
                                (thi::dev-parse-containername)))))
 
+(defun thi::temporary-reopen-file-different-sandbox (projectname)
+  (interactive)
+  (let ((newfname
+         ;; TODO check if replace-regexp-in-string did a replace
+         ;; TODO check if the file exists in the desired sandbox
+         (replace-regexp-in-string "\\(.*\\)/sandbox/\\([-0-9a-zA-z]*\\)/\\(.*\\)"
+                                   (format "\\1/sandbox/%s/\\3" projectname)
+                                   (buffer-file-name))))
+    (message "reopening %s as %s" (buffer-file-name) newfname)
+    (find-file newfname)))
+
+(define-sandbox-hydra thi::hydra-dev-reopen-file-different-sandbox (:color blue
+                                                                    :hint nil ;; show hint in the echo area
+                                                                    )
+  "
+open %(concat (buffer-file-name)) in different sandbox
+
+"
+  (cl-loop for (shortname . projectname) in thi::project-hydra-mapping
+           collect
+           `(,shortname (lambda ()
+                          (interactive)
+                          (thi::temporary-reopen-file-different-sandbox ,projectname))
+                        ,projectname)))
+
 (provide 'thi-projects)
 ;;; thi-projects.el ends here
