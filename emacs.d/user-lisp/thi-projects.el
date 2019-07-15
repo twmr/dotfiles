@@ -147,7 +147,7 @@ evaluated."
 
 (defun thi::dev-find-file-in-docker-container ()
   (interactive)
-  (let ((user "devel"))
+  (let ((user "root"))
     ;; TODO check if container is running
     (counsel-find-file (format "/docker:%s@%s:/usr/"
                                user
