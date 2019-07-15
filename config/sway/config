@@ -73,7 +73,7 @@ input * tap enabled
     bindsym $mod+Return exec $term
 
     # kill focused window
-    bindsym $mod+Shift+q kill
+    bindsym $mod+Shift+c kill
 
     # start your launcher
     bindsym $mod+d exec $menu
@@ -86,7 +86,7 @@ input * tap enabled
     floating_modifier $mod normal
 
     # reload the configuration file
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+r reload
 
     # exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -181,6 +181,12 @@ input * tap enabled
 #
 # Resizing containers:
 #
+# https://unix.stackexchange.com/questions/255344/resizing-windows-in-i3-using-keyboard-only
+bindsym $mod+Ctrl+l resize shrink width 25 px
+bindsym $mod+Ctrl+k resize grow height 25 px
+bindsym $mod+Ctrl+j resize shrink height 25 px
+bindsym $mod+Ctrl+h resize grow width 25 px
+
 mode "resize" {
     # left will shrink the containers width
     # right will grow the containers width
