@@ -19,16 +19,16 @@ set $term terminator
 # Note: it's recommended that you pass the final command to sway
 set $menu dmenu_path | dmenu | xargs swaymsg exec --
 
-set ws1 1:term
-set ws1 1:emacs
-set ws3 1:web
-set ws4 4:mail
-set ws5 5:gaia
-set ws6 6
-set ws7 7:matter
-set ws8 8
-set ws9 9:spotify
-set ws10 10
+set $ws1 1:term
+set $ws1 1:emacs
+set $ws3 1:web
+set $ws4 4:mail
+set $ws5 5:gaia
+set $ws6 6
+set $ws7 7:matter
+set $ws8 8
+set $ws9 9:spotify
+set $ws10 10
 
 ### Output configuration
 #
