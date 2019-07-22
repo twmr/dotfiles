@@ -238,6 +238,7 @@
                      (image-mode . emacs)
                      (inferior-emacs-lisp-mode . emacs)
                      (json-mode . emacs)
+                     (makefile-mode . emacs)
                      (makey-key-mode . emacs)
                      (magit-repolist-mode . emacs)
                      (org-mode . emacs)
