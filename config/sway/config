@@ -30,6 +30,21 @@ set $ws8 "8"
 set $ws9 "9:spotify"
 set $ws10 "10"
 
+set $leftmonitor DVI-1
+set $rightmonitor DVI-2
+
+workspace 1 output $leftmonitor
+workspace 2 output $leftmonitor
+workspace 3 output $leftmonitor
+workspace 4 output $leftmonitor
+workspace 5 output $leftmonitor
+
+workspace 6 output $rightmonitor
+workspace 7 output $rightmonitor
+workspace 8 output $rightmonitor
+workspace 9 output $rightmonitor
+workspace 10 output $rightmonitor
+
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
