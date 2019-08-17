@@ -575,14 +575,14 @@ See URL `https://www.pylint.org/'."
                "\\(^\\s-*(use-package +\\)\\(\\_<.+\\_>\\)" 2)))
   (add-hook 'emacs-lisp-mode-hook #'jcs-use-package))
 
-(use-package ido
-  :disabled t
-  :custom
-  (ido-auto-merge-delay-time 2.7)
-  (ido-max-window-height 30)
-  (ido-use-faces t)
-  :config
-  (load "thi-ido"))
+;; (use-package ido
+;;   :disabled t
+;;   :custom
+;;   (ido-auto-merge-delay-time 2.7)
+;;   (ido-max-window-height 30)
+;;   (ido-use-faces t)
+;;   :config
+;;   (load "thi-ido"))
 
 (use-package ivy
   ;; see https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
@@ -1173,13 +1173,8 @@ See URL `https://www.pylint.org/'."
 (put 'dired-find-alternate-file 'disabled nil)
 
 
-
-
 ;; (use-package fill-column-indicator :ensure t)
 ;; (use-package flx :ensure t)
-;; (use-package flx-ido :ensure t
-;;   :config
-;;   (flx-ido-mode))
 
 ;; (use-package evil :ensure t
 ;;   :config (progn
