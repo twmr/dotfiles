@@ -59,6 +59,7 @@ set -e
     --without-jpeg \
     --without-gif \
     --without-tiff \
+    --with-modules \
     --with-json
 # --with-x-toolkit=gtk3 \
 #    --with-xml2 \
