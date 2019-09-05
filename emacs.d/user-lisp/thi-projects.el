@@ -58,8 +58,9 @@ evaluated."
     ("f". "fiora")
     ("g". "gaia")
     ("3". "gaia_py3")
-    ("S". "gaia_py3_stable")
+    ;; ("S". "gaia_py3_stable")
     ("h". "huxley")
+    ("i". "isar_py37")
     ))
 
 
@@ -70,7 +71,8 @@ evaluated."
     ;; add .projectile files and dumbjump files
     (if (not (file-exists-p projectdir))
         (message "directory %s does not exist - skipping" projectdir)
-      (unless (not (file-exists-p projectiledotfile))
+      (message "directory %s exists" projectdir)
+      (unless (file-exists-p projectiledotfile)
         (message "projectilefile %s does not exist - Creating...!"
                  projectiledotfile)
         (write-region "" nil projectiledotfile))
@@ -141,7 +143,7 @@ evaluated."
       (with-temp-buffer
         (insert-file-contents (f-join path sandboxcfgname))
         (keep-lines "containername" (point-min) (point-max))
-        (when (string-match "containername=\\(.*\\)" (buffer-string))
+        (when (string-match "containername = \\(.*\\)" (buffer-string))
           (match-string 1 (buffer-string)))))))
 
 
