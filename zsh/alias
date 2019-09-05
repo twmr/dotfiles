@@ -50,6 +50,8 @@ alias upgrade_all_pip_packes='pip freeze --local | grep -v "^\-e" | cut -d = -f 
 alias upxonsh='pip3 install git+https://github.com/xonsh/xonsh.git --user -U'
 alias upjenkins='pip install git+https://github.com/pycontribs/jenkinsapi.git --user -U'
 
+alias dst='docker stop -t 1'
+
 alias -g G='| egrep'
 
 #function call
