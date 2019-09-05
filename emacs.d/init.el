@@ -202,6 +202,13 @@
          )
   )
 
+(use-package edwina
+  :ensure t
+  :config
+  (setq display-buffer-base-action '(display-buffer-below-selected))
+  (edwina-setup-dwm-keys)
+  (edwina-mode 1))
+
 (use-package eglot :ensure t :defer t
   :config
   (add-to-list 'eglot-server-programs
@@ -958,6 +965,15 @@ See URL `https://www.pylint.org/'."
       (sml/setup))))
 
 (use-package smex :ensure t :config (load "thi-ido.el"))
+
+;; (use-package spaceline
+;;   :ensure t
+;;   :demand t
+;;   :init
+;;   (setq powerline-default-separator 'arrow-fade)
+;;   :config
+;;   (require 'spaceline-config)
+;;   (spaceline-spacemacs-theme))
 
 (use-package sr-speedbar :ensure t)
 
