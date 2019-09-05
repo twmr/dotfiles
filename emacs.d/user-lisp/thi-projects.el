@@ -60,7 +60,7 @@ evaluated."
     ("3". "gaia_py3")
     ;; ("S". "gaia_py3_stable")
     ("h". "huxley")
-    ("i". "isar_py37")
+    ("i". "isar")
     ))
 
 
