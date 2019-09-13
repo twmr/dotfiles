@@ -149,6 +149,7 @@ elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
     # prepath $HOME/.cargo/bin
     prepath /opt/emacs/bin
     prepath $HOME/.cask/bin
+    prepath $HOME/.garden/bin
 
     # Ubuntu make installation of Ubuntu Make binary symlink
     # prepath $HOME/.local/share/umake/bin
