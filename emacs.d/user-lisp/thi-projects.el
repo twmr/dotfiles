@@ -54,13 +54,13 @@ evaluated."
 
 (defvar thi::project-hydra-mapping
   '(("d" . "drina")
-    ("e". "erenik")
     ("f". "fiora")
     ("g". "gaia")
     ("3". "gaia_py3")
-    ;; ("S". "gaia_py3_stable")
     ("h". "huxley")
     ("i". "isar")
+    ("j". "jackson")
+    ("k". "kalix")
     ))
 
 
@@ -108,6 +108,8 @@ evaluated."
              (replace-regexp-in-string "~" (getenv "HOME") path))
            '("~/.zsh.d"
              "~/.zsh"
+             "~/gitrepos/dev"
+             "~/gitrepos/software-tests"
              "~/gitrepos/dotfiles/emacs.d"
              "~/gitrepos/dotfiles/emacs.d/user-lisp"
              ))))
@@ -181,4 +183,5 @@ open %(concat (buffer-file-name)) in different sandbox
                         ,projectname)))
 
 (provide 'thi-projects)
+
 ;;; thi-projects.el ends here
