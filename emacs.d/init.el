@@ -77,6 +77,9 @@
 ;;   (progn
 ;;     (global-auto-complete-mode)))
 
+(use-package avy
+    :ensure t)
+
 (use-package better-shell
     :ensure t
     :bind (("C-'" . better-shell-shell)
@@ -202,12 +205,12 @@
          )
   )
 
-(use-package edwina
-  :ensure t
-  :config
-  (setq display-buffer-base-action '(display-buffer-below-selected))
-  (edwina-setup-dwm-keys)
-  (edwina-mode 1))
+;; (use-package edwina
+;;   :ensure t
+;;   :config
+;;   (setq display-buffer-base-action '(display-buffer-below-selected))
+;;   (edwina-setup-dwm-keys)
+;;   (edwina-mode 1))
 
 (use-package eglot :ensure t :defer t
   :config
@@ -253,6 +256,7 @@
                      (protobuf-mode . emacs)
                      (python-mode . emacs)
                      (quickrun/mode . emacs)
+                     (rust-mode . emacs)
                      (sh-mode . emacs)
                      (shell-mode . emacs)
                      (shell-script-mode . emacs)
