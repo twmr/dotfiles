@@ -58,8 +58,6 @@
 (horizontal-scroll-bar-mode -1)         ; But no scrollbar
 
 (size-indication-mode)
-;;default font is now set in .Xresources
-;; (set-default-font "ProFont-9")
 
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 ;: Logical Behavour

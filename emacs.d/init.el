@@ -962,6 +962,8 @@ See URL `https://www.pylint.org/'."
                        (tool-bar-mode -1)
                        (menu-bar-mode -1)
                        (scroll-bar-mode -1)
+                       ;; TODO determine host dependent font-size
+                       (set-frame-font "Source Code Pro:size=40")
                        (load-theme thi::theme t)
                        (sml/setup)))))
     (progn
