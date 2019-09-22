@@ -939,6 +939,7 @@ See URL `https://www.pylint.org/'."
   ;; select word and type "M-s d"
   ;; In *rg* buffer:
   ;;   C-c C-p start wgrep mode
+  ;;           to exit it type wgrep-exit
   ;;   C-c c   increase context (toggle)
   :hook wgrep-ag-setup
   :config
