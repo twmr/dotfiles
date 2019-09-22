@@ -13,6 +13,63 @@
 
 (add-to-list 'load-path thi::config-dir)
 
+
+(add-to-list 'load-path (expand-file-name (concat user-emacs-directory "external/xelb")))
+(add-to-list 'load-path (expand-file-name (concat user-emacs-directory "external/exwm")))
+
+(setq thi::exwm-enabled
+      (and (eq window-system 'x)
+           ;; TODO check that emacs is not running in a wayland session
+           (seq-contains command-line-args "--use-exwm")))
+
+(when thi::exwm-enabled
+  (require 'exwm)
+  ;; TODO get rid of perspectives once exwm is properly configured
+  ;; TODO start emacs in deamon mode and enable exwm once first frame is created
+  ;; TODO emacs lock screen
+
+  ;; FIXME second monitor does not work with this config
+  ;; (require 'exwm-randr)
+  ;; (setq exwm-randr-workspace-output-plist '(0 "DVI-I-1" 1 "HDMI-0"))
+  ;; (add-hook 'exwm-randr-screen-change-hook
+  ;;           (lambda ()
+  ;;             (start-process-shell-command
+  ;;              "xrandr" nil "xrandr --output HDMI-0 --left-of DVI-I-1 --auto")))
+  ;; (exwm-randr-enable)
+
+  (require 'exwm-systemtray)
+  (exwm-systemtray-enable)
+
+  ;; The following example demonstrates how to use simulation keys to mimic
+  ;; the behavior of Emacs.  The value of `exwm-input-simulation-keys` is a
+  ;; list of cons cells (SRC . DEST), where SRC is the key sequence you press
+  ;; and DEST is what EXWM actually sends to application.  Note that both SRC
+  ;; and DEST should be key sequences (vector or string).
+  (setq exwm-input-simulation-keys
+        '(
+          ;; movement
+          ([?\C-b] . [left])
+          ([?\M-b] . [C-left])
+          ([?\C-f] . [right])
+          ([?\M-f] . [C-right])
+          ([?\C-p] . [up])
+          ([?\C-n] . [down])
+          ([?\C-a] . [home])
+          ([?\C-e] . [end])
+          ([?\M-v] . [prior])
+          ([?\C-v] . [next])
+          ([?\C-d] . [delete])
+          ([?\C-k] . [S-end delete])
+          ;; cut/paste.
+          ([?\C-w] . [?\C-x])
+          ([?\M-w] . [?\C-c])
+          ([?\C-y] . [?\C-v])
+          ;; search
+          ([?\C-s] . [?\C-f])))
+
+  (exwm-enable)
+  )
+
 (require 'cl-lib) ;; cl-loop
 
 ;; TODO try to get rid of the custom.el file, which is hard to keep in version control
@@ -241,6 +298,7 @@
                      (dockerfile-mode . emacs)
                      (emacs-lisp-mode . emacs)
                      (eshell-mode . emacs)
+                     (exwm-mode . emacs)
                      (flycheck-error-list-mode . emacs)
                      (fundamental-mode . emacs)
                      (groovy-mode . emacs)
