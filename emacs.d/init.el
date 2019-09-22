@@ -241,6 +241,7 @@
                      (eshell-mode . emacs)
                      (flycheck-error-list-mode . emacs)
                      (fundamental-mode . emacs)
+                     (groovy-mode . emacs)
                      (help-mode . emacs)
                      (helpful-mode . emacs)
                      (image-dired-mode . emacs)
