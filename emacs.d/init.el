@@ -780,11 +780,11 @@ See URL `https://www.pylint.org/'."
   :config
   (global-page-break-lines-mode))
 
-(use-package paradox :ensure t :defer t
-  :custom
-  (paradox-github-token t)
-  :config
-  (setq paradox-execute-asynchronously t))
+;; (use-package paradox :ensure t :defer t
+;;   :custom
+;;   (paradox-github-token t)
+;;   :config
+;;   (setq paradox-execute-asynchronously t))
 
 (use-package paredit :ensure t)
 
