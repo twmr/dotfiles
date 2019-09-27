@@ -187,6 +187,8 @@
 
 (use-package dockerfile-mode :ensure t :defer t)
 
+(use-package diminish :ensure t)
+
 (use-package dumb-jump
   :ensure t
   :demand t
@@ -270,7 +272,10 @@
                      )
                    do (evil-set-initial-state mode state))))
 
-(use-package ethan-wspace :ensure t :defer t
+(use-package ethan-wspace
+  :ensure t
+  :defer t
+  :diminish
   :custom
   (mode-require-final-newline nil)
   :init
@@ -1014,6 +1019,7 @@ See URL `https://www.pylint.org/'."
   ;; M-_ redo (without the undo tree graph) !!!
   :ensure t
   :defer t
+  :diminish
   :config (add-hook 'after-init-hook #'global-undo-tree-mode))
 
 (add-hook 'org-mode-hook
@@ -1051,7 +1057,9 @@ See URL `https://www.pylint.org/'."
 
 (use-package yaml-mode :ensure t :defer t)
 
-(use-package yasnippet :ensure t
+(use-package yasnippet
+  :ensure t
+  :diminish yas-minor-mode
   :config
   (progn
     (yas-reload-all)
