@@ -1020,6 +1020,34 @@ See URL `https://www.pylint.org/'."
   :custom
   (sml/no-confirm-load-theme t)
   :config
+  (defun thi::sml-setup ()
+    (sml/setup)
+    (sml/apply-theme 'respectful)
+    ;; (setq sml/mode-width 'right
+    ;;       sml/name-width 60)
+
+    (setq-default mode-line-format
+                  '("%e"
+                    ;; (:eval (format "[%d] " exwm-workspace-current-index))
+                    mode-line-front-space
+                    mode-line-mule-info
+                    mode-line-client
+                    mode-line-modified
+                    mode-line-remote
+                    mode-line-frame-identification
+                    mode-line-buffer-identification
+                    sml/pos-id-separator
+                    (vc-mode vc-mode)
+                    " "
+                    mode-line-position
+                    evil-mode-line-tag
+                    sml/pre-modes-separator
+                    mode-line-modes
+                    " "
+                    mode-line-misc-info))
+
+    )
+
   (if (daemonp)
       (add-hook 'after-make-frame-functions
                 '(lambda (f)
@@ -1033,10 +1061,10 @@ See URL `https://www.pylint.org/'."
                                                    10
                                                  40)))
                        (load-theme thi::theme t)
-                       (sml/setup)))))
+                       (thi::sml-setup)))))
     (progn
       (load-theme thi::theme t)
-      (sml/setup))))
+      (thi::sml-setup))))
 
 (use-package smex :ensure t :config (load "thi-ido.el"))
 
