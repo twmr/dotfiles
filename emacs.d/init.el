@@ -252,6 +252,7 @@
                      (makefile-mode . emacs)
                      (makey-key-mode . emacs)
                      (magit-repolist-mode . emacs)
+                     (messages-buffer-mode . emacs)
                      (org-mode . emacs)
                      (paradox-menu-mode . emacs)
                      (protobuf-mode . emacs)
