@@ -792,6 +792,9 @@ See URL `https://www.pylint.org/'."
     (magit-git-command "git pull --rebase")
     ))
 
+(use-package magit-libgit
+  :ensure t)
+
 (use-package multiple-cursors :ensure t :defer t
   :bind (("C->"       . mc/mark-next-like-this)
          ("C-<"       . mc/mark-previous-like-this)
