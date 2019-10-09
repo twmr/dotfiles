@@ -353,6 +353,7 @@ buffer is not visiting a file."
 
 (defun kill-other-buffers ()
     "Kill all other buffers."
+    ;;https://stackoverflow.com/questions/3417438/close-all-buffers-besides-the-current-one-in-emacs
     (interactive)
     (mapc 'kill-buffer
           (delq (current-buffer)
