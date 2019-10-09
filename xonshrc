@@ -1,6 +1,7 @@
 # https://github.com/ninjaaron/xonsh-quickstart
 $AUTO_CD = True
 #PROMPT = "#> "
+$PROMPT = "{env_name}{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{NO_COLOR} {BOLD_BLUE}{prompt_end}{NO_COLOR} "
 $SHELL_TYPE = 'prompt_toolkit2'
 # $UPDATE_COMPLETIONS_ON_KEYPRESS = True
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
