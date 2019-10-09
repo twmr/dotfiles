@@ -1024,6 +1024,8 @@ See URL `https://www.pylint.org/'."
     (rg-define-toggle "--context 3" (kbd "C-c c"))
   ))
 
+(use-package rust-mode :ensure t)
+
 (use-package smart-mode-line :ensure t
   :custom
   (sml/no-confirm-load-theme t)
