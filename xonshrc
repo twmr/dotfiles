@@ -5,6 +5,8 @@ $SHELL_TYPE = 'prompt_toolkit2'
 # $UPDATE_COMPLETIONS_ON_KEYPRESS = True
 $SUPPRESS_BRANCH_TIMEOUT_MESSAGE = True
 
+$XONSH_SHOW_TRACEBACK = True
+
 r"""
 completions from history (ghost text) can be selectd using either the
 right arrow key or Ctrl-e.
@@ -20,13 +22,18 @@ aliases['gg'] = ('git', 'grep')
 aliases['gd'] = ('git', 'diff')
 aliases['gpl'] = ('git', 'pull')
 aliases['gpr'] = ('git', 'pull', '--rebase')
+aliases['gps'] = ('git', 'push')
 aliases['src'] = aliases['reload_xonshrc'] = ("source", "~/.xonshrc")
 # TODO does not work
 aliases['dnu'] = "sudo aptitude update && sudo aptitude upgrade"
 # TODO does not work
 aliases['gk'] = "gitk --all $* &"
 
-# xontrib load fzf-widgets
-#from prompt_toolkit.keys import Keys
-#$fzf_history_binding = Keys.ControlR
-#$fzf_ssh_binding = Keys.ControlS
+# intall fzf-widgets from github
+# git clone https://github.com/laloch/xontrib-fzf-widgets
+# pip install -e .
+xontrib load fzf-widgets
+from prompt_toolkit.keys import Keys
+$fzf_history_binding = Keys.ControlR
+$fzf_ssh_binding = Keys.ControlS
+$fzf_file_binding = Keys.ControlT
