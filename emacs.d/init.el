@@ -68,6 +68,11 @@
           ([?\C-s] . [?\C-f])))
 
   (exwm-enable)
+  (defun exwm-logout ()
+      (interactive)
+      (recentf-save-list)
+      (save-some-buffers)
+      (start-process-shell-command "logout" nil "lxsession-logout"))
   )
 
 (require 'cl-lib) ;; cl-loop
