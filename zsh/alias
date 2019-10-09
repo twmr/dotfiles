@@ -48,7 +48,6 @@ alias upgrade_all_pip_packes='pip freeze --local | grep -v "^\-e" | cut -d = -f 
 #alias pip='pip' # TODO only use this alias if not in conda environment
 # alias upxonsh='pip3.4 install xonsh --user -U'
 alias upxonsh='pip3 install git+https://github.com/xonsh/xonsh.git --user -U'
-alias upjenkins='pip install git+https://github.com/pycontribs/jenkinsapi.git --user -U'
 
 alias dst='docker stop -t 1'
 
@@ -80,11 +79,6 @@ alias -s pdf='okular'
 
 alias wcat='wget -q -O -'
 alias reboot='sudo reboot'
-alias qtc='qtcreator'
-
-alias mat='matlab -nosplash'
-alias cmat='matlab -nodesktop -nosplash -nojvm'
-alias zot='run-zotero.sh'
 
 alias i='noglob i'
 
@@ -92,9 +86,6 @@ embin="/usr/bin/emacs"
 if [ "$EMBINPATH" ]; then
     embin="$EMBINPATH/emacs"
 fi
-
-alias jn='jupyter notebook'
-alias in='jupyter notebook'
 
 alias svim='sudo /usr/bin/vim'
 alias v='vim'
@@ -143,26 +134,7 @@ alias ka='sudo killall'
 alias cmx='chmod +x'
 
 #named directories
-HOSTNAME=`hostname`
-if [ "$HOSTNAME" = "dirac" -o "$HOSTNAME" = "dyson" -o "$HOSTNAME" = "cobra" ]; then
-    alias vsc='ssh thisch@vsc.tuwien.ac.at -X -A'
-    alias vsc2='ssh thisch@vsc2.tuwien.ac.at -X -A'
-    alias vsc3='ssh -p 27 thisch2@vsc3.vsc.ac.at -X -A'
-    alias vsc3new='ssh -p 27 thisch@vsc3.vsc.ac.at -X -A'
-    alias vsc3itp='ssh -p 27 thisch3@vsc3.vsc.ac.at -X -A'
-
-    alias ng='LD_PRELOAD=/opt/libpardiso500-GNU481-X86-64.so:/usr/lib64/libm.so:/usr/lib64/liblapack.so:/usr/lib64/libblas.so  netgen'
-    hash -d pys=${GITR}/diss/pysalt
-    hash -d t3=${GITR}/diss/task3
-    hash -d t4=${GITR}/diss/t4
-    hash -d pyd=${GITR}/diss/pydipole
-    hash -d myd=${GITR}/diss/mydipole
-    hash -d rloc=~/ownCloud/Shared/Random_Lasers/
-fi
-
 DOTFDIR=${GITR}/dotfiles
-hash -d oc=${HOME}/ownCloud
-hash -d ocrl=${HOME}/ownCloud/Shared/Random_Lasers
 hash -d conf=${HOME}/.config
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
@@ -170,7 +142,6 @@ hash -d diss=${GITR}/diss
 hash -d dotf=${DOTFDIR}
 hash -d dotfp=${DOTFDIR}_personal
 hash -d emd=${DOTFDIR}/emacs.d
-hash -d egd=${DOTFDIR}/emacs.d/el-get
 hash -d gr=${GITR}
-hash -d sp27=/usr/lib/python2.7/site-packages
-hash -d sp6427=/usr/lib64/python2.7/site-packages
+hash -d sp37=/usr/lib/python3.7/site-packages
+hash -d sp6437=/usr/lib64/python3.7/site-packages
