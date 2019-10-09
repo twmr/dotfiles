@@ -113,8 +113,6 @@ alias removelog='rm -f`find . -iname "*.log"`'
 #                           -o -iname "ng0.trace"`'
 alias removelatex='rm -f `find . -iname "*.log" -o -iname "*.aux" -o -iname "*.out"` && rm -rf `find . -iname auto -type d`'
 
-alias st='sublime_text'
-
 if [ -e /usr/bin/dnf ]; then
     alias di='sudo dnf install'
     alias dinf='sudo dnf info'
@@ -130,8 +128,6 @@ else
 fi
 
 alias ka='sudo killall'
-
-alias cmx='chmod +x'
 
 #named directories
 DOTFDIR=${GITR}/dotfiles
