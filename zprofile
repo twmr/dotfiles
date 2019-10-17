@@ -147,7 +147,7 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
     prepath $HOME/bin
     # prepath $HOME/.cargo/bin
-    prepath /opt/emacs/bin
+    # prepath /opt/emacs/bin
     prepath $HOME/.cask/bin
     prepath $HOME/.cargo/bin
     prepath $HOME/.garden/bin
