@@ -153,6 +153,8 @@
 
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+(winner-mode 1)
+
 ;; (semantic-mode 1)
 ;; see http://www.gnu.org/software/emacs/manual/html_node/semantic/Sticky-Func-Mode.html#Sticky-Func-Mode
 ;; (global-semantic-stickyfunc-mode 1)
