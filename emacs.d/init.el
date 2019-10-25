@@ -1071,7 +1071,7 @@ See URL `https://www.pylint.org/'."
                        (set-frame-font (format "Source Code Pro:size=%d"
                                                (if (string= (system-name) "PC-16609.ims.co.at")
                                                    10
-                                                 40)))
+                                                 34)))
                        (load-theme thi::theme t)
                        (thi::sml-setup)))))
     (progn
