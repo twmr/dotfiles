@@ -56,7 +56,6 @@ evaluated."
   '(("d" . "drina")
     ("f". "fiora")
     ("g". "gaia")
-    ("3". "gaia_py3")
     ("h". "huxley")
     ("i". "isar")
     ("j". "jackson")
