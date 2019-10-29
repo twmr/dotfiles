@@ -155,7 +155,7 @@ elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
     # Ubuntu make installation of Ubuntu Make binary symlink
     # prepath $HOME/.local/share/umake/bin
 
-    preldlpath /opt/emacs/lib
+    # preldlpath /opt/emacs/lib
 
     # ssh-agent is started using a systemd user-service
     export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.socket
