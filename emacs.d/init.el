@@ -1300,6 +1300,10 @@ See URL `https://www.pylint.org/'."
 ;; (with-eval-after-load 'flycheck
 ;;    (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
+;; FIXME segfaults
+;;(add-to-list 'load-path "/home/thomas/gitrepos/emacs-libvterm")
+;;(require 'vterm)
+
 
 ;;; init.el ends here
 (put 'downcase-region 'disabled nil)
