@@ -24,6 +24,9 @@ alias cr='enconda && conda remove --use-index-cache'
 alias workon='enconda && source activate'
 alias workoff='enconda && source deactivate'
 
+# rg
+alias pyrg='rg --type=py'
+
 alias rng='ranger'
 # alias pip='python-pip'
 alias ipy='ipython --no-confirm-exit'
