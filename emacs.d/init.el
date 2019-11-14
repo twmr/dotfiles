@@ -894,18 +894,18 @@ See URL `https://www.pylint.org/'."
      (use-package org-pdfview
        :ensure t))
 
-(use-package persp-mode :ensure t
-  :config
-  (persp-mode)
-  )
+;; (use-package persp-mode :ensure t
+;;   :config
+;;   (persp-mode)
+;;   )
 
-(use-package perspective :ensure t :disabled t
-  ;; disabled because it does not yet support persp-2.0
-  (bind-keys :map projectile-mode-map
-        ("s-s" . projecile-persp-switch-project))
-  :config
-  (project-persist-mode 1) ;; C-c P n; C-c P f
-  )
+;; (use-package perspective :ensure t :disabled t
+;;   ;; disabled because it does not yet support persp-2.0
+;;   (bind-keys :map projectile-mode-map
+;;         ("s-s" . projecile-persp-switch-project))
+;;   :config
+;;   (project-persist-mode 1) ;; C-c P n; C-c P f
+;;   )
 
 (use-package pip-requirements :ensure t :defer t)
 
