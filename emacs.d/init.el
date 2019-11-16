@@ -269,6 +269,61 @@
          )
   )
 
+(use-package edit-indirect
+  ;; Edit regions in separate buffers, like `org-edit-src-code' but for arbitrary
+  ;; regions
+
+  ;; copied from https://gist.github.com/fleimgruber/cd2386d8326fad3e0e2b99ebc2f05739
+  ;; referenced in https://github.com/jorgenschaefer/elpy/issues/498#issuecomment-324145571
+  ;; needed for editing python docstring in new buffers that are in rst-mode
+  ;; TODO add some rst validitiy checks before commiting change in rst-mode buffer.
+
+  ;; rst.el docu: https://docutils.readthedocs.io/en/sphinx-docs/user/emacs.html
+  ;; run C-c e to edit docstring in rst-mode buffer
+  ;; Commit changes wich C-c C-c
+  :ensure t
+  :config
+  (progn
+
+    (defun edit-indirect-rst-set-mode (_parent _beg _end)
+      (rst-mode))
+
+    (setq edit-indirect-guess-mode-function #'edit-indirect-rst-set-mode)
+
+    (defun edit-indirect-rst-remove-spaces()
+      (save-excursion
+        (beginning-of-buffer)
+        (while (search-forward-regexp "^    \\(.*?\\)" nil t)
+          (replace-match "\\1" nil))))
+
+    (defun edit-indirect-rst-add-spaces()
+      (save-excursion
+        (beginning-of-buffer)
+        (while (search-forward-regexp "^\\([^\n]\\)" nil t)
+          (replace-match "    \\1" nil))
+        (end-of-buffer)
+        (insert "    ")))
+
+    (add-to-list 'edit-indirect-after-creation-hook #'edit-indirect-rst-remove-spaces)
+    (add-to-list 'edit-indirect-before-commit-hook #'edit-indirect-rst-add-spaces)
+
+    (defun edit-indirect-region-wrap-rst (s e o)
+      (edit-indirect-region s e o))
+
+    (defun edit-indirect-rst ()
+      (interactive)
+      (let ((pt (point)))
+        (progn
+          (save-excursion
+            (setq s (re-search-backward "\\(\"\"\"\\)" nil t)
+                  region-start (match-end 0))
+            (goto-char pt)
+            (setq e (re-search-forward "\\(\"\"\"\\)" nil t)
+                  region-end (match-beginning 0))
+            (and s e (< s pt e))))
+        (edit-indirect-region-wrap-rst region-start region-end t)))
+    ))
+
 ;; (use-package edwina
 ;;   :ensure t
 ;;   :config
@@ -968,6 +1023,7 @@ See URL `https://www.pylint.org/'."
   (define-key python-mode-map (kbd "M-.") #'dumb-jump-go)
   (define-key python-mode-map (kbd "M-,") #'dumb-jump-back)
   (define-key python-mode-map (kbd "C-c C-i") #'pyimport-insert-missing)
+  (define-key python-mode-map (kbd "C-c e") #'edit-indirect-rst)
 
   ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
   ;; (("C-`" . 'helm-semantic-or-imenu))
@@ -1088,6 +1144,42 @@ See URL `https://www.pylint.org/'."
 ;;   :config
 ;;   (require 'spaceline-config)
 ;;   (spaceline-spacemacs-theme))
+
+(use-package sphinx-doc
+  ;; TODO this package contains support for generating docstrings in sphinx
+  ;; parasble formater for python functions/methods/classes
+
+  ;; TODO does not yet support numpy style docstings  https://github.com/naiquevin/sphinx-doc.el/issues/19
+  ;; TODO is there a yasnippet for this already? (yes there are  https://github.com/AndreaCrotti/yasnippet-snippets/search?q=numpy&unscoped_q=numpy
+  ;;            snippets: idn, fdn, mdn,
+  ;;       TODO they do not support type annotations
+  ;;       TODO sync not supported?
+  :ensure t
+
+
+  :config
+  (progn
+
+    ;; TODO get region of current signatrue automatically
+    (defun thi::python-args-to-docstring-numpy (start end)
+      ;; this was taken from https://github.com/AndreaCrotti/yasnippet-snippets/blob/43624cad757a6bd9380c8f79406b1e74b80478f7/snippets/python-mode/.yas-setup.el#L24
+      ;; which is used for the docstring snippets in yasnippet
+
+      ;; this function does not depend on yas-text
+      "return docstring format for the python arguments in yas-text"
+      (interactive "r")
+      (let* ((args (python-split-args (buffer-substring-no-properties start end)))
+             (format-arg (lambda(arg)
+                           (concat (nth 0 arg) " : " (if (nth 1 arg) ", optional") "\n")))
+             (formatted-params (mapconcat format-arg args "\n"))
+             (formatted-ret (mapconcat format-arg (list (list "out")) "\n")))
+        (unless (string= formatted-params "")
+          ;; TODO insert it in docstring
+          (message (mapconcat 'identity
+                     (list "\nParameters\n----------" formatted-params
+                           "\nReturns\n-------" formatted-ret)
+                     "\n")))))
+    ))
 
 (use-package sr-speedbar :ensure t)
 
