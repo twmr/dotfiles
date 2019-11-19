@@ -543,3 +543,109 @@ function fif() {
         fzf --preview \
             "highlight -O ansi -l {} 2> /dev/null | rg --colors 'match:bg:yellow' --ignore-case --pretty --context 10 '$1' || rg --ignore-case --pretty --context 10 '$1' {}"
 }
+
+function ensure_clean() {
+    # TODO add sanity checks
+    dev foreach git reset --hard "{@upstream}"
+}
+
+function apply_cmd_to_gerrit_repos() {
+    # runs cmd on all gerrit repos
+    # supported cmds should be: zsh function (gsed) and sh script
+    # outputs diffstat at the end and allows to page through all changes (separate command?)
+
+    # examples: apply_cmd_to_gerrit_repos ls
+    #           apply_cmd_to_gerrit_repos ls | wc
+    #           apply_cmd_to_gerrit_repos gsed 's/foo/bar/g'
+
+    if [[ ! $# -gt 0 ]]; then
+        echo "Need a cmd to run in every gerrit repo!";
+        return 1;
+    fi
+    echo $*
+
+    gerrit_repos=$(find . -maxdepth 2 -type f -iname '.gitreview' -printf '%h\n')
+    basedir=$PWD
+
+    while IFS= read -r repo ; do
+        echo $repo;
+
+        echo "[in $repo]"
+        cd $basedir/$repo
+        echo "  [running $*]"
+        eval $*
+        # todo
+    done <<< "$gerrit_repos"
+
+    cd $basedir
+
+    echo "[[git diffstat]]"
+    while IFS= read -r repo ; do
+        echo "[in $repo]"
+        cd $basedir/$repo
+        GIT_PAGER=cat git diff --stat
+    done <<< "$gerrit_repos"
+
+    cd $basedir
+    # TODO ask for full output
+
+    # https://superuser.com/questions/427645/better-way-to-read-a-line-of-user-input-in-zsh-e-g-with-zle
+    # https://unix.stackexchange.com/questions/468754/zsh-test-newline-in-case?noredirect=1
+    tmp=; vared -p 'Would you like to see the full diff?: [y|N]' tmp
+    if [ -n $tmp ] && [ "$tmp" = "y" ]; then
+        echo "[[git diff]]"
+        while IFS= read -r repo ; do
+            echo "[in $repo]"
+            cd $basedir/$repo
+            GIT_PAGER=cat git diff
+        done <<< "$gerrit_repos"
+
+    fi
+
+    cd $basedir
+}
+
+function create_gerrit_commit_series() {
+    # loop over all repos that are dirty
+    # collect repos that are dirty
+    # confirm
+    # enter commit msg
+    # commit
+
+    gerrit_repos=$(find . -maxdepth 2 -type f -iname '.gitreview' -printf '%h\n')
+    basedir=$PWD
+
+    echo "[[dirty gerrit repos]]"
+    while IFS= read -r repo ; do
+        cd $basedir/$repo
+        git diff-index --quiet HEAD -- || echo $repo;
+        # GIT_PAGER=cat git diff --stat
+    done <<< "$gerrit_repos"
+
+    cd $basedir
+
+    tmp=; vared -p 'Would you like to commit this: [Y|n]' tmp
+    if [ -z $tmp ] || [ "$tmp" = "y" ]; then
+        touch /tmp/.GERRIT_CMT_MSG
+        vim /tmp/.GERRIT_CMT_MSG
+        # TODO check if the user entered a valid msg
+
+        [ ! -s /tmp/.GERRIT_CMT_MSG ] && echo "empty file" && return 1
+
+        while IFS= read -r repo ; do
+            cd $basedir/$repo
+            git commit -F /tmp/.gERRIT_CMT_MSG
+        done <<< "$gerrit_repos"
+    fi
+}
+
+# TODO
+# function foo(){
+#     # find all directories in sandbox that have a .gitreview file
+#     # check that the sandbox is clean
+#     # multiple commands
+#     #   one that checks that all repos are clean and applies a command to every repo and outputs a diff at the end
+#     #   one that commits all changes (single commit msg),  summary at the end
+#     #   one that uploads the change (requires topic, reviewer and -W)
+#     #   one for resetting all heads
+# }
