@@ -32,31 +32,9 @@ function eup()
      compile_emacs)
 }
 
-function cenvdir() {
-    echo $HOME/miniconda/envs/$CONDA_DEFAULT_ENV
-}
-function switchcurenv() {
-    cd `cenvdir`
-}
-
 function act() {
     echo "activate virtualenv in $1"
     source $1/bin/activate
-}
-
-function env2k() {
-    enconda
-    workon py27
-}
-
-function env3k() {
-    enconda
-    workon py36
-}
-
-function env35() {
-    enconda
-    workon py35
 }
 
 function melmacs() {
@@ -219,146 +197,8 @@ function gitgrep_in_sandbox() {
     done
 }
 
-function sco() {
-    args=""
-    if [[ $# -ge 1 ]]; then
-        if [[ $1 == 'trunk' ]]; then
-            NLDIR=`pwd`/../NetLib
-        else
-            print "unknown type", $1
-            return 1
-        fi
-        if [[ $# -ge 2 ]]; then
-           args=$2
-        fi
-    else
-        NLDIR=`pwd`/../NetLib
-    fi
-
-    echo NLDIR is $NLDIR
-    if [ ! -e $NLDIR ]; then
-        echo "$NLDIR does not exist (wrong directory ??)"
-    fi
-    echo executing
-    echo scons Arch=arch-pc Patch=0 NetLib=$NLDIR $args
-    scons Arch=arch-pc Patch=0 NetLib=$NLDIR $args
-}
-
-function scocf() {
-    args=""
-    if [[ $# -ge 1 ]]; then
-        if [[ $1 == 'trunk' ]]; then
-            NLDIR=`pwd`/../NetLib
-        else
-            print "unknown type", $1
-            return 1
-        fi
-        if [[ $# -ge 2 ]]; then
-           args=$2
-        fi
-    else
-        NLDIR=`pwd`/../NetLib
-    fi
-
-    echo NLDIR is $NLDIR
-    if [ ! -e $NLDIR ]; then
-        echo "$NLDIR does not exist (wrong directory ??)"
-    fi
-    echo executing
-    echo scons Arch=arch-cf Patch=0 NetLib=$NLDIR $args
-    scons Arch=arch-cf Patch=0 NetLib=$NLDIR $args
-}
-
-
 function makecf {
     (cd ${CFBD} && make)
-}
-
-function laserscp() {
-    remotedir="/home/thomas/public_html/laser"
-    remotehost="thomas@opentech.meinserver.at"
-    flist=$@
-    if [[ $# -gt 1 ]]; then
-        # echo more than one arg:  $#
-        if [[ ! -e $@[$#] ]]; then
-            # echo last arg $@[$#] does not exist
-            # echo strip it from arglist
-            strippedlen=$((${#@}-1))
-            # echo $strippedlen
-            # echo ${@:1:${strippedlen}}
-            flist=${@:1:${strippedlen}}
-            remotedir=$remotedir/$@[${#@}]
-            echo $remotehost "mkdir -p $remotedir"
-            ssh $remotehost "mkdir -p $remotedir"
-        else
-            # echo $@[$#] exists
-        fi
-    fi
-
-    # for i in {1..${#@}}; do
-    #     echo $i, $@[$i]
-    # done
-    echo secure copy : $flist
-    echo to: $remotehost:$remotedir
-    scp $flist $remotehost:$remotedir/
-}
-
-function diplomscp() {
-    remotedir="/home/thomas/public_html/diplom"
-    remotehost="thomas@opentech.meinserver.at"
-    flist=$@
-    if [[ $# -gt 1 ]]; then
-        # echo more than one arg:  $#
-        if [[ ! -e $@[$#] ]]; then
-            # echo last arg $@[$#] does not exist
-            # echo strip it from arglist
-            strippedlen=$((${#@}-1))
-            # echo $strippedlen
-            # echo ${@:1:${strippedlen}}
-            flist=${@:1:${strippedlen}}
-            remotedir=$remotedir/$@[${#@}]
-            echo $remotehost "mkdir -p $remotedir"
-            ssh $remotehost "mkdir -p $remotedir"
-        else
-            # echo $@[$#] exists
-        fi
-    fi
-
-    # for i in {1..${#@}}; do
-    #     echo $i, $@[$i]
-    # done
-    echo secure copy : $flist
-    echo to: $remotehost:$remotedir
-    scp $flist $remotehost:$remotedir/
-}
-
-function manuscp() {
-    remotedir="/home/thomas/public_html/manuscript"
-    remotehost="thomas@opentech.meinserver.at"
-    flist=$@
-    if [[ $# -gt 1 ]]; then
-        # echo more than one arg:  $#
-        if [[ ! -e $@[$#] ]]; then
-            # echo last arg $@[$#] does not exist
-            # echo strip it from arglist
-            strippedlen=$((${#@}-1))
-            # echo $strippedlen
-            # echo ${@:1:${strippedlen}}
-            flist=${@:1:${strippedlen}}
-            remotedir=$remotedir/$@[${#@}]
-            echo $remotehost "mkdir -p $remotedir"
-            ssh $remotehost "mkdir -p $remotedir"
-        else
-            # echo $@[$#] exists
-        fi
-    fi
-
-    # for i in {1..${#@}}; do
-    #     echo $i, $@[$i]
-    # done
-    echo secure copy : $flist
-    echo to: $remotehost:$remotedir
-    scp $flist $remotehost:$remotedir/
 }
 
 function pastie {
@@ -486,34 +326,6 @@ function git_info {
 
 function mgg() {
     (cd ~psc; GIT_PAGER=cat gg $*; cd ~tol; GIT_PAGER=cat gg $*) | less
-}
-
-
-function cfbench() {
-    echo time mpirun -np 4 calc_cfbasis -f cfbench.xml -k 30.0 -o oidatest
-    time mpirun -np 4 calc_cfbasis -f cfbench.xml -k 30.0 -o oidatest -log_summary | tee logsumm.log
-}
-function cfmatlab() {
-    #TODO aendere den path s.d. matlab die single core version von der cffemlib verwendet
-    (
-    if [ `hostname` = "thisch" ]; then
-        PRELOADSTRING="/usr/lib/x86_64-linux-gnu/libstdc++.so.6 /usr/lib/x86_64-linux-gnu/libgfortran.so.3"
-    else
-        PRELOADSTRING=""
-    fi
-    export PATH=$CFBD:$PATH
-    echo env LD_PRELOAD="$PRELOADSTRING" $MATLAB_BIN/matlab -desktop
-    env LD_PRELOAD="$PRELOADSTRING" $MATLAB_BIN/matlab -desktop
-
-    )
-}
-
-function ipycomp() {
-    (enconda &&
-     workon py3k &&
-     echo `python --version` &&
-     cd ${GITR}/ipython &&
-     git pull && pi)
 }
 
 function genpasswd() {
