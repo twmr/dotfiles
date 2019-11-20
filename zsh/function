@@ -569,21 +569,22 @@ function apply_cmd_to_gerrit_repos() {
 
     while IFS= read -r repo ; do
         echo "[in $repo]"
-        cd $basedir/$repo
-        echo "  [running $*]"
-        eval $*
+        (
+            cd $repo
+            echo "  [running $*]"
+            eval $*
+        )
     done <<< "$gerrit_repos"
-
-    cd $basedir
 
     echo "[[git diffstat]]"
     while IFS= read -r repo ; do
         echo "[in $repo]"
-        cd $basedir/$repo
-        GIT_PAGER=cat git diff --stat
+        (
+            cd $repo
+            GIT_PAGER=cat git diff --stat
+        )
     done <<< "$gerrit_repos"
 
-    cd $basedir
     # TODO ask for full output
 
     # https://superuser.com/questions/427645/better-way-to-read-a-line-of-user-input-in-zsh-e-g-with-zle
@@ -593,13 +594,13 @@ function apply_cmd_to_gerrit_repos() {
         echo "[[git diff]]"
         while IFS= read -r repo ; do
             echo "[in $repo]"
-            cd $basedir/$repo
-            GIT_PAGER=cat git diff
+            (
+                cd $repo
+                GIT_PAGER=cat git diff
+            )
         done <<< "$gerrit_repos"
 
     fi
-
-    cd $basedir
 }
 
 function create_gerrit_commit_series() {
@@ -614,28 +615,24 @@ function create_gerrit_commit_series() {
 
     echo "[[dirty gerrit repos]]"
     while IFS= read -r repo ; do
-        cd $basedir/$repo
-        git diff-index --quiet HEAD -- || echo $repo;
-        # GIT_PAGER=cat git diff --stat
+        (
+            cd $repo
+            git diff-index --quiet HEAD -- || echo $repo;
+        )
     done <<< "$gerrit_repos"
-
-    cd $basedir
 
     tmp=; vared -p 'Would you like to commit this: [Y|n]' tmp
     if [ -z $tmp ] || [ "$tmp" = "y" ]; then
         touch /tmp/.GERRIT_CMT_MSG
         vim /tmp/.GERRIT_CMT_MSG
-        # TODO check if the user entered a valid msg
 
+        # check if the user entered a valid msg
         [ ! -s /tmp/.GERRIT_CMT_MSG ] && echo "empty file" && return 1
 
         while IFS= read -r repo ; do
-            cd $basedir/$repo
-            git diff-index --quiet HEAD -- || git commit -a -F /tmp/.GERRIT_CMT_MSG
+            (cd $repo; git diff-index --quiet HEAD -- || git commit -a -F /tmp/.GERRIT_CMT_MSG)
         done <<< "$gerrit_repos"
     fi
-
-    cd $basedir
 }
 
 
@@ -650,27 +647,31 @@ function upload_gerrit_commit_series() {
     fi
     gerrit_topic=$1
     gerrit_repos=$(find . -maxdepth 2 -type f -iname '.gitreview' -printf '%h\n')
-    basedir=$PWD
 
     echo "[[dirty gerrit repos]]"
     while IFS= read -r repo ; do
-        cd $basedir/$repo
-        [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] || (echo $repo; GIT_PAGER=cat git log --format=oneline origin "@{upstream}..HEAD")
-
+        (
+            cd $repo
+            [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] || (echo $repo; GIT_PAGER=cat git log --format=oneline origin "@{upstream}..HEAD")
+        )
     done <<< "$gerrit_repos"
-
-    cd $basedir
 
     tmp=; vared -p 'Would you like to upload the above gerrit changes to topic $gerrit_topic: [Y|n]' tmp
     if [ -z $tmp ] || [ "$tmp" = "y" ]; then
         while IFS= read -r repo ; do
-            cd $basedir/$repo
-            # TODO set assignee
-            [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] || (echo $repo; git review -W -t $gerrit_topic --reviewer SD-odd)
+            (
+                cd $repo
+                # TODO set assignee
+                [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] || (
+                    echo $repo
+                    git review -W -t $gerrit_topic --reviewer SD-odd
+                    # TODO extract change nr
+                    # gerrit-set-assignee.py -c $
+                )
+            )
         done <<< "$gerrit_repos"
+        # dev topic set-assignee $gerrit_topic SD-odd
     fi
-
-    cd $basedir
 }
 
 
