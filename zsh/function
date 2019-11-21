@@ -361,6 +361,33 @@ function ensure_clean() {
     dev foreach git reset --hard "@{upstream}"
 }
 
+
+function _iterate_over_gerrit_repos() {
+    echo $(find . -maxdepth 2 -type f -iname '.gitreview' -printf '%h\n' | grep -v "^\./config$")
+}
+
+function foobar() {
+    repos=$(_iterate_over_gerrit_repos)
+    for repo in $repos; do
+        echo "[in $repo]"
+        (
+            cd $repo
+            echo "  [running $*]"
+            eval $*
+        )
+    done
+
+    for repo in $repos; do
+        echo "[in $repo]"
+        (
+            cd $repo
+            echo "  [running $*]"
+            eval $*
+        )
+    done
+}
+
+
 function apply_cmd_to_gerrit_repos() {
     # runs cmd on all gerrit repos
     # supported cmds should be: zsh function (gsed) and sh script
@@ -374,28 +401,25 @@ function apply_cmd_to_gerrit_repos() {
         echo "Need a cmd to run in every gerrit repo!";
         return 1;
     fi
-    echo $*
+    gerrit_repos=$(_iterate_over_gerrit_repos)
 
-    gerrit_repos=$(find . -maxdepth 2 -type f -iname '.gitreview' -printf '%h\n')
-    basedir=$PWD
-
-    while IFS= read -r repo ; do
+    for repo in $repos; do
         echo "[in $repo]"
         (
             cd $repo
             echo "  [running $*]"
             eval $*
         )
-    done <<< "$gerrit_repos"
+    done
 
     echo "[[git diffstat]]"
-    while IFS= read -r repo ; do
+    for repo in $repos; do
         echo "[in $repo]"
         (
             cd $repo
             GIT_PAGER=cat git diff --stat
         )
-    done <<< "$gerrit_repos"
+    done
 
     # TODO ask for full output
 
@@ -404,14 +428,13 @@ function apply_cmd_to_gerrit_repos() {
     tmp=; vared -p 'Would you like to see the full diff?: [y|N]' tmp
     if [ -n $tmp ] && [ "$tmp" = "y" ]; then
         echo "[[git diff]]"
-        while IFS= read -r repo ; do
+        for repo in $repos; do
             echo "[in $repo]"
             (
                 cd $repo
                 GIT_PAGER=cat git diff
             )
-        done <<< "$gerrit_repos"
-
+        done
     fi
 }
 
@@ -422,16 +445,15 @@ function create_gerrit_commit_series() {
     # enter commit msg
     # commit
 
-    gerrit_repos=$(find . -maxdepth 2 -type f -iname '.gitreview' -printf '%h\n')
-    basedir=$PWD
+    gerrit_repos=$(_iterate_over_gerrit_repos)
 
     echo "[[dirty gerrit repos]]"
-    while IFS= read -r repo ; do
+    for repo in $repos; do
         (
             cd $repo
             git diff-index --quiet HEAD -- || echo $repo;
         )
-    done <<< "$gerrit_repos"
+    done
 
     tmp=; vared -p 'Would you like to commit this: [Y|n]' tmp
     if [ -z $tmp ] || [ "$tmp" = "y" ]; then
@@ -441,9 +463,9 @@ function create_gerrit_commit_series() {
         # check if the user entered a valid msg
         [ ! -s /tmp/.GERRIT_CMT_MSG ] && echo "empty file" && return 1
 
-        while IFS= read -r repo ; do
+        for repo in $repos; do
             (cd $repo; git diff-index --quiet HEAD -- || git commit -a -F /tmp/.GERRIT_CMT_MSG)
-        done <<< "$gerrit_repos"
+        done
     fi
 }
 
@@ -458,19 +480,19 @@ function upload_gerrit_commit_series() {
         return 1;
     fi
     gerrit_topic=$1
-    gerrit_repos=$(find . -maxdepth 2 -type f -iname '.gitreview' -printf '%h\n')
+    gerrit_repos=$(_iterate_over_gerrit_repos)
 
     echo "[[dirty gerrit repos]]"
-    while IFS= read -r repo ; do
+    for repo in $repos; do
         (
             cd $repo
             [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] || (echo $repo; GIT_PAGER=cat git log --format=oneline origin "@{upstream}..HEAD")
         )
-    done <<< "$gerrit_repos"
+    done
 
     tmp=; vared -p 'Would you like to upload the above gerrit changes to topic $gerrit_topic: [Y|n]' tmp
     if [ -z $tmp ] || [ "$tmp" = "y" ]; then
-        while IFS= read -r repo ; do
+        for repo in $repos; do
             (
                 cd $repo
                 # TODO set assignee
@@ -481,7 +503,7 @@ function upload_gerrit_commit_series() {
                     # gerrit-set-assignee.py -c $
                 )
             )
-        done <<< "$gerrit_repos"
+        done
         # dev topic set-assignee $gerrit_topic SD-odd
     fi
 }
