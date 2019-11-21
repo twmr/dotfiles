@@ -740,7 +740,8 @@ See URL `https://www.pylint.org/'."
   (ivy-count-format "(%d/%d) ")
   (ivy-display-style 'fancy)
   (ivy-height 20)
-  (ivy-use-virtual-buffers t)
+  (ivy-use-virtual-buffers t) ;; this is great!! it shows me recently used buffers in ivy-switch-buffer
+
   ;; needed for fuzzy matching (see https://oremacs.com/2016/01/06/ivy-flx/)
   ;; (ivy-re-builders-alist
   ;;  ;; '((t . ivy--regex-fuzzy)))
