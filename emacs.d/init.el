@@ -1003,18 +1003,7 @@ See URL `https://www.pylint.org/'."
 
 (use-package python
   :custom
-  ;; django style:
-  ;;
-  ;; \"\"\"
-  ;; Process foo, return bar.
-  ;; \"\"\"
-
-  ;; \"\"\"
-  ;; Process foo, return bar.
-
-  ;; If processing fails throw ProcessingError.
-  ;; \"\"\"
-  (python-fill-docstring-style 'django)
+  (python-fill-docstring-style 'pep-257)
   (python-indent-guess-indent-offset-verbose nil)
   :mode ("\\.py\\'" . python-mode)
   :interpreter ("python" . python-mode)
