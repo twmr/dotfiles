@@ -1034,6 +1034,11 @@ See URL `https://www.pylint.org/'."
   ;;   )
   )
 
+(use-package python-docstring
+  :ensure t
+  :config
+  (python-docstring-install))
+
 (use-package python-pytest
   :ensure t
   :after python
@@ -1129,7 +1134,15 @@ See URL `https://www.pylint.org/'."
                        (thi::sml-setup)))))
     (progn
       (load-theme thi::theme t)
-      (thi::sml-setup))))
+      (thi::sml-setup)
+      (add-hook 'after-make-frame-functions
+                '(lambda (f)
+                   (with-selected-frame f
+                     (when (window-system f)
+                       (tool-bar-mode -1)
+                       (menu-bar-mode -1)))))
+
+      )))
 
 (use-package smex :ensure t :config (load "thi-ido.el"))
 
