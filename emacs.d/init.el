@@ -1133,7 +1133,7 @@ See URL `https://www.pylint.org/'."
                        (scroll-bar-mode -1)
                        (set-frame-font (format "Source Code Pro:size=%d"
                                                (if (string= (system-name) "PC-16609.ims.co.at")
-                                                   10
+                                                   12
                                                  34)))
                        (load-theme thi::theme t)
                        (thi::sml-setup)))))
