@@ -776,7 +776,11 @@ See URL `https://www.pylint.org/'."
   (ivy-initial-inputs-alist nil)
   ;; todo not really needed?
   (ivy-use-selectable-prompt t)
-  :config (ivy-mode))
+  :config (progn
+            (ivy-mode)
+            ;; see https://oremacs.com/2016/06/27/ivy-push-view/
+            (global-set-key (kbd "C-c v") 'ivy-push-view)
+            (global-set-key (kbd "C-c V") 'ivy-pop-view)))
 
 (use-package ivy-hydra
   ;; type C-o to see hydra help in completion list
