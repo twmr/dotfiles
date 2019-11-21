@@ -1020,6 +1020,13 @@ See URL `https://www.pylint.org/'."
   :config
   ;; TODO support jumping in multi git-repo project
   (add-hook 'python-mode-hook 'dumb-jump-mode)
+
+  (defun ims-yapf()
+    (interactive)
+    (when (string-match "sandbox" buffer-file-name)
+      (yapf-mode)))
+
+  (add-hook 'python-mode-hook 'ims-yapf)
   (define-key python-mode-map (kbd "M-.") #'dumb-jump-go)
   (define-key python-mode-map (kbd "M-,") #'dumb-jump-back)
   (define-key python-mode-map (kbd "C-c C-i") #'pyimport-insert-missing)
@@ -1248,6 +1255,8 @@ See URL `https://www.pylint.org/'."
   )
 
 (use-package yaml-mode :ensure t :defer t)
+
+(use-package yapfify :ensure t :defer t)
 
 (use-package yasnippet
   :ensure t
