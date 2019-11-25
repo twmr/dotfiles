@@ -111,7 +111,7 @@ function upload_gerrit_commit_series() {
     for repo in ${(z)repos}; do
         (
             cd $repo
-            [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] || (echo $repo; GIT_PAGER=cat git log --format=oneline origin "@{upstream}..HEAD")
+            [ $(git rev-parse HEAD) = $(git rev-parse @{u}) ] || (echo $repo; GIT_PAGER=cat git log --format=oneline "@{upstream}..HEAD")
         )
     done
 
