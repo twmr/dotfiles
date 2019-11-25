@@ -60,7 +60,6 @@
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
 ;; If there is a tab, make it the size of 2 spaces
-;; TODO Check if this causes problems with fgallina/python.el
 (setq-default tab-width 2)
 
 (dolist (hook '(erc-mode-hook
