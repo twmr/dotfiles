@@ -131,6 +131,9 @@ fi
 
 alias ka='sudo killall'
 
+
+alias docker=podman
+
 #named directories
 DOTFDIR=${GITR}/dotfiles
 hash -d conf=${HOME}/.config
