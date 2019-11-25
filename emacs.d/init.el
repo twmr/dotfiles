@@ -502,6 +502,9 @@ See URL `https://www.pylint.org/'."
   ;; TODO replace source-inplace in definition of pycheckers checker by source-original
   :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
 
+(use-package forge
+  :ensure t
+  :after magit)
 
 (use-package gerrit
   :if (string= (system-name) "PC-16609.ims.co.at")
