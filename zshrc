@@ -67,6 +67,7 @@ done
 # Customize to your needs...
 . ~/.zsh/alias
 . ~/.zsh/function
+. ~/.zsh/gerrit
 . ~/.zsh/notebook
 . ~/.zsh/keybindings
 #. ~/.zsh/opts
