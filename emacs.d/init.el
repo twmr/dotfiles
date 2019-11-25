@@ -434,7 +434,6 @@
   ;;If you expand too far, you can contract the region by pressing - (minus key), or by prefixing the shortcut you defined with a negative argument: C-- C-=.
   (("C-=" . er/expand-region)))
 
-(use-package fill-column-indicator :ensure t)
 (use-package flx :ensure t)
 (use-package flx-ido :ensure t
   :config
@@ -503,7 +502,6 @@ See URL `https://www.pylint.org/'."
   ;; TODO replace source-inplace in definition of pycheckers checker by source-original
   :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
 
-(use-package fill-column-indicator :ensure t :defer t)
 
 (use-package gerrit
   :if (string= (system-name) "PC-16609.ims.co.at")
@@ -1445,7 +1443,6 @@ See URL `https://www.pylint.org/'."
 
 
 
-;; (use-package fill-column-indicator :ensure t)
 ;; (use-package flx :ensure t)
 ;; (use-package flx-ido :ensure t
 ;;   :config
@@ -1506,8 +1503,6 @@ See URL `https://www.pylint.org/'."
 ;; (use-package flycheck-pycheckers
 ;;   :ensure t
 ;;   :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
-
-;; (use-package fill-column-indicator :ensure t :defer t)
 
 ;; (use-package python
 ;;   :custom
