@@ -6,7 +6,6 @@
 ;:::::::::::::::::::::::::::::::::::::::::::::::
 
 (setq inhibit-startup-screen t)
-(setq default-indicate-empty-lines nil)
 
 ;: LINUM
 (when (eq 'thi::theme 'solarized-light)
