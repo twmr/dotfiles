@@ -24,7 +24,6 @@
 ;; Emacs will automatically insert a new line after “fill-column” number of
 ;; columns. PEP8 specifies a maximum of 79, but this can be set to a smaller
 ;; value also, for example 72.  this is used e.g. in M-q (fill-paragraph)
-;; FIXME this disables fci-mode and highlight-indentation-mode !??!
 ;; (add-hook 'python-mode-hook (lambda ()
 ;;                               (setq-default-fill-column 72)))
 

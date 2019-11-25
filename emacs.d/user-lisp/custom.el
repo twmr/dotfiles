@@ -17,7 +17,6 @@
  '(elpy-modules
    '(elpy-module-company elpy-module-eldoc elpy-module-pyvenv elpy-module-highlight-indentation elpy-module-yasnippet elpy-module-sane-defaults))
  '(evil-mode-line-format 'before)
- '(fci-rule-color "#232A2F")
  '(git-commit-known-pseudo-headers
    '("Signed-off-by" "Acked-by" "Modified-by" "Cc" "Suggested-by" "Reported-by" "Tested-by" "Reviewed-by" "Fixes" "Related" "Change-Id"))
  '(git-commit-mode-hook '(turn-on-auto-fill) t)
