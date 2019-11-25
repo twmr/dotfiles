@@ -46,6 +46,7 @@ beautiful.init(awful.util.getdir("config") .. "/theme.lua")
 -- terminal = 'urxvt256c-ml'
 -- terminal = 'urxvt256c -e /home/thomas/.local/bin/xonsh'
 terminal = "terminator"
+terminal = "kitty"
 -- terminal = "urxvt256c-ml -e /bin/zsh"
 -- terminal = "urxvt"
 -- terminal = 'gnome-terminal'
