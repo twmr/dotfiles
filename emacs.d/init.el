@@ -1220,8 +1220,6 @@ See URL `https://www.pylint.org/'."
                      "\n")))))
     ))
 
-(use-package sr-speedbar :ensure t)
-
 (use-package ssh-config-mode :ensure t)
 
 ;; requires semantic-mode to be enabled
