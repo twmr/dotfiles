@@ -414,6 +414,17 @@ down the URL structure to send the request."
     (setq open-reviews-response resp) ;; for debugging only (use M-x ielm)
     resp))
 
+(defun magit-gerrit--get-gerrit-usernames ()
+  (interactive)
+  (condition-case nil
+      (mapcar (lambda (account-info) (seq-map (lambda (fieldname) (cdr
+                                  (assoc fieldname (cdr account-info))))
+                              (list 'username)))
+              (let ((json-array-type 'list))
+                ;; see https://gerrit-review.googlesource.com/Documentation/rest-api-accounts.html
+                (gerrit-rest-sync "GET" nil "/accounts/")))
+    (error '())))
+
 
 ;;; TODOS:
 ;;; include votes in  open gerrit review lines
