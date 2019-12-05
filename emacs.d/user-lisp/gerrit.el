@@ -201,7 +201,6 @@ Read data from the file specified by `gerrit-save-file'."
                            "Topic: "
                            gerrit-upload-topic-history)))
 
-
 (defun gerrit-upload-set-args ()
   "Interactively ask for arguments that are passed to git-review."
   (interactive)
@@ -337,8 +336,8 @@ down the URL structure to send the request."
   ;; changenr, version, name, CR/V, assignee, topic, fixes/related ticket
   ;; sort by modification-date?
   (condition-case nil
-      (mapcar (lambda (x) (seq-map (lambda (y) (cdr
-                                  (assoc y (cdr x))))
+      (mapcar (lambda (change) (seq-map (lambda (fieldnames) (cdr
+                                  (assoc fieldnames (cdr change))))
                           (list '_number 'branch 'topic 'subject)))
               (gerrit-magit-open-reviews-for-current-project))
     (error '())))
@@ -418,7 +417,7 @@ down the URL structure to send the request."
                               "o=DETAILED_ACCOUNTS")
                       (funcall 'gerrit-rest-escape-project project)))
          (resp (gerrit-rest-sync "GET" nil req)))
-    (setq open-reviews-response resp) ;; for debugging only (use M-x ielm)
+    ;; (setq open-reviews-response resp) ;; for debugging only (use M-x ielm)
     resp))
 
 (defun gerrit-magit--get-gerrit-usernames ()
@@ -434,6 +433,8 @@ down the URL structure to send the request."
 
 
 ;;; TODOS:
+;;; remove ivy-dependency
+;;; when uploading a new patchset for a change (via `gerrit-upload`) show votes
 ;;; include votes in  open gerrit review lines
 ;;; press "ret" on line opens change in browser
 ;;; parse commit messages and show jira tickets (ret on jira tickets opens them)
