@@ -513,7 +513,7 @@ See URL `https://www.pylint.org/'."
   :config
   (progn
     (add-hook 'after-init-hook #'gerrit-mode)
-    ;; (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
+    ;; (add-hook 'magit-status-sections-hook #'gerrit-magit-insert-status t)
 
     (global-set-key (kbd "C-x i") 'gerrit-upload)
     (global-set-key (kbd "C-x o") 'gerrit-download)))

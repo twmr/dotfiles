@@ -1,4 +1,29 @@
 ;;; gerrit.el --- Gerrit integration @ IMS -*- lexical-binding: t; -*-
+
+;; Author: Thomas Hisch <t.hisch@gmail.com>
+;; Maintainer: Thomas Hisch <t.hisch@gmail.com>
+;; URL: https://github.com/thisch/gerrit.el
+;; Version: 0.1
+;; Package-Requires: ((emacs "25.1"))
+;; Keywords: extensions
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation; either version 2, or (at your option)
+;; any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License along with
+;; this program; see the file LICENSE. If not, write to the write to the Free
+;; Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+;; 02110-1301, USA.
+
+;;; Commentary:
+
 ;;
 ;; This package contains
 ;;
@@ -11,7 +36,6 @@
 ;;        RET - opens change in browser
 ;;
 ;; TODO
-
 ;; reviewers (cache each teammember seperately) -> store it in history file
 ;;            make it possible to have named groups of reviewers (e.g. pyeven, pyodd, cpp, web, jobdeck)
 ;;            allow to configure it via an *.el file
@@ -28,7 +52,7 @@
 ;; (add-hook 'after-init-hook #'gerrit-mode)
 ;; (global-set-key (kbd "C-x i") 'gerrit-upload)
 ;; (global-set-key (kbd "C-x o") 'gerrit-download)
-;; (add-hook 'magit-status-sections-hook #'magit-gerrit-insert-status t)
+;; (add-hook 'magit-status-sections-hook #'gerrit-magit-insert-status t)
 
 ;;; Code:
 
@@ -148,8 +172,7 @@ Read data from the file specified by `gerrit-save-file'."
                  reduced-history
                  nil nil nil nil
                  ;; default value set to LRU reviewers value
-                 (car reduced-history)
-                 )))
+                 (car reduced-history))))
      (unless (equal "" value)
        ;; todo simplify the duplicate handling
        (push value ,history)
@@ -278,8 +301,7 @@ down the URL structure to send the request."
   (let ((url-request-method method)
         (url-request-extra-headers
          `(("Content-Type" . "application/json")
-           ("Authorization" . ,(concat "Basic " (ims-gerrit-authentication)))
-           ))
+           ("Authorization" . ,(concat "Basic " (ims-gerrit-authentication)))))
         (url-request-data data)
         (target (concat "https://" gerrit-host "/a" path)))
 
@@ -322,7 +344,7 @@ down the URL structure to send the request."
          (resp (gerrit-rest-sync "GET" nil req)))
     (message "%s" (prin1-to-string resp))))
 
-(defun magit-gerrit--fetch-open-reviews ()
+(defun gerrit-magit--fetch-open-reviews ()
   "Return a sequence of (number branch topic subject)."
   (interactive)
   ;; we need the following information:
@@ -332,14 +354,14 @@ down the URL structure to send the request."
       (mapcar (lambda (x) (seq-map (lambda (y) (cdr
                                   (assoc y (cdr x))))
                           (list '_number 'branch 'topic 'subject)))
-              (magit-gerrit-open-reviews-for-current-project))
+              (gerrit-magit-open-reviews-for-current-project))
     (error '())))
 
-(defun magit-gerrit-insert-status ()
+(defun gerrit-magit-insert-status ()
   (magit-insert-section (open-reviews)
     ;; the behavoir should be similar to "Recent commits"
     (magit-insert-heading "Open Gerrit Reviews")
-    (dolist (loopvar (magit-gerrit--fetch-open-reviews))
+    (dolist (loopvar (gerrit-magit--fetch-open-reviews))
       (progn
         (magit-insert-section (open-reviews-issue loopvar t)
           (magit-insert-heading
@@ -369,18 +391,17 @@ down the URL structure to send the request."
         ;; (insert "Metadata1: xxx\n")
         ;; (insert "Metadata2: yyy\n")
         ))
-    (insert ?\n)
-    ))
+    (insert ?\n)))
 
-(defvar magit-gerrit-open-reviews-issue-section-map
+(defvar gerrit-magit-open-reviews-issue-section-map
   (let ((map (make-sparse-keymap)))
     ;; (define-key map "jT" #'magit-todos-jump-to-todos)
     ;; (define-key map "jl" #'magit-todos-list)
-    (define-key map (kbd "RET") #'magit-gerrit-open-reviews--open-gerrit-change)
+    (define-key map (kbd "RET") #'gerrit-magit-open-reviews--open-gerrit-change)
     map)
-  "Keymap for `magit-gerrit-open-reviews' top-level section.")
+  "Keymap for `gerrit-magit-open-reviews' top-level section.")
 
-(defun magit-gerrit-open-reviews--open-gerrit-change()
+(defun gerrit-magit-open-reviews--open-gerrit-change()
   (interactive)
   (browse-url (format
                "https://%s/c/%s"
@@ -391,7 +412,7 @@ down the URL structure to send the request."
                               (prin1-to-string (nth 0 (oref (magit-current-section) value)))))))
   ;; (message (prin1-to-string (nth 0 (oref (magit-current-section) value)))))
 
-(defun magit-gerrit--get-current-project ()
+(defun gerrit-magit--get-current-project ()
   "Return the gerrit project name, e.g., 'software/jobdeck'."
   (s-chop-suffix
    ".git"
@@ -399,9 +420,9 @@ down the URL structure to send the request."
                             (magit-config-get-from-cached-list
                              "remote.origin.url"))))))
 
-(defun magit-gerrit-open-reviews-for-current-project ()
+(defun gerrit-magit-open-reviews-for-current-project ()
   (interactive)
-  (let* ((project (funcall 'magit-gerrit--get-current-project))
+  (let* ((project (funcall 'gerrit-magit--get-current-project))
          (json-array-type 'list)
          (req (format (concat "/changes/?q=is:open+project:%s&"
                               "o=DOWNLOAD_COMMANDS&"
@@ -414,7 +435,7 @@ down the URL structure to send the request."
     (setq open-reviews-response resp) ;; for debugging only (use M-x ielm)
     resp))
 
-(defun magit-gerrit--get-gerrit-usernames ()
+(defun gerrit-magit--get-gerrit-usernames ()
   (interactive)
   (condition-case nil
       (mapcar (lambda (account-info) (seq-map (lambda (fieldname) (cdr
@@ -432,7 +453,7 @@ down the URL structure to send the request."
 ;;; parse commit messages and show jira tickets (ret on jira tickets opens them)
 ;;;
 
-;; (defun magit-gerrit-insert-status2 ()
+;; (defun gerrit-magit-insert-status2 ()
 ;;   "Insert information about current incremental merge."
 ;;   (when (magit-imerge-in-progress-p)
 ;;     (let* ((name (or (magit-imerge-current-name)
@@ -478,7 +499,7 @@ down the URL structure to send the request."
 ;;              (delete-region (point) (point-max))
 ;;              (buffer-string))))))))
 
-;; (defun magit-gerrit-insert-status3 (&optional type value)
+;; (defun gerrit-magit-insert-status3 (&optional type value)
 ;;   "Insert section showing recent commits.
 ;; Show the last `magit-log-section-commit-count' commits."
 ;;   (let* ((start (format "HEAD~%s" magit-log-section-commit-count))
@@ -550,3 +571,4 @@ down the URL structure to send the request."
 
 
 (provide 'gerrit)
+;;; gerrit.el ends here
