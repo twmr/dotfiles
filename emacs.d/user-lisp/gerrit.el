@@ -423,9 +423,7 @@ down the URL structure to send the request."
 (defun gerrit-magit--get-gerrit-usernames ()
   (interactive)
   (condition-case nil
-      (mapcar (lambda (account-info) (seq-map (lambda (fieldname) (cdr
-                                  (assoc fieldname (cdr account-info))))
-                              (list 'username)))
+      (mapcar (lambda (account-info) (cdr (assoc 'username (cdr account-info))))
               (let ((json-array-type 'list))
                 ;; see https://gerrit-review.googlesource.com/Documentation/rest-api-accounts.html
                 (gerrit-rest-sync "GET" nil "/accounts/")))
