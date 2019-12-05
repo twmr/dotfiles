@@ -336,8 +336,8 @@ down the URL structure to send the request."
   ;; changenr, version, name, CR/V, assignee, topic, fixes/related ticket
   ;; sort by modification-date?
   (condition-case nil
-      (mapcar (lambda (change) (seq-map (lambda (fieldnames) (cdr
-                                  (assoc fieldnames (cdr change))))
+      (mapcar (lambda (change) (seq-map (lambda (fieldname) (cdr
+                                  (assoc fieldname (cdr change))))
                           (list '_number 'branch 'topic 'subject)))
               (gerrit-magit-open-reviews-for-current-project))
     (error '())))
