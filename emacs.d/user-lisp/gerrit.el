@@ -83,7 +83,7 @@
 
 (defgroup gerrit nil
   "Maintain a menu of recently opened files."
-  :version "26.1"
+  :version "25.1"
   ;; which group should be used?
   :group 'files)
 
@@ -107,13 +107,13 @@ A nil value means to save the whole lists."
   :group 'gerrit
   :type 'file)
 
-(defcustom gerrit-host "gerrit.rnd.ims.co.at"
-  "hostname of the gerrit instance (without the protocol prefix)"
+(defcustom gerrit-host nil
+  "Hostname of the gerrit instance (without the protocol prefix)."
   :group 'gerrit
   :type 'string)
 
 (defun gerrit-authentication ()
-  "Return an encoded string with jira username and password."
+  "Return an encoded string with gerrit username and password."
   (let ((pass-entry (auth-source-user-and-password gerrit-host)))
     (if-let ((username (nth 0 pass-entry))
              (password (nth 1 pass-entry)))
@@ -141,10 +141,6 @@ Write data into the file specified by `gerrit-save-file'."
         nil)
     (error
      (warn "gerrit: %s" (error-message-string error)))))
-
-(defsubst gerrit-enabled-p ()
-  "Return non-nil if gerrit mode is currently enabled."
-  (memq 'gerrit-save-lists kill-emacs-hook))
 
 (defcustom gerrit-upload-default-args ""
   "Default args used when calling 'git review' to upload a change."
@@ -238,9 +234,11 @@ Read data from the file specified by `gerrit-save-file'."
                                :hint nil ;; show hint in the echo area
                                :columns 1
                                :body-pre (progn
+                                           (gerrit-load-lists)
                                            (setq gerrit-last-topic "")
                                            (setq gerrit-last-reviewers '())
-                                           (setq gerrit-upload-args gerrit-upload-default-args)))
+                                           (setq gerrit-upload-args gerrit-upload-default-args))
+                               :body-before-exit (gerrit-save-lists))
   "
 gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
 "
@@ -267,18 +265,6 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
       (magit-git-command (concat "git review -d "
                                  (car (s-split " " (s-trim changenr))))))))
 
-;;;###autoload
-(define-minor-mode gerrit-mode
-  "TODO"
-  :global t
-  :group 'gerrit
-  (unless (and gerrit-mode (gerrit-enabled-p))
-    (if gerrit-mode
-        (gerrit-load-lists)
-      (gerrit-save-lists))
-    (let ((hook-setup (if recentf-mode 'add-hook 'remove-hook)))
-      (apply hook-setup '(kill-emacs-hook gerrit-save-lists)))))
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -301,7 +287,7 @@ down the URL structure to send the request."
   (let ((url-request-method method)
         (url-request-extra-headers
          `(("Content-Type" . "application/json")
-           ("Authorization" . ,(concat "Basic " (ims-gerrit-authentication)))))
+           ("Authorization" . ,(concat "Basic " (gerrit-authentication)))))
         (url-request-data data)
         (target (concat "https://" gerrit-host "/a" path)))
 
@@ -430,7 +416,7 @@ down the URL structure to send the request."
                               "o=CURRENT_COMMIT&"
                               "o=DETAILED_LABELS&"
                               "o=DETAILED_ACCOUNTS")
-                      (funccall 'gerrit-rest-escape-project project)))
+                      (funcall 'gerrit-rest-escape-project project)))
          (resp (gerrit-rest-sync "GET" nil req)))
     (setq open-reviews-response resp) ;; for debugging only (use M-x ielm)
     resp))
@@ -552,7 +538,7 @@ down the URL structure to send the request."
 ;;          (url-request-method "GET")
 ;;          (url-request-extra-headers
 ;;           `(("Content-Type" . "application/json")
-;;             ("Authorization" . ,(concat "Basic " (ims-gerrit-authentication)))))
+;;             ("Authorization" . ,(concat "Basic " (gerrit-authentication)))))
 ;;          )
 
 ;;     ;; (message url)))

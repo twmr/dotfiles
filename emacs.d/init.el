@@ -509,12 +509,11 @@ See URL `https://www.pylint.org/'."
 (use-package gerrit
   :if (string= (system-name) "PC-16609.ims.co.at")
   :custom
+  (gerrit-host "gerrit.rnd.ims.co.at")
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
   :config
   (progn
-    (add-hook 'after-init-hook #'gerrit-mode)
     ;; (add-hook 'magit-status-sections-hook #'gerrit-magit-insert-status t)
-
     (global-set-key (kbd "C-x i") 'gerrit-upload)
     (global-set-key (kbd "C-x o") 'gerrit-download)))
 
