@@ -933,6 +933,8 @@ See URL `https://www.pylint.org/'."
 ;;     (push (org-projectile-project-todo-entry) org-capture-templates))
 ;;   :ensure t)
 
+(use-package package-lint :ensure t :defer t)
+
 (use-package page-break-lines :ensure t :defer t
   :config
   (global-page-break-lines-mode))
