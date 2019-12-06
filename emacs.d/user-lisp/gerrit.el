@@ -279,6 +279,13 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
   (setq gerrit-rest-api-debug-flag (not gerrit-rest-api-debug-flag))
   (message "set debug flag to '%s'" gerrit-rest-api-debug-flag))
 
+(defun gerrit--encode-payload (payload)
+  (and payload
+       (progn
+         (unless (stringp payload)
+           (setq payload (json-encode-list payload)))
+         (encode-coding-string payload 'utf-8))))
+
 (defun gerrit-rest-sync (method data &optional path)
   "Interact with the API using method METHOD and data DATA.
 Optional arg PATH may be provided to specify another location further
@@ -429,6 +436,12 @@ down the URL structure to send the request."
                 ;; and https://gerrit-review.googlesource.com/Documentation/user-search-accounts.html#_search_operators
                 (gerrit-rest-sync "GET" nil "/accounts/?q=is:active&o=DETAILS&S=0")))
     (error '())))
+
+(defun gerrit-magit--set-assignee (changenr assignee)
+  (interactive "sEnter a changenr: \nsEnter assignee: ")
+  (gerrit-rest-sync "PUT"
+                    (gerrit--encode-payload `((assignee . ,assignee)))
+                    (format "/changes/%s/assignee"  changenr)))
 
 
 ;;; TODOS:
