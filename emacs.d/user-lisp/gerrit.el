@@ -426,7 +426,8 @@ down the URL structure to send the request."
       (mapcar (lambda (account-info) (cdr (assoc 'username (cdr account-info))))
               (let ((json-array-type 'list))
                 ;; see https://gerrit-review.googlesource.com/Documentation/rest-api-accounts.html
-                (gerrit-rest-sync "GET" nil "/accounts/")))
+                ;; and https://gerrit-review.googlesource.com/Documentation/user-search-accounts.html#_search_operators
+                (gerrit-rest-sync "GET" nil "/accounts/?q=is:active&o=DETAILS&S=0")))
     (error '())))
 
 
