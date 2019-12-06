@@ -42,6 +42,20 @@
 ;; (global-set-key (kbd "C-x o") 'gerrit-download)
 ;; (add-hook 'magit-status-sections-hook #'gerrit-magit-insert-status t)
 
+;; TODOS:
+;; remove ivy-dependency
+;; when uploading a new patchset for a change (via `gerrit-upload`) show votes
+;; include votes in  open gerrit review lines
+;; press "ret" on line opens change in browser
+;; parse commit messages and show jira tickets (ret on jira tickets opens them)
+;; write some testcases
+;; reviewers (cache each teammember seperately) -> store it in history file
+;;            make it possible to have named groups of reviewers (e.g. pyeven, pyodd, cpp, web, jobdeck)
+;;            allow to configure it via an *.el file
+;;            add/remove single reviewers from selected group (using +/- key bindings)
+;;            ...;
+;; use (gerrit-rest--get-gerrit-usernames) instead of gerrit-upload-reviewer-history
+
 ;;; Code:
 
 (require 'cl-lib)  ;; for cl-remove-duplicates
@@ -419,19 +433,6 @@ down the URL structure to send the request."
          (resp (gerrit-rest-sync "GET" nil req)))
     ;; (setq open-reviews-response resp) ;; for debugging only (use M-x ielm)
     resp))
-
-;;; TODOS:
-;;; remove ivy-dependency
-;;; when uploading a new patchset for a change (via `gerrit-upload`) show votes
-;;; include votes in  open gerrit review lines
-;;; press "ret" on line opens change in browser
-;;; parse commit messages and show jira tickets (ret on jira tickets opens them)
-;;; write some testcases
-;;; reviewers (cache each teammember seperately) -> store it in history file
-;;;            make it possible to have named groups of reviewers (e.g. pyeven, pyodd, cpp, web, jobdeck)
-;;;            allow to configure it via an *.el file
-;;;            add/remove single reviewers from selected group (using +/- key bindings)
-;;;            ...
 
 
 
