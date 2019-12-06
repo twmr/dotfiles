@@ -43,7 +43,6 @@
 ;; (add-hook 'magit-status-sections-hook #'gerrit-magit-insert-status t)
 
 ;; TODOS:
-;; remove ivy-dependency
 ;; when uploading a new patchset for a change (via `gerrit-upload`) show votes
 ;; include votes in  open gerrit review lines
 ;; press "ret" on line opens change in browser
@@ -165,7 +164,7 @@ Read data from the file specified by `gerrit-save-file'."
   ;;;          candidate (like other commands).)
 
   `(let* ((reduced-history (-difference ,history ,history-excludes))
-          (value (ivy-completing-read
+          (value (completing-read
                  ,msg
                  reduced-history
                  nil nil nil nil
@@ -261,7 +260,7 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
     ;; remove last two lines
     (setq open-changes (nbutlast (s-lines open-changes) 2))
     ;; (message (s-join "\n" open-changes))
-    (let ((changenr (ivy-completing-read
+    (let ((changenr (completing-read
                      "Download Change: " open-changes nil nil)))
       (magit-git-command (concat "git review -d "
                                  (car (s-split " " (s-trim changenr))))))))
