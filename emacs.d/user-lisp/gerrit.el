@@ -225,7 +225,7 @@ Read data from the file specified by `gerrit-save-file'."
                                            (setq gerrit-last-topic "")
                                            (setq gerrit-last-reviewers '())
                                            (setq gerrit-upload-args gerrit-upload-default-args))
-                               :body-before-exit (gerrit-save-lists))
+                               :after-exit (gerrit-save-lists))
   "
 gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
 "
