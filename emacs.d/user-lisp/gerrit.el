@@ -34,19 +34,7 @@
 ;;
 ;;     section local keymap:
 ;;        RET - opens change in browser
-;;
-;; TODO
-;; reviewers (cache each teammember seperately) -> store it in history file
-;;            make it possible to have named groups of reviewers (e.g. pyeven, pyodd, cpp, web, jobdeck)
-;;            allow to configure it via an *.el file
-;;            add/remove single reviewers from selected group (using +/- key bindings)
-;;            ...
-
-;; set assignee for git-review (cli) app,
-;; assignee can not be set via git push options (https://gerrit-review.googlesource.com/Documentation/user-upload.html). Those push options are used when uploading a change via git-review.
-;; take a look at pygerrit2 (github) - write small script, which sets assignee instead
-;;
-;; https://gerrit-review.googlesource.com/Documentation/rest-api-changes.html#add-reviewer
+;; * defun for setting assignee of a gerrit change using rest api `gerrit-rest--set-assignee
 ;;
 ;; (load 'gerrit)
 ;; (add-hook 'after-init-hook #'gerrit-mode)
@@ -308,7 +296,7 @@ down the URL structure to send the request."
 
             resp))
       (progn
-        ;; TODO improve this, syntax highlight json code?
+        ;; TODO improve this, fontify json data?
         (switch-to-buffer (url-retrieve-synchronously target))
         (goto-char (point-min))
         (insert target)
@@ -322,7 +310,7 @@ down the URL structure to send the request."
   (message (prin1-to-string (gerrit-rest-sync "GET" nil "/config/server/version"))))
 
 (defun gerrit-rest-get-topic-info (topicname)
-  "Return information about an open topic"
+  "Return information about an open topic with TOPICNAME."
   ;; TODO create new buffer and insert stuff there
   ;; TODO query open topics
   (interactive "sEnter a topic name: ")
@@ -335,6 +323,27 @@ down the URL structure to send the request."
          (req (format fmtstr topicname))
          (resp (gerrit-rest-sync "GET" nil req)))
     (message "%s" (prin1-to-string resp))))
+
+(defun gerrit-rest--get-gerrit-usernames ()
+  "Return a list of usernames of all active gerrit users."
+  (interactive)
+  (condition-case nil
+      (mapcar (lambda (account-info) (cdr (assoc 'username (cdr account-info))))
+              (let ((json-array-type 'list))
+                ;; see https://gerrit-review.googlesource.com/Documentation/rest-api-accounts.html
+                ;; and https://gerrit-review.googlesource.com/Documentation/user-search-accounts.html#_search_operators
+                (gerrit-rest-sync "GET" nil "/accounts/?q=is:active&o=DETAILS&S=0")))
+    (error '())))
+
+(defun gerrit-rest--set-assignee (changenr assignee)
+  "Set the assignee to ASSIGNEE of a change with nr CHANGENR."
+  (interactive "sEnter a changenr: \nsEnter assignee: ")
+  ;; TODO error handling?
+  (gerrit-rest-sync "PUT"
+                    (gerrit--encode-payload `((assignee . ,assignee)))
+                    (format "/changes/%s/assignee"  changenr)))
+
+
 
 (defun gerrit-magit--fetch-open-reviews ()
   "Return a sequence of (number branch topic subject)."
@@ -351,7 +360,6 @@ down the URL structure to send the request."
 
 (defun gerrit-magit-insert-status ()
   (magit-insert-section (open-reviews)
-    ;; the behavoir should be similar to "Recent commits"
     (magit-insert-heading "Open Gerrit Reviews")
     (dolist (loopvar (gerrit-magit--fetch-open-reviews))
       (progn
@@ -367,22 +375,7 @@ down the URL structure to send the request."
                          ""))
                      (propertize (nth 1 loopvar) 'face '(:foreground "red"))
                      ")")
-                    (nth 3 loopvar)))
-          ;; (propertize (format "#%d " loopvar)))
-
-          ;; (insert (propertize "version7.0\n" 'face '(:foreground "red")))
-          ;; (insert "metadata1\n")
-          ;; (insert-button (format "fsf%d" loopvar)
-          ;;                'action (lambda (x) (browse-url (button-get x 'url)))
-          ;;                'url "http://www.fsf.org")
-
-          ;; (insert ?\n)
-          )
-
-        ;; (magit-insert-heading)
-        ;; (insert "Metadata1: xxx\n")
-        ;; (insert "Metadata2: yyy\n")
-        ))
+                    (nth 3 loopvar))))))
     (insert ?\n)))
 
 (defvar gerrit-magit-open-reviews-issue-section-map
@@ -427,145 +420,18 @@ down the URL structure to send the request."
     ;; (setq open-reviews-response resp) ;; for debugging only (use M-x ielm)
     resp))
 
-(defun gerrit-magit--get-gerrit-usernames ()
-  (interactive)
-  (condition-case nil
-      (mapcar (lambda (account-info) (cdr (assoc 'username (cdr account-info))))
-              (let ((json-array-type 'list))
-                ;; see https://gerrit-review.googlesource.com/Documentation/rest-api-accounts.html
-                ;; and https://gerrit-review.googlesource.com/Documentation/user-search-accounts.html#_search_operators
-                (gerrit-rest-sync "GET" nil "/accounts/?q=is:active&o=DETAILS&S=0")))
-    (error '())))
-
-(defun gerrit-magit--set-assignee (changenr assignee)
-  (interactive "sEnter a changenr: \nsEnter assignee: ")
-  (gerrit-rest-sync "PUT"
-                    (gerrit--encode-payload `((assignee . ,assignee)))
-                    (format "/changes/%s/assignee"  changenr)))
-
-
 ;;; TODOS:
 ;;; remove ivy-dependency
 ;;; when uploading a new patchset for a change (via `gerrit-upload`) show votes
 ;;; include votes in  open gerrit review lines
 ;;; press "ret" on line opens change in browser
 ;;; parse commit messages and show jira tickets (ret on jira tickets opens them)
-;;;
-
-;; (defun gerrit-magit-insert-status2 ()
-;;   "Insert information about current incremental merge."
-;;   (when (magit-imerge-in-progress-p)
-;;     (let* ((name (or (magit-imerge-current-name)
-;;                      (error "No name, but in progress?")))
-;;            (state (magit-imerge-state name))
-;;            (format-with-overriding
-;;             (lambda (option current)
-;;               (let ((val (--some
-;;                           (and (string-match (format "\\`%s=\\(.+\\)"
-;;                                                      (regexp-quote option))
-;;                                              it)
-;;                                (match-string 1 it))
-;;                           magit-imerge--arguments)))
-;;                 (if (and val (not (string= val current)))
-;;                     (propertize val 'face 'magit-imerge-overriding-value)
-;;                   current)))))
-;;       (magit-insert-section (imerge)
-;;         (magit-insert-heading "Incremental merge")
-;;         (magit-insert-section (imerge-info)
-;;           (insert (format "Name:   %s\n" name))
-;;           (magit-insert-heading)
-;;           (insert (format "Goal:   %s\n"
-;;                           (funcall format-with-overriding
-;;                                    "--goal"
-;;                                    (cdr (assq 'goal state)))))
-;;           (insert (format "Result: %s\n"
-;;                           (funcall format-with-overriding
-;;                                    "--branch"
-;;                                    (cdr (assq 'branch state)))))
-;;           (insert "Tips:   ")
-;;           (magit-imerge--insert-tip (cdr (assq 'tip1 state)))
-;;           (insert ", ")
-;;           (magit-imerge--insert-tip (cdr (assq 'tip2 state)))
-;;           (insert ?\n ?\n))
-;;         (magit-insert-section (imerge-diagram)
-;;           (magit-insert-heading
-;;             (propertize "Diagram\n"
-;;                         'face 'magit-section-secondary-heading))
-;;           (insert
-;;            (with-temp-buffer
-;;              (magit-git-insert "imerge" "diagram" "--no-color" "--commits")
-;;              (re-search-backward "^Key:")
-;;              (delete-region (point) (point-max))
-;;              (buffer-string))))))))
-
-;; (defun gerrit-magit-insert-status3 (&optional type value)
-;;   "Insert section showing recent commits.
-;; Show the last `magit-log-section-commit-count' commits."
-;;   (let* ((start (format "HEAD~%s" magit-log-section-commit-count))
-;;          (range (and (magit-rev-verify start)
-;;                      (concat start "..HEAD"))))
-
-;;     (magit-insert-section (open-reviews)
-;;       (magit-insert-heading "Open Gerrit Reviews")
-;;       (magit-insert-section (longer)
-;;         (insert-text-button
-;;          (substitute-command-keys
-;;           (format "Type \\<%s>\\[%s] to show more history"
-;;                   'magit-log-mode-map
-;;                   'magit-log-double-commit-limit))
-;;          'action (lambda (_button)
-;;                    (message "clicked"))
-;;          ;; (magit-log-double-commit-limit))
-;;          'follow-link t
-;;          'mouse-face 'magit-section-highlight))
-
-;;       (insert ?\n)
-;;       (insert (format "l1\nl2 %s\n" range))
-
-;;       (magit-insert-log range
-;;                         (cons (format "-n%d" magit-log-section-commit-count)
-;;                               (--remove (string-prefix-p "-n" it)
-;;                                         magit-log-section-arguments))))))
-
-;; (let
-;;     ((url "https://api.github.com/repos/thisch/pytest/contents/_pytest/warnings.py?ref=master")
-;;      (url-request-extra-headers
-;;       `(("Content-Type" . "application/json"))))
-;;   (switch-to-buffer-other-window (url-retrieve-synchronously url))
-;;   (goto-char url-http-end-of-headers)
-;;   (when-let ((json-object-type 'hash-table)
-;;            (json-key-type 'symbol)
-;;            (result (json-read))
-;;            (fields (map-elt result '_links))
-;;            (self (map-elt fields 'self)))
-;;     (erase-buffer)
-;;     (insert self)))
-
-;; (defun gerrit-get-assignee (project version changeidnr)
-;;   "Retrieve summary of TICKETID in jira."
-;;   (let* ((url
-;;           (concat "https://" gerrit-host
-;;                   ;; "/changes/?q=7730&o=ALL_REVISIONS"))
-;;                   ;; "/changes/?q=7730&o=ALL_REVISIONS"))
-;;          ;; (format "/changes/%s~%s~%d/assignee" project version changeidnr)))
-;;          (url-request-method "GET")
-;;          (url-request-extra-headers
-;;           `(("Content-Type" . "application/json")
-;;             ("Authorization" . ,(concat "Basic " (gerrit-authentication)))))
-;;          )
-
-;;     ;; (message url)))
-;;     (switch-to-buffer (url-retrieve-synchronously url))
-;;     (goto-char url-http-end-of-headers)))))
-;;     ;; (with-current-buffer (url-retrieve-synchronously url)
-;;     ;;   (goto-char url-http-end-of-headers)
-;;       ;; (if-let ((json-object-type 'hash-table)
-;;       ;;          (json-key-type 'symbol)
-;;       ;;          (result (json-read))
-;;       ;;          (name (map-elt result 'name)))
-;;       ;;     (message "Assignee is set to %s" name)))))
-
-;; TODO write some testcases
+;;; write some testcases
+;;; reviewers (cache each teammember seperately) -> store it in history file
+;;;            make it possible to have named groups of reviewers (e.g. pyeven, pyodd, cpp, web, jobdeck)
+;;;            allow to configure it via an *.el file
+;;;            add/remove single reviewers from selected group (using +/- key bindings)
+;;;            ...
 
 
 
