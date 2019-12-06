@@ -78,6 +78,7 @@
 (defvar gerrit-last-reviewers nil "...")
 (defvar gerrit-last-topic nil "...")
 (defvar gerrit-upload-args nil "...")
+(defvar gerrit-upload-ready-for-review nil "...")
 
 (defalias 'gerrit-dump-variable 'recentf-dump-variable)
 (defalias 'gerrit-save-file-modes 'recentf-save-file-modes)
@@ -209,6 +210,11 @@ Read data from the file specified by `gerrit-save-file'."
                             "Args (space separated): "
                             gerrit-upload-args-history)))
 
+(defun gerrit-upload-set-ready-for-review ()
+  "Interactively ask for arguments that are passed to git-review."
+  (interactive)
+  (setq gerrit-upload-ready-for-review t))
+
 (defun gerrit-upload-create-git-review-cmd ()
   "Create cmdstr for git-review."
   (interactive)
@@ -222,6 +228,8 @@ Read data from the file specified by `gerrit-save-file'."
       (setq cmdstr (concat cmdstr " --reviewers " reviewers)))
     (unless (equal "" args)
       (setq cmdstr (concat cmdstr " " args)))
+    (when gerrit-upload-ready-for-review
+      (setq cmdstr (concat cmdstr " -W ")))
     cmdstr))
 
 (defun gerrit-upload-run ()
@@ -237,7 +245,8 @@ Read data from the file specified by `gerrit-save-file'."
                                            (gerrit-load-lists)
                                            (setq gerrit-last-topic "")
                                            (setq gerrit-last-reviewers '())
-                                           (setq gerrit-upload-args gerrit-upload-default-args))
+                                           (setq gerrit-upload-args gerrit-upload-default-args)
+                                           (setq gerrit-upload-ready-for-review nil))
                                :after-exit (gerrit-save-lists))
   "
 gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
@@ -246,6 +255,7 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
   ("R" gerrit-upload-remove-reviewer "Remove reviewer")
   ;; ("g" gerrit-upload-add-review-group "Add review group")
   ("t" gerrit-upload-set-topic "Set topic")
+  ("v" gerrit-upload-set-ready-for-review "Set ready-for-review")
   ("a" gerrit-upload-set-args "Set additional args")
   ("RET" gerrit-upload-run "Run git-reivew" :color blue))
 
