@@ -70,8 +70,9 @@
 (require 'url-vars)
 
 (defvar gerrit-upload-topic-history nil "List of recently used topic names.")
-(defvar gerrit-upload-reviewer-history nil "List of recently used reviewers.")
 (defvar gerrit-upload-args-history nil "List of recently used args for git-review cmd.")
+
+(defvar gerrit--usernames nil "")
 
 ;; these two vars are mainly needed for the hydra-based implementation because
 ;; I don't know how I can communicate between different heads of the hydra
@@ -134,7 +135,6 @@ Write data into the file specified by `gerrit-save-file'."
         (insert (format-message ";;; Automatically generated on %s.\n"
                                 (current-time-string)))
         (gerrit-dump-variable 'gerrit-upload-topic-history gerrit-upload-max-saved-items)
-        (gerrit-dump-variable 'gerrit-upload-reviewer-history gerrit-upload-max-saved-items)
         (insert "\n\n;; Local Variables:\n"
                 ";; coding: utf-8-emacs\n"
                 ";; End:\n")
@@ -178,13 +178,36 @@ Read data from the file specified by `gerrit-save-file'."
        (setq ,history (cl-remove-duplicates ,history :test 'string=)))
      value))
 
+(defmacro gerrit-upload-completing-set-with-fixed-collection
+    (msg collection history &optional history-excludes)
+  `(let* ((reduced-history (-difference ,history ,history-excludes))
+          (value (completing-read
+                  ,msg
+                  ,collection
+                  nil ;; predicate
+                  t ;; require match
+                  nil ;; initial input
+                  nil ;; history
+                  ;; default value set to LRU reviewers value
+                  (car reduced-history))))
+     (unless (equal "" value)
+       ;; todo simplify the duplicate handling
+       (push value ,history) ;; note that we don't need this if the builtin
+                             ;; completeing-read is used. Bug in
+                             ;; ivy-completing-read?
+       (setq ,history (cl-remove-duplicates ,history :test 'string=)))
+     value))
+
 (defun gerrit-upload-add-reviewer ()
   "Interactively ask for to-be-added reviewer name."
   (interactive)
+  (unless gerrit--usernames
+    (setq gerrit--usernames (gerrit-rest--get-gerrit-usernames)))
+
   ;; exclude the ones from the history that have already been added
-  (push (gerrit-upload-completing-set
+  (push (gerrit-upload-completing-set-with-fixed-collection
          "Reviewer: "
-         gerrit-upload-reviewer-history
+         gerrit--usernames
          gerrit-last-reviewers)
         gerrit-last-reviewers))
 
@@ -200,9 +223,11 @@ Read data from the file specified by `gerrit-save-file'."
 (defun gerrit-upload-set-assignee ()
   "Interactively ask for an assignee."
   (interactive)
+  (unless gerrit--usernames
+    (setq gerrit--usernames (gerrit-rest--get-gerrit-usernames)))
   (completing-read
    "Assignee: "
-   (gerrit-rest--get-gerrit-usernames)
+   gerrit--usernames
    nil ;; predicate
    t ;; require match
    nil ;; initial
