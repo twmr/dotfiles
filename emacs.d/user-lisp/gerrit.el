@@ -224,10 +224,9 @@ Read data from the file specified by `gerrit-save-file'."
                             "Args (space separated): "
                             gerrit-upload-args-history)))
 
-(defun gerrit-upload-set-ready-for-review ()
-  "Interactively ask for arguments that are passed to git-review."
+(defun gerrit-upload-toggle-ready-for-review ()
   (interactive)
-  (setq gerrit-upload-ready-for-review t))
+  (setq gerrit-upload-ready-for-review (not gerrit-upload-ready-for-review))
 
 (defun gerrit-upload-create-git-review-cmd ()
   "Create cmdstr for git-review."
@@ -270,7 +269,7 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
   ;; ("g" gerrit-upload-add-review-group "Add review group")
   ("a" gerrit-upload-set-assignee "Set assignee")
   ("t" gerrit-upload-set-topic "Set topic")
-  ("v" gerrit-upload-set-ready-for-review "Set ready-for-review")
+  ("v" gerrit-upload-toggle-for-review "Toggle ready-for-review")
   ("a" gerrit-upload-set-args "Set additional args")
   ("RET" gerrit-upload-run "Run git-reivew" :color blue))
 
