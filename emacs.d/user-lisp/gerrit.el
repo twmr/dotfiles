@@ -440,13 +440,15 @@ down the URL structure to send the request."
                     (nth 3 loopvar))))))
     (insert ?\n)))
 
-(defvar gerrit-magit-open-reviews-issue-section-map
+;; don't rename this var, as it is required for magit-sections (see
+;; magit-insert-section)
+(defvar magit-open-reviews-issue-section-map
   (let ((map (make-sparse-keymap)))
     ;; (define-key map "jT" #'magit-todos-jump-to-todos)
     ;; (define-key map "jl" #'magit-todos-list)
     (define-key map (kbd "RET") #'gerrit-magit-open-reviews--open-gerrit-change)
     map)
-  "Keymap for `gerrit-magit-open-reviews' top-level section.")
+  "Keymap for `magit-open-reviews' top-level section.")
 
 (defun gerrit-magit-open-reviews--open-gerrit-change()
   (interactive)
@@ -454,6 +456,7 @@ down the URL structure to send the request."
                "https://%s/c/%s"
                gerrit-host
                ;; TODO change code s.t. s-chop-prefix is not needed
+               ;; TODO what does (oref (magit-current-section) value) return?
                (s-chop-prefix "#"
                               ;; TOOD avoid using prin1-to-string?!?
                               (prin1-to-string (nth 0 (oref (magit-current-section) value)))))))
