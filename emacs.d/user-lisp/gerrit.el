@@ -77,6 +77,7 @@
 ;; I don't know how I can communicate between different heads of the hydra
 (defvar gerrit-last-reviewers nil "...")
 (defvar gerrit-last-topic nil "...")
+(defvar gerrit-last-assignee nil "...")
 (defvar gerrit-upload-args nil "...")
 (defvar gerrit-upload-ready-for-review nil "...")
 
@@ -196,6 +197,19 @@ Read data from the file specified by `gerrit-save-file'."
                  gerrit-last-reviewers)
                 gerrit-last-reviewers)))
 
+(defun gerrit-upload-set-assignee ()
+  "Interactively ask for an assignee."
+  (interactive)
+  (completing-read
+   "Assignee: "
+   (gerrit-rest--get-gerrit-usernames)
+   nil ;; predicate
+   t ;; require match
+   nil ;; initial
+   nil ;; hist (output only?)
+   ;; def
+   nil))
+
 (defun gerrit-upload-set-topic ()
   "Interactively ask for a topic name."
   (interactive)
@@ -254,6 +268,7 @@ gerrit-upload: (current cmd: %(concat (gerrit-upload-create-git-review-cmd)))
   ("r" gerrit-upload-add-reviewer "Add reviewer")
   ("R" gerrit-upload-remove-reviewer "Remove reviewer")
   ;; ("g" gerrit-upload-add-review-group "Add review group")
+  ("a" gerrit-upload-set-assignee "Set assignee")
   ("t" gerrit-upload-set-topic "Set topic")
   ("v" gerrit-upload-set-ready-for-review "Set ready-for-review")
   ("a" gerrit-upload-set-args "Set additional args")
