@@ -495,6 +495,8 @@ See URL `https://www.pylint.org/'."
     :verify (lambda (_) (flycheck-python-verify-module 'python-pylint "pylint"))
     :modes python-mode))
 
+(use-package flycheck-package
+  :ensure t)
 
 (use-package flycheck-pycheckers
   :ensure t
@@ -1163,14 +1165,8 @@ See URL `https://www.pylint.org/'."
     (progn
       (load-theme thi::theme t)
       (thi::sml-setup)
-      (add-hook 'after-make-frame-functions
-                '(lambda (f)
-                   (with-selected-frame f
-                     (when (window-system f)
-                       (tool-bar-mode -1)
-                       (menu-bar-mode -1)))))
-
-      )))
+      (tool-bar-mode -1)
+      (menu-bar-mode -1))))
 
 (use-package smex :ensure t :config (load "thi-ido.el"))
 
