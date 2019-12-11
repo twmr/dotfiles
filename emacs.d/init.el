@@ -567,6 +567,27 @@ See URL `https://www.pylint.org/'."
       (interactive (git-commit-read-jira-ticket))
       (git-commit-insert-jira-header "Related" ticket))))
 
+;; Pop up last commit information of current line
+(use-package git-messenger
+  :ensure t
+  :bind (:map vc-prefix-map
+         ("p" . git-messenger:popup-message)
+         :map git-messenger-map
+         ("m" . git-messenger:copy-message))
+  ;; :pretty-hydra
+  ;; ((:title (pretty-hydra-title "Git Messenger" 'alltheicon "git")
+  ;;   :color blue :quit-key "q")
+  ;;  ("Actions"
+  ;;   (("s" git-messenger:popup-show "Show")
+  ;;    ;; ("S" git-messenger:popup-show-verbose "Show verbose")
+  ;;    ("c" git-messenger:copy-commit-id "Copy hash")
+  ;;    ;; ("d" git-messenger:popup-diff "Diff")
+  ;;    ("m" git-messenger:copy-message "Copy message")
+  ;;    ("," (catch 'git-messenger-loop (git-messenger:show-parent)) "Go Parent"))))
+  :init
+  (setq git-messenger:show-detail t
+        git-messenger:use-magit-popup t))
+
 (use-package groovy-mode
   :ensure t
   :defer t
