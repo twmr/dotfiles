@@ -516,7 +516,7 @@ See URL `https://www.pylint.org/'."
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
   :config
   (progn
-    ;; (add-hook 'magit-status-sections-hook #'gerrit-magit-insert-status t)
+    (add-hook 'magit-status-sections-hook #'gerrit-magit-insert-status t)
     (global-set-key (kbd "C-x i") 'gerrit-upload)
     (global-set-key (kbd "C-x o") 'gerrit-download)))
 
