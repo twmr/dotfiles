@@ -510,6 +510,7 @@ See URL `https://www.pylint.org/'."
 
 (use-package gerrit
   :if (string= (system-name) "PC-16609.ims.co.at")
+  :load-path "~/gitrepos/gerrit.el"
   :custom
   (gerrit-host "gerrit.rnd.ims.co.at")
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
