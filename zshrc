@@ -74,9 +74,6 @@ done
 #. ~/.zsh/opts
 # . ~/.zsh/theme.zsh-theme
 . ~/.zsh/emacs
-if [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
-    . ~/.zsh/fzf
-fi
 
 if [ -d ~/.zsh.d/ -a ! "$(ls -A ~/.zsh.d/ 2> /dev/null)" = "" ]; then
    # see https://superuser.com/questions/397307
@@ -114,3 +111,5 @@ source "$fzfdir/shell/key-bindings.zsh"
 # Auto-completion
 # ---------------
 [[ $- == *i* ]] && source "$fzfdir/shell/completion.zsh" 2> /dev/null
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
