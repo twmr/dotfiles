@@ -1397,6 +1397,13 @@ See URL `https://www.pylint.org/'."
 ;; (add-hook 'after-init-hook #'global-discover-mode)
 ;; (add-hook 'after-init-hook #'helm-projectile-on)
 
+;; this fixes ansii escape seq issues: https://emacs.stackexchange.com/questions/37310/ansi-colors-for-bash-process
+(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
+(add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
+(autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
+
+
+
 ;; use the desktop-save infrastructure, which I don't like
 ;; can this be disabled somehow?
 ;; (add-hook 'after-init-hook #'persp-mode)
