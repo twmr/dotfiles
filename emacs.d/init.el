@@ -375,52 +375,7 @@
 
 (use-package evil :ensure t
   :config (progn
-          ;; (delete 'term-mode evil-insert-state-modes)
-
-          ;;see https://github.com/redguardtoo/emacs.d/blob/master/init-evil.el
-          (cl-loop for (mode . state) in
-                   '(
-                     (conf-mode . emacs)
-                     (c-mode . emacs)
-                     (c++-mode . emacs)
-                     (compilation-mode . emacs)
-                     (dashboard-mode . emacs)
-                     (deadgrep-mode . emacs)
-                     (dired-mode . emacs)
-                     (dockerfile-mode . emacs)
-                     (emacs-lisp-mode . emacs)
-                     (eshell-mode . emacs)
-                     (exwm-mode . emacs)
-                     (flycheck-error-list-mode . emacs)
-                     (fundamental-mode . emacs)
-                     (groovy-mode . emacs)
-                     (help-mode . emacs)
-                     (helpful-mode . emacs)
-                     (image-dired-mode . emacs)
-                     (image-dired-thumbnail-mode . emacs)
-                     (image-mode . emacs)
-                     (inferior-emacs-lisp-mode . emacs)
-                     (json-mode . emacs)
-                     (makefile-mode . emacs)
-                     (makey-key-mode . emacs)
-                     (magit-repolist-mode . emacs)
-                     (messages-buffer-mode . emacs)
-                     (org-mode . emacs)
-                     (paradox-menu-mode . emacs)
-                     (protobuf-mode . emacs)
-                     (python-mode . emacs)
-                     (quickrun/mode . emacs)
-                     (rust-mode . emacs)
-                     (sh-mode . emacs)
-                     (shell-mode . emacs)
-                     (shell-script-mode . emacs)
-                     (shell-script-mode . emacs)
-                     (speedbar-mode . emacs)
-                     (term-mode . emacs)
-                     (text-mode . emacs)
-                     (yaml-mode . emacs)
-                     )
-                   do (evil-set-initial-state mode state))))
+            (setq evil-default-state 'emacs)))
 
 (use-package ethan-wspace
   :ensure t
