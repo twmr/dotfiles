@@ -404,6 +404,8 @@
 
 (use-package flycheck
   :ensure t
+  :custom
+  (flycheck-emacs-lisp-initialize-packages t) ;; fixes an unkown pkg error with (require 'hydra) in gerrit.el
   :init (progn
           (setq flycheck-highlighting-mode 'lines)
           (setq flycheck-display-errors-delay 0.4)
