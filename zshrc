@@ -115,3 +115,21 @@ source "$fzfdir/shell/key-bindings.zsh"
 [[ $- == *i* ]] && source "$fzfdir/shell/completion.zsh" 2> /dev/null
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# >>> conda initialize >>>
+minicondadir=$HOME/miniconda3
+if [ -e $minicondadir ]; then
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$(${minicondadir}'/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "$minicondadir/etc/profile.d/conda.sh" ]; then
+            . "$minicondadir/etc/profile.d/conda.sh"
+        else
+            export PATH="$minicondadir/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+fi
+# <<< conda initialize <<<
