@@ -44,3 +44,4 @@ matplotlib/tex.cache
 *.sqlite
 /config/systemd/user/default.target.wants/
 /emacs.d/transient/history.el
+/zsh/zsh-dircolors-solarized
