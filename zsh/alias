@@ -139,7 +139,6 @@ DOTFDIR=${GITR}/dotfiles
 hash -d conf=${HOME}/.config
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
-hash -d diss=${GITR}/diss
 hash -d dotf=${DOTFDIR}
 hash -d dotfp=${DOTFDIR}_personal
 hash -d emd=${DOTFDIR}/emacs.d
