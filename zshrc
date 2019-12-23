@@ -50,7 +50,8 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(sudo zsh-dircolors-solarized docker man)
+#plugins=(sudo zsh-dircolors-solarized docker man)
+plugins=(sudo docker man)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,6 +92,8 @@ setopt interactivecomments # pound sign in interactive prompt
 setopt nohup  # don't kill child processes of the current zsh when the zsh
               # process is killed
 
+#git clone --recursive https://github.com/joel-porquet/zsh-dircolors-solarized ~/.zsh/zsh-dircolors-solarized
+source ~/.zsh/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh
 
 #eval "$(_DEV_COMPLETE=source_zsh dev)"
 
