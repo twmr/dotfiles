@@ -89,7 +89,9 @@ setopt interactivecomments # pound sign in interactive prompt
 setopt nohup  # don't kill child processes of the current zsh when the zsh
               # process is killed
 
-#git clone --recursive https://github.com/joel-porquet/zsh-dircolors-solarized ~/.zsh/zsh-dircolors-solarized
+if [ ! -e ~/.zsh/zsh-dircolors-solarized ]; then
+    git clone --recursive https://github.com/joel-porquet/zsh-dircolors-solarized ~/.zsh/zsh-dircolors-solarized
+fi
 source ~/.zsh/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh
 
 #eval "$(_DEV_COMPLETE=source_zsh dev)"
