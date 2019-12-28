@@ -399,9 +399,15 @@ if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" ]; then
     export LD_LIBRARY_PATH=${CFBDMPI}/lib:${LD_LIBRARY_PATH}
 fi
 
+if [ "$HOSTNAME" = "NBPF1PQX4B" ]; then
+    prepath "$HOME/bin"
+    prepath "$HOME/.local/bin"
+fi
+
 . ~/.zsh/linuxconsole
 
 #[[ $- != *i* ]] && return
 #[[ -z "$TMUX" ]] && exec tmux
 
-export PATH="$HOME/.cargo/bin:$PATH"
+
+# prepath "$HOME/.cargo/bin"
