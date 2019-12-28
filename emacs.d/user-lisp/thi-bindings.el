@@ -9,7 +9,10 @@
 
 ;; (global-set-key [f1] 'query-replace)
 ;; (global-set-key [f1] 'yas/expand)
-(global-set-key [f1] 'hippie-expand)
+;; (global-set-key [f1] 'hippie-expand)
+(global-set-key [f1] 'kmacro-start-macro-or-insert-counter)
+(global-set-key [(shift f1)] 'kmacro-end-or-call-macro)
+
 (global-set-key (kbd "<f2>") 'visit-ansi-term)
 (global-set-key (kbd "<C-f3>") 'persp-switch)
 
