@@ -1210,7 +1210,22 @@ See URL `https://www.pylint.org/'."
 (use-package swiper
   :ensure t
   :bind (("C-s" . swiper)
-         ("C-r" . swiper)))
+         ("C-r" . swiper)
+         ("C-*" . swiper-thing-at-point))
+
+  :config
+  (progn
+    (defun ivy-with-thing-at-point (cmd)
+      (let ((ivy-initial-inputs-alist
+             (list
+              (cons cmd (thing-at-point 'symbol)))))
+        (funcall cmd)))
+
+    (defun swiper-thing-at-point ()
+      ;; similar to * in vim command mode
+      (interactive)
+      (ivy-with-thing-at-point 'swiper))
+    ))
   ;; (bind-keys :map swiper-map
   ;;            ("C-." (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'symbol))))))
   ;;            ((kbd "M-.") (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'word))))))
