@@ -776,16 +776,32 @@ See URL `https://www.pylint.org/'."
   :ensure t
   :after ivy)
 
-;; (use-package ivy-rich
-;;   :ensure t
-;;   :after ivy
-;;   :custom
-;;   (ivy-virtual-abbreviate 'full
-;;                           ivy-rich-switch-buffer-align-virtual-buffer t
-;;                           ivy-rich-path-style 'abbrev)
-;;   :config
-;;   (ivy-set-display-transformer 'ivy-switch-buffer
-;;                                'ivy-rich-switch-buffer-transformer))
+(use-package ivy-rich
+  :ensure t
+  :after ivy
+  :custom
+  (ivy-rich-path-style 'abbrev) ;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
+  ;;                         ivy-rich-switch-buffer-align-virtual-buffer t ;; obsolete since 0.1
+  :config
+  (progn
+    (ivy-rich-mode t)
+    (setq ivy-virtual-abbreviate 'full) ;; shows the full filename of the virtual/recentf files/buffers.
+    (setq ivy-rich--display-transformers-list
+          '(ivy-switch-buffer
+            (:columns
+             (;;(ivy-rich-switch-buffer-icon (:width 2))
+              (ivy-rich-candidate (:width 30))
+              (ivy-rich-switch-buffer-size (:width 7))
+              (ivy-rich-switch-buffer-indicators (:width 4 :face error :align right))
+              (ivy-rich-switch-buffer-major-mode (:width 12 :face warning))
+              (ivy-rich-switch-buffer-project (:width 15 :face success))
+              (ivy-rich-switch-buffer-path (:width (lambda (x) (ivy-rich-switch-buffer-shorten-path x (ivy-rich-minibuffer-width 0.3))))))
+             :predicate
+             (lambda (cand) (get-buffer cand))))))
+  ;; no longer works due to API change
+  ;; (ivy-set-display-transformer 'ivy-switch-buffer
+  ;;                              'ivy-rich-switch-buffer-transformer))
+  )
 
 
 ;; (use-package jabber
