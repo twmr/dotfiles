@@ -264,6 +264,8 @@
   ;; NOTE on debian systems you have to install the ripgrep binary from https://github.com/BurntSushi/ripgrep/releases, otherwise rg --pcre2 ...  returns PCRE2 is not available in this build of ripgrep
   ;; deadgrep used rg --pcre2!!
 
+  ;; https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
+
   ;; TODO try (grep-apply-setting
   ;; 'grep-find-command
   ;;'("rg -n -H --no-heading -e '' $(git rev-parse --show-toplevel || pwd)" . 27)
