@@ -18,7 +18,7 @@
    nil
    '(("\\<\\(FIXME\\|HACK\\|XXX\\|TODO\\|NOTE\\|REFACTOR\\|FIX\\)"
       1
-      '(:box (:color "grey10" :line-width 2) :background "red" :bold t :foreground "yellow")
+      '(:box (:color "grey10" :line-width 2) :background "red" :foreground "yellow")
       prepend)))
   (setq show-trailing-whitespace t)
   (eldoc-mode -1)
