@@ -121,6 +121,12 @@
   (require 'use-package))
 ;; https://github.com/alezost/emacs-config/prog.el
 
+(use-package ace-window
+  :ensure t
+  :custom
+  (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  :bind (("M-o" . ace-window)))
+
 ;; (use-package anaconda-mode :ensure t)
 
 ;; (use-package ace-jump-mode :ensure t :defer t
