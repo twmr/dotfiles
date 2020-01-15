@@ -107,6 +107,8 @@ evaluated."
              (replace-regexp-in-string "~" (getenv "HOME") path))
            '("~/.zsh.d"
              "~/.zsh"
+             "~/gitrepos/dotfiles"
+             "~/gitrepos/dotfiles_private"
              "~/gitrepos/dev"
              "~/gitrepos/software-tests"
              "~/gitrepos/dotfiles/emacs.d"
@@ -122,7 +124,7 @@ evaluated."
 
 
 (with-eval-after-load 'smart-mode-line
-  (add-to-list 'sml/replacer-regexp-list '("^~/Dropbox/" ":DB:"))
+  (add-to-list 'sml/replacer-regexp-list '("^~/Nextcloud/" ":NC:"))
   (add-to-list 'sml/replacer-regexp-list '("^~/gitrepos/" ":Git:"))
   (add-to-list 'sml/replacer-regexp-list '("^~/gitrepos/dotfiles/emacs.d" ":ED:"))
   (add-to-list 'sml/replacer-regexp-list '("^~/.emacs.d" ":ED:"))
