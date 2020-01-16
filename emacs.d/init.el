@@ -125,6 +125,8 @@
   :ensure t
   :custom
   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
+  (aw-dispatch-always t)
+  (aw-always-on t)
   :bind (("M-o" . ace-window)))
 
 ;; (use-package anaconda-mode :ensure t)
