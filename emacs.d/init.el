@@ -14,15 +14,12 @@
 (add-to-list 'load-path thi::config-dir)
 
 
-(add-to-list 'load-path (expand-file-name (concat user-emacs-directory "external/xelb")))
-(add-to-list 'load-path (expand-file-name (concat user-emacs-directory "external/exwm")))
+(when (seq-contains command-line-args "--use-exwm")
+  (add-to-list 'load-path (expand-file-name (concat user-emacs-directory
+                                                    "external/xelb")))
+  (add-to-list 'load-path (expand-file-name (concat user-emacs-directory
+                                                    "external/exwm")))
 
-(setq thi::exwm-enabled
-      (and (eq window-system 'x)
-           ;; TODO check that emacs is not running in a wayland session
-           (seq-contains command-line-args "--use-exwm")))
-
-(when thi::exwm-enabled
   (require 'exwm)
   ;; TODO get rid of perspectives once exwm is properly configured
   ;; TODO start emacs in deamon mode and enable exwm once first frame is created
@@ -72,8 +69,8 @@
       (interactive)
       (recentf-save-list)
       (save-some-buffers)
-      (start-process-shell-command "logout" nil "lxsession-logout"))
-  )
+      (start-process-shell-command "logout" nil "lxsession-logout")))
+
 
 (require 'cl-lib) ;; cl-loop
 
