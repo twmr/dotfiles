@@ -145,3 +145,5 @@ hash -d emd=${DOTFDIR}/emacs.d
 hash -d gr=${GITR}
 hash -d sp37=/usr/lib/python3.7/site-packages
 hash -d sp6437=/usr/lib64/python3.7/site-packages
+hash -d swt=${GITR}/software_tests
+hash -d pswt=${GITR}/software_tests/py
