@@ -2,7 +2,10 @@
 ;;; Code:
 ;; (setq debug-on-error t)
 
+(require 'seq)
 (require 'xdg)
+(require 'cl-lib) ;; cl-loop
+(require 'package)
 
 (defvar thi::cache-file-dir
   (expand-file-name
@@ -14,7 +17,7 @@
 (add-to-list 'load-path thi::config-dir)
 
 
-(when (seq-contains command-line-args "--use-exwm")
+(when (seq-contains-p command-line-args "--use-exwm")
   (add-to-list 'load-path (expand-file-name (concat user-emacs-directory
                                                     "external/xelb")))
   (add-to-list 'load-path (expand-file-name (concat user-emacs-directory
@@ -71,9 +74,6 @@
       (save-some-buffers)
       (start-process-shell-command "logout" nil "lxsession-logout")))
 
-
-(require 'cl-lib) ;; cl-loop
-
 ;; TODO try to get rid of the custom.el file, which is hard to keep in version control
 ;; see https://github.com/jwiegley/use-package/pull/508
 ;; see https://www.reddit.com/r/emacs/comments/53zpv9/how_do_i_get_emacs_to_stop_adding_custom_fields/
@@ -108,15 +108,13 @@
       `(load ,(concat thi::config-dir "/" file)))))
 
 ;; Bootstrap `use-package'
-(if (fboundp 'package-installed-p)
-    (unless (package-installed-p 'use-package)
-      (package-refresh-contents)
-      (package-install 'use-package))
-  (require 'use-package))
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 (eval-when-compile
+  (package-initialize)
   (require 'use-package))
-;; https://github.com/alezost/emacs-config/prog.el
 
 (use-package ace-window
   :ensure t
