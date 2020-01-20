@@ -10,7 +10,11 @@
 (setq recentf-max-menu-items 60)
 (setq recentf-max-saved-items 500)
 (setq recentf-exclude '("COMMIT_EDITMSG"
-                        ".newsrc-dribble"))
+                        ".newsrc-dribble"
+                        "/session\\."
+                        ".*-autoloads\\.el\\'"
+                        "/elpa/"
+                        ))
 
 ;; TODO merge recentf-ido-find-file and ...-find-dir function into 1 general
 ;; function
