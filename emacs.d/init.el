@@ -81,9 +81,9 @@
 (setq custom-file "/dev/null")
 
 (setq package-archives
-   '(("melpa" . "http://melpa.org/packages/")
-     ("gnu" . "http://elpa.gnu.org/packages/")
-     ("elpy" . "http://jorgenschaefer.github.io/packages/")))
+   '(("melpa" . "https://melpa.org/packages/")
+     ("gnu" . "https://elpa.gnu.org/packages/")
+     ("elpy" . "https://jorgenschaefer.github.io/packages/")))
 
 ;; (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
