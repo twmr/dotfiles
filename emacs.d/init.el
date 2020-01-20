@@ -1,4 +1,4 @@
-;;; init.el --- presonal emacs config by thisch -*- lexical-binding:t -*-
+;;; init.el --- personal config by thisch -*- lexical-binding:t -*-
 ;;; Code:
 ;; (setq debug-on-error t)
 
