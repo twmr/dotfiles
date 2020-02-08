@@ -1238,7 +1238,7 @@ See URL `https://www.pylint.org/'."
                        (tool-bar-mode -1)
                        (menu-bar-mode -1)
                        (scroll-bar-mode -1)
-                       (set-frame-font (format "Source Code Pro:size=%d"
+                       (set-frame-font (format "JetBrains Mono:size=%d"
                                                (if (string= (system-name) "PC-16609.ims.co.at")
                                                    12
                                                  34)))
