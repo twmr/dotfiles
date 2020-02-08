@@ -875,6 +875,12 @@ See URL `https://www.pylint.org/'."
 
 (use-package json-mode :ensure t :defer t)
 
+(use-package link-hint
+  :ensure t
+  :bind
+  ("C-c l o" . link-hint-open-link)
+  ("C-c l c" . link-hint-copy-link))
+
 (use-package magit
   ;; bindings: C-c M-g: magit-file-popup (use it in a buffer)
   :ensure t
