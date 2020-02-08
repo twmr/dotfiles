@@ -995,17 +995,39 @@ See URL `https://www.pylint.org/'."
        :ensure t))
 
 ;; (use-package persp-mode :ensure t
+;;   ; is a fork of perspective.el (they can't be installed at the same time.
 ;;   :config
 ;;   (persp-mode)
 ;;   )
 
-;; (use-package perspective :ensure t :disabled t
-;;   ;; disabled because it does not yet support persp-2.0
-;;   (bind-keys :map projectile-mode-map
-;;         ("s-s" . projecile-persp-switch-project))
-;;   :config
-;;   (project-persist-mode 1) ;; C-c P n; C-c P f
-;;   )
+(use-package perspective :ensure t
+  ;; Prefix key is C-x x
+  ;; s — persp-switch: Query a perspective to switch to, or create
+  ;; k — persp-remove-buffer: Query a buffer to remove from current perspective
+  ;; c — persp-kill : Query a perspective to kill
+  ;; r — persp-rename: Rename current perspective
+  ;; a — persp-add-buffer: Query an open buffer to add to current perspective
+  ;; A — persp-set-buffer: Add buffer to current perspective and remove it from all others
+  ;; i — persp-import: Import a given perspective from another frame.
+  ;; n, <right> — persp-next: Switch to next perspective
+  ;; p, <left> — persp-prev: Switch to previous perspective
+  ;; C-s — persp-state-save: Save all perspectives in all frames to a file
+  ;; C-l — persp-state-load: Load all perspectives from a file
+
+  ;; replace buffermenu with ibuffer
+  :bind (("C-x C-b" . persp-ibuffer)
+
+         ;; this doesn't yet work as expected:
+         ;; * the ivy-virtual-buffers are not shown in persp-counsle-switch-buffer
+         ;; * the nice table is also not shown - this has to do with ivy-rich I guess
+         ;; ("C-x b" . persp-counsel-switch-buffer)
+         )
+  ;; (bind-keys :map projectile-mode-map
+  ;;       ("s-s" . projecile-persp-switch-project))
+  :config
+  (persp-mode)
+  ;; (project-persist-mode 1) ;; C-c P n; C-c P f
+  )
 
 (use-package pip-requirements :ensure t :defer t)
 
@@ -1445,12 +1467,6 @@ See URL `https://www.pylint.org/'."
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 (add-to-list 'comint-output-filter-functions 'ansi-color-process-output)
 (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-
-
-
-;; use the desktop-save infrastructure, which I don't like
-;; can this be disabled somehow?
-;; (add-hook 'after-init-hook #'persp-mode)
 
 ;; testing https://github.com/abo-abo/swiper/pull/1518
 ;; (try "https://raw.githubusercontent.com/MaskRay/swiper/8ca04e88c0c536e6ac8b169b37eba74892678f82/ivy.el")
