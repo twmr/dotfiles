@@ -645,7 +645,6 @@ See URL `https://www.pylint.org/'."
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
   )
 
-
 (use-package hydra :ensure t
   :init
   (progn
@@ -1248,7 +1247,7 @@ See URL `https://www.pylint.org/'."
                        (set-frame-font (format "JetBrains Mono:size=%d"
                                                (if (string= (system-name) "PC-16609.ims.co.at")
                                                    12
-                                                 34)))
+                                                 22)))
                        (load-theme thi::theme t)
                        (thi::sml-setup)))))
     (progn
