@@ -266,6 +266,12 @@
   ;; NOTE on debian systems you have to install the ripgrep binary from https://github.com/BurntSushi/ripgrep/releases, otherwise rg --pcre2 ...  returns PCRE2 is not available in this build of ripgrep
   ;; deadgrep used rg --pcre2!!
 
+  ;; TODO try (grep-apply-setting
+  ;; 'grep-find-command
+  ;;'("rg -n -H --no-heading -e '' $(git rev-parse --show-toplevel || pwd)" . 27)
+  ;;)
+  ;; taken from https://stegosaurusdormant.com/emacs-ripgrep/
+
   :after (dumb-jump)
   :bind (("C-c d" . deadgrep) ;; in entire project/sandbox
          ("C-c D" . deadgrep-in-current-repo))
