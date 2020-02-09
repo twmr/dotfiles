@@ -334,6 +334,7 @@
   ;; referenced in https://github.com/jorgenschaefer/elpy/issues/498#issuecomment-324145571
   ;; needed for editing python docstring in new buffers that are in rst-mode
   ;; TODO add some rst validitiy checks before commiting change in rst-mode buffer.
+  ;; FIXME indendation is not preserved
 
   ;; rst.el docu: https://docutils.readthedocs.io/en/sphinx-docs/user/emacs.html
   ;; run C-c e to edit docstring in rst-mode buffer
