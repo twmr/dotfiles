@@ -11,6 +11,7 @@
 (require 'cl-lib) ;; cl-delete-if-not, cl-loop
 (require 'projectile)
 (require 'f)
+(require 's)
 (require 'dash)
 
 ;; TODO sort results (using rg --sort), evaluate performance loss
@@ -24,6 +25,17 @@
        "-g '!ijscore' "
        "-g '!local_configdb' "))
 
+(defun thi::project-info ()
+  ;; output number of files matched by projectile-generic-command
+  (interactive)
+  ;; TODO
+  ;; output project root
+  ;; output ...
+  (message "Number of (tracked) files in the project: %s"
+           (shell-command-to-string
+            (concat
+             (s-replace " -0" "" projectile-generic-command)
+             " | wc -l"))))
 
 (defun thi::hydra-project-find-file--generic (project-name)
   (interactive)
