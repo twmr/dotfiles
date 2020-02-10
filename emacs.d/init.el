@@ -783,15 +783,6 @@ See URL `https://www.pylint.org/'."
                "\\(^\\s-*(use-package +\\)\\(\\_<.+\\_>\\)" 2)))
   (add-hook 'emacs-lisp-mode-hook #'jcs-use-package))
 
-(use-package ido
-  :disabled t
-  :custom
-  (ido-auto-merge-delay-time 2.7)
-  (ido-max-window-height 30)
-  (ido-use-faces t)
-  :config
-  (load "thi-ido"))
-
 (use-package ivy
   ;; see https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
   :ensure t
@@ -817,8 +808,9 @@ See URL `https://www.pylint.org/'."
   ;;  ;; '((t . ivy--regex-fuzzy)))
   ;;  '((t . ivy--subseq-fuzzy)))
   (ivy-re-builders-alist
-      '((read-file-name-internal . ivy--regex-fuzzy)
-        (t . ivy--regex-plus)))
+   '((read-file-name-internal . ivy--regex-fuzzy)
+     (counsel-M-x . ivy--regex-fuzzy)
+     (t . ivy--regex-plus)))
   (ivy-initial-inputs-alist nil)
   ;; todo not really needed?
   (ivy-use-selectable-prompt t)
@@ -1255,8 +1247,6 @@ See URL `https://www.pylint.org/'."
       (thi::sml-setup)
       (tool-bar-mode -1)
       (menu-bar-mode -1))))
-
-(use-package smex :ensure t :config (load "thi-ido.el"))
 
 ;; (use-package spaceline
 ;;   :ensure t
