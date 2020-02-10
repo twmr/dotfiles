@@ -1127,11 +1127,20 @@ See URL `https://www.pylint.org/'."
     (when (string-match "sandbox" buffer-file-name)
       (yapf-mode)))
 
+  (defun thi::save-buffer-maybe-show-errors ()
+    "Save buffer and show errors if any."
+    (interactive)
+    (save-buffer)
+    (when (not flycheck-current-errors)
+      (flycheck-list-errors)))
+
   (add-hook 'python-mode-hook 'ims-yapf)
   (define-key python-mode-map (kbd "M-.") #'dumb-jump-go)
   (define-key python-mode-map (kbd "M-,") #'dumb-jump-back)
   (define-key python-mode-map (kbd "C-c C-i") #'pyimport-insert-missing)
   (define-key python-mode-map (kbd "C-c e") #'edit-indirect-rst)
+
+  (define-key python-mode-map (kbd "C-x C-s") #'thi::save-buffer-maybe-show-errors)
 
   ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
   ;; (("C-`" . 'helm-semantic-or-imenu))
