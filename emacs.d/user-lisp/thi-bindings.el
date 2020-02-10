@@ -125,9 +125,6 @@
 (define-key minibuffer-local-map (kbd "<up>") 'previous-complete-history-element)
 (define-key minibuffer-local-map (kbd "<down>") 'next-complete-history-element)
 
-(global-set-key (kbd "C-c s") 'sr-speedbar-select-window)
-;; (global-set-key [f6] 'sr-speedbar-toggle)
-
 (global-set-key (kbd "C-c b") 'revert-buffer)
 
 (global-set-key (kbd "C-c h b") 'helm-mini)
