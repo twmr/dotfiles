@@ -228,12 +228,10 @@
 
 (use-package counsel
   :ensure t
-  ;; :bind (("C-h v" . counsel-describe-variable)
-  ;;        ("C-h f" . counsel-describe-function)
-  ;;        ("C-h s" . counsel-info-lookup-symbol)))
-
-  ;; TODO instructions for using TRAMP
-  :bind (("C-x C-f" . counsel-find-file))
+  :bind (("C-h v" . counsel-describe-variable)
+         ("C-h f" . counsel-describe-function)
+         ("C-h s" . counsel-info-lookup-symbol)
+         ("C-x C-f" . counsel-find-file))
 
   :config (progn
             (counsel-mode)
@@ -612,6 +610,7 @@ See URL `https://www.pylint.org/'."
 ;; (use-package help-mode+ :ensure t)
 
 (use-package helpful :ensure t
+  :disabled t
   :bind (
   ;; Note that the built-in `describe-function' includes both functions
   ;; and macros. `helpful-function' is functions only, so we provide
@@ -810,6 +809,8 @@ See URL `https://www.pylint.org/'."
   (ivy-re-builders-alist
    '((read-file-name-internal . ivy--regex-fuzzy)
      (counsel-M-x . ivy--regex-fuzzy)
+     (counsel-describe-variable . ivy--regex-fuzzy)
+     (counsel-describe-function . ivy--regex-fuzzy)
      (t . ivy--regex-plus)))
   (ivy-initial-inputs-alist nil)
   ;; todo not really needed?
