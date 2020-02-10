@@ -128,6 +128,8 @@
 (global-set-key (kbd "C-c s") 'sr-speedbar-select-window)
 ;; (global-set-key [f6] 'sr-speedbar-toggle)
 
+(global-set-key (kbd "C-c b") 'revert-buffer)
+
 (global-set-key (kbd "C-c h b") 'helm-mini)
 (global-set-key (kbd "C-c h m") 'helm-man-woman)
 (global-set-key (kbd "C-c h f") 'helm-find)
