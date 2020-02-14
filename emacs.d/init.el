@@ -808,7 +808,13 @@ See URL `https://www.pylint.org/'."
   ;;  '((t . ivy--subseq-fuzzy)))
   (ivy-re-builders-alist
    '((read-file-name-internal . ivy--regex-fuzzy)
-     (counsel-M-x . ivy--regex-fuzzy)
+     (counsel-M-x . ivy--regex-fuzzy) ;; I'm not satisfied with this. "lsp"
+                                      ;; should give me "lsp" and "conda"
+                                      ;; should expand to
+                                      ;; "thi::.....conda-py37". In smex
+                                      ;; everything worked as expected. Is
+                                      ;; there a smex backend for
+                                      ;; counsel-M-x?
      (counsel-describe-variable . ivy--regex-fuzzy)
      (counsel-describe-function . ivy--regex-fuzzy)
      (t . ivy--regex-plus)))
