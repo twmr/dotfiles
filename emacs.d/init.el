@@ -926,6 +926,36 @@ See URL `https://www.pylint.org/'."
   ("C-c l o" . link-hint-open-link)
   ("C-c l c" . link-hint-copy-link))
 
+(use-package lsp-mode
+  :ensure t
+  :init
+  ;; Set it to big number(100mb) like most of the popular starter kits like
+  ;; Spacemacs/Doom/Prelude, etc do:
+  (setq gc-cons-threshold 100000000)
+  ;; Increase the amount of data which Emacs reads from the process. Again
+  ;; the emacs default is too low 4k considering that the some of the
+  ;; language server responses are in 800k - 3M range.
+  (setq read-process-output-max (* 1024 1024)) ;; 1mb
+  :hook
+  ;; how do I test that lsp works?
+  ;; (lsp-decribe-session) ;; does this have a refresh keybindin? like g in magit-status?
+  ((python-mode-hook . lsp))
+  :config
+  (defun thi::lsp-python-use-conda-py37-settings ()
+    (interactive)
+    (setq lsp-pyls-server-command "~/miniconda/envs/py37/bin/pyls"
+          lsp-clients-python-library-directories '("~/miniconda/envs/py37/"))
+   )
+)
+
+(use-package lsp-ui
+  :ensure t
+  :config
+  ;; make sure we have lsp-imenu everywhere we have LSP
+  (require 'lsp-ui-imenu)
+  ;; (add-hook 'lsp-after-open-hook 'lsp-ui-imenu)
+  )
+
 (use-package magit
   ;; bindings: C-c M-g: magit-file-popup (use it in a buffer)
   :ensure t
