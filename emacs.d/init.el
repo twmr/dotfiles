@@ -1167,7 +1167,7 @@ See URL `https://www.pylint.org/'."
     "Save buffer and show errors if any."
     (interactive)
     (save-buffer)
-    (when (not flycheck-current-errors)
+    (when (flycheck-has-current-errors-p)
       (flycheck-list-errors)))
 
   (add-hook 'python-mode-hook 'ims-yapf)
