@@ -1297,6 +1297,10 @@ See URL `https://www.pylint.org/'."
       (tool-bar-mode -1)
       (menu-bar-mode -1))))
 
+
+;; does this improve counsel-M-x?
+(use-package smex :ensure t)
+
 ;; (use-package spaceline
 ;;   :ensure t
 ;;   :demand t
