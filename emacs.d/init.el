@@ -1148,6 +1148,8 @@ See URL `https://www.pylint.org/'."
 
 (use-package pyimport :ensure t)
 
+(use-package py-isort :ensure t)
+
 (use-package python
   :custom
   (python-fill-docstring-style 'pep-257)
@@ -1161,6 +1163,7 @@ See URL `https://www.pylint.org/'."
   (defun ims-yapf()
     (interactive)
     (when (string-match "sandbox" buffer-file-name)
+      (add-hook 'before-save-hook #'py-isort-before-save nil t)
       (yapf-mode)))
 
   (defun thi::save-buffer-maybe-show-errors ()
