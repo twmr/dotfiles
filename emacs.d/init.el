@@ -1195,6 +1195,8 @@ See URL `https://www.pylint.org/'."
 
 (use-package python-docstring
   :ensure t
+  :custom
+  (python-docstring-sentence-end-double-space nil)
   :config
   (python-docstring-install))
 
