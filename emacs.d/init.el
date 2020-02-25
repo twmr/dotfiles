@@ -975,7 +975,7 @@ See URL `https://www.pylint.org/'."
   (defun magit-gpr ()
     "Run git pull --rebase in current repo."
     (interactive)
-    (magit-git-command "git pull --rebase")
+    (magit-git-command "git pull --rebase --autostash")
     ))
 
 (use-package magit-libgit
