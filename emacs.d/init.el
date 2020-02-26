@@ -532,10 +532,12 @@ See URL `https://www.pylint.org/'."
   :after magit)
 
 (use-package gerrit
-  :if (string= (system-name) "PC-16609.ims.co.at")
   :load-path "~/gitrepos/gerrit.el"
   :custom
-  (gerrit-host "gerrit.rnd.ims.co.at")
+  (gerrit-host "review.opendev.org")
+  (gerrit-rest-endpoint-prefix "")
+  ;; (gerrit-host "gerrit.googlesource.com")
+  ;; (gerrit-host "review.gerrithub.io")
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
   :config
   (progn
