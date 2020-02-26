@@ -1324,8 +1324,8 @@ See URL `https://www.pylint.org/'."
 ;;   (spaceline-spacemacs-theme))
 
 (use-package sphinx-doc
-  ;; TODO this package contains support for generating docstrings in sphinx
-  ;; parasble formater for python functions/methods/classes
+  ;; TODO this package contains support for generating docstrings in a sphinx
+  ;; parsable format for python functions/methods/classes
 
   ;; TODO does not yet support numpy style docstings  https://github.com/naiquevin/sphinx-doc.el/issues/19
   ;; TODO is there a yasnippet for this already? (yes there are  https://github.com/AndreaCrotti/yasnippet-snippets/search?q=numpy&unscoped_q=numpy
