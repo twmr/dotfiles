@@ -431,9 +431,16 @@
     ;; set distinct face for Equake: white foreground with dark blue background, and different font
     (set-face-attribute 'equake-buffer-face 'nil :inherit 'default :family "DejaVu Sans Mono" :background "#000022" :foreground "white"))
 
-(use-package evil :ensure t
+(use-package evil
+  :ensure t
   :config (progn
-            (setq evil-default-state 'emacs)))
+            (setq evil-default-state 'emacs)
+            (cl-loop for (mode . state) in
+                     '(
+                       (help-mode . emacs)
+                       (helpful-mode . emacs)
+                       )
+                     do (evil-set-initial-state mode state))))
 
 (use-package ethan-wspace
   :ensure t
