@@ -89,6 +89,10 @@
 (mkdir thi::cache-file-dir t)
 (mkdir (concat thi::cache-file-dir "/backups") t)
 
+
+(defvar thi::at-work (or (string= (system-name) "PC-16609.ims.co.at")
+                         (string= (system-name) "NBPF1PQX4B")))
+
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 (defvar thi::theme 'doom-wilmersdorf)
@@ -541,8 +545,14 @@ See URL `https://www.pylint.org/'."
 (use-package gerrit
   :load-path "~/gitrepos/gerrit.el"
   :custom
-  (gerrit-host "review.opendev.org")
-  (gerrit-rest-endpoint-prefix "")
+  (gerrit-host
+     (if thi::at-work
+        "gerrit.rnd.ims.co.at"
+        "review.opendev.org"))
+  (gerrit-rest-endpoint-prefix
+   (if thi::at-work
+       "/a"
+     ""))
   ;; (gerrit-host "gerrit.googlesource.com")
   ;; (gerrit-host "review.gerrithub.io")
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
