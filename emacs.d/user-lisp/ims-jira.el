@@ -16,6 +16,7 @@
 
 (defun ims-jira-get-ticket-summary (ticketid)
   "Retrieve summary of TICKETID in jira."
+  (interactive "sEnter ticket id: ")
   (require 'json)
   (require 'url)
   (require 'url-http)
