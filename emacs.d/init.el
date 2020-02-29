@@ -1309,7 +1309,7 @@ See URL `https://www.pylint.org/'."
                        (menu-bar-mode -1)
                        (scroll-bar-mode -1)
                        (set-frame-font (format "JetBrains Mono:size=%d"
-                                               (if (string= (system-name) "PC-16609.ims.co.at")
+                                               (if thi::at-work
                                                    12
                                                  22)))
                        (load-theme thi::theme t)
