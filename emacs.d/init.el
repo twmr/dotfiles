@@ -40,6 +40,34 @@
   (require 'exwm-systemtray)
   (exwm-systemtray-enable)
 
+  (unless (get 'exwm-workspace-number 'saved-value)
+    ;; TODO minimal workspace number must be 1 and not 0
+    (setq exwm-workspace-number 4))
+
+  ;; Make class name the buffer name
+  (add-hook 'exwm-update-class-hook
+            (lambda ()
+              (exwm-workspace-rename-buffer exwm-class-name)))
+
+  ;; Global keybindings.
+  (setq exwm-input-global-keys
+        `(
+          ;; 's-r': Reset (to line-mode).
+          ([?\s-r] . exwm-reset)
+          ;; 's-w': Switch workspace.
+          ([?\s-w] . exwm-workspace-switch)
+          ;; 's-&': Launch application.
+          ([?\s-&] . (lambda (command)
+                       (interactive (list (read-shell-command "$ ")))
+                       (start-process-shell-command command nil command)))
+          ;; 's-N': Switch to certain workspace.
+          ,@(mapcar (lambda (i)
+                      `(,(kbd (format "s-%d" i)) .
+                        (lambda ()
+                          (interactive)
+                          (exwm-workspace-switch-create ,i))))
+                    (number-sequence 0 9))))
+
   ;; The following example demonstrates how to use simulation keys to mimic
   ;; the behavior of Emacs.  The value of `exwm-input-simulation-keys` is a
   ;; list of cons cells (SRC . DEST), where SRC is the key sequence you press
@@ -442,6 +470,7 @@
             (cl-loop for (mode . state) in
                      '(
                        (help-mode . emacs)
+                       (term-mode . emacs)
                        (helpful-mode . emacs)
                        )
                      do (evil-set-initial-state mode state))))
