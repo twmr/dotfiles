@@ -1,4 +1,6 @@
 ;;; Recent Files
+(require 'cl-lib) ;; cl-remove-duplicates
+
 
 ;; recentf-save-file has to be before (require ..) otherwise you have
 ;; to load the new file manually with recentf-load-list
@@ -29,7 +31,7 @@
                            home "~" x) x))
                   recentf-list))
          (filename-list
-          (remove-duplicates (mapcar #'car file-assoc-list)
+          (cl-remove-duplicates (mapcar #'car file-assoc-list)
                              :test #'string=))
          (filename (ivy-completing-read "Choose recent file: "
                                         filename-list nil t)))
@@ -48,7 +50,7 @@
                            home "~" (file-name-directory x)) x))
                   recentf-list))
          (dirname-list
-          (remove-duplicates (mapcar #'car dir-assoc-list)
+          (cl-remove-duplicates (mapcar #'car dir-assoc-list)
                              :test #'string=)))
     (dired (ivy-completing-read "Choose recent dir: "
                                 dirname-list
