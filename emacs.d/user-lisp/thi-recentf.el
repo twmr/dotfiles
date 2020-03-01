@@ -58,3 +58,12 @@
 ;; TODO somehow if this is activated C-e in eshell and ansi-term triggers
 ;; ide-my-edit-input - whyyy??
 ;;(define-key recentf-mode-map (kbd "C-e") 'ido-my-edit-input)
+
+
+(defun recentf-filter-list-containing-string (string)
+  (interactive "sEnter String:\n")
+  (message "entered: %s" string)
+
+  (let ((len-before (length recentf-list)))
+    (setq recentf-list (seq-filter (lambda (elem) (not (string-match string elem))) recentf-list))
+    (message "Len of recentf-list: before %d, after: %d" (length recentf-list) len-before)))
