@@ -68,4 +68,4 @@
 
   (let ((len-before (length recentf-list)))
     (setq recentf-list (seq-filter (lambda (elem) (not (string-match string elem))) recentf-list))
-    (message "Len of recentf-list: before %d, after: %d" (length recentf-list) len-before)))
+    (message "Len of recentf-list: after %d, before: %d" (length recentf-list) len-before)))
