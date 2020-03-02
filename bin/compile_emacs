@@ -53,6 +53,7 @@ set -e
 
 
 ./configure \
+    CFLAGS="-march=native -O3" \
     --prefix=/opt/emacs \
     --with-x-toolkit=lucid \
     --with-xpm \
