@@ -24,6 +24,12 @@
                                                     "external/exwm")))
 
   (require 'exwm)
+  ;; TODO battery information + safe shutdown when level is critical (shouldn't this be handled by gnome-flashback?)
+  ;; TODO does it make sense to use an external tool for displaying a bar (polybar: https://github.com/ch11ng/exwm/issues/716#issuecomment-593100329)
+  ;; https://tech.toryanderson.com/posts/exwm_laptop/
+
+  ;; docking station - multiple monitor support
+
   ;; TODO get rid of perspectives once exwm is properly configured
   ;; TODO start emacs in deamon mode and enable exwm once first frame is created
   ;; TODO emacs lock screen
@@ -38,11 +44,12 @@
   ;; (exwm-randr-enable)
 
   (require 'exwm-systemtray)
+  ;; TODO needed for which systray icons? (I would expect the
+  ;; network-manager applet in the systray, but it is not there)
   (exwm-systemtray-enable)
 
-  (unless (get 'exwm-workspace-number 'saved-value)
-    ;; TODO minimal workspace number must be 1 and not 0
-    (setq exwm-workspace-number 4))
+  ;; TODO minimal workspace number must be 1 and not 0
+  (setq exwm-workspace-number 4) ;; what does this var affect?
 
   ;; Make class name the buffer name
   (add-hook 'exwm-update-class-hook
