@@ -1373,6 +1373,7 @@ See URL `https://www.pylint.org/'."
   :config
   (progn
     (rg-define-search thi::gg :files "*")
+    (rg-define-search thi::gg-no-tests :files "py" :flags ("--glob=!tests"))
 
     (rg-enable-default-bindings (kbd "M-s"))
     ;; (setq rg-show-header nil)
