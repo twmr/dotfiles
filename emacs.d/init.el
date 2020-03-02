@@ -325,6 +325,15 @@
       (when root
         (deadgrep--lookup-override root))))
 
+  ;; TODO keybinding
+  (defun deadgrep-python (search-term)
+    (interactive (list (deadgrep--read-search-term)))
+    (let ((deadgrep--file-type '(type . "py")))
+      (deadgrep search-term)))
+
+  ;; TODO exclude tests from search results
+  ;; this works: rg --files -tpy -g '!tests'
+
   (defun deadgrep-in-current-repo (search-term)
     (interactive (list (deadgrep--read-search-term)))
     (let ((deadgrep--project-root
