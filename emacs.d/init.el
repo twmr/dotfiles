@@ -311,9 +311,10 @@
   ;;)
   ;; taken from https://stegosaurusdormant.com/emacs-ripgrep/
 
-  :after (dumb-jump)
-  :bind (("C-c d" . deadgrep) ;; in entire project/sandbox
-         ("C-c D" . deadgrep-in-current-repo))
+  :after (dumb-jump hydra)
+  :bind (("C-c d" . deadgrep)
+         ("C-c D" . hydra-deadgrep/body)
+         )
   :config
   ;; override deadgrep--project-root to include support for dumb-jump files (.dumbjump, .dumbjumpignore)
   (defun deadgrep--project-root ()
@@ -325,14 +326,19 @@
       (when root
         (deadgrep--lookup-override root))))
 
+  (defvar thi::deadgrep-without-tests-glob nil)
+
   ;; TODO keybinding
   (defun deadgrep-python (search-term)
     (interactive (list (deadgrep--read-search-term)))
     (let ((deadgrep--file-type '(type . "py")))
       (deadgrep search-term)))
 
-  ;; TODO exclude tests from search results
-  ;; this works: rg --files -tpy -g '!tests'
+  (defun deadgrep-python-without-tests (search-term)
+    (interactive (list (deadgrep--read-search-term)))
+    (let ((deadgrep--file-type '(type . "py"))
+          (thi::deadgrep-without-tests-glob t))
+      (deadgrep search-term)))
 
   (defun deadgrep-in-current-repo (search-term)
     (interactive (list (deadgrep--read-search-term)))
@@ -346,6 +352,14 @@
                  (deadgrep--lookup-override root))))))
       (deadgrep search-term)))
 
+  (defhydra hydra-deadgrep (:color blue)
+    "thi/deadgrep"
+      ("p" deadgrep-python "py")
+      ("t" deadgrep-python-without-tests "py witout tests")
+      ("r" deadgrep-in-current-repo "in current repo"))
+
+  ;; exclude tests from search results
+  ;; (this works: rg --files -tpy -g '!tests')
   (defun deadgrep--arguments (search-term search-type case context)
     "Return a list of command line arguments that we can execute in a shell
 to obtain ripgrep results."
@@ -390,7 +404,8 @@ to obtain ripgrep results."
         (push (format "--after-context=%s" (cdr context)) args))
 
       ;; TODO add support for toggling this (see https://github.com/Wilfred/deadgrep/issues/75)
-      (push "--glob=!tests" args)
+      (when thi::deadgrep-without-tests-glob
+        (push "--glob=!tests" args))
 
       (push "--" args)
       (push search-term args)
