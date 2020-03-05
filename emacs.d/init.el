@@ -155,6 +155,8 @@
   (package-initialize)
   (require 'use-package))
 
+(use-package quelpa-use-package :ensure t)
+
 (use-package ace-window
   :ensure t
   :custom
@@ -193,6 +195,9 @@
 ;;   :config
 ;;   (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
 ;;   (setq bpr-process-mode #'comint-mode))
+
+(use-package bufler
+  :quelpa (bufler :fetcher github :repo "alphapapa/bufler.el"))
 
 (use-package cmake-mode :ensure t :defer t)
 (use-package color-identifiers-mode :ensure t :defer t)
