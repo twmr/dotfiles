@@ -128,6 +128,13 @@
 (defvar thi::at-work (or (string= (system-name) "PC-16609.ims.co.at")
                          (string= (system-name) "NBPF1PQX4B")))
 
+(when thi::at-work
+  ;; for isort/yapf/pylint
+  ;; TODO do we want to set exec-path globally, or just for certain parts?
+  ;; buffer-local
+  ;; IMO better is to have sth like https://github.com/flycheck/flycheck/pull/272
+  (add-to-list 'exec-path "~/miniconda/envs/py37/bin"))
+
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 (defvar thi::theme 'doom-wilmersdorf)
@@ -664,25 +671,7 @@ See URL `https://www.pylint.org/'."
   :ensure t
   ;; this package should soon support chaining of multiple formatters
   ;; e.g. isort, yapf
-  :config
-  ;; locally defined, because exec path can't be overriden.
-  ;; TODO set exec-path instead?
-  (define-format-all-formatter black
-    (:executable "~/miniconda/envs/py37/bin/black")
-    (:install "pip install black")
-    (:languages "Python")
-    (:format (format-all--buffer-easy
-              executable "-q"
-              (when (format-all--buffer-extension-p "pyi") "--pyi")
-              "-")))
-
-  (define-format-all-formatter isort
-    (:executable "~/miniconda/envs/py37/bin/isort")
-    (:install "pip install isort")
-    (:languages "Python")
-    (:format (format-all--buffer-easy
-              executable
-              "-"))))
+  )
 
 (use-package gerrit
   :load-path "~/gitrepos/gerrit.el"
