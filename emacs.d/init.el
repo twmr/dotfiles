@@ -660,6 +660,30 @@ See URL `https://www.pylint.org/'."
   :ensure t
   :after magit)
 
+(use-package format-all
+  :ensure t
+  ;; this package should soon support chaining of multiple formatters
+  ;; e.g. isort, yapf
+  :config
+  ;; locally defined, because exec path can't be overriden.
+  ;; TODO set exec-path instead?
+  (define-format-all-formatter black
+    (:executable "~/miniconda/envs/py37/bin/black")
+    (:install "pip install black")
+    (:languages "Python")
+    (:format (format-all--buffer-easy
+              executable "-q"
+              (when (format-all--buffer-extension-p "pyi") "--pyi")
+              "-")))
+
+  (define-format-all-formatter isort
+    (:executable "~/miniconda/envs/py37/bin/isort")
+    (:install "pip install isort")
+    (:languages "Python")
+    (:format (format-all--buffer-easy
+              executable
+              "-"))))
+
 (use-package gerrit
   :load-path "~/gitrepos/gerrit.el"
   :custom
