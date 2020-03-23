@@ -131,11 +131,12 @@
 (defvar thi::at-work (or (string= (system-name) "PC-16609.ims.co.at")
                          (string= (system-name) "NBPF1PQX4B")))
 
-(when thi::at-work
+(if thi::at-work
   ;; for isort/yapf/pylint
   ;; TODO do we want to set exec-path globally, or just for certain parts?
   ;; buffer-local
   ;; IMO better is to have sth like https://github.com/flycheck/flycheck/pull/272
+    (add-to-list 'exec-path "~/miniconda3/bin")
   (add-to-list 'exec-path "~/miniconda/envs/py37/bin"))
 
 
@@ -1406,6 +1407,38 @@ See URL `https://www.pylint.org/'."
   :config
   ;; TODO support jumping in multi git-repo project
   (add-hook 'python-mode-hook 'dumb-jump-mode)
+
+;;   (defvar thi::isort-executalbe "/home/thomas.hisch/miniconda3/bin/isort")
+
+;;   (with-eval-after-load 'py-isort
+;;     (defun py-isort--call-executable (errbuf file)
+;;       (let ((default-directory (py-isort--find-settings-path)))
+;;         (zerop (apply 'call-process "/home/thomas.hisch/miniconda3/bin/isort" nil errbuf nil
+;;                       (append `(" " , file, " ",
+;;                                 (concat "--settings-path=" default-directory))
+;;                               py-isort-options)))))
+;;     (defun py-isort--call (only-on-region)
+;;       (py-isort-bf--apply-executable-to-buffer "isort"
+;;                                                'py-isort--call-executable
+;;                                                only-on-region
+;;                                                "py"))
+
+
+;;     (defun py-isort--call-executable (errbuf file)
+;;       (let ((default-directory (py-isort--find-settings-path)))
+;;         (zerop (apply 'call-process "/home/thomas.hisch/miniconda3/bin/isort" nil errbuf nil
+;;                       (append `(" " , file, " ",
+;;                                 (concat "--settings-path=" default-directory))
+;;                               py-isort-options))))))
+
+;;   (with-eval-after-load 'yapfify
+;;     (defun yapfify-call-bin (input-buffer output-buffer start-line end-line)
+;;       "Call process yapf on INPUT-BUFFER saving the output to OUTPUT-BUFFER.
+
+;; Return the exit code.  START-LINE and END-LINE specify region to
+;; format."
+;;       (with-current-buffer input-buffer
+;;         (call-process-region (point-min) (point-max) "/home/thomas.hisch/miniconda3/bin/yapf" nil output-buffer nil "-l" (concat (number-to-string start-line) "-" (number-to-string end-line))))))
 
   (defun ims-yapf()
     (interactive)
