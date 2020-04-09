@@ -1491,12 +1491,18 @@ See URL `https://www.pylint.org/'."
   )
 
 (use-package python-docstring
+  ;; this package should font-lock keywords in the docstrings, but it
+  ;; currently doesn't support numpydoc keywords.
+
+  ;; it also supports intelligent re-filling of docstrings.
   :ensure t
   :custom
   (python-docstring-sentence-end-double-space nil)
-  :config
-  (python-docstring-install))
-
+  ;; :config
+  ;; ;; this is the same as adding a (python-docstring-mode) to
+  ;; ;; pyhton-mode-hook
+  ;; (python-docstring-install))
+)
 (use-package python-pytest
   :ensure t
   :after python
@@ -1727,7 +1733,10 @@ See URL `https://www.pylint.org/'."
 
 (use-package yaml-mode :ensure t :defer t)
 
-(use-package yapfify :ensure t :defer t)
+(use-package yapfify :ensure t :defer t
+  :custom
+  (yapfify-exectuable "~/miniconda3/bin/yapf")
+  )
 
 (use-package yasnippet
   :ensure t
