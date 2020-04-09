@@ -763,6 +763,13 @@ See URL `https://www.pylint.org/'."
   :ensure t
   :after magit)
 
+;;
+(use-package reformatter
+  :ensure t
+  )
+
+
+;; TODO pick either format-all or reformatter.el from spurcell
 (use-package format-all
   :ensure t
   ;; this package should soon support chaining of multiple formatters
