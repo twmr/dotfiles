@@ -1278,6 +1278,16 @@ See URL `https://www.pylint.org/'."
 ;;     (push (org-projectile-project-todo-entry) org-capture-templates))
 ;;   :ensure t)
 
+(use-package origami
+  :ensure t
+  :bind
+  ("C-M-s" . origami-toggle-node)
+  ("C-M-h" . origami-close-all-nodes)
+  :hook
+  (python-mode . origami-mode)
+  ;;(origami-mode . origami-close-all-nodes)
+  )
+
 (use-package package-lint :ensure t :defer t)
 
 (use-package page-break-lines :ensure t :defer t
