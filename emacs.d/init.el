@@ -126,6 +126,8 @@
 (mkdir (concat thi::cache-file-dir "/backups") t)
 
 
+(defvar thi::jira-projects '("CTB" "RD" "DT" "HPC" "SD"))
+
 (defvar thi::at-work (or (string= (system-name) "PC-16609.ims.co.at")
                          (string= (system-name) "NBPF1PQX4B")))
 
@@ -158,12 +160,8 @@ Intended as a value for `bug-reference-url-format'."
       (format "https://gerrit.ims.co.at/c/%s" issue-number))
      ((string= "#" issue-prefix) ;; redmine
       (format "https://bugs.ims.co.at/c/%s" issue-number))
-     ;; TODO use thi::jira-project
-     ((member issue-prefix '("RD-"
-                             "SD-"
-                             "HPC-"
-                             "CTB-"
-                             "DT-")) ;; rnd jira
+     ((member issue-prefix
+              (seq-map (lambda (elt) (concat elt "-")) thi::jira-projects)) ;; rnd jira
       (format "https://jira.rnd.ims.co.at/c/%s" issue-number))
      (t
       (format "https://gitlab.example.com/group/project/%s/%s"
@@ -188,8 +186,6 @@ Intended as a value for `bug-reference-url-format'."
 ;;  (setq-local bug-reference-url-format #'thi::bug-reference-url)
 ;;  (insert ";; RD-3 MR!101 solves issue #100 in g123, RD-1234, DT-224, SD-93 redmine #99\n")
 ;;  (bug-reference-prog-mode))
-
-(defvar thi::jira-projects '("CTB" "RD" "DT" "HPC" "SD"))
 
 (defun thi::activate-ticket-and-gerrit-links ()
   (interactive)
