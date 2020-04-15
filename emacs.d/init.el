@@ -196,6 +196,7 @@ Intended as a value for `bug-reference-url-format'."
                             ?# ;; redmine issue prefix
 
                             ;; like (: (| "RD" "SD" "DT") ?-)
+                            ;; see https://francismurillo.github.io/2017-03-30-Exploring-Emacs-rx-Macro/
                             (: (eval `(| ,@thi::jira-projects)) ?-)
 
                             ;; from the example
@@ -206,8 +207,17 @@ Intended as a value for `bug-reference-url-format'."
   (bug-reference-prog-mode 1) ;; only in comments
   )
 
+(defun thi::activate-ticket-and-gerrit-links-text-modes ()
+  (interactive)
+  ;; in text mode we want to use (bug-reference-mode) and not the
+  ;; (bug-refernece-prog-mode)
+  (thi::activate-ticket-and-gerrit-links)
+  (bug-reference-prog-mode 0)
+  (bug-reference-mode 1)
+  )
+
 (add-hook 'prog-mode-hook #'thi::activate-ticket-and-gerrit-links)
-(add-hook 'org-mode-hook #'thi::activate-ticket-and-gerrit-links)
+(add-hook 'org-mode-hook #'thi::activate-ticket-and-gerrit-links-text-modes)
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
