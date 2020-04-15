@@ -160,10 +160,10 @@ Intended as a value for `bug-reference-url-format'."
      ((string= "g" issue-prefix) ;; gerrit
       (format "https://gerrit.ims.co.at/c/%s" issue-number))
      ((string= "#" issue-prefix) ;; redmine
-      (format "https://bugs.ims.co.at/c/%s" issue-number))
+      (format "http://bugs.ims.co.at/issues/%s" issue-number))
      ((member issue-prefix
               (seq-map (lambda (elt) (concat elt "-")) thi::jira-projects)) ;; rnd jira
-      (format "https://jira.rnd.ims.co.at/c/%s" issue-number))
+      (format "https://jira.rnd.ims.co.at/browse/%s%s" issue-prefix issue-number))
      (t
       (format "https://gitlab.example.com/group/project/%s/%s"
               (if (string-suffix-p "!" issue-prefix)
