@@ -6,6 +6,7 @@
 (require 'xdg)
 (require 'cl-lib) ;; cl-loop
 (require 'package)
+(require 'bug-reference)
 
 (defvar thi::cache-file-dir
   (expand-file-name
@@ -135,6 +136,83 @@
   ;; IMO better is to have sth like https://github.com/flycheck/flycheck/pull/272
   (add-to-list 'exec-path "~/miniconda/envs/py37/bin"))
 
+
+;; referneces to jira/redmine/gerrit tickets/changes
+;; for github issues see `bug-reference-github`
+;; TODO globally add support for gXXXX to all prog-modes + text-modes
+;; TODO link jira tickets in IMS repos to jira
+;; TODO linke redmine tickets in IMS repos to redmine
+;; https://github.com/emacs-mirror/emacs/blob/master/lisp/progmodes/bug-reference.el
+;; see also goto-address-mode
+;; see also https://emacs.stackexchange.com/questions/35878/multiple-url-formats-for-bug-reference-mode
+
+(defun thi::bug-reference-url ()
+  "Return a gerrit/jira/redmine URL.
+Intended as a value for `bug-reference-url-format'."
+
+  (let ((issue-prefix (match-string-no-properties 1))
+        (issue-number (match-string-no-properties 2)))
+    ;; (message "prefix %s" issue-prefix)
+    (cond
+     ((string= "g" issue-prefix) ;; gerrit
+      (format "https://gerrit.ims.co.at/c/%s" issue-number))
+     ((string= "#" issue-prefix) ;; redmine
+      (format "https://bugs.ims.co.at/c/%s" issue-number))
+     ;; TODO use thi::jira-project
+     ((member issue-prefix '("RD-"
+                             "SD-"
+                             "HPC-"
+                             "CTB-"
+                             "DT-")) ;; rnd jira
+      (format "https://jira.rnd.ims.co.at/c/%s" issue-number))
+     (t
+      (format "https://gitlab.example.com/group/project/%s/%s"
+              (if (string-suffix-p "!" issue-prefix)
+                  "merge_requests"
+                "issues")
+              issue-number)))))
+
+;; FOR DEBUGGING
+;; (with-current-buffer-window
+;;  (generate-new-buffer-name "tmp") () nil
+;;  (emacs-lisp-mode)
+;;  (setq-local bug-reference-bug-regexp
+;;              (rx (group (| ?g ;; gerrit change prefix
+;;                            ?# ;; redmine issue prefix
+;;                            (: (| "RD" "SD" "DT") ?-)
+
+;;                            ;; from the example
+;;                            (: (in ?I ?i) "ssue" (? ?\s) ?#)
+;;                            (: "MR" (? ?\s) ?!)))
+;;                  (group (+ digit))))
+;;  (setq-local bug-reference-url-format #'thi::bug-reference-url)
+;;  (insert ";; RD-3 MR!101 solves issue #100 in g123, RD-1234, DT-224, SD-93 redmine #99\n")
+;;  (bug-reference-prog-mode))
+
+(defvar thi::jira-projects '("CTB" "RD" "DT" "HPC" "SD"))
+
+(defun thi::activate-ticket-and-gerrit-links ()
+  (interactive)
+  ;; TODO only do that for IMS stuff
+
+  (setq-local bug-reference-bug-regexp
+              (rx (group (| ?g ;; gerrit change prefix
+                            ?# ;; redmine issue prefix
+                            (: (| "RD" "SD" "DT") ?-)
+                            ;; TODO fix this
+                            ;; (: (| 'thi::jira-projects) ?-)
+
+                            ;; from the example
+                            (: (in ?I ?i) "ssue" (? ?\s) ?#)
+                            (: "MR" (? ?\s) ?!)))
+                  (group (+ digit))))
+  (setq-local bug-reference-url-format #'thi::bug-reference-url)
+  (bug-reference-prog-mode 1) ;; only in comments
+  )
+
+(add-hook 'prog-mode-hook #'thi::activate-ticket-and-gerrit-links)
+(add-hook 'org-mode-hook #'thi::activate-ticket-and-gerrit-links)
+
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 ;; (defvar thi::theme 'doom-wilmersdorf)
@@ -206,6 +284,16 @@
 
 (use-package bufler
   :quelpa (bufler :fetcher github :repo "alphapapa/bufler.el"))
+
+(use-package bug-reference-github
+  ;; Automatically set `bug-reference-url-format' and enable
+  ;; `bug-reference-prog-mode' in Emacs buffers from Github repositories.
+  ;; https://github.com/arnested/bug-reference-github
+  :ensure t
+  :disabled t
+  :config
+  (add-hook 'prog-mode-hook 'bug-reference-github-set-url-format)
+  )
 
 (use-package cmake-mode :ensure t :defer t)
 (use-package color-identifiers-mode :ensure t :defer t)
