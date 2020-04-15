@@ -198,9 +198,9 @@ Intended as a value for `bug-reference-url-format'."
   (setq-local bug-reference-bug-regexp
               (rx (group (| ?g ;; gerrit change prefix
                             ?# ;; redmine issue prefix
-                            (: (| "RD" "SD" "DT") ?-)
-                            ;; TODO fix this
-                            ;; (: (| 'thi::jira-projects) ?-)
+
+                            ;; like (: (| "RD" "SD" "DT") ?-)
+                            (: (eval `(| ,@thi::jira-projects)) ?-)
 
                             ;; from the example
                             (: (in ?I ?i) "ssue" (? ?\s) ?#)
