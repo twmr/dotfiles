@@ -126,7 +126,8 @@
 (mkdir (concat thi::cache-file-dir "/backups") t)
 
 
-(defvar thi::jira-projects '("CTB" "RD" "DT" "HPC" "SD"))
+(defvar thi::jira-rnd-projects '("CTB" "RD" "DT" "HPC" "SD"))
+(defvar thi::jira-service-projects '("RHI"))
 
 (defvar thi::at-work (or (string= (system-name) "PC-16609.ims.co.at")
                          (string= (system-name) "NBPF1PQX4B")))
@@ -162,8 +163,11 @@ Intended as a value for `bug-reference-url-format'."
      ((string= "#" issue-prefix) ;; redmine
       (format "http://bugs.ims.co.at/issues/%s" issue-number))
      ((member issue-prefix
-              (seq-map (lambda (elt) (concat elt "-")) thi::jira-projects)) ;; rnd jira
+              (seq-map (lambda (elt) (concat elt "-")) thi::jira-rnd-projects))
       (format "https://jira.rnd.ims.co.at/browse/%s%s" issue-prefix issue-number))
+     ((member issue-prefix
+              (seq-map (lambda (elt) (concat elt "-")) thi::jira-service-projects))
+      (format "https://service.ims.co.at/browse/%s%s" issue-prefix issue-number))
      (t
       (format "https://gitlab.example.com/group/project/%s/%s"
               (if (string-suffix-p "!" issue-prefix)
@@ -198,7 +202,8 @@ Intended as a value for `bug-reference-url-format'."
 
                             ;; like (: (| "RD" "SD" "DT") ?-)
                             ;; see https://francismurillo.github.io/2017-03-30-Exploring-Emacs-rx-Macro/
-                            (: (eval `(| ,@thi::jira-projects)) ?-)
+                            (: (eval `(| ,@thi::jira-rnd-projects)) ?-)
+                            (: (eval `(| ,@thi::jira-service-projects)) ?-)
 
                             ;; from the example
                             (: (in ?I ?i) "ssue" (? ?\s) ?#)
