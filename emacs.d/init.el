@@ -127,7 +127,7 @@
 
 
 (defvar thi::jira-rnd-projects '("CTB" "RD" "DT" "HPC" "SD"))
-(defvar thi::jira-service-projects '("RHI"))
+(defvar thi::jira-service-projects '("RHI" "SER"))
 
 (defvar thi::at-work (or (string= (system-name) "PC-16609.ims.co.at")
                          (string= (system-name) "NBPF1PQX4B")))
