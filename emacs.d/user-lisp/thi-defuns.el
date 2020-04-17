@@ -428,3 +428,23 @@ buffer is not visiting a file."
         (message "Line %d: %s" line-number (buffer-string)))
       (kill-buffer log-buf))
     (kill-buffer commit-buf)))
+
+
+;; Similar to: http://stackoverflow.com/questions/43765/pin-emacs-buffers-to-windows-for-cscope/65992#65992
+(defun pin-buffer ()
+  "Pin buffer to current window."
+
+  ;; from docstring of `set-window-dedicated-p`:
+  ;; When a window is pinned to its buffer, ‘display-buffer’ will refrain
+  ;; from displaying another buffer in it.  ‘get-lru-window’ and
+  ;; ‘get-largest-window’ treat pinned (or dedicated) windows specially.
+  ;; ‘delete-windows-on’, ‘replace-buffer-in-windows’, ‘quit-window’,
+  ;; ‘quit-restore-window’ and ‘kill-buffer’ can delete a dedicated window
+  ;; and the containing frame.
+
+  (interactive)
+  (message
+   (if (let (window (get-buffer-window (current-buffer)))
+         (set-window-dedicated-p window (not (window-dedicated-p window))))
+       "pinned buffer" "un-pinned buffer")
+   ))

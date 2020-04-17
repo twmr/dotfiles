@@ -47,6 +47,8 @@
 
 (global-set-key (kbd "M-p") 'ace-window)
 
+(global-set-key (kbd "M-P") 'pin-buffer)
+
 ;; (global-set-key (kbd "M-x") 'helm-M-x) ;; i don't like this
 (global-set-key (kbd "M-x") (lambda () (interactive) (counsel-M-x "")))
 ;; This is your old M-x.
