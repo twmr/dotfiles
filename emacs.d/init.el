@@ -225,6 +225,16 @@ Intended as a value for `bug-reference-url-format'."
 (add-hook 'prog-mode-hook #'thi::activate-ticket-and-gerrit-links)
 (add-hook 'org-mode-hook #'thi::activate-ticket-and-gerrit-links-text-modes)
 
+;; show current function information in header-line
+;; see https://emacsredux.com/blog/2014/04/05/which-function-mode/
+(which-function-mode)
+(setq-default header-line-format
+              '((which-function-mode ("" which-func-format " "))))
+(setq mode-line-misc-info
+            ;; We remove Which Function Mode from the mode line, because it's mostly
+            ;; invisible here anyway.
+            (assq-delete-all 'which-function-mode mode-line-misc-info))
+
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 ;; (defvar thi::theme 'doom-wilmersdorf)
