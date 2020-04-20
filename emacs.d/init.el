@@ -1267,6 +1267,12 @@ See URL `https://www.pylint.org/'."
          ("C-c m C-s" . mc/mark-all-in-region)))
 
 (use-package org
+  ;; TODO add more keybindings
+
+  ;; org-narrow-to-subtree (C-x n s) will display only the current heading. It does however include the heading itself, not just the text. Maybe that is OK for you?
+
+  ;; widen (C-x n w) will widen the view again.
+
   :ensure t
   :custom
   (org-directory "~/org")
