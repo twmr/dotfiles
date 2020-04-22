@@ -1267,11 +1267,17 @@ See URL `https://www.pylint.org/'."
          ("C-c m C-s" . mc/mark-all-in-region)))
 
 (use-package org
-  ;; TODO add more keybindings
+  ;; helpful key-bindings:
+  ;; <M-S-return> org insert todo heading
+  ;; TODO BEGIN_SRC
+  ;; <S-left/right> switch to the next TODO,DONE,.. keyword
+  ;; alternative: C-c C-t
+  ;; <C-c C-,> insert +BEGIN_SRC block see https://emacs.stackexchange.com/a/47370/2761
+  ;; narrow/widen:
+  ;;     org-narrow-to-subtree: (C-x n s) will display only the current heading.
+  ;;     It does however include the heading itself, not just the text.
+  ;;     widen: (C-x n w) will widen the view again.
 
-  ;; org-narrow-to-subtree (C-x n s) will display only the current heading. It does however include the heading itself, not just the text. Maybe that is OK for you?
-
-  ;; widen (C-x n w) will widen the view again.
 
   :ensure t
   :custom
