@@ -132,7 +132,9 @@ fi
 alias ka='sudo killall'
 
 
-alias docker=podman
+alias dev=$HOME/miniconda3/envs/devtool/bin/dev >> ~/.profile
+
+#alias docker=podman
 
 #named directories
 DOTFDIR=${GITR}/dotfiles
@@ -147,3 +149,5 @@ hash -d sp37=/usr/lib/python3.7/site-packages
 hash -d sp6437=/usr/lib64/python3.7/site-packages
 hash -d swt=${GITR}/software_tests
 hash -d pswt=${GITR}/software_tests/py
+
+hash -d is=$HOME/sandbox/isar
