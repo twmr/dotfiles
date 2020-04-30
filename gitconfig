@@ -22,6 +22,7 @@
 	grep-all-erenik = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep '\\-erenik'); : "
 	grep-all-fiora = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep '\\-fiora'); : "
 	grep-all-drina = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep drina); : "
+	grep-all-isar = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep isar); : "
 [include]
 	path = ~/.git_identity
 [color]
