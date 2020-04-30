@@ -1037,7 +1037,7 @@ See URL `https://www.pylint.org/'."
 
     ))
 
-(use-package idle-highlight
+(use-package idle-highlight-mode
   :ensure t
   :config
   (add-hook 'prog-mode-hook #'idle-highlight-mode)
