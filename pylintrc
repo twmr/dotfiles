@@ -52,8 +52,7 @@ confidence=
 # multiple time. See also the "--disable" option for examples.
 disable=all
 
-enable=import-error,
-       import-self,
+enable=import-self,
        reimported,
        wildcard-import,
        misplaced-future,
@@ -81,6 +80,7 @@ enable=import-error,
        unused-variable,
        undefined-variable,
        too-few-format-args,
+       unused-argument,
        syntax-error,
 
 # Things we'd like to enable someday:
