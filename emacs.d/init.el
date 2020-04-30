@@ -1037,6 +1037,12 @@ See URL `https://www.pylint.org/'."
 
     ))
 
+(use-package idle-highlight
+  :ensure t
+  :config
+  (add-hook 'prog-mode-hook #'idle-highlight-mode)
+  )
+
 (use-package imenu-anywhere
   :ensure t
   :defer t
