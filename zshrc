@@ -133,3 +133,5 @@ if [ -e $minicondadir ]; then
     unset __conda_setup
 fi
 # <<< conda initialize <<<
+
+echo "zshrc sourced"
