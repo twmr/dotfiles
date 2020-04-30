@@ -143,9 +143,6 @@
 
 ;; referneces to jira/redmine/gerrit tickets/changes
 ;; for github issues see `bug-reference-github`
-;; TODO globally add support for gXXXX to all prog-modes + text-modes
-;; TODO link jira tickets in IMS repos to jira
-;; TODO linke redmine tickets in IMS repos to redmine
 ;; https://github.com/emacs-mirror/emacs/blob/master/lisp/progmodes/bug-reference.el
 ;; see also goto-address-mode
 ;; see also https://emacs.stackexchange.com/questions/35878/multiple-url-formats-for-bug-reference-mode
@@ -194,8 +191,6 @@ Intended as a value for `bug-reference-url-format'."
 
 (defun thi::activate-ticket-and-gerrit-links ()
   (interactive)
-  ;; TODO only do that for IMS stuff
-
   (setq-local bug-reference-bug-regexp
               (rx (group (| ?g ;; gerrit change prefix
                             ?# ;; redmine issue prefix
