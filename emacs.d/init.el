@@ -1429,15 +1429,17 @@ See URL `https://www.pylint.org/'."
   :config
   (project-persist-mode t) ;; C-c P n; C-c P f
 )
-;; (use-package protobuf-mode
-;;   :ensure t
 
-;;   :config
-;;   (add-hook 'protobuf-mode-hook
-;;             (lambda ()
-;;               (progn
-;;                 (setq c-basic-offset 4)
-;;                 (setq tab-width 4)))))
+(use-package protobuf-mode
+  :ensure t
+  :config
+  (define-key protobuf-mode-map (kbd "M-.") #'dumb-jump-go)
+  (define-key protobuf-mode-map (kbd "M-,") #'dumb-jump-back)
+  (add-hook 'protobuf-mode-hook
+            (lambda ()
+              (progn
+                (setq c-basic-offset 4)
+                (setq tab-width 4)))))
 
 (use-package pyimport :ensure t)
 
