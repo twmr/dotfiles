@@ -70,6 +70,7 @@ evaluated."
     ("i". "isar")
     ("j". "jackson")
     ("k". "kalix")
+    ("p". "pltb_simu")
     ))
 
 
