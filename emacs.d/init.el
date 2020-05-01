@@ -1614,6 +1614,20 @@ See URL `https://www.pylint.org/'."
 ;;   (require 'spaceline-config)
 ;;   (spaceline-spacemacs-theme))
 
+(use-package spell-fu
+  ;; https://gitlab.com/ideasman42/emacs-spell-fu
+
+  ;; TODO keybindigs for spell-fu-word-add
+  ;; TODO ignore URLs
+  ;; TODO ignore commented-out code - possible?
+  :ensure t
+  :custom
+  (
+   ;; alternative in https://gitlab.com/ideasman42/emacs-spell-fu/-/issues/4
+   (ispell-personal-dictionary "~/.emacs.d/spell-fu/personal-dict"))
+  :config
+  (global-spell-fu-mode))
+
 (use-package sphinx-doc
   ;; TODO this package contains support for generating docstrings in a sphinx
   ;; parsable format for python functions/methods/classes
