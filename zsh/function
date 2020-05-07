@@ -188,6 +188,10 @@ function reset_to_upstream() {
     git reset --hard "@{upstream}"
 }
 
+function git_clean_all_including_submodules() {
+    git stash
+    git submodule foreach "git reset --hard && git clean -ffdx" && git clean -ffd
+}
 
 function gitgrep_in_sandbox() {
     for X in $(find . -maxdepth 1 -type d); do
