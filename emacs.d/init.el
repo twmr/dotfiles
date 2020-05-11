@@ -421,6 +421,9 @@ Intended as a value for `bug-reference-url-format'."
   ;; NOTE on debian systems you have to install the ripgrep binary from https://github.com/BurntSushi/ripgrep/releases, otherwise rg --pcre2 ...  returns PCRE2 is not available in this build of ripgrep
   ;; deadgrep used rg --pcre2!!
 
+  ;; you can check whether rg has built with pcre2 by calling
+  ;; rg --pcre2-version
+
   ;; https://github.com/BurntSushi/ripgrep/releases/download/11.0.2/ripgrep_11.0.2_amd64.deb
 
   ;; TODO try (grep-apply-setting
