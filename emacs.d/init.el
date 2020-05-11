@@ -32,7 +32,7 @@
   ;; docking station - multiple monitor support
 
   ;; TODO get rid of perspectives once exwm is properly configured
-  ;; TODO start emacs in deamon mode and enable exwm once first frame is created
+  ;; TODO start emacs in daemon mode and enable exwm once first frame is created
   ;; TODO emacs lock screen
 
   ;; FIXME second monitor does not work with this config
@@ -1632,7 +1632,7 @@ See URL `https://www.pylint.org/'."
   ;; TODO this package contains support for generating docstrings in a sphinx
   ;; parsable format for python functions/methods/classes
 
-  ;; TODO does not yet support numpy style docstings  https://github.com/naiquevin/sphinx-doc.el/issues/19
+  ;; TODO does not yet support numpy style docstrings  https://github.com/naiquevin/sphinx-doc.el/issues/19
   ;; TODO is there a yasnippet for this already? (yes there are  https://github.com/AndreaCrotti/yasnippet-snippets/search?q=numpy&unscoped_q=numpy
   ;;            snippets: idn, fdn, mdn,
   ;;       TODO they do not support type annotations
@@ -1643,7 +1643,7 @@ See URL `https://www.pylint.org/'."
   :config
   (progn
 
-    ;; TODO get region of current signatrue automatically
+    ;; TODO get region of current signature automatically
     (defun thi::python-args-to-docstring-numpy (start end)
       ;; this was taken from https://github.com/AndreaCrotti/yasnippet-snippets/blob/43624cad757a6bd9380c8f79406b1e74b80478f7/snippets/python-mode/.yas-setup.el#L24
       ;; which is used for the docstring snippets in yasnippet
