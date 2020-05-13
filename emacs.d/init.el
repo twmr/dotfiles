@@ -847,8 +847,11 @@ See URL `https://www.pylint.org/'."
         (unless (or (eobp) (= (char-after) ?\n))
           (insert ?\n))))
 
+    ;; (defun git-commit-read-jira-ticket ()
+    ;;   (list (read-string "Jira Ticket: ")))
+
     (defun git-commit-read-jira-ticket ()
-      (list (read-string "Jira Ticket: ")))
+      (list (car (s-match thi::bug-reference-bug-regexp (firefox-places)))))
 
     (defun git-commit-fix-jira-insert (ticket)
       (interactive (git-commit-read-jira-ticket))
