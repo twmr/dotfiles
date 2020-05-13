@@ -223,12 +223,41 @@ Intended as a value for `bug-reference-url-format'."
 ;; show current function information in header-line
 ;; see https://emacsredux.com/blog/2014/04/05/which-function-mode/
 ;; (which-function-mode)
-;; (setq-default header-line-format
-;;               '((which-function-mode ("" which-func-format " "))))
+;; (setq which-func-modes '(python-mode))
 ;; (setq mode-line-misc-info
 ;;             ;; We remove Which Function Mode from the mode line, because it's mostly
 ;;             ;; invisible here anyway.
 ;;             (assq-delete-all 'which-function-mode mode-line-misc-info))
+;; (add-hook 'python-mode-hook (lambda ()
+;;                               (make-variable-buffer-local 'header-line-format)
+;;                               (setq-default header-line-format
+;;                                             '((which-function-mode ("" which-func-format " "))))))
+
+;; (defun thi::display-header ()
+;;   "Create the header string and display it."
+;;   ;; The dark blue in the header for which-func is terrible to read.
+;;   ;; However, in the terminal it's quite nice
+;;   (if header-line-format
+;;       nil
+;;     (if window-system
+;;         (custom-set-faces
+;;          '(which-func ((t (:foreground "#8fb28f")))))
+;;       (custom-set-faces
+;;        '(which-func ((t (:foreground "blue"))))))
+;;     ;; Set the header line
+;;     (setq header-line-format
+;;           (list "-"
+;;                 '(which-func-mode ("" which-func-format))
+;;                 '("" ;; invocation-name
+;;                   (:eval (if (buffer-file-name)
+;;                              (concat "[" (sl/make-header) "]")
+;;                            "[%b]")))
+;;                 )
+;;           )
+;;     )
+;;   )
+
+
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
