@@ -448,3 +448,14 @@ buffer is not visiting a file."
          (set-window-dedicated-p window (not (window-dedicated-p window))))
        "pinned buffer" "un-pinned buffer")
    ))
+
+(defun firefox-places ()
+  "Select title from moz_places dataase."
+  (interactive)
+  ;; TODO handle non-zero exit status (see https://stackoverflow.com/questions/23299314/finding-the-exit-code-of-a-shell-command-in-elisp)
+  (let ((output (shell-command-to-string "~/miniconda/envs/py38/bin/python ~/gitrepos/software_tests/py/browserhistory.py")))
+    (setq titles (s-lines output))
+    (let ((title (completing-read
+                  "Select title: " titles nil nil)))
+      title)))
+      ;; (message "Selected title: %s" title))))

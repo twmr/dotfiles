@@ -189,21 +189,21 @@ Intended as a value for `bug-reference-url-format'."
 ;;  (insert ";; RD-3 MR!101 solves issue #100 in g123, RD-1234, DT-224, SD-93 redmine #99\n")
 ;;  (bug-reference-prog-mode))
 
+
+(defvar thi::bug-reference-bug-regexp
+  (rx (group (| ?g ;; gerrit change prefix
+                ?# ;; redmine issue prefix
+
+                ;; see https://francismurillo.github.io/2017-03-30-Exploring-Emacs-rx-Macro/
+                (: (eval `(| ,@thi::jira-rnd-projects)) ?-)
+                (: (eval `(| ,@thi::jira-service-projects)) ?-)
+                ))
+      (group (+ digit))))
+
+
 (defun thi::activate-ticket-and-gerrit-links ()
   (interactive)
-  (setq-local bug-reference-bug-regexp
-              (rx (group (| ?g ;; gerrit change prefix
-                            ?# ;; redmine issue prefix
-
-                            ;; like (: (| "RD" "SD" "DT") ?-)
-                            ;; see https://francismurillo.github.io/2017-03-30-Exploring-Emacs-rx-Macro/
-                            (: (eval `(| ,@thi::jira-rnd-projects)) ?-)
-                            (: (eval `(| ,@thi::jira-service-projects)) ?-)
-
-                            ;; from the example
-                            (: (in ?I ?i) "ssue" (? ?\s) ?#)
-                            (: "MR" (? ?\s) ?!)))
-                  (group (+ digit))))
+  (setq-local bug-reference-bug-regexp thi::bug-reference-bug-regexp)
   (setq-local bug-reference-url-format #'thi::bug-reference-url)
   (bug-reference-prog-mode 1) ;; only in comments
   )
