@@ -450,7 +450,8 @@ buffer is not visiting a file."
    ))
 
 (defun firefox-places ()
-  "Select title from moz_places dataase."
+  "Select title from moz_places database."
+  ;; alternatively use: counsel-ffdata-firefox-history
   (interactive)
   ;; TODO handle non-zero exit status (see https://stackoverflow.com/questions/23299314/finding-the-exit-code-of-a-shell-command-in-elisp)
   (let ((output (shell-command-to-string "~/miniconda/envs/py38/bin/python ~/gitrepos/software_tests/py/browserhistory.py")))
