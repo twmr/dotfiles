@@ -1484,7 +1484,8 @@ See URL `https://www.pylint.org/'."
     (when (flycheck-has-current-errors-p)
       (flycheck-list-errors)))
 
-  (add-hook 'python-mode-hook 'ims-yapf)
+  (when thi::at-work
+    (add-hook 'python-mode-hook 'ims-yapf))
   (define-key python-mode-map (kbd "M-.") #'dumb-jump-go)
   (define-key python-mode-map (kbd "M-,") #'dumb-jump-back)
   (define-key python-mode-map (kbd "C-c C-i") #'pyimport-insert-missing)
