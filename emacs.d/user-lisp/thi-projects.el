@@ -19,6 +19,7 @@
       ;; -0 is needed for the \0 line termination.
       (concat
        "rg --files -0 "
+       "-g '!Libs/devlib' "
        "-g '!node_modules' "
        "-g '!ijscore' "
        "-g '!local_configdb' "))
