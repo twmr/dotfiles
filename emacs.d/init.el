@@ -1633,6 +1633,7 @@ See URL `https://www.pylint.org/'."
 (use-package spell-fu
   ;; https://gitlab.com/ideasman42/emacs-spell-fu
 
+  ;; TODO use avy to select words that should be added to the local dictionary
   ;; TODO keybindigs for spell-fu-word-add
   ;; TODO ignore URLs
   ;; TODO ignore commented-out code - possible?
