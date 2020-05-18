@@ -1689,6 +1689,8 @@ See URL `https://www.pylint.org/'."
 (use-package swiper
   :ensure t
   :bind (("C-s" . swiper)
+         ;; inside swiper it is possible to preview search result in separate buffer
+         ;; -> C-c C-o
          ("C-r" . swiper)
          ("C-*" . swiper-thing-at-point))
 
