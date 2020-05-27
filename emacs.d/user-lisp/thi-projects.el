@@ -19,10 +19,22 @@
       ;; -0 is needed for the \0 line termination.
       (concat
        "rg --files -0 "
-       "-g '!Libs/devlib' "
+       "-g '!netlib-plugins/Libs/devlib' "
+       "-g '!tools/aps_pattern' "
+       "-g '!config/aps_pattern' "
+       "-g '!tools/structure_files' "
+       "-g '!config/structure_files' "
        "-g '!node_modules' "
        "-g '!ijscore' "
        "-g '!local_configdb' "))
+
+(defun thi::get-project-root ()
+  "Parse find root of the current sandbox."
+  (let* ((sandboxcfgname ".sandbox.cfg")
+         (path (locate-dominating-file default-directory
+                                       (lambda (dir)
+                                         (f-exists? (f-join dir sandboxcfgname))))))
+    path))
 
 (defun thi::project-info ()
   ;; output number of files matched by projectile-generic-command
@@ -31,10 +43,11 @@
   ;; output project root
   ;; output ...
   (message "Number of (tracked) files in the project: %s"
-           (shell-command-to-string
-            (concat
-             (s-replace " -0" "" projectile-generic-command)
-             " | wc -l"))))
+           (let ((default-directory (thi::get-project-root)))
+                 (shell-command-to-string
+                  (concat
+                   (s-replace " -0" "" projectile-generic-command)
+                   " | wc -l")))))
 
 (defun thi::hydra-project-find-file--generic (project-name)
   (interactive)
