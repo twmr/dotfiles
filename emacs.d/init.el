@@ -589,7 +589,18 @@ to obtain ripgrep results."
          ;; :map python-mode-map
          ;; ("M-." . dumb-jump-go)
          ;; ("M-," . dumb-jump-back)
+         ;; :map c++-mode-map
+         ;; ("M-." . dumb-jump-go)
+         ;; ("M-," . dumb-jump-back)
          )
+  )
+
+(use-package cc-mode
+  :bind (
+         ("M-." . dumb-jump-go)
+         ("M-," . dumb-jump-back))
+  :config
+  (add-hook 'cc-mode-hook 'dumb-jump-mode)
   )
 
 (use-package edit-indirect
