@@ -1466,6 +1466,7 @@ See URL `https://www.pylint.org/'."
   (add-hook 'protobuf-mode-hook
             (lambda ()
               (progn
+                (dumb-jump-mode)
                 (setq c-basic-offset 4)
                 (setq tab-width 4)))))
 
