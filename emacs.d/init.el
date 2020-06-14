@@ -1668,7 +1668,18 @@ See URL `https://www.pylint.org/'."
    ;; alternative in https://gitlab.com/ideasman42/emacs-spell-fu/-/issues/4
    (ispell-personal-dictionary "~/.emacs.d/spell-fu/personal-dict"))
   :config
-  (global-spell-fu-mode))
+  (global-spell-fu-mode)
+
+  ;; to add support for disabling the minor mode spell-fu in major modes do
+  ;; (see https://stackoverflow.com/questions/6837511/automatically-disable-a-global-minor-mode-for-a-specific-major-mode)
+  (define-global-minor-mode thi::spell-fu-mode spell-fu-mode
+    (lambda ()
+      (when (not (memq major-mode
+                       (list 'gerrit-dashboard-mode)))
+        (spell-fu-mode))))
+
+  (thi::spell-fu-mode 1)
+  )
 
 (use-package sphinx-doc
   ;; TODO this package contains support for generating docstrings in a sphinx
