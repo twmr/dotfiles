@@ -495,7 +495,7 @@ Intended as a value for `bug-reference-url-format'."
     (let ((deadgrep--project-root
            (lambda ()
              (let ((root default-directory)
-                   (project (project-current)))
+                   (project (cdr (project-current))))
                (when project
                  (setq root project))
                (when root
