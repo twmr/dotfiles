@@ -23,6 +23,8 @@
 	grep-all-fiora = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep '\\-fiora'); : "
 	grep-all-drina = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep drina); : "
 	grep-all-isar = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep isar); : "
+	grep-all-gaia = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep gaia); : "
+	grep-all-kalix = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep kalix); : "
 [include]
 	path = ~/.git_identity
 [color]
