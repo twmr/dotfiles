@@ -717,6 +717,7 @@ to obtain ripgrep results."
                        (help-mode . emacs)
                        (term-mode . emacs)
                        (helpful-mode . emacs)
+                       (eshell-mode . emacs)
                        )
                      do (evil-set-initial-state mode state))))
 
