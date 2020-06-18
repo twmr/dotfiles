@@ -476,6 +476,14 @@ Intended as a value for `bug-reference-url-format'."
       (when root
         (deadgrep--lookup-override root))))
 
+  (defun thi::deadgrep--project-root-current-repo ()
+    (let ((root default-directory)
+          (project (cdr (project-current))))
+      (when project
+        (setq root project))
+      (when root
+        (deadgrep--lookup-override root))))
+
   (defvar thi::deadgrep-without-tests-glob nil)
 
   ;; TODO keybinding
@@ -492,14 +500,7 @@ Intended as a value for `bug-reference-url-format'."
 
   (defun deadgrep-in-current-repo (search-term)
     (interactive (list (deadgrep--read-search-term)))
-    (let ((deadgrep--project-root
-           (lambda ()
-             (let ((root default-directory)
-                   (project (cdr (project-current))))
-               (when project
-                 (setq root project))
-               (when root
-                 (deadgrep--lookup-override root))))))
+    (let ((deadgrep-project-root-function #'thi::deadgrep--project-root-current-repo))
       (deadgrep search-term)))
 
   (defhydra hydra-deadgrep (:color blue)
