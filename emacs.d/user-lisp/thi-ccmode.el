@@ -51,8 +51,7 @@
   (interactive)
   (message (buffer-file-name))
   (when (and buffer-file-name
-             (or (string-match "sandbox" buffer-file-name)
-                 (string-match "erenik" buffer-file-name)))
+             (string-match "sandbox" buffer-file-name))
     (progn
       (c-set-style "stroustrup")
       (setq c-basic-offset 2)
