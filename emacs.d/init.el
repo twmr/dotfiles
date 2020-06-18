@@ -837,8 +837,13 @@ See URL `https://www.pylint.org/'."
                ("Waiting for +1" . "is:open assignee:sd-odd label:Code-Review=0")
                ("Waiting for +2" . "is:open assignee:sd-odd label:Code-Review=1")
                ("Waiting for SD-even" . "is:open assignee:sd-even (owner:matthias.madzak@ims.co.at OR owner:thomas.hisch@ims.co.at OR owner:emanuela.avasalcai@ims.co.at OR owner:peter.dzubaj@ims.co.at OR owner:dmytro.bondal@ims.co.at OR owner:sergey.borovikov@ims.co.at OR owner:mihail.georgescu@ims.co.at OR owner:bojan.vujnovic@ims.co.at)")
-               ))
-             (gerrit-dashboard-buffer-name "*gerrit-odd-standup*"))
+               )
+             )
+            (gerrit-dashboard-buffer-name "*gerrit-odd-standup*")
+            ;; this is a workaround for the text-scale increase bug/feature
+            ;; see debbugs 41852
+            (tabulated-list-use-header-line nil)
+            )
             (gerrit-dashboard)))
     ))
 
