@@ -454,7 +454,7 @@ buffer is not visiting a file."
   ;; alternatively use: counsel-ffdata-firefox-history
   (interactive)
   ;; TODO handle non-zero exit status (see https://stackoverflow.com/questions/23299314/finding-the-exit-code-of-a-shell-command-in-elisp)
-  (let ((output (shell-command-to-string "~/miniconda/envs/py38/bin/python ~/gitrepos/software_tests/py/browserhistory.py")))
+  (let ((output (shell-command-to-string "~/miniconda3/bin/python ~/bin/browserhistory.py")))
     (setq titles (s-lines output))
     (let ((title (completing-read
                   "Select title: " titles nil nil)))
