@@ -817,14 +817,15 @@ See URL `https://www.pylint.org/'."
   :custom
   (gerrit-host
      (if thi::at-work
-        "gerrit.rnd.ims.co.at"
-        "review.opendev.org"))
+         "gerrit.rnd.ims.co.at"
+       ;; (gerrit-host "gerrit.googlesource.com")
+       "review.gerrithub.io"
+       ;; "review.opendev.org"
+       ))
   (gerrit-rest-endpoint-prefix
    (if thi::at-work
        "/a"
-     ""))
-  ;; (gerrit-host "gerrit.googlesource.com")
-  ;; (gerrit-host "review.gerrithub.io")
+     "/a"))
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
   :config
   (progn
@@ -842,6 +843,25 @@ See URL `https://www.pylint.org/'."
                )
              )
             (gerrit-dashboard-buffer-name "*gerrit-odd-standup*")
+            ;; this is a workaround for the text-scale increase bug/feature
+            ;; see debbugs 41852
+            (tabulated-list-use-header-line nil)
+            )
+        (gerrit-dashboard)))
+
+    ;; debug commands
+    (defun thi::gerrit-mywip ()
+      (interactive)
+      (gerrit-dashboard--get-data "is:open is:WIP"))
+
+    (defun thi::gerrit-dashboard-gerritforge ()
+      (interactive)
+      (let ((gerrit-dashboard-query-alist
+             '(
+               ("Demo" . "is:open is:wip")
+               )
+             )
+            (gerrit-dashboard-buffer-name "*gerrit-gerritforge*")
             ;; this is a workaround for the text-scale increase bug/feature
             ;; see debbugs 41852
             (tabulated-list-use-header-line nil)
