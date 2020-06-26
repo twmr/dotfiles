@@ -1475,7 +1475,8 @@ See URL `https://www.pylint.org/'."
   :custom (projectile-completion-system 'ivy)
   :bind (("C-x f" . projectile-find-file))
   :config (progn
-            (projectile-global-mode t)
+            ;; deprecated in favor of projectile-mode
+            ;; (projectile-global-mode t)
 
             ;; ;; needed for the ignore files feature in .projectile (see https://emacs.stackexchange.com/a/16964/2761)
             ;; (setq projectile-indexing-method 'native)
