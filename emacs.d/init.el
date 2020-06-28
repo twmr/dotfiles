@@ -866,13 +866,17 @@ See URL `https://www.pylint.org/'."
     ;; debug commands
     (defun thi::gerrit-mywip ()
       (interactive)
-      (gerrit-dashboard--get-data "is:open is:WIP"))
+      (profiler-start 'cpu)
+      (gerrit-dashboard--get-data "is:open is:WIP limit:3")
+      (profiler-stop)
+      ;; run profiler-report manually
+      )
 
     (defun thi::gerrit-dashboard-gerritforge ()
       (interactive)
       (let ((gerrit-dashboard-query-alist
              '(
-               ("Demo" . "is:open is:wip")
+               ("Demo" . "is:open is:wip limit:15")
                )
              )
             (gerrit-dashboard-buffer-name "*gerrit-gerritforge*")
