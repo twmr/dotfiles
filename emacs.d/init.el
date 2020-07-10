@@ -604,6 +604,14 @@ to obtain ripgrep results."
   (add-hook 'cc-mode-hook 'dumb-jump-mode)
   )
 
+(use-package ediff
+  :ensure t
+  :custom
+  ;;https://oremacs.com/2015/01/17/setting-up-ediff/
+  (ediff-window-setup-function 'ediff-setup-windows-plain)
+  (ediff-split-window-function 'split-window-horizontally)
+  (ediff-diff-options "-w"))
+
 (use-package edit-indirect
   ;; Edit regions in separate buffers, like `org-edit-src-code' but for arbitrary
   ;; regions
