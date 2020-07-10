@@ -46,3 +46,5 @@ matplotlib/tex.cache
 /emacs.d/transient/history.el
 /zsh/zsh-dircolors-solarized
 /emacs.d/quelpa/
+/emacs.d/spell-fu/words_default.txt
+/emacs.d/spell-fu/words_default.el.data
