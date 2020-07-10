@@ -486,7 +486,6 @@ Intended as a value for `bug-reference-url-format'."
 
   (defvar thi::deadgrep-without-tests-glob nil)
 
-  ;; TODO keybinding
   (defun deadgrep-python (search-term)
     (interactive (list (deadgrep--read-search-term)))
     (let ((deadgrep--file-type '(type . "py")))
@@ -498,6 +497,11 @@ Intended as a value for `bug-reference-url-format'."
           (thi::deadgrep-without-tests-glob t))
       (deadgrep search-term)))
 
+  (defun deadgrep-python-without-tests-in-current-repo (search-term)
+    (interactive (list (deadgrep--read-search-term)))
+    (let ((deadgrep-project-root-function #'thi::deadgrep--project-root-current-repo))
+      (deadgrep-python-without-tests search-term)))
+
   (defun deadgrep-in-current-repo (search-term)
     (interactive (list (deadgrep--read-search-term)))
     (let ((deadgrep-project-root-function #'thi::deadgrep--project-root-current-repo))
@@ -507,6 +511,7 @@ Intended as a value for `bug-reference-url-format'."
     "thi/deadgrep"
       ("p" deadgrep-python "py")
       ("t" deadgrep-python-without-tests "py witout tests")
+      ("T" deadgrep-python-without-tests-in-current-repo "py witout tests")
       ("r" deadgrep-in-current-repo "in current repo"))
 
   ;; exclude tests from search results
