@@ -191,6 +191,7 @@ Intended as a value for `bug-reference-url-format'."
 
 
 (defvar thi::bug-reference-bug-regexp
+  ;; Type C-c RET to goto reference
   (rx (group (| ?g ;; gerrit change prefix
                 ?# ;; redmine issue prefix
 
