@@ -587,25 +587,25 @@ to obtain ripgrep results."
   :custom
   (dumb-jump-force-searcher 'rg)
   (dumb-jump-selector 'ivy)
-  :bind (("M-g o" . dumb-jump-go-other-window)
-         ("M-g j" . dumb-jump-go)
-         ("M-g i" . dumb-jump-go-prompt)
-         ("M-g x" . dumb-jump-go-prefer-external)
-         ("M-g z" . dumb-jump-go-prefer-external-other-window)
-         ("M-g p" . dumb-jump-back)
-         ;; :map python-mode-map
-         ;; ("M-." . dumb-jump-go)
-         ;; ("M-," . dumb-jump-back)
-         ;; :map c++-mode-map
-         ;; ("M-." . dumb-jump-go)
-         ;; ("M-," . dumb-jump-back)
-         )
-  )
+  :config
+  (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
+)
+  ;; :bind (("M-g o" . dumb-jump-go-other-window)
+  ;;        ("M-g j" . dumb-jump-go)
+  ;;        ("M-g i" . dumb-jump-go-prompt)
+  ;;        ("M-g x" . dumb-jump-go-prefer-external)
+  ;;        ("M-g z" . dumb-jump-go-prefer-external-other-window)
+  ;;        ("M-g p" . dumb-jump-back)
+  ;;        ;; :map python-mode-map
+  ;;        ;; ("M-." . dumb-jump-go)
+  ;;        ;; ("M-," . dumb-jump-back)
+  ;;        ;; :map c++-mode-map
+  ;;        ;; ("M-." . dumb-jump-go)
+  ;;        ;; ("M-," . dumb-jump-back)
+  ;;        )
+  ;; )
 
 (use-package cc-mode
-  :bind (
-         ("M-." . dumb-jump-go)
-         ("M-," . dumb-jump-back))
   :config
   (add-hook 'cc-mode-hook 'dumb-jump-mode)
   )
@@ -1514,8 +1514,8 @@ See URL `https://www.pylint.org/'."
 (use-package protobuf-mode
   :ensure t
   :config
-  (define-key protobuf-mode-map (kbd "M-.") #'dumb-jump-go)
-  (define-key protobuf-mode-map (kbd "M-,") #'dumb-jump-back)
+  ;; (define-key protobuf-mode-map (kbd "M-.") #'dumb-jump-go)
+  ;; (define-key protobuf-mode-map (kbd "M-,") #'dumb-jump-back)
   (add-hook 'protobuf-mode-hook
             (lambda ()
               (progn
@@ -1535,7 +1535,7 @@ See URL `https://www.pylint.org/'."
   :interpreter ("python" . python-mode)
   :config
   ;; TODO support jumping in multi git-repo project
-  (add-hook 'python-mode-hook 'dumb-jump-mode)
+  ;; (add-hook 'python-mode-hook 'dumb-jump-mode)
 
   (defun ims-yapf()
     (interactive)
@@ -1552,8 +1552,8 @@ See URL `https://www.pylint.org/'."
 
   (when thi::at-work
     (add-hook 'python-mode-hook 'ims-yapf))
-  (define-key python-mode-map (kbd "M-.") #'dumb-jump-go)
-  (define-key python-mode-map (kbd "M-,") #'dumb-jump-back)
+  ;; (define-key python-mode-map (kbd "M-.") #'dumb-jump-go)
+  ;; (define-key python-mode-map (kbd "M-,") #'dumb-jump-back)
   (define-key python-mode-map (kbd "C-c C-i") #'pyimport-insert-missing)
   (define-key python-mode-map (kbd "C-c e") #'edit-indirect-rst)
 
