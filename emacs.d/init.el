@@ -1338,9 +1338,8 @@ See URL `https://www.pylint.org/'."
     )
   (defun magit-switch-to-upstream-branch ()
     (interactive)
-    (let ((upstream-branch (magit-git-command "git rev-parse --abbrev-ref --symbolic-full-name @{u}")))
-      ;; TODO switch-branch
-      (message upstream-branch))))
+    ;; the git ref-parse command always outputs the remote name (in my case origin). let's remove it
+    (magit-git-command "git switch `git rev-parse --abbrev-ref --symbolic-full-name @{u} | sed 's|^origin/||'`")))
 
 (use-package magit-libgit
   :ensure t)
