@@ -1328,10 +1328,19 @@ See URL `https://www.pylint.org/'."
   (("C-x g" . magit-status))
   :config
   (defun magit-gpr ()
-    "Run git pull --rebase in current repo."
     (interactive)
     (magit-git-command "git pull --rebase --autostash")
-    ))
+    )
+  (defun magit-reset-to-upstream ()
+    (interactive)
+    ;; TODO confirmation
+    (magit-git-command "git reset --hard @{upstream}")
+    )
+  (defun magit-switch-to-upstream-branch ()
+    (interactive)
+    (let ((upstream-branch (magit-git-command "git rev-parse --abbrev-ref --symbolic-full-name @{u}")))
+      ;; TODO switch-branch
+      (message upstream-branch))))
 
 (use-package magit-libgit
   :ensure t)
