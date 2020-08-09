@@ -259,6 +259,11 @@ Intended as a value for `bug-reference-url-format'."
 ;;   )
 
 
+;; I don't want to use TAGS files - remove it from the list of backend
+;; functions
+(require 'xref)
+(setq xref-backend-functions (remq 'etags--xref-backend xref-backend-functions))
+
 
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
