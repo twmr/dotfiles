@@ -1729,7 +1729,7 @@ See URL `https://www.pylint.org/'."
   (define-global-minor-mode thi::spell-fu-mode spell-fu-mode
     (lambda ()
       (when (not (memq major-mode
-                       (list 'gerrit-dashboard-mode)))
+                       (list 'vterm-mode 'gerrit-dashboard-mode)))
         (spell-fu-mode))))
 
   (thi::spell-fu-mode 1)
