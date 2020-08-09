@@ -1001,12 +1001,17 @@ See URL `https://www.pylint.org/'."
 (use-package hydra :ensure t
   :init
   (progn
+    (defun thi::text-scale-reset ()
+      (interative)
+      (text-scale-set 0))
+
     (defhydra hydra-zoom-winner (global-map "<f5>")
       ;; Now, <f5> g 4g 2l will zoom in 5 times, and zoom out 2 times for a
       ;; total of +3 zoom.
       "zoom/winner"
       ("g" text-scale-increase "zoom in")
       ("l" text-scale-decrease "zoom out")
+      ("R" thi::text-scale-reset "zoom reset")
       ("r" winner-undo "win-undo")
       ("t" winner-redo "win-redo"))
 
