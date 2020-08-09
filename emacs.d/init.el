@@ -1722,8 +1722,6 @@ See URL `https://www.pylint.org/'."
    ;; alternative in https://gitlab.com/ideasman42/emacs-spell-fu/-/issues/4
    (ispell-personal-dictionary "~/.emacs.d/spell-fu/personal-dict"))
   :config
-  (global-spell-fu-mode)
-
   ;; to add support for disabling the minor mode spell-fu in major modes do
   ;; (see https://stackoverflow.com/questions/6837511/automatically-disable-a-global-minor-mode-for-a-specific-major-mode)
   (define-global-minor-mode thi::spell-fu-mode spell-fu-mode
