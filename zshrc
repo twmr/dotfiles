@@ -134,4 +134,10 @@ if [ -e $minicondadir ]; then
 fi
 # <<< conda initialize <<<
 
+# enable directory tracking
+function vterm_prompt_end() {
+    vterm_printf "51;A$(whoami)@$(hostname):$(pwd)";
+}
+PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
+
 echo "zshrc sourced"
