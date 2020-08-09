@@ -2002,8 +2002,8 @@ See URL `https://www.pylint.org/'."
 ;;    (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
 
 ;; FIXME segfaults
-;;(add-to-list 'load-path "/home/thomas/gitrepos/emacs-libvterm")
-;;(require 'vterm)
+(add-to-list 'load-path "/home/thomas/gitrepos/emacs-libvterm")
+(require 'vterm)
 
 
 ;;; init.el ends here
