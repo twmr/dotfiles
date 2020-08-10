@@ -17,8 +17,9 @@
 (savehist-mode 1)
 
 (delete-selection-mode 1)               ; Transient mark can delete/replace
-(global-hl-line-mode 1)                 ; Highlight the current line
-(make-variable-buffer-local 'global-hl-line-mode) ; this makes it possible to disable hl-line mode for certain modes (see http://stackoverflow.com/questions/9990370/how-to-disable-hl-line-feature-in-specified-mode)
+;; (global-hl-line-mode 1)                 ; Highlight the current line
+;; (make-variable-buffer-local 'global-hl-line-mode) ; this makes it possible to disable hl-li
+;; ne mode for certain modes (see http://stackoverflow.com/questions/9990370/how-to-disable-hl-line-feature-in-specified-mode)
 
 ;; (windmove-default-keybindings)        ; Move between frames with Shift+arrow
 (show-paren-mode t)
