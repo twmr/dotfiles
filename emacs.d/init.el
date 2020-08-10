@@ -881,7 +881,8 @@ See URL `https://www.pylint.org/'."
       (interactive)
       (let ((gerrit-dashboard-query-alist
              '(
-               ("Demo" . "is:open is:wip limit:15")
+               ("Open" . "is:open -is:wip limit:15")
+               ("Unassigned / Unreviewed" . "-assignee label:Code-Review=0 limit:15")
                )
              )
             (gerrit-dashboard-buffer-name "*gerrit-gerritforge*")
@@ -889,7 +890,9 @@ See URL `https://www.pylint.org/'."
             ;; see debbugs 41852
             (tabulated-list-use-header-line nil)
             )
-            (gerrit-dashboard)))
+        (with-current-buffer (get-buffer-create gerrit-dashboard-buffer-name)
+          (text-scale-set -3))
+        (gerrit-dashboard)))
     ))
 
 (use-package git-commit
