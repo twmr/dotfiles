@@ -1843,6 +1843,15 @@ See URL `https://www.pylint.org/'."
 
 (use-package visual-fill-column :ensure t)
 
+(use-package vterm
+  :ensure t)
+
+(use-package vterm-toggle
+  :ensure t
+  :config
+  (global-set-key [f2] #'vterm-toggle)
+  (global-set-key [C-f2] #'vterm-toggle-cd))
+
 (use-package wgrep-ag :ensure t)
 
 (use-package which-key :ensure t
@@ -2010,11 +2019,6 @@ See URL `https://www.pylint.org/'."
 ;; TODO move this into the use-package macros above
 ;; (with-eval-after-load 'flycheck
 ;;    (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup))
-
-;; FIXME segfaults
-(add-to-list 'load-path "/home/thomas/gitrepos/emacs-libvterm")
-(require 'vterm)
-
 
 ;;; init.el ends here
 (put 'downcase-region 'disabled nil)
