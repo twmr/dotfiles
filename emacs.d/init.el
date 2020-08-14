@@ -1880,6 +1880,9 @@ See URL `https://www.pylint.org/'."
   )
 
 (use-package yasnippet
+  ;; what do I expect from this config?
+  ;; pdb [TAB] in python buffers expands
+  ;; ifm [TAB] in python buffers expands
   :ensure t
   :diminish yas-minor-mode
   :config
