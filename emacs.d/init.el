@@ -1657,6 +1657,25 @@ See URL `https://www.pylint.org/'."
 
 (use-package rust-mode :ensure t)
 
+;; Package by Ian Eure (ieure on GitHub)
+;; (use-package scratch
+;;   :ensure
+;;   :config
+;;   (defun prot/scratch-buffer-setup ()
+;;     ;; taken from https://protesilaos.com/codelog/2020-08-03-emacs-custom-functions-galore/
+;;     "Add contents to `scratch' buffer and name it accordingly."
+;;     (let* ((mode (format "%s" major-mode))
+;;            (string (concat "Scratch buffer for: " mode "\n\n")))
+;;       (when scratch-buffer
+;;         (save-excursion
+;;           (insert string)
+;;           (goto-char (point-min))
+;;           (comment-region (point-at-bol) (point-at-eol)))
+;;         (forward-line 2))
+;;       (rename-buffer (concat "*Scratch for " mode "*") t)))
+;;   :hook (scratch-create-buffer-hook . prot/scratch-buffer-setup)
+;;   :bind ("C-c s" . scratch))
+
 (use-package smart-mode-line :ensure t
   :custom
   (sml/no-confirm-load-theme t)
