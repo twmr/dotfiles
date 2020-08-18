@@ -1512,19 +1512,6 @@ See URL `https://www.pylint.org/'."
 
 (use-package prog-mode
   :config
-  (setqq thi::programming-language-major-modes
-    '(prog-mode     ; This is the mode perl, makefile, lisp-mode, scheme-mode,
-                                        ; emacs-lisp-mode, sh-mode, java-mode, c-mode, c++-mode,
-                                        ; python-mode inherits from.
-      lua-mode
-      cmake-mode
-      tex-mode      ; LaTeX inherits
-      sgml-mode     ; HTML inherits
-      css-mode
-      nxml-mode
-      diff-mode
-      haskell-mode
-      rst-mode))
 
   (defun thi::customize-programming-language-mode ()
     (font-lock-add-keywords
@@ -1542,7 +1529,19 @@ See URL `https://www.pylint.org/'."
     ;; (flyspell-prog-mode)
     )
 
-  (dolist (mode thi::programming-language-major-modes)
+  (dolist (mode
+           '(prog-mode     ; This is the mode perl, makefile, lisp-mode, scheme-mode,
+                           ; emacs-lisp-mode, sh-mode, java-mode, c-mode, c++-mode,
+                           ; python-mode inherits from.
+             lua-mode
+             cmake-mode
+             tex-mode      ; LaTeX inherits
+             sgml-mode     ; HTML inherits
+             css-mode
+             nxml-mode
+             diff-mode
+             haskell-mode
+             rst-mode))
     (add-hook
      (intern (concat (symbol-name mode) "-hook"))
      #'thi::customize-programming-language-mode))
