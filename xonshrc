@@ -29,6 +29,7 @@ aliases['src'] = aliases['reload_xonshrc'] = ("source", "~/.xonshrc")
 aliases['dnu'] = "sudo aptitude update && sudo aptitude upgrade"
 # TODO does not work
 aliases['gk'] = "gitk --all $* &"
+aliases['ll'] = "ls -ahl --color | more"
 
 # intall fzf-widgets from github
 # git clone https://github.com/laloch/xontrib-fzf-widgets
