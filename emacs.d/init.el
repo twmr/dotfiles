@@ -329,6 +329,14 @@ Intended as a value for `bug-reference-url-format'."
 ;;     :bind (("C-'" . better-shell-shell)
 ;;            ("C-;" . better-shell-remote-open)))
 
+(use-package bicycle
+  ;; for emacs-lisp buffers
+  :ensure t
+  :after outline
+  :bind (:map outline-minor-mode-map
+              ([C-tab] . bicycle-cycle)
+              ([S-tab] . bicycle-cycle-global)))
+
 ;; (use-package bpr :ensure t
 ;;   :config
 ;;   (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
