@@ -302,8 +302,8 @@ globalkeys = awful.util.table.join(
         end,
         {description = "go back", group = "client"}),
 
-    awful.key({ modkey }, "]", function () awful.screen.focus(1) end),
-    awful.key({ modkey }, "[", function () awful.screen.focus(2) end),
+    awful.key({ modkey }, "]", function () awful.screen.focus_bydirection("right") end),
+    awful.key({ modkey }, "[", function () awful.screen.focus_bydirection("left") end),
 
     -- Standard program
     awful.key({ modkey,           }, "Return", function () awful.spawn(terminal) end,
@@ -350,7 +350,7 @@ globalkeys = awful.util.table.join(
     awful.key({ "Control", altkey }, "l",     function () exec(lockcmd) end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () exec("dmenu_run") end),
+    awful.key({ modkey },            "r",     function () exec("rofi -show run") end),
     awful.key({ modkey, "Shift" },            "r",     function () exec("krunner") end),
 --    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
 --              {description = "run prompt", group = "launcher"}),
