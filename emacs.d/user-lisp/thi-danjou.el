@@ -26,7 +26,7 @@
 ;; (add-hook 'minibuffer-setup-hook '(lambda () (set (make-local-variable 'show-paren-mode) nil)))
 ;; (add-hook 'minibuffer-exit-hook #'show-paren-mode t)
 (url-handler-mode 1)                    ; Allow to open URL
-(mouse-avoidance-mode 'animate)         ; Move the mouse away
+;; (mouse-avoidance-mode 'animate)         ; Move the mouse away
 (ffap-bindings)                         ; Use ffap
 ;; (iswitchb-mode 1)
 ;; (browse-kill-ring-default-keybindings)
