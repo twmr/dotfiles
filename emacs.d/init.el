@@ -1013,13 +1013,23 @@ See URL `https://www.pylint.org/'."
   :init
   (progn
     (defun thi::text-scale-reset ()
-      (interative)
+      (interactive)
       (text-scale-set 0))
+
+    (defun thi::frame-font-increase ()
+      (interactive)
+      (set-frame-font (format "JetBrains Mono:size=%d"  20)))
+
+    (defun thi::frame-font-reset ()
+      (interactive)
+      (set-frame-font (format "JetBrains Mono:size=%d"  12)))
 
     (defhydra hydra-zoom-winner (global-map "<f5>")
       ;; Now, <f5> g 4g 2l will zoom in 5 times, and zoom out 2 times for a
       ;; total of +3 zoom.
       "zoom/winner"
+      ("G" thi::frame-font-increase "zoom frame font")
+      ("L" thi::frame-font-reset "reset frame font")
       ("g" text-scale-increase "zoom in")
       ("l" text-scale-decrease "zoom out")
       ("R" thi::text-scale-reset "zoom reset")
