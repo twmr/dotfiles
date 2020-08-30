@@ -778,6 +778,7 @@ to obtain ripgrep results."
   :ensure t
   :custom
   (flycheck-emacs-lisp-initialize-packages t) ;; fixes an unkown pkg error with (require 'hydra) in gerrit.el
+  (flycheck-python-mypy-executable (expand-file-name "~/miniconda3/bin/mypy"))
   :init (progn
           (setq flycheck-highlighting-mode 'lines)
           (setq flycheck-display-errors-delay 0.4)
@@ -797,7 +798,7 @@ See URL `https://www.pylint.org/'."
     ;; --reports=n disables the scoring report.
     ;; Not calling pylint directly makes it easier to switch between different
     ;; Python versions; see https://github.com/flycheck/flycheck/issues/1055.
-    :command ("~/miniconda/envs/py38_pylint_master/bin/python"
+    :command ((expand-file-name "~/miniconda3/bin/python")
               (eval (flycheck-python-module-args 'python-pylint "pylint"))
               "--reports=n"
               "--output-format=json"
