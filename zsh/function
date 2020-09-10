@@ -178,7 +178,7 @@ function gsed() {
         fi
 
         if [ -f $x ]; then
-            sed -i $1 $x;
+            sed -r -i $1 $x;
         fi
 
     done
