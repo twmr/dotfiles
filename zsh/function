@@ -184,6 +184,15 @@ function gsed() {
     done
 }
 
+
+function convert_imspb2() {
+    gsed 's/from ims.pb2 import (\S*)/import \1\_pb2/g'
+    gsed 's/import ims.pb2.(\S*)/import \1\_pb2/g'
+    gsed 's/from ims.pb2.(\S*) import/from \1\_pb2 import/g'
+}
+
+
+
 function reset_to_upstream() {
     git reset --hard "@{upstream}"
 }
