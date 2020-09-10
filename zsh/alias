@@ -132,8 +132,6 @@ fi
 alias ka='sudo killall'
 
 
-alias dev=$HOME/miniconda3/envs/devtool/bin/dev >> ~/.profile
-
 #alias docker=podman
 
 #named directories
