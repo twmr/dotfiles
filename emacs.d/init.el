@@ -1953,7 +1953,7 @@ See URL `https://www.pylint.org/'."
 
 (use-package yapfify :ensure t :defer t
   :custom
-  (yapfify-exectuable "~/miniconda3/bin/yapf")
+  (yapfify-executable (expand-file-name "~/miniconda3/bin/yapf"))
   )
 
 (use-package yasnippet
