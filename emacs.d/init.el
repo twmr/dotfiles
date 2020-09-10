@@ -131,14 +131,14 @@
 
 (defvar thi::at-work (or (string= (system-name) "PC-16609.ims.co.at")
                          (string= (system-name) "NBPF1PQX4B")))
-
+;; (setq thi::at-work nil)
 (if thi::at-work
   ;; for isort/yapf/pylint
   ;; TODO do we want to set exec-path globally, or just for certain parts?
   ;; buffer-local
   ;; IMO better is to have sth like https://github.com/flycheck/flycheck/pull/272
-    (add-to-list 'exec-path "~/miniconda3/bin")
-  (add-to-list 'exec-path "~/miniconda/envs/py37/bin"))
+    (add-to-list 'exec-path (expand-file-name "~/miniconda3/bin"))
+  (add-to-list 'exec-path (expand-file-name "~/miniconda/envs/py37/bin")))
 
 
 ;; referneces to jira/redmine/gerrit tickets/changes
