@@ -268,9 +268,9 @@ Intended as a value for `bug-reference-url-format'."
 ;; see http://stackoverflow.com/questions/18904529/after-emacs-deamon-i-can-not-see-new-theme-in-emacsclient-frame-it-works-fr
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 ;; (defvar thi::theme 'doom-wilmersdorf)
-;; (defvar thi::theme 'solarized-light)
+(defvar thi::theme 'solarized-light)
 ;; (defvar thi::theme 'tango-dark)
-(defvar thi::theme 'sanityinc-tomorrow-night)
+;; (defvar thi::theme 'sanityinc-tomorrow-night)
 
 ;; (defvar thi::theme
 ;;   (if (string= system-name "dirac")
