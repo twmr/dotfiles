@@ -116,6 +116,9 @@ source "$fzfdir/shell/key-bindings.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# direnv setup
+eval "$(direnv hook zsh)"
+
 # >>> conda initialize >>>
 minicondadir=$HOME/miniconda3
 if [ -e $minicondadir ]; then
