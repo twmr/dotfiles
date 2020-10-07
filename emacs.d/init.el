@@ -1625,6 +1625,8 @@ See URL `https://www.pylint.org/'."
     (interactive)
     (when (string-match "sandbox" buffer-file-name)
       (add-hook 'before-save-hook #'py-isort-before-save nil t)
+      ;; instead of doing (add-hook 'python-mode-hook 'yapf-mode), as
+      ;; suggested in the README of yapfify we do
       (yapf-mode)))
 
   (defun thi::save-buffer-maybe-show-errors ()
