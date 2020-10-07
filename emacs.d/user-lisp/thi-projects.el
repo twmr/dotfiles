@@ -166,7 +166,7 @@ evaluated."
   (when-let ((path (thi::get-project-root)))
       ;; TODO error out if path is nil
       (with-temp-buffer
-        (insert-file-contents (f-join path sandboxcfgname))
+        (insert-file-contents (f-join path ".sandbox.cfg"))
         (keep-lines "containername" (point-min) (point-max))
         (when (string-match "containername = \\(.*\\)" (buffer-string))
           (match-string 1 (buffer-string))))))
