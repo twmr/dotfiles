@@ -126,8 +126,8 @@
 (mkdir (concat thi::cache-file-dir "/backups") t)
 
 
-(defvar thi::jira-rnd-projects '("CTB" "RD" "DT" "HPC" "SD"))
-(defvar thi::jira-service-projects '("RHI" "SER"))
+(defvar thi::jira-rnd-projects '("CTB" "RD" "DT" "HPC" "SD" "RS"))
+(defvar thi::jira-service-projects '("RHI" "SER" "FRCIP"))
 
 (defvar thi::at-work (or (string= (system-name) "PC-16609.ims.co.at")
                          (string= (system-name) "NBPF1PQX4B")))
