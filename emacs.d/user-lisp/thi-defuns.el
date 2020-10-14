@@ -402,7 +402,7 @@ buffer is not visiting a file."
      (save-excursion
        (forward-line)
        (transpose-lines -1))
-     (forward-line -1)
+     (forward-line -2)
      (move-to-column col)))
 
 
