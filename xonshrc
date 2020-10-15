@@ -25,11 +25,10 @@ aliases['gd'] = ('git', 'diff')
 aliases['gpl'] = ('git', 'pull')
 aliases['gpr'] = ('git', 'pull', '--rebase')
 aliases['gps'] = ('git', 'push')
+aliases['glu'] = ('git', 'log', '-u')
 aliases['src'] = aliases['reload_xonshrc'] = ("source", "~/.xonshrc")
-# TODO does not work
 aliases['dnu'] = "sudo aptitude update && sudo aptitude upgrade"
-# TODO does not work
-aliases['gk'] = "gitk --all $* &"
+aliases['gk'] = "![gitk --all &]"
 
 
 # install fzf-widgets from github
