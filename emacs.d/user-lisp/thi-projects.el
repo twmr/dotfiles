@@ -84,8 +84,8 @@ evaluated."
     ("i". "isar")
     ("j". "jackson")
     ("k". "kalix")
-    ("p". "pltb_simu")
     ("3". "pltb301")
+    ("l". "lavaca")
     ))
 
 
