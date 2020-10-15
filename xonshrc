@@ -16,6 +16,7 @@ FIXME job-control problems (Ctrl-z Ctrl-\ ... see
 https://github.com/xonsh/xonsh/issues/1103
 and https://xon.sh/tutorial.html?highlight=pause
 """
+aliases['ll'] = "![ls -ahl --color | more]"
 aliases['dotf'] = ('cd', '~/gitrepos/dotfiles')
 aliases['gr'] = ('cd', '~/gitrepos')
 aliases['gs'] = ('git', 'status')
@@ -29,9 +30,9 @@ aliases['src'] = aliases['reload_xonshrc'] = ("source", "~/.xonshrc")
 aliases['dnu'] = "sudo aptitude update && sudo aptitude upgrade"
 # TODO does not work
 aliases['gk'] = "gitk --all $* &"
-aliases['ll'] = "ls -ahl --color | more"
 
-# intall fzf-widgets from github
+
+# install fzf-widgets from github
 # git clone https://github.com/laloch/xontrib-fzf-widgets
 # pip install -e .
 xontrib load fzf-widgets
