@@ -31,6 +31,38 @@ aliases['dnu'] = "sudo aptitude update && sudo aptitude upgrade"
 aliases['gk'] = "![gitk --all &]"
 
 
+# the zsh history can be imported using the following script
+# https://github.com/xonsh/xonsh/issues/1614#issuecomment-483386184
+
+"""
+THe only big feature that I miss from xonsh is support for hashed directories.
+
+What are hashed directories?
+See https://github.com/fish-shell/fish-shell/issues/1449
+
+There they claim that env vars can also be used
+
+~ $ export MYDOTF=~/gitrepos/dotfiles
+~ $ MYDOTF # this works because the autocd opt is set
+~MYDIFF $ pwd  # it is nice that this even shows the env var in the prompt!!
+~/gitrepos/dotfiles
+$ ls $MYDOTF/[TAB] # shows all completion candidates (doesn't expand $MYDOTF, which I like!)
+$ ls $MYDOTF[TAB] # expands the env var (don't like it)
+$ ls ~dotf[TAB]  #doesn't complete the hashed directory, instead it
+                 #suggests to select one of the two configured hashed dirs that start with dotf (dotf and dotfp).
+
+Nice!
+
+But in xonsh this doesn't work (not even if $AUTO_CD=True)
+
+$ $mydotf=p"~/gitrepos/dotfiles"
+$ mydotf
+mydotf: command not found
+$ $mydotf
+PosixPath('/home/thomas.hisch/gitrepos/dotfiles')
+
+"""
+
 # install fzf-widgets from github
 # git clone https://github.com/laloch/xontrib-fzf-widgets
 # pip install -e .
