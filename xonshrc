@@ -18,7 +18,8 @@ and https://xon.sh/tutorial.html?highlight=pause
 """
 aliases['ll'] = "![ls -ahl --color | more]"
 aliases['dotf'] = ('cd', '~/gitrepos/dotfiles')
-aliases['gr'] = ('cd', '~/gitrepos')
+aliases['gr'] = ('cd', '~/gitrepos') # should be superseded by "gr" env
+# var
 aliases['gs'] = ('git', 'status')
 aliases['gg'] = ('git', 'grep')
 aliases['gd'] = ('git', 'diff')
@@ -30,6 +31,11 @@ aliases['src'] = aliases['reload_xonshrc'] = ("source", "~/.xonshrc")
 aliases['dnu'] = "sudo aptitude update && sudo aptitude upgrade"
 aliases['gk'] = "![gitk --all &]"
 
+# this should supersede aliases['gr'] at some point, but there are some
+# issues with autocd that don't make it useable:
+# > gr  # raises error (command not found)
+# > $gr # only outputs the value of the env var and doesn't cd into it
+$gr = "~/gitrepos"
 
 # the zsh history can be imported using the following script
 # https://github.com/xonsh/xonsh/issues/1614#issuecomment-483386184
@@ -41,6 +47,8 @@ What are hashed directories?
 See https://github.com/fish-shell/fish-shell/issues/1449
 
 There they claim that env vars can also be used
+
+zsh:
 
 ~ $ export MYDOTF=~/gitrepos/dotfiles
 ~ $ MYDOTF # this works because the autocd opt is set
