@@ -165,8 +165,6 @@
 (global-set-key [(meta up)] 'move-line-up)
 (global-set-key [(meta down)] 'move-line-down)
 
-(global-set-key [(meta down)] 'move-line-down)
-
 ;; TODO C-x o -> next-multiframe-window
 ;; +The @code{other-window} command will normally only switch to the next
 ;; +window in the current frame (unless otherwise configured).  If you
