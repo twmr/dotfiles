@@ -1158,6 +1158,8 @@ See URL `https://www.pylint.org/'."
 (use-package idle-highlight-mode
   :ensure t
   :config
+  ;; this mode highlights selected (via point) symbols
+  ;; TODO give https://github.com/wolray/symbol-overlay a try (does it do the same?)
   (add-hook 'prog-mode-hook #'idle-highlight-mode)
   )
 
