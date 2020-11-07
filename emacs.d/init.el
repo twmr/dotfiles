@@ -1360,8 +1360,8 @@ See URL `https://www.pylint.org/'."
   (magit-repository-directories `(("~/gitrepos" . 1)
                                   ("~/.emacs.d" . 0)))
   (magit-completing-read-function 'ivy-completing-read)
-  :bind
-  (("C-x g" . magit-status))
+  ;; magit automatically enables some global keybindings
+  ;; C-x g
   :config
   (defun magit-gpr ()
     (interactive)
