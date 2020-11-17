@@ -882,8 +882,8 @@ See URL `https://www.pylint.org/'."
     (require 'gerrit-gitreviewless)
     (require 'gerrit-messages)
     ;; (add-hook 'magit-status-sections-hook #'gerrit-magit-insert-status t)
-    (global-set-key (kbd "C-x i") 'gerrit-upload)
-    (global-set-key (kbd "C-x o") 'gerrit-download)
+    (global-set-key (kbd "C-x i") 'gerrit-upload-new)
+    (global-set-key (kbd "C-x o") 'gerrit-download-new-v3)
 
     (defun gerrit-dashboard-sd-odd ()
       (interactive)
