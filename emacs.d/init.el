@@ -609,6 +609,18 @@ to obtain ripgrep results."
   (dumb-jump-selector 'ivy)
   :config
   (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
+
+  ;; TODO adapt this s.t. it can be used instead of the xref-completion buffer
+  ;;   (defun my-xref--show-defs-minibuffer (fetcher alist)
+  ;;   (let* ((xrefs (funcall fetcher))
+  ;;          (xref-alist (xref--analyze xrefs))
+  ;;          (xref (if (not (cdr xrefs))
+  ;;                    (car xrefs)
+  ;;                  (cadr (assoc (completing-read "Jump to definition: " xref-alist)
+  ;;                               xref-alist)))))
+  ;;     (xref-pop-to-location xref (assoc-default 'display-action alist))))
+
+  ;; (setq xref-show-definitions-function 'my-xref--show-defs-minibuffer)
 )
   ;; :bind (("M-g o" . dumb-jump-go-other-window)
   ;;        ("M-g j" . dumb-jump-go)
