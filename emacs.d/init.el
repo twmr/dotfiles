@@ -270,6 +270,7 @@ Intended as a value for `bug-reference-url-format'."
 ;; (defvar thi::theme 'doom-wilmersdorf)
 ;; (defvar thi::theme 'solarized-light)
 (defvar thi::theme 'modus-operandi)
+;; (defvar thi::theme 'dracula)
 ;; (defvar thi::theme 'tango-dark)
 ;; (defvar thi::theme 'sanityinc-tomorrow-night)
 
@@ -594,6 +595,8 @@ to obtain ripgrep results."
 (use-package doom-themes :ensure t)
 
 (use-package diminish :ensure t)
+
+(use-package dracula-theme :ensure t)
 
 (use-package dumb-jump
   :ensure t
