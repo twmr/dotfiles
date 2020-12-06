@@ -1358,14 +1358,14 @@ See URL `https://www.pylint.org/'."
   )
 
 (use-package magit
-  ;; bindings: C-c M-g: magit-file-popup (use it in a buffer)
+  ;; bindings: C-c M-g: magit-file-dispatch (use it in a buffer)
+  ;;           C-x g: magit-status
+  ;;           C-x M-g: magit-dispatch
   :ensure t
   :custom
   (magit-repository-directories `(("~/gitrepos" . 1)
                                   ("~/.emacs.d" . 0)))
   (magit-completing-read-function 'ivy-completing-read)
-  ;; magit automatically enables some global keybindings
-  ;; C-x g
   :config
   (defun magit-gpr ()
     (interactive)
