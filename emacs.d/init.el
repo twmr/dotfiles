@@ -324,7 +324,10 @@ Intended as a value for `bug-reference-url-format'."
 ;;     (global-auto-complete-mode)))
 
 (use-package avy
-    :ensure t)
+  :ensure t
+  :bind
+  (("M-g f" . avy-goto-line))
+  )
 
 ;; (use-package better-shell
 ;;     :ensure t
