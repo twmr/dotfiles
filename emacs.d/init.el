@@ -1826,7 +1826,7 @@ See URL `https://www.pylint.org/'."
   (define-global-minor-mode thi::spell-fu-mode spell-fu-mode
     (lambda ()
       (when (not (memq major-mode
-                       (list 'vterm-mode 'gerrit-dashboard-mode 'magit-status-mode 'dired-mode)))
+                       (list 'vterm-mode 'gerrit-dashboard-mode 'magit-status-mode 'magit-section-mode 'dired-mode)))
         (spell-fu-mode))))
 
   (thi::spell-fu-mode 1)
