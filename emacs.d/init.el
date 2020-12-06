@@ -814,7 +814,8 @@ See URL `https://www.pylint.org/'."
                    (flycheck-python-find-module 'python-pylint "pylint")))
     :verify (lambda (_) (flycheck-python-verify-module 'python-pylint "pylint"))
     :modes python-mode
-    :next-checkers ((warning . python-mypy))))
+    ;; :next-checkers ((warning . python-mypy))
+    ))
 
 
 (use-package flycheck-package
