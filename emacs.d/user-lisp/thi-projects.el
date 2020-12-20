@@ -28,6 +28,22 @@
        "-g '!ijscore' "
        "-g '!local_configdb' "))
 
+(with-eval-after-load 'dumb-jump
+  (setq dumb-jump-rg-search-args
+        (concat
+         "--pcre2 "
+         ;; this only works when rg is run in the root of the project
+         ;; or if https://github.com/BurntSushi/ripgrep/issues/1764
+         ;; is fixed
+         "-g '!netlib-plugins/Libs/devlib' "
+         "-g '!tools/aps_pattern' "
+         "-g '!config/aps_pattern' "
+         "-g '!tools/structure_files' "
+         "-g '!config/structure_files' "
+         "-g '!node_modules' "
+         "-g '!ijscore' "
+         "-g '!local_configdb'")))
+
 (defun thi::get-project-root ()
   "Parse find root of the current sandbox."
   (let* ((sandboxcfgname ".sandbox.cfg")
