@@ -880,13 +880,42 @@ See URL `https://www.pylint.org/'."
        "/a"
      "/a"))
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
+  (gerrit-use-gitreview-interface nil)
   :config
   (progn
-    (require 'gerrit-gitreviewless)
-    (require 'gerrit-messages)
     ;; (add-hook 'magit-status-sections-hook #'gerrit-magit-insert-status t)
-    (global-set-key (kbd "C-x i") 'gerrit-upload-new)
-    (global-set-key (kbd "C-x o") 'gerrit-download-new-v3)
+    (global-set-key (kbd "C-x i") 'gerrit-upload)
+    (global-set-key (kbd "C-x o") 'gerrit-download)
+
+    (defun gerrit-add-verify-comment ()
+      (interactive)
+      ;; TODO add this to the hydra
+      ;; make it configurable
+      (gerrit-rest-change-add-comment
+       (gerrit-get-changeid-from-current-commit)
+        "/verify"))
+
+    (defun thi::upload-and-verify (&optional args)
+      (interactive
+       (list (transient-args 'gerrit-upload-transient)))
+      (gerrit-upload:--action args)
+      (gerrit-add-verify-comment))
+
+    ;; https://github.com/magit/magit/wiki/Converting-popup-modifications-to-transient-modifications
+    (transient-append-suffix 'gerrit-upload-transient "v"
+      '("v" "upload and verify" thi::upload-and-verify))
+
+    (defun gerrit-section-filter (message-info)
+      "Filter function run for every gerrit comment.
+
+This function is called for every comment MESSAGE-INFO
+of a gerrit change.  If the function returns t, the comment is
+shown in the section buffer."
+      (not (or (s-starts-with? "jenkins" (alist-get 'name (alist-get 'author message-info)))
+          (s-ends-with? "/verify" (alist-get 'message message-info)))))
+
+    ;; make the number col a bit smaller
+    (aset gerrit-dashboard-columns 0 '("Number" 6))
 
     (defun gerrit-dashboard-sd-odd ()
       (interactive)
