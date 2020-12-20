@@ -1876,7 +1876,7 @@ shown in the section buffer."
   (define-global-minor-mode thi::spell-fu-mode spell-fu-mode
     (lambda ()
       (when (not (memq major-mode
-                       (list 'vterm-mode 'gerrit-dashboard-mode 'magit-status-mode 'magit-section-mode 'dired-mode)))
+                       (list 'vterm-mode 'gerrit-dashboard-mode 'magit-status-mode 'magit-section-mode 'dired-mode 'deadgrep-mode)))
         (spell-fu-mode))))
 
   (thi::spell-fu-mode 1)
