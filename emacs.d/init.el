@@ -485,6 +485,9 @@ Intended as a value for `bug-reference-url-format'."
          ("C-c D" . hydra-deadgrep/body)
          )
   :config
+
+  (set-face-attribute 'deadgrep-filename-face  'nil :inherit 'magit-section-heading)
+
   ;; override deadgrep--project-root to include support for dumb-jump files (.dumbjump, .dumbjumpignore)
   (defun deadgrep--project-root ()
     "Guess the project root of the given FILE-PATH."
