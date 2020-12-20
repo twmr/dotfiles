@@ -1412,6 +1412,8 @@ shown in the section buffer."
   ;;           C-x g: magit-status
   ;;           C-x M-g: magit-dispatch
   :ensure t
+  :bind (
+         ("C-c g" . 'magit-file-dispatch))
   :custom
   (magit-repository-directories `(("~/gitrepos" . 1)
                                   ("~/.emacs.d" . 0)))
