@@ -269,10 +269,10 @@ Intended as a value for `bug-reference-url-format'."
 ;; (setq solarized-high-contrast-mode-line t) ;; this fixes the spurious underline in the modeline
 ;; (defvar thi::theme 'doom-wilmersdorf)
 ;; (defvar thi::theme 'solarized-light)
-(defvar thi::theme 'modus-operandi)
+;; (defvar thi::theme 'modus-operandi)
 ;; (defvar thi::theme 'dracula)
 ;; (defvar thi::theme 'tango-dark)
-;; (defvar thi::theme 'sanityinc-tomorrow-night)
+(defvar thi::theme 'sanityinc-tomorrow-night)
 
 ;; (defvar thi::theme
 ;;   (if (string= system-name "dirac")
