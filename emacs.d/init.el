@@ -1030,6 +1030,14 @@ shown in the section buffer."
   (setq git-messenger:show-detail t
         git-messenger:use-magit-popup t))
 
+(use-package grip-mode
+  ;; preview markdown files
+  ;; https://github.com/seagle0128/grip-mode
+  ;; requires: pip install grip
+  :ensure t
+  :bind (:map markdown-mode-command-map
+         ("g" . grip-mode)))
+
 (use-package groovy-mode
   :ensure t
   :defer t
