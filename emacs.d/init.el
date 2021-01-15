@@ -910,7 +910,7 @@ See URL `https://www.pylint.org/'."
 
     ;; https://github.com/magit/magit/wiki/Converting-popup-modifications-to-transient-modifications
     (transient-append-suffix 'gerrit-upload-transient "v"
-      '("v" "upload and verify" thi::upload-and-verify))
+      '("V" "upload and verify" thi::upload-and-verify))
 
     (defun gerrit-section-filter (message-info)
       "Filter function run for every gerrit comment.
