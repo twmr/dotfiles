@@ -899,6 +899,13 @@ See URL `https://www.pylint.org/'."
       (interactive
        (list (transient-args 'gerrit-upload-transient)))
       (gerrit-upload:--action args)
+      ;; FIXME wait until the push action is ready (this is only needed if
+      ;; the change didn't exist on the server before thi::upload-and-verify
+      ;; was called.
+      ;; IDEA wait until magit-this-process is nil
+      (while magit-this-process
+        (message "magit process still active")
+        (sleep-for 0.3))
       (gerrit-add-verify-comment))
 
     ;; https://github.com/magit/magit/wiki/Converting-popup-modifications-to-transient-modifications
