@@ -2017,12 +2017,11 @@ shown in the section buffer."
 
 (use-package window-numbering
   :ensure t
-  :defer t
-  :init
+  :config
   (progn
     (custom-set-faces '(window-numbering-face
                         ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
-    (window-numbering-mode 1))
+    (window-numbering-mode))
   )
 
 (use-package yaml-mode :ensure t :defer t)
