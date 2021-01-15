@@ -430,6 +430,8 @@ buffer is not visiting a file."
       (kill-buffer log-buf))
     (kill-buffer commit-buf)))
 
+;; TODO write a function that outputs the commit under point.
+
 
 ;; Similar to: http://stackoverflow.com/questions/43765/pin-emacs-buffers-to-windows-for-cscope/65992#65992
 (defun pin-buffer ()
