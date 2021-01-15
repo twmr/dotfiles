@@ -383,3 +383,9 @@ function vterm_printf() {
         printf "\e]%s\e\\" "$1"
     fi
 }
+
+
+function sorted_size() {
+    # output the size of all files/dirs in current directory sorted by size + total size
+    du -ch $(du -b * | sort -n | cut -f2-)
+}
