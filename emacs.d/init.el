@@ -887,6 +887,12 @@ See URL `https://www.pylint.org/'."
     (global-set-key (kbd "C-x i") 'gerrit-upload)
     (global-set-key (kbd "C-x o") 'gerrit-download)
 
+    ;; (with-eval-after-load 'auth-source
+    ;;   ;; using authinfo.gpg always requires me to specify the gpg passowrd
+    ;;   ;; in a system/gnome dialog
+    ;;   (setq auth-sources '("~/.authinfo.gpg"
+    ;;                        "secrets:Login")))
+
     (defun gerrit-add-verify-comment ()
       (interactive)
       ;; TODO add this to the hydra
