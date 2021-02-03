@@ -1438,7 +1438,8 @@ shown in the section buffer."
          ("C-c g" . 'magit-file-dispatch))
   :custom
   (magit-repository-directories `(("~/gitrepos" . 1)
-                                  ("~/.emacs.d" . 0)))
+                                  ("~/.emacs.d" . 0)
+                                  ("~/sandbox/main" . 1)))
   (magit-completing-read-function 'ivy-completing-read)
   :config
   (defun magit-gpr ()
