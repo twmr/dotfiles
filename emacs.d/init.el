@@ -1434,6 +1434,7 @@ shown in the section buffer."
   ;;           C-x M-g: magit-dispatch
   :ensure t
   :bind (
+         (("C-x g" . magit-status)) ;; someone bound C-x g to revert-buffer ....
          ("C-c g" . 'magit-file-dispatch))
   :custom
   (magit-repository-directories `(("~/gitrepos" . 1)
