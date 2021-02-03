@@ -1476,7 +1476,13 @@ shown in the section buffer."
 
 (use-package org
   ;; helpful key-bindings:
-  ;; <M-S-return> org insert todo heading
+  ;; C-c C-o open link at point
+
+  ;; <C-S-return> org insert todo heading respsect content
+  ;; <M-S-return> org insert todo heading  (immediately below point)
+
+  ;; <C-return> org insert heading respsect content
+  ;; <M-return> org insert heading  (immediately below point)
   ;; TODO BEGIN_SRC
   ;; <S-left/right> switch to the next TODO,DONE,.. keyword
   ;; alternative: C-c C-t
