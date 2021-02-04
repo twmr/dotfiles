@@ -895,8 +895,6 @@ See URL `https://www.pylint.org/'."
 
     (defun gerrit-add-verify-comment ()
       (interactive)
-      ;; TODO add this to the hydra
-      ;; make it configurable
       (gerrit-rest-change-add-comment
        (gerrit-get-changeid-from-current-commit)
         "/verify"))
@@ -905,10 +903,10 @@ See URL `https://www.pylint.org/'."
       (interactive
        (list (transient-args 'gerrit-upload-transient)))
       (gerrit-upload:--action args)
-      ;; FIXME wait until the push action is ready (this is only needed if
+      ;; wait until the push action is ready (this is only needed if
       ;; the change didn't exist on the server before thi::upload-and-verify
       ;; was called.
-      ;; IDEA wait until magit-this-process is nil
+      ;; -> wait until magit-this-process is nil
       (while magit-this-process
         (message "magit process still active")
         (sleep-for 0.3))
