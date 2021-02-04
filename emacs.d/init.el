@@ -1991,11 +1991,10 @@ shown in the section buffer."
   ;; C-/ undo (without the undo tree graph) !!!
   ;; M-_ redo (without the undo tree graph) !!!
   :ensure t
-  :defer t
   :custom (undo-tree-visualizer-mode t)
   :diminish
   :config
-  (add-hook 'after-init-hook #'global-undo-tree-mode))
+  (global-undo-tree-mode))
 
 (add-hook 'org-mode-hook
             (lambda ()
