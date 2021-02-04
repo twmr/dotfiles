@@ -144,3 +144,5 @@ function vterm_prompt_end() {
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
 echo "zshrc sourced"
+
+source /home/thomas.hisch/.config/broot/launcher/bash/br
