@@ -896,7 +896,7 @@ See URL `https://www.pylint.org/'."
     (defun gerrit-add-verify-comment ()
       (interactive)
       (gerrit-rest-change-add-comment
-       (gerrit-get-changeid-from-current-commit)
+       (gerrit-get-unique-changeid-from-current-commit)
         "/verify"))
 
     (defun thi::upload-and-verify (&optional args)
