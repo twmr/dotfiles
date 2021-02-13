@@ -888,10 +888,6 @@ See URL `https://www.pylint.org/'."
        "review.gerrithub.io"
        ;; "review.opendev.org"
        ))
-  (gerrit-rest-endpoint-prefix
-   (if thi::at-work
-       "/a"
-     "/a"))
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
   (gerrit-use-gitreview-interface nil)
   :config
