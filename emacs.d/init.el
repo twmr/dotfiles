@@ -464,6 +464,9 @@ Intended as a value for `bug-reference-url-format'."
 
 (use-package cython-mode :ensure t :defer t)
 
+(use-package dap-mode
+  :ensure t)
+
 ;; alternative to "rg"
 ;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
 (use-package deadgrep :ensure t
