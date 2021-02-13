@@ -2011,6 +2011,12 @@ shown in the section buffer."
          ("S-<f4>" . thi::dev-find-file-in-docker-container)
          ("<f12>" . thi::directorychooser)))
 
+(use-package transient
+  :ensure
+  :custom
+  ;; for gerrit.el
+  (transient-history-limit 100))
+
 (use-package undo-tree
   ;; C-/ undo (without the undo tree graph) !!!
   ;; M-_ redo (without the undo tree graph) !!!
