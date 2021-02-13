@@ -1423,14 +1423,24 @@ shown in the section buffer."
   :hook
   ;; how do I test that lsp works?
   ;; (lsp-decribe-session) ;; does this have a refresh keybindin? like g in magit-status?
-  ((python-mode-hook . lsp))
+  ((prog-mode-hook . lsp))
   :config
+  (setq gc-cons-threshold (* 100 1024 1024) ;; see performance section in lsp-mode documentation
+        read-process-output-max (* 1024 1024) ;; same
+        company-idle-delay 0.0
+        company-minimum-prefix-length 1
+        create-lockfiles nil ;; lock files will kill `npm start'
+        lsp-headerline-breadcrumb-enable t)
+
+  (require 'dap-chrome)
+  (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
+
   (defun thi::lsp-python-use-conda-py37-settings ()
     (interactive)
     (setq lsp-pyls-server-command "~/miniconda/envs/py37/bin/pyls"
           lsp-clients-python-library-directories '("~/miniconda/envs/py37/"))
-   )
-)
+    )
+  )
 
 (use-package lsp-ui
   :ensure t
