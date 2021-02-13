@@ -916,6 +916,8 @@ See URL `https://www.pylint.org/'."
       ;; the change didn't exist on the server before thi::upload-and-verify
       ;; was called.
       ;; -> wait until magit-this-process is nil
+      ;; TODO let bind (inhibit-magit-process t) before running
+      ;; gerrit-upload:--action (then magit-this-process can be removed)
       (while magit-this-process
         (message "magit process still active")
         (sleep-for 0.3))
