@@ -360,6 +360,7 @@ Intended as a value for `bug-reference-url-format'."
   (add-hook 'prog-mode-hook 'bug-reference-github-set-url-format)
   )
 
+(use-package cargo :ensure t)
 (use-package cmake-mode :ensure t :defer t)
 (use-package color-identifiers-mode :ensure t :defer t)
 (use-package color-theme-sanityinc-tomorrow :ensure t)
