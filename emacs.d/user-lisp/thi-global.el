@@ -138,6 +138,7 @@
                 ("[:/]_emacs\\'" . emacs-lisp-mode)
                 ("\\.gp$" . gnuplot-mode)
                 ("pylintrc" . conf-mode)
+                ("\\.eds$" . conf-mode)
                 ("\\.service$" . conf-mode)
                 ("Dockerfile" . dockefile-mode)
                 ("\\.xsh\\'" . xonsh-mode)
