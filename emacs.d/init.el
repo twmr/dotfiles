@@ -2012,10 +2012,18 @@ shown in the section buffer."
          ("<f12>" . thi::directorychooser)))
 
 (use-package transient
-  :ensure
+  :ensure t
   :custom
   ;; for gerrit.el
   (transient-history-limit 100))
+
+(use-package tree-sitter
+  :ensure t
+  :config
+  (add-hook 'python-mode-hook #'tree-sitter-mode))
+
+(use-package tree-sitter-langs
+  :ensure t)
 
 (use-package undo-tree
   ;; C-/ undo (without the undo tree graph) !!!
