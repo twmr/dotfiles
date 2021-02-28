@@ -880,6 +880,7 @@ See URL `https://www.pylint.org/'."
 
 
 ;; TODO pick either format-all or reformatter.el from spurcell
+;; there is also: https://github.com/raxod502/apheleia
 (use-package format-all
   :ensure t
   ;; this package should soon support chaining of multiple formatters
@@ -1725,7 +1726,8 @@ shown in the section buffer."
                 (setq c-basic-offset 4)
                 (setq tab-width 4)))))
 
-(use-package pyimport :ensure t)
+(use-package pyimport :ensure t) ;; is solely (rip)grep based
+;; https://github.com/anachronic/importmagic.el requires a python interpreter
 
 (use-package py-isort :ensure t)
 
