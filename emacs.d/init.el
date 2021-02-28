@@ -2077,13 +2077,13 @@ shown in the section buffer."
     (setq which-key-paging-key "<f5>")
   )
 
-(use-package window-numbering
+(use-package winum
   :ensure t
   :config
   (progn
-    (custom-set-faces '(window-numbering-face
-                        ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
-    (window-numbering-mode))
+    ;; (custom-set-faces '(window-numbering-face
+    ;;                     ((t (:foreground "DeepPink" :underline "DeepPink" :weight bold)))))
+    (winum-mode))
   )
 
 (use-package yaml-mode :ensure t :defer t)
