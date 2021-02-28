@@ -829,7 +829,7 @@ to obtain ripgrep results."
           (setq flycheck-display-errors-delay 0.4)
           (add-hook 'c++-mode-hook (lambda () (setq flycheck-clang-language-standard "c++11")))
           (add-hook 'python-mode-hook
-              '(lambda () (flycheck-select-checker 'python-pylint)))
+                    (lambda () (flycheck-select-checker 'python-pylint)))
           ;; (add-hook 'flycheck-mode-hook #'flycheck-pycheckers-setup)
           )
   :config (global-flycheck-mode))
@@ -1891,18 +1891,18 @@ shown in the section buffer."
 
   (if (daemonp)
       (add-hook 'after-make-frame-functions
-                '(lambda (f)
-                   (with-selected-frame f
-                     (when (window-system f)
-                       (tool-bar-mode -1)
-                       (menu-bar-mode -1)
-                       (scroll-bar-mode -1)
-                       (set-frame-font (format "JetBrains Mono:size=%d"
-                                               (if thi::at-work
-                                                   12
-                                                 22)))
-                       (load-theme thi::theme t)
-                       (thi::sml-setup)))))
+                (lambda (f)
+                  (with-selected-frame f
+                    (when (window-system f)
+                      (tool-bar-mode -1)
+                      (menu-bar-mode -1)
+                      (scroll-bar-mode -1)
+                      (set-frame-font (format "JetBrains Mono:size=%d"
+                                              (if thi::at-work
+                                                  12
+                                                22)))
+                      (load-theme thi::theme t)
+                      (thi::sml-setup)))))
     (progn
       (load-theme thi::theme t)
       (thi::sml-setup)

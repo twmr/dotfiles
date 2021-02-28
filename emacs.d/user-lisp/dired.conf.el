@@ -9,7 +9,7 @@
      (evil-define-key 'normal dired-mode-map (kbd "<return>")
        'dired-find-alternate-file) ; was dired-advertised-find-file
      (evil-define-key 'normal dired-mode-map (kbd "`")
-       '(lambda () (interactive) (find-alternate-file "..")))
+       (lambda () (interactive) (find-alternate-file "..")))
      (evil-define-key 'normal dired-mode-map (kbd "<DEL>")
        'dired-up-directory)
      (evil-define-key 'normal dired-mode-map (kbd "C-a")
@@ -22,7 +22,7 @@
   'dired-find-alternate-file) ; was dired-advertised-find-file
 
 (define-key dired-mode-map (kbd "`")
-  '(lambda () (interactive) (find-alternate-file "..")))
+  (lambda () (interactive) (find-alternate-file "..")))
 
 (define-key dired-mode-map (kbd "<DEL>")
   'dired-up-directory)
