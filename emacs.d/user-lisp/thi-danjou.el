@@ -39,7 +39,8 @@
 (setq uniquify-buffer-name-style 'forward)
 
 (require 'saveplace)
-(setq-default save-place t)
+(save-place-mode 1) ;; thi: enable save-place-mode s.t. restoring pages in
+                    ;; pdf-view-mode works (requires saveplace-pdf-view)
 
 (setq x-select-enable-clipboard t ;; emacs default values is already t
       x-select-enable-primary t ;; emacs default is nil

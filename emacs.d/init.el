@@ -1739,13 +1739,21 @@ shown in the section buffer."
   ;; horizontal scrolling: either the mouse (see mouse-wheel settings in
   ;; init.el) or use C-a, C=e.
 
-  ;; TODO when opening pdf file show the last visited page
+  ;; DONE when opening pdf file show the last visited page
+  ;;      - https://github.com/politza/pdf-tools/issues/18
+  ;;      - see https://github.com/nicolaisingh/saveplace-pdf-view
+  ;; TODO dual view mode (there is a project, which adds support for it, but which?)
+  ;; TODO minimap - like in evince (the column on the left with the thumbnails)
+
 
   :commands (pdf-view-mode) ;; otherwise void-function pdf-view-mode is
                             ;; raised when a PDF file is opened
   :ensure t
   :defer t
   :config
+  (use-package saveplace-pdf-view ;; remembers the last location in the pdf file
+    :ensure t)
+
     (unless (daemonp)
       (pdf-tools-install))
     (setq-default pdf-view-display-size 'fit-page)
