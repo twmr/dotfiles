@@ -1731,6 +1731,16 @@ shown in the section buffer."
 (use-package paredit :ensure t)
 
 (use-package pdf-tools
+  ;; Notes:
+
+  ;; "s" in pdf file opens occur mode (also shows line numbers in new occur buffer/window)
+  ;; "C-s" is mapped to isearch-forward, because swiper doesn't only shows raw pdf file contents
+
+  ;; horizontal scrolling: either the mouse (see mouse-wheel settings in
+  ;; init.el) or use C-a, C=e.
+
+  ;; TODO when opening pdf file show the last visited page
+
   :commands (pdf-view-mode) ;; otherwise void-function pdf-view-mode is
                             ;; raised when a PDF file is opened
   :ensure t
@@ -2352,6 +2362,11 @@ shown in the section buffer."
 (load "thi-term")
 
 (load "ims-jira")
+
+
+;; horizontal scrolling (useful e.g. in pdf-view-mode)
+(setq mouse-wheel-flip-direction t) ;; fix flipped horizontal scrolling direction
+(setq mouse-wheel-tilt-scroll t)    ;; enable left-right scroll from trackpad
 
 
 ;; taken from http://blog.binchen.org/posts/what-s-the-best-spell-check-set-up-in-emacs.html
