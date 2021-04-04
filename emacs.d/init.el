@@ -2076,8 +2076,15 @@ shown in the section buffer."
   ;; (see https://stackoverflow.com/questions/6837511/automatically-disable-a-global-minor-mode-for-a-specific-major-mode)
   (define-global-minor-mode thi::spell-fu-mode spell-fu-mode
     (lambda ()
-      (when (not (memq major-mode
-                       (list 'vterm-mode 'gerrit-dashboard-mode 'magit-status-mode 'magit-section-mode 'dired-mode 'deadgrep-mode)))
+      (when (and (not (memq major-mode
+                            (list 'vterm-mode
+                                  'gerrit-dashboard-mode
+                                  'magit-status-mode
+                                  'magit-section-mode
+                                  'dired-mode
+                                  'deadgrep-mode
+                                  'minibuffer-inactive-move)))
+                 (not (window-minibuffer-p)))
         (spell-fu-mode))))
 
   (thi::spell-fu-mode 1)
