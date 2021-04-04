@@ -2090,6 +2090,9 @@ shown in the section buffer."
 ;;   (spaceline-spacemacs-theme))
 
 (use-package spell-fu
+  ;; spell fu uses the aspell database, which is stored in
+  ;; /usr/lib64/aspell-0.60/en_US*  (contained in apsell-en fedora pkg)
+
   ;; https://gitlab.com/ideasman42/emacs-spell-fu
 
   ;; TODO use avy to select words that should be added to the local dictionary
@@ -2107,13 +2110,15 @@ shown in the section buffer."
   (define-global-minor-mode thi::spell-fu-mode spell-fu-mode
     (lambda ()
       (when (and (not (memq major-mode
-                            (list 'vterm-mode
-                                  'gerrit-dashboard-mode
-                                  'magit-status-mode
-                                  'magit-section-mode
-                                  'dired-mode
-                                  'deadgrep-mode
-                                  'minibuffer-inactive-move)))
+                            (list
+                             'vterm-mode
+                             'gerrit-dashboard-mode
+                             'magit-status-mode
+                             'magit-section-mode
+                             'dired-mode
+                             'deadgrep-mode
+                             'pdf-occur-buffer-mode
+                             'minibuffer-inactive-move)))
                  (not (window-minibuffer-p)))
         (spell-fu-mode))))
 
