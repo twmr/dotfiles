@@ -150,6 +150,7 @@ evaluated."
              (replace-regexp-in-string "~" (getenv "HOME") path))
            '("~/.zsh.d"
              "~/.zsh"
+             "~/Documents/JEOL"
              "~/gitrepos/dotfiles"
              "~/gitrepos/dotfiles_private"
              "~/gitrepos/dev"
