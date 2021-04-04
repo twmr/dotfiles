@@ -1731,6 +1731,9 @@ shown in the section buffer."
 (use-package paredit :ensure t)
 
 (use-package pdf-tools
+  ;; new maintainer: https://github.com/vedang/pdf-tools
+  ;; old maintainer/author: https://github.com/politza/pdf-tools
+
   ;; Notes:
 
   ;; "s" in pdf file opens occur mode (also shows line numbers in new occur buffer/window)
@@ -1743,6 +1746,8 @@ shown in the section buffer."
   ;;      - https://github.com/politza/pdf-tools/issues/18
   ;;      - see https://github.com/nicolaisingh/saveplace-pdf-view
   ;; TODO dual view mode (there is a project, which adds support for it, but which?)
+  ;; TODO smooth scrolling: https://github.com/dalanicolai/pdf-continuous-scroll-mode.el
+  ;;      -> IMO this package needs to be added to upstream pdf-tools
   ;; TODO minimap - like in evince (the column on the left with the thumbnails)
 
 
