@@ -1,4 +1,7 @@
+InputData
+OutputData
 Repo
+Reticle
 alist
 args
 async
@@ -14,9 +17,6 @@ elisp
 exwm
 gerrit
 https
-InputData
-OutputData
-Reticle
 jobdeck
 json
 magit
