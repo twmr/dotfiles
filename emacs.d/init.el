@@ -302,6 +302,11 @@ Intended as a value for `bug-reference-url-format'."
 
 (use-package quelpa-use-package :ensure t)
 
+
+;; byte compiler warnings
+;; (use-package 2048
+;;   :ensure t)
+
 (use-package ace-window
   :ensure t
   :custom
@@ -1342,6 +1347,10 @@ shown in the section buffer."
   ;; (ivy-set-display-transformer 'ivy-switch-buffer
   ;;                              'ivy-rich-switch-buffer-transformer))
   )
+
+
+(use-package kubernetes
+  :ensure t)
 
 
 ;; (use-package jabber
