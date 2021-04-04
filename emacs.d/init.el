@@ -1249,8 +1249,6 @@ shown in the section buffer."
       ("N" pdf-history-forward :color red)
       ("l" image-forward-hscroll :color red)
       ("h" image-backward-hscroll :color red))
-
-
     ))
 
 (use-package idle-highlight-mode
@@ -1261,7 +1259,8 @@ shown in the section buffer."
   (add-hook 'prog-mode-hook #'idle-highlight-mode)
   )
 
-(use-package image
+(use-package image-mode
+  :ensure nil
   :bind (:map image-mode-map
               ("<right>" . image-next-file)
               ("<left>" . image-previous-file)
@@ -1543,7 +1542,6 @@ shown in the section buffer."
   ;;     It does however include the heading itself, not just the text.
   ;;     widen: (C-x n w) will widen the view again.
 
-
   :ensure t
   :custom
   ;; this will turn off asking for a confirmation
@@ -1695,6 +1693,9 @@ shown in the section buffer."
   ;;    (python . t))))
   )
 
+;; (use-package org-pdftools
+;;   :ensure t)
+
 ;; (use-package org-projectile
 ;;   :bind (("C-c n p" . org-projectile-project-todo-completing-read)
 ;;          ("C-c c" . org-capture))
@@ -1759,9 +1760,7 @@ shown in the section buffer."
         ("i"  . pdf-misc-display-metadata)
         ("s"  . pdf-occur)
         ("b"  . pdf-view-set-slice-from-bounding-box)
-        ("r"  . pdf-view-reset-slice))
-     (use-package org-pdfview
-       :ensure t))
+        ("r"  . pdf-view-reset-slice)))
 
 ;; (use-package persp-mode :ensure t
 ;;   ; is a fork of perspective.el (they can't be installed at the same time.

@@ -71,6 +71,7 @@
 (global-set-key (kbd "C-M-r") 'isearch-backward)
 
 
+
 (defun my-c-mode-common-hook ()
   (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
   (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
