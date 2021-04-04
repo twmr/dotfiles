@@ -1730,6 +1730,8 @@ shown in the section buffer."
 (use-package paredit :ensure t)
 
 (use-package pdf-tools
+  :commands (pdf-view-mode) ;; otherwise void-function pdf-view-mode is
+                            ;; raised when a PDF file is opened
   :ensure t
   :defer t
   :config
@@ -1737,6 +1739,7 @@ shown in the section buffer."
       (pdf-tools-install))
     (setq-default pdf-view-display-size 'fit-page)
     (bind-keys :map pdf-view-mode-map
+        ("C-s" . isearch-forward)
         ("\\" . hydra-pdftools/body)
         ("<s-spc>" .  pdf-view-scroll-down-or-next-page)
         ("g"  . pdf-view-first-page)
