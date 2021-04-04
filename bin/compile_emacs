@@ -57,9 +57,9 @@ set -e
     --prefix=/opt/emacs \
     --with-x-toolkit=lucid \
     --with-xpm \
-    --without-jpeg \
-    --without-gif \
-    --without-tiff \
+    --with-jpeg \
+    --with-gif \
+    --with-tiff \
     --with-modules \
     --with-json
 # --with-x-toolkit=gtk3 \
