@@ -1261,6 +1261,16 @@ shown in the section buffer."
   (add-hook 'prog-mode-hook #'idle-highlight-mode)
   )
 
+(use-package image
+  :bind (:map image-mode-map
+              ("<right>" . image-next-file)
+              ("<left>" . image-previous-file)
+              ("<DEL>" . thi::go-back-to-dired))
+  :config
+  (defun thi::go-back-to-dired ()
+    (interactive)
+    (dired-at-point default-directory)))
+
 (use-package imenu-anywhere
   :ensure t
   :defer t
