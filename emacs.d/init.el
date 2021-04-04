@@ -1750,14 +1750,7 @@ shown in the section buffer."
                             ;; raised when a PDF file is opened
   :ensure t
   :defer t
-  :config
-  (use-package saveplace-pdf-view ;; remembers the last location in the pdf file
-    :ensure t)
-
-    (unless (daemonp)
-      (pdf-tools-install))
-    (setq-default pdf-view-display-size 'fit-page)
-    (bind-keys :map pdf-view-mode-map
+  :bind (:map pdf-view-mode-map
         ("C-s" . isearch-forward)
         ("\\" . hydra-pdftools/body)
         ("<s-spc>" .  pdf-view-scroll-down-or-next-page)
@@ -1778,7 +1771,19 @@ shown in the section buffer."
         ("i"  . pdf-misc-display-metadata)
         ("s"  . pdf-occur)
         ("b"  . pdf-view-set-slice-from-bounding-box)
-        ("r"  . pdf-view-reset-slice)))
+        ("r"  . pdf-view-reset-slice)
+        :map pdf-occur-buffer-mode-map
+        ;; allows clicking on the pdf occur matches with the mouse
+        ;; an alternative is to use "RET" or use the "peek" feature C-o,
+        ;; where the active buffer remains the occur buffer. C-n C-o
+        ("<mouse-1>" . pdf-occur-goto-occurrence)
+        )
+  :config
+  (use-package saveplace-pdf-view ;; remembers the last location in the pdf file
+    :ensure t)
+    (unless (daemonp)
+      (pdf-tools-install))
+    (setq-default pdf-view-display-size 'fit-page))
 
 ;; (use-package persp-mode :ensure t
 ;;   ; is a fork of perspective.el (they can't be installed at the same time.
