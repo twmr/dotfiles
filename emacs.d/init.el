@@ -1304,18 +1304,6 @@ shown in the section buffer."
   ;; (ivy-re-builders-alist
   ;;  ;; '((t . ivy--regex-fuzzy)))
   ;;  '((t . ivy--subseq-fuzzy)))
-  (ivy-re-builders-alist
-   '((read-file-name-internal . ivy--regex-fuzzy)
-     (counsel-M-x . ivy--regex-fuzzy) ;; I'm not satisfied with this. "lsp"
-                                      ;; should give me "lsp" and "conda"
-                                      ;; should expand to
-                                      ;; "thi::.....conda-py37". In smex
-                                      ;; everything worked as expected. Is
-                                      ;; there a smex backend for
-                                      ;; counsel-M-x?
-     (counsel-describe-variable . ivy--regex-fuzzy)
-     (counsel-describe-function . ivy--regex-fuzzy)
-     (t . ivy--regex-plus)))
   (ivy-initial-inputs-alist nil)
   ;; todo not really needed?
   (ivy-use-selectable-prompt t)
@@ -1323,7 +1311,22 @@ shown in the section buffer."
             (ivy-mode)
             ;; see https://oremacs.com/2016/06/27/ivy-push-view/
             (global-set-key (kbd "C-c v") 'ivy-push-view)
-            (global-set-key (kbd "C-c V") 'ivy-pop-view)))
+            (global-set-key (kbd "C-c V") 'ivy-pop-view)
+
+            ;; doesn't work if set in :custom for whatever reason
+            (setq ivy-re-builders-alist
+                  '((read-file-name-internal . ivy--regex-fuzzy)
+                    (counsel-M-x . ivy--regex-fuzzy) ;; I'm not satisfied with this. "lsp"
+                    ;; should give me "lsp" and "conda"
+                    ;; should expand to
+                    ;; "thi::.....conda-py37". In smex
+                    ;; everything worked as expected. Is
+                    ;; there a smex backend for
+                    ;; counsel-M-x?
+                    (counsel-describe-variable . ivy--regex-fuzzy)
+                    (counsel-describe-function . ivy--regex-fuzzy)
+                    (t . ivy--regex-plus)))
+            ))
 
 (use-package ivy-hydra
   ;; type C-o to see hydra help in completion list
