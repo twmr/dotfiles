@@ -1741,6 +1741,7 @@ shown in the section buffer."
 
   ;; "s" in pdf file opens occur mode (also shows line numbers in new occur buffer/window)
   ;; "C-s" is mapped to isearch-forward, because swiper doesn't only shows raw pdf file contents
+  ;;       https://github.com/abo-abo/swiper/issues/1407
 
   ;; horizontal scrolling: either the mouse (see mouse-wheel settings in
   ;; init.el) or use C-a, C=e.
@@ -1780,18 +1781,28 @@ shown in the section buffer."
         ("s"  . pdf-occur)
         ("b"  . pdf-view-set-slice-from-bounding-box)
         ("r"  . pdf-view-reset-slice)
-        :map pdf-occur-buffer-mode-map
-        ;; allows clicking on the pdf occur matches with the mouse
-        ;; an alternative is to use "RET" or use the "peek" feature C-o,
-        ;; where the active buffer remains the occur buffer. C-n C-o
-        ("<mouse-1>" . pdf-occur-goto-occurrence)
+        ;; pdf-occur-buffer-mode-map - not defined at this point
+        ;; :map pdf-occur-buffer-mode-map
+        ;; ;; allows clicking on the pdf occur matches with the mouse
+        ;; ;; an alternative is to use "RET" or use the "peek" feature C-o,
+        ;; ;; where the active buffer remains the occur buffer. C-n C-o
+        ;; ("<mouse-1>" . pdf-occur-goto-occurrence)
         )
   :config
+
+  (with-eval-after-load 'pdf-occur
+    (define-key pdf-occur-buffer-mode-map
+      ;; allows clicking on the pdf occur matches with the mouse
+      ;; an alternative is to use "RET" or use the "peek" feature C-o,
+      ;; where the active buffer remains the occur buffer. C-n C-o
+      (kbd "<mouse-1>") 'pdf-occur-goto-occurrence))
+
   (use-package saveplace-pdf-view ;; remembers the last location in the pdf file
     :ensure t)
-    (unless (daemonp)
-      (pdf-tools-install))
-    (setq-default pdf-view-display-size 'fit-page))
+
+  (pdf-tools-install)
+
+  (setq-default pdf-view-display-size 'fit-page))
 
 ;; (use-package persp-mode :ensure t
 ;;   ; is a fork of perspective.el (they can't be installed at the same time.
