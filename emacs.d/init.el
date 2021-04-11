@@ -616,6 +616,12 @@ to obtain ripgrep results."
 
 (use-package diminish :ensure t)
 
+(use-package dired :ensure nil
+  :config
+  ;; human readable sizes
+  (setq dired-listing-switches "-alh")
+  )
+
 (use-package dracula-theme :ensure t)
 
 (use-package dumb-jump
