@@ -72,6 +72,13 @@
 
 
 
+;; TODO check if those key-bindings have already been added upstream
+(define-key isearch-mode-map (kbd "M-<") 'isearch-beginning-of-buffer)
+(define-key isearch-mode-map (kbd "M->") 'isearch-end-of-buffer)
+;; TODO add more keybindings to isearch-mode-map, scrolling commands, ...
+
+
+
 (defun my-c-mode-common-hook ()
   (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
   (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
