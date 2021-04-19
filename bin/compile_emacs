@@ -55,13 +55,14 @@ set -e
 ./configure \
     CFLAGS="-march=native -O3" \
     --prefix=/opt/emacs \
-    --with-x-toolkit=lucid \
+    --with-pgtk \
     --with-xpm \
     --with-jpeg \
     --with-gif \
     --with-tiff \
     --with-modules \
     --with-json
+#    --with-x-toolkit=pgtk \
 # --with-x-toolkit=gtk3 \
 #    --with-xml2 \
 #    --with-cairo \
