@@ -2306,6 +2306,16 @@ shown in the section buffer."
 
 (use-package visual-fill-column :ensure t)
 
+(use-package visual-regexp :ensure t
+  ;; this package was mentioned in prod's talk about regexp in emacs:
+  ;; https://protesilaos.com/codelog/2020-01-23-emacs-regexp-primer/
+  :config
+  (define-key global-map (kbd "C-c r") 'vr/replace)
+  (define-key global-map (kbd "C-c q") 'vr/query-replace)
+  ;; if you use multiple-cursors, this is for you:
+  (define-key global-map (kbd "C-c m") 'vr/mc-mark)
+  )
+
 (use-package vterm
   :ensure t)
 
