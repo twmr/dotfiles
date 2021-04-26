@@ -335,6 +335,9 @@ Intended as a value for `bug-reference-url-format'."
 ;;   (progn
 ;;     (global-auto-complete-mode)))
 
+(use-package autorevert
+  :diminish)
+
 (use-package avy
   :ensure t
   :bind
