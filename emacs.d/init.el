@@ -8,6 +8,20 @@
 (require 'package)
 (require 'bug-reference)
 
+;; straight.el
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
+
 (defvar thi::cache-file-dir
   (expand-file-name
    (concat (xdg-cache-home) "/emacs")))
@@ -115,13 +129,6 @@
 ;; see https://www.reddit.com/r/emacs/comments/53zpv9/how_do_i_get_emacs_to_stop_adding_custom_fields/
 ;; (setq custom-file (concat thi::config-dir "/custom.el"))
 (setq custom-file "/dev/null")
-
-(setq package-archives
-      '(
-        ("celpa" . "https://celpa.conao3.com/packages/") ;; contains new origami.el
-        ("melpa" . "https://melpa.org/packages/")
-        ("gnu" . "https://elpa.gnu.org/packages/")
-        ("elpy" . "https://jorgenschaefer.github.io/packages/")))
 
 ;; (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
@@ -294,43 +301,42 @@ Intended as a value for `bug-reference-url-format'."
       `(load ,(concat thi::config-dir "/" file)))))
 
 ;; Bootstrap `use-package'
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; (unless (package-installed-p 'use-package)
+;;   (package-refresh-contents)
+;;   (package-install 'use-package))
 
 (eval-when-compile
-  (package-initialize)
   (require 'use-package))
 
-(use-package quelpa-use-package :ensure t)
+;; (use-package quelpa-use-package)
 
 
 ;; byte compiler warnings
 ;; (use-package 2048
-;;   :ensure t)
+;;  )
 
 (use-package ace-window
-  :ensure t
+
   :custom
   (aw-keys '(?a ?s ?d ?f ?g ?h ?j ?k ?l))
   (aw-dispatch-always t)
   (aw-always-on t)
   :bind (("M-o" . ace-window)))
 
-;; (use-package anaconda-mode :ensure t)
+;; (use-package anaconda-mode)
 
-;; (use-package ace-jump-mode :ensure t :defer t
+;; (use-package ace-jump-mode :defer t
 ;;   :init
 ;;   (progn
 ;;     (autoload 'ace-jump-mode "ace-jump-mode" nil t)
 ;;     (bind-key "C-." 'ace-jump-mode)))
 
 ;; (use-package all-the-icons-ivy
-;;   :ensure t
+;;
 ;;   :config
 ;;   (all-the-icons-ivy-setup))
 
-;; (use-package auto-complete :ensure t
+;; (use-package auto-complete
 ;;   :init
 ;;   (progn
 ;;     (global-auto-complete-mode)))
@@ -339,25 +345,25 @@ Intended as a value for `bug-reference-url-format'."
   :diminish)
 
 (use-package avy
-  :ensure t
+
   :bind
   (("M-g f" . avy-goto-line))
   )
 
 ;; (use-package better-shell
-;;     :ensure t
+;;
 ;;     :bind (("C-'" . better-shell-shell)
 ;;            ("C-;" . better-shell-remote-open)))
 
 (use-package bicycle
   ;; for emacs-lisp buffers
-  :ensure t
+
   :after outline
   :bind (:map outline-minor-mode-map
               ([C-tab] . bicycle-cycle)
               ([S-tab] . bicycle-cycle-global)))
 
-;; (use-package bpr :ensure t
+;; (use-package bpr
 ;;   :config
 ;;   (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
 ;;   (setq bpr-process-mode #'comint-mode))
@@ -369,18 +375,18 @@ Intended as a value for `bug-reference-url-format'."
   ;; Automatically set `bug-reference-url-format' and enable
   ;; `bug-reference-prog-mode' in Emacs buffers from Github repositories.
   ;; https://github.com/arnested/bug-reference-github
-  :ensure t
+
   :disabled t
   :config
   (add-hook 'prog-mode-hook 'bug-reference-github-set-url-format)
   )
 
-(use-package cargo :ensure t)
-(use-package cmake-mode :ensure t :defer t)
-(use-package color-identifiers-mode :ensure t :defer t)
-(use-package color-theme-sanityinc-tomorrow :ensure t)
+(use-package cargo)
+(use-package cmake-mode :defer t)
+(use-package color-identifiers-mode :defer t)
+(use-package color-theme-sanityinc-tomorrow)
 
-(use-package company :ensure t :defer t
+(use-package company :defer t
   :config
   (global-company-mode))
 ;;   :config (progn
@@ -443,12 +449,12 @@ Intended as a value for `bug-reference-url-format'."
     (set-char-table-parent composition-ligature-table composition-function-table))
   )
 
-;;(use-package cython-anaconda :ensure t
+;;(use-package cython-anaconda
 ;;  :config
 ;;  (add-hook 'python-mode-hook 'anaconda-mode))
 
 (use-package counsel
-  :ensure t
+
   :bind (("C-h v" . counsel-describe-variable)
          ("C-h f" . counsel-describe-function)
          ("C-h s" . counsel-info-lookup-symbol)
@@ -469,7 +475,7 @@ Intended as a value for `bug-reference-url-format'."
   ;; C-c p d    counsel-projectile-find-dir
   ;; C-c p s r  counsel-projectile-rg
   ;; C-c p p    counsel-projectile-switch-project
-  :ensure t
+
   :after (counsel)
   :config (progn
             (counsel-projectile-mode)
@@ -477,14 +483,14 @@ Intended as a value for `bug-reference-url-format'."
             )
   )
 
-(use-package cython-mode :ensure t :defer t)
+(use-package cython-mode :defer t)
 
 (use-package dap-mode
-  :ensure t)
+ )
 
 ;; alternative to "rg"
 ;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
-(use-package deadgrep :ensure t
+(use-package deadgrep
   ;; NOTE on debian systems you have to install the ripgrep binary from https://github.com/BurntSushi/ripgrep/releases, otherwise rg --pcre2 ...  returns PCRE2 is not available in this build of ripgrep
   ;; deadgrep used rg --pcre2!!
 
@@ -613,13 +619,13 @@ to obtain ripgrep results."
   )
 
 ;; see https://ligerlearn.com/using-emacs-edit-files-within-docker-containers/
-(use-package docker-tramp :ensure t :defer t)
+(use-package docker-tramp :defer t)
 
-(use-package dockerfile-mode :ensure t :defer t)
+(use-package dockerfile-mode :defer t)
 
-(use-package doom-themes :ensure t)
+(use-package doom-themes)
 
-(use-package diminish :ensure t)
+(use-package diminish)
 
 (use-package dired :ensure nil
   :config
@@ -627,10 +633,10 @@ to obtain ripgrep results."
   (setq dired-listing-switches "-alh")
   )
 
-(use-package dracula-theme :ensure t)
+(use-package dracula-theme)
 
 (use-package dumb-jump
-  :ensure t
+
   :demand t
   :custom
   (dumb-jump-force-searcher 'rg)
@@ -671,7 +677,7 @@ to obtain ripgrep results."
   )
 
 (use-package ediff
-  :ensure t
+
   :custom
   ;;https://oremacs.com/2015/01/17/setting-up-ediff/
   (ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -691,7 +697,7 @@ to obtain ripgrep results."
   ;; rst.el docu: https://docutils.readthedocs.io/en/sphinx-docs/user/emacs.html
   ;; run C-c e to edit docstring in rst-mode buffer
   ;; Commit changes wich C-c C-c
-  :ensure t
+
   :config
   (progn
     ;; https://github.com/Fanael/edit-indirect/issues/6
@@ -759,23 +765,23 @@ to obtain ripgrep results."
     ))
 
 ;; (use-package edwina
-;;   :ensure t
+;;
 ;;   :config
 ;;   (setq display-buffer-base-action '(display-buffer-below-selected))
 ;;   (edwina-setup-dwm-keys)
 ;;   (edwina-mode 1))
 
-(use-package eglot :ensure t :defer t
+(use-package eglot :defer t
   :config
   (add-to-list 'eglot-server-programs
                `(python-mode . ("pyls" "-v" "--tcp" "--host"
                                 "localhost" "--port" :autoport))))
 
-;; (use-package elpy :ensure t
+;; (use-package elpy
 ;;   :init
 ;;   (elpy-enable))
 
-(use-package envrc :ensure t
+(use-package envrc
   ;;A GNU Emacs library which uses direnv to set environment variables on a
   ;;per-buffer basis. This means that when you work across multiple projects
   ;;which have .envrc files, all processes launched from the buffers "in"
@@ -788,7 +794,7 @@ to obtain ripgrep results."
   )
 
 (use-package equake
-    :ensure t
+
     :config  ; some examples of optional settings follow:
     (global-set-key (kbd "C-x C-c") 'equake-check-if-in-equake-frame-before-closing) ; prevent accidental frame-closure
     (setq equake-size-width 0.99) ; set width a bit less than full-screen (prevent 'overflow' on multi-monitor)
@@ -796,7 +802,7 @@ to obtain ripgrep results."
     (set-face-attribute 'equake-buffer-face 'nil :inherit 'default :family "DejaVu Sans Mono" :background "#000022" :foreground "white"))
 
 (use-package evil
-  :ensure t
+
   :config (progn
             (setq evil-default-state 'emacs)
             (cl-loop for (mode . state) in
@@ -810,7 +816,7 @@ to obtain ripgrep results."
                      do (evil-set-initial-state mode state))))
 
 (use-package ethan-wspace
-  :ensure t
+
   :defer t
   :diminish
   :custom
@@ -824,18 +830,18 @@ to obtain ripgrep results."
     (add-hook 'sh-mode-hook 'thi::tabs-are-less-evil)
     ))
 
-(use-package expand-region :ensure t :defer t
+(use-package expand-region :defer t
   :bind
   ;;If you expand too far, you can contract the region by pressing - (minus key), or by prefixing the shortcut you defined with a negative argument: C-- C-=.
   (("C-=" . er/expand-region)))
 
-(use-package flx :ensure t)
-(use-package flx-ido :ensure t
+(use-package flx)
+(use-package flx-ido
   :config
   (flx-ido-mode))
 
 (use-package flycheck
-  :ensure t
+
   :custom
   (flycheck-emacs-lisp-initialize-packages t) ;; fixes an unkown pkg error with (require 'hydra) in gerrit.el
   (flycheck-python-mypy-executable (expand-file-name "~/miniconda3/bin/mypy"))
@@ -877,28 +883,28 @@ See URL `https://www.pylint.org/'."
 
 
 (use-package flycheck-package
-  :ensure t)
+ )
 
 (use-package flycheck-pycheckers
-  :ensure t
+
   :disabled t
   ;; TODO replace source-inplace in definition of pycheckers checker by source-original
   :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
 
 (use-package forge
-  :ensure t
+
   :after magit)
 
 ;;
 (use-package reformatter
-  :ensure t
+
   )
 
 
 ;; TODO pick either format-all or reformatter.el from spurcell
 ;; there is also: https://github.com/raxod502/apheleia
 (use-package format-all
-  :ensure t
+
   ;; this package should soon support chaining of multiple formatters
   ;; e.g. isort, yapf
   )
@@ -1008,7 +1014,7 @@ shown in the section buffer."
     ))
 
 (use-package git-commit
-  :ensure t
+
   :bind (:map git-commit-mode-map
               ("C-c C-f" . git-commit-fix-jira-insert)
               ("C-c C-r" . git-commit-related-jira-insert))
@@ -1051,7 +1057,7 @@ shown in the section buffer."
 
 ;; Pop up last commit information of current line
 (use-package git-messenger
-  :ensure t
+
   :bind (:map vc-prefix-map
          ("p" . git-messenger:popup-message)
          :map git-messenger-map
@@ -1074,19 +1080,19 @@ shown in the section buffer."
   ;; preview markdown files
   ;; https://github.com/seagle0128/grip-mode
   ;; requires: pip install grip
-  :ensure t
+
   :bind (:map markdown-mode-command-map
          ("g" . grip-mode)))
 
 (use-package groovy-mode
-  :ensure t
+
   :defer t
   :mode "Jenkinsfile")
 
 ;; TODO help-mode+ is unavailable??
-;; (use-package help-mode+ :ensure t)
+;; (use-package help-mode+)
 
-(use-package helpful :ensure t
+(use-package helpful
   :disabled t
   :bind (
   ;; Note that the built-in `describe-function' includes both functions
@@ -1097,19 +1103,19 @@ shown in the section buffer."
   ("C-h v" . helpful-variable)
   ("C-h k" . helpful-key)))
 
-(use-package highlight-function-calls :ensure t
+(use-package highlight-function-calls
   :config
   (add-hook 'emacs-lisp-mode-hook 'highlight-function-calls-mode))
 
-(use-package highlight-indentation :ensure t)
+(use-package highlight-indentation)
 
 (use-package helm
-  :ensure t
+
   :bind (("C-x C-h" . helm-mini))
   :config
   (setq helm-mode-fuzzy-match t))
 
-(use-package helm-projectile :ensure t
+(use-package helm-projectile
   :config
   ;; https://www.reddit.com/r/emacs/comments/3m8i5r/helmprojectile_quickly_findcreate_new_file_in/
   ;; (helm-projectile-on)
@@ -1121,7 +1127,7 @@ shown in the section buffer."
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
   )
 
-(use-package hydra :ensure t
+(use-package hydra
   :init
   (progn
     (defun thi::text-scale-reset ()
@@ -1263,7 +1269,7 @@ shown in the section buffer."
     ))
 
 (use-package idle-highlight-mode
-  :ensure t
+
   :config
   ;; this mode highlights selected (via point) symbols
   ;; TODO give https://github.com/wolray/symbol-overlay a try (does it do the same?)
@@ -1282,7 +1288,7 @@ shown in the section buffer."
     (dired-at-point default-directory)))
 
 (use-package imenu-anywhere
-  :ensure t
+
   :defer t
   :init (global-set-key (kbd "C-.") 'imenu-anywhere)
   :config (defun jcs-use-package ()
@@ -1293,7 +1299,7 @@ shown in the section buffer."
 
 (use-package ivy
   ;; see https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
-  :ensure t
+
   :diminish
   ;; nice things about ivy:
   ;; *) to keep the completion buffer open (even after a candidate was selected) type
@@ -1341,11 +1347,11 @@ shown in the section buffer."
 
 (use-package ivy-hydra
   ;; type C-o to see hydra help in completion list
-  :ensure t
+
   :after ivy)
 
 (use-package ivy-rich
-  :ensure t
+
   :after ivy
   :custom
   (ivy-rich-path-style 'abbrev) ;; To abbreviate paths using abbreviate-file-name (e.g. replace “/home/username” with “~”)
@@ -1373,11 +1379,11 @@ shown in the section buffer."
 
 
 (use-package kubernetes
-  :ensure t)
+ )
 
 
 ;; (use-package jabber
-;;   :ensure t
+;;
 ;;   :if (string= (system-name) "PC-16609")
 ;;   :config (progn
 ;;             (setq jabber-invalid-certificate-servers '("srv-voip-04"))
@@ -1428,7 +1434,7 @@ shown in the section buffer."
 ;;             (setq jabber-roster-line-format  " %c %-25n %u %-8s  %S")
 ;;             ))
 
-(use-package jedi :ensure t
+(use-package jedi
   :disabled t
   ;; redefine jedi's C-. (jedi:goto-definition)
   ;; to remember position, and set C-, to jump back
@@ -1440,16 +1446,16 @@ shown in the section buffer."
     (add-hook 'python-mode-hook 'jedi:setup)
     ))
 
-(use-package json-mode :ensure t :defer t)
+(use-package json-mode :defer t)
 
 (use-package link-hint
-  :ensure t
+
   :bind
   ("C-c l o" . link-hint-open-link)
   ("C-c l c" . link-hint-copy-link))
 
 (use-package lsp-mode
-  :ensure t
+
   :init
   ;; Set it to big number(100mb) like most of the popular starter kits like
   ;; Spacemacs/Doom/Prelude, etc do:
@@ -1481,7 +1487,7 @@ shown in the section buffer."
   )
 
 (use-package lsp-ui
-  :ensure t
+
   :config
   ;; make sure we have lsp-imenu everywhere we have LSP
   (require 'lsp-ui-imenu)
@@ -1496,7 +1502,7 @@ shown in the section buffer."
   ;; bindings: C-c M-g: magit-file-dispatch (use it in a buffer)
   ;;           C-x g: magit-status
   ;;           C-x M-g: magit-dispatch
-  :ensure t
+
   :bind (
          (("C-x g" . magit-status)) ;; someone bound C-x g to revert-buffer ....
          ("C-c g" . 'magit-file-dispatch))
@@ -1521,9 +1527,9 @@ shown in the section buffer."
     (magit-git-command "git switch `git rev-parse --abbrev-ref --symbolic-full-name @{u} | sed 's|^origin/||'`")))
 
 (use-package magit-libgit
-  :ensure t)
+ )
 
-(use-package multiple-cursors :ensure t :defer t
+(use-package multiple-cursors :defer t
   :bind (("C->"       . mc/mark-next-like-this)
          ("C-<"       . mc/mark-previous-like-this)
          ("C-c C-<"   . mc/mark-all-like-this)
@@ -1556,7 +1562,7 @@ shown in the section buffer."
   ;;     It does however include the heading itself, not just the text.
   ;;     widen: (C-x n w) will widen the view again.
 
-  :ensure t
+
   :custom
   ;; this will turn off asking for a confirmation
   ;; (org-agenda-files (quote ("~/gitrepos/orgnotes/studium.org"
@@ -1708,7 +1714,7 @@ shown in the section buffer."
   )
 
 ;; (use-package org-pdftools
-;;   :ensure t)
+;;  )
 
 ;; (use-package org-projectile
 ;;   :bind (("C-c n p" . org-projectile-project-todo-completing-read)
@@ -1718,10 +1724,10 @@ shown in the section buffer."
 ;;     (setq org-projectile-projects-file "~/projects.org")
 ;;     (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
 ;;     (push (org-projectile-project-todo-entry) org-capture-templates))
-;;   :ensure t)
+;;  )
 
 (use-package origami
-  :ensure t
+
   :bind
   ("C-M-s" . origami-toggle-node)
   ("C-M-h" . origami-close-all-nodes)
@@ -1730,19 +1736,19 @@ shown in the section buffer."
   ;;(origami-mode . origami-close-all-nodes)
   )
 
-(use-package package-lint :ensure t :defer t)
+(use-package package-lint :defer t)
 
-(use-package page-break-lines :ensure t :defer t
+(use-package page-break-lines :defer t
   :config
   (global-page-break-lines-mode))
 
-;; (use-package paradox :ensure t :defer t
+;; (use-package paradox :defer t
 ;;   :custom
 ;;   (paradox-github-token t)
 ;;   :config
 ;;   (setq paradox-execute-asynchronously t))
 
-(use-package paredit :ensure t)
+(use-package paredit)
 
 (use-package pdf-tools
   ;; new maintainer: https://github.com/vedang/pdf-tools
@@ -1768,7 +1774,7 @@ shown in the section buffer."
 
   :commands (pdf-view-mode) ;; otherwise void-function pdf-view-mode is
                             ;; raised when a PDF file is opened
-  :ensure t
+
   :defer t
   :bind (:map pdf-view-mode-map
         ("C-s" . isearch-forward)
@@ -1809,19 +1815,19 @@ shown in the section buffer."
       (kbd "<mouse-1>") 'pdf-occur-goto-occurrence))
 
   (use-package saveplace-pdf-view ;; remembers the last location in the pdf file
-    :ensure t)
+   )
 
   (pdf-tools-install)
 
   (setq-default pdf-view-display-size 'fit-page))
 
-;; (use-package persp-mode :ensure t
+;; (use-package persp-mode
 ;;   ; is a fork of perspective.el (they can't be installed at the same time.
 ;;   :config
 ;;   (persp-mode)
 ;;   )
 
-(use-package perspective :ensure t
+(use-package perspective
   ;; Prefix key is C-x x
   ;; s — persp-switch: Query a perspective to switch to, or create
   ;; k — persp-remove-buffer: Query a buffer to remove from current perspective
@@ -1850,7 +1856,7 @@ shown in the section buffer."
   ;; (project-persist-mode 1) ;; C-c P n; C-c P f
   )
 
-(use-package pip-requirements :ensure t :defer t)
+(use-package pip-requirements :defer t)
 
 (use-package prog-mode
   :config
@@ -1891,7 +1897,7 @@ shown in the section buffer."
   (add-hook 'prog-mode-hook #'outline-minor-mode)
   (add-hook 'prog-mode-hook #'hs-minor-mode))
 
-(use-package projectile :ensure t
+(use-package projectile
   :custom (projectile-completion-system 'ivy)
   :bind (("C-x f" . projectile-find-file))
   :config (progn
@@ -1912,13 +1918,13 @@ shown in the section buffer."
             ))
 
 
-(use-package project-persist :ensure t :defer t
+(use-package project-persist :defer t
   :config
   (project-persist-mode t) ;; C-c P n; C-c P f
 )
 
 (use-package protobuf-mode
-  :ensure t
+
   :config
   ;; (define-key protobuf-mode-map (kbd "M-.") #'dumb-jump-go)
   ;; (define-key protobuf-mode-map (kbd "M-,") #'dumb-jump-back)
@@ -1928,10 +1934,10 @@ shown in the section buffer."
                 (setq c-basic-offset 4)
                 (setq tab-width 4)))))
 
-(use-package pyimport :ensure t) ;; is solely (rip)grep based
+(use-package pyimport) ;; is solely (rip)grep based
 ;; https://github.com/anachronic/importmagic.el requires a python interpreter
 
-(use-package py-isort :ensure t)
+(use-package py-isort)
 
 (use-package python
   :custom
@@ -1984,7 +1990,7 @@ shown in the section buffer."
   ;; currently doesn't support numpydoc keywords.
 
   ;; it also supports intelligent re-filling of docstrings.
-  :ensure t
+
   :custom
   (python-docstring-sentence-end-double-space nil)
   ;; :config
@@ -1993,7 +1999,7 @@ shown in the section buffer."
   ;; (python-docstring-install))
 )
 ;; (use-package python-pytest
-;;   :ensure t
+;;
 ;;   :after python
 ;;   ;; see https://shahinism.com/en/posts/emacs-python-pytest/
 ;;   :custom
@@ -2014,13 +2020,13 @@ shown in the section buffer."
 ;;   ;;   "ptl" 'python-pytest-last-failed)
 ;;   )
 
-(use-package python-switch-quotes :ensure t :defer t)
+(use-package python-switch-quotes :defer t)
 
-(use-package rainbow-delimiters :ensure t
+(use-package rainbow-delimiters
   :config
   (add-hook 'emacs-lisp-mode-hook #'rainbow-delimiters-mode))
 
-(use-package rg :ensure t
+(use-package rg
   ;; https://github.com/dajva/rg.el
   ;; select word and type "M-s d"
   ;; In *rg* buffer:
@@ -2038,7 +2044,7 @@ shown in the section buffer."
     (rg-define-toggle "--context 3" (kbd "C-c c"))
   ))
 
-(use-package rust-mode :ensure t)
+(use-package rust-mode)
 
 ;; Package by Ian Eure (ieure on GitHub)
 (use-package scratch
@@ -2059,7 +2065,7 @@ shown in the section buffer."
   :hook (scratch-create-buffer-hook . prot/scratch-buffer-setup)
   :bind ("C-c s" . scratch))
 
-(use-package smart-mode-line :ensure t
+(use-package smart-mode-line
   :custom
   (sml/no-confirm-load-theme t)
   :config
@@ -2113,10 +2119,10 @@ shown in the section buffer."
 
 
 ;; does this improve counsel-M-x?
-(use-package smex :ensure t)
+(use-package smex)
 
 ;; (use-package spaceline
-;;   :ensure t
+;;
 ;;   :demand t
 ;;   :init
 ;;   (setq powerline-default-separator 'arrow-fade)
@@ -2134,7 +2140,7 @@ shown in the section buffer."
   ;; TODO keybindigs for spell-fu-word-add
   ;; TODO ignore URLs
   ;; TODO ignore commented-out code - possible?
-  :ensure t
+
   :custom
   (
    ;; alternative in https://gitlab.com/ideasman42/emacs-spell-fu/-/issues/4
@@ -2169,7 +2175,7 @@ shown in the section buffer."
   ;;            snippets: idn, fdn, mdn,
   ;;       TODO they do not support type annotations
   ;;       TODO sync not supported?
-  :ensure t
+
 
 
   :config
@@ -2196,13 +2202,13 @@ shown in the section buffer."
                      "\n")))))
     ))
 
-(use-package ssh-config-mode :ensure t)
+(use-package ssh-config-mode)
 
 ;; requires semantic-mode to be enabled
-(use-package stickyfunc-enhance :ensure t)
+(use-package stickyfunc-enhance)
 
 (use-package swiper
-  :ensure t
+
   :bind (("C-s" . swiper)
          ;; inside swiper it is possible to preview search result in separate buffer
          ;; -> C-c C-o
@@ -2226,7 +2232,7 @@ shown in the section buffer."
   ;;            ("C-." (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'symbol))))))
   ;;            ((kbd "M-.") (lambda () (interactive) (insert (format "\\<%s\\>" (with-ivy-window (thing-at-point 'word))))))
 
-(use-package typescript-mode :ensure t)
+(use-package typescript-mode)
 
 (use-package thi-projects
   :after (hydra helm)
@@ -2237,13 +2243,13 @@ shown in the section buffer."
          ("<f12>" . thi::directorychooser)))
 
 (use-package transient
-  :ensure t
+
   :custom
   ;; for gerrit.el
   (transient-history-limit 100))
 
 (use-package tree-sitter
-  :ensure t
+
   :config
   (add-hook 'python-mode-hook #'tree-sitter-mode)
 
@@ -2284,12 +2290,12 @@ shown in the section buffer."
   )
 
 (use-package tree-sitter-langs
-  :ensure t)
+ )
 
 (use-package undo-tree
   ;; C-/ undo (without the undo tree graph) !!!
   ;; M-_ redo (without the undo tree graph) !!!
-  :ensure t
+
   :custom (undo-tree-visualizer-mode t)
   :diminish
   :config
@@ -2309,9 +2315,9 @@ shown in the section buffer."
                      'org-meta-line
                      'org-document-info-keyword))))
 
-(use-package visual-fill-column :ensure t)
+(use-package visual-fill-column)
 
-(use-package visual-regexp :ensure t
+(use-package visual-regexp
   ;; this package was mentioned in prod's talk about regexp in emacs:
   ;; https://protesilaos.com/codelog/2020-01-23-emacs-regexp-primer/
   :config
@@ -2321,24 +2327,21 @@ shown in the section buffer."
   (define-key global-map (kbd "C-c m") 'vr/mc-mark)
   )
 
-(use-package vterm
-  :ensure t)
+(use-package vterm)
 
 (use-package vterm-toggle
-  :ensure t
   :config
   (global-set-key [f2] #'vterm-toggle)
   (global-set-key [C-f2] #'vterm-toggle-cd))
 
-(use-package wgrep-ag :ensure t)
+(use-package wgrep-ag)
 
-(use-package which-key :ensure t
+(use-package which-key
   :config
     (setq which-key-paging-key "<f5>")
   )
 
 (use-package winum
-  :ensure t
   :init
   (setq winum-keymap
     (let ((map (make-sparse-keymap)))
@@ -2361,9 +2364,9 @@ shown in the section buffer."
     (winum-mode))
   )
 
-(use-package yaml-mode :ensure t :defer t)
+(use-package yaml-mode :defer t)
 
-(use-package yapfify :ensure t :defer t
+(use-package yapfify :defer t
   :custom
   (yapfify-executable (expand-file-name "~/miniconda3/bin/yapf"))
   )
@@ -2372,7 +2375,7 @@ shown in the section buffer."
   ;; what do I expect from this config?
   ;; pdb [TAB] in python buffers expands
   ;; ifm [TAB] in python buffers expands
-  :ensure t
+
   :diminish yas-minor-mode
   :config
   (progn
@@ -2382,10 +2385,9 @@ shown in the section buffer."
   )
 
 ;; for pdb snippet type tr[TAB] in a python-mode buffer
-(use-package yasnippet-snippets :ensure t)
+(use-package yasnippet-snippets)
 
 (use-package zop-to-char
-  :ensure t
   :defer t
   :init
   (progn
