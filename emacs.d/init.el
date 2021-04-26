@@ -2040,6 +2040,11 @@ shown in the section buffer."
 
 (use-package rust-mode :ensure t)
 
+;; Persist history over Emacs restarts.
+(use-package savehist
+  :init
+  (savehist-mode))
+
 ;; Package by Ian Eure (ieure on GitHub)
 (use-package scratch
   :ensure

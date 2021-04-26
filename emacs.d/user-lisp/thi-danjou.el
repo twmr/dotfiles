@@ -14,7 +14,6 @@
 
 ;; (display-time-mode 1)
 (global-hi-lock-mode 1)                 ; highlight stuff
-(savehist-mode 1)
 
 (delete-selection-mode 1)               ; Transient mark can delete/replace
 ;; (global-hl-line-mode 1)                 ; Highlight the current line
