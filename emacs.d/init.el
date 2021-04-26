@@ -117,9 +117,11 @@
 (setq custom-file "/dev/null")
 
 (setq package-archives
-   '(("melpa" . "https://melpa.org/packages/")
-     ("gnu" . "https://elpa.gnu.org/packages/")
-     ("elpy" . "https://jorgenschaefer.github.io/packages/")))
+      '(
+        ("celpa" . "https://celpa.conao3.com/packages/") ;; contains new origami.el
+        ("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")
+        ("elpy" . "https://jorgenschaefer.github.io/packages/")))
 
 ;; (load custom-file 'noerror)
 (mkdir thi::cache-file-dir t)
