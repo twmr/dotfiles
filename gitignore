@@ -1,3 +1,4 @@
 .idea/
 .dumbjumpignore
 .mypy_cache/
+.coverage.*
