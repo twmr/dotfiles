@@ -889,20 +889,6 @@ See URL `https://www.pylint.org/'."
   :ensure t
   :after magit)
 
-;;
-(use-package reformatter
-  :ensure t
-  )
-
-
-;; TODO pick either format-all or reformatter.el from spurcell
-;; there is also: https://github.com/raxod502/apheleia
-(use-package format-all
-  :ensure t
-  ;; this package should soon support chaining of multiple formatters
-  ;; e.g. isort, yapf
-  )
-
 (use-package gerrit
   :load-path "~/gitrepos/gerrit.el"
   :custom
@@ -1931,8 +1917,6 @@ shown in the section buffer."
 (use-package pyimport :ensure t) ;; is solely (rip)grep based
 ;; https://github.com/anachronic/importmagic.el requires a python interpreter
 
-(use-package py-isort :ensure t)
-
 (use-package python
   :custom
   (python-fill-docstring-style 'pep-257)
@@ -2368,11 +2352,6 @@ shown in the section buffer."
 
 (use-package yaml-mode :ensure t :defer t)
 
-(use-package yapfify :ensure t :defer t
-  :custom
-  (yapfify-executable (expand-file-name "~/miniconda3/bin/yapf"))
-  )
-
 (use-package yasnippet
   ;; what do I expect from this config?
   ;; pdb [TAB] in python buffers expands
@@ -2409,6 +2388,37 @@ shown in the section buffer."
   (setq auto-save-file-name-transforms
         `((".*" ,thi::cache-file-dir t))))
 
+
+;;; Code formatting
+
+;; I want to run yapf, isort and unify (unify can also be called as part of
+;; the pre-commit hook) ideally using a single elisp pkg in my python mode
+;; buffers in my sandboxes.  Sometimes I also want to use it in python
+;; buffers outside the sandbox.
+;;
+;; Currently I use py-isort and yapfify
+;;
+;; TODO pick either format-all or reformatter.el from spurcell
+;; there is also: https://github.com/raxod502/apheleia
+
+(use-package reformatter
+  :ensure t
+  )
+
+(use-package format-all
+  :ensure t
+  ;; this package should soon support chaining of multiple formatters
+  ;; e.g. isort, yapf
+  )
+
+(use-package py-isort :ensure t)
+
+(use-package yapfify :ensure t :defer t
+  :custom
+  (yapfify-executable (expand-file-name "~/miniconda3/bin/yapf"))
+  )
+
+;;; Other
 
 (load "thi-defuns")
 (load "thi-global")
