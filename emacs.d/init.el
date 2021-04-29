@@ -308,7 +308,9 @@ Intended as a value for `bug-reference-url-format'."
     (eval-buffer)
     (quelpa-self-upgrade)))
 
-(quelpa '(smart-mode-line :fetcher github :repo "thisch/smart-mode-line"))
+;; this was only needed because
+;; https://github.com/Malabarba/smart-mode-line/pull/249 was not merged
+;; (quelpa '(smart-mode-line :fetcher github :repo "thisch/smart-mode-line"))
 
 (setq use-package-ensure-function 'quelpa)
 
