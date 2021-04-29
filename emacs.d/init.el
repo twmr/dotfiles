@@ -302,8 +302,17 @@ Intended as a value for `bug-reference-url-format'."
   (package-initialize)
   (require 'use-package))
 
-(use-package quelpa-use-package :ensure t)
+(unless (package-installed-p 'quelpa)
+  (with-temp-buffer
+    (url-insert-file-contents "https://raw.githubusercontent.com/quelpa/quelpa/master/quelpa.el")
+    (eval-buffer)
+    (quelpa-self-upgrade)))
 
+(quelpa '(smart-mode-line :fetcher github :repo "thisch/smart-mode-line"))
+
+(setq use-package-ensure-function 'quelpa)
+
+(use-package quelpa-use-package :ensure t)
 
 ;; byte compiler warnings
 ;; (use-package 2048
@@ -1709,7 +1718,7 @@ shown in the section buffer."
 ;;   :ensure t)
 
 (use-package origami
-  :ensure t
+  :quelpa (origami :fetcher github :repo "emacs-origami/origami.el")
   :bind
   ("C-M-s" . origami-toggle-node)
   ("C-M-h" . origami-close-all-nodes)
@@ -2050,7 +2059,7 @@ shown in the section buffer."
   :hook (scratch-create-buffer-hook . prot/scratch-buffer-setup)
   :bind ("C-c s" . scratch))
 
-(use-package smart-mode-line :ensure t
+(use-package smart-mode-line
   :custom
   (sml/no-confirm-load-theme t)
   :config
