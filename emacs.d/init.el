@@ -2413,6 +2413,10 @@ shown in the section buffer."
 ;;
 ;; TODO pick either format-all or reformatter.el from spurcell
 ;; there is also: https://github.com/raxod502/apheleia
+;; https://github.com/raxod502/apheleia/issues/31#issuecomment-813065581
+
+(use-package apheleia
+    :quelpa (apheleia :fetcher github :repo "raxod502/apheleia"))
 
 (use-package reformatter
   :ensure t
