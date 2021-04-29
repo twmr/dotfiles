@@ -636,6 +636,8 @@ to obtain ripgrep results."
   (dumb-jump-force-searcher 'rg)
   (dumb-jump-selector 'ivy)
   :config
+  ;;
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read)
   (add-to-list 'xref-backend-functions #'dumb-jump-xref-activate)
 
   ;; TODO adapt this s.t. it can be used instead of the xref-completion buffer
