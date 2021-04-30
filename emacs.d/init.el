@@ -2062,6 +2062,7 @@ shown in the section buffer."
   :bind ("C-c s" . scratch))
 
 (use-package smart-mode-line
+  :ensure t
   :custom
   (sml/no-confirm-load-theme t)
   :config
