@@ -62,22 +62,22 @@ This command is similar to `find-file-at-point' but without prompting for confir
     (set-window-margins nil (car (window-margins)) new-right)
     (set-window-fringes nil (car (window-fringes)) 2)))
 
-(define-minor-mode wrap-column-mode
-    "Wrap the text at `fill-column'.
-Works by adjusting the right margin."
-  nil nil nil
-  (if wrap-column-mode
-      (progn
-        (visual-line-mode 1)
-        (add-hook 'window-configuration-change-hook
-                  'wc/narrow-window nil t)
-        (wc/narrow-window))
-      (progn
-        (remove-hook 'window-configuration-change-hook
-                     'wc/narrow-window t)
-        (set-window-margins nil (car (window-margins)) nil)
-        (set-window-fringes nil (car (window-fringes))
-                                (car (window-fringes))))))
+;; (define-minor-mode wrap-column-mode
+;;     "Wrap the text at `fill-column'.
+;; Works by adjusting the right margin."
+;;   nil nil nil
+;;   (if wrap-column-mode
+;;       (progn
+;;         (visual-line-mode 1)
+;;         (add-hook 'window-configuration-change-hook
+;;                   'wc/narrow-window nil t)
+;;         (wc/narrow-window))
+;;       (progn
+;;         (remove-hook 'window-configuration-change-hook
+;;                      'wc/narrow-window t)
+;;         (set-window-margins nil (car (window-margins)) nil)
+;;         (set-window-fringes nil (car (window-fringes))
+;;                                 (car (window-fringes))))))
 
 ;; see http://www.enigmacurry.com/category/emacs/2/
 (require 'term)
