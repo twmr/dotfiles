@@ -312,9 +312,25 @@ Intended as a value for `bug-reference-url-format'."
 ;; https://github.com/Malabarba/smart-mode-line/pull/249 was not merged
 ;; (quelpa '(smart-mode-line :fetcher github :repo "thisch/smart-mode-line"))
 
+(quelpa '(numpydoc :fetcher github :repo "douglasdavis/numpydoc.el"))
+
 (setq use-package-ensure-function 'quelpa)
 
 (use-package quelpa-use-package :ensure t)
+
+
+(use-package bookmark+
+  :quelpa (bookmark+ :fetcher wiki
+                     :files
+                     ("bookmark+.el"
+                      "bookmark+-mac.el"
+                      "bookmark+-bmu.el"
+                      "bookmark+-1.el"
+                      "bookmark+-key.el"
+                      "bookmark+-lit.el"
+                      "bookmark+-doc.el"
+                      "bookmark+-chg.el"))
+  :defer 2)
 
 ;; byte compiler warnings
 ;; (use-package 2048
@@ -639,6 +655,8 @@ to obtain ripgrep results."
   )
 
 (use-package dracula-theme :ensure t)
+
+(use-package debbugs :ensure t)
 
 (use-package dumb-jump
   :ensure t
@@ -1120,6 +1138,10 @@ shown in the section buffer."
   (add-to-list 'helm-projectile-sources-list helm-source-file-not-found t)
   )
 
+(use-package help
+  :custom
+  (describe-bindings-outline t))
+
 (use-package hydra :ensure t
   :init
   (progn
@@ -1439,7 +1461,24 @@ shown in the section buffer."
     (add-hook 'python-mode-hook 'jedi:setup)
     ))
 
-(use-package json-mode :ensure t :defer t)
+(use-package jiralib2 :ensure t
+
+
+  ;; (let ((request-backend 'url-retrieve))
+  ;;   (request (concat jiralib2-url "/rest/api/2/myself")
+  ;;     :sync t
+  ;;     :parser 'json-read
+  ;;     :headers `(("Content-Type" . "application/json")
+  ;;                ("Authorization" . ,(format "Basic %s"  jiralib2--session)))))
+
+  :init
+  (setq jiralib2-url             "https://jira.rnd.ims.co.at"
+        jiralib2-auth            'token             ;; 'cookie, 'token or 'basic
+        jiralib2-user-login-name "I010229"  ;; email for JIRA Cloud
+        jiralib2-token            nil))              ;; for token auth with JIRA Cloud
+
+;; this depends on an outdated json pkg
+;; (use-package json-mode :ensure t :defer t)
 
 (use-package link-hint
   :ensure t
@@ -1744,6 +1783,7 @@ shown in the section buffer."
 (use-package paredit :ensure t)
 
 (use-package pdf-tools
+  :quelpa (pdf-tools :fetcher github :repo "vedang/pdf-tools")
   ;; new maintainer: https://github.com/vedang/pdf-tools
   ;; old maintainer/author: https://github.com/politza/pdf-tools
 
@@ -1764,11 +1804,9 @@ shown in the section buffer."
   ;;      -> IMO this package needs to be added to upstream pdf-tools
   ;; TODO minimap - like in evince (the column on the left with the thumbnails)
 
-
   :commands (pdf-view-mode) ;; otherwise void-function pdf-view-mode is
                             ;; raised when a PDF file is opened
   :ensure t
-  :defer t
   :bind (:map pdf-view-mode-map
         ("C-s" . isearch-forward)
         ("\\" . hydra-pdftools/body)
@@ -1986,7 +2024,7 @@ shown in the section buffer."
   (python-docstring-sentence-end-double-space nil)
   ;; :config
   ;; ;; this is the same as adding a (python-docstring-mode) to
-  ;; ;; pyhton-mode-hook
+  ;; ;; python-mode-hook
   ;; (python-docstring-install))
 )
 ;; (use-package python-pytest
@@ -2198,6 +2236,11 @@ shown in the section buffer."
                            "\nReturns\n-------" formatted-ret)
                      "\n")))))
     ))
+
+(use-package numpydoc
+  :ensure t
+  :bind (:map python-mode-map
+              ("C-c C-n" . numpydoc-generate)))
 
 (use-package ssh-config-mode :ensure t)
 
