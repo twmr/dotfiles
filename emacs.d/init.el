@@ -1794,6 +1794,7 @@ shown in the section buffer."
   ;; Notes:
 
   ;; "s" in pdf file opens occur mode (also shows line numbers in new occur buffer/window)
+  ;;       -> to quickly jump to the desired line in the occur buffer, use avy-goto-line M-g f
   ;; "C-s" is mapped to isearch-forward, because swiper doesn't only shows raw pdf file contents
   ;;       https://github.com/abo-abo/swiper/issues/1407
 
