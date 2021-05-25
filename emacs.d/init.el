@@ -228,6 +228,10 @@ Intended as a value for `bug-reference-url-format'."
 ;; Don't show "Symbolic link to Git-controlled source file; follow link? (y or n)"
 (setq vc-follow-symlinks t)
 
+;; To log warnings without popping up the @*Warnings* buffer, set this
+;; variable to 'silent.
+(setq native-comp-async-report-warnings-errors 'silent)
+
 ;; show current function information in header-line
 ;; see https://emacsredux.com/blog/2014/04/05/which-function-mode/
 ;; (which-function-mode)
