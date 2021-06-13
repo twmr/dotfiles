@@ -2248,6 +2248,9 @@ shown in the section buffer."
                      "\n")))))
     ))
 
+;; (use-package nano-theme
+;;   :enusre t)
+
 (use-package numpydoc
   :ensure t
   :bind (:map python-mode-map
