@@ -1,3 +1,6 @@
+;;; -*- lexical-binding:t -*-
+;;; Code
+
 (setq user-mail-address "thomas.hisch@ims.co.at"
       user-full-name "Thomas Hisch")
 
@@ -8,7 +11,7 @@
 
 ;; do I need this ??
 (setq notmuch-identities
-  '("thomas.hisch@ims.co.at"))
+      '("thomas.hisch@ims.co.at"))
 
 (defvar th:email-addresses-regexp
   (concat "^\\("
@@ -26,12 +29,10 @@
 ;; Configure outbound mail (SMTP)
 (setq smtpmail-starttls-credentials `((,work-smtp-host ,work-smtp-port nil nil))
       smtpmail-smtp-server work-smtp-host
-      smtpmail-local-dmain "thisch.org"
+      smtpmail-smtp-service work-smtp-port
       smtpmail-default-smtp-server work-smtp-host
       send-mail-function 'smtpmail-send-it
       message-send-mail-function 'smtpmail-send-it
-      smtpmail-smtp-service work-smtp-port
-      smtpmail-auth-credentials `((,work-smtp-host ,work-smtp-port "I010229@ims.co.at" nil))
       smtpmail-debug-info t
       smtpmail-debug-verb t)
 
@@ -50,3 +51,6 @@
         (notmuch-show-filter-thread "tag:unread")))))
 
 (add-hook 'notmuch-show-hook 'expand-only-unread-hook)
+
+(provide 'thi-mail)
+;;; thi-mail.el ends here
