@@ -393,8 +393,8 @@ Intended as a value for `bug-reference-url-format'."
 ;;   (setq bpr-colorize-output t) ;; use -color-apply-on-region function on output buffer
 ;;   (setq bpr-process-mode #'comint-mode))
 
-(use-package bufler
-  :quelpa (bufler :fetcher github :repo "alphapapa/bufler.el"))
+;; (use-package bufler
+;;   :quelpa (bufler :fetcher github :repo "alphapapa/bufler.el"))
 
 (use-package bug-reference-github
   ;; Automatically set `bug-reference-url-format' and enable
