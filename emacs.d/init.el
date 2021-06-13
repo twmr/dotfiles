@@ -918,7 +918,10 @@ See URL `https://www.pylint.org/'."
   :ensure t
   :disabled t
   ;; TODO replace source-inplace in definition of pycheckers checker by source-original
-  :init (setq flycheck-pycheckers-checkers '(pylint flake8)))
+  :init (setq flycheck-pycheckers-checkers '(
+                                             pylint
+                                             ;; flake8
+                                             )))
 
 (use-package forge
   :ensure t
