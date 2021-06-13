@@ -50,7 +50,8 @@ confidence=
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
 # multiple time. See also the "--disable" option for examples.
-disable=all
+disable=all,
+        logging-fstring-interpolation
 
 enable=import-self,
        reimported,
