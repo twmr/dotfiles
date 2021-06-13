@@ -317,6 +317,9 @@ Intended as a value for `bug-reference-url-format'."
 ;; (quelpa '(smart-mode-line :fetcher github :repo "thisch/smart-mode-line"))
 
 (quelpa '(numpydoc :fetcher github :repo "douglasdavis/numpydoc.el"))
+;; (quelpa '(nano-theme :fetcher github :repo "rougier/nano-theme"))
+
+;; (quelpa '(pdf-tools :fetcher file :path "/home/thomas.hisch/gitrepos/pdf-tools/lisp"))
 
 (setq use-package-ensure-function 'quelpa)
 
