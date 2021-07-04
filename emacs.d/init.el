@@ -993,11 +993,28 @@ shown in the section buffer."
 
     (defun gerrit-dashboard-sd-odd ()
       (interactive)
-      (let ((gerrit-dashboard-query-alist
+      (let* (
+            (group-members '(
+                             "emanuel.avasalcai"
+                             "peter.dzubaj"
+                             "matthias.madzak"
+                             "patrik.puchala"
+                             "thomas.hisch"
+                             "dmyto.bondal"
+                             "sergey.borovikov"
+                             "antoine.rougier"
+                             "mihail.georgescu"
+                             "lubomir.panak"))
+
+            (group-addresses
+             (seq-map (lambda (elt) (concat elt "@" "ims.co.at")) group-members))
+            (gerrit-dashboard-query-alist
              '(
                ("Waiting for +1" . "is:open assignee:sd-odd label:Code-Review=0")
                ("Waiting for +2" . "is:open assignee:sd-odd label:Code-Review=1")
-               ("Waiting for SD-even" . "is:open assignee:sd-even (owner:matthias.madzak@ims.co.at OR owner:thomas.hisch@ims.co.at OR owner:emanuela.avasalcai@ims.co.at OR owner:peter.dzubaj@ims.co.at OR owner:dmytro.bondal@ims.co.at OR owner:sergey.borovikov@ims.co.at OR owner:mihail.georgescu@ims.co.at OR owner:bojan.vujnovic@ims.co.at)")
+               ("Waiting for SD-even" . (concat "is:open assignee:sd-even ("
+                                                (s-join " OR " group-addresses)
+                                                ")"))
                )
              )
             (gerrit-dashboard-buffer-name "*gerrit-odd-standup*")
