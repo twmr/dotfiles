@@ -27,7 +27,7 @@
 ;; (setq message-signature-file "~/.signature")
 
 ;; Configure outbound mail (SMTP)
-(setq smtpmail-starttls-credentials `((,work-smtp-host ,work-smtp-port nil nil))
+(setq ;; deprecated smtpmail-starttls-credentials `((,work-smtp-host ,work-smtp-port nil nil))
       smtpmail-smtp-server work-smtp-host
       smtpmail-smtp-service work-smtp-port
       smtpmail-default-smtp-server work-smtp-host
