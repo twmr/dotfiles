@@ -669,6 +669,10 @@ to obtain ripgrep results."
   :ensure t
   :demand t
   :custom
+  (dumb-jump-rg-cmd "rg --no-ignore") ;; --no-ignore is needed here if some definitons
+                                      ;; are only part of automatically
+                                      ;; generated files (e.g. the pb2.py
+                                      ;; files)
   (dumb-jump-force-searcher 'rg)
   (dumb-jump-selector 'ivy)
   :config
