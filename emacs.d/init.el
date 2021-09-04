@@ -983,12 +983,23 @@ See URL `https://www.pylint.org/'."
     (transient-append-suffix 'gerrit-upload-transient "v"
       '("V" "upload and verify" thi::upload-and-verify))
 
+    (defun thi::gerrit-topic-all-votes (topicname)
+      (interactive "sEnter a topic: \n")
+      (gerrit-rest-topic-set-vote topicname "+2" "")
+      (gerrit-rest-topic-verify topicname "+1" ""))
+
+    ;; TODO remove jenkins verify -1 from a topic (maybe do this in gerrit-rest-change-verify)
+
+    ;; TODO support code threads: on a change basis or topic basis and add
+    ;; keybindings that allow commenting on them and resolving them
+
     (defun gerrit-section-filter (message-info)
       "Filter function run for every gerrit comment.
 
-This function is called for every comment MESSAGE-INFO
-of a gerrit change.  If the function returns t, the comment is
-shown in the section buffer."
+This function is called for every comment MESSAGE-INFO of a
+gerrit change.  If the function returns t, the comment is shown
+in the section buffer. This is useful for filtering out e.g.
+comments from CI tools."
       (not (or (s-starts-with? "jenkins" (alist-get 'name (alist-get 'author message-info)))
           (s-ends-with? "/verify" (alist-get 'message message-info)))))
 
