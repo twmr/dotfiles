@@ -130,6 +130,9 @@ fi
 
 alias ka='sudo killall'
 
+# ignore job-based-logging proto files
+alias rg='rg -g "!*.par"'
+
 
 #alias docker=podman
 
