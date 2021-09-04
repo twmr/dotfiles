@@ -2334,46 +2334,46 @@ comments from CI tools."
   ;; for gerrit.el
   (transient-history-limit 100))
 
-(use-package tree-sitter
-  :ensure t
-  :config
-  (add-hook 'python-mode-hook #'tree-sitter-mode)
+;; (use-package tree-sitter
+;;   :ensure t
+;;   :config
+;;   (add-hook 'python-mode-hook #'tree-sitter-mode)
 
-  ;; Smart f-strings
-  ;; https://github.com/ubolonton/emacs-tree-sitter/issues/52
-  (defun fk/python-f-string-ify (&rest _)
-    ;; Does nothing if major-mode is not python or point is not on a string.
-    (when-let* ((python-mode-p (eq major-mode 'python-mode))
-                (str (tree-sitter-node-at-point 'string))
-                (text (ts-node-text str)))
-      (let ((is-f-string (string-match-p "^[bru]*f+[bru]*\\(\"\\|'\\)" text))
-            (should-f-string (and (s-contains-p "{" text)
-                                  (s-contains-p "}" text))))
-        (if should-f-string
-            (unless is-f-string
-              (save-excursion
-                (goto-char (ts-node-start-position str))
-                (insert "f")))
-          (when is-f-string
-            (save-excursion
-              (goto-char (ts-node-start-position str))
-              (when (char-equal (char-after) ?f)
-                (delete-char 1))))))))
+;;   ;; Smart f-strings
+;;   ;; https://github.com/ubolonton/emacs-tree-sitter/issues/52
+;;   (defun fk/python-f-string-ify (&rest _)
+;;     ;; Does nothing if major-mode is not python or point is not on a string.
+;;     (when-let* ((python-mode-p (eq major-mode 'python-mode))
+;;                 (str (tree-sitter-node-at-point 'string))
+;;                 (text (ts-node-text str)))
+;;       (let ((is-f-string (string-match-p "^[bru]*f+[bru]*\\(\"\\|'\\)" text))
+;;             (should-f-string (and (s-contains-p "{" text)
+;;                                   (s-contains-p "}" text))))
+;;         (if should-f-string
+;;             (unless is-f-string
+;;               (save-excursion
+;;                 (goto-char (ts-node-start-position str))
+;;                 (insert "f")))
+;;           (when is-f-string
+;;             (save-excursion
+;;               (goto-char (ts-node-start-position str))
+;;               (when (char-equal (char-after) ?f)
+;;                 (delete-char 1))))))))
 
-  ;; When not using wrap-region or anything that changes "{" keybinding
-  ;; (define-key python-mode-map (kbd "{") (lambda ()
-  ;;                                         (interactive)
-  ;;                                         (call-interactively 'self-insert-command)
-  ;;                                         (fk/python-f-string-ify)))
+;;   ;; When not using wrap-region or anything that changes "{" keybinding
+;;   ;; (define-key python-mode-map (kbd "{") (lambda ()
+;;   ;;                                         (interactive)
+;;   ;;                                         (call-interactively 'self-insert-command)
+;;   ;;                                         (fk/python-f-string-ify)))
 
-  (defadvice wrap-region-trigger (after smart-f-string activate)
-    (fk/python-f-string-ify))
-  (defadvice delete-char (after smart-f-string activate)
-    (fk/python-f-string-ify))
-  (defadvice delete-active-region (after smart-f-string activate)
-    (fk/python-f-string-ify))
+;;   (defadvice wrap-region-trigger (after smart-f-string activate)
+;;     (fk/python-f-string-ify))
+;;   (defadvice delete-char (after smart-f-string activate)
+;;     (fk/python-f-string-ify))
+;;   (defadvice delete-active-region (after smart-f-string activate)
+;;     (fk/python-f-string-ify))
 
-  )
+;;   )
 
 (use-package tree-sitter-langs
   :ensure t)
