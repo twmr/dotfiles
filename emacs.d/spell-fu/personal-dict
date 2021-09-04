@@ -3,6 +3,7 @@ OutputData
 Repo
 Reticle
 alist
+alists
 args
 async
 autoload
@@ -21,6 +22,7 @@ jobdeck
 json
 magit
 mult
+plists
 rebase
 refspec
 repos
