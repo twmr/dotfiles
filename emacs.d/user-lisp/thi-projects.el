@@ -19,9 +19,16 @@
       ;; -0 is needed for the \0 line termination.
       (concat
        "rg --files -0 "
+       "-g '!__pychache__' "
        "-g '!netlib-plugins/Libs/devlib' "
        "-g '!tools/aps_pattern' "
+       "-g '!tools/automation_blocks/**/__pycache__' "
+       "-g '!tools-alpha' "
+       "-g '!rasterizer' "
        "-g '!config/aps_pattern' "
+       "-g '!config/automation_blocks' "
+       "-g '!config/integrationtests_jobdecks' "
+       "-g '!config/jobdeck_library_jobdecks' "
        "-g '!tools/structure_files' "
        "-g '!config/structure_files' "
        "-g '!node_modules' "
@@ -35,9 +42,16 @@
          ;; this only works when rg is run in the root of the project
          ;; or if https://github.com/BurntSushi/ripgrep/issues/1764
          ;; is fixed
+         "-g '!__pychache__' "
          "-g '!netlib-plugins/Libs/devlib' "
          "-g '!tools/aps_pattern' "
+         "-g '!tools/automation_blocks/**/__pycache__' "
+         "-g '!tools-alpha' "
+         "-g '!rasterizer' "
          "-g '!config/aps_pattern' "
+         "-g '!config/automation_blocks' "
+         "-g '!config/integrationtests_jobdecks' "
+         "-g '!config/jobdeck_library_jobdecks' "
          "-g '!tools/structure_files' "
          "-g '!config/structure_files' "
          "-g '!node_modules' "
@@ -64,6 +78,16 @@
                   (concat
                    (s-replace " -0" "" projectile-generic-command)
                    " | wc -l")))))
+
+(defun thi::project-list ()
+  ;; output files matched by projectile-generic-command
+  (interactive)
+  (switch-to-buffer (get-buffer-create "*thi-project-list*"))
+  (let ((default-directory (thi::get-project-root)))
+    (shell-command
+     (concat
+      (s-replace " -0" "" projectile-generic-command)
+      " --files | sort") t)  ))
 
 (defun thi::hydra-project-find-file--generic (project-name)
   (interactive)
