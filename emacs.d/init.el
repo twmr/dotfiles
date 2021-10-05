@@ -1903,7 +1903,13 @@ comments from CI tools."
 
   (pdf-tools-install)
 
+  ;; I want to set the slice from the bounding box by default for all pdfs
+  (push 'pdf-view-auto-slice-minor-mode pdf-tools-enabled-modes)
+
   (setq-default pdf-view-display-size 'fit-page))
+
+  ;; TODO enable pdf-view-auto-slice-minor-mode
+
 
 ;; (use-package persp-mode :ensure t
 ;;   ; is a fork of perspective.el (they can't be installed at the same time.
