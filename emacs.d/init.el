@@ -223,6 +223,7 @@ Intended as a value for `bug-reference-url-format'."
 (add-hook 'prog-mode-hook #'thi::activate-ticket-and-gerrit-links)
 (add-hook 'org-mode-hook #'thi::activate-ticket-and-gerrit-links-text-modes)
 (add-hook 'vc-git-log-view-mode-hook #'thi::activate-ticket-and-gerrit-links-text-modes)
+(add-hook 'magit-revision-mode-hook #'thi::activate-ticket-and-gerrit-links-text-modes)
 
 ;; https://stackoverflow.com/questions/15390178/emacs-and-symbolic-links
 ;; Don't show "Symbolic link to Git-controlled source file; follow link? (y or n)"
