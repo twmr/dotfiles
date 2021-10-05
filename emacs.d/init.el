@@ -670,10 +670,14 @@ to obtain ripgrep results."
   :ensure t
   :demand t
   :custom
-  (dumb-jump-rg-cmd "rg --no-ignore") ;; --no-ignore is needed here if some definitons
-                                      ;; are only part of automatically
-                                      ;; generated files (e.g. the pb2.py
-                                      ;; files)
+  ;; the problem with this setting is that too many build artifacts are
+  ;; shown in the dumb-jump completions. I would only like to un-ignore a
+  ;; specific folder in ripgrep, is this possible?
+  ;; see https://github.com/BurntSushi/ripgrep/issues/969#issuecomment-400336680
+  ;; (dumb-jump-rg-cmd "rg --no-ignore") ;; --no-ignore is needed here if some definitons
+  ;;                                     ;; are only part of automatically
+  ;;                                     ;; generated files (e.g. the pb2.py
+  ;;                                     ;; files)
   (dumb-jump-force-searcher 'rg)
   (dumb-jump-selector 'ivy)
   :config
