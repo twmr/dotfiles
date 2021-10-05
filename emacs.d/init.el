@@ -1595,6 +1595,11 @@ comments from CI tools."
     (interactive)
     (magit-git-command "git pull --rebase --autostash")
     )
+  (defun magit-switch-to-main-gpr ()
+    (interactive)
+    (magit-git-command "git checkout main")
+    (magit-git-command "git pull --rebase --autostash")
+    )
   (defun magit-reset-to-upstream ()
     (interactive)
     ;; TODO confirmation
