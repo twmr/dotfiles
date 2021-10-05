@@ -206,3 +206,6 @@
 ;;                                      plain-tex-mode))
 ;;                 (let ((mark-even-if-inactive transient-mark-mode))
 ;;                   (indent-region (region-beginning) (region-end) nil))))))
+
+;; emacs @ a7d51676f140c88b534af98be68fbeafcec2fa15
+(setq completions-details t)
