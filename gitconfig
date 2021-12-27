@@ -1,3 +1,9 @@
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
 [alias]
 	st = status
 	lol = log --graph --decorate --pretty=oneline --abbrev-commit
