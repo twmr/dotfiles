@@ -2317,6 +2317,9 @@ comments from CI tools."
 ;; requires semantic-mode to be enabled
 (use-package stickyfunc-enhance :ensure t)
 
+(use-package svg-lib :ensure t)
+(use-package svg-tag-mode :ensure t)
+
 (use-package swiper
   :ensure t
   :bind (("C-s" . swiper)
