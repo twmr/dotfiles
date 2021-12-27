@@ -1365,6 +1365,11 @@ comments from CI tools."
                "\\(^\\s-*(use-package +\\)\\(\\_<.+\\_>\\)" 2)))
   (add-hook 'emacs-lisp-mode-hook #'jcs-use-package))
 
+(use-package immortal-scratch
+  :ensure t
+  :config
+  (immortal-scratch-mode))
+
 (use-package ivy
   ;; see https://writequit.org/denver-emacs/presentations/2017-04-11-ivy.html
   :ensure t
