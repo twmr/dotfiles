@@ -82,52 +82,84 @@ down the URL structure to send the request."
       ;;    (name . "Done")))
       (alist-get 'status fields)))
 
-(defun ims-jira-search-issues (jql-str &optional start-at max-results fields)
+(defun ims-jira-search-issues (jql &optional start-at max-results fields)
   ;;fields: Do I want to allow both lists of str as well as a commma separted str?
-  (interactive "sEnter jql str: ")
   (interactive)
   ;; TODO output nicely readable error msg
   ;; take a look at interface in
   ;; https://github.com/pycontribs/jira/blob/09ece94f3cae7e6d0becfa87d77d6a05ce01cdf6/jira/client.py#L2807
 
-  (if-let ((result (jira-rest-sync "GET" nil
-                                   (format "/rest/api/2/search/%s"
+  (let* (
+         (fields (or fields "summary"))
+         (result (jira-rest-sync "GET" nil
+                                   (format "/rest/api/2/search/?jql=%s&fields=%s"
                                            ;; the jql-str is hexified in the url library
-                                           jql-str
+                                           jql
+                                           fields
                                            ))))
       result))
 
-(defun thi-jira--format-issue (key fields)
+(defun thi-jira--search-all (jql fields)
+  (let ((continue t)
+        (start-idx 0)
+        (cur-results nil)
+        (results '()))
+    (while continue
+      (setq cur-results
+            (ims-jira-search-issues
+             jql
+             start-idx nil fields))
+      (setq results (append
+                     results
+                     (alist-get 'issues cur-results)))
+      (setq start-idx (+ start-idx (length (alist-get 'issues cur-results))))
+      ;; (message "start: %s" start-idx)
+      (setq continue (< start-idx (alist-get 'total cur-results))))
+    results))
+
+(defun thi-jira--format-issue (key desired-fields fields)
   (concat
-     (propertize (concat key ": ") 'face 'magit-hash)
-     (propertize (alist-get 'summary fields) 'face 'magit-section-highlight)
-     " "
-     (propertize (concat "[" (alist-get 'name (alist-get 'status fields)) "]")
-                 'face 'magit-tag)))
+   ;; TODO only consider desired-fields
+   ;; TODO desired fields should be a list of symbols
+   (propertize (concat key ": ") 'face 'magit-hash)
+   (propertize (alist-get 'summary fields) 'face 'magit-section-highlight)
+   " "
+   (propertize (concat "[" (alist-get 'name (alist-get 'status fields)) "]")
+               'face 'magit-tag)))
 
-(defun thi-jira-list-all-issues () ;;(jql-str)
+(defun thi-jira-list-issues (&optional jql)
   (interactive)
-  ;; TODO support for more than 50 issues: see start-at parameter
-  (s-join "\n" (mapcar (lambda (issue)
-                         (thi-jira--format-issue (alist-get 'key issue)
-                                                 (alist-get 'fields issue)))
-                       (alist-get 'issues (ims-jira-search-issues
-                                           "?jql=labels = small_sd_task&fields=summary,status")))))
-                                           ;; "?jql=labels%20%3D%20small_sd_task&fields=summary,status")))))
-
-(defun thi-jira-summary-status (ticketid)
-  (interactive "sEnter ticket id: ")
-  (let* ((fields (ims-jira-summary-and-status ticketid))
-        (summary (alist-get 'summary fields))
-        (status (alist-get 'status fields)))
-    ;; TODO return a cached SVG tag for the status
-    ;; TODO clickable?
+  (let* ((fields "key,summary,status")
+         (issues (thi-jira--search-all
+                  jql
+                  fields)))
     (concat
-     (propertize (concat ticketid ": ") 'face 'magit-hash)
-     (propertize summary 'face 'magit-section-highlight)
-     " "
-     (propertize (concat "[" (alist-get 'name status) "]")
-                 'face 'magit-tag))))
+     (s-join "\n" (mapcar (lambda (issue)
+                            (thi-jira--format-issue (alist-get 'key issue) fields
+                                                    (alist-get 'fields issue))) issues))
+     (format "\ntotal: %d"  (length issues)))))
+
+
+(defun thi-jira-list-issues-reporter-me ()
+  (interactive)
+  (thi-jira-list-issues "reporter = currentUser() AND project = RD"))
+
+
+;; TODO use svg-lib for displaying tags
+;; TODO display summary of tickets inline like in confluence, but the summary should be not part of the ASCII file!!
+;; maybe think about asking in emacs-devel about this request (collection of meta-data from tickets in e.g. bug-reference-mode)
+
+;; -> use invisible properties and use a hook that replaces all occurrences of tickets with the desired output
+;; -> is it possible to replace those properties if they already exist?
+
+
+;; which emacs feature can I use for that?
+;;https://raw.githubusercontent.com/rougier/svg-lib/master/svg-lib-demo.org
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; OLD ;;;;;;;;;;;;;;;;;;;
 
 (defun ims-jira-get-ticket-summary (ticketid)
   "Retrieve summary of TICKETID in jira."
@@ -150,22 +182,25 @@ down the URL structure to send the request."
                (fields (map-elt result 'fields)))
           (map-elt fields 'summary)))))
 
+(defun thi-jira-summary-status (ticketid)
+  (interactive "sEnter ticket id: ")
+  (let* ((fields (ims-jira-summary-and-status ticketid))
+        (summary (alist-get 'summary fields))
+        (status (alist-get 'status fields)))
+    ;; TODO return a cached SVG tag for the status
+    ;; TODO clickable?
+    (concat
+     (propertize (concat ticketid ": ") 'face 'magit-hash)
+     (propertize summary 'face 'magit-section-highlight)
+     " "
+     (propertize (concat "[" (alist-get 'name status) "]")
+                 'face 'magit-tag))))
+
+
 
 ;; (ims-jira-get-ticket-summary "RD-872")
 ;; (ims-jira-get-ticket-status "RD-872")
 ;; (message (ims-jira-authentication)
-
-
-;; TODO use svg-lib for displaying tags
-;; TODO display summary of tickets inline like in confluence, but the summary should be not part of the ASCII file!!
-;; maybe think about asking in emacs-devel about this request (collection of meta-data from tickets in e.g. bug-reference-mode)
-
-;; -> use invisible properties and use a hook that replaces all occurrences of tickets with the desired output
-;; -> is it possible to replace those properties if they already exist?
-
-
-;; which emacs feature can I use for that?
-;;https://raw.githubusercontent.com/rougier/svg-lib/master/svg-lib-demo.org
 
 
 (provide 'ims-jira)
