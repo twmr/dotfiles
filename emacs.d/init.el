@@ -2253,6 +2253,7 @@ comments from CI tools."
     (lambda ()
       (when (and (not (memq major-mode
                             (list
+                             'minibuffer-mode
                              'vterm-mode
                              'gerrit-dashboard-mode
                              'magit-status-mode
