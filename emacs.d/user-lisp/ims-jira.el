@@ -146,7 +146,8 @@ down the URL structure to send the request."
   (thi-jira-list-issues "reporter = currentUser() AND project = RD"))
 
 (defun thi-jira-colored-status (status)
-  (if (equal status "Done")
+  ;; note that status is upper case
+  (if (equal status "DONE")
       (propertize (concat "[" status "]")
                   'face '(:foreground "green"))
     (propertize (concat "[" status "]") 'face 'magit-tag)))
@@ -156,13 +157,18 @@ down the URL structure to send the request."
     `[
       ,(propertize (alist-get 'key issue) 'face 'magit-hash)
       ,(propertize (alist-get 'summary fields) 'face 'magit-section-highlight)
-      ,(thi-jira-colored-status (alist-get 'name (alist-get 'status fields)))
+      ,(thi-jira-colored-status (upcase (alist-get 'name (alist-get 'status fields))))
+
+      ;; TODO fixversions is a list: concat all fix verions
+      ,(or (alist-get 'name (car (alist-get 'fixVersions fields))) "")
+      ;; ,(propertize (alist-get 'name (alist-get 'fixVersions fields)) 'face 'magit-section-highlight)
+      ;; "A"
       ]))
 
 (defun jira-table-get-section-data (jql)
   "Return a list with \"tabulated-list-entries\"."
   (message "called with %s" jql)
-  (let* ((fields "key,summary,status")
+  (let* ((fields "key,summary,status,fixVersions")
          (issues (thi-jira--search-all
                   jql
                   fields)))
@@ -174,12 +180,13 @@ down the URL structure to send the request."
   "jira-table mode"
 
   (setq dashboard-table-section-alist
-        '(("Section1" . "labels=small_sd_task")
-          ("Section2" . "labels=small_sd_task")))
+        '(("small sd tasks" . "labels=small_sd_task")
+          ("Implementd tasks" . "\"Group/s\" in (SD-highlevel, SD-lowlevel, SD-web) AND status = \"Implemented?\" ORDER BY created DESC")))
   (setq dashboard-table-columns
         [("Key" 10)
          ("Summary" 75)
          ("Status" 10)
+         ("FixVersion" 10)
          ])
   (setq dashboard-table-section-name-column 1)
   (setq dashboard-table-get-section-data-function
