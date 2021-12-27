@@ -939,6 +939,12 @@ See URL `https://www.pylint.org/'."
   :ensure t
   :after magit)
 
+(use-package dashboard-table
+  :load-path "~/gitrepos/dashboard-table.el"
+  :config
+  (require 'dashboard-table)
+  )
+
 (use-package gerrit
   :load-path "~/gitrepos/gerrit.el"
   :custom

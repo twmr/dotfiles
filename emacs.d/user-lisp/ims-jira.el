@@ -3,6 +3,7 @@
 (require 'url-http)
 (require 'url-vars)
 (require 's)
+(require 'dashboard-table)
 
 (defcustom ims-jira-host "jira.rnd.ims.co.at"
   "hostname of the jira instance"
@@ -144,6 +145,53 @@ down the URL structure to send the request."
   (interactive)
   (thi-jira-list-issues "reporter = currentUser() AND project = RD"))
 
+(defun thi-jira-colored-status (status)
+  (if (equal status "Done")
+      (propertize (concat "[" status "]")
+                  'face '(:foreground "green"))
+    (propertize (concat "[" status "]") 'face 'magit-tag)))
+
+(defun thi-jira-metadata (issue)
+  (let ((fields (alist-get 'fields issue)))
+    `[
+      ,(propertize (alist-get 'key issue) 'face 'magit-hash)
+      ,(propertize (alist-get 'summary fields) 'face 'magit-section-highlight)
+      ,(thi-jira-colored-status (alist-get 'name (alist-get 'status fields)))
+      ]))
+
+(defun jira-table-get-section-data (jql)
+  "Return a list with \"tabulated-list-entries\"."
+  (message "called with %s" jql)
+  (let* ((fields "key,summary,status")
+         (issues (thi-jira--search-all
+                  jql
+                  fields)))
+    (seq-map (lambda (issue)
+               `(nil ,(thi-jira-metadata issue)))
+             issues)))
+
+(define-derived-mode jira-table-mode dashboard-table-mode "jira-table"
+  "jira-table mode"
+
+  (setq dashboard-table-section-alist
+        '(("Section1" . "labels=small_sd_task")
+          ("Section2" . "labels=small_sd_task")))
+  (setq dashboard-table-columns
+        [("Key" 10)
+         ("Summary" 75)
+         ("Status" 10)
+         ])
+  (setq dashboard-table-section-name-column 1)
+  (setq dashboard-table-get-section-data-function
+        #'jira-table-get-section-data)
+  (dashboard-table--refresh))
+
+;;;###autoload
+(defun thi-jira-table ()
+  "Show a dashboard in a new buffer."
+  (interactive)
+  (switch-to-buffer "jira-table")
+  (jira-table-mode))
 
 ;; TODO use svg-lib for displaying tags
 ;; TODO display summary of tickets inline like in confluence, but the summary should be not part of the ASCII file!!
