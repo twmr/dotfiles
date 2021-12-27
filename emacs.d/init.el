@@ -1977,6 +1977,7 @@ comments from CI tools."
            '(prog-mode     ; This is the mode perl, makefile, lisp-mode, scheme-mode,
                            ; emacs-lisp-mode, sh-mode, java-mode, c-mode, c++-mode,
                            ; python-mode inherits from.
+             protobuf-mode
              lua-mode
              cmake-mode
              tex-mode      ; LaTeX inherits
