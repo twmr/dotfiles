@@ -26,6 +26,7 @@
 	grep-all-gaia = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep gaia); : "
 	grep-all-kalix = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep kalix); : "
 	grep-all-jackson = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep jackson); : "
+	grep-all-main = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep main); : "
 [include]
 	path = ~/.git_identity
 [color]
