@@ -54,7 +54,7 @@ set -e
 
 ./configure \
     CFLAGS="-march=native -O3" \
-    --prefix=/opt/emacs \
+    --prefix=/opt/emacs-dev \
     --with-pgtk \
     --with-xpm \
     --with-jpeg \
@@ -62,10 +62,10 @@ set -e
     --with-tiff \
     --with-modules \
     --with-native-compilation \
-    --with-json
-#    --with-x-toolkit=pgtk \
-# --with-x-toolkit=gtk3 \
-#    --with-xml2 \
+    --with-json \
+    --with-x-toolkit=no
+    # --with-pgtk
+##    --with-xml2 \
 #    --with-cairo \
 #    --with-xwidgets
 
