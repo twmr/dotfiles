@@ -130,6 +130,13 @@
 
 (defvar thi::jira-rnd-projects '("CTB" "RD" "DT" "HPC" "SD" "RS"))
 (defvar thi::jira-service-projects '("RHI" "SER" "FRCIP"))
+(defvar thi::font "IBM Plex Mono") ;; "JetBrains Mono", "Iosevka"
+
+(defun thi::set-font-size (size)
+  ;; note that there is also x-select-frame, that pops up a font dialog
+  (set-frame-font (format
+                   "%s:size=%d"
+                   thi::font size)))
 
 (defvar thi::at-work (or (string= (system-name) "PC-16609.ims.co.at")
                          (string= (system-name) "NBPF1PQX4B")))
@@ -1204,11 +1211,11 @@ comments from CI tools."
 
     (defun thi::frame-font-increase ()
       (interactive)
-      (set-frame-font (format "JetBrains Mono:size=%d"  20)))
+      (thi::set-font-size 18))
 
     (defun thi::frame-font-reset ()
       (interactive)
-      (set-frame-font (format "JetBrains Mono:size=%d"  12)))
+      (thi::set-font-size 14))
 
     (defhydra hydra-zoom-winner (global-map "<f5>")
       ;; Now, <f5> g 4g 2l will zoom in 5 times, and zoom out 2 times for a
@@ -2211,13 +2218,17 @@ comments from CI tools."
                       (tool-bar-mode -1)
                       (menu-bar-mode -1)
                       (scroll-bar-mode -1)
-                      (set-frame-font (format "JetBrains Mono:size=%d"
-                                              (if thi::at-work
-                                                  12
-                                                22)))
+                      (thi::set-font-size
+                       (if thi::at-work
+                           18
+                         22))
                       (load-theme thi::theme t)
                       (thi::sml-setup)))))
     (progn
+      (thi::set-font-size
+       (if thi::at-work
+           18
+         22))
       (load-theme thi::theme t)
       (thi::sml-setup)
       (tool-bar-mode -1)
