@@ -1147,6 +1147,12 @@ comments from CI tools."
   (setq git-messenger:show-detail t
         git-messenger:use-magit-popup t))
 
+(use-package git-modes
+  ;; Previously the contents of the git-modes repository were available as three
+  ;; separate packages gitattributes-mode, gitconfig-mode and gitignore-mode.
+  ;; now they are part of one pkg.
+  :ensure t)
+
 (use-package grip-mode
   ;; preview markdown files
   ;; https://github.com/seagle0128/grip-mode
