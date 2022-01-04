@@ -1464,8 +1464,8 @@ comments from CI tools."
   )
 
 
-(use-package kubernetes
-  :ensure t)
+;; (use-package kubernetes
+;;   :ensure t)
 
 
 ;; (use-package jabber
