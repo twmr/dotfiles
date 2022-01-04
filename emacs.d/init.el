@@ -2339,7 +2339,11 @@ comments from CI tools."
 ;; requires semantic-mode to be enabled
 (use-package stickyfunc-enhance :ensure t)
 
-(use-package svg-lib :ensure t)
+(use-package svg-lib :ensure t
+  ;; this pkg is on elpa, but I want the bleeding edge version of it
+  :quelpa (svg-lib :fetcher github :repo "rougier/svg-lib")
+  )
+
 (use-package svg-tag-mode :ensure t)
 
 (use-package swiper
