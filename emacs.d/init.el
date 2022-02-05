@@ -130,10 +130,13 @@
 
 (defvar thi::jira-rnd-projects '("CTB" "RD" "DT" "HPC" "SD" "RS"))
 (defvar thi::jira-service-projects '("RHI" "SER" "FRCIP"))
-(defvar thi::font "IBM Plex Mono") ;; "JetBrains Mono", "Iosevka"
+(defvar thi::font "JetBrains Mono") ;; "IBM Plex Mono") ;; "JetBrains Mono", "Iosevka"
 
 (defun thi::set-font-size (size)
   ;; note that there is also x-select-frame, that pops up a font dialog
+  ;; see also https://www.gnu.org/software/emacs/manual/html_node/elisp/Low_002dLevel-Font.html how the returned object can be converted to an alist:
+  ;; see font-face-attributes
+
   (set-frame-font (format
                    "%s:size=%d"
                    thi::font size)))
@@ -150,7 +153,7 @@
   (add-to-list 'exec-path (expand-file-name "~/miniconda/envs/py37/bin")))
 
 
-;; referneces to jira/redmine/gerrit tickets/changes
+;; references to jira/redmine/gerrit tickets/changes
 ;; for github issues see `bug-reference-github`
 ;; https://github.com/emacs-mirror/emacs/blob/master/lisp/progmodes/bug-reference.el
 ;; see also goto-address-mode
@@ -160,9 +163,9 @@
   "Return a gerrit/jira/redmine URL.
 Intended as a value for `bug-reference-url-format'."
 
-  (let ((issue-prefix (match-string-no-properties 1))
-        (issue-number (match-string-no-properties 2)))
-    ;; (message "prefix %s" issue-prefix)
+  (let ((issue-prefix (match-string-no-properties 2))
+        (issue-number (match-string-no-properties 3)))
+    ;; (message "prefix %s; number %s" issue-prefix issue-number)
     (cond
      ((string= "g" issue-prefix) ;; gerrit
       (format "https://gerrit.ims.co.at/c/%s" issue-number))
@@ -201,14 +204,15 @@ Intended as a value for `bug-reference-url-format'."
 
 (defvar thi::bug-reference-bug-regexp
   ;; Type C-c RET to goto reference
-  (rx (group (| ?g ;; gerrit change prefix
-                ?# ;; redmine issue prefix
+  (rx (group
+       (group (| ?g ;; gerrit change prefix
+                 ?# ;; redmine issue prefix
 
-                ;; see https://francismurillo.github.io/2017-03-30-Exploring-Emacs-rx-Macro/
-                (: (eval `(| ,@thi::jira-rnd-projects)) ?-)
-                (: (eval `(| ,@thi::jira-service-projects)) ?-)
-                ))
-      (group (+ digit))))
+                 ;; see https://francismurillo.github.io/2017-03-30-Exploring-Emacs-rx-Macro/
+                 (: (eval `(| ,@thi::jira-rnd-projects)) ?-)
+                 (: (eval `(| ,@thi::jira-service-projects)) ?-)
+                 ))
+       (group (+ digit)))))
 
 
 (defun thi::activate-ticket-and-gerrit-links ()
@@ -292,6 +296,7 @@ Intended as a value for `bug-reference-url-format'."
 ;; (defvar thi::theme 'dracula)
 ;; (defvar thi::theme 'tango-dark)
 (defvar thi::theme 'sanityinc-tomorrow-night)
+;; (defvar thi::theme 'leuven)
 
 ;; (defvar thi::theme
 ;;   (if (string= system-name "dirac")
@@ -334,18 +339,18 @@ Intended as a value for `bug-reference-url-format'."
 (use-package quelpa-use-package :ensure t)
 
 
-(use-package bookmark+
-  :quelpa (bookmark+ :fetcher wiki
-                     :files
-                     ("bookmark+.el"
-                      "bookmark+-mac.el"
-                      "bookmark+-bmu.el"
-                      "bookmark+-1.el"
-                      "bookmark+-key.el"
-                      "bookmark+-lit.el"
-                      "bookmark+-doc.el"
-                      "bookmark+-chg.el"))
-  :defer 2)
+;; (use-package bookmark+
+;;   :quelpa (bookmark+ :fetcher wiki
+;;                      :files
+;;                      ("bookmark+.el"
+;;                       "bookmark+-mac.el"
+;;                       "bookmark+-bmu.el"
+;;                       "bookmark+-1.el"
+;;                       "bookmark+-key.el"
+;;                       "bookmark+-lit.el"
+;;                       "bookmark+-doc.el"
+;;                       "bookmark+-chg.el"))
+;;   :defer 2)
 
 ;; byte compiler warnings
 ;; (use-package 2048
@@ -398,6 +403,19 @@ Intended as a value for `bug-reference-url-format'."
   :bind (:map outline-minor-mode-map
               ([C-tab] . bicycle-cycle)
               ([S-tab] . bicycle-cycle-global)))
+
+;; (use-package blamer
+;;   :quelpa ((blamer :fetcher github :repo "artawower/blamer.el") :upgrade t)
+;;   :custom
+;;   (blamer-idle-time 0.3)
+;;   (blamer-min-offset 70)
+;;   :custom-face
+;;   (blamer-face ((t :foreground "#7a88cf"
+;;                     :background nil
+;;                     :height 140
+;;                     :italic t)))
+;;   :config
+;;   (global-blamer-mode 1))
 
 ;; (use-package bpr :ensure t
 ;;   :config
@@ -521,9 +539,6 @@ Intended as a value for `bug-reference-url-format'."
 
 (use-package cython-mode :ensure t :defer t)
 
-(use-package dap-mode
-  :ensure t)
-
 ;; alternative to "rg"
 ;; see https://github.com/Wilfred/deadgrep/blob/master/docs/ALTERNATIVES.md
 (use-package deadgrep :ensure t
@@ -548,6 +563,8 @@ Intended as a value for `bug-reference-url-format'."
   :config
 
   (set-face-attribute 'deadgrep-filename-face  'nil :inherit 'magit-section-heading)
+
+  (setq dumb-jump-project-denoters (delete "Makefile" dumb-jump-project-denoters))
 
   ;; override deadgrep--project-root to include support for dumb-jump files (.dumbjump, .dumbjumpignore)
   (defun deadgrep--project-root ()
@@ -723,6 +740,14 @@ to obtain ripgrep results."
   :config
   (add-hook 'cc-mode-hook 'dumb-jump-mode)
   )
+
+(use-package code-review
+  :ensure t
+  :config
+  ;; do not open a new window
+  (setq code-review-new-buffer-window-strategy #'switch-to-buffer)
+  )
+
 
 (use-package ediff
   :ensure t
@@ -1050,6 +1075,11 @@ comments from CI tools."
                                                 ")"))
                )
              )
+            (gerrit-dashboard-columns
+             (seq-into
+              (seq-filter (lambda (elt) (not (string= (car elt) "Assignee")))
+                          gerrit-dashboard-columns)
+              'vector))
             (gerrit-dashboard-buffer-name "*gerrit-odd-standup*")
             ;; this is a workaround for the text-scale increase bug/feature
             ;; see debbugs 41852
@@ -1057,6 +1087,46 @@ comments from CI tools."
             )
         (gerrit-dashboard)))
 
+    (defun gerrit-dashboard-mine()
+      (interactive)
+      (let*
+          ((gerrit-dashboard-query-alist
+             '(
+               ("owned" . "is:open owner:me")
+               )
+             )
+            (gerrit-dashboard-buffer-name "*gerrit-dashboard-mine*")
+            ;; this is a workaround for the text-scale increase bug/feature
+            ;; see debbugs 41852
+            (tabulated-list-use-header-line nil)
+            )
+        (gerrit-dashboard)))
+
+
+    (setq gerrit-project-to-local-workspace-alist
+          '(
+            ;; TODO write a function that generates this map
+            (("software/ipycore" "main") "~/sandbox/main/ipycore")
+            (("software/optics/cec" "main") "~/sandbox/main/cec")
+            (("software/common" "main") "~/sandbox/main/common")
+            (("software/tec" "main") "~/sandbox/main/tec")
+            (("software/integrationtests" "main") "~/sandbox/main/integrationtests")
+            (("software/blocks" "main") "~/sandbox/main/blocks")
+            (("software/jobqueue" "main") "~/sandbox/main/jobqueue")
+            (("software/expses" "main") "~/sandbox/main/expses")
+            ))
+
+    ;; TODO think about using `gerrit-project-to-local-workspace-alist' here
+    (setq gerrit-interesting-open-changes-filter (concat
+                                                  "is:open ("
+                                                  ;;TODO use s-join
+                                                  "project:software/ipycore OR "
+                                                  "project:software/common OR "
+                                                  "project:software/optics/cec OR "
+                                                  "project:software/jobqueue OR "
+                                                  "project:software/expses OR "
+                                                  "project:software/blocks OR "
+                                                  "project:software/integrationtests)"))
     ;; debug commands
     (defun thi::gerrit-mywip ()
       (interactive)
@@ -1579,7 +1649,6 @@ comments from CI tools."
         create-lockfiles nil ;; lock files will kill `npm start'
         lsp-headerline-breadcrumb-enable t)
 
-  (require 'dap-chrome)
   (add-hook 'lsp-mode-hook #'lsp-enable-which-key-integration)
 
   (defun thi::lsp-python-use-conda-py37-settings ()
@@ -2088,14 +2157,8 @@ comments from CI tools."
 
   ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
   ;; (("C-`" . 'helm-semantic-or-imenu))
-  ;; :init (progn
-  ;;         (load "thi/python.conf.el"))
-  ;; :init
-  ;; (progn
-  ;;   (with-eval-after-load 'helm
-  ;;     (bind-key "C-`" #'helm-semantic-or-imenu 'python-mode-map)
-  ;;     )
-  ;;   )
+  (with-eval-after-load 'helm
+    (bind-key "C-`" #'helm-semantic-or-imenu 'python-mode-map))
   )
 
 (use-package python-docstring
@@ -2271,30 +2334,30 @@ comments from CI tools."
   :config
   ;; to add support for disabling the minor mode spell-fu in major modes do
   ;; (see https://stackoverflow.com/questions/6837511/automatically-disable-a-global-minor-mode-for-a-specific-major-mode)
-  (define-global-minor-mode thi::spell-fu-mode spell-fu-mode
-    (lambda ()
-      (when (and (not (memq major-mode
-                            (list
-                             'minibuffer-mode
-                             'vterm-mode
-                             'gerrit-dashboard-mode
-                             'magit-status-mode
-                             'magit-section-mode
-                             'dired-mode
-                             'deadgrep-mode
-                             'pdf-occur-buffer-mode
-                             'minibuffer-inactive-move)))
-                 (not (window-minibuffer-p)))
-        (spell-fu-mode))))
+  ;; (define-global-minor-mode thi::spell-fu-mode spell-fu-mode
+  ;;   (lambda ()
+  ;;     (when (and (not (memq major-mode
+  ;;                           (list
+  ;;                            'minibuffer-mode
+  ;;                            'vterm-mode
+  ;;                            'gerrit-dashboard-mode
+  ;;                            'magit-status-mode
+  ;;                            'magit-section-mode
+  ;;                            'dired-mode
+  ;;                            'deadgrep-mode
+  ;;                            'pdf-occur-buffer-mode
+  ;;                            'minibuffer-inactive-move)))
+  ;;                (not (window-minibuffer-p)))
+  ;;       (spell-fu-mode))))
 
-  (thi::spell-fu-mode 1)
+  ;; (thi::spell-fu-mode 1)
   )
 
 (use-package sphinx-doc
   ;; TODO this package contains support for generating docstrings in a sphinx
   ;; parsable format for python functions/methods/classes
 
-  ;; TODO does not yet support numpy style docstrings  https://github.com/naiquevin/sphinx-doc.el/issues/19
+  ;; TODO does not yet support numpy style docstrings  https://github.com/naiquevin/sphinx-doc.el/issues/19  (but numpydoc.el supports it)
   ;; TODO is there a yasnippet for this already? (yes there are  https://github.com/AndreaCrotti/yasnippet-snippets/search?q=numpy&unscoped_q=numpy
   ;;            snippets: idn, fdn, mdn,
   ;;       TODO they do not support type annotations
@@ -2428,8 +2491,8 @@ comments from CI tools."
 
 ;;   )
 
-(use-package tree-sitter-langs
-  :ensure t)
+;; (use-package tree-sitter-langs
+;;   :ensure t)
 
 (use-package undo-tree
   ;; C-/ undo (without the undo tree graph) !!!
@@ -2440,19 +2503,19 @@ comments from CI tools."
   :config
   (global-undo-tree-mode))
 
-(add-hook 'org-mode-hook
-            (lambda ()
-              (mapc
-               (lambda (face)
-                 (set-face-attribute face nil :inherit 'fixed-pitch))
-               (list 'org-code
-                     'org-link
-                     'org-block
-                     'org-table
-                     'org-block-begin-line
-                     'org-block-end-line
-                     'org-meta-line
-                     'org-document-info-keyword))))
+;; (add-hook 'org-mode-hook
+;;             (lambda ()
+;;               (mapc
+;;                (lambda (face)
+;;                  (set-face-attribute face nil :inherit 'fixed-pitch))
+;;                (list 'org-code
+;;                      'org-link
+;;                      'org-block
+;;                      'org-table
+;;                      'org-block-begin-line
+;;                      'org-block-end-line
+;;                      'org-meta-line
+;;                      'org-document-info-keyword))))
 
 (use-package visual-fill-column :ensure t)
 
