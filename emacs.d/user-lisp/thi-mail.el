@@ -10,8 +10,8 @@
   "Regexp of my email addreses.")
 
 ;; do I need this ??
-(setq notmuch-identities
-      '("thomas.hisch@ims.co.at"))
+;; (setq notmuch-identities
+;;       '("thomas.hisch@ims.co.at"))
 
 (defvar th:email-addresses-regexp
   (concat "^\\("
@@ -39,18 +39,18 @@
 ;; kill buffer after sending mail
 (setq message-kill-buffer-on-exit t)
 
-(defun expand-only-unread-hook ()
-  (interactive)
-  (let ((unread nil)
-        (open (notmuch-show-get-message-ids-for-open-messages)))
-    (notmuch-show-mapc (lambda ()
-                         (when (member "unread" (notmuch-show-get-tags))
-                           (setq unread t))))
-    (when unread
-      (let ((notmuch-show-hook (remove 'expand-only-unread-hook notmuch-show-hook)))
-        (notmuch-show-filter-thread "tag:unread")))))
+;; (defun expand-only-unread-hook ()
+;;   (interactive)
+;;   (let ((unread nil)
+;;         (open (notmuch-show-get-message-ids-for-open-messages)))
+;;     (notmuch-show-mapc (lambda ()
+;;                          (when (member "unread" (notmuch-show-get-tags))
+;;                            (setq unread t))))
+;;     (when unread
+;;       (let ((notmuch-show-hook (remove 'expand-only-unread-hook notmuch-show-hook)))
+;;         (notmuch-show-filter-thread "tag:unread")))))
 
-(add-hook 'notmuch-show-hook 'expand-only-unread-hook)
+;; (add-hook 'notmuch-show-hook 'expand-only-unread-hook)
 
 (provide 'thi-mail)
 ;;; thi-mail.el ends here
