@@ -63,11 +63,11 @@ set -e
     --with-modules \
     --with-native-compilation \
     --with-json \
+   --with-xwidgets \
     --with-x-toolkit=no
     # --with-pgtk
 ##    --with-xml2 \
 #    --with-cairo \
-#    --with-xwidgets
 
 make bootstrap
 make
