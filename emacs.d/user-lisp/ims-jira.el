@@ -173,32 +173,38 @@ down the URL structure to send the request."
                   jql
                   fields)))
     (seq-map (lambda (issue)
+               ;; TODO use section + issue id instead of nil
                `(nil ,(thi-jira-metadata issue)))
              issues)))
 
 (define-derived-mode jira-table-mode dashboard-table-mode "jira-table"
   "jira-table mode"
-
-  (setq dashboard-table-section-alist
-        '(("small sd tasks" . "labels=small_sd_task")
-          ("Implementd tasks" . "\"Group/s\" in (SD-highlevel, SD-lowlevel, SD-web) AND status = \"Implemented?\" ORDER BY created DESC")))
-  (setq dashboard-table-columns
-        [("Key" 10)
-         ("Summary" 75)
-         ("Status" 10)
-         ("FixVersion" 10)
-         ])
-  (setq dashboard-table-section-name-column 1)
-  (setq dashboard-table-get-section-data-function
-        #'jira-table-get-section-data)
-  (dashboard-table--refresh))
+  (variable-pitch-mode)
+  )
 
 ;;;###autoload
 (defun thi-jira-table ()
   "Show a dashboard in a new buffer."
   (interactive)
   (switch-to-buffer "jira-table")
-  (jira-table-mode))
+  (jira-table-mode)
+
+  (setq dashboard-table-section-alist
+        `(("small sd tasks" . "labels=small_sd_task")
+          (,(propertize "Implementd tasks" 'face '(:inherit dashboard-table-section :background "red")) .
+           "\"Group/s\" in (SD-highlevel, SD-lowlevel, SD-web) AND status = \"Implemented?\" ORDER BY created DESC")))
+  (setq dashboard-table-columns
+        [("Key" 10)
+         ("Summary" 75)
+         ("Status" 10)
+         ("FixVersion" 10)
+         ])
+  (setq dashboard-table-get-section-data-function
+        #'jira-table-get-section-data)
+
+
+  (dashboard-table--refresh)
+  )
 
 ;; TODO use svg-lib for displaying tags
 ;; TODO display summary of tickets inline like in confluence, but the summary should be not part of the ASCII file!!
