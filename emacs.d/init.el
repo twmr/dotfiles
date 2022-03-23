@@ -131,6 +131,7 @@
 (defvar thi::jira-rnd-projects '("CTB" "RD" "DT" "HPC" "SD" "RS"))
 (defvar thi::jira-service-projects '("RHI" "SER" "FRCIP"))
 (defvar thi::font "JetBrains Mono") ;; "IBM Plex Mono") ;; "JetBrains Mono", "Iosevka"
+(defvar thi::font "Iosevka")
 
 (defun thi::set-font-size (size)
   ;; note that there is also x-select-frame, that pops up a font dialog
@@ -302,6 +303,8 @@ Intended as a value for `bug-reference-url-format'."
 ;;   (if (string= system-name "dirac")
 ;;       'solarized-dark
 ;;     'solarized-light))
+
+(set-face-attribute 'mode-line nil :inherit 'variable-pitch)
 
 ;; Each file named <somelibrary>.conf.el is loaded just after the library is
 ;; loaded.
