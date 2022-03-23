@@ -1084,6 +1084,7 @@ comments from CI tools."
 
     ;; make the number col a bit smaller
     (aset gerrit-dashboard-columns 0 '("Number" 6))
+    (aset gerrit-dashboard-columns 1 '("Subject" 20))
 
     (defun gerrit-dashboard-sd-odd ()
       (interactive)
