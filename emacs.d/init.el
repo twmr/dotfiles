@@ -1026,12 +1026,48 @@ See URL `https://www.pylint.org/'."
     (transient-append-suffix 'gerrit-upload-transient "v"
       '("V" "upload and verify" thi::upload-and-verify))
 
-    (defun thi::gerrit-topic-all-votes (topicname)
+    (defun thi::gerrit-topic-remove-all-my-votes (topicname)
       (interactive "sEnter a topic: \n")
-      (gerrit-rest-topic-set-vote topicname "+2" "")
-      (gerrit-rest-topic-verify topicname "+1" ""))
+      (gerrit-rest-topic-delete-cr-vote topicname "self")
+      (gerrit-rest-topic-delete-verified-vote topicname "self"))
 
-    ;; TODO remove jenkins verify -1 from a topic (maybe do this in gerrit-rest-change-verify)
+    (defun thi::gerrit-topic-all-votes (topicname)
+      ;; TODO and submit
+      (interactive "sEnter a topic: \n")
+      (cl-loop for change-info in (gerrit-rest-get-topic-info topicname) do
+               (let* ((changenr (gerrit-rest--change-info-to-unique-changeid change-info))
+                      (labels (alist-get 'labels change-info))
+                      (all-cr-labels (alist-get 'all (alist-get 'Code-Review labels)))
+                      (all-verified-labels (alist-get 'all (alist-get 'Verified labels))))
+                 ;; CR votes
+                 ;; --------
+                 (seq-do (lambda(x)
+                           (when (eq -2 (alist-get 'value x))
+                             (message "remove CR -2")
+                             (gerrit-rest-change-delete-CR-vote
+                              changenr (alist-get 'username x))))
+                         all-cr-labels)
+                 ;; if there is no +2 we have to add it
+                 (unless (member 2 (seq-map
+                                    (lambda(x) (alist-get 'value x))
+                                    all-cr-labels))
+                   (message "add CR +2")
+                   (gerrit-rest-change-set-cr-vote changenr "+2" ""))
+
+                 ;; Verified votes
+                 ;; --------------
+                 (seq-do (lambda(x)
+                           (when (eq -1 (alist-get 'value x))
+                             (message "remove Verified -1")
+                             (gerrit-rest-change-delete-verified-vote
+                              changenr (alist-get 'username x))))
+                         all-verified-labels)
+                 ;; if there is no +1 we have to add it
+                 (unless (member 1 (seq-map
+                                    (lambda(x) (alist-get 'value x))
+                                    all-verified-labels))
+                   (message "add Verified +1")
+                   (gerrit-rest-change-set-verified-vote changenr "+1" ""))))))
 
     ;; TODO support code threads: on a change basis or topic basis and add
     ;; keybindings that allow commenting on them and resolving them
