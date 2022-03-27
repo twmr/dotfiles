@@ -2538,7 +2538,10 @@ comments from CI tools."
   ;; C-/ undo (without the undo tree graph) !!!
   ;; M-_ redo (without the undo tree graph) !!!
   :ensure t
-  :custom (undo-tree-visualizer-mode t)
+  :custom
+  (undo-tree-visualizer-mode t)
+  ;; don't litter the workspace with ~undo-tree~ files
+  (undo-tree-auto-save-history nil)
   :diminish
   :config
   (global-undo-tree-mode))
