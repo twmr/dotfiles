@@ -1070,7 +1070,7 @@ See URL `https://www.pylint.org/'."
                                     (lambda(x) (alist-get 'value x))
                                     all-verified-labels))
                    (message "add Verified +1")
-                   (gerrit-rest-change-set-verified-vote changenr "+1" ""))))))
+                   (gerrit-rest-change-set-verified-vote changenr "+1" "")))))
 
     ;; TODO support code threads: on a change basis or topic basis and add
     ;; keybindings that allow commenting on them and resolving them
