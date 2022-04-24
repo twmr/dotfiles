@@ -2088,8 +2088,8 @@ comments from CI tools."
 ;; https://www.reddit.com/r/emacs/comments/u5rx6z/open_vterm_in_resized_horizontal_split/
 (use-package popper
   :ensure t
-  :bind (([M-f1]   . popper-toggle-latest)
-         ([M-f2]   . popper-cycle)
+  :bind (("C-`"   . popper-toggle-latest)
+         ("M-`"   . popper-cycle)
          ("C-M-`" . popper-toggle-type))
   :init
   (setq popper-reference-buffers
@@ -2617,8 +2617,8 @@ comments from CI tools."
   :init
   (setq winum-keymap
     (let ((map (make-sparse-keymap)))
-      (define-key map (kbd "C-`") 'winum-select-window-by-number)
-      (define-key map (kbd "C-²") 'winum-select-window-by-number)
+      ;; (define-key map (kbd "C-`") 'winum-select-window-by-number)
+      ;; (define-key map (kbd "C-²") 'winum-select-window-by-number)
       (define-key map (kbd "M-0") 'winum-select-window-0-or-10)
       (define-key map (kbd "M-1") 'winum-select-window-1)
       (define-key map (kbd "M-2") 'winum-select-window-2)
