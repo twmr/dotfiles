@@ -2081,6 +2081,26 @@ comments from CI tools."
 
 (use-package pip-requirements :ensure t :defer t)
 
+;; https://www.reddit.com/r/emacs/comments/u5rx6z/open_vterm_in_resized_horizontal_split/
+(use-package popper
+  :ensure t
+  :bind (([M-f1]   . popper-toggle-latest)
+         ([M-f2]   . popper-cycle)
+         ("C-M-`" . popper-toggle-type))
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "\\*Warnings\\*"
+          "Output\\*$"
+          ;; TODO vterm
+          "\\*eshell\\*"
+          ;; TODO deadgrep/ripgrep buffers?
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode))
+  (popper-mode +1)
+  (popper-echo-mode +1))  ; For echo area hints
+
 (use-package prog-mode
   :config
 
