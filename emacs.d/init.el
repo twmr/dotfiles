@@ -1502,6 +1502,11 @@ comments from CI tools."
   ;;    (see http://oremacs.com/swiper/#example---define-a-new-command-with-several-actions)
   ;;    C-c C-o  (opens an ivy occur buffer)
   ;;    now type j and k for naviation and oo for jumping to the selection
+
+  ;; *) C-M-j to use the entered text in a completion-context instead of
+  ;; completing it if there is a match in the list of candidates (see
+  ;; https://github.com/minad/vertico/issues/211)
+
   :bind (("C-c C-r" . ivy-resume)
          ("C-x b" . ivy-switch-buffer)
          ("C-x B" . ivy-switch-buffer-other-window)
@@ -1572,7 +1577,6 @@ comments from CI tools."
   ;; (ivy-set-display-transformer 'ivy-switch-buffer
   ;;                              'ivy-rich-switch-buffer-transformer))
   )
-
 
 ;; (use-package kubernetes
 ;;   :ensure t)
@@ -1655,8 +1659,8 @@ comments from CI tools."
   :init
   (setq jiralib2-url             "https://jira.rnd.ims.co.at"
         jiralib2-auth            'token             ;; 'cookie, 'token or 'basic
-        jiralib2-user-login-name "I010229"  ;; email for JIRA Cloud
-        jiralib2-token            nil))              ;; for token auth with JIRA Cloud
+        jiralib2-user-login-name "I010229"          ;; email for JIRA Cloud
+        jiralib2-token            nil))             ;; for token auth with JIRA Cloud
 
 ;; this depends on an outdated json pkg
 ;; (use-package json-mode :ensure t :defer t)
