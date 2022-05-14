@@ -146,3 +146,13 @@ PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 echo "zshrc sourced"
 
 source ~/.config/broot/launcher/bash/br
+
+# so far only on my dell laptop
+GUIX_PROFILE="$HOME/.config/guix/current"
+if [ -e $GUIX_PROFILE ]; then
+    . "$GUIX_PROFILE/etc/profile"
+fi
+GUIX_PROFILE="$HOME/.guix-profile"
+if [ -e $GUIX_PROFILE ]; then
+    . "$GUIX_PROFILE/etc/profile"
+fi
