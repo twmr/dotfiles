@@ -1,8 +1,8 @@
-[pager]
-    diff = delta
-    log = delta
-    reflog = delta
-    show = delta
+#[pager]
+#    diff = delta
+#    log = delta
+#    reflog = delta
+#    show = delta
 
 [alias]
 	st = status
