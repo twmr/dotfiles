@@ -1972,7 +1972,6 @@ comments from CI tools."
 (use-package paredit :ensure t)
 
 (use-package pdf-tools
-  :quelpa (pdf-tools :fetcher github :repo "vedang/pdf-tools")
   ;; new maintainer: https://github.com/vedang/pdf-tools
   ;; old maintainer/author: https://github.com/politza/pdf-tools
 
