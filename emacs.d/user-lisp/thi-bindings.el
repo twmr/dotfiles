@@ -89,7 +89,6 @@
 ;; (add-hook 'python-mode-hook 'my-python-mode-hook)
 
 (define-key lisp-mode-shared-map (kbd "M-m") 'eassist-list-methods)
-(define-key lisp-mode-shared-map (kbd "C-`") 'helm-semantic-or-imenu)
 
 ;; real Emacs hackers don't use the arrow keys
 ;; (global-set-key (kbd "<up>") (lambda ()

@@ -1812,8 +1812,8 @@ comments from CI tools."
          ("C-c l" . org-store-link)
          ("C-c a" . org-agenda)
          ;; ("C-c b" . org-iswitchb)
-         :map org-mode-map
-         ("C-`" . helm-semantic-or-imenu)
+         ;; :map org-mode-map
+         ;; ("C-`" . helm-semantic-or-imenu)
          )
   :config
 
@@ -2095,8 +2095,8 @@ comments from CI tools."
   (setq popper-reference-buffers
         '("\\*Messages\\*"
           "\\*Warnings\\*"
+          "\\*vterm\\*"
           "Output\\*$"
-          ;; TODO vterm
           "\\*eshell\\*"
           ;; TODO deadgrep/ripgrep buffers?
           "\\*Async Shell Command\\*"
@@ -2221,8 +2221,8 @@ comments from CI tools."
 
   ;; :bind ;; see http://tuhdo.github.io/helm-intro.html#sec-6
   ;; (("C-`" . 'helm-semantic-or-imenu))
-  (with-eval-after-load 'helm
-    (bind-key "C-`" #'helm-semantic-or-imenu 'python-mode-map))
+  ;; (with-eval-after-load 'helm
+  ;;   (bind-key "C-`" #'helm-semantic-or-imenu 'python-mode-map))
   )
 
 (use-package python-docstring
@@ -2597,12 +2597,14 @@ comments from CI tools."
   )
 
 (use-package vterm
-  :ensure t)
+  :ensure t
+  :config
+    (global-set-key [f2] #'vterm))
 
 (use-package vterm-toggle
   :ensure t
   :config
-  (global-set-key [f2] #'vterm-toggle)
+  ;; (global-set-key [f2] #'vterm-toggle)
   (global-set-key [C-f2] #'vterm-toggle-cd))
 
 (use-package wgrep-ag :ensure t)
