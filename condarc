@@ -1,9 +1,9 @@
-create_default_packages:
-  - ipython
-  - pip
-  - setuptools
-  - cython
-  - flake8
+# create_default_packages:
+#  - ipython
+#  - pip
+#  - setuptools
+#  - cython
+#  - flake8
 
 channels:
   # - file:///home/thomas/miniconda/conda-bld

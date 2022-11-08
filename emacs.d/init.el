@@ -2197,7 +2197,8 @@ comments from CI tools."
 
   (defun ims-yapf()
     (interactive)
-    (when (string-match "sandbox" buffer-file-name)
+    (when (and (not (string-match "gaia" buffer-file-name))
+                    (string-match "sandbox" buffer-file-name))
       (add-hook 'before-save-hook #'py-isort-before-save nil t)
       ;; instead of doing (add-hook 'python-mode-hook 'yapf-mode), as
       ;; suggested in the README of yapfify we do

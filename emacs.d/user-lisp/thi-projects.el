@@ -72,12 +72,18 @@
   ;; TODO
   ;; output project root
   ;; output ...
+
+  ;; should be around 14k
   (message "Number of (tracked) files in the project: %s"
            (let ((default-directory (thi::get-project-root)))
-                 (shell-command-to-string
-                  (concat
-                   (s-replace " -0" "" projectile-generic-command)
-                   " | wc -l")))))
+             (with-current-buffer (get-buffer-create "*ims-file-list*")
+               (erase-buffer)
+               (insert (shell-command-to-string
+                        (s-replace " -0" " --sort path" projectile-generic-command))))
+             (shell-command-to-string
+              (concat
+               (s-replace " -0" "" projectile-generic-command)
+               " | wc -l")))))
 
 (defun thi::project-list ()
   ;; output files matched by projectile-generic-command
