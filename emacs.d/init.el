@@ -1072,6 +1072,68 @@ See URL `https://www.pylint.org/'."
                    (message "add Verified +1")
                    (gerrit-rest-change-set-verified-vote changenr "+1" "")))))
 
+    (defun gerrit-rest-get-change-comments (changenr)
+      "Return information about an open topic with TOPICNAME."
+      (interactive "sEnter a change name: ")
+      (let* ((req (concat "/changes/"
+			  changenr
+			  "/comments")))
+	(gerrit-rest-sync "GET" nil req)))
+
+    (defun thi::comments (changenr)
+      (interactive "sEnter a change name: ")
+      (with-current-buffer (get-buffer-create "comments")
+	(erase-buffer)
+
+	;; TODO format:  (sort by updated-time descending)
+	;;  filename # linenumber  PS
+	;;    Name: message, updated-time
+	;;    Name: message, updated-time
+
+	;; TODO groupby id (filename line PS)
+
+	(seq-do (lambda (comment-info-with-filename)
+		  (insert (format
+			   "Filename: %s\n" (symbol-name (car comment-info-with-filename))))
+		  (seq-do (lambda (group-and-values)
+			    (insert (format "\n-> %s\n" (car group-and-values)))
+			    (seq-do (lambda (comments-in-group)
+				      (insert (format "%s (%s): %s\n"
+						      (propertize (alist-get 'username
+									     (alist-get 'author comments-in-group)) 'face 'magit-log-author)
+						      (gerrit--format-abbrev-date (alist-get 'updated comments-in-group))
+						      (alist-get 'message comments-in-group))))
+
+				    ;; comments sort by updated timestamp
+				    ;; (cdr group-and-values)))
+			            (seq-sort-by (lambda (element) (alist-get 'updated element)) #'string< (cdr group-and-values))))
+			 
+			  ;; groups
+			  (seq-group-by (lambda (comment-info)
+					  (list
+					   (alist-get 'line comment-info)
+					   (alist-get 'patch_set comment-info)))
+					(cdr comment-info-with-filename))))
+		(gerrit-rest-get-change-comments changenr))))
+	
+
+	;; ---
+	;; (seq-do (lambda (comment-info-with-filename)
+	;; 	  (insert (format
+	;; 		   "Filename: %s\n" (symbol-name (car comment-info-with-filename))))
+	;; 	  (seq-do (lambda (comment-info)
+	;; 		    (insert (format "%s@%s PS%s (%s): %s\n"
+	;; 				    (propertize (alist-get 'username
+	;; 							   (alist-get 'author comment-info)) 'face 'magit-log-author)
+	;; 				    (alist-get 'line comment-info)
+	;; 				    (alist-get 'patch_set comment-info)
+	;; 				    (gerrit--format-abbrev-date (alist-get 'updated comment-info))
+	;; 				    ;;(alist-get 'id comment-info)
+	;; 				    (alist-get 'message comment-info))))
+	;; 		  (reverse (cdr comment-info-with-filename))))
+	;; 	(gerrit-rest-get-change-comments changenr))))
+
+    
     ;; TODO support code threads: on a change basis or topic basis and add
     ;; keybindings that allow commenting on them and resolving them
 
