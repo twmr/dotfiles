@@ -2,6 +2,8 @@
 #
 # change default behaviors for the basics
 
+echo sourcing alias file
+
 . ~/.zsh/vars
 
 alias mv='mv -v --backup=existing'
@@ -133,13 +135,15 @@ alias ka='sudo killall'
 # ignore job-based-logging proto files
 alias rg='rg -g "!*.par"'
 
-
 alias vim='nvim'
 
 #alias docker=podman
 
 #named directories
+#echo creating hashed dirs
+GITR=${HOME}/gitrepos
 DOTFDIR=${GITR}/dotfiles
+#echo "dotfdir $DOTFDIR"
 hash -d conf=${HOME}/.config
 hash -d loc=${HOME}/.local
 hash -d awe=${HOME}/.config/awesome
@@ -153,3 +157,4 @@ hash -d swt=${GITR}/software_tests
 hash -d pswt=${GITR}/software_tests/py
 
 hash -d is=$HOME/sandbox/isar
+hash -d mn=$HOME/main

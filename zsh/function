@@ -37,6 +37,10 @@ function act() {
     source $1/bin/activate
 }
 
+function devt2() {
+    (conda activate devtool2; dev $*)
+}
+
 function melmacs() {
     emacs -Q --eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)"
 }
@@ -130,7 +134,7 @@ function gf() { git fetch $* }
 function gd() { git diff --ignore-submodules $* }
 function gg() { git grep $* }
 function glol() { git lola $* }
-function gk() { gitk --all $* & }
+function gk() { (conda deactivate; gitk --all $* &) }
 function gl() { git log $* }
 function glu() { git log -u $* }
 function gs() { git status $* }
@@ -181,6 +185,20 @@ function gsed() {
             sed -r -i $1 $x;
         fi
 
+    done
+}
+
+
+function gsednor() {
+    # same as gsed but without the -r flag
+    for x in `git ls-files`; do
+        if [ -h $x ]; then
+            # symbolic link
+            continue
+        fi
+        if [ -f $x ]; then
+            sed -i $1 $x;
+        fi
     done
 }
 

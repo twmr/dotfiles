@@ -53,6 +53,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 #plugins=(sudo zsh-dircolors-solarized docker man)
 plugins=(sudo docker man)
 
+echo source $ZSH/oh-my-zsh.sh
 source $ZSH/oh-my-zsh.sh
 
 autoload -U colors zsh/terminfo
@@ -105,6 +106,11 @@ if [ -e $HOME/.fzf ]; then
 else
     fzfdir=/usr/share/fzf
 fi
+export FZF_DEFAULT_COMMAND='rg --files --hidden'
+#export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
+
+# this is needed s.t. Ctrl-T respects my global gitignore file and doesn't output files in e.g. __pycache__
+export FZF_CTRL_T_COMMAND='rg --files --hidden'
 
 # Key bindings
 # ------------
@@ -145,7 +151,7 @@ PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
 echo "zshrc sourced"
 
-source ~/.config/broot/launcher/bash/br
+# source ~/.config/broot/launcher/bash/br
 
 # so far only on my dell laptop
 GUIX_PROFILE="$HOME/.config/guix/current"

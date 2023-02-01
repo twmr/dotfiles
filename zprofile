@@ -398,11 +398,6 @@ if [ "$HOSTNAME" = "thisch" -o "$HOSTNAME" = "mustang" ]; then
     export LD_LIBRARY_PATH=${CFBDMPI}/lib:${LD_LIBRARY_PATH}
 fi
 
-if [ "$HOSTNAME" = "NBPF1PQX4B" ]; then
-    prepath "$HOME/bin"
-    prepath "$HOME/.local/bin"
-fi
-
 . ~/.zsh/linuxconsole
 
 #[[ $- != *i* ]] && return
@@ -411,4 +406,5 @@ fi
 
 # prepath "$HOME/.cargo/bin"
 
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.cargo/bin:$PATH"
+echo "done loading zprofile"
