@@ -43,6 +43,8 @@ alias pie='pip install -e .' # editable install
 alias pympi='mpirun -n `nproc` python'
 alias upgrade_all_pip_packes='pip freeze --local | grep -v "^\-e" | cut -d = -f 1  | xargs -n1 pip install -U'
 
+alias nocov='pytest --no-cov'
+
 # remove py2 stuff and use py3 tools:
 # remove the aliases once fedora has switched to python3
 #alias pep8='python3-pep8'
