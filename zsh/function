@@ -45,8 +45,8 @@ function melmacs() {
     emacs -Q --eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)"
 }
 
-function enconda() {
-    type conda &>/dev/null && return
+function enmamba() {
+    type mamba &>/dev/null && return
     perl -e 'exit(!(grep(m{^$ENV{HOME}/miniconda/bin$},split(":", $ENV{PATH}))) > 0)' && return
     export PATH=$HOME/miniconda/bin:$PATH
 }

@@ -16,15 +16,15 @@ alias grep='grep --color=auto'
 
 alias start_btsync='btsync --config ~/btsync_config/config.json'
 
-# conda
-alias cua='enconda && conda update --all'
-alias ci='enconda && conda install'
-alias cs='enconda && conda search'
-alias cl='enconda && conda list'
-alias cinf='enconda && conda info -e'
-alias cr='enconda && conda remove --use-index-cache'
-alias workon='enconda && source activate'
-alias workoff='enconda && source deactivate'
+# mamba
+alias cua='enmamba && mamba update --all'
+alias ci='enmamba && mamba install'
+alias cs='enmamba && mamba search'
+alias cl='enmamba && mamba list'
+alias cinf='enmamba && mamba info -e'
+alias cr='enmamba && mamba remove --use-index-cache'
+alias workon='enmamba && source activate'
+alias workoff='enmamba && source deactivate'
 
 # rg
 alias pyrg='rg --type=py'

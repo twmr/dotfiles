@@ -2090,12 +2090,12 @@ comments from CI tools."
         )
   :config
 
-  (with-eval-after-load 'pdf-occur
-    (define-key pdf-occur-buffer-mode-map
-      ;; allows clicking on the pdf occur matches with the mouse
-      ;; an alternative is to use "RET" or use the "peek" feature C-o,
-      ;; where the active buffer remains the occur buffer. C-n C-o
-      (kbd "<mouse-1>") 'pdf-occur-goto-occurrence))
+  ;; (with-eval-after-load 'pdf-occur
+  ;;   (define-key pdf-occur-buffer-mode-map
+  ;;     ;; allows clicking on the pdf occur matches with the mouse
+  ;;     ;; an alternative is to use "RET" or use the "peek" feature C-o,
+  ;;     ;; where the active buffer remains the occur buffer. C-n C-o
+  ;;     (kbd "<mouse-1>") 'pdf-occur-goto-occurrence))
 
   (use-package saveplace-pdf-view ;; remembers the last location in the pdf file
     :ensure t)
