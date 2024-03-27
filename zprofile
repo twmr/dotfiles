@@ -404,9 +404,9 @@ fi
 #[[ -z "$TMUX" ]] && exec tmux
 
 # guix used for installing nyxt (note that nyxt currently doesn't work)
-GUIX_PROFILE="$HOME/.guix-profile"
-export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale"
-. "$GUIX_PROFILE/etc/profile"
+# GUIX_PROFILE="$HOME/.guix-profile"
+# export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale"
+# . "$GUIX_PROFILE/etc/profile"
 
 
 # prepath "$HOME/.cargo/bin"
