@@ -16,10 +16,12 @@ if [ $(id -u) = "0" ]; then
 fi
 
 #enable horizontal and vertical scrolling
-$SET_INT_PROP "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
-$SET_INT_PROP "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
+
+devname="TPPS/2 Elan TrackPoint"
+$SET_INT_PROP "$devname" "Evdev Wheel Emulation" 1
+$SET_INT_PROP "$devname" "Evdev Wheel Emulation Button" 2
 #$SET_INT_PROP "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
-$SET_INT_PROP "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
+$SET_INT_PROP "$devname" "Evdev Wheel Emulation Axes" 6 7 4 5
 
 synclient TapButton1=1
 synclient HorizTwoFingerScroll=1
