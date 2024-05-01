@@ -70,12 +70,17 @@ fi
 [ -e $HOME/.bin ] && prepath $HOME/.bin
 [ -e $HOME/.local/bin ] && prepath $HOME/.local/bin
 [ -e $HOME/.pixi ] && prepath $HOME/.pixi/bin
+[ -e $HOME/.cargo/bin ] && prepath $HOME/.cargo/bin
+[ -e $HOME/.cask/bin ] && prepath $HOME/.cask/bin
+[ -e $HOME/.cask/bin ] && prepath $HOME/.cask/bin
 
 # needed for distributions where there is no fzf package available (ubuntu)
 [ -e $HOME/.fzf/bin ] && prepath $HOME/.fzf/bin
 
 DOTFPATH=$HOME/gitrepos/dotfiles
 [ -e $DOTFPATH ] &&  prepath $DOTFPATH/bin
+
+prepath /opt/emacs-dev/bin
 
 if [ -e ~/.zsh.d/zprofile ]; then
     . ~/.zsh.d/zprofile
@@ -150,15 +155,6 @@ elif [ "$HOSTNAME" = "mustang" ]; then
 
 elif [ "$HOSTNAME" = "thomas-XPS-13-9360" ]; then
     prepath $HOME/bin
-    # prepath $HOME/.cargo/bin
-    prepath /opt/emacs-dev/bin
-    prepath $HOME/.cask/bin
-    prepath $HOME/.cargo/bin
-
-    # Ubuntu make installation of Ubuntu Make binary symlink
-    # prepath $HOME/.local/share/umake/bin
-
-    # preldlpath /opt/emacs/lib
 
     # ssh-agent is started using a systemd user-service
     export SSH_AUTH_SOCK=${XDG_RUNTIME_DIR}/ssh-agent.socket
@@ -222,7 +218,6 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     # prepath $HOME/software/pycharm-community-3.4.1/bin
     prepath $EMBINPATH
     prepath $EMBINPATH2
-    prepath $HOME/.cask/bin
     prepath $GITR/software_setup_scripts
     #prepath $NETGENDIR
     prepath $GITR/diss/task3/scripts
@@ -409,9 +404,6 @@ fi
 # GUIX_PROFILE="$HOME/.guix-profile"
 # export GUIX_LOCPATH="$GUIX_PROFILE/lib/locale"
 # . "$GUIX_PROFILE/etc/profile"
-
-
-# prepath "$HOME/.cargo/bin"
 
 export PATH="$HOME/bin:$HOME/.cargo/bin:$PATH"
 echo "done loading zprofile"
