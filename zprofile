@@ -74,6 +74,9 @@ fi
 # needed for distributions where there is no fzf package available (ubuntu)
 [ -e $HOME/.fzf/bin ] && prepath $HOME/.fzf/bin
 
+DOTFPATH=$HOME/gitrepos/dotfiles
+[ -e $DOTFPATH ] &&  prepath $DOTFPATH/bin
+
 if [ -e ~/.zsh.d/zprofile ]; then
     . ~/.zsh.d/zprofile
 elif [ "$HOSTNAME" = "mustang" ]; then
@@ -200,7 +203,6 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     # module purge
     # module load mpi/openmpi-x86_64
 
-    DOTFPATH=$HOME/gitrepos/dotfiles
 
     export JDK_HOME=$HOME/software/jdk1.7.0_40
 
@@ -220,7 +222,6 @@ elif [ "$HOSTNAME" = "cobra" ]; then
     # prepath $HOME/software/pycharm-community-3.4.1/bin
     prepath $EMBINPATH
     prepath $EMBINPATH2
-    prepath $DOTFPATH/bin
     prepath $HOME/.cask/bin
     prepath $GITR/software_setup_scripts
     #prepath $NETGENDIR
