@@ -1,0 +1,15 @@
+#!/bin/sh
+
+if [ -z $XDG_CURRENT_DESKTOP ]; then
+    export XDG_CURRENT_DESKTOP="awesome-GNOME-Flashback:GNOME-Flashback:GNOME"
+fi
+
+# TODO move all this into lua scripts
+xscreensaver -no-splash &
+
+keyboard.sh
+laptop-settings.sh
+flameshot &
+
+#exec gnome-session --builtin --session=awesome-gnome-flashback --disable-acceleration-check "$@"
+exec gnome-session --session=awesome-gnome-flashback --disable-acceleration-check "$@"
