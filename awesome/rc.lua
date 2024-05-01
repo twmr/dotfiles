@@ -585,3 +585,8 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- This section contains all programs that are going to be started when logged
+-- in. Please see the startup.lua file.
+--
+require("autostart")

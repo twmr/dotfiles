@@ -1,15 +1,11 @@
-
-
 clone https://github.com/ReadyWidgets/awesome-gnome-flashback/
 and install the scripts
 
 sudo apt install xscreensaver  # for Ctrl-Alt-l
+sudo apt install xfce4-power-manager
 
 https://github.com/muammar/awesome/tree/master
 
-Add this to the end of my rc.lua file
-
--- This section contains all programs that are going to be started when logged
--- in. Please see the startup.lua file.
---
-require("autostart")
+TODO osd volume/brightness
+TODO battery
+TODO theme
