@@ -30,6 +30,7 @@ HOSTNAME=`hostname`
 # export GIT_AUTHOR_EMAIL="`git config user.email`"
 # export GIT_COMMITTER_NAME=$GIT_AUTHOR_NAME
 # export GIT_COMMITTER_EMAIL=$GIT_AUTHOR_EMAIL
+export GIT_EDITOR=vim
 
 # Exports
 export PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin
