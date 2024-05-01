@@ -11,6 +11,8 @@ local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup").widget
 
+local battery_widget = require("awesome-wm-widgets.battery-widget.battery")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -240,6 +242,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
+            battery_widget({ display_notification = true }),
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
