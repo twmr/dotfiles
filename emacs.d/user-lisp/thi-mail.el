@@ -1,43 +1,43 @@
 ;;; -*- lexical-binding:t -*-
 ;;; Code
 
-(setq user-mail-address "thomas.hisch@ims.co.at"
-      user-full-name "Thomas Hisch")
+;; (setq user-mail-address "thomas.hisch@ims.co.at"
+;;       user-full-name "Thomas Hisch")
 
-(defvar th:email-addresses
-  '("t.hisch@gmail\\.com"
-    "thomas.hisch@ims\\.co\\.at")
-  "Regexp of my email addreses.")
+;; (defvar th:email-addresses
+;;   '("t.hisch@gmail\\.com"
+;;     "thomas.hisch@ims\\.co\\.at")
+;;   "Regexp of my email addreses.")
 
-;; do I need this ??
+;; ;; do I need this ??
 ;; (setq notmuch-identities
 ;;       '("thomas.hisch@ims.co.at"))
 
-(defvar th:email-addresses-regexp
-  (concat "^\\("
-          (mapconcat 'identity th:email-addresses "\\|")
-          "\\)$"))
+;; (defvar th:email-addresses-regexp
+;;   (concat "^\\("
+;;           (mapconcat 'identity th:email-addresses "\\|")
+;;           "\\)$"))
 
-(setq work-smtp-port 587)
-(setq work-smtp-host "smtp.ims.co.at")
+;; (setq work-smtp-port 587)
+;; (setq work-smtp-host "smtp.ims.co.at")
 
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "xdg-open")
+;; (setq browse-url-browser-function 'browse-url-generic
+;;       browse-url-generic-program "xdg-open")
 
-;; (setq message-signature-file "~/.signature")
+;; ;; (setq message-signature-file "~/.signature")
 
-;; Configure outbound mail (SMTP)
-(setq ;; deprecated smtpmail-starttls-credentials `((,work-smtp-host ,work-smtp-port nil nil))
-      smtpmail-smtp-server work-smtp-host
-      smtpmail-smtp-service work-smtp-port
-      smtpmail-default-smtp-server work-smtp-host
-      send-mail-function 'smtpmail-send-it
-      message-send-mail-function 'smtpmail-send-it
-      smtpmail-debug-info t
-      smtpmail-debug-verb t)
+;; ;; Configure outbound mail (SMTP)
+;; (setq ;; deprecated smtpmail-starttls-credentials `((,work-smtp-host ,work-smtp-port nil nil))
+;;       smtpmail-smtp-server work-smtp-host
+;;       smtpmail-smtp-service work-smtp-port
+;;       smtpmail-default-smtp-server work-smtp-host
+;;       send-mail-function 'smtpmail-send-it
+;;       message-send-mail-function 'smtpmail-send-it
+;;       smtpmail-debug-info t
+;;       smtpmail-debug-verb t)
 
-;; kill buffer after sending mail
-(setq message-kill-buffer-on-exit t)
+;; ;; kill buffer after sending mail
+;; (setq message-kill-buffer-on-exit t)
 
 ;; (defun expand-only-unread-hook ()
 ;;   (interactive)
@@ -52,5 +52,5 @@
 
 ;; (add-hook 'notmuch-show-hook 'expand-only-unread-hook)
 
-(provide 'thi-mail)
+;; (provide 'thi-mail)
 ;;; thi-mail.el ends here

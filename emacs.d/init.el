@@ -132,6 +132,8 @@
 (defvar thi::jira-service-projects '("RHI" "SER" "FRCIP"))
 (defvar thi::font "JetBrains Mono") ;; "IBM Plex Mono") ;; "JetBrains Mono", "Iosevka"
 (defvar thi::font "Iosevka")
+(defvar thi::font "IBM Plex Mono") ;; "JetBrains Mono", "Iosevka"
+(defvar thi::font "JetBrains Mono") ;; "JetBrains Mono", "Iosevka"
 
 (defun thi::set-font-size (size)
   ;; note that there is also x-select-frame, that pops up a font dialog
@@ -218,18 +220,18 @@ Intended as a value for `bug-reference-url-format'."
 
 (defun thi::activate-ticket-and-gerrit-links ()
   (interactive)
-  (setq-local bug-reference-bug-regexp thi::bug-reference-bug-regexp)
-  (setq-local bug-reference-url-format #'thi::bug-reference-url)
-  (bug-reference-prog-mode 1) ;; only in comments
+  ;; (setq-local bug-reference-bug-regexp thi::bug-reference-bug-regexp)
+  ;; (setq-local bug-reference-url-format #'thi::bug-reference-url)
+  ;; (bug-reference-prog-mode 1) ;; only in comments
   )
 
 (defun thi::activate-ticket-and-gerrit-links-text-modes ()
   (interactive)
   ;; in text mode we want to use (bug-reference-mode) and not the
   ;; (bug-refernece-prog-mode)
-  (thi::activate-ticket-and-gerrit-links)
-  (bug-reference-prog-mode 0)
-  (bug-reference-mode 1)
+  ;; (thi::activate-ticket-and-gerrit-links)
+  ;; (bug-reference-prog-mode 0)
+  ;; (bug-reference-mode 1)
   )
 
 (add-hook 'prog-mode-hook #'thi::activate-ticket-and-gerrit-links)
@@ -298,6 +300,7 @@ Intended as a value for `bug-reference-url-format'."
 ;; (defvar thi::theme 'tango-dark)
 (defvar thi::theme 'sanityinc-tomorrow-night)
 ;; (defvar thi::theme 'leuven)
+;; (defvar thi::theme 'nano)
 
 ;; (defvar thi::theme
 ;;   (if (string= system-name "dirac")
@@ -691,7 +694,7 @@ to obtain ripgrep results."
 
 (use-package dracula-theme :ensure t)
 
-(use-package debbugs :ensure t)
+;;;(use-package debbugs :ensure t)
 
 (use-package dumb-jump
   :ensure t
@@ -906,10 +909,19 @@ to obtain ripgrep results."
     (add-hook 'sh-mode-hook 'thi::tabs-are-less-evil)
     ))
 
-(use-package expand-region :ensure t :defer t
-  :bind
+(use-package expand-region :ensure t
+   :config (defun er/select-call-f (arg)
+             (setq current-prefix-arg arg)
+             (call-interactively 'er/expand-region)
+             (exchange-point-and-mark))
+   (defun selectFunctionCall()
+     (interactive)
+     (er/select-call-f 3))
+   :bind ("<C-return>" . selectFunctionCall)
+   ("M-a" . er/expand-region)
+   ("M-s" . er/contract-region)
   ;;If you expand too far, you can contract the region by pressing - (minus key), or by prefixing the shortcut you defined with a negative argument: C-- C-=.
-  (("C-=" . er/expand-region)))
+   ("C-=" . er/expand-region))
 
 (use-package flx :ensure t)
 (use-package flx-ido :ensure t
@@ -920,8 +932,8 @@ to obtain ripgrep results."
   :ensure t
   :custom
   (flycheck-emacs-lisp-initialize-packages t) ;; fixes an unkown pkg error with (require 'hydra) in gerrit.el
-  (flycheck-python-mypy-executable (expand-file-name "~/miniconda3/bin/mypy"))
-  (flycheck-python-pylint-executable (expand-file-name "~/miniconda3/bin/python"))
+  ;; (flycheck-python-mypy-executable (expand-file-name "~/miniconda3/bin/mypy"))
+  ;; (flycheck-python-pylint-executable (expand-file-name "~/miniconda3/bin/python"))
   :init (progn
           (setq flycheck-highlighting-mode 'lines)
           (setq flycheck-display-errors-delay 0.4)
@@ -934,6 +946,19 @@ to obtain ripgrep results."
 
 
 (with-eval-after-load 'flycheck
+  ;; copied from PR1771
+  (defun flycheck-pylint-find-project-root (_checker)
+    "Find the directory to invoke pylint from.
+
+The algorithm is the same as used by epylint: find the first
+directory that doesn't have a __init__.py file."
+    (locate-dominating-file
+     (if buffer-file-name
+         (file-name-directory buffer-file-name)
+       default-directory)
+     (lambda (dir)
+       (not (file-exists-p (expand-file-name "__init__.py" dir))))))
+
   (flycheck-define-checker python-pylint
     "A Python syntax and style checker using Pylint.
 This syntax checker requires Pylint 1.0 or newer.
@@ -941,7 +966,7 @@ See URL `https://www.pylint.org/'."
     ;; --reports=n disables the scoring report.
     ;; Not calling pylint directly makes it easier to switch between different
     ;; Python versions; see https://github.com/flycheck/flycheck/issues/1055.
-    :command ("python"
+    :command ("/home/thomas/miniconda/bin/python"
               (eval (flycheck-python-module-args 'python-pylint "pylint"))
               "--reports=n"
               "--output-format=json"
@@ -949,6 +974,7 @@ See URL `https://www.pylint.org/'."
               "--from-stdin" source-original)
     :standard-input t
     :error-parser flycheck-parse-pylint
+    ;; :working-directory flycheck-pylint-find-project-root
     :enabled (lambda ()
                (or (not (flycheck-python-needs-module-p 'python-pylint))
                    (flycheck-python-find-module 'python-pylint "pylint")))
@@ -987,8 +1013,8 @@ See URL `https://www.pylint.org/'."
      (if thi::at-work
          "gerrit.rnd.ims.co.at"
        ;; (gerrit-host "gerrit.googlesource.com")
-       "review.gerrithub.io"
-       ;; "review.opendev.org"
+       ;; "review.gerrithub.io"
+       "review.opendev.org"
        ))
   (gerrit-save-file (concat thi::cache-file-dir "/git-review"))
   (gerrit-use-gitreview-interface nil)
@@ -1249,9 +1275,10 @@ comments from CI tools."
             (gerrit-dashboard-buffer-name "*gerrit-gerritforge*")
             ;; this is a workaround for the text-scale increase bug/feature
             ;; see debbugs 41852
-            (tabulated-list-use-header-line nil)
+            ;; (tabulated-list-use-header-line nil)
             )
         (with-current-buffer (get-buffer-create gerrit-dashboard-buffer-name)
+          (hl-line-mode 1)
           (text-scale-set -3))
         (gerrit-dashboard)))
     ))
@@ -1324,6 +1351,13 @@ comments from CI tools."
   ;; separate packages gitattributes-mode, gitconfig-mode and gitignore-mode.
   ;; now they are part of one pkg.
   :ensure t)
+
+(use-package gnus
+  :ensure t
+  :config
+  (setq gnus-parameters
+      '((".*"
+         (gcc-self . t)))))
 
 (use-package grip-mode
   ;; preview markdown files
@@ -1809,6 +1843,16 @@ comments from CI tools."
     ;; the git ref-parse command always outputs the remote name (in my case origin). let's remove it
     (magit-git-command "git switch `git rev-parse --abbrev-ref --symbolic-full-name @{u} | sed 's|^origin/||'`")))
 
+;; (use-package magit-gerrit
+;;   :load-path "~/gitrepos/magit-gerrit"
+;;   :config
+;;   (progn
+;;     (require 'magit-gerrit)
+;;     (setq-default magit-gerrit-ssh-creds "thomas@gerrit-review.googlesource.com")
+;;     ;; (setq-default magit-gerrit-remote "gerrit"))
+;;     (setq-default magit-gerrit-remote "origin"))
+;; )
+
 (use-package magit-libgit
   :ensure t)
 
@@ -1827,6 +1871,12 @@ comments from CI tools."
 ;;          ("C-c m C-e" . mc/edit-ends-of-lines)
 ;;          ("C-c m C-s" . mc/mark-all-in-region)))
 
+(use-package nano-theme
+  :ensure nil
+  :defer t
+  :quelpa (nano-theme
+           :fetcher github
+           :repo "rougier/nano-theme"))
 
 (use-package org
   ;; helpful key-bindings:
@@ -2416,15 +2466,15 @@ comments from CI tools."
                       (scroll-bar-mode -1)
                       (thi::set-font-size
                        (if thi::at-work
-                           18
-                         22))
+                           12
+                         24))
                       (load-theme thi::theme t)
                       (thi::sml-setup)))))
     (progn
       (thi::set-font-size
        (if thi::at-work
-           18
-         22))
+           12
+         14))
       (load-theme thi::theme t)
       (thi::sml-setup)
       (tool-bar-mode -1)
@@ -2912,228 +2962,104 @@ comments from CI tools."
 (put 'dired-find-alternate-file 'disabled nil)
 
 
-(use-package mu4e
-  :disabled t
-  ;; :defer 20 ; Wait until 20 seconds after startup
-  ;; :ensure nil ;; because this package is not on melpa
-  :load-path "/usr/share/emacs/site-lisp/mu4e"
-  :config
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; key bindings
-  ;; - show source of mail?
-  ;; - open mail in firefox
-  ;;
+;; (use-package mu4e
+;;   ;; :defer 20 ; Wait until 20 seconds after startup
+;;   ;; :ensure t
+;;   :config
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; resources
-  ;; https://github.com/munen/emacs.d/#mu4e
+;;   ;; Load org-mode integration
+;;   (require 'org-mu4e)
 
-  ;; jira mail types can be changed to text (default html)
+;;   ;; Refresh mail using isync every 10 minutes
+;;   (setq mu4e-update-interval (* 10 60))
+;;   (setq mu4e-get-mail-command "mbsync -a")
+;;   (setq mu4e-maildir "~/Mail")
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;   ;; Use Ivy for mu4e completions (maildir folders, etc)
+;;   (setq mu4e-completing-read-function #'ivy-completing-read)
 
+;;   ;; Make sure that moving a message (like to Trash) causes the
+;;   ;; message to get a new file name.  This helps to avoid the
+;;   ;; dreaded "UID is N beyond highest assigned" error.
+;;   ;; See this link for more info: https://stackoverflow.com/a/43461973
+;;   (setq mu4e-change-filenames-when-moving t)
 
+;;   ;; Set up contexts for email accounts
+;;   (setq mu4e-contexts
+;;         `(,(make-mu4e-context
+;;             :name "Work"
+;;             :vars '(
+;;                     (user-full-name . "Thomas Hisch")
+;;                     (user-mail-address . "thomas.hisch@ims.co.at")
+;;                     (mu4e-sent-folder . "/Sent Items")
+;;                     (mu4e-trash-folder . "/Deleted Items")
+;;                     (mu4e-drafts-folder . "/Drafts")
+;;                     (mu4e-refile-folder . "/Archive")
+;;                     (mu4e-sent-messages-behavior . sent)
+;;                     ))
+;;           ))
+;;   (setq mu4e-context-policy 'pick-first)
 
-  ;; Load org-mode integration
-  (require 'org-mu4e)
+;;   ;; Prevent mu4e from permanently deleting trashed items
+;;   ;; This snippet was taken from the following article:
+;;   ;; http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/
+;;   (defun remove-nth-element (nth list)
+;;     (if (zerop nth) (cdr list)
+;;       (let ((last (nthcdr (1- nth) list)))
+;;         (setcdr last (cddr last))
+;;         list)))
+;;   (setq mu4e-marks (remove-nth-element 5 mu4e-marks))
+;;   (add-to-list 'mu4e-marks
+;;                '(trash
+;;                  :char ("d" . "▼")
+;;                  :prompt "dtrash"
+;;                  :dyn-target (lambda (target msg) (mu4e-get-trash-folder msg))
+;;                  :action (lambda (docid msg target)
+;;                            (mu4e~proc-move docid
+;;                                            (mu4e~mark-check-target target) "-N"))))
 
-  ;; Refresh mail using isync every 10 minutes
-  (setq mu4e-update-interval (* 10 60))
-  (setq mu4e-get-mail-command "offlineimap")
+;;   ;; Display options
+;;   (setq mu4e-view-show-images t)
+;;   (setq mu4e-view-show-addresses 't)
 
-  ;; Use Ivy for mu4e completions (maildir folders, etc)
-  (setq mu4e-completing-read-function #'ivy-completing-read)
+;;   ;; Composing mail
+;;   (setq mu4e-compose-dont-reply-to-self t)
 
-  ;; Make sure that moving a message (like to Trash) causes the
-  ;; message to get a new file name.  This helps to avoid the
-  ;; dreaded "UID is N beyond highest assigned" error.
-  ;; See this link for more info: https://stackoverflow.com/a/43461973
-  (setq mu4e-change-filenames-when-moving t)
+;;   ;; Use mu4e for sending e-mail
+;;   (setq mail-user-agent 'mu4e-user-agent
+;;         message-send-mail-function 'smtpmail-send-it
+;;         smtpmail-smtp-server "smtp.ims.co.at"
+;;         smtpmail-smtp-service 587
+;;         smtpmail-stream-type  'ssl)
 
-  ;; Set up contexts for email accounts
-  (setq mu4e-contexts
-        `(,(make-mu4e-context
-            :name "IMS"
-            ;; :match-func (lambda (msg) (when msg
-            ;;                             (string-prefix-p "/Fastmail" (mu4e-message-field msg :maildir))))
-            :vars '(
-                    (user-full-name . "Thomas Hisch")
-                    (user-mail-address . (concat "thomas.hisch"
-                                                 "@"
-                                                 "ims.co.at"))
-                    (mu4e-sent-folder . "/Sent Items")
-                    (mu4e-trash-folder . "/Deleted Items")
-                    (mu4e-drafts-folder . "/Drafts")
-                    (mu4e-refile-folder . "/Archives")
-                    (mu4e-sent-messages-behavior . sent)
-                    ))
-          ))
+;;   ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
+;;   ;; additional non-Gmail addresses and want assign them different
+;;   ;; behavior.)
 
-  ;; what if there is only one context???
-  (setq mu4e-context-policy 'pick-first)
+;;   ;; setup some handy shortcuts
+;;   ;; you can quickly switch to your Inbox -- press ``ji''
+;;   ;; then, when you want archive some messages, move them to
+;;   ;; the 'All Mail' folder by pressing ``ma''.
+;;   (setq mu4e-maildir-shortcuts
+;;         '(("/INBOX"       . ?i)
+;;           ("/Sent Mail"   . ?s)
+;;           ("/Deleted Items"       . ?t)))
 
-  ;; Prevent mu4e from permanently deleting trashed items
-  ;; This snippet was taken from the following article:
-  ;; http://cachestocaches.com/2017/3/complete-guide-email-emacs-using-mu-and-/
-  (defun remove-nth-element (nth list)
-    (if (zerop nth) (cdr list)
-      (let ((last (nthcdr (1- nth) list)))
-        (setcdr last (cddr last))
-        list)))
-  (setq mu4e-marks (remove-nth-element 5 mu4e-marks))
-  (add-to-list 'mu4e-marks
-               '(trash
-                 :char ("d" . "▼")
-                 :prompt "dtrash"
-                 :dyn-target (lambda (target msg) (mu4e-get-trash-folder msg))
-                 :action (lambda (docid msg target)
-                           (mu4e~proc-move docid
-                                           (mu4e~mark-check-target target) "-N"))))
+;;   (add-to-list 'mu4e-bookmarks
+;;                (make-mu4e-bookmark
+;;                 :name "All Inboxes"
+;;                 :query "maildir:/INBOX"
+;;                 :key ?i))
 
-  ;; Display options
-  (setq mu4e-view-show-images t)
-  (setq mu4e-view-show-addresses 't)
+;;   ;; don't keep message buffers around
+;;   (setq message-kill-buffer-on-exit t)
 
-  ;; html mails (see msg2pdf tool, which is part of the mu4e github repo)
-  ;; https://200ok.ch/posts/2020-05-27_using_emacs_and_mu4e_for_emails_even_with_html.html
-  ;; what's the command for opening html mails in firefox???
+;;   (setq dw/mu4e-inbox-query
+;;         "(maildir:/INBOX) AND flag:unread")
 
-  (mu4e-column-faces-mode)
-  (setq mu4e-headers-fields
-        '((:human-date    .   12)
-          (:flags         .    6)
-          ;; I don't want to see mailing list info
-          ;; (:mailing-list  .   10)
-          (:from          .   22)
-          (:subject       .   nil)))
+;;   (defun dw/go-to-inbox ()
+;;     (interactive)
+;;     (mu4e-headers-search dw/mu4e-inbox-query))
 
-  ;; I don't want to see threads
-  (setq mu4e-headers-show-threads nil)
-
-  ;; Composing mail
-  (setq mu4e-compose-dont-reply-to-self t)
-
-  ;; Use mu4e for sending e-mail
-  (setq mail-user-agent 'mu4e-user-agent)
-  (setq message-send-mail-function 'smtpmail-send-it)
-
-  ;; Signing messages (use mml-secure-sign-pgpmime)
-  ;; (setq mml-secure-openpgp-signers '("53C41E6E41AAFE55335ACA5E446A2ED4D940BF14"))
-
-  ;; (See the documentation for `mu4e-sent-messages-behavior' if you have
-  ;; additional non-Gmail addresses and want assign them different
-  ;; behavior.)
-
-  ;; setup some handy shortcuts
-  ;; you can quickly switch to your Inbox -- press ``ji''
-  ;; then, when you want archive some messages, move them to
-  ;; the 'All Mail' folder by pressing ``ma''.
-  (setq mu4e-maildir-shortcuts
-        '(("/INBOX"       . ?i)
-          ;; ("/Fastmail/Lists/*"     . ?l)
-          ("/Sent Items"   . ?s)
-          ("/Deleted Items"       . ?t)))
-
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "All Inboxes"
-                :query "maildir:/INBOX"
-                :key ?i))
-
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "Filtered Inboxes"
-                :query (string-join '(
-                                      "(maildir:/INBOX"
-                                      "NOT from:/gerrit@.*ims.co.at/"
-                                      ;; "NOT from:gerrit@srv-vct-02.ims.co.at"
-                                      "NOT from:jira.rnd@ims.co.at"
-                                      "NOT from:jira.service@ims.co.at"
-                                      "NOT from:mattermost@ims.co.at"
-                                      "NOT from:quarantine@ims.co.at)"
-                                      ) ") AND (")
-                :key ?f))
-
-
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "Jira/Gerrit"
-                :query (concat "maildir:/INBOX OR ("
-                               (string-join '(
-                                              "from:/gerrit@.*ims.co.at/"
-                                              "from:jira.rnd@ims.co.at"
-                                              "from:jira.service@ims.co.at"
-                                              )
-                                            ") OR (")
-                               ")")
-                :key ?j))
-
-
-  ;; (plist-get (nth 1 mu4e-bookmarks) :name)
-  ;; (plist-get (nth 1 mu4e-bookmarks) :query)
-  ;; (shell-command-to-string (concat "mu find --reverse -n 20 '" (plist-get (nth 1 mu4e-bookmarks) :query) "'"))
-  ;; (mu4e~headers-search-execute (plist-get (nth 1 mu4e-bookmarks) :query) t)
-
-
-  (add-to-list 'mu4e-bookmarks
-               (make-mu4e-bookmark
-                :name "Filtered Today"
-                :query (string-join '(
-                                      "maildir:/INBOX"
-                                      "NOT from:/gerrit@.*ims.co.at/"
-                                      ;; "NOT from:gerrit@srv-vct-02.ims.co.at"
-                                      "NOT from:jira.rnd@ims.co.at"
-                                      "NOT from:jira.service@ims.co.at"
-                                      "NOT from:mattermost@ims.co.at"
-                                      "NOT from:quarantine@ims.co.at"
-                                      "date:today..now"
-                                      )  " AND ")
-                :key ?n))
-
-  ;; Close mu4e without asking.
-  (setq mu4e-confirm-quit nil)
-
-  ;; don't keep message buffers around
-  (setq message-kill-buffer-on-exit t)
-
-  ;; always prefer text/plain version over html version
-  (setq mu4e-view-html-plaintext-ratio-heuristic most-positive-fixnum)
-
-  ;; Press "a" (actions) then "v" in the current message to open it in the default
-  ;; web browser.
-  ;; already part of mu4e
-  ;; (add-to-list 'mu4e-view-actions '("ViewInBrowser" . mu4e-action-view-in-browser) t)
-
-  ;; (defun mu4e-action-view-in-browser-webkit (msg)
-  ;;   (let ((url (concat "file://" (mu4e~write-body-to-html msg))))
-  ;;     (xwidget-webkit-browse-url url)))
-
-  (defun mu4e-action-view-in-xwidget (msg)
-    "Show current MSG in an embedded xwidget, if available."
-    (unless (fboundp 'xwidget-webkit-browse-url)
-      (mu4e-error "No xwidget support available"))
-    (let ((browse-url-browser-function
-           (lambda (url &optional _rest)
-             (xwidget-webkit-browse-url url))))
-      (mu4e-action-view-in-browser msg)))
-
-  (add-to-list 'mu4e-view-actions
-               '("web browser" .  mu4e-action-view-in-xwidget)) ;;mu4e-action-view-in-browser-webkit)))
-
-
-  ;; (setq thi::mu4e-inbox-query
-  ;;       "from:/gerrit@.*ims.co.at/ flag:unread")
-
-  (defun thi::mail-gerrit ()
-    (interactive)
-    (mu4e-headers-search "from:/gerrit@.*ims.co.at/ flag:unread"))
-
-  ;; (dw/leader-key-def
-  ;;   "m"  '(:ignore t :which-key "mail")
-  ;;   "mm" 'mu4e
-  ;;   "mc" 'mu4e-compose-new
-  ;;   "mi" 'thi::go-to-inbox
-  ;;   "ms" 'mu4e-update-mail-and-index)
-
-  ;; Start mu4e in the background so that it syncs mail periodically
-  (mu4e t))
+;;   ;; Start mu4e in the background so that it syncs mail periodically
+;;   (mu4e t))

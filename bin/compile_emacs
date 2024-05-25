@@ -61,9 +61,10 @@ set -e
     --with-gif \
     --with-tiff \
     --with-modules \
-    --with-native-compilation \
+    --without-native-compilation \
     --with-json \
     --with-xwidgets \
+    --with-tree-sitter \
     --with-x-toolkit=no
     # --with-pgtk
 ##    --with-xml2 \

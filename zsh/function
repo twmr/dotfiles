@@ -82,6 +82,11 @@ _emacs_setup() {
     ln -s ~dotf/${name}.d ~/.emacs.d
 }
 
+function clean_bank_json() {
+    local json=$1
+    jq '' $json | sponge $json
+}
+
 function emacs_melpa_setup() {
     _emacs_setup "emacs_with_melpa"
 }

@@ -125,24 +125,6 @@ source "$fzfdir/shell/key-bindings.zsh"
 # direnv setup
 eval "$(direnv hook zsh)"
 
-# >>> conda initialize >>>
-minicondadir=$HOME/miniconda3
-if [ -e $minicondadir ]; then
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$(${minicondadir}'/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "$minicondadir/etc/profile.d/conda.sh" ]; then
-            . "$minicondadir/etc/profile.d/conda.sh"
-        else
-            export PATH="$minicondadir/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-fi
-# <<< conda initialize <<<
-
 # enable directory tracking
 function vterm_prompt_end() {
     vterm_printf "51;A$(whoami)@$(hostname):$(pwd)";
@@ -162,16 +144,3 @@ GUIX_PROFILE="$HOME/.guix-profile"
 if [ -e $GUIX_PROFILE ]; then
     . "$GUIX_PROFILE/etc/profile"
 fi
-
-# >>> mamba initialize >>>
-# !! Contents within this block are managed by 'mamba init' !!
-export MAMBA_EXE='~/bin/micromamba';
-export MAMBA_ROOT_PREFIX='~/micromamba';
-__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__mamba_setup"
-else
-    alias micromamba="$MAMBA_EXE"  # Fallback on help from mamba activate
-fi
-unset __mamba_setup
-# <<< mamba initialize <<<
