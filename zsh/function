@@ -139,7 +139,7 @@ function gf() { git fetch $* }
 function gd() { git diff --ignore-submodules $* }
 function gg() { git grep $* }
 function glol() { git lola $* }
-function gk() { (conda deactivate; gitk --all $* &) }
+function gk() { ( gitk --all $* & }
 function gl() { git log $* }
 function glu() { git log -u $* }
 function gs() { git status $* }
