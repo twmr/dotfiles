@@ -1,0 +1,16 @@
+#!/bin/zsh
+
+function enmamba() {
+    type mamba &>/dev/null && return
+    perl -e 'exit(!(grep(m{^$ENV{HOME}/miniconda/bin$},split(":", $ENV{PATH}))) > 0)' && return
+    export PATH=$HOME/miniconda/bin:$PATH
+}
+
+alias cua='enmamba && mamba update --all'
+alias ci='enmamba && mamba install'
+alias cs='enmamba && mamba search'
+alias cl='enmamba && mamba list'
+alias cinf='enmamba && mamba info -e'
+alias cr='enmamba && mamba remove --use-index-cache'
+alias workon='enmamba && source activate'
+alias workoff='enmamba && source deactivate'

@@ -16,16 +16,6 @@ alias grep='grep --color=auto'
 
 alias start_btsync='btsync --config ~/btsync_config/config.json'
 
-# mamba
-alias cua='enmamba && mamba update --all'
-alias ci='enmamba && mamba install'
-alias cs='enmamba && mamba search'
-alias cl='enmamba && mamba list'
-alias cinf='enmamba && mamba info -e'
-alias cr='enmamba && mamba remove --use-index-cache'
-alias workon='enmamba && source activate'
-alias workoff='enmamba && source deactivate'
-
 # rg
 alias pyrg='rg --type=py'
 

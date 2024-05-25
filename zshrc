@@ -69,6 +69,7 @@ done
 # Customize to your needs...
 . ~/.zsh/alias
 . ~/.zsh/function
+. ~/.zsh/conda # conda/mamba/pixi stuff
 . ~/.zsh/gerrit
 . ~/.zsh/notebook
 . ~/.zsh/keybindings
