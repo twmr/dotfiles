@@ -154,8 +154,6 @@ fi
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
-echo "zshrc sourced"
-
 # source ~/.config/broot/launcher/bash/br
 
 # so far only on my dell laptop
@@ -191,3 +189,7 @@ fi
 if [ -f ~/.ssh/id_ed25519 ]; then
     ssh-add ~/.ssh/id_ed25519
 fi
+if [ -f ~/.ssh/id_rsa ]; then
+    ssh-add ~/.ssh/id_rsa
+fi
+echo "zshrc sourced"
