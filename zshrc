@@ -132,6 +132,11 @@ function vterm_prompt_end() {
 }
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
+# autocompletion (suggested by ruff, see
+# https://docs.astral.sh/ruff/configuration/#shell-autocompletion)
+fpath+=~/.zfunc
+autoload -Uz compinit && compinit
+
 echo "zshrc sourced"
 
 # source ~/.config/broot/launcher/bash/br
