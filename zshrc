@@ -111,14 +111,8 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden'
 # this is needed s.t. Ctrl-T respects my global gitignore file and doesn't output files in e.g. __pycache__
 export FZF_CTRL_T_COMMAND='rg --files --hidden'
 
-# Key bindings
-# ------------
 source "$fzfdir/shell/key-bindings.zsh"
-
-# Auto-completion
-# ---------------
 [[ $- == *i* ]] && source "$fzfdir/shell/completion.zsh" 2> /dev/null
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # direnv setup
