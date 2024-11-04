@@ -116,7 +116,8 @@ source "$fzfdir/shell/key-bindings.zsh"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # direnv setup
-eval "$(direnv hook zsh)"
+# -> currently I don't use direnv, but maybe it makes sense to run `pixi shell` when entering a pixi proj
+# eval "$(direnv hook zsh)"
 
 # enable directory tracking
 function vterm_prompt_end() {
