@@ -190,6 +190,7 @@ else
     echo "SSH agent already running."
 fi
 
+# from https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/ssh-agent/ssh-agent.plugin.zsh
 identities=
 for id in id_rsa id_dsa id_ecdsa id_ed25519 id_ed25519_sk identity; do
     # check if file exists
