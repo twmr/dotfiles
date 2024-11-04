@@ -131,6 +131,7 @@ function vterm_prompt_end() {
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
 # autocompletion scripts (suggested by ruff)
+[ ! -e ~/.zfunc ] && mkdir ~/.zfunc
 if [ ! -e ~/.zfunc/_ruff ]; then
     # https://docs.astral.sh/ruff/configuration/#shell-autocompletion
     # TODO run every two weeks
@@ -165,4 +166,28 @@ fi
 GUIX_PROFILE="$HOME/.guix-profile"
 if [ -e $GUIX_PROFILE ]; then
     . "$GUIX_PROFILE/etc/profile"
+fi
+
+# Start SSH agent if not already running
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    # Check for existing SSH agent process and reuse if available
+    if [ -f ~/.ssh/agent_env ]; then
+        source ~/.ssh/agent_env > /dev/null
+    fi
+
+    # Verify that the existing agent is actually working
+    if ! ssh-add -l > /dev/null 2>&1; then
+        # Start a new SSH agent and save its environment variables
+        eval "$(ssh-agent -s)" > ~/.ssh/agent_env
+        echo "SSH agent started."
+    else
+        echo "Reusing existing SSH agent."
+    fi
+else
+    echo "SSH agent already running."
+fi
+
+# Automatically add default SSH key (if available)
+if [ -f ~/.ssh/id_ed25519 ]; then
+    ssh-add ~/.ssh/id_ed25519
 fi
