@@ -96,8 +96,6 @@ if [ ! -e ~/.zsh/zsh-dircolors-solarized ]; then
 fi
 source ~/.zsh/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh
 
-#. ~/gitrepos/devenv/activation.sh
-#
 # Setup fzf
 # TODO oneliner
 if [ -e $HOME/.fzf ]; then
