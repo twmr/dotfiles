@@ -130,7 +130,7 @@ function vterm_prompt_end() {
 }
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
-# autocompletion scripts (suggested by ruff)
+# Auto-completion scripts (suggested by ruff)
 [ ! -e ~/.zfunc ] && mkdir ~/.zfunc
 if [ ! -e ~/.zfunc/_ruff ]; then
     # https://docs.astral.sh/ruff/configuration/#shell-autocompletion

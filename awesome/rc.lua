@@ -51,7 +51,7 @@ terminal = "terminator"
 -- terminal = "kitty"
 -- terminal = "urxvt256c-ml -e /bin/zsh"
 -- terminal = "urxvt"
--- terminal = 'gnome-terminal'
+-- terminal = "gnome-terminal"
 
 editor = os.getenv("EDITOR") or "emacs"
 editor_cmd = terminal .. " -e " .. editor
@@ -63,10 +63,8 @@ filemanager = 'nemo ' .. home
 music = 'spotify'
 lockcmd = "xscreensaver-command -lock"
 
-
 exec = awful.util.spawn
 sexec = awful.util.spawn_with_shell
-
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -139,7 +137,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+-- mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -241,8 +239,8 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
-            battery_widget({ display_notification = true }),
+            -- mykeyboardlayout,
+            -- battery_widget({ display_notification = true }),
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
@@ -592,4 +590,4 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 -- This section contains all programs that are going to be started when logged
 -- in. Please see the startup.lua file.
 --
-require("autostart")
+-- require("autostart")
