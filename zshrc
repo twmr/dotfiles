@@ -112,7 +112,6 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden'
 export FZF_CTRL_T_COMMAND='rg --files --hidden'
 
 source "$fzfdir/shell/key-bindings.zsh"
-[[ $- == *i* ]] && source "$fzfdir/shell/completion.zsh" 2> /dev/null
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # direnv setup
@@ -125,29 +124,36 @@ function vterm_prompt_end() {
 }
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
-# Auto-completion scripts (suggested by ruff)
-[ ! -e ~/.zfunc ] && mkdir ~/.zfunc
-if [ ! -e ~/.zfunc/_ruff ]; then
-    # https://docs.astral.sh/ruff/configuration/#shell-autocompletion
-    # TODO run every two weeks
-    ruff generate-shell-completion zsh > ~/.zfunc/_ruff
-    echo "generated ruff-completion"
+# Auto-completion
+# ---------------
+if [[ $- == *i* ]] then;
+   # run in an interactive shell
+
+   source "$fzfdir/shell/completion.zsh" 2> /dev/null
+
+   [ ! -e ~/.zfunc ] && mkdir ~/.zfunc
+   if [ ! -e ~/.zfunc/_ruff ]; then
+       # https://docs.astral.sh/ruff/configuration/#shell-autocompletion
+       # TODO run every two weeks
+       ruff generate-shell-completion zsh > ~/.zfunc/_ruff
+       echo "generated ruff-completion"
+   fi
+   if [ ! -e ~/.zfunc/_uv ]; then
+       # https://docs.astral.sh/uv/reference/cli/#uv-generate-shell-completion
+       # TODO run every two weeks
+       uv generate-shell-completion zsh > ~/.zfunc/_uv
+       echo "generated uv-completion"
+   fi
+   if [ ! -e ~/.zfunc/_dev ]; then
+       # see https://click.palletsprojects.com/en/stable/shell-completion
+       # TODO run every two weeks
+       _DEV_COMPLETE=zsh_source dev > ~/.zfunc/_dev
+       echo "generated dev completion"
+   fi
+   # TODO what is the fpath???
+   fpath+=~/.zfunc
+   autoload -Uz compinit && compinit
 fi
-if [ ! -e ~/.zfunc/_uv ]; then
-    # https://docs.astral.sh/uv/reference/cli/#uv-generate-shell-completion
-    # TODO run every two weeks
-    uv generate-shell-completion zsh > ~/.zfunc/_uv
-    echo "generated uv-completion"
-fi
-if [ ! -e ~/.zfunc/_dev ]; then
-    # see https://click.palletsprojects.com/en/stable/shell-completion
-    # TODO run every two weeks
-    _DEV_COMPLETE=zsh_source dev > ~/.zfunc/_dev
-    echo "generated dev completion"
-fi
-# TODO what is the fpath???
-fpath+=~/.zfunc
-autoload -Uz compinit && compinit
 
 # source ~/.config/broot/launcher/bash/br
 
