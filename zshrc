@@ -137,6 +137,12 @@ if [ ! -e ~/.zfunc/_ruff ]; then
     ruff generate-shell-completion zsh > ~/.zfunc/_ruff
     echo "generated ruff-completion"
 fi
+if [ ! -e ~/.zfunc/_uv ]; then
+    # https://docs.astral.sh/uv/reference/cli/#uv-generate-shell-completion
+    # TODO run every two weeks
+    uv generate-shell-completion zsh > ~/.zfunc/_uv
+    echo "generated uv-completion"
+fi
 if [ ! -e ~/.zfunc/_dev ]; then
     # see https://click.palletsprojects.com/en/stable/shell-completion
     # TODO run every two weeks
