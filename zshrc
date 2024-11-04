@@ -96,8 +96,6 @@ if [ ! -e ~/.zsh/zsh-dircolors-solarized ]; then
 fi
 source ~/.zsh/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh
 
-#eval "$(_DEV_COMPLETE=source_zsh dev)"
-
 #. ~/gitrepos/devenv/activation.sh
 #
 # Setup fzf
@@ -132,8 +130,20 @@ function vterm_prompt_end() {
 }
 PROMPT=$PROMPT'%{$(vterm_prompt_end)%}'
 
-# autocompletion (suggested by ruff, see
-# https://docs.astral.sh/ruff/configuration/#shell-autocompletion)
+# autocompletion scripts (suggested by ruff)
+if [ ! -e ~/.zfunc/_ruff ]; then
+    # https://docs.astral.sh/ruff/configuration/#shell-autocompletion
+    # TODO run every two weeks
+    ruff generate-shell-completion zsh > ~/.zfunc/_ruff
+    echo "generated ruff-completion"
+fi
+if [ ! -e ~/.zfunc/_dev ]; then
+    # see https://click.palletsprojects.com/en/stable/shell-completion
+    # TODO run every two weeks
+    _DEV_COMPLETE=zsh_source dev > ~/.zfunc/_dev
+    echo "generated dev completion"
+fi
+# TODO what is the fpath???
 fpath+=~/.zfunc
 autoload -Uz compinit && compinit
 
