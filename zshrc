@@ -190,11 +190,29 @@ else
     echo "SSH agent already running."
 fi
 
-# Automatically add default SSH key (if available)
-if [ -f ~/.ssh/id_ed25519 ]; then
-    ssh-add ~/.ssh/id_ed25519
+identities=
+for id in id_rsa id_dsa id_ecdsa id_ed25519 id_ed25519_sk identity; do
+    # check if file exists
+    [[ -f "$HOME/.ssh/$id" ]] && identities+=($id)
+done
+
+# get list of loaded identities' signatures and filenames
+if lines=$(ssh-add -l); then
+    for line in ${(f)lines}; do
+        loaded_sigs+=${${(z)line}[2]}
+        loaded_ids+=${${(z)line}[3]}
+    done
 fi
-if [ -f ~/.ssh/id_rsa ]; then
-    ssh-add ~/.ssh/id_rsa
-fi
+
+# add identities if not already loaded
+for id in $identities; do
+    # if id is an absolute path, make file equal to id
+    [[ "$id" = /* ]] && file="$id" || file="$HOME/.ssh/$id"
+    # check for filename match, otherwise try for signature match
+    if [[ -f $file && ${loaded_ids[(I)$file]} -le 0 ]]; then
+        sig="$(ssh-keygen -lf "$file" | awk '{print $2}')"
+        [[ ${loaded_sigs[(I)$sig]} -le 0 ]] && not_loaded+=("$file")
+    fi
+done
+
 echo "zshrc sourced"
