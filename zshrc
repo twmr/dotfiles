@@ -102,6 +102,8 @@ source ~/.zsh/zsh-dircolors-solarized/zsh-dircolors-solarized.zsh
 # TODO oneliner
 if [ -e $HOME/.fzf ]; then
     fzfdir=$HOME/.fzf
+    # TODO update .fzf every two week and build it using `make install`
+    # install golang-go first using `apt install golang-go`
 else
     fzfdir=/usr/share/fzf
 fi
