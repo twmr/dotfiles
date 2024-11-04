@@ -169,14 +169,19 @@ fi
 # Start SSH agent if not already running
 if [ -z "$SSH_AUTH_SOCK" ]; then
     # Check for existing SSH agent process and reuse if available
-    if [ -f ~/.ssh/agent_env ]; then
-        source ~/.ssh/agent_env > /dev/null
+    ssh_env_cache=~/.ssh/agent_env
+    if [ -f $ssh_env_cache ]; then
+        source "$ssh_env_cache" > /dev/null
     fi
 
     # Verify that the existing agent is actually working
     if ! ssh-add -l > /dev/null 2>&1; then
         # Start a new SSH agent and save its environment variables
-        eval "$(ssh-agent -s)" > ~/.ssh/agent_env
+        #eval "$(ssh-agent -s)" > ~/.ssh/agent_env
+        # copied from omzsh
+        ssh-agent -s | sed '/^echo/d' >! "$ssh_env_cache"
+        chmod 600 "$ssh_env_cache"
+        source "$ssh_env_cache" > /dev/null
         echo "SSH agent started."
     else
         echo "Reusing existing SSH agent."
