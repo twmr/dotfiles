@@ -407,3 +407,9 @@ function sorted_size() {
     # output the size of all files/dirs in current directory sorted by size + total size
     du -ch $(du -b * | sort -n | cut -f2-)
 }
+
+function uvr() {
+    # this function has the benefit that I can finally complete filename when I run e.g.
+    # uv run pytest path/to/x/y/z
+    uv run "$@"
+}
