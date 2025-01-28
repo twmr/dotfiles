@@ -150,6 +150,11 @@ if [[ $- == *i* ]] then;
        _DEV_COMPLETE=zsh_source dev > ~/.zfunc/_dev
        echo "generated dev completion"
    fi
+   if [ ! -e ~/.zfunc/_pixi ]; then
+       # see https://pixi.sh/v0.30.0/#installation
+       pixi completion --shell zsh >  ~/.zfunc/_pixi
+       echo "generated pixi completion"
+   fi
    # TODO what is the fpath???
    fpath+=~/.zfunc
    autoload -Uz compinit && compinit
