@@ -408,6 +408,12 @@ function sorted_size() {
     du -ch $(du -b * | sort -n | cut -f2-)
 }
 
+function pxr() {
+    # this function has the benefit that I can finally complete filename when I run e.g.
+    # uv run pytest path/to/x/y/z
+    pixi run "$@"
+}
+
 function uvr() {
     # this function has the benefit that I can finally complete filename when I run e.g.
     # uv run pytest path/to/x/y/z
