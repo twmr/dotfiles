@@ -131,22 +131,39 @@ if [[ $- == *i* ]] then;
 
    source "$fzfdir/shell/completion.zsh" 2> /dev/null
 
+   # Check if the directory exists
+   if [[ -d ~/.zfunc ]]; then
+       # Get the last modification time of the directory in seconds
+       LAST_MODIFIED=$(stat -c %Y ~/.zfunc)
+
+       # Get the current time in seconds
+       CURRENT_TIME=$(date "+%s")
+
+       # Calculate the difference in time
+       TIME_DIFF=$((CURRENT_TIME - LAST_MODIFIED))
+
+       # Check if the directory hasn't been modified for more than 2
+       # weeks (14 days)
+       if (( TIME_DIFF > 14 * 24 * 60 * 60 )); then
+           echo "The directory hasn't been modified in over 2 weeks. Deleting ~/.zfunc..."
+           rm -rf ~/.zfunc
+           echo "Directory deleted successfully."
+       fi
+   fi
+
    [ ! -e ~/.zfunc ] && mkdir ~/.zfunc
    if [ ! -e ~/.zfunc/_ruff ]; then
        # https://docs.astral.sh/ruff/configuration/#shell-autocompletion
-       # TODO run every two weeks
        ruff generate-shell-completion zsh > ~/.zfunc/_ruff
        echo "generated ruff-completion"
    fi
    if [ ! -e ~/.zfunc/_uv ]; then
        # https://docs.astral.sh/uv/reference/cli/#uv-generate-shell-completion
-       # TODO run every two weeks
        uv generate-shell-completion zsh > ~/.zfunc/_uv
        echo "generated uv-completion"
    fi
    if [ ! -e ~/.zfunc/_dev ]; then
        # see https://click.palletsprojects.com/en/stable/shell-completion
-       # TODO run every two weeks
        _DEV_COMPLETE=zsh_source dev > ~/.zfunc/_dev
        echo "generated dev completion"
    fi
