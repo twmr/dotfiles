@@ -24,7 +24,7 @@
 				git ls-tree -r --name-only $branch | nl -bn -w3 | grep \"$1\"; fi; \
 			done; :"
 	find-file-local = "!for branch in $(git for-each-ref --format=\"%(refname)\" refs/heads); do if git ls-tree -r --name-only $branch | grep \"$1\" > /dev/null; then  echo \"${branch}:\"; git ls-tree -r --name-only $branch | nl -bn -w3 | grep \"$1\"; fi; done; :"
-	grep-all = "!git grep -E --heading --break --line-number \"$1\" $(git branch -r | grep -v '>'); : "
+	grep-all = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>'); : "
 	grep-all-erenik = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep '\\-erenik'); : "
 	grep-all-fiora = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep '\\-fiora'); : "
 	grep-all-drina = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep drina); : "
@@ -33,6 +33,13 @@
 	grep-all-kalix = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep kalix); : "
 	grep-all-jackson = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep jackson); : "
 	grep-all-main = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | grep main); : "
+	grep-customer-tc = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep tc[0-9]+$); : "
+	grep-customer-se = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep se[0-9]+$); : "
+	grep-customer-am = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep am[0-9]+$); : "
+	grep-customer-in = "!git grep --heading --break --line-number \"$1\" $(git branch -r | grep -v '>' | egrep in[0-9]+$); : "
+	lt-fitb = "!git ls-tree $(git branch -r | grep -v '>' | egrep fitb[0-9]+$) -r --name-only : "
+	lt-fitb2 = "!git ls-tree $(git branch -r | grep -v '>' | egrep fitb[0-9]+$) -r --name-only | egrep \"$1\" : "
+
 [include]
 	path = ~/.git_identity
 [color]
@@ -45,7 +52,7 @@
 	user = thisch
 	token = d5b6175d01b404a6f21a0f815fd6e3af
 [core]
-	editor = vim
+        # editor = vim
 	excludesfile = ~/.gitignore
 [push]
 	default = simple
