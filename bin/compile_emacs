@@ -63,9 +63,14 @@ set -e
     --with-modules \
     --without-native-compilation \
     --with-json \
-    --with-xwidgets \
     --with-tree-sitter \
     --with-x-toolkit=no
+# --with-xwidgets \ doesn't work because is output
+# checking for webkit2gtk-4.1 >= 2.12 webkit2gtk-4.1 < 2.41.92... no
+# checking for webkit2gtk-4.0 >= 2.12 webkit2gtk-4.0 < 2.41.92... no
+# configure: error: xwidgets requested but WebKitGTK+ or WebKit framework not found.
+
+
     # --with-pgtk
 ##    --with-xml2 \
 #    --with-cairo \
