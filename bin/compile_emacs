@@ -61,8 +61,7 @@ set -e
     --with-gif \
     --with-tiff \
     --with-modules \
-    --without-native-compilation \
-    --with-json \
+    --with-native-compilation \
     --with-tree-sitter \
     --with-x-toolkit=no
 # --with-xwidgets \ doesn't work because is output
