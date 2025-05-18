@@ -40,6 +40,7 @@
 	lt-fitb = "!git ls-tree $(git branch -r | grep -v '>' | egrep fitb[0-9]+$) -r --name-only : "
 	lt-fitb2 = "!git ls-tree $(git branch -r | grep -v '>' | egrep fitb[0-9]+$) -r --name-only | egrep \"$1\" : "
 
+# todo use includIf gitdir:...
 [include]
 	path = ~/.git_identity
 [color]
