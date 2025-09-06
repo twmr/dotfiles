@@ -162,10 +162,12 @@ if [[ $- == *i* ]] then;
        uv generate-shell-completion zsh > ~/.zfunc/_uv
        echo "generated uv-completion"
    fi
-   if [ ! -e ~/.zfunc/_dev ]; then
-       # see https://click.palletsprojects.com/en/stable/shell-completion
-       _DEV_COMPLETE=zsh_source dev > ~/.zfunc/_dev
-       echo "generated dev completion"
+   if command -v dev >/dev/null 2>&1; then
+       if [ ! -e ~/.zfunc/_dev ]; then
+          # see https://click.palletsprojects.com/en/stable/shell-completion
+          _DEV_COMPLETE=zsh_source dev > ~/.zfunc/_dev
+          echo "generated dev completion"
+      fi
    fi
    if [ ! -e ~/.zfunc/_pixi ]; then
        # see https://pixi.sh/v0.30.0/#installation
