@@ -45,6 +45,10 @@ function melmacs() {
     emacs -Q --eval "(add-to-list 'package-archives '(\"melpa\" . \"http://melpa.milkbox.net/packages/\") t)"
 }
 
+function e() {
+    emacs . &
+}
+
 function dired() {
     if [ $# -gt 0 ]; then
         dirname="$1"
