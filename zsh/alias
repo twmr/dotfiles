@@ -129,6 +129,9 @@ alias rg='rg -g "!*.par"'
 
 alias vim='nvim'
 
+# the new gnome image viewer
+alias eog='loupe'
+
 #alias docker=podman
 
 #named directories
